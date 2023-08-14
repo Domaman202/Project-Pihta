@@ -16,16 +16,16 @@ object CompilerMain {
         val compiler = Compiler()
         val node = Parser(Lexer("""
             (
-                (use std std/math)
+                (use std)
                 
-                (ns ru.DmN.test
-                    (@generic T ^java.lang.String
-                        (class FooImpl ^java.lang.Object ^ru.DmN.pht.test.java.IFoo<T^> (
-                            (ctor (ccall super))
-                            (ofn foo T^ [o T^] o)
-                        )))
-                    (object Main (fn main ^void ((use std)(#println std (#foo (new ^FooImpl) "Hi!")))))
-                )
+                (ns ru.DmN.test (
+                    (object Main (
+                        (fn main (
+                            (use std)
+                            (#println std "Hi!")
+                        ))
+                    ))
+                ))
             )
         """.trimIndent())
         ).parseNode()!!
