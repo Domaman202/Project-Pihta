@@ -1,0 +1,99 @@
+package ru.DmN.pht.std.compiler.java.compilers
+
+import org.objectweb.asm.Label
+import org.objectweb.asm.Opcodes
+import org.objectweb.asm.tree.ClassNode
+import org.objectweb.asm.tree.MethodNode
+import ru.DmN.pht.base.Compiler
+import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
+import ru.DmN.pht.base.compiler.java.ctx.BodyContext
+import ru.DmN.pht.base.compiler.java.ctx.ClassContext
+import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
+import ru.DmN.pht.base.compiler.java.ctx.MethodContext
+import ru.DmN.pht.base.utils.*
+import ru.DmN.pht.std.ast.NodeClass
+
+object NCClass : NodeCompiler<NodeClass>() {
+    override fun compile(node: NodeClass, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
+        if (ctx.type == CompilationContext.Type.GLOBAL) { // todo: subclass
+            val isInterface = node.tkOperation.text == "interface"
+            val isClass = node.tkOperation.text == "class"
+            val isObject = node.tkOperation.text == "object"
+            //
+            val cnode = ClassNode()
+            val type = VirtualType(ctx.gctx.name(node.name), isInterface = isInterface, generics = node.generics)
+            val context = ClassContext(cnode, type)
+            compiler.classes += context
+            compiler.getLastStack().add {
+                type.parents = node.parents.map { context.getType(compiler, ctx.gctx, it) }.toMutableList()
+                    .apply { if (!isInterface && isEmpty()) this += VirtualType.ofKlass(Any::class.java) }
+                cnode.visit(
+                    Opcodes.V19,
+                    if (isInterface)
+                        Opcodes.ACC_PUBLIC + Opcodes.ACC_ABSTRACT + Opcodes.ACC_INTERFACE
+                    else if (isClass)
+                        Opcodes.ACC_PUBLIC
+                    else if (isObject)
+                        Opcodes.ACC_PUBLIC + Opcodes.ACC_FINAL
+                    else throw Error(),
+                    type.className,
+                    node.getSignature(compiler, context, ctx.gctx),
+                    type.parents.firstOrNull()?.className ?: "java/lang/Object",
+                    type.parents.drop(1).map { it.className }.toTypedArray()
+                )
+                if (node.tkOperation.text == "object") {
+                    type.fields += VirtualField("INSTANCE", type, static = true, enum = false)
+                    cnode.visitField(
+                        Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC + Opcodes.ACC_FINAL,
+                        "INSTANCE",
+                        type.desc,
+                        null,
+                        null
+                    )
+                    cnode.visitMethod(Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC, "<clinit>", "()V", null, null).run {
+                        visitCode()
+                        visitTypeInsn(Opcodes.NEW, cnode.name)
+                        visitInsn(Opcodes.DUP)
+                        visitMethodInsn(Opcodes.INVOKESPECIAL, cnode.name, "<init>", "()V", false)
+                        visitFieldInsn(Opcodes.PUTSTATIC, cnode.name, "INSTANCE", type.desc)
+                        visitInsn(Opcodes.RETURN)
+                        visitEnd()
+                    }
+                }
+                compiler.getLastStack().add {
+                    val nctx = ctx.with(CompilationContext.Type.CLASS).with(context)
+                    node.nodes.forEach { compiler.compile(it, nctx, false) }
+                    if (isObject) {
+                        if (type.methods.find { it.name == "<init>" } == null) {
+                            val method = VirtualMethod(
+                                type,
+                                "<init>",
+                                TypeOrGeneric.of(Void::class.javaPrimitiveType!!),
+                                emptyList(), emptyList(), varargs = false,
+                                static = false,
+                                abstract = isInterface
+                            )
+                            type.methods += method
+                            val mnode = cnode.visitMethod(Opcodes.ACC_PRIVATE, "<init>", "()V", null, null) as MethodNode
+                            val mcontext = MethodContext(mnode, method)
+                            context.methods += mcontext
+                            mnode.run {
+                                visitCode()
+                                val labelStart = Label()
+                                visitLabel(labelStart)
+                                visitVarInsn(Opcodes.ALOAD, 0)
+                                visitMethodInsn(Opcodes.INVOKESPECIAL, cnode.superName, "<init>", "()V", false)
+                                visitInsn(Opcodes.RETURN)
+                                val labelStop = Label()
+                                visitLabel(labelStop)
+                                visitLocalVariable("this", type.desc, null, labelStart, labelStop, 0)
+                                visitEnd()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null
+    }
+}
