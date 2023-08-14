@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.base.Compiler
+import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.ClassContext
 import ru.DmN.pht.base.compiler.java.ctx.GlobalContext
 import ru.DmN.pht.base.lexer.Token

@@ -1,6 +1,8 @@
 package ru.DmN.pht.base
 
 import org.objectweb.asm.ClassWriter
+import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.compiler.java.compilers.ICompilable
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.ctx.GlobalContext
 import ru.DmN.pht.base.lexer.Lexer
@@ -24,11 +26,7 @@ class Interpreter {
     fun eval0(code: String): List<Klass> {
         val compiler = Compiler()
         compiler.compile(Parser(Lexer(code)).parseNode()!!, CompilationContext(CompilationContext.Type.GLOBAL, GlobalContext(), null, null, null), false)
-        while (compiler.stack.isNotEmpty()) {
-            compiler.popCompileStack().forEach {
-                it.compile()
-            }
-        }
+        compiler.tasks.values.forEach { it.forEach(ICompilable::compile) }
         return compiler.classes.map { it.node }.map {
             val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
             it.accept(writer)

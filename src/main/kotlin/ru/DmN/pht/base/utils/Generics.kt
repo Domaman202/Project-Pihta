@@ -1,6 +1,6 @@
 package ru.DmN.pht.base.utils
 
-import ru.DmN.pht.base.Compiler
+import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.GlobalContext
 
 class Generics(val list: MutableList<Generic> = ArrayList()) {

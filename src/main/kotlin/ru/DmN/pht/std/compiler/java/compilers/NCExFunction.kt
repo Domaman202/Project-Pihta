@@ -3,7 +3,8 @@ package ru.DmN.pht.std.compiler.java.compilers
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.pht.base.Compiler
+import ru.DmN.pht.base.compiler.java.CompileStage
+import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.BodyContext
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
@@ -40,7 +41,7 @@ object NCExFunction : NodeCompiler<NodeExFunction>() {
             cctx.clazz.methods += method
             val context = MethodContext(mnode, method)
             cctx.methods += context
-            compiler.peekCompileStack().add {
+            compiler.tasks[CompileStage.METHODS_DEFINE].add {
                 val bctx = BodyContext.of(context)
                 val label0 = Label()
                 mnode.visitLabel(label0)

@@ -3,7 +3,7 @@ package ru.DmN.pht.std.utils
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.pht.base.Compiler
+import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.GlobalContext
 import ru.DmN.pht.base.utils.*
 import ru.DmN.pht.base.utils.Variable

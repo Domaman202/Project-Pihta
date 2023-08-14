@@ -1,4 +1,4 @@
-package ru.DmN.pht.base
+package ru.DmN.pht.base.compiler.java
 
 import ru.DmN.pht.base.compiler.java.compilers.ICompilable
 import ru.DmN.pht.base.compiler.java.compilers.NCNodesList
@@ -6,14 +6,9 @@ import ru.DmN.pht.base.compiler.java.compilers.NCUse
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.ClassContext
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
-import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.base.utils.VirtualField
-import ru.DmN.pht.base.utils.VirtualMethod
-import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.base.parser.ast.Node
-import ru.DmN.pht.base.utils.Klass
+import ru.DmN.pht.base.utils.*
 import ru.DmN.pht.std.utils.Module
-import ru.DmN.pht.base.utils.klassOf
 import java.lang.reflect.Modifier
 import java.util.*
 import kotlin.collections.ArrayDeque
@@ -25,7 +20,7 @@ class Compiler {
     val compilers: MutableMap<String, NodeCompiler<*>> = DEFAULT_COMPILERS.toMutableMap()
     val types: MutableList<VirtualType> = ArrayList()
     val classes: MutableList<ClassContext> = ArrayList()
-    val stack: ArrayDeque<MutableList<ICompilable>> = ArrayDeque()
+    val tasks: DefaultEnumMap<CompileStage, MutableList<ICompilable>> = DefaultEnumMap(CompileStage::class.java) { ArrayList() }
 
     fun calc(node: Node, ctx: CompilationContext, ): VirtualType? = this[node].calcType(node, this, ctx)
     fun compile(node: Node, ctx: CompilationContext, ret: Boolean): Variable? = this[node].compile(node, this, ctx, ret)
@@ -67,18 +62,6 @@ class Compiler {
                     klass.declaredMethods.map { VirtualMethod.of(this@Compiler, it) }
         }
     }
-
-    fun popCompileStack(): List<ICompilable> =
-        stack.removeFirst()
-
-    fun peekCompileStack(): MutableList<ICompilable> =
-        if (stack.size == 1)
-            stack.last()
-        else {
-            val stack = Stack<ICompilable>()
-            this.stack.addLast(stack)
-            stack
-        }
 
     companion object {
         val DEFAULT_COMPILERS: Map<String, NodeCompiler<*>>

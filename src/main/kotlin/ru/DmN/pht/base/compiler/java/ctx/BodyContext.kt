@@ -1,7 +1,7 @@
 package ru.DmN.pht.base.compiler.java.ctx
 
 import org.objectweb.asm.Label
-import ru.DmN.pht.base.Compiler
+import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.utils.Variable
 import java.util.concurrent.atomic.AtomicInteger
 

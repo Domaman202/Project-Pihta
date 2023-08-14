@@ -1,12 +1,10 @@
 package ru.DmN.pht.base.utils
 
-import ru.DmN.pht.base.Compiler
+import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.std.utils.desc
-import ru.DmN.uu.Unsafe
 import java.lang.reflect.Constructor
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
-import java.lang.reflect.Type
 
 data class VirtualMethod(
     var declaringClass: VirtualType,

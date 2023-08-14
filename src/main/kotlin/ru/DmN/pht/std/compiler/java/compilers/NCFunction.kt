@@ -3,7 +3,8 @@ package ru.DmN.pht.std.compiler.java.compilers
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.pht.base.Compiler
+import ru.DmN.pht.base.compiler.java.CompileStage
+import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.BodyContext
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
@@ -52,7 +53,7 @@ object NCFunction : NodeCompiler<NodeFunction>() {
             val context = MethodContext(mnode, method)
             cctx.methods += context
             if (!node.abstract) {
-                compiler.peekCompileStack().add {
+                compiler.tasks[CompileStage.METHODS_DEFINE].add {
                     if (node.override) {
                         method.override = clazz.getAllMethods().find { it ->
                             it.declaringClass != clazz && it.overridableBy(method) {
@@ -108,7 +109,7 @@ object NCFunction : NodeCompiler<NodeFunction>() {
                             }
                         }
                     }
-                    compiler.peekCompileStack().add {
+                    compiler.tasks[CompileStage.METHODS_BODY].add {
                         val bctx = BodyContext.of(context)
                         if (!node.static) {
                             val label = Label()

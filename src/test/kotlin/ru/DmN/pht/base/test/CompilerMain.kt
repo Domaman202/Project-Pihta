@@ -2,7 +2,8 @@ package ru.DmN.pht.base.test
 
 import org.objectweb.asm.ClassWriter
 import ru.DmN.pht.base.Parser
-import ru.DmN.pht.base.Compiler
+import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.compiler.java.compilers.ICompilable
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.ctx.GlobalContext
 import ru.DmN.pht.base.lexer.Lexer
@@ -32,11 +33,7 @@ object CompilerMain {
         """.trimIndent())
         ).parseNode()!!
         compiler.compile(node, CompilationContext(CompilationContext.Type.GLOBAL, GlobalContext(), null, null, null), false)
-        while (compiler.stack.isNotEmpty()) {
-            compiler.popCompileStack().forEach {
-                it.compile()
-            }
-        }
+        compiler.tasks.values.forEach { it.forEach(ICompilable::compile) }
         compiler.classes.map { it.node }.forEach {
             val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
             it.accept(writer)
