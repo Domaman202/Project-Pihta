@@ -59,6 +59,6 @@ object NPFunction : SimpleNodeParser<NodeFunction>() {
                 tk = parser.nextToken()!!
             }
         } else parser.tokens.push(argsStartToken)
-        return super.parse(parser) { constructor(Arguments(args), it) }
+        return super.parse(parser) { constructor(Arguments(args, false), it) }
     }
 }

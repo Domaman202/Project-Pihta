@@ -21,25 +21,26 @@ object NCExFunction : NodeCompiler<NodeExFunction>() {
             val gctx = ctx.gctx
             val cctx = ctx.cctx!!
             val mnode = cctx.node.visitMethod(
-                Opcodes.ACC_STATIC + Opcodes.ACC_PUBLIC,
+                Opcodes.ACC_STATIC + Opcodes.ACC_PUBLIC + if (node.varargs) Opcodes.ACC_VARARGS else 0,
                 node.name,
                 "(${node.clazz.desc}${node.args.desc})${node.rettype.desc}",
                 null,
                 null
             ) as MethodNode
+            val args = node.args.build { gctx.getType(compiler, it) }
             val method = VirtualMethod(
                 cctx.clazz,
                 node.name,
                 TypeOrGeneric.of(gctx.getType(compiler, node.rettype)),
-                node.args.list.map { TypeOrGeneric.of(gctx.getType(compiler, it.second)) },
-                node.args.list.map { it.first },
-                node.args.isVarArgs(),
+                args.first,
+                args.second,
+                node.args.varargs,
                 extend = gctx.getType(compiler, node.clazz)
             )
             cctx.clazz.methods += method
             val context = MethodContext(mnode, method)
             cctx.methods += context
-            compiler.getLastStack().add {
+            compiler.peekCompileStack().add {
                 val bctx = BodyContext.of(context)
                 val label0 = Label()
                 mnode.visitLabel(label0)

@@ -8,17 +8,12 @@ import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.BodyContext
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.ctx.MethodContext
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.TypeOrGeneric
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.isPrimitive
 import ru.DmN.pht.std.ast.NodeFunction
-import ru.DmN.pht.std.ast.NodeMethodCall
 import ru.DmN.pht.std.utils.insertRet
-import ru.DmN.pht.std.utils.load
-import ru.DmN.pht.std.utils.loadCast
 
 object NCFunction : NodeCompiler<NodeFunction>() {
     override fun compile(node: NodeFunction, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
@@ -26,22 +21,29 @@ object NCFunction : NodeCompiler<NodeFunction>() {
             val gctx = ctx.gctx
             val cctx = ctx.cctx!!
             val clazz = cctx.clazz
+            var access = Opcodes.ACC_PUBLIC
+            if (node.static)
+                access += Opcodes.ACC_STATIC
+            else if (node.abstract)
+                access += Opcodes.ACC_ABSTRACT
+            if (node.varargs)
+                access += Opcodes.ACC_VARARGS
             val mnode = cctx.node.visitMethod(
-                if (node.static) Opcodes.ACC_STATIC + Opcodes.ACC_PUBLIC
-                else if (node.abstract) Opcodes.ACC_ABSTRACT + Opcodes.ACC_PUBLIC
-                else Opcodes.ACC_PUBLIC,
+                access,
                 node.name,
                 cctx.getDescriptor(compiler, gctx, node),
                 cctx.getSignature(node),
                 null
             ) as MethodNode
             val rettype = TypeOrGeneric.of(cctx.getType(compiler, gctx, node.rettype))
-            val argsc = node.args.list.map { TypeOrGeneric.of(cctx.getType(compiler, gctx, it.second)) }
+            val args = node.args.build { cctx.getType(compiler, gctx, it) }
             val method = VirtualMethod(
                 clazz,
                 node.name,
                 rettype,
-                argsc, node.args.list.map { it.first }, node.args.isVarArgs(),
+                args.first,
+                args.second,
+                node.args.varargs,
                 node.static,
                 node.abstract,
                 null
@@ -50,7 +52,7 @@ object NCFunction : NodeCompiler<NodeFunction>() {
             val context = MethodContext(mnode, method)
             cctx.methods += context
             if (!node.abstract) {
-                compiler.getLastStack().add {
+                compiler.peekCompileStack().add {
                     if (node.override) {
                         method.override = clazz.getAllMethods().find { it ->
                             it.declaringClass != clazz && it.overridableBy(method) {
@@ -106,7 +108,7 @@ object NCFunction : NodeCompiler<NodeFunction>() {
                             }
                         }
                     }
-                    compiler.getLastStack().add {
+                    compiler.peekCompileStack().add {
                         val bctx = BodyContext.of(context)
                         if (!node.static) {
                             val label = Label()

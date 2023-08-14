@@ -1,7 +1,6 @@
 package ru.DmN.pht.std.ast
 
 import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ast.IStaticVariantNode
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.std.utils.Arguments
@@ -16,7 +15,7 @@ open class NodeFunction(
     val abstract: Boolean,
     val override: Boolean,
     nodes: MutableList<Node>
-) : NodeNodesList(tkOperation, nodes), IStaticVariantNode {
+) : NodeNodesList(tkOperation, nodes), IStaticVariantNode, IVarargsVariantNode {
     final override var static: Boolean = static
         set(value) {
             field = value
@@ -24,6 +23,9 @@ open class NodeFunction(
                 name = "<clinit>"
             }
         }
+    override var varargs: Boolean
+        get() = args.varargs
+        set(value) { args.varargs = value }
 
     override fun print(builder: StringBuilder, indent: Int): StringBuilder {
         builder.indent(indent).append('[').append(tkOperation.text).append(if (static) " static\n" else " nostatic\n")

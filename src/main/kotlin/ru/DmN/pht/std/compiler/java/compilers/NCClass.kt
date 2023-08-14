@@ -6,7 +6,6 @@ import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
-import ru.DmN.pht.base.compiler.java.ctx.BodyContext
 import ru.DmN.pht.base.compiler.java.ctx.ClassContext
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.ctx.MethodContext
@@ -24,7 +23,7 @@ object NCClass : NodeCompiler<NodeClass>() {
             val type = VirtualType(ctx.gctx.name(node.name), isInterface = isInterface, generics = node.generics)
             val context = ClassContext(cnode, type)
             compiler.classes += context
-            compiler.getLastStack().add {
+            compiler.peekCompileStack().add {
                 type.parents = node.parents.map { context.getType(compiler, ctx.gctx, it) }.toMutableList()
                     .apply { if (!isInterface && isEmpty()) this += VirtualType.ofKlass(Any::class.java) }
                 cnode.visit(
@@ -60,7 +59,7 @@ object NCClass : NodeCompiler<NodeClass>() {
                         visitEnd()
                     }
                 }
-                compiler.getLastStack().add {
+                compiler.peekCompileStack().add {
                     val nctx = ctx.with(CompilationContext.Type.CLASS).with(context)
                     node.nodes.forEach { compiler.compile(it, nctx, false) }
                     if (isObject) {

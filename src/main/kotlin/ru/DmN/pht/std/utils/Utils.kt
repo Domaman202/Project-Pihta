@@ -19,8 +19,20 @@ val String.desc
         "int" -> "I"
         "long" -> "J"
         "double" -> "D"
-        else -> if (this.startsWith('[')) this.replace('.', '/') else "L${this.replace('.', '/')};"
+        else -> {
+            if (this[0] == '[') {
+                var i = 0
+                while (this[i] == '[') i++
+                val clazz = this.substring(i)
+                if (this[1] == 'L' || clazz.isPrimitive())
+                    this.className
+                else "${this.substring(0, i)}L${clazz.className};"
+            }
+            else "L${this.className};"
+        }
     }
+val String.className
+    get() = this.replace('.', '/')
 
 fun VirtualType.ofPrimitive(): String? = when (name) {
     "void" -> ("java.lang.Void")
@@ -203,31 +215,42 @@ fun primitiveToObject(variable: Variable, node: MethodNode): String? {
     val start = Label()
     node.visitLabel(start)
     load(variable, node)
-    val vtype = when (variable.type) {
-        "boolean" -> {
-            node.visitMethodInsn(Opcodes.INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;", false)
-            "java.lang.Boolean"
-        }
-        "byte", "short", "char", "long", "float", "double" -> TODO()
-        "int" -> {
-            node.visitMethodInsn(Opcodes.INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;", false)
-            "java.lang.Integer"
-        }
+    return when (variable.type) {
+        "boolean" -> primitiveToObject(node, 'Z', "java.lang.Boolean")
+        "byte" -> primitiveToObject(node, 'B', "java.lang.Byte")
+        "short" -> primitiveToObject(node, 'S', "java.lang.Short")
+        "char" -> primitiveToObject(node, 'C', "java.lang.Character")
+        "int" -> primitiveToObject(node, 'I', "java.lang.Integer")
+        "long" -> primitiveToObject(node, 'J', "java.lang.Long")
+        "float" -> primitiveToObject(node, 'F', "java.lang.Float")
+        "double" -> primitiveToObject(node, 'D', "java.lang.Double")
         else -> variable.type
     }
-    return vtype
+}
+
+private fun primitiveToObject(node: MethodNode, input: Char, type: String): String {
+    node.visitMethodInsn(Opcodes.INVOKESTATIC, type.replace('.', '/'), "valueOf", "($input)${type.desc}", false)
+    return type
 }
 
 fun objectToPrimitive(variable: Variable, node: MethodNode): String? {
     val start = Label()
     node.visitLabel(start)
-    return when (variable.type) {
-        "java.lang.Boolean", "java.lang.Byte", "java.lang.Short", "java.lang.Character", "java.lang.Long", "java.lang.Float", "java.lang.Double" -> TODO()
-        "java.lang.Integer" -> {
-            load(variable, node)
-            node.visitMethodInsn(Opcodes.INVOKESTATIC, "java/lang/Integer", "toInt", "()I", false)
-            "int"
-        }
-        else -> variable.type
+    return when (val type = variable.type) {
+        "java.lang.Boolean" -> objectToPrimitive(variable, node, type, "boolean", 'Z')
+        "java.lang.Byte" -> objectToPrimitive(variable, node, type, "byte", 'B')
+        "java.lang.Short" -> objectToPrimitive(variable, node, type, "short", 'S')
+        "java.lang.Character" -> objectToPrimitive(variable, node, type, "char", 'C')
+        "java.lang.Integer" -> objectToPrimitive(variable, node, type, "int", 'I')
+        "java.lang.Long" -> objectToPrimitive(variable, node, type, "long", 'J')
+        "java.lang.Float" -> objectToPrimitive(variable, node, type, "float", 'F')
+        "java.lang.Double" -> objectToPrimitive(variable, node, type, "double", 'D')
+        else -> type
     }
+}
+
+private fun objectToPrimitive(variable: Variable, node: MethodNode, owner: String, name: String, rettype: Char): String {
+    load(variable, node)
+    node.visitMethodInsn(Opcodes.INVOKESTATIC, owner.replace('.', '/'), "${name}Value", "()$rettype", false)
+    return name
 }

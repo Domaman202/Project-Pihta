@@ -8,18 +8,19 @@ import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.BodyContext
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.ctx.MethodContext
-import ru.DmN.pht.base.utils.*
+import ru.DmN.pht.base.utils.TypeOrGeneric
+import ru.DmN.pht.base.utils.Variable
+import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.std.ast.NodeFunction
-import ru.DmN.pht.std.utils.desc
 
 object NCEnumCtor : NodeCompiler<NodeFunction>() {
     override fun compile(node: NodeFunction, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.type.enum) {
             val cctx = ctx.cctx!!
             cctx.node.visitMethod(
-                Opcodes.ACC_PRIVATE,
+                if (node.varargs) Opcodes.ACC_PRIVATE + Opcodes.ACC_VARARGS else Opcodes.ACC_PRIVATE,
                 "<init>",
-                "(Ljava/lang/String;I${node.args.desc})V",
+                "(Ljava/lang/String;I${cctx.getDescriptor(compiler, ctx.gctx, node).let { it.substring(1, it.lastIndexOf(')')) }})V",
                 null,
                 null
             ).run {
@@ -29,7 +30,7 @@ object NCEnumCtor : NodeCompiler<NodeFunction>() {
                     TypeOrGeneric.of(Void::class.java),
                     node.args.list.map { TypeOrGeneric.of(ctx.gctx.getType(compiler, it.second)) },
                     node.args.list.map { it.first },
-                    node.args.isVarArgs()
+                    node.args.varargs
                 )
                 cctx.clazz.methods += method
                 val mctx = MethodContext(this as MethodNode, method)

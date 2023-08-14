@@ -76,12 +76,12 @@ class VirtualType(
                 TYPES[klass.name] = this
                 klass.superclass?.let { parents.add(ofKlass(it.name)) }
                 Arrays.stream(klass.interfaces).map { ofKlass(it.name) }.forEach(parents::add)
-                fields += klass.declaredFields.map(VirtualField.Companion::of)
-                methods += klass.declaredConstructors.map(VirtualMethod.Companion::of) +
-                        klass.declaredMethods.map(VirtualMethod.Companion::of)
                 componentType = klass.componentType?.let(Companion::ofKlass)
                 isInterface = klass.isInterface
                 final = Modifier.isFinal(klass.modifiers) || klass.isEnum
+                fields += klass.declaredFields.map(VirtualField.Companion::of)
+                methods += klass.declaredConstructors.map(VirtualMethod.Companion::of) +
+                        klass.declaredMethods.map(VirtualMethod.Companion::of)
             }
     }
 }

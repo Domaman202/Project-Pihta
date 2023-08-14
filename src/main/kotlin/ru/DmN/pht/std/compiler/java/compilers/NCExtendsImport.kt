@@ -9,9 +9,9 @@ import ru.DmN.pht.base.parser.ast.NodeNodesList
 object NCExtendsImport : NodeCompiler<NodeNodesList>() {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.type == CompilationContext.Type.GLOBAL) {
-            compiler.getLastStack().add {
-                compiler.getLastStack().add {
-                    compiler.getLastStack().add {
+            compiler.peekCompileStack().add {
+                compiler.peekCompileStack().add {
+                    compiler.peekCompileStack().add {
                         node.nodes.forEach { it ->
                             ctx.gctx.getType(compiler, it.getConstValueAsString()).methods.filter { it.extend != null }
                                 .forEach {

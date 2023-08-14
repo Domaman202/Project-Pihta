@@ -1,10 +1,8 @@
 package ru.DmN.pht.std.utils
 
-import ru.DmN.pht.base.utils.Klass
-import ru.DmN.pht.base.utils.indent
-import ru.DmN.pht.base.utils.klassOf
+import ru.DmN.pht.base.utils.*
 
-class Arguments(val list: List<Pair<String, String>> = ArrayList()) : Iterable<Pair<String, Klass>> {
+class Arguments(val list: List<Pair<String, String>> = ArrayList(), var varargs: Boolean) : Iterable<Pair<String, Klass>> {
     val size: Int
         get() = list.size
     val desc: String
@@ -13,9 +11,15 @@ class Arguments(val list: List<Pair<String, String>> = ArrayList()) : Iterable<P
             list.forEach { str.append(it.second.desc) }
             return str.toString()
         }
-    fun isVarArgs(): Boolean =
-        list.isNotEmpty() && list.last().first.startsWith("*")
+
     operator fun get(index: Int) = list[index]
+
+    fun build(getType: (name: String) -> VirtualType): Pair<List<TypeOrGeneric>, List<String>> =
+        if (list.isEmpty())
+            Pair(emptyList(), emptyList())
+        else Pair(
+            (list.dropLast(1).map { it.second } + list.last().let { if (varargs) "[${it.second}" else it.second })
+                .map { TypeOrGeneric.of(getType(it)) }, list.map { it.first })
 
     fun print(builder: StringBuilder, indent: Int): StringBuilder {
         builder.indent(indent).append("[args")

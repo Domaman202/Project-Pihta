@@ -36,9 +36,8 @@ class Compiler {
     fun typeOf(klass: Klass): VirtualType =
         types.find { it.name == klass.name } ?: addType(klass)
 
-    fun typeOf(name: String): VirtualType {
-        return types.find { it.name == name } ?: getOrNull(name) ?: addType(klassOf(name))
-    }
+    fun typeOf(name: String): VirtualType =
+        types.find { it.name == name } ?: getOrNull(name) ?: addType(klassOf(name))
 
     private fun getOrNull(name: String): VirtualType? {
         val type = types.find { it.name == name }
@@ -69,19 +68,17 @@ class Compiler {
         }
     }
 
-    fun popFirstStack(): List<ICompilable> { // todo: rename
-        return stack.removeFirst()
-    }
+    fun popCompileStack(): List<ICompilable> =
+        stack.removeFirst()
 
-    fun getLastStack(): MutableList<ICompilable> { // todo: rename
-        return if (stack.size == 1)
+    fun peekCompileStack(): MutableList<ICompilable> =
+        if (stack.size == 1)
             stack.last()
         else {
             val stack = Stack<ICompilable>()
             this.stack.addLast(stack)
             stack
         }
-    }
 
     companion object {
         val DEFAULT_COMPILERS: Map<String, NodeCompiler<*>>

@@ -14,18 +14,13 @@ import ru.DmN.pht.base.utils.*
 import ru.DmN.pht.std.ast.NodeClass
 
 object NCEnum : NodeCompiler<NodeClass>() {
-    override fun compile(
-        node: NodeClass,
-        compiler: Compiler,
-        ctx: CompilationContext,
-        ret: Boolean
-    ): Variable? {
+    override fun compile(node: NodeClass, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.type == CompilationContext.Type.GLOBAL) { // todo: subclass?
             val cnode = ClassNode()
             val type = VirtualType(ctx.gctx.name(node.name))
             val cctx = EnumContext(cnode, type)
             compiler.classes += cctx
-            compiler.getLastStack().add {
+            compiler.peekCompileStack().add {
                 type.parents = mutableListOf(VirtualType.ofKlass(Enum::class.java))
                 type.parents += node.parents.map { ctx.gctx.getType(compiler, it) }
                 cnode.visit(
@@ -88,7 +83,7 @@ object NCEnum : NodeCompiler<NodeClass>() {
                 cctx.methods += MethodContext(valueOfMethodNode, valueOfMethod)
 
                 //
-                compiler.getLastStack().add {
+                compiler.peekCompileStack().add {
                     val nctx = ctx.with(CompilationContext.Type.ENUM).with(cctx)
                     node.nodes.forEach { compiler.compile(it, nctx, false) }
                     //

@@ -1,4 +1,4 @@
-package ru.DmN.pht.base.parser.ast
+package ru.DmN.pht.std.ast
 
 interface IStaticVariantNode {
     var static: Boolean

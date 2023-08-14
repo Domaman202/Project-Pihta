@@ -25,7 +25,7 @@ class Interpreter {
         val compiler = Compiler()
         compiler.compile(Parser(Lexer(code)).parseNode()!!, CompilationContext(CompilationContext.Type.GLOBAL, GlobalContext(), null, null, null), false)
         while (compiler.stack.isNotEmpty()) {
-            compiler.popFirstStack().forEach {
+            compiler.popCompileStack().forEach {
                 it.compile()
             }
         }

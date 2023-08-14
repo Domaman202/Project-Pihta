@@ -20,10 +20,12 @@ object CompilerMain {
                 
                 (ns ru.DmN.test (
                     (object Main (
+                        (@varargs (fn foo [o] (
+                            (use std)
+                            (#println std o))))
                         (fn main (
                             (use std)
-                            (#println std "Hi!")
-                        ))
+                            (#foo this 12)))
                     ))
                 ))
             )
@@ -31,7 +33,7 @@ object CompilerMain {
         ).parseNode()!!
         compiler.compile(node, CompilationContext(CompilationContext.Type.GLOBAL, GlobalContext(), null, null, null), false)
         while (compiler.stack.isNotEmpty()) {
-            compiler.popFirstStack().forEach {
+            compiler.popCompileStack().forEach {
                 it.compile()
             }
         }

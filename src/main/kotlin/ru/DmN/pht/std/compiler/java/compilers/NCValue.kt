@@ -21,7 +21,7 @@ object NCValue : NodeCompiler<NodeValue>() {
                     DOUBLE -> "double"
                     STRING -> "java.lang.String"
                     PRIMITIVE, CLASS -> "java.lang.Class"
-                    NAMING -> TODO()
+                    NAMING -> throw RuntimeException()
                 }
             )
         else null
@@ -62,7 +62,7 @@ object NCValue : NodeCompiler<NodeValue>() {
                         "java.lang.Class"
                     }
 
-                    NAMING -> TODO()
+                    NAMING -> throw RuntimeException()
                 }, -1, true
             )
         } else null

@@ -12,7 +12,10 @@ open class ClassContext(val node: ClassNode, val clazz: VirtualType, val fields:
     fun getSignature(node: NodeFunction) =
         StringBuilder().apply {
             append('(')
-            node.args.list.forEach { append(getSignature(it.second)) }
+            if (node.args.list.isEmpty()) {
+                node.args.list.dropLast(1).forEach { append(getSignature(it.second)) }
+                node.args.list.forEach { append(getSignature(if (node.varargs) "[${it.second}" else it.second)) }
+            }
             append(')').append(getSignature(node.rettype))
         }.toString()
 
@@ -35,7 +38,7 @@ open class ClassContext(val node: ClassNode, val clazz: VirtualType, val fields:
     fun getDescriptor(compiler: Compiler, gctx: GlobalContext, node: NodeFunction) =
         StringBuilder().apply {
             append('(')
-            node.args.list.forEach { append(getType(compiler, gctx, it.second).desc) }
+            node.args.build { getType(compiler, gctx, it) }.first.forEach { append(it.type.desc) }
             append(')').append(getType(compiler, gctx, node.rettype).desc)
         }.toString()
 

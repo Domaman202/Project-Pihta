@@ -16,6 +16,7 @@ import ru.DmN.pht.std.utils.Module
 object Std : Module("std") {
     init {
         // Атрибуты
+        add(name = "@varargs",  parser = NPVarargs,             unparser = NUDefault,   compiler = NCNodesList)
         add(name = "@static",   parser = NPStatic,              unparser = NUDefault,   compiler = NCNodesList)
         add(name = "@generic",  parser = NPGeneric,             unparser = NUGeneric,   compiler = NCNodesList)
         // Импорт
