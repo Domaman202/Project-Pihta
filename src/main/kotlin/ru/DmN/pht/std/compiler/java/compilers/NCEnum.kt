@@ -13,18 +13,19 @@ import ru.DmN.pht.base.compiler.java.ctx.EnumContext
 import ru.DmN.pht.base.compiler.java.ctx.MethodContext
 import ru.DmN.pht.base.utils.*
 import ru.DmN.pht.std.ast.NodeClass
+import ru.DmN.pht.base.compiler.java.ctx.CompilationContext.Type.Companion as CtxType
 
 object NCEnum : NodeCompiler<NodeClass>() {
     override fun compile(node: NodeClass, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        if (ctx.type == CompilationContext.Type.GLOBAL) { // todo: subclass?
+        if (ctx.type == CtxType.GLOBAL) { // todo: subclass?
             compiler.tasks[CompileStage.TYPES_PREDEFINE].add {
                 val cnode = ClassNode()
-                val type = VirtualType(ctx.gctx.name(node.name))
+                val type = VirtualType(ctx.global.name(node.name))
                 val cctx = EnumContext(cnode, type)
                 compiler.classes += cctx
                 compiler.tasks[CompileStage.TYPES_DEFINE].add {
                     type.parents = mutableListOf(VirtualType.ofKlass(Enum::class.java))
-                    type.parents += node.parents.map { ctx.gctx.getType(compiler, it) }
+                    type.parents += node.parents.map { ctx.global.getType(compiler, it) }
                     cnode.visit(
                         Opcodes.V19,
                         Opcodes.ACC_PUBLIC + Opcodes.ACC_FINAL + Opcodes.ACC_ENUM,
@@ -107,7 +108,7 @@ object NCEnum : NodeCompiler<NodeClass>() {
 
                     //
                     compiler.tasks[CompileStage.METHODS_PREDEFINE].add {
-                        val nctx = ctx.with(CompilationContext.Type.ENUM).with(cctx)
+                        val nctx = ctx.with(CtxType.ENUM).with(cctx)
                         node.nodes.forEach { compiler.compile(it, nctx, false) }
                         //
                         cnode.visitMethod(
@@ -146,7 +147,7 @@ object NCEnum : NodeCompiler<NodeClass>() {
                             type.methods += method
                             val mctx = MethodContext(this as MethodNode, method)
                             cctx.methods += mctx
-                            val context = ctx.with(CompilationContext.Type.CLASS_METHOD).with(mctx)
+                            val context = ctx.with(CtxType.CLASS.with(CtxType.METHOD)).with(mctx)
                             cctx.enums.forEachIndexed { i, it ->
                                 visitTypeInsn(Opcodes.NEW, cnode.name)
                                 visitInsn(Opcodes.DUP)

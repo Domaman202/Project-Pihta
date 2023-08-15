@@ -11,7 +11,7 @@ import ru.DmN.pht.base.parser.ast.NodeNodesList
 object NCRepeat : NodeCompiler<NodeNodesList>() {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ctx.type.method)
-            ctx.mctx!!.node.run {
+            ctx.method!!.node.run {
                 val labelStart = Label()
                 visitLabel(labelStart)
                 node.nodes.drop(1).forEach { compiler.compile(it, ctx, false) }

@@ -15,12 +15,13 @@ import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.isPrimitive
 import ru.DmN.pht.std.ast.NodeFunction
 import ru.DmN.pht.std.utils.insertRet
+import ru.DmN.pht.base.compiler.java.ctx.CompilationContext.Type as CtxType
 
 object NCFunction : NodeCompiler<NodeFunction>() {
     override fun compile(node: NodeFunction, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.type.clazz) { // todo: lambda & no class method
-            val gctx = ctx.gctx
-            val cctx = ctx.cctx!!
+            val gctx = ctx.global
+            val cctx = ctx.clazz!!
             val clazz = cctx.clazz
             var access = Opcodes.ACC_PUBLIC
             if (node.static)
@@ -121,7 +122,7 @@ object NCFunction : NodeCompiler<NodeFunction>() {
                             mnode.visitLabel(label)
                             context.variableStarts[bctx.addVariable(it.first, it.second).id] = label
                         }
-                        val nctx = ctx.with(CompilationContext.Type.CLASS_METHOD_BODY).with(context).with(bctx)
+                        val nctx = ctx.with(CtxType.CLASS.with(CtxType.METHOD).with(CtxType.BODY)).with(context).with(bctx)
                         val nodes = node.nodes.map { { r: Boolean -> compiler.compile(it, nctx, r) } }
                         nodes.dropLast(1).forEach { it(false) }
                         val retVal = method.rettype.type != "void"

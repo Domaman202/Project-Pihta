@@ -17,7 +17,7 @@ object NCList : NodeCompiler<NodeNodesList>() {
 
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ret && ctx.type.method) {
-            ctx.mctx!!.node.run {
+            ctx.method!!.node.run {
                 visitLdcInsn(node.nodes.size)
                 visitTypeInsn(Opcodes.ANEWARRAY, "java/lang/Object")
                 node.nodes.forEachIndexed { i, it ->

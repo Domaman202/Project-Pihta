@@ -11,36 +11,36 @@ import ru.DmN.pht.std.ast.NodeGet
 object NCGet : NodeCompiler<NodeGet>() {
     override fun calcType(node: NodeGet, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         if (ctx.type.method && ctx.type.body) {
-            ctx.bctx!![node.name]?.type?.let {
+            ctx.body!![node.name]?.type?.let {
                 return if (ctx.type.clazz)
-                    ctx.cctx!!.getType(compiler, ctx.gctx, it)
-                else ctx.gctx.getTypeOrNull(compiler, it)
+                    ctx.clazz!!.getType(compiler, ctx.global, it)
+                else ctx.global.getTypeOrNull(compiler, it)
             }
             if (ctx.type.clazz)
-                ctx.cctx!!.fields.find { it.field.name == node.name }?.let { return it.field.type }
-            ctx.gctx.getType(compiler, node.name)
+                ctx.clazz!!.fields.find { it.field.name == node.name }?.let { return it.field.type }
+            ctx.global.getType(compiler, node.name)
         } else null
 
     override fun compile(node: NodeGet, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ret && ctx.type.method && ctx.type.body) {
-            val mctx = ctx.mctx!!
-            ctx.bctx!![node.name]?.let { return it }
+            val mctx = ctx.method!!
+            ctx.body!![node.name]?.let { return it }
             if (ctx.type.clazz) {
-                val cctx = ctx.cctx!!
+                val cctx = ctx.clazz!!
                 cctx.fields.find { it.field.name == node.name }?.let { it ->
                     mctx.node.run {
                         val field = it.field
                         if (field.static)
                             visitFieldInsn(Opcodes.GETSTATIC, cctx.node.name, field.name, field.desc)
                         else {
-                            visitVarInsn(Opcodes.ALOAD, ctx.bctx["this"]!!.id)
+                            visitVarInsn(Opcodes.ALOAD, ctx.body["this"]!!.id)
                             visitFieldInsn(Opcodes.GETFIELD, cctx.node.name, field.name, field.desc)
                         }
                         return Variable(field.name, field.type.name, -1, true)
                     }
                 }
             }
-            ctx.gctx.getTypeOrNull(compiler, node.name)?.let { it ->
+            ctx.global.getTypeOrNull(compiler, node.name)?.let { it ->
                 val instance = it.fields.find { it.name == "INSTANCE" }
                 if (instance == null)
                     null

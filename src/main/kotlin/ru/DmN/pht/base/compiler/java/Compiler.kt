@@ -11,9 +11,6 @@ import ru.DmN.pht.base.utils.*
 import ru.DmN.pht.std.utils.Module
 import java.lang.reflect.Modifier
 import java.util.*
-import kotlin.collections.ArrayDeque
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class Compiler {
     val modules: MutableList<Module> = ArrayList()

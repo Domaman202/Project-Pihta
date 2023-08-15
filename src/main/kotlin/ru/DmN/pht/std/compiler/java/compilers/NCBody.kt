@@ -21,15 +21,15 @@ object NCBody : NodeCompiler<NodeNodesList>() {
             node.nodes.dropLast(1).forEach { compiler.compile(it, context, false) }
             compiler.compile(node.nodes.last(), context, ret).apply {
                 val stopLabel = Label()
-                ctx.mctx!!.node.visitLabel(stopLabel)
-                context.bctx!!.stopLabel = stopLabel
+                ctx.method!!.node.visitLabel(stopLabel)
+                context.body!!.stopLabel = stopLabel
             }
         } else null
 
     fun ctxOf(ctx: CompilationContext): CompilationContext =
         if (ctx.type.body)
-            ctx.with(BodyContext.of(ctx.bctx!!))
+            ctx.with(BodyContext.of(ctx.body!!))
         else if (ctx.type.method)
-            ctx.with(BodyContext.of(ctx.mctx!!))
+            ctx.with(BodyContext.of(ctx.method!!))
         else throw RuntimeException()
 }

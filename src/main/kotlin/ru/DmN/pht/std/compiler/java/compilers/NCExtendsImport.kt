@@ -12,9 +12,9 @@ object NCExtendsImport : NodeCompiler<NodeNodesList>() {
         if (ctx.type == CompilationContext.Type.GLOBAL) {
             compiler.tasks[CompileStage.EXTENDS_IMPORT].add {
                 node.nodes.forEach { it ->
-                    ctx.gctx.getType(compiler, it.getConstValueAsString()).methods.filter { it.extend != null }
+                    ctx.global.getType(compiler, it.getConstValueAsString()).methods.filter { it.extend != null }
                         .forEach {
-                            ctx.gctx.getExtends(it.extend!!) += it
+                            ctx.global.getExtends(it.extend!!) += it
                         }
                 }
             }

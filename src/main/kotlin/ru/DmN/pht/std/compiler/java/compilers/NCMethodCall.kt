@@ -19,13 +19,13 @@ object NCMethodCall : NodeCompiler<NodeMethodCall>() {
         else null
 
     fun calcType(compiler: Compiler, ctx: CompilationContext, methods: List<VirtualMethod>, args: List<Node>): VirtualType =
-        ctx.gctx.getType(compiler, findFunction(args.map { compiler.calc(it, ctx)!! }, methods, ctx.gctx, compiler).rettype.type)
+        ctx.global.getType(compiler, findFunction(args.map { compiler.calc(it, ctx)!! }, methods, ctx.global, compiler).rettype.type)
 
     override fun compile(node: NodeMethodCall, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ctx.type.method) {
             val instance = compiler.compile(node.nodes[0], ctx, true)!!
-            load(instance, ctx.mctx!!.node)
-            val type = ctx.gctx.getType(compiler, instance.type!!)
+            load(instance, ctx.method!!.node)
+            val type = ctx.global.getType(compiler, instance.type!!)
             compileWithRet(
                 node,
                 compiler,
@@ -49,7 +49,7 @@ object NCMethodCall : NodeCompiler<NodeMethodCall>() {
         args: List<Node>,
         instance: () -> Unit,
         special: Boolean
-    ): Variable? = compileRet(node, ctx.mctx!!, ret, compileWithOutRet(compiler, ctx, type, name, args, instance, enumCtor = false, special = special))
+    ): Variable? = compileRet(node, ctx.method!!, ret, compileWithOutRet(compiler, ctx, type, name, args, instance, enumCtor = false, special = special))
 
 
     fun compileWithOutRet(
@@ -62,9 +62,9 @@ object NCMethodCall : NodeCompiler<NodeMethodCall>() {
         enumCtor: Boolean,
         special: Boolean
     ): VirtualMethod {
-        ctx.mctx!!.node.run {
-            val filteredMethods = ctx.gctx.getAllExtends(type).let { it + type.methods }.filter { it.name == name }
-            val method = findFunction(args.map { compiler.calc(it, ctx)!! }, filteredMethods, ctx.gctx, compiler)
+        ctx.method!!.node.run {
+            val filteredMethods = ctx.global.getAllExtends(type).let { it + type.methods }.filter { it.name == name }
+            val method = findFunction(args.map { compiler.calc(it, ctx)!! }, filteredMethods, ctx.global, compiler)
             if (!method.static)
                 instance()
             val i =
@@ -72,7 +72,7 @@ object NCMethodCall : NodeCompiler<NodeMethodCall>() {
                     if (method.argsc.size == 1) args.size
                     else args.size - method.argsc.size
                 else 0
-            val margs = method.argsc.map { ctx.gctx.getType(compiler, it.type) }
+            val margs = method.argsc.map { ctx.global.getType(compiler, it.type) }
             args.dropLast(i).forEachIndexed { j, it -> loadCast(compiler.compile(it, ctx, true)!!, margs[j], this) }
             if (method.varargs) {
                 visitLdcInsn(i)

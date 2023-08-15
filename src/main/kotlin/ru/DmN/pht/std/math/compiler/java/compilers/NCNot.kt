@@ -18,7 +18,7 @@ object NCNot : NodeCompiler<NodeNot>() {
 
     override fun compile(node: NodeNot, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ctx.type.method) {
-            ctx.mctx!!.node.apply {
+            ctx.method!!.node.apply {
                 load(compiler.compile(node.value, ctx, true)!!, this)
                 val labelIf = Label()
                 visitJumpInsn(Opcodes.IFNE, labelIf)

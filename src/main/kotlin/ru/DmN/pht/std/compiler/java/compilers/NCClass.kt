@@ -22,11 +22,11 @@ object NCClass : NodeCompiler<NodeClass>() {
                 val isObject = node.tkOperation.text == "obj"
                 //
                 val cnode = ClassNode()
-                val type = VirtualType(ctx.gctx.name(node.name), isInterface = isInterface, generics = node.generics)
+                val type = VirtualType(ctx.global.name(node.name), isInterface = isInterface, generics = node.generics)
                 val context = ClassContext(cnode, type)
                 compiler.classes += context
                 compiler.tasks[CompileStage.TYPES_DEFINE].add {
-                    type.parents = node.parents.map { context.getType(compiler, ctx.gctx, it) }.toMutableList()
+                    type.parents = node.parents.map { context.getType(compiler, ctx.global, it) }.toMutableList()
                         .apply { if (!isInterface && isEmpty()) this += VirtualType.ofKlass(Any::class.java) }
                     cnode.visit(
                         Opcodes.V19,
@@ -38,7 +38,7 @@ object NCClass : NodeCompiler<NodeClass>() {
                             Opcodes.ACC_PUBLIC + Opcodes.ACC_FINAL
                         else throw Error(),
                         type.className,
-                        node.getSignature(compiler, context, ctx.gctx),
+                        node.getSignature(compiler, context, ctx.global),
                         type.parents.firstOrNull()?.className ?: "java/lang/Object",
                         type.parents.drop(1).map { it.className }.toTypedArray()
                     )

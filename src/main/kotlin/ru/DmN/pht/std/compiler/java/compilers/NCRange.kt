@@ -22,7 +22,7 @@ object NCRange : NodeCompiler<NodeNodesList>() {
         ret: Boolean
     ): Variable? =
         if (ctx.type.method)
-            ctx.mctx!!.node.run {
+            ctx.method!!.node.run {
                 node.nodes.forEach { load(compiler.compile(it, ctx, true)!!, this) }
                 visitMethodInsn(
                     Opcodes.INVOKESTATIC,

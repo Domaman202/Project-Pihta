@@ -20,15 +20,18 @@ object CompilerMain {
                 (use std)
                 
                 (ns ru.DmN.test (
-                    (defmacro foo ((use std)(#println std "Foo!")))
+                    (defmacro println [o] (
+                        (use std)
+                        (#println std (macro-arg o))))
+                    
                     (obj Main (
-                        (defn main ((foo)))
+                        (defn main (println "Hi!"))
                     ))
                 ))
             )
         """.trimIndent())
         ).parseNode()!!
-        compiler.compile(node, CompilationContext(CompilationContext.Type.GLOBAL, GlobalContext(), null, null, null), false)
+        compiler.compile(node, CompilationContext(CompilationContext.Type.GLOBAL, GlobalContext(), null, null, null, null), false)
         compiler.tasks.values.forEach { it.forEach(ICompilable::compile) }
         compiler.classes.map { it.node }.forEach {
             val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)

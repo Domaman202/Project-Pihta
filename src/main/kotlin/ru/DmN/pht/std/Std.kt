@@ -15,8 +15,9 @@ import ru.DmN.pht.std.utils.Module
 
 object Std : Module("std") {
     init {
-        // Определить Макрос / Макрос
-        add(name = "defmacro",  parser = NPMacro,               unparser = NUMacro,     compiler = NCDefMacro)
+        // Определить Макрос / Вставить Аргумент / Макрос
+        add(name = "defmacro",  parser = NPDefMacro,            unparser = NUDefMacro,  compiler = NCDefMacro)
+        add(name = "macro-arg", parser = NPMacroArg,            unparser = NUMacroArg,  compiler = NCMacroArg)
         add(name = "macro",     parser = NPMacro,               unparser = NUMacro,     compiler = NCMacro)
         // Переменные аргументы / Статик / Дженерик
         add(name = "@varargs",  parser = NPVarargs,             unparser = NUDefault,   compiler = NCNodesList)
@@ -86,9 +87,9 @@ object Std : Module("std") {
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         super.inject(compiler, ctx, ret)
         return if (ctx.type.method) {
-            val variable = ctx.bctx!!.addVariable("std", "ru.DmN.pht.std.StdFunctions", tmp = ret)
+            val variable = ctx.body!!.addVariable("std", "ru.DmN.pht.std.StdFunctions", tmp = ret)
             val label = Label()
-            ctx.mctx!!.node.run {
+            ctx.method!!.node.run {
                 visitLabel(label)
                 visitFieldInsn(
                     Opcodes.GETSTATIC,
@@ -100,7 +101,7 @@ object Std : Module("std") {
                     variable
                 else {
                     visitVarInsn(Opcodes.ASTORE, variable.id)
-                    ctx.mctx.variableStarts[variable.id] = label
+                    ctx.method.variableStarts[variable.id] = label
                     null
                 }
             }

@@ -14,7 +14,7 @@ object NCThisCall : NodeCompiler<NodeThisCall>() {
             NCMethodCall.calcType(
                 compiler,
                 ctx,
-                ctx.cctx!!.clazz.methods.filter { it.name == node.name },
+                ctx.clazz!!.clazz.methods.filter { it.name == node.name },
                 node.nodes
             )
         else null
@@ -26,10 +26,10 @@ object NCThisCall : NodeCompiler<NodeThisCall>() {
                 compiler,
                 ctx,
                 ret,
-                ctx.cctx!!.clazz,
+                ctx.clazz!!.clazz,
                 node.name,
                 node.nodes,
-                {ctx.mctx!!.node.visitVarInsn(Opcodes.ALOAD, ctx.bctx!!["this"]!!.id)},
+                {ctx.method!!.node.visitVarInsn(Opcodes.ALOAD, ctx.body!!["this"]!!.id)},
                 special = false
             )
         } else null

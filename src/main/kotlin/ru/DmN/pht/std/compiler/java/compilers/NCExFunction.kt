@@ -15,12 +15,13 @@ import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.std.ast.NodeExFunction
 import ru.DmN.pht.std.utils.desc
 import ru.DmN.pht.std.utils.insertRet
+import ru.DmN.pht.base.compiler.java.ctx.CompilationContext.Type as CtxType
 
 object NCExFunction : NodeCompiler<NodeExFunction>() {
     override fun compile(node: NodeExFunction, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.type.clazz) {
-            val gctx = ctx.gctx
-            val cctx = ctx.cctx!!
+            val gctx = ctx.global
+            val cctx = ctx.clazz!!
             val mnode = cctx.node.visitMethod(
                 Opcodes.ACC_STATIC + Opcodes.ACC_PUBLIC + if (node.varargs) Opcodes.ACC_VARARGS else 0,
                 node.name,
@@ -51,7 +52,7 @@ object NCExFunction : NodeCompiler<NodeExFunction>() {
                     mnode.visitLabel(label1)
                     context.variableStarts[bctx.addVariable(it.first, it.second).id] = label1
                 }
-                val nctx = ctx.with(CompilationContext.Type.CLASS_METHOD_BODY).with(context).with(bctx)
+                val nctx = ctx.with(CtxType.CLASS.with(CtxType.METHOD).with(CtxType.BODY)).with(context).with(bctx)
                 val nodes = node.nodes.map { { r: Boolean -> compiler.compile(it, nctx, r) } }
                 nodes.dropLast(1).forEach { it(false) }
                 val retVal = method.rettype.type != "void"

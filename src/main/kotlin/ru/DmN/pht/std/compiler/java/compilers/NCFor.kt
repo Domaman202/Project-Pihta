@@ -12,11 +12,11 @@ import ru.DmN.pht.std.utils.load
 object NCFor : NodeCompiler<NodeFor>() {
     override fun compile(node: NodeFor, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.type.method && ctx.type.body) {
-            ctx.mctx!!.node.run {
+            ctx.method!!.node.run {
                 val labelInit = Label()
                 visitLabel(labelInit)
-                val iterator = ctx.mctx.createVariable(ctx.bctx!!, "pht$${node.hashCode()}", "java.util.Iterator", labelInit)
-                val type = ctx.gctx.getType(compiler, compiler.compile(node.nodes.first(), ctx, true)!!.apply { load(this, this@run) }.type!!)
+                val iterator = ctx.method.createVariable(ctx.body!!, "pht$${node.hashCode()}", "java.util.Iterator", labelInit)
+                val type = ctx.global.getType(compiler, compiler.compile(node.nodes.first(), ctx, true)!!.apply { load(this, this@run) }.type!!)
                 if (!type.isAssignableFrom(compiler.typeOf("java.util.Iterator"))) {
                     if (type.isAssignableFrom(compiler.typeOf("java.lang.Iterable")))
                         visitMethodInsn(Opcodes.INVOKEINTERFACE, "java/lang/Iterable", "iterator", "()Ljava/util/Iterator;", true)
@@ -32,7 +32,7 @@ object NCFor : NodeCompiler<NodeFor>() {
                 visitJumpInsn(Opcodes.IFEQ, labelExit)
                 val labelCycle = Label()
                 visitLabel(labelCycle)
-                val value = ctx.mctx.createVariable(ctx.bctx, node.name, "java.lang.Object", labelCycle)
+                val value = ctx.method.createVariable(ctx.body, node.name, "java.lang.Object", labelCycle)
                 visitMethodInsn(Opcodes.INVOKEINTERFACE, "java/util/Iterator", "next", "()Ljava/lang/Object;", true)
                 visitVarInsn(Opcodes.ASTORE, value.id)
                 node.nodes.drop(1).forEach { compiler.compile(it, ctx, false) }

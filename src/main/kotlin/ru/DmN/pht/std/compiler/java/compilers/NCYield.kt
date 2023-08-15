@@ -10,6 +10,6 @@ import ru.DmN.pht.std.utils.load
 object NCYield : NodeCompiler<NodeNodesList>() {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ret && ctx.type.method)
-            compiler.compile(node.nodes.first(), ctx, true)?.apply { load(this, ctx.mctx!!.node) }
+            compiler.compile(node.nodes.first(), ctx, true)?.apply { load(this, ctx.method!!.node) }
         else null
 }

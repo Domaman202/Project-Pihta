@@ -8,7 +8,7 @@ import ru.DmN.pht.std.ast.NodeNamespace
 
 object NCNamespace : NodeCompiler<NodeNamespace>() {
     override fun compile(node: NodeNamespace, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        val context = ctx.with(ctx.gctx.with(ctx.gctx.name(node.name)))
+        val context = ctx.with(ctx.global.with(ctx.global.name(node.name)))
         node.nodes.forEach { compiler.compile(it, context, ret) }
         return null
     }

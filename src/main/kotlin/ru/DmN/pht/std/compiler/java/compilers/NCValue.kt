@@ -13,7 +13,7 @@ import ru.DmN.pht.std.ast.NodeValue.Type.*
 object NCValue : NodeCompiler<NodeValue>() {
     override fun calcType(node: NodeValue, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         if (ctx.type.method)
-            ctx.gctx.getType(
+            ctx.global.getType(
                 compiler, when (node.vtype) {
                     NIL -> "java.lang.Object"
                     BOOLEAN -> "boolean"
@@ -28,7 +28,7 @@ object NCValue : NodeCompiler<NodeValue>() {
 
     override fun compile(node: NodeValue, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ret && ctx.type.method) {
-            val mctx = ctx.mctx!!
+            val mctx = ctx.method!!
             Variable(
                 "(tmp$${node.hashCode()})",
                 when (node.vtype) {
@@ -58,7 +58,7 @@ object NCValue : NodeCompiler<NodeValue>() {
                     }
 
                     PRIMITIVE, CLASS -> {
-                        mctx.node.visitLdcInsn(Type.getType(ctx.gctx.getType(compiler, node.value).desc))
+                        mctx.node.visitLdcInsn(Type.getType(ctx.global.getType(compiler, node.value).desc))
                         "java.lang.Class"
                     }
 

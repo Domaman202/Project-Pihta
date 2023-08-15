@@ -15,7 +15,7 @@ import ru.DmN.pht.base.parser.ast.NodeNodesList
 object NCEnumField : NodeCompiler<NodeNodesList>() {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.type.enum) {
-            val cctx = ctx.cctx as EnumContext
+            val cctx = ctx.clazz as EnumContext
             val name = node.nodes.first().getConstValueAsString()
             val fnode = cctx.node.visitField(
                 Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC + Opcodes.ACC_FINAL + Opcodes.ACC_ENUM,

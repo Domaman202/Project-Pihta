@@ -15,12 +15,12 @@ object NCField : NodeCompiler<NodeField>() {
     override fun compile(node: NodeField, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.type.method && ctx.type.body) {
             val label = Label()
-            ctx.mctx!!.node.visitLabel(label)
-            node.fields.forEach { ctx.mctx.createVariable(ctx.bctx!!, it.first, it.second, label) }
+            ctx.method!!.node.visitLabel(label)
+            node.fields.forEach { ctx.method.createVariable(ctx.body!!, it.first, it.second, label) }
         } else if (ctx.type.clazz) {
-            val cctx = ctx.cctx!!
+            val cctx = ctx.clazz!!
             node.fields.forEach {
-                val type = ctx.cctx.getType(compiler, ctx.gctx, it.second)
+                val type = ctx.clazz.getType(compiler, ctx.global, it.second)
                 val fnode = cctx.node.visitField(
                     if (node.static) Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC else Opcodes.ACC_PUBLIC,
                     it.first,

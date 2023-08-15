@@ -18,16 +18,16 @@ object NCIf : NodeCompiler<NodeNodesList>() {
 
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         return if (ctx.type.method)
-            ctx.mctx!!.node.run {
+            ctx.method!!.node.run {
                 compiler.compile(node.nodes.first(), ctx, true)
                 val labelIf = Label()
                 visitJumpInsn(Opcodes.IFEQ, labelIf)
-                val typeA = compiler.compile(node.nodes[1], ctx, ret)?.apply { load(this, ctx.mctx.node) }?.type?.let { ctx.gctx.getType(compiler, it) }
+                val typeA = compiler.compile(node.nodes[1], ctx, ret)?.apply { load(this, ctx.method.node) }?.type?.let { ctx.global.getType(compiler, it) }
                 val labelExit = Label()
                 visitJumpInsn(Opcodes.GOTO, labelExit)
                 visitLabel(labelIf)
                 val typeB = if (node.nodes.size == 3)
-                    compiler.compile(node.nodes[2], ctx, ret)?.apply { load(this, ctx.mctx.node) }?.type?.let { ctx.gctx.getType(compiler, it) }
+                    compiler.compile(node.nodes[2], ctx, ret)?.apply { load(this, ctx.method.node) }?.type?.let { ctx.global.getType(compiler, it) }
                 else null
                 visitLabel(labelExit)
                 if (ret)

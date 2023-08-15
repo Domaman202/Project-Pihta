@@ -3,9 +3,9 @@ package ru.DmN.pht.base.compiler.java.ctx
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.ast.NodeMacro
+import ru.DmN.pht.std.ast.NodeDefMacro
 
-class GlobalContext(val namespace: String = "", val extends: MutableList<Pair<String, MutableList<VirtualMethod>>> = ArrayList(), val macros: MutableList<NodeMacro> = ArrayList()) {
+class GlobalContext(val namespace: String = "", val extends: MutableList<Pair<String, MutableList<VirtualMethod>>> = ArrayList(), val macros: MutableList<NodeDefMacro> = ArrayList()) {
     fun with(namespace: String) =
         GlobalContext(namespace, extends)
 

@@ -10,7 +10,7 @@ import ru.DmN.pht.std.ast.NodeConstructorCall
 object NCCtorCall : NodeCompiler<NodeConstructorCall>() {
     override fun compile(node: NodeConstructorCall, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.type.clazz && ctx.type.method && ctx.type.body) {
-            var type = ctx.cctx!!.clazz
+            var type = ctx.clazz!!.clazz
             if (node.supercall)
                 type = type.superclass!!
             NCMethodCall.compileWithOutRet(
@@ -19,7 +19,7 @@ object NCCtorCall : NodeCompiler<NodeConstructorCall>() {
                 type,
                 "<init>",
                 node.nodes,
-                { ctx.mctx!!.node.visitVarInsn(Opcodes.ALOAD, ctx.bctx!!["this"]!!.id) },
+                { ctx.method!!.node.visitVarInsn(Opcodes.ALOAD, ctx.body!!["this"]!!.id) },
                 enumCtor = false,
                 special = true
             )

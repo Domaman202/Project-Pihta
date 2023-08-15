@@ -10,8 +10,8 @@ import ru.DmN.pht.std.utils.insertRet
 object NCReturn : NodeCompiler<NodeNodesList>() {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.type.method) {
-            val mctx = ctx.mctx!!
-            insertRet(compiler.compile(node.nodes.first(), ctx, true), ctx.gctx.getType(compiler, mctx.method.rettype.type), mctx.node)
+            val mctx = ctx.method!!
+            insertRet(compiler.compile(node.nodes.first(), ctx, true), ctx.global.getType(compiler, mctx.method.rettype.type), mctx.node)
         }
         return null
     }

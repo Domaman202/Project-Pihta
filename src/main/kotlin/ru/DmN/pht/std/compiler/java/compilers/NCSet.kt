@@ -19,15 +19,15 @@ object NCSet : NodeCompiler<NodeSet>() {
 
     override fun compile(node: NodeSet, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ctx.type.method && ctx.type.body) {
-            val mctx = ctx.mctx!!
+            val mctx = ctx.method!!
             var valueType: String? = null
             val value = { valueType = compiler.compile(node.value!!, ctx, true)!!.apply { load(this, mctx.node) }.type }
             if (ret)
                 mctx.node.visitInsn(Opcodes.DUP)
-            val variable = ctx.bctx!![node.name]
+            val variable = ctx.body!![node.name]
             if (variable == null) {
                 if (ctx.type.clazz) {
-                    val cctx = ctx.cctx!!
+                    val cctx = ctx.clazz!!
                     cctx.fields.find { it.field.name == node.name }.let {
                         mctx.node.run {
                             val field = it!!.field
@@ -35,7 +35,7 @@ object NCSet : NodeCompiler<NodeSet>() {
                                 value()
                                 visitFieldInsn(Opcodes.PUTSTATIC, cctx.node.name, node.name, field.desc)
                             } else {
-                                visitVarInsn(Opcodes.ALOAD, ctx.bctx["this"]!!.id)
+                                visitVarInsn(Opcodes.ALOAD, ctx.body["this"]!!.id)
                                 value()
                                 visitFieldInsn(Opcodes.PUTFIELD, cctx.node.name, node.name, field.desc)
                             }
@@ -45,8 +45,8 @@ object NCSet : NodeCompiler<NodeSet>() {
             } else {
                 value()
                 val result = ru.DmN.pht.std.utils.calcType(
-                    variable.type?.let { ctx.gctx.getType(compiler, it) },
-                    valueType?.let { ctx.gctx.getType(compiler, it) }
+                    variable.type?.let { ctx.global.getType(compiler, it) },
+                    valueType?.let { ctx.global.getType(compiler, it) }
                 )
                 variable.type = result.first?.name
                 if (result.second == null)

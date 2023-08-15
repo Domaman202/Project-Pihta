@@ -12,15 +12,16 @@ import ru.DmN.pht.base.utils.TypeOrGeneric
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.std.ast.NodeFunction
+import ru.DmN.pht.base.compiler.java.ctx.CompilationContext.Type as CtxType
 
 object NCEnumCtor : NodeCompiler<NodeFunction>() {
     override fun compile(node: NodeFunction, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.type.enum) {
-            val cctx = ctx.cctx!!
+            val cctx = ctx.clazz!!
             cctx.node.visitMethod(
                 if (node.varargs) Opcodes.ACC_PRIVATE + Opcodes.ACC_VARARGS else Opcodes.ACC_PRIVATE,
                 "<init>",
-                "(Ljava/lang/String;I${cctx.getDescriptor(compiler, ctx.gctx, node).let { it.substring(1, it.lastIndexOf(')')) }})V",
+                "(Ljava/lang/String;I${cctx.getDescriptor(compiler, ctx.global, node).let { it.substring(1, it.lastIndexOf(')')) }})V",
                 null,
                 null
             ).run {
@@ -28,7 +29,7 @@ object NCEnumCtor : NodeCompiler<NodeFunction>() {
                     cctx.clazz,
                     "<init>",
                     TypeOrGeneric.of(Void::class.java),
-                    node.args.list.map { TypeOrGeneric.of(ctx.gctx.getType(compiler, it.second)) },
+                    node.args.list.map { TypeOrGeneric.of(ctx.global.getType(compiler, it.second)) },
                     node.args.list.map { it.first },
                     node.args.varargs
                 )
@@ -36,7 +37,7 @@ object NCEnumCtor : NodeCompiler<NodeFunction>() {
                 val mctx = MethodContext(this as MethodNode, method)
                 cctx.methods += mctx
                 val bctx = BodyContext.of(mctx)
-                val context = ctx.with(CompilationContext.Type.CLASS_METHOD_BODY).with(mctx).with(bctx)
+                val context = ctx.with(CtxType.CLASS.with(CtxType.METHOD).with(CtxType.BODY)).with(mctx).with(bctx)
                 bctx.addVariable("this", cctx.clazz.name, false)
                 bctx.addVariable("pht\$internal$0", "java.lang.String", false)
                 bctx.addVariable("pht\$internal$1", "int", false)
@@ -56,7 +57,7 @@ object NCEnumCtor : NodeCompiler<NodeFunction>() {
                 val stopLabel = Label()
                 visitLabel(stopLabel)
                 bctx.stopLabel = stopLabel
-                bctx.visitAllVariables(compiler, ctx.gctx, cctx, mctx)
+                bctx.visitAllVariables(compiler, ctx.global, cctx, mctx)
             }
         }
         return null

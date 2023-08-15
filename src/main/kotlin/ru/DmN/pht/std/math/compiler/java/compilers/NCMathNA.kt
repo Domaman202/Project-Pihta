@@ -18,12 +18,12 @@ object NCMathNA : NodeCompiler<NodeMathNA>() { // todo: list
 
     override fun compile(node: NodeMathNA, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ctx.type.method)
-            ctx.mctx!!.node.run {
+            ctx.method!!.node.run {
                 val valueA = compiler.compile(node.nodes.first(), ctx, true)!!.apply { load(this, this@run) }
                 val valueB = compiler.compile(node.nodes.last(), ctx, true)!!.apply { load(this, this@run) }
                 val rettype = calcNumberType(
-                    valueA.type?.let { ctx.gctx.getType(compiler, it) },
-                    valueB.type?.let { ctx.gctx.getType(compiler, it) }
+                    valueA.type?.let { ctx.global.getType(compiler, it) },
+                    valueB.type?.let { ctx.global.getType(compiler, it) }
                 )!!.name
                 visitInsn(
                     when (node.operation) {

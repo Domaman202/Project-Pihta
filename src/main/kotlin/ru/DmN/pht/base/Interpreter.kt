@@ -25,7 +25,7 @@ class Interpreter {
 
     fun eval0(code: String): List<Klass> {
         val compiler = Compiler()
-        compiler.compile(Parser(Lexer(code)).parseNode()!!, CompilationContext(CompilationContext.Type.GLOBAL, GlobalContext(), null, null, null), false)
+        compiler.compile(Parser(Lexer(code)).parseNode()!!, CompilationContext(CompilationContext.Type.GLOBAL, GlobalContext(), null, null, null, null), false)
         compiler.tasks.values.forEach { it.forEach(ICompilable::compile) }
         return compiler.classes.map { it.node }.map {
             val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)

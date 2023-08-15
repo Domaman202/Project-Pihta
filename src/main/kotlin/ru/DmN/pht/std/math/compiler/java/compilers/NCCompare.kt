@@ -18,7 +18,7 @@ object NCCompare : NodeCompiler<NodeEquals>() { // todo: list
 
     override fun compile(node: NodeEquals, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ret && ctx.type.method)
-            ctx.mctx!!.node.run {
+            ctx.method!!.node.run {
                 val type = node.nodes.map { compiler.compile(it, ctx, true) }.map { it!!.apply { load(it, this@run) }.type }.first() // todo: cast to общий type
                 val labelIf = Label()
                 visitJumpInsn(when (type) {

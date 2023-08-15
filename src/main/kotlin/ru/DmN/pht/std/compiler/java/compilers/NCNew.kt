@@ -11,13 +11,13 @@ import ru.DmN.pht.base.parser.ast.NodeNodesList
 object NCNew : NodeCompiler<NodeNodesList>() {
     override fun calcType(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         if (ctx.type.method)
-            ctx.gctx.getType(compiler, node.nodes.first().getValueAsString())
+            ctx.global.getType(compiler, node.nodes.first().getValueAsString())
         else null
 
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ctx.type.method) {
-            ctx.mctx!!.node.run {
-                val type = ctx.gctx.getType(compiler, node.nodes.first().getValueAsString())
+            ctx.method!!.node.run {
+                val type = ctx.global.getType(compiler, node.nodes.first().getValueAsString())
                 visitTypeInsn(Opcodes.NEW, type.className)
                 visitInsn(Opcodes.DUP)
                 NCMethodCall.compileWithOutRet(
