@@ -22,9 +22,7 @@ object CompilerMain {
                 (ns ru.DmN.test (
                     (defmacro foo ((use std)(#println std "Foo!")))
                     (obj Main (
-                        (defn main (
-                            (use std)
-                            (foo)))
+                        (defn main ((foo)))
                     ))
                 ))
             )
