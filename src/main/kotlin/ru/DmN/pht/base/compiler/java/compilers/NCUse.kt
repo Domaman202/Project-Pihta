@@ -7,12 +7,7 @@ import ru.DmN.pht.base.parser.ast.NodeUse
 import ru.DmN.pht.std.utils.Module
 
 object NCUse : NodeCompiler<NodeUse>() {
-    override fun compile(
-        node: NodeUse,
-        compiler: Compiler,
-        ctx: CompilationContext,
-        ret: Boolean
-    ): Variable? {
+    override fun compile(node: NodeUse, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         return node.names.map { Module.MODULES[it]!!.inject(compiler, ctx, ret) }.last()
     }
 }

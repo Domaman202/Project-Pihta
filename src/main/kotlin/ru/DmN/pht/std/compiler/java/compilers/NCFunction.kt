@@ -5,10 +5,12 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.base.compiler.java.CompileStage
 import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.compiler.java.compilers.NCDefault
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.BodyContext
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.ctx.MethodContext
+import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.TypeOrGeneric
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualMethod
@@ -143,5 +145,12 @@ object NCFunction : NodeCompiler<NodeFunction>() {
             }
         }
         return null
+    }
+
+    override fun applyAnnotation(node: NodeFunction, compiler: Compiler, ctx: CompilationContext, annotation: Node) {
+        when (annotation.tkOperation.text) {
+            "@static" -> node.static = true
+            "@nostatic" -> node.static = false
+        }
     }
 }

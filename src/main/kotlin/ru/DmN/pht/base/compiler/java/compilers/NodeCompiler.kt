@@ -10,6 +10,8 @@ open class NodeCompiler<T : Node> {
     open fun calcType(node: T, compiler: Compiler, ctx: CompilationContext): VirtualType? = null
     open fun compile(node: T, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? = null
 
+    open fun applyAnnotation(node: T, compiler: Compiler, ctx: CompilationContext, annotation: Node) = Unit
+
     companion object {
         val INSTANCE = NodeCompiler<Node>()
     }

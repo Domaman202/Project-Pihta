@@ -3,7 +3,7 @@ package ru.DmN.pht.std
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NCNodesList
+import ru.DmN.pht.base.compiler.java.compilers.NCDefault
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
@@ -19,10 +19,11 @@ object Std : Module("std") {
         add(name = "defmacro",  parser = NPDefMacro,            unparser = NUDefMacro,  compiler = NCDefMacro)
         add(name = "macro-arg", parser = NPMacroArg,            unparser = NUMacroArg,  compiler = NCMacroArg)
         add(name = "macro",     parser = NPMacro,               unparser = NUMacro,     compiler = NCMacro)
-        // Переменные аргументы / Статик / Дженерик
-        add(name = "@varargs",  parser = NPVarargs,             unparser = NUDefault,   compiler = NCNodesList)
-        add(name = "@static",   parser = NPStatic,              unparser = NUDefault,   compiler = NCNodesList)
-        add(name = "@generic",  parser = NPGeneric,             unparser = NUGeneric,   compiler = NCNodesList)
+        // Переменные аргументы / Статик / НеСтатик / Дженерик
+        add(name = "@varargs",  parser = NPVarargs,             unparser = NUDefault,   compiler = NCDefault)
+        add(name = "@static",   parser = NPDefault,             unparser = NUDefault,   compiler = NCStatic)
+        add(name = "@nostatic",   parser = NPDefault,             unparser = NUDefault,   compiler = NCStatic)
+        add(name = "@generic",  parser = NPGeneric,             unparser = NUGeneric,   compiler = NCDefault)
         // Импорт
         add(name = "eimport",   parser = NPDefault,             unparser = NUDefault,   compiler = NCExtendsImport)
         add(name = "import",    parser = NPImport,              unparser = NUImport,    compiler = NodeCompiler.INSTANCE)
@@ -40,7 +41,7 @@ object Std : Module("std") {
         add(name = "sfn",       parser = NPFunction,            unparser = NUFunction,  compiler = NCFunction)
         add(name = "ofn",       parser = NPFunction,            unparser = NUFunction,  compiler = NCFunction)
         add(name = "afn",       parser = NPFunction,            unparser = NUFunction,  compiler = NCFunction)
-        add(name = "defn",      parser = NPFunction,            unparser = NUFunction,  compiler = NCFunction)
+        add(name = "fn",        parser = NPFunction,            unparser = NUFunction,  compiler = NCFunction)
         add(name = "lambda",    parser = NPFunction,            unparser = NUFunction)
         // Циклы
         add(name = "for",       parser = NPFor,                 unparser = NUFor,       compiler = NCFor)

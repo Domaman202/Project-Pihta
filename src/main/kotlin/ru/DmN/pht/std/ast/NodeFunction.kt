@@ -19,9 +19,10 @@ open class NodeFunction(
     final override var static: Boolean = static
         set(value) {
             field = value
-            if (value && tkOperation.text == "ctor") {
+            if (value && tkOperation.text == "ctor")
                 name = "<clinit>"
-            }
+            else if (!value && tkOperation.text == "ctor")
+                name = "<init>"
         }
     override var varargs: Boolean
         get() = args.varargs

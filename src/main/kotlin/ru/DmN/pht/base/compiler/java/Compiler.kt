@@ -1,7 +1,6 @@
 package ru.DmN.pht.base.compiler.java
 
-import ru.DmN.pht.base.compiler.java.compilers.ICompilable
-import ru.DmN.pht.base.compiler.java.compilers.NCNodesList
+import ru.DmN.pht.base.compiler.java.compilers.NCDefault
 import ru.DmN.pht.base.compiler.java.compilers.NCUse
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.ClassContext
@@ -21,6 +20,7 @@ class Compiler {
 
     fun calc(node: Node, ctx: CompilationContext, ): VirtualType? = this[node].calcType(node, this, ctx)
     fun compile(node: Node, ctx: CompilationContext, ret: Boolean): Variable? = this[node].compile(node, this, ctx, ret)
+    fun applyAnnotation(node: Node, ctx: CompilationContext, annotation: Node) = this[node].applyAnnotation(node, this, ctx, annotation)
 
     operator fun get(node: Node): NodeCompiler<Node> =
         compilers[node.tkOperation.text!!] as NodeCompiler<Node>
@@ -68,7 +68,7 @@ class Compiler {
             // use
             DEFAULT_COMPILERS["use"] = NCUse
             // Блок
-            DEFAULT_COMPILERS["nslist"] = NCNodesList
+            DEFAULT_COMPILERS["nslist"] = NCDefault
         }
     }
 }

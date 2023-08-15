@@ -3,6 +3,7 @@ package ru.DmN.pht.std.compiler.java.compilers
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
+import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
@@ -18,4 +19,10 @@ object NCMacroArg : NodeCompiler<NodeMacroArg>() {
         if (ctx.type.macro)
             compiler.compile(ctx.macro!![node.name], ctx, ret)
         else null
+
+    override fun applyAnnotation(node: NodeMacroArg, compiler: Compiler, ctx: CompilationContext, annotation: Node) {
+        if (ctx.type.macro) {
+            compiler.applyAnnotation(ctx.macro!![node.name], ctx, annotation)
+        }
+    }
 }

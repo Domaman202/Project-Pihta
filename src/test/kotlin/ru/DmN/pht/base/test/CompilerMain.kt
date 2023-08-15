@@ -3,7 +3,7 @@ package ru.DmN.pht.base.test
 import org.objectweb.asm.ClassWriter
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.ICompilable
+import ru.DmN.pht.base.compiler.java.ICompilable
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.ctx.GlobalContext
 import ru.DmN.pht.base.lexer.Lexer
@@ -20,12 +20,10 @@ object CompilerMain {
                 (use std)
                 
                 (ns ru.DmN.test (
-                    (defmacro println [o] (
-                        (use std)
-                        (#println std (macro-arg o))))
-                    
-                    (obj Main (
-                        (defn main (println "Hi!"))
+                    (defmacro static [body] (@static (macro-arg body)))
+                
+                    (cls Main (static
+                        (fn main (#println (use std) "Hi!"))
                     ))
                 ))
             )
@@ -48,7 +46,7 @@ object CompilerMain {
             Unsafe.forceSetAccessible(method)
             method.invoke(CompilerMain::class.java.classLoader, b, 0, b.size) as Klass
         }
-        println(Class.forName("ru.DmN.test.Main").run { getMethod("main").invoke(getField("INSTANCE").get(null)) } )
-//        println(Class.forName("ru.DmN.test.Main").getMethod("main").invoke(null))
+//        println(Class.forName("ru.DmN.test.Main").run { getMethod("main").invoke(getField("INSTANCE").get(null)) } )
+        println(Class.forName("ru.DmN.test.Main").getMethod("main").invoke(null))
     }
 }

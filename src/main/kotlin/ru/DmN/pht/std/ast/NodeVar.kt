@@ -5,6 +5,9 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.indent
 
 class NodeVar(tkOperation: Token, val variables: List<Pair<String, Node?>>) : Node(tkOperation) {
+    override val nodes: List<Node>
+        get() = variables.mapNotNull { it.second }
+
     override fun print(builder: StringBuilder, indent: Int): StringBuilder {
         builder.indent(indent).append('[').append(tkOperation.text)
         if (variables.isNotEmpty())
