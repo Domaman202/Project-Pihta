@@ -23,7 +23,13 @@ class Parser(val lexer: Lexer) {
                         tokens.push(operationToken)
                         parsers["nslist"]!!.parse(this, operationToken)
                     }
-                    Token.Type.OPERATION -> parsers[operationToken.text!!]!!.parse(this, operationToken)
+                    Token.Type.OPERATION -> {
+                        val parser = parsers[operationToken.text!!]
+                        if (parser == null) {
+                            tokens.push(operationToken)
+                            parsers["macro"]!!.parse(this, Token(operationToken.line, Token.Type.OPERATION, "macro"))
+                        } else parser.parse(this, operationToken)
+                    }
                     Token.Type.NAMING -> {
                         tokens.push(operationToken)
                         parsers["mcall_"]!!.parse(this, operationToken)

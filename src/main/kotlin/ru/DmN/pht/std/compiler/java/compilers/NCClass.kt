@@ -17,9 +17,9 @@ object NCClass : NodeCompiler<NodeClass>() {
     override fun compile(node: NodeClass, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.type == CompilationContext.Type.GLOBAL) { // todo: subclass
             compiler.tasks[CompileStage.TYPES_PREDEFINE].add {
-                val isInterface = node.tkOperation.text == "interface"
-                val isClass = node.tkOperation.text == "class"
-                val isObject = node.tkOperation.text == "object"
+                val isInterface = node.tkOperation.text == "intf"
+                val isClass = node.tkOperation.text == "cls"
+                val isObject = node.tkOperation.text == "obj"
                 //
                 val cnode = ClassNode()
                 val type = VirtualType(ctx.gctx.name(node.name), isInterface = isInterface, generics = node.generics)
@@ -42,7 +42,7 @@ object NCClass : NodeCompiler<NodeClass>() {
                         type.parents.firstOrNull()?.className ?: "java/lang/Object",
                         type.parents.drop(1).map { it.className }.toTypedArray()
                     )
-                    if (node.tkOperation.text == "object") {
+                    if (isObject) {
                         type.fields += VirtualField("INSTANCE", type, static = true, enum = false)
                         cnode.visitField(
                             Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC + Opcodes.ACC_FINAL,

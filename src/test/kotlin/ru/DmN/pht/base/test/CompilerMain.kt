@@ -20,13 +20,11 @@ object CompilerMain {
                 (use std)
                 
                 (ns ru.DmN.test (
-                    (object Main (
-                        (@varargs (fn foo [o] (
+                    (defmacro foo ((use std)(#println std "Foo!")))
+                    (obj Main (
+                        (defn main (
                             (use std)
-                            (#println std o))))
-                        (fn main (
-                            (use std)
-                            (#foo this 12)))
+                            (foo)))
                     ))
                 ))
             )

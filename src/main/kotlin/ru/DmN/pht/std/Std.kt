@@ -15,7 +15,10 @@ import ru.DmN.pht.std.utils.Module
 
 object Std : Module("std") {
     init {
-        // Атрибуты
+        // Определить Макрос / Макрос
+        add(name = "defmacro",  parser = NPMacro,               unparser = NUMacro,     compiler = NCDefMacro)
+        add(name = "macro",     parser = NPMacro,               unparser = NUMacro,     compiler = NCMacro)
+        // Переменные аргументы / Статик / Дженерик
         add(name = "@varargs",  parser = NPVarargs,             unparser = NUDefault,   compiler = NCNodesList)
         add(name = "@static",   parser = NPStatic,              unparser = NUDefault,   compiler = NCNodesList)
         add(name = "@generic",  parser = NPGeneric,             unparser = NUGeneric,   compiler = NCNodesList)
@@ -26,17 +29,17 @@ object Std : Module("std") {
         add(name = "ns",        parser = NPNamespace,           unparser = NUNamespace, compiler = NCNamespace)
         // Перечисление / Объект / Класс / Интерфейс
         add(name = "enum",      parser = NPClass,               unparser = NUClass,     compiler = NCEnum)
-        add(name = "object",    parser = NPClass,               unparser = NUClass,     compiler = NCClass)
-        add(name = "class",     parser = NPClass,               unparser = NUClass,     compiler = NCClass)
-        add(name = "interface", parser = NPClass,               unparser = NUClass,     compiler = NCClass)
-        // Конструктор / Расширение / Функция / Лямбда
+        add(name = "obj",       parser = NPClass,               unparser = NUClass,     compiler = NCClass)
+        add(name = "cls",       parser = NPClass,               unparser = NUClass,     compiler = NCClass)
+        add(name = "intf",      parser = NPClass,               unparser = NUClass,     compiler = NCClass)
+        // Конструктор Enum-а / Конструктор / Расширение / Перегрузка / Абстрактная Функция / Функция / Лямбда
         add(name = "ector",     parser = NPCtor,                unparser = NUFunction,  compiler = NCEnumCtor)
         add(name = "ctor",      parser = NPCtor,                unparser = NUFunction,  compiler = NCFunction)
         add(name = "efn",       parser = NPExFunction,          unparser = NUExFunction,compiler = NCExFunction)
         add(name = "sfn",       parser = NPFunction,            unparser = NUFunction,  compiler = NCFunction)
         add(name = "ofn",       parser = NPFunction,            unparser = NUFunction,  compiler = NCFunction)
         add(name = "afn",       parser = NPFunction,            unparser = NUFunction,  compiler = NCFunction)
-        add(name = "fn",        parser = NPFunction,            unparser = NUFunction,  compiler = NCFunction)
+        add(name = "defn",      parser = NPFunction,            unparser = NUFunction,  compiler = NCFunction)
         add(name = "lambda",    parser = NPFunction,            unparser = NUFunction)
         // Циклы
         add(name = "for",       parser = NPFor,                 unparser = NUFor,       compiler = NCFor)
@@ -45,7 +48,7 @@ object Std : Module("std") {
         // Условия
         add(name = "if",        parser = NPDefault,             unparser = NUDefault,   compiler = NCIf)
         // Выход
-        add(name = "return",    parser = NPDefault,             unparser = NUDefault,   compiler = NCReturn)
+        add(name = "ret",       parser = NPDefault,             unparser = NUDefault,   compiler = NCReturn)
         add(name = "yield",     parser = NPDefault,             unparser = NUDefault,   compiler = NCYield)
         // Тело
         add(name = "body",      parser = NPDefault,             unparser = NUDefault,   compiler = NCBody)
