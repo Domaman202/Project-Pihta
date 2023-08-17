@@ -1,6 +1,7 @@
 package ru.DmN.pht.base.compiler.java
 
 enum class CompileStage {
+    MACROS_DEFINE_IMPORT,
     TYPES_PREDEFINE,
     TYPES_DEFINE,
     METHODS_PREDEFINE,

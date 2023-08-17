@@ -1,27 +1,39 @@
 package ru.DmN.pht.base.compiler.java
 
+import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.compiler.java.compilers.NCDefault
 import ru.DmN.pht.base.compiler.java.compilers.NCUse
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.ClassContext
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
+import ru.DmN.pht.base.lexer.Lexer
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.*
+import ru.DmN.pht.std.ast.NodeDefMacro
 import ru.DmN.pht.std.utils.Module
 import java.lang.reflect.Modifier
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class Compiler {
     val modules: MutableList<Module> = ArrayList()
     val compilers: MutableMap<String, NodeCompiler<*>> = DEFAULT_COMPILERS.toMutableMap()
     val types: MutableList<VirtualType> = ArrayList()
     val classes: MutableList<ClassContext> = ArrayList()
+    val macros: MutableMap<String, MutableList<NodeDefMacro>> = HashMap()
     val tasks: DefaultEnumMap<CompileStage, MutableList<ICompilable>> = DefaultEnumMap(CompileStage::class.java) { ArrayList() }
 
-    fun calc(node: Node, ctx: CompilationContext): VirtualType? = this[node].calc(node, this, ctx)
-    fun compile(node: Node, ctx: CompilationContext, ret: Boolean): Variable? = this[node].compile(node, this, ctx, ret)
-    fun <T> compute(node: Node, ctx: CompilationContext, name: Boolean): T = this[node].compute(node, this, ctx, name) as T
-    fun applyAnnotation(node: Node, ctx: CompilationContext, annotation: Node) = this[node].applyAnnotation(node, this, ctx, annotation)
+    fun calc(node: Node, ctx: CompilationContext): VirtualType? =
+        this[node].calc(node, this, ctx)
+    fun compile(code: String, ctx: CompilationContext) =
+        compile(Parser(Lexer(code)).parseNode()!!, ctx, false)
+    fun compile(node: Node, ctx: CompilationContext, ret: Boolean): Variable? =
+        this[node].compile(node, this, ctx, ret)
+    fun <T> compute(node: Node, ctx: CompilationContext, name: Boolean): T =
+        this[node].compute(node, this, ctx, name) as T
+    fun applyAnnotation(node: Node, ctx: CompilationContext, annotation: Node) =
+        this[node].applyAnnotation(node, this, ctx, annotation)
 
     operator fun get(node: Node): NodeCompiler<Node> =
         compilers[node.tkOperation.text!!] as NodeCompiler<Node>

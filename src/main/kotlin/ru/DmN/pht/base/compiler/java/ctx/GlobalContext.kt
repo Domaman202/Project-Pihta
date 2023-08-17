@@ -13,7 +13,7 @@ class GlobalContext(
     val macros: MutableList<NodeDefMacro> = ArrayList()
 ) {
     fun with(namespace: String) =
-        GlobalContext(namespace, imports, extends, macros)
+        GlobalContext(namespace)
 
     fun name(name: String): String =
         if (namespace.isEmpty()) name else "$namespace.$name"

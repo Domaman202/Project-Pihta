@@ -8,7 +8,7 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 
-object NCExtendsImport : NodeCompiler<NodeNodesList>() {
+object NCImportExtends : NodeCompiler<NodeNodesList>() {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.type == CompilationContext.Type.GLOBAL) {
             compiler.tasks[CompileStage.EXTENDS_IMPORT].add {

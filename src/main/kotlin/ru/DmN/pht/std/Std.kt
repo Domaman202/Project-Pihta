@@ -18,87 +18,87 @@ import ru.DmN.pht.std.utils.Module
 object Std : Module("std") {
     init {
         // Use
-        add(name = "use",           parser = NPDefault,             unparser = NUDefault,   compiler = NCUse)
+//        add("use",      NPDefault,  NUDefault,  NCUse)
         // Определить Макрос / Вставить Аргумент / Макрос
-        add(name = "defmacro",      parser = NPDefault,             unparser = NUDefMacro,  compiler = NCDefMacro)
-        add(name = "macro-arg",     parser = NPDefault,             unparser = NUDefault,   compiler = NCMacroArg)
-        add(name = "macro_",        parser = NPMacro,               unparser = NUMacro,     compiler = NCMacroB)
-        add(name = "macro",         parser = NPDefault,             unparser = NUDefault,   compiler = NCMacroA)
+        add("defmacro", NPDefault,  NUDefMacro, NCDefMacro)
+        add("macro-arg",NPDefault,  NUDefault,  NCMacroArg)
+        add("macro_",   NPMacro,    NUMacro,    NCMacroB)
+        add("macro",    NPDefault,  NUDefault,  NCMacroA)
         // Аннотации
-        add(name = "@abstract",     parser = NPDefault,             unparser = NUDefault,   compiler = NCAnnotation)
-        add(name = "@final",        parser = NPDefault,             unparser = NUDefault,   compiler = NCAnnotation)
-        add(name = "@generic",      parser = NPDefault,             unparser = NUDefault,   compiler = NCGeneric)
-        add(name = "@override",     parser = NPDefault,             unparser = NUDefault,   compiler = NCAnnotation)
-        add(name = "@static",       parser = NPDefault,             unparser = NUDefault,   compiler = NCAnnotation)
-        add(name = "@varargs",      parser = NPDefault,             unparser = NUDefault,   compiler = NCAnnotation)
+        add("@abstract",NPDefault,NUDefault,NCAnnotation)
+        add("@final",   NPDefault,NUDefault,NCAnnotation)
+        add("@generic", NPDefault,NUDefault,NCGeneric)
+        add("@override",NPDefault,NUDefault,NCAnnotation)
+        add("@static",  NPDefault,NUDefault,NCAnnotation)
+        add("@varargs", NPDefault,NUDefault,NCAnnotation)
         // Импорт
-        add(name = "eimport",       parser = NPDefault,             unparser = NUDefault,   compiler = NCExtendsImport)
-        add(name = "import",        parser = NPDefault,             unparser = NUDefault,   compiler = NCImport)
+        add("import-macro",     NPDefault,  NUDefault,  NCImportMacro)
+        add("import-extend",    NPDefault,  NUDefault,  NCImportExtends)
+        add("import",           NPDefault,  NUDefault,  NCImport)
         // Пространство Имён
-        add(name = "ns",            parser = NPNamespace,           unparser = NUNamespace, compiler = NCNamespace)
+        add("ns",   NPNamespace,NUNamespace,NCNamespace)
         // Перечисление / Объект / Класс / Интерфейс
-        add(name = "enum",          parser = NPDefault,             unparser = NUDefault,   compiler = NCEnum)
-        add(name = "obj",           parser = NPDefault,             unparser = NUDefault,   compiler = NCClass)
-        add(name = "cls",           parser = NPDefault,             unparser = NUDefault,   compiler = NCClass)
-        add(name = "intf",          parser = NPDefault,             unparser = NUDefault,   compiler = NCClass)
+        add("enum", NPDefault,  NUDefault,  NCEnum)
+        add("obj",  NPDefault,  NUDefault,  NCClass)
+        add("cls",  NPDefault,  NUDefault,  NCClass)
+        add("intf", NPDefault,  NUDefault,  NCClass)
         // Конструктор Enum-а / Конструктор / Расширение / Перегрузка / Абстрактная Функция / Функция / Лямбда
-        add(name = "ector",         parser = NPDefault,             unparser = NUDefault,   compiler = NCEnumCtor)
-        add(name = "efn",           parser = NPDefault,             unparser = NUDefault,   compiler = NCExFunction)
-        add(name = "fn",            parser = NPDefault,             unparser = NUDefault,   compiler = NCFunction)
+        add("ector",NPDefault,  NUDefault,  NCEnumCtor)
+        add("efn",  NPDefault,  NUDefault,  NCExFunction)
+        add("fn",   NPDefault,  NUDefault,  NCFunction)
         // Циклы
-        add(name = "repeat",        parser = NPDefault,             unparser = NUDefault,   compiler = NCRepeat)
-        add(name = "while",         parser = NPDefault,             unparser = NUDefault,   compiler = NCWhile)
+        add("repeat",   NPDefault,  NUDefault,  NCRepeat)
+        add("while",    NPDefault,  NUDefault,  NCWhile)
         // Условия
-        add(name = "if",            parser = NPDefault,             unparser = NUDefault,   compiler = NCIf)
+        add("if",       NPDefault,  NUDefault,  NCIf)
         // Выход
-        add(name = "return",        parser = NPDefault,             unparser = NUDefault,   compiler = NCReturn)
-        add(name = "yield",         parser = NPDefault,             unparser = NUDefault,   compiler = NCYield)
+        add("return",   NPDefault,  NUDefault,  NCReturn)
+        add("yield",    NPDefault,  NUDefault,  NCYield)
         // Тело
-        add(name = "body",          parser = NPDefault,             unparser = NUDefault,   compiler = NCBody)
+        add("body",     NPDefault,  NUDefault,  NCBody)
         // Создать / Выполнить / Вызвать Супер-Конструктор / Вызвать
-        add(name = "new",           parser = NPDefault,             unparser = NUDefault,   compiler = NCNew)
-        add(name = "ccall",         parser = NPDefault,             unparser = NUDefault,   compiler = NCCtorCall)
-        add(name = "tcall",         parser = NPDefault,             unparser = NUDefault,   compiler = NCThisCall)
-        add(name = "mcall_",        parser = NPMethodCallB)
-        add(name = "mcall",         parser = NPDefault,             unparser = NUDefault,   compiler = NCMethodCall)
+        add("new",      NPDefault,  NUDefault,  NCNew)
+        add("ccall",    NPDefault,  NUDefault,  NCCtorCall)
+        add("tcall",    NPDefault,  NUDefault,  NCThisCall)
+        add("mcall_",   NPMethodCallB)
+        add("mcall",    NPDefault,  NUDefault,  NCMethodCall)
         // Сеттеры
-        add(name = "fset_",         parser = NPFieldSet,            unparser = NUFieldSet,  compiler = NCSetB)
-        add(name = "set_",          parser = NPSet,                 unparser = NUSet,       compiler = NCSetB)
-        add(name = "set",           parser = NPDefault,             unparser = NUDefault,   compiler = NCSetA)
+        add("fset_",    NPFieldSet, NUFieldSet, NCSetB)
+        add("set_",     NPSet,      NUSet,      NCSetB)
+        add("set",      NPDefault,  NUDefault,  NCSetA)
         // Геттеры
-        add(name = "fget_",                                                                 compiler = NCFieldGetB)
-        add(name = "fget",          parser = NPDefault,             unparser = NUDefault,   compiler = NCFieldGetA)
-        add(name = "get_",          parser = NPGet,                 unparser = NUGetOrName, compiler = NCGetB)
-        add(name = "get",           parser = NPDefault,             unparser = NUDefault,   compiler = NCGetA)
-        add(name = "get-or-name",   parser = NPGetOrName,           unparser = NUGetOrName, compiler = NCGetOrName)
+        add("fget_",                    compiler =  NCFieldGetB)
+        add("fget",         NPDefault,  NUDefault,  NCFieldGetA)
+        add("get_",         NPGet,      NUGetOrName,NCGetB)
+        add("get",          NPDefault,  NUDefault,  NCGetA)
+        add("get-or-name",  NPGetOrName,NUGetOrName,NCGetOrName)
         // Поля / Переменные
-        add(name=  "efield",        parser = NPDefault,             unparser = NUDefault,   compiler = NCEnumField)
-        add(name = "field",         parser = NPDefault,             unparser = NUDefault,   compiler = NCField)
-        add(name = "def",           parser = NPDefault,             unparser = NUDefault,   compiler = NCDef)
+        add("efield",       NPDefault,  NUDefault,  NCEnumField)
+        add("field",        NPDefault,  NUDefault,  NCField)
+        add("def",          NPDefault,  NUDefault,  NCDef)
         // Преобразование типов
-        add(name = "cast",          parser = NPDefault,             unparser = NUDefault,   compiler = NCCast)
+        add("cast",         NPDefault,  NUDefault,  NCCast)
         // Итераторы
-        add(name = "until",         parser = NPDefault,             unparser = NUDefault)
-        add(name = "range",         parser = NPDefault,             unparser = NUDefault,   compiler = NCRange)
+        add("until",        NPDefault,  NUDefault) // todo:?
+        add("range",        NPDefault,  NUDefault,  NCRange)
         // Значения
-        add(name = "valn",          parser = NPValn,                unparser = NUNodesList, compiler = NCValn)
-        add(name = "value_",        parser = NPValueB)
-        add(name = "value",         parser = NPValueA,              unparser = NUValue,     compiler = NCValue)
+        add("valn",         NPValn,     NUNodesList,    NCValn)
+        add("value_",       NPValueB)
+        add("value",        NPValueA,   NUValue,        NCValue)
         // Пустой блок
-        add(name = "unit",          parser = NPDefault,             unparser = NUDefault,   compiler = NCUnit)
+        add("unit",         NPDefault,  NUDefault,      NCUnit)
     }
 
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val flag = !compiler.modules.contains(this)
         if (flag) {
             super.inject(compiler, ctx, ret)
-            Parser(Lexer("""((use std)
-                (defmacro ctor [args body] (fn <init> ^void (macro-arg args) (macro-arg body)))
-            )""".trimIndent())).parseNode()!!.nodes.forEach {
-                if (it.tkOperation.text == "defmacro") {
-                    NCDefMacro.compile(it as NodeNodesList, compiler, ctx, false)
-                }
-            }
+            compiler.compile("""(
+                (use std)
+                (ns pht.std
+                    (defmacro ctor [args body] (fn <init> ^void (macro-arg args) (macro-arg body)))
+                )
+            )""".trimIndent(), ctx)
         }
         return if (ctx.type.method) {
             val variable = ctx.body!!.addVariable("std", "ru.DmN.pht.std.StdFunctions", tmp = ret)

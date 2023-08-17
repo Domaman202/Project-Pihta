@@ -19,12 +19,15 @@ object CompilerMain {
             (
                 (use std std/math)
                 
-                (import [java.lang.Object Any][java.lang.String String])
-                
                 (ns ru.DmN.test (
+                    (import [java.lang.Object Any][java.lang.String String])
+                    (import-macro [pht.std.*])
+                
                     (obj Main [^Any] (
-                        (fn main ^int [] (
-                            (return (= true true))
+                        (ctor [] (ccall super))
+                    
+                        (fn main ^Any [] (
+                            (return this)
                         ))
                     ))
                 ))
