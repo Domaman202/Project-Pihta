@@ -10,7 +10,7 @@ import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 
 object NCBody : NodeCompiler<NodeNodesList>() {
-    override fun calcType(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
+    override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         if (ctx.type.method)
             compiler.calc(node.nodes.last(), ctxOf(ctx))
         else null

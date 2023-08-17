@@ -52,52 +52,64 @@ data class VirtualMethod(
             of(VirtualType.ofKlass(method.declaringClass), method)
 
         private fun of(declaringClass: VirtualType, method: Constructor<*>): VirtualMethod {
+            val generics = Generics()
             val argsc = ArrayList<TypeOrGeneric>()
             val argsn = ArrayList<String>()
             if (declaringClass.final) {
                 method.parameters.forEach {
-                    argsc += TypeOrGeneric.of(it.type)
+                    argsc += TypeOrGeneric.of(generics, it.type)
                     argsn += it.name
                 }
             } else {
                 val gpt = method.genericParameterTypes
                 method.parameters.forEachIndexed { i, it ->
-                    argsc += TypeOrGeneric.of(gpt[i])
+                    argsc += TypeOrGeneric.of(generics, gpt[i])
                     argsn += it.name
                 }
             }
             return VirtualMethod(
                 declaringClass,
                 "<init>",
-                TypeOrGeneric.of(Void::class.javaPrimitiveType!!),
-                argsc, argsn, method.isVarArgs,
+                TypeOrGeneric.of(generics, VirtualType.VOID),
+                argsc,
+                argsn,
+                method.isVarArgs,
                 Modifier.isStatic(method.modifiers),
-                method.declaringClass.isInterface
+                method.declaringClass.isInterface,
+                null,
+                null, // todo:
+                generics
             )
         }
 
         private fun of(declaringClass: VirtualType, method: Method): VirtualMethod {
+            val generics = Generics()
             val argsc = ArrayList<TypeOrGeneric>()
             val argsn = ArrayList<String>()
             if (declaringClass.final) {
                 method.parameters.forEach {
-                    argsc += TypeOrGeneric.of(it.type)
+                    argsc += TypeOrGeneric.of(generics, it.type)
                     argsn += it.name
                 }
             } else {
                 val gpt = method.genericParameterTypes
                 method.parameters.forEachIndexed { i, it ->
-                    argsc += TypeOrGeneric.of(gpt[i])
+                    argsc += TypeOrGeneric.of(generics, gpt[i])
                     argsn += it.name
                 }
             }
             return VirtualMethod(
                 declaringClass,
                 method.name,
-                TypeOrGeneric.of(method.genericReturnType),
-                argsc, argsn, method.isVarArgs,
+                TypeOrGeneric.of(generics, method.genericReturnType),
+                argsc,
+                argsn,
+                method.isVarArgs,
                 Modifier.isStatic(method.modifiers),
-                method.declaringClass.isInterface
+                method.declaringClass.isInterface,
+                null,
+                null, // todo:
+                generics
             )
         }
     }

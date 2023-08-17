@@ -19,11 +19,19 @@ object CompilerMain {
             (
                 (use std)
                 
-                (ns ru.DmN.test (
-                    (defmacro static [body] (@static (macro-arg body)))
+                (import [java.lang.Object Any][java.lang.String String])
                 
-                    (cls Main (static
-                        (fn main (#println (use std) "Hi!"))
+                (ns ru.DmN.test (
+                    (obj TestClassA [^Any] (
+                        (field [value ^Any])
+                        (ctor [] ((ccall super) (set value 12.21)))
+                    )))
+                    
+                    (obj Main [^Any] (
+                        (fn main ^Any [] (
+                            (def [o TestClassA])
+                            (return o/value)
+                        ))
                     ))
                 ))
             )
@@ -46,7 +54,7 @@ object CompilerMain {
             Unsafe.forceSetAccessible(method)
             method.invoke(CompilerMain::class.java.classLoader, b, 0, b.size) as Klass
         }
-//        println(Class.forName("ru.DmN.test.Main").run { getMethod("main").invoke(getField("INSTANCE").get(null)) } )
-        println(Class.forName("ru.DmN.test.Main").getMethod("main").invoke(null))
+        println(Class.forName("ru.DmN.test.Main").run { getMethod("main").invoke(getField("INSTANCE").get(null)) } )
+//        println(Class.forName("ru.DmN.test.Main").getMethod("main").invoke(null))
     }
 }

@@ -9,7 +9,7 @@ import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeFMGet
 
 object NCStaticFieldGet : NodeCompiler<NodeFMGet>() {
-    override fun calcType(node: NodeFMGet, compiler: Compiler, ctx: CompilationContext): VirtualType? =
+    override fun calc(node: NodeFMGet, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         if (ctx.type.method)
             ctx.global.getType(compiler, node.instance.getValueAsString()).fields.find { it.name == node.name }!!.type
         else null

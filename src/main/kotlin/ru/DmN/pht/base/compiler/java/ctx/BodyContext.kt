@@ -21,7 +21,8 @@ class BodyContext(val parent: BodyContext?, val sub: MutableList<BodyContext> = 
                 mctx.node.visitLocalVariable(
                     it.name,
                     cctx.getType(compiler, gctx, type).desc,
-                    cctx.getSignature(type),
+//                    cctx.getSignature(type), // todo:
+                    null,
                     mctx.variableStarts[it.id],
                     pair.first.stopLabel,
                     it.id

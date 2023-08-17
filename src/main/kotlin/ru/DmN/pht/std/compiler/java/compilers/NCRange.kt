@@ -10,7 +10,7 @@ import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.std.utils.load
 
 object NCRange : NodeCompiler<NodeNodesList>() {
-    override fun calcType(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
+    override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         if (ctx.type.method)
             compiler.typeOf("java.util.Iterator")
         else null

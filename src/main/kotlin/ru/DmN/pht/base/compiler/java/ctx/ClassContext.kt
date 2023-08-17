@@ -9,39 +9,6 @@ import ru.DmN.pht.base.utils.Generics
 import ru.DmN.pht.std.utils.desc
 
 open class ClassContext(val node: ClassNode, val clazz: VirtualType, val fields: MutableList<FieldContext> = ArrayList(), val methods: MutableList<MethodContext> = ArrayList()) {
-    fun getSignature(node: NodeFunction) =
-        StringBuilder().apply {
-            append('(')
-            if (node.args.list.isEmpty()) {
-                node.args.list.dropLast(1).forEach { append(getSignature(it.second)) }
-                node.args.list.forEach { append(getSignature(if (node.varargs) "[${it.second}" else it.second)) }
-            }
-            append(')').append(getSignature(node.rettype))
-        }.toString()
-
-    fun getSignature(type: String): String =
-        type.let {
-            if (it.endsWith('^'))
-                "T${it.substring(0, type.length - 1)};"
-            else it.desc
-        }
-
-    fun getSignature(type: VirtualType): String =
-        if (type.generics.list.isEmpty())
-            type.desc
-        else {
-            val sb = StringBuilder()
-            type.generics.list.forEach { sb.append(it.extends) }
-            "L${type.className}<$sb>;"
-        }
-
-    fun getDescriptor(compiler: Compiler, gctx: GlobalContext, node: NodeFunction) =
-        StringBuilder().apply {
-            append('(')
-            node.args.build { getType(compiler, gctx, it) }.first.forEach { append(it.type.desc) }
-            append(')').append(getType(compiler, gctx, node.rettype).desc)
-        }.toString()
-
     fun getType(compiler: Compiler, gctx: GlobalContext, name: String): VirtualType {
         var generic: String? = null
         val type = gctx.getType(compiler, name.run {

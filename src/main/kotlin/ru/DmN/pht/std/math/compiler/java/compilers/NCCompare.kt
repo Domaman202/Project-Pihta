@@ -11,7 +11,7 @@ import ru.DmN.pht.std.utils.load
 import ru.DmN.pht.std.math.ast.NodeEquals
 
 object NCCompare : NodeCompiler<NodeEquals>() { // todo: list
-    override fun calcType(node: NodeEquals, compiler: Compiler, ctx: CompilationContext): VirtualType? =
+    override fun calc(node: NodeEquals, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         if (ctx.type.method)
             compiler.typeOf("boolean")
         else null

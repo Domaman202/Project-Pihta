@@ -4,7 +4,7 @@ import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.indent
 
-class NodeVar(tkOperation: Token, val variables: List<Pair<String, Node?>>) : Node(tkOperation) {
+class NodeVar(tkOperation: Token, val variables: List<Pair<Node, Node?>>) : Node(tkOperation) {
     override val nodes: List<Node>
         get() = variables.mapNotNull { it.second }
 
@@ -13,7 +13,8 @@ class NodeVar(tkOperation: Token, val variables: List<Pair<String, Node?>>) : No
         if (variables.isNotEmpty())
             builder.append('\n')
         variables.forEach { it ->
-            builder.indent(indent + 1).append("[ ").append(it.first)
+            builder.indent(indent + 1).append("[\n")
+            it.first.print(builder, indent + 2)
             it.second?.let {
                 builder.append('\n')
                 it.print(builder, indent + 2).append('\n').indent(indent + 1).append(']').append('\n')

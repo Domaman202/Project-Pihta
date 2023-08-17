@@ -11,7 +11,7 @@ import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.std.utils.load
 
 object NCIf : NodeCompiler<NodeNodesList>() {
-    override fun calcType(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
+    override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         if (ctx.type.method)
             node.nodes.map { compiler.calc(it, ctx) }.let { ru.DmN.pht.std.utils.calcType(it[1], it[2]) }.first
         else null

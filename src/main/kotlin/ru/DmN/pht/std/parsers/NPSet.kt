@@ -6,7 +6,7 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.parsers.NodeParser
 import ru.DmN.pht.std.ast.NodeFMGet
 import ru.DmN.pht.std.ast.NodeFieldSet
-import ru.DmN.pht.std.ast.NodeGet
+import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.ast.NodeSet
 
 object NPSet : NodeParser() {
@@ -23,12 +23,11 @@ object NPSet : NodeParser() {
     private fun process(operationToken: Token, name: String, static: Boolean, value: Node): Node {
         val parts = name.split("/")
         return if (parts.size == 1) NodeSet(
-            Token(operationToken.line, Token.Type.OPERATION, "set"),
+            Token(operationToken.line, Token.Type.OPERATION, "set_"),
             parts.last(),
             value
-        )
-        else NodeFieldSet(
-            Token(operationToken.line, Token.Type.OPERATION, "fset"),
+        ) else NodeFieldSet(
+            Token(operationToken.line, Token.Type.OPERATION, "fset_"),
             process(operationToken.line, parts, 1, static),
             parts.last(),
             value,
@@ -38,9 +37,10 @@ object NPSet : NodeParser() {
 
     private fun process(line: Int, parts: List<String>, i: Int, static: Boolean): Node {
         val j = i + 1
-        return if (j == parts.size) NodeGet(Token(line, Token.Type.OPERATION, "get"), parts[parts.size - j], static)
+        return if (j == parts.size)
+            NodeGetOrName(Token(line, Token.Type.OPERATION, "get_"), parts[parts.size - j], static)
         else NodeFMGet(
-            Token(line, Token.Type.OPERATION, "fget"),
+            Token(line, Token.Type.OPERATION, "fget_"),
             process(line, parts, j, static),
             parts[parts.size - j],
             static

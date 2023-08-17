@@ -8,7 +8,7 @@ import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 
 open class SimpleNodeCompiler<T : NodeNodesList> : NodeCompiler<T>() {
-    override fun calcType(node: T, compiler: Compiler, ctx: CompilationContext): VirtualType? =
+    override fun calc(node: T, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         compiler.calc(node.nodes.last(), ctx)
 
     override fun compile(node: T, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
@@ -17,6 +17,6 @@ open class SimpleNodeCompiler<T : NodeNodesList> : NodeCompiler<T>() {
     }
 
     override fun applyAnnotation(node: T, compiler: Compiler, ctx: CompilationContext, annotation: Node) {
-        node.nodes.forEach { compiler.applyAnnotation(it, ctx, node) }
+        node.nodes.forEach { compiler.applyAnnotation(it, ctx, annotation) }
     }
 }

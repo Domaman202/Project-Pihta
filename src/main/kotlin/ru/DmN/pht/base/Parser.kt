@@ -21,13 +21,14 @@ class Parser(val lexer: Lexer) {
                 when (operationToken.type) {
                     Token.Type.OPEN_BRACKET -> {
                         tokens.push(operationToken)
-                        parsers["nslist"]!!.parse(this, operationToken)
+                        parsers["progn"]!!.parse(this, operationToken)
                     }
+                    Token.Type.OPEN_CBRACKET -> parsers["valn"]!!.parse(this, startToken)
                     Token.Type.OPERATION -> {
                         val parser = parsers[operationToken.text!!]
                         if (parser == null) {
                             tokens.push(operationToken)
-                            parsers["macro"]!!.parse(this, Token(operationToken.line, Token.Type.OPERATION, "macro"))
+                            parsers["macro_"]!!.parse(this, Token(operationToken.line, Token.Type.OPERATION, "macro_"))
                         } else parser.parse(this, operationToken)
                     }
                     Token.Type.NAMING -> {
@@ -37,9 +38,12 @@ class Parser(val lexer: Lexer) {
                     else -> throw RuntimeException()
                 }
             }
-
+            Token.Type.OPEN_CBRACKET -> parsers["valn"]!!.parse(this, startToken)
             Token.Type.OPERATION, Token.Type.PRIMITIVE, Token.Type.CLASS, Token.Type.NAMING, Token.Type.NIL, Token.Type.STRING, Token.Type.NUMBER, Token.Type.BOOLEAN -> parseValue(startToken)
-            else -> throw RuntimeException()
+            else -> {
+                tokens.push(startToken)
+                null
+            }
         }
     }
 
@@ -66,9 +70,9 @@ class Parser(val lexer: Lexer) {
         init {
             DEFAULT_PARSERS = HashMap()
             // use
-            DEFAULT_PARSERS["use"] = NPUse()
+            DEFAULT_PARSERS["use"] = NPUse
             // Блок
-            DEFAULT_PARSERS["nslist"] = NPNodesList()
+            DEFAULT_PARSERS["progn"] = NPNodesList
         }
     }
 }

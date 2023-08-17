@@ -11,8 +11,8 @@ import ru.DmN.pht.std.utils.load
 import ru.DmN.pht.std.utils.store
 import ru.DmN.pht.std.utils.storeCast
 
-object NCSet : NodeCompiler<NodeSet>() {
-    override fun calcType(node: NodeSet, compiler: Compiler, ctx: CompilationContext): VirtualType? =
+object NCSetB : NodeCompiler<NodeSet>() {
+    override fun calc(node: NodeSet, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         if (ctx.type.method && ctx.type.body)
             compiler.calc(node.value!!, ctx)
         else null
@@ -21,29 +21,29 @@ object NCSet : NodeCompiler<NodeSet>() {
         if (ctx.type.method && ctx.type.body) {
             val mctx = ctx.method!!
             var valueType: String? = null
-            val value = { valueType = compiler.compile(node.value!!, ctx, true)!!.apply { load(this, mctx.node) }.type }
-            if (ret)
-                mctx.node.visitInsn(Opcodes.DUP)
+            val value = { flag: Boolean ->
+                valueType = compiler.compile(node.value!!, ctx, true)!!.apply { load(this, mctx.node) }.type
+                mctx.node.visitInsn(if (flag) Opcodes.DUP_X1 else Opcodes.DUP)
+            }
             val variable = ctx.body!![node.name]
             if (variable == null) {
                 if (ctx.type.clazz) {
-                    val cctx = ctx.clazz!!
-                    cctx.fields.find { it.field.name == node.name }.let {
+                    ctx.clazz!!.fields.find { it.field.name == node.name }.let {
                         mctx.node.run {
                             val field = it!!.field
                             if (field.static) {
-                                value()
-                                visitFieldInsn(Opcodes.PUTSTATIC, cctx.node.name, node.name, field.desc)
+                                value(false)
+                                visitFieldInsn(Opcodes.PUTSTATIC, ctx.clazz.node.name, node.name, field.desc)
                             } else {
                                 visitVarInsn(Opcodes.ALOAD, ctx.body["this"]!!.id)
-                                value()
-                                visitFieldInsn(Opcodes.PUTFIELD, cctx.node.name, node.name, field.desc)
+                                value(true)
+                                visitFieldInsn(Opcodes.PUTFIELD, ctx.clazz.node.name, node.name, field.desc)
                             }
                         }
                     }
                 } else throw RuntimeException()
             } else {
-                value()
+                value(false)
                 val result = ru.DmN.pht.std.utils.calcType(
                     variable.type?.let { ctx.global.getType(compiler, it) },
                     valueType?.let { ctx.global.getType(compiler, it) }

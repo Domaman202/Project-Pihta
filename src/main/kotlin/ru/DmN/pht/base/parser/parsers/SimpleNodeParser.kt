@@ -6,16 +6,15 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 
 open class SimpleNodeParser<T : NodeNodesList> : NodeParser() {
-    override fun parse(parser: Parser, operationToken: Token): T {
-        return parse(parser) { NodeNodesList(operationToken, it) as T }
-    }
+    override fun parse(parser: Parser, operationToken: Token): T =
+        parse(parser) { NodeNodesList(operationToken, it) as T }
 
     fun parse(parser: Parser, constructor: (nodes: MutableList<Node>) -> T): T {
-        val nodes = mutableListOf<Node>()
+        val nodes = ArrayList<Node>()
         var tk = parser.nextToken()
         while (tk != null && tk.type != Token.Type.CLOSE_BRACKET) {
             nodes.add(
-                if (tk.type == Token.Type.OPEN_BRACKET) {
+                if (tk.type == Token.Type.OPEN_BRACKET || tk.type == Token.Type.OPEN_CBRACKET) {
                     parser.tokens.push(tk)
                     parser.parseNode()!!
                 } else parser.parseValue(tk)

@@ -8,18 +8,9 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.indent
 import ru.DmN.pht.base.utils.Generics
+import ru.DmN.pht.std.compiler.java.compilers.NCFunction
 
-class NodeClass(tkOperation: Token, val name: String, val parents: MutableList<String>, nodes: MutableList<Node>, override val generics: Generics = Generics()) : NodeNodesList(tkOperation, nodes), IGenericsContainer {
-    fun getSignature(compiler: Compiler, cctx: ClassContext, gctx: GlobalContext): String? {
-        val gensig = generics.getSignature(compiler, gctx)
-        return if (gensig.isNotEmpty()) {
-            val sb = StringBuilder()
-            sb.append('<').append(gensig).append('>')
-            parents.forEach { sb.append(cctx.getSignature(cctx.getType(compiler, gctx, it))) }
-            sb.toString()
-        } else null
-    }
-
+class NodeClass(tkOperation: Token, val name: String, val parents: MutableList<String>, nodes: MutableList<Node>, override var generics: Generics = Generics()) : NodeNodesList(tkOperation, nodes), IGenericsContainer {
     override fun print(builder: StringBuilder, indent: Int): StringBuilder {
         builder.indent(indent).append('[').append(tkOperation.text).append(' ').append(name)
         if (parents.isNotEmpty()) {

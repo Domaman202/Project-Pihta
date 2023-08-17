@@ -3,29 +3,41 @@ package ru.DmN.pht.base.utils
 import ru.DmN.uu.Unsafe
 import java.lang.reflect.Type
 
-data class TypeOrGeneric(val _type: String?, val generic: String?) {
-    val type: String
-        get(): String = generic ?: _type!!
+data class TypeOrGeneric(val generics: Generics, val type: String, val generic: String?) {
+    val signature: String
+        get(): String = generic ?: type
 
-    fun overridableBy(other: TypeOrGeneric, getType: (name: String) -> VirtualType): Boolean =
+    fun overridableBy(other: TypeOrGeneric, getType: (type: String) -> VirtualType): Boolean =
         if (this == other)
             true
-        else getType(other.type).isAssignableFrom(getType(this.type))
+        else getType(other.type).isAssignableFrom(getType(type))
 
     override fun equals(other: Any?): Boolean =
-        if (other is TypeOrGeneric)
-            other.type == type
-        else false
+        hashCode() == other.hashCode()
+
+    override fun hashCode(): Int {
+        var result = type.hashCode()
+        result = 31 * result + (generic?.hashCode() ?: 0)
+        return result
+    }
 
     companion object {
-        fun of(type: Type): TypeOrGeneric =
-            TypeOrGeneric(type.typeName, getGenericType(type)?.name)
-        fun of(vt: VirtualType): TypeOrGeneric =
-            TypeOrGeneric(vt.name, null)
-        fun of(clazz: Class<*>): TypeOrGeneric =
-            TypeOrGeneric(clazz.name, null)
+        fun of(generics: Generics, type: String, vt: VirtualType) =
+            if (type.endsWith('^'))
+                TypeOrGeneric(generics, vt.name, type.substring(0, type.length - 1))
+            else of(generics, vt)
+        fun of(generics: Generics, vt: VirtualType): TypeOrGeneric =
+            TypeOrGeneric(generics, vt.name, null)
+        fun of(generics: Generics, type: Type): TypeOrGeneric =
+            getGenericType(type)?.name.let {
+                if (it == null)
+                    TypeOrGeneric(generics, type.typeName, null)
+                else TypeOrGeneric(generics, it, type.typeName)
+            }
+        fun of(generics: Generics, clazz: Class<*>): TypeOrGeneric =
+            TypeOrGeneric(generics, clazz.name, null)
 
-        fun getGenericType(generic: Type): Class<*>? {
+        private fun getGenericType(generic: Type): Class<*>? {
             return try {
                 val cTypeVariableImpl = Class.forName("sun.reflect.generics.reflectiveObjects.TypeVariableImpl")
                 if (cTypeVariableImpl.isAssignableFrom(generic.javaClass))

@@ -5,6 +5,6 @@ enum class CompileStage {
     TYPES_DEFINE,
     METHODS_PREDEFINE,
     METHODS_DEFINE,
+    EXTENDS_IMPORT,
     METHODS_BODY,
-    EXTENDS_IMPORT
 }

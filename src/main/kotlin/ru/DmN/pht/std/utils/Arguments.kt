@@ -14,13 +14,6 @@ class Arguments(val list: List<Pair<String, String>> = ArrayList(), var varargs:
 
     operator fun get(index: Int) = list[index]
 
-    fun build(getType: (name: String) -> VirtualType): Pair<List<TypeOrGeneric>, List<String>> =
-        if (list.isEmpty())
-            Pair(emptyList(), emptyList())
-        else Pair(
-            (list.dropLast(1).map { it.second } + list.last().let { if (varargs) "[${it.second}" else it.second })
-                .map { TypeOrGeneric.of(getType(it)) }, list.map { it.first })
-
     fun print(builder: StringBuilder, indent: Int): StringBuilder {
         builder.indent(indent).append("[args")
         if (list.isNotEmpty())

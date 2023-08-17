@@ -6,7 +6,7 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeUse
 import ru.DmN.pht.std.utils.Module
 
-class NPUse : NodeParser() {
+object NPUse : NodeParser() {
     override fun parse(parser: Parser, operationToken: Token): Node {
         val names = ArrayList<String>()
         var tk = parser.nextToken()!!

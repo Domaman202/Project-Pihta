@@ -9,6 +9,35 @@ import ru.DmN.pht.base.utils.*
 import ru.DmN.pht.base.utils.Variable
 import kotlin.jvm.optionals.getOrNull
 
+fun insertRet(variable: Variable?, rettype: VirtualType, node: MethodNode) {
+    if (rettype.name == "void")
+        node.visitInsn(Opcodes.RETURN)
+    else {
+        if (variable == null) {
+            if (rettype.isPrimitive) {
+                node.visitLdcInsn(
+                    when (rettype.name) {
+                        "boolean", "byte", "short", "char", "int" -> Opcodes.ICONST_0
+                        "long" -> Opcodes.LCONST_0
+                        "float" -> Opcodes.FCONST_0
+                        "double" -> Opcodes.DCONST_0
+                        else -> throw Error("Unreachable code")
+                    }
+                )
+            } else node.visitFieldInsn(Opcodes.GETSTATIC, "kotlin/Unit", "INSTANCE", "Lkotlin/Unit;")
+        } else loadCast(variable, rettype, node)
+        node.visitInsn(
+            when (rettype.name) {
+                "boolean", "byte", "short", "char", "int" -> Opcodes.IRETURN
+                "long" -> Opcodes.LRETURN
+                "float" -> Opcodes.FRETURN
+                "double" -> Opcodes.DRETURN
+                else -> Opcodes.ARETURN
+            }
+        )
+    }
+}
+
 val String.desc
     get() = when (this) {
         "void" -> "V"
@@ -61,7 +90,7 @@ fun VirtualType.toPrimitive(): String? = when (name) {
 }
 
 fun findFunction(input: List<VirtualType>, variants: List<VirtualMethod>, ctx: GlobalContext, compiler: Compiler): VirtualMethod {
-    return variants[findFunction(input, variants.map { Pair(it.argsc.map { ctx.getType(compiler, it.type) }, it.varargs) })!!.first]
+    return variants[findFunction(input, variants.map { it -> Pair(it.argsc.map { ctx.getType(compiler, it.type) }, it.varargs) })!!.first]
 }
 
 fun findFunction(input: List<VirtualType>, variants: List<Pair<List<VirtualType>, Boolean>>): Pair<Int, Int>? {
@@ -109,20 +138,6 @@ fun lenArgs(src: VirtualType?, dist: VirtualType): Int {
             dist.toPrimitive()?.let { lenArgs(src, VirtualType.ofKlass(it)).let { i -> if (i == -1) return -1 else i } + 1 }
                 ?: src.ofPrimitive()?.let { lenArgs(VirtualType.ofKlass(it), dist) }
                 ?: -1
-}
-
-fun insertRet(variable: Variable?, rettype: VirtualType, node: MethodNode) {
-    variable?.let { loadCast(it, rettype, node) }
-    node.visitInsn(
-        when (rettype.name) {
-            "void" -> Opcodes.RETURN
-            "boolean","byte","short","char","int" -> Opcodes.IRETURN
-            "long" -> Opcodes.LRETURN
-            "float" -> Opcodes.FRETURN
-            "double" -> Opcodes.DRETURN
-            else -> Opcodes.ARETURN
-        }
-    )
 }
 
 fun calcType(otype: VirtualType?, ntype: VirtualType?): Pair<VirtualType?, VirtualType?> {

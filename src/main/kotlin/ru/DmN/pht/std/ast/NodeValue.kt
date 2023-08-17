@@ -19,7 +19,7 @@ class NodeValue(tkOperation: Token, val vtype: Type, val value: String) : Node(t
     }
 
     override fun isConst(): Boolean = true
-
+    override fun isConstClass(): Boolean = vtype == Type.PRIMITIVE || vtype == Type.CLASS
     override fun getValueAsString(): String = value
 
     val type: String

@@ -9,6 +9,7 @@ import ru.DmN.pht.base.utils.nextNaming
 
 object NPFieldSet : NodeParser() {
     override fun parse(parser: Parser, operationToken: Token): Node {
-        return NodeFieldSet(operationToken, parser.parseNode()!!, parser.nextNaming().text!!, parser.parseNode()!!, operationToken.text == "sfset")
+        val instance = parser.parseNode()!!
+        return NodeFieldSet(operationToken, instance, parser.nextNaming().text!!, parser.parseNode()!!, instance.isConstClass())
     }
 }

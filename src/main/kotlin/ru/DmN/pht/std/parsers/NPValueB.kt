@@ -13,14 +13,14 @@ object NPValueB : NodeParser() {
                 Token(operationToken.line, operationToken.type, "value"), when (operationToken.type) {
                     Token.Type.OPERATION -> {
                         parser.tokens.push(operationToken)
-                        return parser.parsers["get"]!!.parse(parser, Token(operationToken.line, Token.Type.OPERATION, "get"))
+                        return parser.parsers["get-or-name"]!!.parse(parser, Token(operationToken.line, Token.Type.OPERATION, "get-or-name"))
                     }
 
                     Token.Type.PRIMITIVE -> NodeValue.Type.PRIMITIVE
                     Token.Type.CLASS -> {
                         if (text.contains("[/#]".toRegex())) {
                             parser.tokens.push(operationToken)
-                            return parser.parsers["get"]!!.parse(parser, Token(operationToken.line, Token.Type.OPERATION, "get"))
+                            return parser.parsers["get_"]!!.parse(parser, Token(operationToken.line, Token.Type.OPERATION, "get_"))
                         } else NodeValue.Type.CLASS
                     }
 

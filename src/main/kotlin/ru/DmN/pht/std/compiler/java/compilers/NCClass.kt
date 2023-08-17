@@ -9,25 +9,38 @@ import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.ClassContext
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
+import ru.DmN.pht.base.compiler.java.ctx.GlobalContext
 import ru.DmN.pht.base.compiler.java.ctx.MethodContext
+import ru.DmN.pht.base.parser.ast.Node
+import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.*
-import ru.DmN.pht.std.ast.NodeClass
 
-object NCClass : NodeCompiler<NodeClass>() {
-    override fun compile(node: NodeClass, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
+object NCClass : NodeCompiler<NodeNodesList>() {
+    override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.type == CompilationContext.Type.GLOBAL) { // todo: subclass
             compiler.tasks[CompileStage.TYPES_PREDEFINE].add {
+                val parts = node.nodes.map { { name: Boolean -> compiler.compute<Any?>(it, ctx, name) } }
+                val name = ctx.global.name(parts[0](true) as String)
+                val parents = (parts[1](false) as List<Node>)
+                    .map { compiler.computeStringConst(it, ctx) }
+                    .map { ctx.global.getType(compiler, it) }.toMutableList()
+                //
                 val isInterface = node.tkOperation.text == "intf"
                 val isClass = node.tkOperation.text == "cls"
                 val isObject = node.tkOperation.text == "obj"
                 //
+                val generics = Generics()
+                (node.attributes.getOrDefault("generics", emptyList<(Pair<String, String>)>()) as List<Pair<String, String>>).forEach {
+                    generics.list += Generic(it.first, it.second)
+                }
+                //
                 val cnode = ClassNode()
-                val type = VirtualType(ctx.global.name(node.name), isInterface = isInterface, generics = node.generics)
+                val type = VirtualType(name, isInterface = isInterface, generics = generics)
                 val context = ClassContext(cnode, type)
+                //
                 compiler.classes += context
                 compiler.tasks[CompileStage.TYPES_DEFINE].add {
-                    type.parents = node.parents.map { context.getType(compiler, ctx.global, it) }.toMutableList()
-                        .apply { if (!isInterface && isEmpty()) this += VirtualType.ofKlass(Any::class.java) }
+                    type.parents = parents
                     cnode.visit(
                         Opcodes.V19,
                         if (isInterface)
@@ -38,7 +51,7 @@ object NCClass : NodeCompiler<NodeClass>() {
                             Opcodes.ACC_PUBLIC + Opcodes.ACC_FINAL
                         else throw Error(),
                         type.className,
-                        node.getSignature(compiler, context, ctx.global),
+                        getSignature(compiler, ctx.global, parents, generics),
                         type.parents.firstOrNull()?.className ?: "java/lang/Object",
                         type.parents.drop(1).map { it.className }.toTypedArray()
                     )
@@ -63,20 +76,23 @@ object NCClass : NodeCompiler<NodeClass>() {
                     }
                     compiler.tasks[CompileStage.METHODS_PREDEFINE].add {
                         val nctx = ctx.with(CompilationContext.Type.CLASS).with(context)
-                        node.nodes.forEach { compiler.compile(it, nctx, false) }
+                        if(parts.size > 2)
+                            compiler.compile(parts[2](false) as Node, nctx, false)
                         if (isObject) {
                             if (type.methods.find { it.name == "<init>" } == null) {
                                 val method = VirtualMethod(
                                     type,
                                     "<init>",
-                                    TypeOrGeneric.of(Void::class.javaPrimitiveType!!),
-                                    emptyList(), emptyList(), varargs = false,
+                                    TypeOrGeneric.of(generics, VirtualType.VOID),
+                                    emptyList(),
+                                    emptyList(),
+                                    varargs = false,
                                     static = false,
-                                    abstract = isInterface
+                                    abstract = isInterface,
+                                    generics = generics
                                 )
                                 type.methods += method
-                                val mnode =
-                                    cnode.visitMethod(Opcodes.ACC_PRIVATE, "<init>", "()V", null, null) as MethodNode
+                                val mnode = cnode.visitMethod(Opcodes.ACC_PRIVATE, "<init>", "()V", null, null) as MethodNode
                                 val mcontext = MethodContext(mnode, method)
                                 context.methods += mcontext
                                 mnode.run {
@@ -98,5 +114,15 @@ object NCClass : NodeCompiler<NodeClass>() {
             }
         }
         return null
+    }
+
+    fun getSignature(compiler: Compiler, gctx: GlobalContext, parents: List<VirtualType>, generics: Generics): String? {
+        val gensig = generics.getSignature(compiler, gctx)
+        return if (gensig.isNotEmpty()) {
+            val sb = StringBuilder()
+            sb.append('<').append(gensig).append('>')
+            parents.forEach { sb.append(it.signature) }
+            sb.toString()
+        } else null
     }
 }

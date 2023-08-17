@@ -4,7 +4,7 @@ import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.indent
 
-class NodeFMGet(tkOperation: Token, val instance: Node, name: String, static: Boolean) : NodeGet(tkOperation, name, static) {
+class NodeFMGet(tkOperation: Token, val instance: Node, name: String, static: Boolean) : NodeGetOrName(tkOperation, name, static) {
     override val nodes: List<Node>
         get() = listOf(instance)
 

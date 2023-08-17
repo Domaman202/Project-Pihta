@@ -9,7 +9,7 @@ import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeThisCall
 
 object NCThisCall : NodeCompiler<NodeThisCall>() {
-    override fun calcType(node: NodeThisCall, compiler: Compiler, ctx: CompilationContext): VirtualType? =
+    override fun calc(node: NodeThisCall, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         if (ctx.type.clazz && ctx.type.method && ctx.type.body)
             NCMethodCall.calcType(
                 compiler,

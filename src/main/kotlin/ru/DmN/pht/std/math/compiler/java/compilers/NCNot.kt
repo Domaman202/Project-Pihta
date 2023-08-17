@@ -11,7 +11,7 @@ import ru.DmN.pht.std.utils.load
 import ru.DmN.pht.std.math.ast.NodeNot
 
 object NCNot : NodeCompiler<NodeNot>() {
-    override fun calcType(node: NodeNot, compiler: Compiler, ctx: CompilationContext): VirtualType? =
+    override fun calc(node: NodeNot, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         if (ctx.type.method)
             compiler.typeOf("boolean")
         else null

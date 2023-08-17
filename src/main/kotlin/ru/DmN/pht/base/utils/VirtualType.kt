@@ -42,6 +42,15 @@ class VirtualType(
             "double" -> "D"
             else -> "L$className;"
         }
+    val signature: String
+        get() =
+            if (this.generics.list.isEmpty())
+                this.desc
+            else {
+                val sb = StringBuilder()
+                this.generics.list.forEach { sb.append(it.extends) }
+                "L${this.className}<$sb>;"
+            }
 
     fun getAllMethods(): MutableList<VirtualMethod> {
         val list = ArrayList<VirtualMethod>()
@@ -64,6 +73,8 @@ class VirtualType(
 
     companion object {
         private val TYPES: MutableMap<String, VirtualType> = WeakHashMap()
+        val VOID = ofKlass(Void::class.javaPrimitiveType!!)
+        val STRING = ofKlass(String::class.javaObjectType)
 
         fun ofKlass(name: String) =
             ofKlass(klassOf(name))

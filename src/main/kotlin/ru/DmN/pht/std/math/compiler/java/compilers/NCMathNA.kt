@@ -11,7 +11,7 @@ import ru.DmN.pht.std.utils.load
 import ru.DmN.pht.std.math.ast.NodeMathNA
 
 object NCMathNA : NodeCompiler<NodeMathNA>() { // todo: list
-    override fun calcType(node: NodeMathNA, compiler: Compiler, ctx: CompilationContext): VirtualType? = calcNumberType(
+    override fun calc(node: NodeMathNA, compiler: Compiler, ctx: CompilationContext): VirtualType? = calcNumberType(
         compiler.calc(node.nodes.first(), ctx),
         compiler.calc(node.nodes.last(), ctx)
     )

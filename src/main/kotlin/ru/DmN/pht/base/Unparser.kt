@@ -21,7 +21,7 @@ class Unparser {
             // use
             DEFAULT_PARSERS["use"] = NUUse
             // Блок
-            DEFAULT_PARSERS["nslist"] = NUUse
+            DEFAULT_PARSERS["progn"] = NUUse
         }
     }
 }

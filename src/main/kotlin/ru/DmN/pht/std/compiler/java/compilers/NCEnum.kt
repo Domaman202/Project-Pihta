@@ -11,28 +11,40 @@ import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.ctx.EnumContext
 import ru.DmN.pht.base.compiler.java.ctx.MethodContext
+import ru.DmN.pht.base.parser.ast.Node
+import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.*
-import ru.DmN.pht.std.ast.NodeClass
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext.Type.Companion as CtxType
 
-object NCEnum : NodeCompiler<NodeClass>() {
-    override fun compile(node: NodeClass, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        if (ctx.type == CtxType.GLOBAL) { // todo: subclass?
+object NCEnum : NodeCompiler<NodeNodesList>() {
+    override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
+        if (ctx.type == CtxType.GLOBAL) { // todo: subclass? & generics
             compiler.tasks[CompileStage.TYPES_PREDEFINE].add {
+                val parts = node.nodes.map { { name: Boolean -> compiler.compute<Any?>(it, ctx, name) } }
+                val name = ctx.global.name(parts[0](true) as String)
+                val parents = (parts[1](false) as List<Node>)
+                    .map { compiler.computeStringConst(it, ctx) }
+                    .map { ctx.global.getType(compiler, it) }.toMutableList()
+                //
+                val generics = Generics()
+                (node.attributes.getOrDefault("generics", emptyList<(Pair<String, String>)>()) as List<Pair<String, String>>).forEach {
+                    generics.list += Generic(it.first, it.second)
+                }
+                //
                 val cnode = ClassNode()
-                val type = VirtualType(ctx.global.name(node.name))
+                val type = VirtualType(name)
                 val cctx = EnumContext(cnode, type)
                 compiler.classes += cctx
                 compiler.tasks[CompileStage.TYPES_DEFINE].add {
                     type.parents = mutableListOf(VirtualType.ofKlass(Enum::class.java))
-                    type.parents += node.parents.map { ctx.global.getType(compiler, it) }
+                    type.parents += parents
                     cnode.visit(
                         Opcodes.V19,
                         Opcodes.ACC_PUBLIC + Opcodes.ACC_FINAL + Opcodes.ACC_ENUM,
                         type.className,
                         null,
                         "java/lang/Enum",
-                        node.parents.toTypedArray()
+                        type.parents.drop(1).map { it.className }.toTypedArray()
                     )
                     //
                     val typeDesc = type.desc
@@ -62,7 +74,7 @@ object NCEnum : NodeCompiler<NodeClass>() {
                     val valuesMethod = VirtualMethod(
                         type,
                         "values",
-                        TypeOrGeneric.of(arrayType),
+                        TypeOrGeneric.of(Generics.EMPTY, arrayType),
                         emptyList(),
                         emptyList(),
                         varargs = false,
@@ -98,8 +110,8 @@ object NCEnum : NodeCompiler<NodeClass>() {
                     val valueOfMethod = VirtualMethod(
                         type,
                         "valueOf",
-                        TypeOrGeneric.of(type),
-                        listOf(TypeOrGeneric.of(String::class.java)),
+                        TypeOrGeneric.of(Generics.EMPTY, type),
+                        listOf(TypeOrGeneric.of(Generics.EMPTY, String::class.java)),
                         listOf("name"),
                         false
                     )
@@ -109,7 +121,8 @@ object NCEnum : NodeCompiler<NodeClass>() {
                     //
                     compiler.tasks[CompileStage.METHODS_PREDEFINE].add {
                         val nctx = ctx.with(CtxType.ENUM).with(cctx)
-                        node.nodes.forEach { compiler.compile(it, nctx, false) }
+                        if(parts.size > 2)
+                            compiler.compile(parts[2](false) as Node, nctx, false)
                         //
                         cnode.visitMethod(
                             Opcodes.ACC_PRIVATE + Opcodes.ACC_STATIC + Opcodes.ACC_SYNTHETIC,
@@ -139,7 +152,7 @@ object NCEnum : NodeCompiler<NodeClass>() {
                             val method = VirtualMethod(
                                 type,
                                 "<clinit>",
-                                TypeOrGeneric.of(Void::class.java),
+                                TypeOrGeneric.of(Generics.EMPTY, VirtualType.VOID),
                                 emptyList(),
                                 emptyList(),
                                 static = true

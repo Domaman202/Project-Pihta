@@ -11,10 +11,10 @@ import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeDefMacro
 import ru.DmN.pht.std.ast.NodeMacro
 
-object NCMacro : NodeCompiler<NodeMacro>() {
-    override fun calcType(node: NodeMacro, compiler: Compiler, ctx: CompilationContext): VirtualType? {
+object NCMacroB : NodeCompiler<NodeMacro>() {
+    override fun calc(node: NodeMacro, compiler: Compiler, ctx: CompilationContext): VirtualType? {
         val result = process(node, ctx)
-        return NCDefault.calcType(result.first, compiler, result.second)
+        return NCDefault.calc(result.first, compiler, result.second)
     }
 
     override fun compile(node: NodeMacro, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {

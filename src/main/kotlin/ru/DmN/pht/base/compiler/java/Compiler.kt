@@ -18,23 +18,34 @@ class Compiler {
     val classes: MutableList<ClassContext> = ArrayList()
     val tasks: DefaultEnumMap<CompileStage, MutableList<ICompilable>> = DefaultEnumMap(CompileStage::class.java) { ArrayList() }
 
-    fun calc(node: Node, ctx: CompilationContext, ): VirtualType? = this[node].calcType(node, this, ctx)
+    fun calc(node: Node, ctx: CompilationContext): VirtualType? = this[node].calc(node, this, ctx)
     fun compile(node: Node, ctx: CompilationContext, ret: Boolean): Variable? = this[node].compile(node, this, ctx, ret)
+    fun <T> compute(node: Node, ctx: CompilationContext, name: Boolean): T = this[node].compute(node, this, ctx, name) as T
     fun applyAnnotation(node: Node, ctx: CompilationContext, annotation: Node) = this[node].applyAnnotation(node, this, ctx, annotation)
 
     operator fun get(node: Node): NodeCompiler<Node> =
         compilers[node.tkOperation.text!!] as NodeCompiler<Node>
 
+    fun computeStringConst(node: Node, ctx: CompilationContext): String =
+        if (node.isConst())
+            node.getConstValueAsString()
+        else {
+            val result = compute<Any?>(node, ctx, true)
+            if (result is String)
+                result
+            else computeStringConst(result as Node, ctx)
+        }
+
     fun typeOf(klass: Klass): VirtualType =
         types.find { it.name == klass.name } ?: addType(klass)
 
     fun typeOf(name: String): VirtualType =
-        types.find { it.name == name } ?: getOrNull(name) ?: addType(klassOf(name))
+        types.find { it.name == name } ?: classes.map { it.clazz }.find { it.name == name } ?: typeOrNull(name) ?: addType(klassOf(name))
 
-    private fun getOrNull(name: String): VirtualType? {
+    private fun typeOrNull(name: String): VirtualType? {
         val type = types.find { it.name == name }
         return if (type == null && name.startsWith('['))
-            getOrNull(name.substring(1))?.let {  VirtualType(name, componentType = it) }
+            typeOrNull(name.substring(1))?.let {  VirtualType(name, componentType = it) }
         else type
     }
 
@@ -68,7 +79,7 @@ class Compiler {
             // use
             DEFAULT_COMPILERS["use"] = NCUse
             // Блок
-            DEFAULT_COMPILERS["nslist"] = NCDefault
+            DEFAULT_COMPILERS["progn"] = NCDefault
         }
     }
 }

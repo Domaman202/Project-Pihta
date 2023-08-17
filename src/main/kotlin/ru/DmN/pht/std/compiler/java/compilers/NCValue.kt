@@ -11,7 +11,7 @@ import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.ast.NodeValue.Type.*
 
 object NCValue : NodeCompiler<NodeValue>() {
-    override fun calcType(node: NodeValue, compiler: Compiler, ctx: CompilationContext): VirtualType? =
+    override fun calc(node: NodeValue, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         if (ctx.type.method)
             ctx.global.getType(
                 compiler, when (node.vtype) {
@@ -66,4 +66,16 @@ object NCValue : NodeCompiler<NodeValue>() {
                 }, -1, true
             )
         } else null
+
+    override fun compute(node: NodeValue, compiler: Compiler, ctx: CompilationContext, name: Boolean): Any? =
+        if (name) node.value else node
+//        when (node.vtype) {
+//            NIL -> null
+//            BOOLEAN -> node.getBoolean()
+//            INT -> node.getInt()
+//            DOUBLE -> node.getDouble()
+//            STRING, NAMING -> node.getString()
+//            PRIMITIVE, CLASS -> node.getString()
+////            PRIMITIVE, CLASS -> if (ctx.type.clazz) ctx.clazz!!.getType(compiler, ctx.global, node.getString()) else ctx.global.getType(compiler, node.getString())
+//        }
 }

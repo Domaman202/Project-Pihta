@@ -9,11 +9,10 @@ object ParserMain {
         println(
             Parser(
             Lexer("""
-                (
-                    (use std)
-                    (def [[a 12][b 21]])
-                    (field [[i ^int]])
-                )
+            (
+                (use std)
+                (get o/value)
+            )
             """)
         ).parseNode()?.print())
     }

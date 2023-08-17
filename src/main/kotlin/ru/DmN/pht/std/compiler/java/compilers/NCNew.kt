@@ -9,7 +9,7 @@ import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 
 object NCNew : NodeCompiler<NodeNodesList>() {
-    override fun calcType(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
+    override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         if (ctx.type.method)
             ctx.global.getType(compiler, node.nodes.first().getValueAsString())
         else null
