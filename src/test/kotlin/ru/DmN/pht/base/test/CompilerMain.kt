@@ -24,7 +24,7 @@ object CompilerMain {
                 (ns ru.DmN.test (
                     (obj Main [^Any] (
                         (fn main ^int [] (
-                            (return (+ 12 21 44))
+                            (return (= true true))
                         ))
                     ))
                 ))

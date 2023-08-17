@@ -73,8 +73,11 @@ class VirtualType(
 
     companion object {
         private val TYPES: MutableMap<String, VirtualType> = WeakHashMap()
-        val VOID = ofKlass(Void::class.javaPrimitiveType!!)
-        val STRING = ofKlass(String::class.javaObjectType)
+        val VOID    = ofKlass(Void::class.javaPrimitiveType!!)
+        val BOOLEAN = ofKlass(Boolean::class.javaPrimitiveType!!)
+        val INT     = ofKlass(Int::class.javaPrimitiveType!!)
+        val OBJECT  = ofKlass(Object::class.java)
+        val STRING  = ofKlass(String::class.java)
 
         fun ofKlass(name: String) =
             ofKlass(klassOf(name))
