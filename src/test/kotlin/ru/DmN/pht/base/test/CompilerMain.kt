@@ -17,20 +17,14 @@ object CompilerMain {
         val compiler = Compiler()
         val node = Parser(Lexer("""
             (
-                (use std)
+                (use std std/math)
                 
                 (import [java.lang.Object Any][java.lang.String String])
                 
                 (ns ru.DmN.test (
-                    (obj TestClassA [^Any] (
-                        (field [value ^Any])
-                        (ctor [] ((ccall super) (set value 12.21)))
-                    )))
-                    
                     (obj Main [^Any] (
-                        (fn main ^Any [] (
-                            (def [o TestClassA])
-                            (return o/value)
+                        (fn main ^int [] (
+                            (return (+ 12 21 44))
                         ))
                     ))
                 ))

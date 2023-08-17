@@ -18,7 +18,7 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext.Type.Companion as Ct
 
 object NCEnum : NodeCompiler<NodeNodesList>() {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        if (ctx.type == CtxType.GLOBAL) { // todo: subclass? & generics
+        if (ctx.type == CtxType.GLOBAL) { // todo: subclass?
             compiler.tasks[CompileStage.TYPES_PREDEFINE].add {
                 val parts = node.nodes.map { { name: Boolean -> compiler.compute<Any?>(it, ctx, name) } }
                 val name = ctx.global.name(parts[0](true) as String)
