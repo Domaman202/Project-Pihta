@@ -1,0 +1,6 @@
+(
+    (use std)
+    (ns pht.std
+        (defmacro ctor [args body] (fn <init> ^void (macro-arg args) (macro-arg body)))
+    )
+)

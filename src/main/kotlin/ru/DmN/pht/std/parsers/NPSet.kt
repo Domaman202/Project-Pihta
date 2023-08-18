@@ -23,11 +23,11 @@ object NPSet : NodeParser() {
     private fun process(operationToken: Token, name: String, static: Boolean, value: Node): Node {
         val parts = name.split("/")
         return if (parts.size == 1) NodeSet(
-            Token(operationToken.line, Token.Type.OPERATION, "set_"),
+            Token(operationToken.line, Token.Type.OPERATION, "set!"),
             parts.last(),
             value
         ) else NodeFieldSet(
-            Token(operationToken.line, Token.Type.OPERATION, "fset_"),
+            Token(operationToken.line, Token.Type.OPERATION, "fset!"),
             process(operationToken.line, parts, 1, static),
             parts.last(),
             value,
@@ -38,9 +38,9 @@ object NPSet : NodeParser() {
     private fun process(line: Int, parts: List<String>, i: Int, static: Boolean): Node {
         val j = i + 1
         return if (j == parts.size)
-            NodeGetOrName(Token(line, Token.Type.OPERATION, "get_"), parts[parts.size - j], static)
+            NodeGetOrName(Token(line, Token.Type.OPERATION, "get!"), parts[parts.size - j], static)
         else NodeFMGet(
-            Token(line, Token.Type.OPERATION, "fget_"),
+            Token(line, Token.Type.OPERATION, "fget!"),
             process(line, parts, j, static),
             parts[parts.size - j],
             static

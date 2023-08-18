@@ -12,7 +12,7 @@ object NPGetOrName : NodeParser() {
         val tk = parser.nextOperation()
         return if (tk.text!!.contains("[/#]".toRegex())) {
             parser.tokens.push(tk)
-            parser.parsers["get_"]!!.parse(parser, Token(operationToken.line, Token.Type.OPERATION, "get_"))
+            parser.parsers["get!"]!!.parse(parser, Token(operationToken.line, Token.Type.OPERATION, "get!"))
         } else NodeGetOrName(operationToken, tk.text, false)
     }
 }

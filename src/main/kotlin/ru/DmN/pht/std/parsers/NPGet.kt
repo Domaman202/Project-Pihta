@@ -45,7 +45,7 @@ object NPGet : NodeParser() {
         } else {
             val isStatic = static && j == 1
             NodeFMGet(
-                Token(operationToken.line, Token.Type.OPERATION, "fget_",),
+                Token(operationToken.line, Token.Type.OPERATION, "fget!",),
                 process(operationToken, parts, j, static, clazz),
                 parts[j],
                 isStatic

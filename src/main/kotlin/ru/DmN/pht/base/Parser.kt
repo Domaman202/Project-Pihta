@@ -21,24 +21,24 @@ class Parser(val lexer: Lexer) {
                 when (operationToken.type) {
                     Token.Type.OPEN_BRACKET -> {
                         tokens.push(operationToken)
-                        parsers["progn"]!!.parse(this, operationToken)
+                        parseProgn(operationToken)
                     }
-                    Token.Type.OPEN_CBRACKET -> parsers["valn"]!!.parse(this, startToken)
+                    Token.Type.OPEN_CBRACKET -> parseValn(startToken)
                     Token.Type.OPERATION -> {
                         val parser = parsers[operationToken.text!!]
                         if (parser == null) {
                             tokens.push(operationToken)
-                            parsers["macro_"]!!.parse(this, Token(operationToken.line, Token.Type.OPERATION, "macro_"))
+                            parseMacro(Token(operationToken.line, Token.Type.OPERATION, "macro!"))
                         } else parser.parse(this, operationToken)
                     }
                     Token.Type.NAMING -> {
                         tokens.push(operationToken)
-                        parsers["mcall_"]!!.parse(this, operationToken)
+                        parseMCall(operationToken)
                     }
                     else -> throw RuntimeException()
                 }
             }
-            Token.Type.OPEN_CBRACKET -> parsers["valn"]!!.parse(this, startToken)
+            Token.Type.OPEN_CBRACKET -> parseValn(startToken)
             Token.Type.OPERATION, Token.Type.PRIMITIVE, Token.Type.CLASS, Token.Type.NAMING, Token.Type.NIL, Token.Type.STRING, Token.Type.NUMBER, Token.Type.BOOLEAN -> parseValue(startToken)
             else -> {
                 tokens.push(startToken)
@@ -47,7 +47,16 @@ class Parser(val lexer: Lexer) {
         }
     }
 
-    fun parseValue(valueToken: Token): Node = parsers["value_"]!!.parse(this, valueToken)!!
+    fun parseProgn(token: Token) =
+        parsers["progn"]!!.parse(this, token)
+    fun parseValn(token: Token) =
+        parsers["valn"]!!.parse(this, token)
+    fun parseMacro(token: Token) =
+        parsers["macro!"]!!.parse(this, token)
+    fun parseMCall(token: Token) =
+        parsers["mcall!"]!!.parse(this, token)
+    fun parseValue(token: Token) =
+        parsers["value!"]!!.parse(this, token)!!
 
     private inline fun <T> pnb(body: () -> T): T = body.invoke().apply { tryClose() }
 

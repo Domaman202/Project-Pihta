@@ -20,7 +20,7 @@ object NPValueB : NodeParser() {
                     Token.Type.CLASS -> {
                         if (text.contains("[/#]".toRegex())) {
                             parser.tokens.push(operationToken)
-                            return parser.parsers["get_"]!!.parse(parser, Token(operationToken.line, Token.Type.OPERATION, "get_"))
+                            return parser.parsers["get!"]!!.parse(parser, Token(operationToken.line, Token.Type.OPERATION, "get_"))
                         } else NodeValue.Type.CLASS
                     }
 

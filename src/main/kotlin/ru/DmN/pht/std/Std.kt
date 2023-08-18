@@ -18,11 +18,11 @@ import ru.DmN.pht.std.utils.Module
 object Std : Module("std") {
     init {
         // Use
-//        add("use",      NPDefault,  NUDefault,  NCUse)
+        add("use!",     NPDefault,  NUDefault,  NCUse)
         // Определить Макрос / Вставить Аргумент / Макрос
         add("defmacro", NPDefault,  NUDefMacro, NCDefMacro)
         add("macro-arg",NPDefault,  NUDefault,  NCMacroArg)
-        add("macro_",   NPMacro,    NUMacro,    NCMacroB)
+        add("macro!",   NPMacro,    NUMacro,    NCMacroB)
         add("macro",    NPDefault,  NUDefault,  NCMacroA)
         // Аннотации
         add("@abstract",NPDefault,NUDefault,NCAnnotation)
@@ -60,16 +60,16 @@ object Std : Module("std") {
         add("new",      NPDefault,  NUDefault,  NCNew)
         add("ccall",    NPDefault,  NUDefault,  NCCtorCall)
         add("tcall",    NPDefault,  NUDefault,  NCThisCall)
-        add("mcall_",   NPMethodCallB)
+        add("mcall!",   NPMethodCallB)
         add("mcall",    NPDefault,  NUDefault,  NCMethodCall)
         // Сеттеры
-        add("fset_",    NPFieldSet, NUFieldSet, NCSetB)
-        add("set_",     NPSet,      NUSet,      NCSetB)
+        add("fset!",    NPFieldSet, NUFieldSet, NCSetB)
+        add("set!",     NPSet,      NUSet,      NCSetB)
         add("set",      NPDefault,  NUDefault,  NCSetA)
         // Геттеры
-        add("fget_",                    compiler =  NCFieldGetB)
+        add("fget!",                    compiler =  NCFieldGetB)
         add("fget",         NPDefault,  NUDefault,  NCFieldGetA)
-        add("get_",         NPGet,      NUGetOrName,NCGetB)
+        add("get!",         NPGet,      NUGetOrName,NCGetB)
         add("get",          NPDefault,  NUDefault,  NCGetA)
         add("get-or-name",  NPGetOrName,NUGetOrName,NCGetOrName)
         // Поля / Переменные
@@ -83,22 +83,16 @@ object Std : Module("std") {
         add("range",        NPDefault,  NUDefault,  NCRange)
         // Значения
         add("valn",         NPValn,     NUNodesList,    NCValn)
-        add("value_",       NPValueB)
+        add("value!",       NPValueB)
         add("value",        NPValueA,   NUValue,        NCValue)
         // Пустой блок
         add("unit",         NPDefault,  NUDefault,      NCUnit)
     }
 
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        val flag = !compiler.modules.contains(this)
-        if (flag) {
+        if (!compiler.modules.contains(this)) {
             super.inject(compiler, ctx, ret)
-            compiler.compile("""(
-                (use std)
-                (ns pht.std
-                    (defmacro ctor [args body] (fn <init> ^void (macro-arg args) (macro-arg body)))
-                )
-            )""".trimIndent(), ctx)
+            compiler.compile(String(Std::class.java.getResourceAsStream("/pht/std.pht")!!.readAllBytes()), ctx)
         }
         return if (ctx.type.method) {
             val variable = ctx.body!!.addVariable("std", "ru.DmN.pht.std.StdFunctions", tmp = ret)
