@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.compiler.java.compilers
 
-import ru.DmN.pht.base.compiler.java.CompileStage
+import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext

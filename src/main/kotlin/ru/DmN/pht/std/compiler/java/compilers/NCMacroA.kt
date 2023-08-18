@@ -9,8 +9,6 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.ast.NodeDefMacro
-import ru.DmN.pht.std.ast.NodeMacro
 
 object NCMacroA : NodeCompiler<NodeNodesList>() {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? {
@@ -28,11 +26,11 @@ object NCMacroA : NodeCompiler<NodeNodesList>() {
         return NCDefault.applyAnnotation(result.first, compiler, result.second, annotation)
     }
 
-    private fun process(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Pair<NodeDefMacro, CompilationContext> {
+    private fun process(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Pair<NodeNodesList, CompilationContext> {
         val name = compiler.computeStringConst(node.nodes.first(), ctx)
         val macro = ctx.global.macros.find { it.name == name }!!
         val mctx = MacroContext()
         macro.args.forEachIndexed { i, it -> mctx.args[it] = node.nodes[i + 1] }
-        return Pair(macro, ctx.with(ctx.type.with(CompilationContext.Type.MACRO)).with(mctx))
+        return Pair(macro.toNodesList(), ctx.with(macro.ctx).with(ctx.type.with(CompilationContext.Type.MACRO)).with(mctx))
     }
 }

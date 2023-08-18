@@ -2,7 +2,7 @@ package ru.DmN.pht.base
 
 import org.objectweb.asm.ClassWriter
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.ICompilable
+import ru.DmN.pht.base.compiler.java.utils.ICompilable
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.ctx.GlobalContext
 import ru.DmN.pht.base.lexer.Lexer

@@ -1,6 +1,7 @@
 package ru.DmN.pht.base.compiler.java.ctx
 
 import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.compiler.java.utils.MacroDefine
 import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.base.utils.isPrimitive
@@ -10,7 +11,7 @@ class GlobalContext(
     val namespace: String = "",
     val imports: MutableMap<String, String> = HashMap(),
     val extends: MutableList<Pair<String, MutableList<VirtualMethod>>> = ArrayList(),
-    val macros: MutableList<NodeDefMacro> = ArrayList()
+    val macros: MutableList<MacroDefine> = ArrayList()
 ) {
     fun with(namespace: String) =
         GlobalContext(namespace)
@@ -42,10 +43,7 @@ class GlobalContext(
     private fun getTypeOrThrow(compiler: Compiler, name: String): VirtualType {
         val classes = compiler.classes.map { it.clazz }
         classes.find { it.name == name }?.let { return it }
-        return (if (name.contains('.') || name.isPrimitive())
-            name
-        else name(name)).let { nnmae ->
-            classes.find { it.name == name(nnmae) } ?: compiler.typeOf(nnmae)
-        }
+        return (if (name.contains('.') || name.isPrimitive()) name else name(name))
+            .let { n -> classes.find { it.name == name(n) } ?: compiler.typeOf(n) }
     }
 }

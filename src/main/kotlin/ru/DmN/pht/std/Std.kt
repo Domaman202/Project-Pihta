@@ -2,14 +2,11 @@ package ru.DmN.pht.std
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
-import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
-import ru.DmN.pht.base.lexer.Lexer
-import ru.DmN.pht.base.parser.ast.NodeNodesList
-import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.parser.parsers.NPDefault
 import ru.DmN.pht.base.unparsers.NUNodesList
+import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.compiler.java.compilers.*
 import ru.DmN.pht.std.parsers.*
 import ru.DmN.pht.std.unparsers.*
@@ -18,12 +15,12 @@ import ru.DmN.pht.std.utils.Module
 object Std : Module("std") {
     init {
         // Use
-        add("use!",     NPDefault,  NUDefault,  NCUse)
+        add("use!",         NPDefault,  NUDefault,  NCUse)
         // Определить Макрос / Вставить Аргумент / Макрос
-        add("defmacro", NPDefault,  NUDefMacro, NCDefMacro)
-        add("macro-arg",NPDefault,  NUDefault,  NCMacroArg)
-        add("macro!",   NPMacro,    NUMacro,    NCMacroB)
-        add("macro",    NPDefault,  NUDefault,  NCMacroA)
+        add("defmacro",     NPDefault,  NUDefault,  NCDefMacro)
+        add("macro-arg",    NPDefault,  NUDefault,  NCMacroArg)
+        add("macro!",       NPMacro,    NUMacro,    NCMacroB)
+        add("macro",        NPDefault,  NUDefault,  NCMacroA)
         // Аннотации
         add("@abstract",NPDefault,NUDefault,NCAnnotation)
         add("@final",   NPDefault,NUDefault,NCAnnotation)
@@ -78,9 +75,6 @@ object Std : Module("std") {
         add("def",          NPDefault,  NUDefault,  NCDef)
         // Преобразование типов
         add("cast",         NPDefault,  NUDefault,  NCCast)
-        // Итераторы
-        add("until",        NPDefault,  NUDefault) // todo:?
-        add("range",        NPDefault,  NUDefault,  NCRange)
         // Значения
         add("valn",         NPValn,     NUNodesList,    NCValn)
         add("value!",       NPValueB)
@@ -92,7 +86,7 @@ object Std : Module("std") {
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (!compiler.modules.contains(this)) {
             super.inject(compiler, ctx, ret)
-            compiler.compile(String(Std::class.java.getResourceAsStream("/pht/std.pht")!!.readAllBytes()), ctx)
+            compiler.compile(String(Std::class.java.getResourceAsStream("/pht/std/module.pht")!!.readAllBytes()), ctx)
         }
         return if (ctx.type.method) {
             val variable = ctx.body!!.addVariable("std", "ru.DmN.pht.std.StdFunctions", tmp = ret)

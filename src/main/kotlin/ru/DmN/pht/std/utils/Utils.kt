@@ -7,7 +7,38 @@ import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.GlobalContext
 import ru.DmN.pht.base.utils.*
 import ru.DmN.pht.base.utils.Variable
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.jvm.optionals.getOrNull
+
+fun findCommonSuperclasses(vararg classes: VirtualType): List<VirtualType> {
+    val commonSuperclasses = mutableListOf<VirtualType>()
+    val firstClass = classes.firstOrNull()
+    if (firstClass != null) {
+        val superClassSet = mutableSetOf<VirtualType>()
+        superClassSet.addAll(firstClass.parents)
+        for (classToCheck in classes.drop(1))
+            superClassSet.retainAll(classToCheck.allSuperclassesAndInterfaces())
+        commonSuperclasses.addAll(superClassSet)
+    }
+    return commonSuperclasses
+}
+
+fun VirtualType.allSuperclassesAndInterfaces(): Set<VirtualType> {
+    val superclasses = mutableSetOf<VirtualType>()
+    val queue = LinkedList<VirtualType>()
+    queue.add(this)
+    while (queue.isNotEmpty()) {
+        val currentClass = queue.poll()
+        superclasses.add(currentClass)
+        queue.addAll(currentClass.parents)
+        val superclass = currentClass.superclass
+        if (superclass != null) {
+            queue.add(superclass)
+        }
+    }
+    return superclasses
+}
 
 fun insertRet(variable: Variable?, rettype: VirtualType, node: MethodNode) {
     if (rettype.name == "void")
@@ -154,7 +185,8 @@ fun calcType(otype: VirtualType?, ntype: VirtualType?): Pair<VirtualType?, Virtu
             Pair(ntype, otype)
         else if (typeB.isAssignableFrom(typeA))
             Pair(otype, ntype)
-        else throw ClassCastException("$ntype no casts to $otype")
+        else Pair(findCommonSuperclasses(otype, ntype).last { !it.name.startsWith("kotlin.jvm.internal.") }, otype) // todo: remake
+//        else throw ClassCastException("$ntype no casts to $otype")
     }
 }
 

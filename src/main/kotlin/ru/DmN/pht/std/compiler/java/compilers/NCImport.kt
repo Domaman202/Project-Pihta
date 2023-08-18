@@ -9,8 +9,11 @@ import ru.DmN.pht.base.utils.Variable
 
 object NCImport : NodeCompiler<NodeNodesList>() {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        node.nodes.map { it -> (compiler.compute<List<Node>>(it, ctx, true) ).map { compiler.computeStringConst(it, ctx) } }
-            .forEach { ctx.global.imports[it.last()] = it.first() }
+        node.nodes.map { it -> compiler.compute<List<Node>>(it, ctx, true).map { compiler.computeStringConst(it, ctx) } }
+            .forEach {
+                val import = it[0]
+                ctx.global.imports[it.getOrNull(1) ?: import.substring(import.lastIndexOf('.') + 1)] = import
+            }
         return null
     }
 }

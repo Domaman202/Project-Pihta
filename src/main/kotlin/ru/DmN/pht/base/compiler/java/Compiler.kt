@@ -6,6 +6,9 @@ import ru.DmN.pht.base.compiler.java.compilers.NCUse
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.ClassContext
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
+import ru.DmN.pht.base.compiler.java.utils.CompileStage
+import ru.DmN.pht.base.compiler.java.utils.ICompilable
+import ru.DmN.pht.base.compiler.java.utils.MacroDefine
 import ru.DmN.pht.base.lexer.Lexer
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.*
@@ -21,7 +24,7 @@ class Compiler {
     val compilers: MutableMap<String, NodeCompiler<*>> = DEFAULT_COMPILERS.toMutableMap()
     val types: MutableList<VirtualType> = ArrayList()
     val classes: MutableList<ClassContext> = ArrayList()
-    val macros: MutableMap<String, MutableList<NodeDefMacro>> = HashMap()
+    val macros: MutableMap<String, MutableList<MacroDefine>> = HashMap()
     val tasks: DefaultEnumMap<CompileStage, MutableList<ICompilable>> = DefaultEnumMap(CompileStage::class.java) { ArrayList() }
 
     fun calc(node: Node, ctx: CompilationContext): VirtualType? =

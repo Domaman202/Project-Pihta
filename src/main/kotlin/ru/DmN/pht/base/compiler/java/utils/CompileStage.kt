@@ -1,4 +1,4 @@
-package ru.DmN.pht.base.compiler.java
+package ru.DmN.pht.base.compiler.java.utils
 
 enum class CompileStage {
     MACROS_DEFINE_IMPORT,

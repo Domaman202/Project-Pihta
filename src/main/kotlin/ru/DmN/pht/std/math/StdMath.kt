@@ -16,11 +16,11 @@ import ru.DmN.pht.std.utils.Module
 
 object StdMath : Module("std/math") { // todo: kotlin operators
     init {
-        add(        name = "<=>",   parser = NPDefault, unparser = NUDefault,   compiler = NCObjectCompare)
+        add(    name = "<=>",   NPDefault,  NUDefault,  NCObjectCompare)
         for (name in listOf("=", "!=", "<", "<=", ">=", ">"))
-            add(    name = name,    parser = NPEquals,  unparser = NUEquals,    compiler = NCPrimitiveCompare)
+            add(name = name,    NPEquals,   NUEquals,   NCPrimitiveCompare)
         for (name in listOf("+", "-", "*", "/"))
-            add(    name = name,    parser = NPMathNA,  unparser = NUMathNA,    compiler = NCMathNA)
-        add(        name = "!",     parser = NPNot,     unparser = NUNot,       compiler = NCNot)
+            add(name = name,    NPMathNA,   NUMathNA,   NCMathNA)
+        add(    name = "!",     NPNot,      NUNot,      NCNot)
     }
 }

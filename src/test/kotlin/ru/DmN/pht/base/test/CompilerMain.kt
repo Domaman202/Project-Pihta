@@ -3,7 +3,7 @@ package ru.DmN.pht.base.test
 import org.objectweb.asm.ClassWriter
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.ICompilable
+import ru.DmN.pht.base.compiler.java.utils.ICompilable
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.ctx.GlobalContext
 import ru.DmN.pht.base.lexer.Lexer
@@ -17,17 +17,17 @@ object CompilerMain {
         val compiler = Compiler()
         val node = Parser(Lexer("""
             (
-                (use std std/math)
+                (use std std/math std/util)
                 
                 (ns ru.DmN.test (
                     (import [java.lang.Object Any][java.lang.String String])
-                    (import-macro [pht.std.*])
+                    (import-macro [pht.std.* pht.std.util.*])
                 
                     (obj Main [^Any] (
                         (ctor [] (ccall super))
                     
                         (fn main ^Any [] (
-                            (return this)
+                            (return (range 0 10))
                         ))
                     ))
                 ))
