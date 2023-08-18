@@ -74,8 +74,9 @@ object Std : Module("std") {
         add("efield",       NPDefault,  NUDefault,  NCEnumField)
         add("field",        NPDefault,  NUDefault,  NCField)
         add("def",          NPDefault,  NUDefault,  NCDef)
-        // Преобразование типов
-        add("cast",         NPDefault,  NUDefault,  NCCast)
+        // Преобразование и Проверка типов
+        add("as",           NPDefault,  NUDefault,  NCAs)
+        add("is",           NPDefault,  NUDefault,  NCIs)
         // Значения
         add("valn",         NPValn,     NUNodesList,    NCValn)
         add("value!",       NPValueB)

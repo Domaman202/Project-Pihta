@@ -26,7 +26,8 @@ object CompilerMain {
                     (obj Main [^Any] (
                         (fn main ^Any [] (
                             (use std)
-                            (let [^Any v "Hi!"] (#println std v))
+                            (def [v (as ^Any "Hi!")])
+                            (#println std (is ^java.lang.Number v))
                             (unit)
                         ))
                     ))
