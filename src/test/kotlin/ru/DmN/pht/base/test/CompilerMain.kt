@@ -17,19 +17,16 @@ object CompilerMain {
         val compiler = Compiler()
         val node = Parser(Lexer("""
             (
-                (use std std/math std/util)
+                (use std)
                 
                 (ns ru.DmN.test (
                     (import [java.lang.Object Any][java.lang.String String])
-                    (import-macro [pht.std.* pht.std.util.*])
-                
+
                     (obj Main [^Any] (
-                        (ctor [] (ccall super))
-                    
                         (fn main ^Any [] (
                             (use std)
-                            (for [i (range 0 10)] (
-                                (mcall std println i)))
+                            (def [^Any v "Hi!"])
+                            (#println std v)
                             (unit)
                         ))
                     ))

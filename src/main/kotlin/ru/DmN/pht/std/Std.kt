@@ -19,6 +19,7 @@ object Std : Module("std") {
         // Определить Макрос / Вставить Аргумент / Макрос
         add("defmacro",     NPDefault,  NUDefault,  NCDefMacro)
         add("macro-arg",    NPDefault,  NUDefault,  NCMacroArg)
+        add("macro-name",   NPDefault,  NUDefault,  NCMacroName)
         add("macro!",       NPMacro,    NUMacro,    NCMacroB)
         add("macro",        NPDefault,  NUDefault,  NCMacroA)
         // Аннотации

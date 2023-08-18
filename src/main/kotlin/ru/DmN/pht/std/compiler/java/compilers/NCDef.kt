@@ -14,15 +14,27 @@ object NCDef : NodeCompiler<NodeNodesList>() {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.type.method && ctx.type.body) {
             val mctx = ctx.method!!
+            val mnode = mctx.node
             val label = Label()
-            mctx.node.visitLabel(label)
+            mnode.visitLabel(label)
             node.nodes.forEach { it ->
-                val pair = compiler.compute(it, ctx, false) as List<Node>
-                val value = pair.lastOrNull()?.let { compiler.compile(it, ctx, true)?.apply { load(this, mctx.node) } }
-                val variable = ctx.body!!.addVariable(compiler.computeStringConst(pair.first(), ctx), value?.type)
-                mctx.variableStarts[variable.id] = label
-                if (value != null) {
-                    store(variable, mctx.node)
+                val pair = compiler.compute<List<Node>>(it, ctx, false).map { compiler.compute<Node>(it, ctx, false) }
+                if (pair[0].isConstClass()) {
+                    val variable = ctx.body!!.addVariable(pair[1].getValueAsString(), pair[0].getValueAsString())
+                    mctx.variableStarts[variable.id] = label
+                    pair.getOrNull(2)?.let {
+                        compiler.compile(it, ctx, true)?.apply {
+                            load(this, mnode)
+                            store(variable, mnode)
+                        }
+                    }
+                } else {
+                    val value = pair.getOrNull(1)?.let { compiler.compile(it, ctx, true)?.apply { load(this, mnode) } }
+                    val variable = ctx.body!!.addVariable(pair[0].getValueAsString(), value?.type)
+                    mctx.variableStarts[variable.id] = label
+                    if (value != null) {
+                        store(variable, mnode)
+                    }
                 }
             }
         }

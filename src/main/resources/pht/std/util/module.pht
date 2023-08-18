@@ -1,6 +1,15 @@
 (
     (use std std/math)
     (ns pht.std.util
+        (import [java.util.Iterable][java.lang.Iterator])
+        (defmacro for [name iter body] (
+            (def [iter (macro-arg iter)])
+            (while (#hasNext iter) (
+                (def [(macro-name name) (#next iter)])
+                (macro-arg body)
+            ))
+        ))
+
         (import [ru.DmN.pht.std.util.IntDownIterator][ru.DmN.pht.std.util.IntUpIterator])
         (defmacro range [start stop]
             (if (> (macro-arg start) (macro-arg stop))
