@@ -15,6 +15,13 @@ class GlobalContext(
 ) {
     fun with(namespace: String) =
         GlobalContext(namespace)
+    fun combineWith(context: GlobalContext) =
+        GlobalContext(
+            namespace,
+            (imports + context.imports).toMutableMap(),
+            (extends + context.extends).toMutableList(),
+            (macros + context.macros).toMutableList()
+        )
 
     fun name(name: String): String =
         if (namespace.isEmpty()) name else "$namespace.$name"

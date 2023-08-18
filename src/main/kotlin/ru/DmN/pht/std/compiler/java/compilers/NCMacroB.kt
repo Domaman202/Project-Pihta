@@ -31,6 +31,6 @@ object NCMacroB : NodeCompiler<NodeMacro>() {
         val macro = ctx.global.macros.find { it.name == node.name }!!
         val mctx = MacroContext()
         macro.args.forEachIndexed { i, it -> mctx.args[it] = node.nodes[i] }
-        return Pair(macro.toNodesList(), ctx.with(macro.ctx).with(ctx.type.with(CompilationContext.Type.MACRO)).with(mctx))
+        return NCMacroA.process(macro, ctx, mctx)
     }
 }

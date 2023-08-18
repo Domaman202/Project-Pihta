@@ -5,6 +5,7 @@ import ru.DmN.pht.base.compiler.java.compilers.NCDefault
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.ctx.MacroContext
+import ru.DmN.pht.base.compiler.java.utils.MacroDefine
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
@@ -31,6 +32,9 @@ object NCMacroA : NodeCompiler<NodeNodesList>() {
         val macro = ctx.global.macros.find { it.name == name }!!
         val mctx = MacroContext()
         macro.args.forEachIndexed { i, it -> mctx.args[it] = node.nodes[i + 1] }
-        return Pair(macro.toNodesList(), ctx.with(macro.ctx).with(ctx.type.with(CompilationContext.Type.MACRO)).with(mctx))
+        return process(macro, ctx, mctx)
     }
+
+    fun process(macro: MacroDefine, ctx: CompilationContext, mctx: MacroContext) =
+        Pair(macro.toNodesList(), ctx.with(macro.ctx.combineWith(ctx.global)).with(ctx.type.with(CompilationContext.Type.MACRO)).with(mctx))
 }

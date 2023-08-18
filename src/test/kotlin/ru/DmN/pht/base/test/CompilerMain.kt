@@ -21,12 +21,12 @@ object CompilerMain {
                 
                 (ns ru.DmN.test (
                     (import [java.lang.Object Any][java.lang.String String])
+                    (import-macro [pht.std.*])
 
                     (obj Main [^Any] (
                         (fn main ^Any [] (
                             (use std)
-                            (def [^Any v "Hi!"])
-                            (#println std v)
+                            (let [^Any v "Hi!"] (#println std v))
                             (unit)
                         ))
                     ))

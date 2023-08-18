@@ -18,7 +18,8 @@ object NCDef : NodeCompiler<NodeNodesList>() {
             val label = Label()
             mnode.visitLabel(label)
             node.nodes.forEach { it ->
-                val pair = compiler.compute<List<Node>>(it, ctx, false).map { compiler.compute<Node>(it, ctx, false) }
+                val pair = compiler.compute<List<Node>>(it, ctx, false)
+                    .map { compiler.compute<Node>(it, ctx, false) }
                 if (pair[0].isConstClass()) {
                     val variable = ctx.body!!.addVariable(pair[1].getValueAsString(), pair[0].getValueAsString())
                     mctx.variableStarts[variable.id] = label
