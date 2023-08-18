@@ -2,6 +2,9 @@
     (use std std/math)
     (ns pht.std.util
         (import [ru.DmN.pht.std.util.IntDownIterator][ru.DmN.pht.std.util.IntUpIterator])
-        (defmacro range [start stop] (if (> (macro-arg start) (macro-arg stop)) (new ^IntDownIterator (macro-arg start) (macro-arg stop)) (new ^IntUpIterator (macro-arg start) (macro-arg stop))))
+        (defmacro range [start stop]
+            (if (> (macro-arg start) (macro-arg stop))
+                (new ^IntDownIterator (macro-arg start) (macro-arg stop))
+                (new ^IntUpIterator (macro-arg start) (macro-arg stop))))
     )
 )

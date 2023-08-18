@@ -27,7 +27,10 @@ object CompilerMain {
                         (ctor [] (ccall super))
                     
                         (fn main ^Any [] (
-                            (return (range 0 10))
+                            (use std)
+                            (for [i (range 0 10)] (
+                                (mcall std println i)))
+                            (unit)
                         ))
                     ))
                 ))
