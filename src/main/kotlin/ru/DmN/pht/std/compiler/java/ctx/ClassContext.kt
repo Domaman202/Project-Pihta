@@ -1,12 +1,10 @@
-package ru.DmN.pht.base.compiler.java.ctx
+package ru.DmN.pht.std.compiler.java.ctx
 
 import org.objectweb.asm.tree.ClassNode
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.ast.NodeFunction
 import ru.DmN.pht.base.utils.Generic
 import ru.DmN.pht.base.utils.Generics
-import ru.DmN.pht.std.utils.desc
 
 open class ClassContext(val node: ClassNode, val clazz: VirtualType, val fields: MutableList<FieldContext> = ArrayList(), val methods: MutableList<MethodContext> = ArrayList()) {
     fun getType(compiler: Compiler, gctx: GlobalContext, name: String): VirtualType {

@@ -9,10 +9,11 @@ import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.ast.NodeValue.Type.*
+import ru.DmN.pht.std.compiler.java.ctx.global
+import ru.DmN.pht.std.compiler.java.ctx.method
 
 object NCValue : NodeCompiler<NodeValue>() {
     override fun calc(node: NodeValue, compiler: Compiler, ctx: CompilationContext): VirtualType? =
-        if (ctx.type.method)
             ctx.global.getType(
                 compiler, when (node.vtype) {
                     NIL -> "java.lang.Object"
@@ -24,41 +25,40 @@ object NCValue : NodeCompiler<NodeValue>() {
                     NAMING -> throw RuntimeException()
                 }
             )
-        else null
 
     override fun compile(node: NodeValue, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
-        if (ret && ctx.type.method) {
-            val mctx = ctx.method!!
+        if (ret) {
+            val mnode = ctx.method.node
             Variable(
                 "(tmp$${node.hashCode()})",
                 when (node.vtype) {
                     NIL -> {
-                        mctx.node.visitInsn(Opcodes.ACONST_NULL)
+                        mnode.visitInsn(Opcodes.ACONST_NULL)
                         "java.lang.Object"
                     }
 
                     BOOLEAN -> {
-                        mctx.node.visitLdcInsn(node.getBoolean())
+                        mnode.visitLdcInsn(node.getBoolean())
                         "boolean"
                     }
 
                     INT -> {
-                        mctx.node.visitLdcInsn(node.getInt())
+                        mnode.visitLdcInsn(node.getInt())
                         "int"
                     }
 
                     DOUBLE -> {
-                        mctx.node.visitLdcInsn(node.getDouble())
+                        mnode.visitLdcInsn(node.getDouble())
                         "double"
                     }
 
                     STRING -> {
-                        mctx.node.visitLdcInsn(node.getString())
+                        mnode.visitLdcInsn(node.getString())
                         "java.lang.String"
                     }
 
                     PRIMITIVE, CLASS -> {
-                        mctx.node.visitLdcInsn(Type.getType(ctx.global.getType(compiler, node.value).desc))
+                        mnode.visitLdcInsn(Type.getType(ctx.global.getType(compiler, node.value).desc))
                         "java.lang.Class"
                     }
 

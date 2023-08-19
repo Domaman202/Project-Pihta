@@ -1,4 +1,4 @@
-package ru.DmN.pht.base.compiler.java.ctx
+package ru.DmN.pht.std.compiler.java.ctx
 
 import ru.DmN.pht.base.parser.ast.Node
 

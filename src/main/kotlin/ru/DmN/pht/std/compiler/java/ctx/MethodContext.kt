@@ -1,4 +1,4 @@
-package ru.DmN.pht.base.compiler.java.ctx
+package ru.DmN.pht.std.compiler.java.ctx
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.tree.MethodNode

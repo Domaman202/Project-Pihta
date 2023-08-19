@@ -1,7 +1,7 @@
 package ru.DmN.pht.base.utils
 
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.ctx.GlobalContext
+import ru.DmN.pht.std.compiler.java.ctx.GlobalContext
 
 class Generic(val name: String, val type: String, var extends: String? = null) {
     fun getSignature(compiler: Compiler, ctx: GlobalContext): String =

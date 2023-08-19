@@ -7,17 +7,16 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.compiler.java.ctx.method
 import ru.DmN.pht.std.utils.loadCast
 
 object NCObjectCompare : NodeCompiler<NodeNodesList>() {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
-        if (ctx.type.method)
-            VirtualType.INT
-        else null
+        VirtualType.INT
 
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
-        if (ctx.type.method)
-            ctx.method!!.node.run {
+        if (ret)
+            ctx.method.node.run {
                 loadCast(compiler.compile(node.nodes.first(), ctx, true)!!, VirtualType.ofKlass(Comparable::class.java), this)
                 loadCast(compiler.compile(node.nodes.last(), ctx, true)!!, VirtualType.OBJECT, this)
                 visitMethodInsn(Opcodes.INVOKEINTERFACE, "java/lang/Comparable", "compareTo", "(Ljava/lang/Object;)I", true)

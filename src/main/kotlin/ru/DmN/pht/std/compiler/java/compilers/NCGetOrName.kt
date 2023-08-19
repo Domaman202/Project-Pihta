@@ -15,5 +15,7 @@ object NCGetOrName : NodeCompiler<NodeGetOrName>() {
         NCGetB.compile(node, compiler, ctx, ret)
 
     override fun compute(node: NodeGetOrName, compiler: Compiler, ctx: CompilationContext, name: Boolean): Any =
-        if (name) node.name else node
+        if (name)
+            node.name
+        else node
 }

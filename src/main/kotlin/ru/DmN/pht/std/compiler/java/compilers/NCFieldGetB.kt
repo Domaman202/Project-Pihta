@@ -7,17 +7,17 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeFMGet
+import ru.DmN.pht.std.compiler.java.ctx.global
+import ru.DmN.pht.std.compiler.java.ctx.method
 import ru.DmN.pht.std.utils.load
 
 object NCFieldGetB : NodeCompiler<NodeFMGet>() {
     override fun calc(node: NodeFMGet, compiler: Compiler, ctx: CompilationContext): VirtualType? =
-        if (ctx.type.method) {
-            compiler.calc(node.instance, ctx)!!.fields.find { it.name == node.name && it.static == node.static }!!.type
-        } else null
+        compiler.calc(node.instance, ctx)!!.fields.find { it.name == node.name && it.static == node.static }!!.type
 
     override fun compile(node: NodeFMGet, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
-        if (ret && ctx.type.method)
-            ctx.method!!.node.run {
+        if (ret)
+            ctx.method.node.run {
                 val instanceType = ctx.global.getType(
                     compiler,
                     if (node.static)

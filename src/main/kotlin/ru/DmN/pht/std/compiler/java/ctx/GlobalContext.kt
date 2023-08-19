@@ -1,35 +1,30 @@
-package ru.DmN.pht.base.compiler.java.ctx
+package ru.DmN.pht.std.compiler.java.ctx
 
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.utils.MacroDefine
 import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.base.utils.isPrimitive
-import ru.DmN.pht.std.ast.NodeDefMacro
-import ru.DmN.pht.std.utils.Module
 
 class GlobalContext(
     val namespace: String = "",
     val imports: MutableMap<String, String> = HashMap(),
     val extends: MutableList<Pair<String, MutableList<VirtualMethod>>> = ArrayList(),
     val macros: MutableList<MacroDefine> = ArrayList(),
-    val modules: MutableList<Module> = ArrayList()
 ) {
     fun with(namespace: String) =
         GlobalContext(
             namespace,
             imports.toMutableMap(),
             extends.toMutableList(),
-            macros.toMutableList(),
-            modules.toMutableList()
+            macros.toMutableList()
         )
     fun combineWith(context: GlobalContext) =
         GlobalContext(
             namespace,
             (imports + context.imports).toMutableMap(),
             (extends + context.extends).toMutableList(),
-            (macros + context.macros).toMutableList(),
-            (modules + context.modules).toMutableList()
+            (macros + context.macros).toMutableList()
         )
 
     fun name(name: String): String =

@@ -7,16 +7,15 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.compiler.java.ctx.method
 
 object NCUnit : NodeCompiler<Node>() {
     override fun calc(node: Node, compiler: Compiler, ctx: CompilationContext): VirtualType? =
-        if (ctx.type.method)
-            VirtualType.ofKlass(Unit::class.java)
-        else null
+        VirtualType.ofKlass(Unit::class.java)
 
     override fun compile(node: Node, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
-        if (ret && ctx.type.method) {
-            ctx.method!!.node.visitFieldInsn(Opcodes.GETSTATIC, "kotlin/Unit", "INSTANCE", "Lkotlin/Unit;")
+        if (ret) {
+            ctx.method.node.visitFieldInsn(Opcodes.GETSTATIC, "kotlin/Unit", "INSTANCE", "Lkotlin/Unit;")
             Variable("lul$${node.hashCode()}", "kotlin.Unit", -1, true)
         } else null
 }

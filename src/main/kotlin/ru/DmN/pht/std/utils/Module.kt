@@ -33,8 +33,8 @@ open class Module(val name: String) {
     }
 
     open fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        if (!ctx.global.modules.contains(this))
-            ctx.global.modules += this
+        if (!ctx.modules.contains(this))
+            ctx.modules += this
         return null
     }
 

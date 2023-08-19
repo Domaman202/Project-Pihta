@@ -4,61 +4,59 @@ import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
-import ru.DmN.pht.base.compiler.java.ctx.MethodContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.compiler.java.ctx.*
 import ru.DmN.pht.std.utils.*
 
 object NCMethodCall : NodeCompiler<NodeNodesList>() {
-    override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
-        if (ctx.type.method) {
-            val instance = compiler.compute(node.nodes[0], ctx, false) as Node
-            val name = compiler.computeStringConst(node.nodes[1], ctx)
-            calcType(
-                compiler,
-                ctx,
-                (if (instance.isConst()) {
-                    val cname = node.nodes.first().getConstValueAsString()
-                    if (ctx.type.clazz)
-                        ctx.clazz!!.getType(compiler, ctx.global, cname)
-                    else ctx.global.getType(compiler, cname)
-                } else compiler.calc(instance, ctx)!!).methods.filter { it.name == name },
-                node.nodes.drop(2)
-            )
-        } else null
+    override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType {
+        val instance = compiler.compute(node.nodes[0], ctx, false) as Node
+        val name = compiler.computeStringConst(node.nodes[1], ctx)
+        return calcType(
+            compiler,
+            ctx,
+            (if (instance.isConst()) {
+                val cname = node.nodes.first().getConstValueAsString()
+                if (ctx.isClass())
+                    ctx.clazz.getType(compiler, ctx.global, cname)
+                else ctx.global.getType(compiler, cname)
+            } else compiler.calc(instance, ctx)!!).methods.filter { it.name == name },
+            node.nodes.drop(2)
+        )
+    }
 
     fun calcType(compiler: Compiler, ctx: CompilationContext, methods: List<VirtualMethod>, args: List<Node>): VirtualType =
         ctx.global.getType(compiler, findFunction(args.map { compiler.calc(it, ctx)!! }, methods, ctx.global, compiler).rettype.type)
 
-    override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
-        if (ctx.type.method) {
-            val instance = compiler.compute(node.nodes[0], ctx, false) as Node
-            val name = compiler.computeStringConst(node.nodes[1], ctx)
-            val type = if (instance.isConstClass()) {
-                val cname = node.nodes.first().getConstValueAsString()
-                if (ctx.type.clazz)
-                    ctx.clazz!!.getType(compiler, ctx.global, cname)
-                else ctx.global.getType(compiler, cname)
-            } else {
-                val obj = compiler.compile(instance, ctx, true)!!
-                load(obj, ctx.method!!.node)
-                ctx.global.getType(compiler, obj.type!!)
-            }
-            compileWithRet(
-                node,
-                compiler,
-                ctx,
-                ret,
-                type,
-                name,
-                node.nodes.drop(2),
-                {},
-                false
-            )
-        } else null
+    override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
+        val instance = compiler.compute(node.nodes[0], ctx, false) as Node
+        val name = compiler.computeStringConst(node.nodes[1], ctx)
+        val type = if (instance.isConstClass()) {
+            val cname = node.nodes.first().getConstValueAsString()
+            if (ctx.isClass())
+                ctx.clazz.getType(compiler, ctx.global, cname)
+            else ctx.global.getType(compiler, cname)
+        } else {
+            val obj = compiler.compile(instance, ctx, true)!!
+            load(obj, ctx.method.node)
+            ctx.global.getType(compiler, obj.type!!)
+        }
+        return compileWithRet(
+            node,
+            compiler,
+            ctx,
+            ret,
+            type,
+            name,
+            node.nodes.drop(2),
+            {},
+            false
+        )
+    }
 
     fun compileWithRet(
         node: Node,
@@ -70,7 +68,7 @@ object NCMethodCall : NodeCompiler<NodeNodesList>() {
         args: List<Node>,
         instance: () -> Unit,
         special: Boolean
-    ): Variable? = compileRet(node, ctx.method!!, ret, compileWithOutRet(compiler, ctx, type, name, args, instance, enumCtor = false, special = special))
+    ): Variable? = compileRet(node, ctx.method, ret, compileWithOutRet(compiler, ctx, type, name, args, instance, enumCtor = false, special = special))
 
 
     fun compileWithOutRet(
@@ -83,7 +81,7 @@ object NCMethodCall : NodeCompiler<NodeNodesList>() {
         enumCtor: Boolean,
         special: Boolean
     ): VirtualMethod {
-        ctx.method!!.node.run {
+        ctx.method.node.run {
             val filteredMethods = ctx.global.getAllExtends(type).let { it + type.methods }.filter { it.name == name }
             val method = findFunction(args.map { compiler.calc(it, ctx)!! }, filteredMethods, ctx.global, compiler)
             if (!method.static)

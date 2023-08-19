@@ -7,18 +7,17 @@ import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.compiler.java.ctx.method
 import ru.DmN.pht.std.utils.load
 import ru.DmN.pht.std.math.ast.NodeNot
 
 object NCNot : NodeCompiler<NodeNot>() {
     override fun calc(node: NodeNot, compiler: Compiler, ctx: CompilationContext): VirtualType? =
-        if (ctx.type.method)
-            compiler.typeOf("boolean")
-        else null
+        compiler.typeOf("boolean")
 
     override fun compile(node: NodeNot, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
-        if (ctx.type.method) {
-            ctx.method!!.node.apply {
+        if (ret) {
+            ctx.method.node.apply {
                 load(compiler.compile(node.value, ctx, true)!!, this)
                 val labelIf = Label()
                 visitJumpInsn(Opcodes.IFNE, labelIf)

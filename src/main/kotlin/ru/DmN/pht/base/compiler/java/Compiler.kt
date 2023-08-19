@@ -1,10 +1,8 @@
 package ru.DmN.pht.base.compiler.java
 
 import ru.DmN.pht.base.Parser
-import ru.DmN.pht.base.compiler.java.compilers.NCDefault
-import ru.DmN.pht.base.compiler.java.compilers.NCUse
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
-import ru.DmN.pht.base.compiler.java.ctx.ClassContext
+import ru.DmN.pht.std.compiler.java.ctx.ClassContext
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.compiler.java.utils.ICompilable
@@ -13,8 +11,6 @@ import ru.DmN.pht.base.lexer.Lexer
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.*
-import ru.DmN.pht.std.ast.NodeDefMacro
-import ru.DmN.pht.std.utils.Module
 import java.lang.reflect.Modifier
 import java.util.*
 import kotlin.collections.ArrayList
@@ -39,7 +35,7 @@ class Compiler {
 
     fun get(ctx: CompilationContext, node: Node): NodeCompiler<Node> {
         val name = node.tkOperation.text!!
-        ctx.global.modules.forEach { it -> it.compilers[name]?.let { return it as NodeCompiler<Node> } }
+        ctx.modules.forEach { it -> it.compilers[name]?.let { return it as NodeCompiler<Node> } }
         throw RuntimeException()
     }
 

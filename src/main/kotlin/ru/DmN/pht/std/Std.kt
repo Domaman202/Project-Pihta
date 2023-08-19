@@ -10,6 +10,7 @@ import ru.DmN.pht.base.parser.parsers.NPDefault
 import ru.DmN.pht.base.unparser.unparsers.NUNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.compiler.java.compilers.*
+import ru.DmN.pht.std.compiler.java.ctx.*
 import ru.DmN.pht.std.parsers.*
 import ru.DmN.pht.std.unparsers.*
 import ru.DmN.pht.std.utils.Module
@@ -88,14 +89,15 @@ object Std : Module("std") {
     }
 
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        if (!ctx.global.modules.contains(this)) {
+        if (!ctx.modules.contains(this)) {
             super.inject(compiler, ctx, ret)
+            ctx.contexts["std/global"] = GlobalContext()
             compiler.compile(String(Std::class.java.getResourceAsStream("/pht/std/module.pht")!!.readAllBytes()), ParsingContext(mutableListOf(Base)), ctx)
         }
-        return if (ctx.type.method) {
-            val variable = ctx.body!!.addVariable("std", "ru.DmN.pht.std.StdFunctions", tmp = ret)
+        return if (ctx.isMethod() && ctx.isBody()) {
+            val variable = ctx.body.addVariable("std", "ru.DmN.pht.std.StdFunctions", tmp = ret)
             val label = Label()
-            ctx.method!!.node.run {
+            ctx.method.node.run {
                 visitLabel(label)
                 visitFieldInsn(
                     Opcodes.GETSTATIC,

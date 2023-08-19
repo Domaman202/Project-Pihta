@@ -4,12 +4,14 @@ import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.NCDefault
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
-import ru.DmN.pht.base.compiler.java.ctx.MacroContext
+import ru.DmN.pht.std.compiler.java.ctx.MacroContext
 import ru.DmN.pht.base.compiler.java.utils.MacroDefine
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.compiler.java.ctx.global
+import ru.DmN.pht.std.compiler.java.ctx.with
 
 object NCMacroA : NodeCompiler<NodeNodesList>() {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? {
@@ -36,5 +38,5 @@ object NCMacroA : NodeCompiler<NodeNodesList>() {
     }
 
     fun process(macro: MacroDefine, ctx: CompilationContext, mctx: MacroContext) =
-        Pair(macro.toNodesList(), ctx.with(macro.ctx.combineWith(ctx.global)).with(ctx.type.with(CompilationContext.Type.MACRO)).with(mctx))
+        Pair(macro.toNodesList(), ctx.with(macro.ctx.combineWith(ctx.global)).with(mctx))
 }

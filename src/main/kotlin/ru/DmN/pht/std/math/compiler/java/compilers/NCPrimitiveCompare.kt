@@ -8,18 +8,17 @@ import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.compiler.java.ctx.method
 import ru.DmN.pht.std.utils.load
 import ru.DmN.pht.std.math.ast.NodeEquals
 
 object NCPrimitiveCompare : NodeCompiler<NodeEquals>() { // todo: list
     override fun calc(node: NodeEquals, compiler: Compiler, ctx: CompilationContext): VirtualType? =
-        if (ctx.type.method)
-            VirtualType.BOOLEAN
-        else null
+        VirtualType.BOOLEAN
 
     override fun compile(node: NodeEquals, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
-        if (ret && ctx.type.method) {
-            ctx.method!!.node.run {
+        if (ret) {
+            ctx.method.node.run {
                 val type = node.nodes
                     .map { compiler.compile(it, ctx, true) }
                     .map { it!!.apply { load(it, this@run) }.type }.first() // todo: cast to общий type
