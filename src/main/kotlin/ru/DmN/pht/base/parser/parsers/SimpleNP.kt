@@ -6,7 +6,7 @@ import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 
-open class SimpleNodeParser<T : NodeNodesList> : NodeParser() {
+open class SimpleNP<T : NodeNodesList> : NodeParser() {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): T =
         parse(parser, ctx) { NodeNodesList(operationToken, it) as T }
 
@@ -28,6 +28,6 @@ open class SimpleNodeParser<T : NodeNodesList> : NodeParser() {
 
     companion object {
         @JvmStatic
-        val INSTANCE = SimpleNodeParser<NodeNodesList>()
+        val INSTANCE = SimpleNP<NodeNodesList>()
     }
 }

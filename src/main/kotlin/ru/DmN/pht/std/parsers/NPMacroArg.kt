@@ -10,5 +10,5 @@ import ru.DmN.pht.std.ast.NodeMacroArg
 
 object NPMacroArg : NodeParser() {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
-        NodeMacroArg(operationToken, parser.nextOperation().text!!)
+        NodeMacroArg(operationToken, "${parser.nextOperation().text!!}$${ctx.macros.peek()}")
 }

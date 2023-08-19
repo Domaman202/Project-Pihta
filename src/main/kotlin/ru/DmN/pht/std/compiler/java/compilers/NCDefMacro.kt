@@ -5,21 +5,21 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.compiler.java.utils.MacroDefine
 import ru.DmN.pht.base.parser.ast.Node
-import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
+import ru.DmN.pht.std.ast.NodeMacroDef
 import ru.DmN.pht.std.compiler.java.compute
 import ru.DmN.pht.std.compiler.java.computeName
 import ru.DmN.pht.std.compiler.java.global
 
-object NCDefMacro : IStdNodeCompiler<NodeNodesList> {
-    override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
+object NCDefMacro : IStdNodeCompiler<NodeMacroDef> {
+    override fun compile(node: NodeMacroDef, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         compiler.tasks[CompileStage.MACROS_DEFINE_IMPORT].add {
             val gctx = ctx.global
             val nodes = node.nodes.map { { name: Boolean -> compiler.compute<Any?>(it, ctx, name) } }
             val macro = MacroDefine(
-                nodes[0](true) as String,
-                (nodes[1](false) as List<Node>).map { compiler.computeName(it, ctx) },
-                nodes.drop(2).map { it(true) as Node },
+                node.name,
+                (nodes[0](false) as List<Node>).map { "${compiler.computeName(it, ctx)}$${node.name}" },
+                nodes.drop(1).map { it(true) as Node },
                 gctx
             )
             gctx.macros += macro

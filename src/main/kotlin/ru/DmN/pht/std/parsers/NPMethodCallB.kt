@@ -4,9 +4,9 @@ import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.NodeNodesList
-import ru.DmN.pht.base.parser.parsers.SimpleNodeParser
+import ru.DmN.pht.base.parser.parsers.SimpleNP
 
-object NPMethodCallB : SimpleNodeParser<NodeNodesList>() {
+object NPMethodCallB : SimpleNP<NodeNodesList>() {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): NodeNodesList {
         val name = parser.parseNode(ctx)!!
         return super.parse(parser, ctx) {

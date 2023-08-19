@@ -24,9 +24,9 @@ object Std : Module("std") {
         // Use
         add("use",          NPDefault,  NUDefault,  NCUse)
         // Определить Макрос / Вставить Аргумент / Макрос
-        add("defmacro",     NPDefault,  NUDefault,  NCDefMacro)
-        add("macro-arg",    NPDefault,  NUDefault,  NCMacroArg)
-        add("macro-name",   NPDefault,  NUDefault,  NCMacroName)
+        add("defmacro",     NPMacroDef, NUDefault,  NCDefMacro)
+        add("macro-arg",    NPMacroArg, NUDefault,  NCMacroArg)
+        add("macro-name",   NPMacroArg, NUDefault,  NCMacroName)
         add("macro!",       NPMacro,    NUMacro,    NCMacroB)
         add("macro",        NPDefault,  NUDefault,  NCMacroA)
         // Аннотации
@@ -64,7 +64,7 @@ object Std : Module("std") {
         // Создать / Выполнить / Вызвать Супер-Конструктор / Вызвать
         add("new",      NPDefault,  NUDefault,  NCNew)
         add("ccall",    NPDefault,  NUDefault,  NCCtorCall)
-        add("tcall",    NPDefault,  NUDefault,  NCThisCall)
+//        add("tcall",    NPDefault,  NUDefault,  NCThisCall)
         add("mcall!",   NPMethodCallB)
         add("mcall",    NPDefault,  NUDefault,  NCMethodCall)
         // Сеттеры

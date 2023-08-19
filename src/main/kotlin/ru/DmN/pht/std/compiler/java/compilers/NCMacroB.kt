@@ -9,6 +9,8 @@ import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeMacro
 import ru.DmN.pht.std.compiler.java.ctx.MacroContext
 import ru.DmN.pht.std.compiler.java.global
+import ru.DmN.pht.std.compiler.java.isMacro
+import ru.DmN.pht.std.compiler.java.macro
 
 object NCMacroB : IStdNodeCompiler<NodeMacro> {
     override fun calc(node: NodeMacro, compiler: Compiler, ctx: CompilationContext): VirtualType? {
@@ -28,7 +30,7 @@ object NCMacroB : IStdNodeCompiler<NodeMacro> {
 
     private fun process(node: NodeMacro, ctx: CompilationContext): Pair<NodeNodesList, CompilationContext> {
         val macro = ctx.global.macros.find { it.name == node.name }!!
-        val mctx = MacroContext()
+        val mctx = NCMacroA.ctxOf(ctx)
         macro.args.forEachIndexed { i, it -> mctx.args[it] = node.nodes[i] }
         return NCMacroA.process(macro, ctx, mctx)
     }

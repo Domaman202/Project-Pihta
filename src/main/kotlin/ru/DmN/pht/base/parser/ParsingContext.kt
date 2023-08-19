@@ -1,5 +1,6 @@
 package ru.DmN.pht.base.parser
 
 import ru.DmN.pht.std.utils.Module
+import java.util.Stack
 
-class ParsingContext(val modules: MutableList<Module> = ArrayList())
+class ParsingContext(val modules: MutableList<Module> = ArrayList(), val macros: Stack<String> = Stack())

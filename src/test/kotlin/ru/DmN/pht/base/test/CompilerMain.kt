@@ -26,13 +26,13 @@ object CompilerMain {
 
                     (obj Main [^Any] (
                         (fn main ^Any [] (
-                            (test (use std))
+                            (doto (use std) (tcall println "Hi!"))
                             (unit)
                         ))
                     ))
                 ))
             )
-        """.trimIndent(), pctx, ctx)
+        """.trimIndent(), pctx, ctx) // todo: развёртывание макро-аргументов
         compiler.tasks.values.forEach { it.forEach(ICompilable::compile) }
         compiler.classes.map { it.node }.forEach {
             val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
