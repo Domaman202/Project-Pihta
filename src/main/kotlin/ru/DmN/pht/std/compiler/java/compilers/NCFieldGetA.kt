@@ -38,7 +38,7 @@ object NCFieldGetA : IStdNodeCompiler<NodeNodesList> {
                     ctx.method.node.run {
                         val instance = compiler.compile(type, ctx, true)!!
                         load(instance, this)
-                        val instanceType = ctx.global.getType(compiler, instance.type!!)
+                        val instanceType = ctx.global.getType(compiler, instance.type())
                         val field = instanceType.fields.find { it.name == name }!!
                         visitFieldInsn(Opcodes.GETFIELD, instanceType.className, name, field.desc)
                         Variable("lul$${node.hashCode()}", field.type.name, -1, true)

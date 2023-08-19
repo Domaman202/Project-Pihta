@@ -36,6 +36,6 @@ object NCMacroA : IStdNodeCompiler<NodeNodesList> {
         return process(macro, ctx, mctx)
     }
 
-    fun process(macro: MacroDefine, ctx: CompilationContext, mctx: MacroContext) =
+    fun process(macro: MacroDefine, ctx: CompilationContext, mctx: MacroContext): Pair<NodeNodesList, CompilationContext> =
         Pair(macro.toNodesList(), ctx.with(macro.ctx.combineWith(ctx.global)).with(mctx))
 }

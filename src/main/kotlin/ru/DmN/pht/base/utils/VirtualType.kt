@@ -78,6 +78,7 @@ class VirtualType(
         val INT     = ofKlass(Int::class.javaPrimitiveType!!)
         val UNIT    = ofKlass(Unit::class.java)
         val OBJECT  = ofKlass(Object::class.java)
+        val CLASS   = ofKlass(Class::class.java)
         val STRING  = ofKlass(String::class.java)
 
         fun ofKlass(name: String) =

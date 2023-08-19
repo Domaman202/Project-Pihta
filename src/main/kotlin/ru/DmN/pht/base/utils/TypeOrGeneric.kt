@@ -31,11 +31,18 @@ data class TypeOrGeneric(val generics: Generics, val type: String, val generic: 
         fun of(generics: Generics, type: Type): TypeOrGeneric =
             getGenericType(type)?.name.let {
                 if (it == null)
-                    TypeOrGeneric(generics, type.typeName, null)
-                else TypeOrGeneric(generics, it, type.typeName)
+                    TypeOrGeneric(generics, typeName(type), null)
+                else TypeOrGeneric(generics, it, typeName(type))
             }
         fun of(generics: Generics, clazz: Class<*>): TypeOrGeneric =
             TypeOrGeneric(generics, clazz.name, null)
+
+        fun typeName(type: Type): String {
+            val i = type.typeName.indexOf('<')
+            return if (i == -1)
+                type.typeName
+            else type.typeName.substring(0, i)
+        }
 
         private fun getGenericType(generic: Type): Class<*>? {
             return try {

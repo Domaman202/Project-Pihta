@@ -22,7 +22,7 @@ import ru.DmN.pht.std.utils.Module
 object Std : Module("std") {
     init {
         // Use
-        add("use",         NPDefault,  NUDefault,  NCUse)
+        add("use",          NPDefault,  NUDefault,  NCUse)
         // Определить Макрос / Вставить Аргумент / Макрос
         add("defmacro",     NPDefault,  NUDefault,  NCDefMacro)
         add("macro-arg",    NPDefault,  NUDefault,  NCMacroArg)
@@ -81,9 +81,10 @@ object Std : Module("std") {
         add("efield",       NPDefault,  NUDefault,  NCEnumField)
         add("field",        NPDefault,  NUDefault,  NCField)
         add("def",          NPDefault,  NUDefault,  NCDef)
-        // Преобразование и Проверка типов
+        // Преобразование, Проверка, Получение типов
         add("as",           NPDefault,  NUDefault,  NCAs)
         add("is",           NPDefault,  NUDefault,  NCIs)
+        add("typeof",       NPDefault,  NUDefault,  NCTypeof)
         // Значения
         add("valn",         NPValn,     NUNodesList,    NCValn)
         add("value!",       NPValueB)

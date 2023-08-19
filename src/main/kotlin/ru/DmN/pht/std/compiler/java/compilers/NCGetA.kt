@@ -12,7 +12,7 @@ import ru.DmN.pht.std.compiler.java.global
 object NCGetA : IStdNodeCompiler<Node> {
     override fun calc(node: Node, compiler: Compiler, ctx: CompilationContext): VirtualType {
         val name = compiler.computeName(node.nodes.first(), ctx)
-        return ctx.global.getType(compiler, ctx.body.variables.find { it.name == name }!!.type ?: "java.lang.Object")
+        return ctx.global.getType(compiler, ctx.body.variables.find { it.name == name }!!.type())
     }
 
     override fun compile(node: Node, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =

@@ -206,7 +206,7 @@ fun calcWeight(type: VirtualType?): Int {
 }
 
 fun loadCast(variable: Variable, to: VirtualType, node: MethodNode) {
-    val from = variable.type ?: "java.lang.Object"
+    val from = variable.type()
     if (from.isPrimitive() != to.isPrimitive) {
         if (to.isPrimitive) {
             objectToPrimitive(variable, node)
@@ -233,7 +233,7 @@ fun load(variable: Variable, node: MethodNode) {
 }
 
 fun storeCast(variable: Variable, from: VirtualType, node: MethodNode) {
-    val to = variable.type ?: "java.lang.Object"
+    val to = variable.type()
     val tmp = Variable("tmp$${variable.hashCode() + from.hashCode()}", from.name, -1, true)
     if (from.isPrimitive != to.isPrimitive())
         if (to.isPrimitive())

@@ -17,7 +17,7 @@ class BodyContext(val parent: BodyContext?, val sub: MutableList<BodyContext> = 
     fun visitAllVariables(compiler: Compiler, gctx: GlobalContext, cctx: ClassContext, mctx: MethodContext) {
         getAllVariables().forEach { pair ->
             pair.second.filter { !it.tmp }.forEach {
-                val type = it.type ?: "java.lang.Object"
+                val type = it.type()
                 mctx.node.visitLocalVariable(
                     it.name,
                     cctx.getType(compiler, gctx, type).desc,

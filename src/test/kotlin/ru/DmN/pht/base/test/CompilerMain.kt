@@ -4,7 +4,6 @@ import org.objectweb.asm.ClassWriter
 import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
-import ru.DmN.pht.std.compiler.java.ctx.GlobalContext
 import ru.DmN.pht.base.compiler.java.utils.ICompilable
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.utils.Klass
@@ -27,10 +26,7 @@ object CompilerMain {
 
                     (obj Main [^Any] (
                         (fn main ^Any [] (
-                            (use std)
-                            (def [v (as ^Any "Hi!")])
-                            (#println std (is ^java.lang.Number v))
-                            (#println std (is ^java.lang.String v))
+                            (test (use std))
                             (unit)
                         ))
                     ))

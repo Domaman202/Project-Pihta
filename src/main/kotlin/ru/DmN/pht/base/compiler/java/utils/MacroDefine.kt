@@ -1,9 +1,9 @@
 package ru.DmN.pht.base.compiler.java.utils
 
-import ru.DmN.pht.std.compiler.java.ctx.GlobalContext
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
+import ru.DmN.pht.std.compiler.java.ctx.GlobalContext
 
 class MacroDefine(val name: String, val args: List<String>, val body: List<Node>, val ctx: GlobalContext) {
     fun toNodesList(): NodeNodesList =

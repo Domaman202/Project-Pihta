@@ -1,7 +1,12 @@
 (
-    (use std)
+    (use std std/math)
     (ns pht.std
         (defmacro ctor [args body] (fn <init> ^void (macro-arg args) (macro-arg body)))
-        (defmacro let [var body] (body (def (macro-arg var)) (macro-arg body)))
+        (defmacro test [val] (body
+            (let [this (macro-arg val)] (#println this "Hi!"))))
+        (defmacro let [var expr] (body
+            (def (macro-arg var))
+            (macro-arg expr)))
+        (defmacro classof [value] (if (= (macro-arg value) nil) nil (#getClass (macro-arg value))))
     )
 )

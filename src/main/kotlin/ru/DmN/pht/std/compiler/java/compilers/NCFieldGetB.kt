@@ -21,7 +21,7 @@ object NCFieldGetB : IStdNodeCompiler<NodeFMGet> {
                     compiler,
                     if (node.static)
                         node.instance.getConstValueAsString()
-                    else compiler.compile(node.instance, ctx, true)!!.apply { load(this@apply, this@run) }.type!!
+                    else compiler.compile(node.instance, ctx, true)!!.apply { load(this@apply, this@run) }.type()
                 )
                 val field = instanceType.fields.find { it.name == node.name && it.static == node.static }!!
                 visitFieldInsn(

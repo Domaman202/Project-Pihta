@@ -15,7 +15,7 @@ object NCGetB : IStdNodeCompiler<NodeGetOrName> {
             if (ctx.isClass())
                 ctx.clazz.clazz.fields.find { it.name == node.name }!!.type
             else throw RuntimeException()
-        else ctx.global.getType(compiler, variable.type ?: "java.lang.Object")
+        else ctx.global.getType(compiler, variable.type())
     }
 
     override fun compile(node: NodeGetOrName, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
