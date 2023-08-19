@@ -1,12 +1,12 @@
 package ru.DmN.pht.base.test
 
 import org.objectweb.asm.ClassWriter
-import ru.DmN.pht.base.Parser
+import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.utils.ICompilable
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.ctx.GlobalContext
-import ru.DmN.pht.base.lexer.Lexer
+import ru.DmN.pht.base.compiler.java.utils.ICompilable
+import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.utils.Klass
 import ru.DmN.uu.Unsafe
 import java.io.FileOutputStream
@@ -14,8 +14,10 @@ import java.io.FileOutputStream
 object CompilerMain {
     @JvmStatic
     fun main(args: Array<String>) {
+        val pctx = ParsingContext(mutableListOf(Base))
+        val ctx = CompilationContext(CompilationContext.Type.GLOBAL, GlobalContext(modules = mutableListOf(Base)), null, null, null, null)
         val compiler = Compiler()
-        val node = Parser(Lexer("""
+        compiler.compile("""
             (
                 (use std)
                 
@@ -33,9 +35,7 @@ object CompilerMain {
                     ))
                 ))
             )
-        """.trimIndent())
-        ).parseNode()!!
-        compiler.compile(node, CompilationContext(CompilationContext.Type.GLOBAL, GlobalContext(), null, null, null, null), false)
+        """.trimIndent(), pctx, ctx)
         compiler.tasks.values.forEach { it.forEach(ICompilable::compile) }
         compiler.classes.map { it.node }.forEach {
             val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)

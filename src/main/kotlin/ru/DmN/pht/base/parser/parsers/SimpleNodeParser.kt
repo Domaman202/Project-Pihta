@@ -2,22 +2,23 @@ package ru.DmN.pht.base.parser.parsers
 
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.Parser
+import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 
 open class SimpleNodeParser<T : NodeNodesList> : NodeParser() {
-    override fun parse(parser: Parser, operationToken: Token): T =
-        parse(parser) { NodeNodesList(operationToken, it) as T }
+    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): T =
+        parse(parser, ctx) { NodeNodesList(operationToken, it) as T }
 
-    fun parse(parser: Parser, constructor: (nodes: MutableList<Node>) -> T): T {
+    fun parse(parser: Parser, ctx: ParsingContext, constructor: (nodes: MutableList<Node>) -> T): T {
         val nodes = ArrayList<Node>()
         var tk = parser.nextToken()
         while (tk != null && tk.type != Token.Type.CLOSE_BRACKET) {
             nodes.add(
                 if (tk.type == Token.Type.OPEN_BRACKET || tk.type == Token.Type.OPEN_CBRACKET) {
                     parser.tokens.push(tk)
-                    parser.parseNode()!!
-                } else parser.parseValue(tk)
+                    parser.parseNode(ctx)!!
+                } else parser.parseValue(ctx, tk)
             )
             tk = parser.nextToken()
         }

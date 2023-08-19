@@ -5,9 +5,11 @@ import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
+import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.parser.parsers.NodeParser
-import ru.DmN.pht.base.unparsers.NodeUnparser
+import ru.DmN.pht.base.unparser.UnparsingContext
+import ru.DmN.pht.base.unparser.unparsers.NodeUnparser
 import ru.DmN.pht.std.Std
 import ru.DmN.pht.std.collections.StdCollections
 import ru.DmN.pht.std.math.StdMath
@@ -18,25 +20,21 @@ open class Module(val name: String) {
     val unparsers: MutableMap<String, NodeUnparser<*>> = HashMap()
     val compilers: MutableMap<String, NodeCompiler<*>> = HashMap()
 
-    fun inject(parser: Parser) {
-        if (!parser.modules.contains(this)) {
-            parser.modules += this
-            parser.parsers += parsers
+    fun inject(parser: Parser, ctx: ParsingContext) {
+        if (!ctx.modules.contains(this)) {
+            ctx.modules += this
         }
     }
 
-    fun inject(unparser: Unparser) {
-        if (!unparser.modules.contains(this)) {
-            unparser.modules += this
-            unparser.unparsers += unparsers
+    fun inject(unparser: Unparser, ctx: UnparsingContext) {
+        if (!ctx.modules.contains(this)) {
+            ctx.modules += this
         }
     }
 
     open fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        if (!compiler.modules.contains(this)) {
-            compiler.modules += this
-            compiler.compilers += compilers
-        }
+        if (!ctx.global.modules.contains(this))
+            ctx.global.modules += this
         return null
     }
 

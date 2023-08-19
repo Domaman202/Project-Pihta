@@ -14,7 +14,7 @@ import ru.DmN.pht.std.math.unparsers.NUNot
 import ru.DmN.pht.std.unparsers.NUDefault
 import ru.DmN.pht.std.utils.Module
 
-object StdMath : Module("std/math") { // todo: kotlin operators
+object StdMath : Module("std/math") { // todo: kotlin operators // todo: remake to NPDefault structure
     init {
         add(    name = "<=>",   NPDefault,  NUDefault,  NCObjectCompare)
         for (name in listOf("=", "!=", "<", "<=", ">=", ">"))

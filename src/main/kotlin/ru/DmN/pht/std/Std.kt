@@ -2,10 +2,12 @@ package ru.DmN.pht.std
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
+import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
+import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.parsers.NPDefault
-import ru.DmN.pht.base.unparsers.NUNodesList
+import ru.DmN.pht.base.unparser.unparsers.NUNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.compiler.java.compilers.*
 import ru.DmN.pht.std.parsers.*
@@ -15,7 +17,7 @@ import ru.DmN.pht.std.utils.Module
 object Std : Module("std") {
     init {
         // Use
-        add("use!",         NPDefault,  NUDefault,  NCUse)
+        add("use",         NPDefault,  NUDefault,  NCUse)
         // Определить Макрос / Вставить Аргумент / Макрос
         add("defmacro",     NPDefault,  NUDefault,  NCDefMacro)
         add("macro-arg",    NPDefault,  NUDefault,  NCMacroArg)
@@ -86,9 +88,9 @@ object Std : Module("std") {
     }
 
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        if (!compiler.modules.contains(this)) {
+        if (!ctx.global.modules.contains(this)) {
             super.inject(compiler, ctx, ret)
-            compiler.compile(String(Std::class.java.getResourceAsStream("/pht/std/module.pht")!!.readAllBytes()), ctx)
+            compiler.compile(String(Std::class.java.getResourceAsStream("/pht/std/module.pht")!!.readAllBytes()), ParsingContext(mutableListOf(Base)), ctx)
         }
         return if (ctx.type.method) {
             val variable = ctx.body!!.addVariable("std", "ru.DmN.pht.std.StdFunctions", tmp = ret)

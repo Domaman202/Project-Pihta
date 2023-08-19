@@ -1,27 +1,17 @@
 package ru.DmN.pht.base
 
 import ru.DmN.pht.base.parser.ast.Node
-import ru.DmN.pht.base.unparsers.NUUse
-import ru.DmN.pht.base.unparsers.NodeUnparser
-import ru.DmN.pht.std.utils.Module
-import java.util.ArrayList
+import ru.DmN.pht.base.unparser.UnparsingContext
+import ru.DmN.pht.base.unparser.unparsers.NodeUnparser
 
 class Unparser {
-    val modules: MutableList<Module> = ArrayList()
-    val unparsers: MutableMap<String, NodeUnparser<*>> = DEFAULT_PARSERS.toMutableMap()
     val out = StringBuilder()
 
-    fun unparse(node: Node) = (unparsers[node.tkOperation.text!!] as NodeUnparser<Node>).unparse(this, node)
+    fun unparse(ctx: UnparsingContext, node: Node) = get(ctx, node).unparse(this, ctx, node)
 
-    companion object {
-        private val DEFAULT_PARSERS: Map<String, NodeUnparser<*>>
-
-        init {
-            DEFAULT_PARSERS = HashMap()
-            // use
-            DEFAULT_PARSERS["use"] = NUUse
-            // Блок
-            DEFAULT_PARSERS["progn"] = NUUse
-        }
+    fun get(ctx: UnparsingContext, node: Node): NodeUnparser<Node> {
+        val name = node.tkOperation.text!!
+        ctx.modules.forEach { it.unparsers[name]?.let { return it as NodeUnparser<Node> } }
+        throw RuntimeException()
     }
 }

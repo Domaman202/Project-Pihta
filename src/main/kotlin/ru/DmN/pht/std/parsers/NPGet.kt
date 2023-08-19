@@ -4,6 +4,7 @@ import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.lexer.isNaming
 import ru.DmN.pht.base.lexer.isOperation
+import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.parsers.NodeParser
 import ru.DmN.pht.std.ast.NodeFMGet
@@ -11,7 +12,7 @@ import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.ast.NodeValue
 
 object NPGet : NodeParser() {
-    override fun parse(parser: Parser, operationToken: Token): Node {
+    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
         val nameToken = parser.nextToken()!!
         return when (nameToken.type) {
             Token.Type.CLASS -> process(operationToken, nameToken.text!!, static = true, klass = true)
@@ -20,7 +21,7 @@ object NPGet : NodeParser() {
                 parser.tokens.push(nameToken)
                 return NodeFMGet(
                     operationToken,
-                    parser.parseNode()!!,
+                    parser.parseNode(ctx)!!,
                     parser.nextToken()!!
                         .let { if (it.isOperation() || it.isNaming()) it else throw RuntimeException() }.text!!,
                     false

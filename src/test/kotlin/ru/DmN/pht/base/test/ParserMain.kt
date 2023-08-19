@@ -1,7 +1,9 @@
 package ru.DmN.pht.base.test
 
+import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.lexer.Lexer
 import ru.DmN.pht.base.Parser
+import ru.DmN.pht.base.parser.ParsingContext
 
 object ParserMain {
     @JvmStatic
@@ -14,6 +16,6 @@ object ParserMain {
                 (get o/value)
             )
             """)
-        ).parseNode()?.print())
+        ).parseNode(ParsingContext(mutableListOf(Base)))?.print())
     }
 }

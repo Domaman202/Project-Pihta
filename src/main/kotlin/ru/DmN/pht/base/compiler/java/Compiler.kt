@@ -10,6 +10,7 @@ import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.compiler.java.utils.ICompilable
 import ru.DmN.pht.base.compiler.java.utils.MacroDefine
 import ru.DmN.pht.base.lexer.Lexer
+import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.*
 import ru.DmN.pht.std.ast.NodeDefMacro
@@ -20,26 +21,27 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class Compiler {
-    val modules: MutableList<Module> = ArrayList()
-    val compilers: MutableMap<String, NodeCompiler<*>> = DEFAULT_COMPILERS.toMutableMap()
     val types: MutableList<VirtualType> = ArrayList()
     val classes: MutableList<ClassContext> = ArrayList()
     val macros: MutableMap<String, MutableList<MacroDefine>> = HashMap()
     val tasks: DefaultEnumMap<CompileStage, MutableList<ICompilable>> = DefaultEnumMap(CompileStage::class.java) { ArrayList() }
 
     fun calc(node: Node, ctx: CompilationContext): VirtualType? =
-        this[node].calc(node, this, ctx)
-    fun compile(code: String, ctx: CompilationContext) =
-        compile(Parser(Lexer(code)).parseNode()!!, ctx, false)
+        this.get(ctx, node).calc(node, this, ctx)
+    fun compile(code: String, pctx: ParsingContext, ctx: CompilationContext) =
+        compile(Parser(Lexer(code)).parseNode(pctx)!!, ctx, false)
     fun compile(node: Node, ctx: CompilationContext, ret: Boolean): Variable? =
-        this[node].compile(node, this, ctx, ret)
+        this.get(ctx, node).compile(node, this, ctx, ret)
     fun <T> compute(node: Node, ctx: CompilationContext, name: Boolean): T =
-        this[node].compute(node, this, ctx, name) as T
+        this.get(ctx, node).compute(node, this, ctx, name) as T
     fun applyAnnotation(node: Node, ctx: CompilationContext, annotation: Node) =
-        this[node].applyAnnotation(node, this, ctx, annotation)
+        this.get(ctx, node).applyAnnotation(node, this, ctx, annotation)
 
-    operator fun get(node: Node): NodeCompiler<Node> =
-        compilers[node.tkOperation.text!!] as NodeCompiler<Node>
+    fun get(ctx: CompilationContext, node: Node): NodeCompiler<Node> {
+        val name = node.tkOperation.text!!
+        ctx.global.modules.forEach { it -> it.compilers[name]?.let { return it as NodeCompiler<Node> } }
+        throw RuntimeException()
+    }
 
     fun computeStringConst(node: Node, ctx: CompilationContext): String =
         if (node.isConst())
@@ -83,18 +85,6 @@ class Compiler {
             fields += klass.declaredFields.map { VirtualField.of(this@Compiler, it) }
             methods += klass.declaredConstructors.map { VirtualMethod.of(this@Compiler, it) } +
                     klass.declaredMethods.map { VirtualMethod.of(this@Compiler, it) }
-        }
-    }
-
-    companion object {
-        val DEFAULT_COMPILERS: Map<String, NodeCompiler<*>>
-
-        init {
-            DEFAULT_COMPILERS = HashMap()
-            // use
-            DEFAULT_COMPILERS["use"] = NCUse
-            // Блок
-            DEFAULT_COMPILERS["progn"] = NCDefault
         }
     }
 }

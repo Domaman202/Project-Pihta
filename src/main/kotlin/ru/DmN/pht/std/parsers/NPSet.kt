@@ -2,6 +2,7 @@ package ru.DmN.pht.std.parsers
 
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.Parser
+import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.parsers.NodeParser
 import ru.DmN.pht.std.ast.NodeFMGet
@@ -10,9 +11,9 @@ import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.ast.NodeSet
 
 object NPSet : NodeParser() {
-    override fun parse(parser: Parser, operationToken: Token): Node {
+    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
         val name = parser.nextToken()!!
-        val value = parser.parseNode()!!
+        val value = parser.parseNode(ctx)!!
         return when (name.type) {
             Token.Type.CLASS -> process(operationToken, name.text!!, true, value)
             Token.Type.OPERATION -> process(operationToken, name.text!!, false, value)

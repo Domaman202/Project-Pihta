@@ -2,25 +2,26 @@ package ru.DmN.pht.std.parsers
 
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.Parser
+import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.parsers.NodeParser
 import ru.DmN.pht.std.ast.NodeValue
 
 object NPValueB : NodeParser() {
-    override fun parse(parser: Parser, operationToken: Token): Node? =
+    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
         operationToken.text!!.let { text ->
             NodeValue(
                 Token(operationToken.line, operationToken.type, "value"), when (operationToken.type) {
                     Token.Type.OPERATION -> {
                         parser.tokens.push(operationToken)
-                        return parser.parsers["get-or-name"]!!.parse(parser, Token(operationToken.line, Token.Type.OPERATION, "get-or-name"))
+                        return parser.get(ctx, "get-or-name")!!.parse(parser, ctx, Token(operationToken.line, Token.Type.OPERATION, "get-or-name"))
                     }
 
                     Token.Type.PRIMITIVE -> NodeValue.Type.PRIMITIVE
                     Token.Type.CLASS -> {
                         if (text.contains("[/#]".toRegex())) {
                             parser.tokens.push(operationToken)
-                            return parser.parsers["get!"]!!.parse(parser, Token(operationToken.line, Token.Type.OPERATION, "get_"))
+                            return parser.get(ctx, "get!")!!.parse(parser, ctx, Token(operationToken.line, Token.Type.OPERATION, "get_"))
                         } else NodeValue.Type.CLASS
                     }
 
