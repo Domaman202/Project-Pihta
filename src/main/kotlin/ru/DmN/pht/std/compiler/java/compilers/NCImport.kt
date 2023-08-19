@@ -5,9 +5,9 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.std.compiler.java.compute
-import ru.DmN.pht.std.compiler.java.computeName
-import ru.DmN.pht.std.compiler.java.global
+import ru.DmN.pht.std.compiler.java.utils.compute
+import ru.DmN.pht.std.compiler.java.utils.computeName
+import ru.DmN.pht.std.compiler.java.utils.global
 
 object NCImport : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {

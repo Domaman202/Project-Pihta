@@ -6,7 +6,10 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeMacroArg
-import ru.DmN.pht.std.compiler.java.*
+import ru.DmN.pht.std.compiler.java.utils.applyAnnotation
+import ru.DmN.pht.std.compiler.java.utils.compute
+import ru.DmN.pht.std.compiler.java.utils.isMacro
+import ru.DmN.pht.std.compiler.java.utils.macro
 
 object NCMacroArg : IStdNodeCompiler<NodeMacroArg> {
     override fun calc(node: NodeMacroArg, compiler: Compiler, ctx: CompilationContext): VirtualType? =

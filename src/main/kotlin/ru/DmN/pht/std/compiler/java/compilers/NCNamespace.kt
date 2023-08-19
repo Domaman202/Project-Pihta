@@ -4,8 +4,8 @@ import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.ast.NodeNamespace
-import ru.DmN.pht.std.compiler.java.global
-import ru.DmN.pht.std.compiler.java.with
+import ru.DmN.pht.std.compiler.java.utils.global
+import ru.DmN.pht.std.compiler.java.utils.with
 
 object NCNamespace : IStdNodeCompiler<NodeNamespace> {
     override fun compile(node: NodeNamespace, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {

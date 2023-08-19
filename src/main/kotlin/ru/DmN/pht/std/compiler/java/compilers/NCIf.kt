@@ -7,8 +7,8 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.global
-import ru.DmN.pht.std.compiler.java.method
+import ru.DmN.pht.std.compiler.java.utils.global
+import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.utils.load
 
 object NCIf : IStdNodeCompiler<NodeNodesList> {

@@ -6,7 +6,7 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.*
+import ru.DmN.pht.std.compiler.java.utils.*
 import ru.DmN.pht.std.utils.load
 import ru.DmN.pht.std.utils.loadCast
 import ru.DmN.pht.std.utils.storeCast

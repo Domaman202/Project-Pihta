@@ -3,7 +3,7 @@ package ru.DmN.pht.base.unparser.unparsers
 import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.parser.ast.NodeUse
 import ru.DmN.pht.base.unparser.UnparsingContext
-import ru.DmN.pht.std.utils.Module
+import ru.DmN.pht.base.utils.Module
 
 object NUUse : NodeUnparser<NodeUse>() {
     override fun unparse(unparser: Unparser, ctx: UnparsingContext, node: NodeUse) {

@@ -8,8 +8,9 @@ import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.*
+import ru.DmN.pht.base.utils.desc
 import ru.DmN.pht.std.compiler.java.ctx.*
+import ru.DmN.pht.std.compiler.java.utils.*
 import ru.DmN.pht.std.utils.*
 
 object NCMethodCall : IStdNodeCompiler<NodeNodesList> {

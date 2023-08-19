@@ -9,8 +9,8 @@ import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.*
-import ru.DmN.pht.std.compiler.java.*
 import ru.DmN.pht.std.compiler.java.ctx.*
+import ru.DmN.pht.std.compiler.java.utils.*
 import ru.DmN.pht.std.utils.insertRet
 
 object NCFunction : IStdNodeCompiler<NodeNodesList> {

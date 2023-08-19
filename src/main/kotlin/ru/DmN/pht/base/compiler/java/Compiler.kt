@@ -1,26 +1,24 @@
 package ru.DmN.pht.base.compiler.java
 
+import org.objectweb.asm.tree.ClassNode
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
-import ru.DmN.pht.std.compiler.java.ctx.ClassContext
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.compiler.java.utils.ICompilable
-import ru.DmN.pht.base.compiler.java.utils.MacroDefine
 import ru.DmN.pht.base.lexer.Lexer
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.*
 import java.lang.reflect.Modifier
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class Compiler {
     val types: MutableList<VirtualType> = ArrayList()
-    val classes: MutableList<ClassContext> = ArrayList()
-    val macros: MutableMap<String, MutableList<MacroDefine>> = HashMap()
+    val classes: MutableList<Pair<VirtualType, ClassNode>> = ArrayList()
     val tasks: DefaultEnumMap<CompileStage, MutableList<ICompilable>> = DefaultEnumMap(CompileStage::class.java) { ArrayList() }
+    val contexts: MutableMap<String, Any?> = HashMap()
 
     fun calc(node: Node, ctx: CompilationContext): VirtualType? =
         this.get(ctx, node).calc(node, this, ctx)
@@ -39,7 +37,7 @@ class Compiler {
         types.find { it.name == klass.name } ?: addType(klass)
 
     fun typeOf(name: String): VirtualType =
-        types.find { it.name == name } ?: classes.map { it.clazz }.find { it.name == name } ?: typeOrNull(name) ?: addType(klassOf(name))
+        types.find { it.name == name } ?: classes.map { it.first }.find { it.name == name } ?: typeOrNull(name) ?: addType(klassOf(name))
 
     private fun typeOrNull(name: String): VirtualType? {
         val type = types.find { it.name == name }

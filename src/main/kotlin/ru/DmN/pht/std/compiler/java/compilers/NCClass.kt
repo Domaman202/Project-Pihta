@@ -10,11 +10,11 @@ import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.*
-import ru.DmN.pht.std.compiler.java.compute
-import ru.DmN.pht.std.compiler.java.computeName
+import ru.DmN.pht.std.compiler.java.utils.compute
+import ru.DmN.pht.std.compiler.java.utils.computeName
 import ru.DmN.pht.std.compiler.java.ctx.*
-import ru.DmN.pht.std.compiler.java.global
-import ru.DmN.pht.std.compiler.java.with
+import ru.DmN.pht.std.compiler.java.utils.global
+import ru.DmN.pht.std.compiler.java.utils.with
 
 object NCClass : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
@@ -41,8 +41,7 @@ object NCClass : IStdNodeCompiler<NodeNodesList> {
             val cnode = ClassNode()
             val type = VirtualType(name, isInterface = isInterface, generics = generics)
             val context = ClassContext(cnode, type)
-            //
-            compiler.classes += context
+            compiler.classes += Pair(type, cnode)
             compiler.tasks[CompileStage.TYPES_DEFINE].add {
                 type.parents = parents
                 cnode.visit(

@@ -1,6 +1,6 @@
 package ru.DmN.pht.base.compiler.java.ctx
 
-import ru.DmN.pht.std.utils.Module
+import ru.DmN.pht.base.utils.Module
 
 class CompilationContext(val modules: MutableList<Module> = ArrayList(), val contexts: MutableMap<String, Any> = HashMap()) {
     fun with(modules: MutableList<Module>) =

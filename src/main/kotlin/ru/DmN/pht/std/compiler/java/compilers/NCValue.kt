@@ -8,8 +8,8 @@ import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.ast.NodeValue.Type.*
-import ru.DmN.pht.std.compiler.java.global
-import ru.DmN.pht.std.compiler.java.method
+import ru.DmN.pht.std.compiler.java.utils.global
+import ru.DmN.pht.std.compiler.java.utils.method
 
 object NCValue : IStdNodeCompiler<NodeValue> {
     override fun calc(node: NodeValue, compiler: Compiler, ctx: CompilationContext): VirtualType? =

@@ -6,10 +6,7 @@ import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.std.compiler.java.compute
-import ru.DmN.pht.std.compiler.java.computeName
-import ru.DmN.pht.std.compiler.java.global
-import ru.DmN.pht.std.compiler.java.isGlobal
+import ru.DmN.pht.std.compiler.java.utils.*
 
 object NCImportMacro : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
@@ -18,7 +15,7 @@ object NCImportMacro : IStdNodeCompiler<NodeNodesList> {
                 val gctx = ctx.global
                 node.nodes.map { it -> compiler.compute<List<Node>>(it, ctx, true).map { compiler.computeName(it, ctx) } }.first().forEach { it ->
                     val macro = it.substring(it.lastIndexOf('.') + 1)
-                    val macros = compiler.macros[it.substring(0, it.lastIndexOf('.'))]!!
+                    val macros = compiler.contexts.macros[it.substring(0, it.lastIndexOf('.'))]!!
                     if (macro == "*")
                         gctx.macros += macros
                     else gctx.macros += macros.find { it.name == macro }!!

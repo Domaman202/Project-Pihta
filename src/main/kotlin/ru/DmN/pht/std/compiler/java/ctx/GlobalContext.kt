@@ -1,7 +1,7 @@
 package ru.DmN.pht.std.compiler.java.ctx
 
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.utils.MacroDefine
+import ru.DmN.pht.std.compiler.java.utils.MacroDefine
 import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.base.utils.isPrimitive
@@ -52,7 +52,7 @@ class GlobalContext(
         }
 
     private fun getTypeOrThrow(compiler: Compiler, name: String): VirtualType {
-        val classes = compiler.classes.map { it.clazz }
+        val classes = compiler.classes.map { it.first }
         classes.find { it.name == name }?.let { return it }
         return (if (name.contains('.') || name.isPrimitive()) name else name(name))
             .let { n -> classes.find { it.name == name(n) } ?: compiler.typeOf(n) }

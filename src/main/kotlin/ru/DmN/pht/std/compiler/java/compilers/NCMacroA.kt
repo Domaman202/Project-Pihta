@@ -3,12 +3,11 @@ package ru.DmN.pht.std.compiler.java.compilers
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.std.compiler.java.ctx.MacroContext
-import ru.DmN.pht.base.compiler.java.utils.MacroDefine
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.*
+import ru.DmN.pht.std.compiler.java.utils.*
 
 object NCMacroA : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? {

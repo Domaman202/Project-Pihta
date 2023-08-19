@@ -8,11 +8,11 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualField
-import ru.DmN.pht.std.compiler.java.compute
-import ru.DmN.pht.std.compiler.java.computeName
+import ru.DmN.pht.std.compiler.java.utils.compute
+import ru.DmN.pht.std.compiler.java.utils.computeName
 import ru.DmN.pht.std.compiler.java.ctx.EnumConstContext
 import ru.DmN.pht.std.compiler.java.ctx.FieldContext
-import ru.DmN.pht.std.compiler.java.enum
+import ru.DmN.pht.std.compiler.java.utils.enum
 
 object NCEnumField : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {

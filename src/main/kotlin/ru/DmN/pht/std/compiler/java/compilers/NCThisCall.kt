@@ -6,9 +6,9 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeThisCall
-import ru.DmN.pht.std.compiler.java.body
-import ru.DmN.pht.std.compiler.java.clazz
-import ru.DmN.pht.std.compiler.java.method
+import ru.DmN.pht.std.compiler.java.utils.body
+import ru.DmN.pht.std.compiler.java.utils.clazz
+import ru.DmN.pht.std.compiler.java.utils.method
 
 object NCThisCall : IStdNodeCompiler<NodeThisCall> {
     override fun calc(node: NodeThisCall, compiler: Compiler, ctx: CompilationContext): VirtualType? =

@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.compiler.java
+package ru.DmN.pht.std.compiler.java.utils
 
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
@@ -68,3 +68,7 @@ val CompilationContext.body
     get() = contexts["std/body"] as BodyContext
 val CompilationContext.macro
     get() = contexts["std/macro"] as MacroContext
+
+val MutableMap<String, Any?>.macros
+    get() = this["std/macros"] as MutableMap<String, MutableList<MacroDefine>>
+//    get() = this.getOrPut("std/macros") { HashMap<String, MutableList<MacroDefine>>() } as MutableMap<String, MutableList<MacroDefine>>

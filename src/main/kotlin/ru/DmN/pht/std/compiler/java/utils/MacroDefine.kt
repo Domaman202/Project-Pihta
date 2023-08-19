@@ -1,4 +1,4 @@
-package ru.DmN.pht.base.compiler.java.utils
+package ru.DmN.pht.std.compiler.java.utils
 
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ast.Node

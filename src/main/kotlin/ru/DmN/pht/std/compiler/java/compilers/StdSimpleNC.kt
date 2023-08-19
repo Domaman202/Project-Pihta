@@ -5,7 +5,7 @@ import ru.DmN.pht.base.compiler.java.compilers.SimpleNC
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
-import ru.DmN.pht.std.compiler.java.applyAnnotation
+import ru.DmN.pht.std.compiler.java.utils.applyAnnotation
 
 open class StdSimpleNC<T : NodeNodesList> : SimpleNC<T>(), IStdNodeCompiler<T> {
     override fun applyAnnotation(node: T, compiler: Compiler, ctx: CompilationContext, annotation: Node) =

@@ -6,7 +6,7 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeGetOrName
-import ru.DmN.pht.std.compiler.java.*
+import ru.DmN.pht.std.compiler.java.utils.*
 
 object NCGetB : IStdNodeCompiler<NodeGetOrName> {
     override fun calc(node: NodeGetOrName, compiler: Compiler, ctx: CompilationContext): VirtualType? {

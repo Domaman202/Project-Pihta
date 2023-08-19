@@ -6,7 +6,7 @@ import ru.DmN.pht.base.parser.parsers.NPNodesList
 import ru.DmN.pht.base.parser.parsers.NPUse
 import ru.DmN.pht.base.unparser.unparsers.NUNodesList
 import ru.DmN.pht.base.unparser.unparsers.NUUse
-import ru.DmN.pht.std.utils.Module
+import ru.DmN.pht.base.utils.Module
 
 object Base : Module("base") {
     init {

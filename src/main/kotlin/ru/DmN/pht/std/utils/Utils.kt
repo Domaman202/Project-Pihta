@@ -11,6 +11,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.jvm.optionals.getOrNull
 
+fun Generic.getSignature(compiler: Compiler, ctx: GlobalContext): String =
+    "${name}:${ctx.getType(compiler, type).desc}"
+
 fun findCommonSuperclasses(vararg classes: VirtualType): List<VirtualType> {
     val commonSuperclasses = mutableListOf<VirtualType>()
     val firstClass = classes.firstOrNull()
@@ -68,31 +71,6 @@ fun insertRet(variable: Variable?, rettype: VirtualType, node: MethodNode) {
         )
     }
 }
-
-val String.desc
-    get() = when (this) {
-        "void" -> "V"
-        "boolean" -> "Z"
-        "byte" -> "B"
-        "short" -> "S"
-        "char" -> "C"
-        "int" -> "I"
-        "long" -> "J"
-        "double" -> "D"
-        else -> {
-            if (this[0] == '[') {
-                var i = 0
-                while (this[i] == '[') i++
-                val clazz = this.substring(i)
-                if (this[1] == 'L' || clazz.isPrimitive())
-                    this.className
-                else "${this.substring(0, i)}L${clazz.className};"
-            }
-            else "L${this.className};"
-        }
-    }
-val String.className
-    get() = this.replace('.', '/')
 
 fun VirtualType.ofPrimitive(): String? = when (name) {
     "void" -> ("java.lang.Void")

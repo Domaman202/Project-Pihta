@@ -2,9 +2,9 @@ package ru.DmN.pht.base.compiler.java.compilers
 
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
-import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.parser.ast.NodeUse
-import ru.DmN.pht.std.utils.Module
+import ru.DmN.pht.base.utils.Module
+import ru.DmN.pht.base.utils.Variable
 
 object NCUse : INodeCompiler<NodeUse> {
     override fun compile(node: NodeUse, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =

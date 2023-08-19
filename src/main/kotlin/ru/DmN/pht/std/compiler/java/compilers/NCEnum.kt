@@ -11,12 +11,12 @@ import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.*
-import ru.DmN.pht.std.compiler.java.compute
-import ru.DmN.pht.std.compiler.java.computeName
+import ru.DmN.pht.std.compiler.java.utils.compute
+import ru.DmN.pht.std.compiler.java.utils.computeName
 import ru.DmN.pht.std.compiler.java.ctx.EnumContext
 import ru.DmN.pht.std.compiler.java.ctx.MethodContext
-import ru.DmN.pht.std.compiler.java.global
-import ru.DmN.pht.std.compiler.java.with
+import ru.DmN.pht.std.compiler.java.utils.global
+import ru.DmN.pht.std.compiler.java.utils.with
 
 object NCEnum : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
@@ -36,7 +36,7 @@ object NCEnum : IStdNodeCompiler<NodeNodesList> {
             val cnode = ClassNode()
             val type = VirtualType(name)
             val cctx = EnumContext(cnode, type)
-            compiler.classes += cctx
+            compiler.classes += Pair(type, cnode)
             compiler.tasks[CompileStage.TYPES_DEFINE].add {
                 type.parents = mutableListOf(VirtualType.ofKlass(Enum::class.java))
                 type.parents += parents

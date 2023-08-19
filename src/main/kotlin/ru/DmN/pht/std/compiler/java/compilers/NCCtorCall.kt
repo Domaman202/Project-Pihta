@@ -5,10 +5,10 @@ import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.std.compiler.java.body
-import ru.DmN.pht.std.compiler.java.clazz
-import ru.DmN.pht.std.compiler.java.computeName
-import ru.DmN.pht.std.compiler.java.method
+import ru.DmN.pht.std.compiler.java.utils.body
+import ru.DmN.pht.std.compiler.java.utils.clazz
+import ru.DmN.pht.std.compiler.java.utils.computeName
+import ru.DmN.pht.std.compiler.java.utils.method
 
 object NCCtorCall : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {

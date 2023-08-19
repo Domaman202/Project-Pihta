@@ -6,7 +6,7 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.Std
-import ru.DmN.pht.std.utils.Module
+import ru.DmN.pht.base.utils.Module
 
 object StdUtil : Module("std/util") {
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {

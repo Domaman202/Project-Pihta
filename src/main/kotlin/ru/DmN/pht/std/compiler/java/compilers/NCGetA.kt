@@ -5,9 +5,9 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.body
-import ru.DmN.pht.std.compiler.java.computeName
-import ru.DmN.pht.std.compiler.java.global
+import ru.DmN.pht.std.compiler.java.utils.body
+import ru.DmN.pht.std.compiler.java.utils.computeName
+import ru.DmN.pht.std.compiler.java.utils.global
 
 object NCGetA : IStdNodeCompiler<Node> {
     override fun calc(node: Node, compiler: Compiler, ctx: CompilationContext): VirtualType {

@@ -3,13 +3,10 @@ package ru.DmN.pht.std.compiler.java.compilers
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
-import ru.DmN.pht.base.compiler.java.utils.MacroDefine
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.ast.NodeMacroDef
-import ru.DmN.pht.std.compiler.java.compute
-import ru.DmN.pht.std.compiler.java.computeName
-import ru.DmN.pht.std.compiler.java.global
+import ru.DmN.pht.std.compiler.java.utils.*
 
 object NCDefMacro : IStdNodeCompiler<NodeMacroDef> {
     override fun compile(node: NodeMacroDef, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
@@ -23,7 +20,7 @@ object NCDefMacro : IStdNodeCompiler<NodeMacroDef> {
                 gctx
             )
             gctx.macros += macro
-            compiler.macros.getOrPut(gctx.namespace) { ArrayList() } += macro
+            compiler.contexts.macros.getOrPut(gctx.namespace) { ArrayList() } += macro
         }
         return null
     }

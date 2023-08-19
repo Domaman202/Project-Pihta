@@ -3,7 +3,7 @@ package ru.DmN.pht.std.collections
 import ru.DmN.pht.base.parser.parsers.NPDefault
 import ru.DmN.pht.std.collections.compiler.java.compilers.NCList
 import ru.DmN.pht.std.unparsers.NUDefault
-import ru.DmN.pht.std.utils.Module
+import ru.DmN.pht.base.utils.Module
 
 object StdCollections : Module("std/collections") {
     init {

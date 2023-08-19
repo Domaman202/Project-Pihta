@@ -6,8 +6,8 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.ast.IGenericsContainer
-import ru.DmN.pht.std.compiler.java.applyAnnotation
-import ru.DmN.pht.std.compiler.java.compute
+import ru.DmN.pht.std.compiler.java.utils.applyAnnotation
+import ru.DmN.pht.std.compiler.java.utils.compute
 
 object NCGeneric : StdSimpleNC<NodeNodesList>() {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {

@@ -9,15 +9,12 @@ import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.parsers.NPDefault
 import ru.DmN.pht.base.unparser.unparsers.NUNodesList
 import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.std.compiler.java.body
 import ru.DmN.pht.std.compiler.java.compilers.*
 import ru.DmN.pht.std.compiler.java.ctx.*
-import ru.DmN.pht.std.compiler.java.isBody
-import ru.DmN.pht.std.compiler.java.isMethod
-import ru.DmN.pht.std.compiler.java.method
 import ru.DmN.pht.std.parsers.*
 import ru.DmN.pht.std.unparsers.*
-import ru.DmN.pht.std.utils.Module
+import ru.DmN.pht.base.utils.Module
+import ru.DmN.pht.std.compiler.java.utils.*
 
 object Std : Module("std") {
     init {
@@ -97,6 +94,7 @@ object Std : Module("std") {
         if (!ctx.modules.contains(this)) {
             super.inject(compiler, ctx, ret)
             ctx.contexts["std/global"] = GlobalContext()
+            compiler.contexts["std/macros"] = HashMap<String, MutableList<MacroDefine>>()
             compiler.compile(String(Std::class.java.getResourceAsStream("/pht/std/module.pht")!!.readAllBytes()), ParsingContext(mutableListOf(Base)), ctx)
         }
         return if (ctx.isMethod() && ctx.isBody()) {

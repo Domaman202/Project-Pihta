@@ -2,9 +2,8 @@ package ru.DmN.pht.base
 
 import org.objectweb.asm.ClassWriter
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.utils.ICompilable
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
-import ru.DmN.pht.std.compiler.java.ctx.GlobalContext
+import ru.DmN.pht.base.compiler.java.utils.ICompilable
 import ru.DmN.pht.base.lexer.Lexer
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.utils.Klass
@@ -28,7 +27,7 @@ class Interpreter {
         val compiler = Compiler()
         compiler.compile(Parser(Lexer(code)).parseNode(ParsingContext(mutableListOf(Base)))!!, CompilationContext(mutableListOf(Base)), false)
         compiler.tasks.values.forEach { it.forEach(ICompilable::compile) }
-        return compiler.classes.map { it.node }.map {
+        return compiler.classes.map { it.second }.map {
             val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
             it.accept(writer)
             val b = writer.toByteArray()

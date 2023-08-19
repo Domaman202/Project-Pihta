@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.utils
+package ru.DmN.pht.base.utils
 
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.compiler.java.Compiler
@@ -6,7 +6,6 @@ import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ParsingContext
-import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.parser.parsers.NodeParser
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparser.unparsers.NodeUnparser

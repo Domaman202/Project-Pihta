@@ -12,7 +12,7 @@ import ru.DmN.pht.std.math.unparsers.NUEquals
 import ru.DmN.pht.std.math.unparsers.NUMathNA
 import ru.DmN.pht.std.math.unparsers.NUNot
 import ru.DmN.pht.std.unparsers.NUDefault
-import ru.DmN.pht.std.utils.Module
+import ru.DmN.pht.base.utils.Module
 
 object StdMath : Module("std/math") { // todo: kotlin operators // todo: remake to NPDefault structure
     init {
