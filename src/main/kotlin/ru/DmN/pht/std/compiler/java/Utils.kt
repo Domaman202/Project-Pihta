@@ -1,6 +1,34 @@
-package ru.DmN.pht.std.compiler.java.ctx
+package ru.DmN.pht.std.compiler.java
 
+import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
+import ru.DmN.pht.base.parser.ast.Node
+import ru.DmN.pht.std.compiler.java.compilers.IStdNodeCompiler
+import ru.DmN.pht.std.compiler.java.ctx.*
+
+fun Compiler.computeName(node: Node, ctx: CompilationContext): String =
+    if (node.isConst())
+        node.getConstValueAsString()
+    else {
+        val result = compute<Any?>(node, ctx, true)
+        if (result is String)
+            result
+        else computeName(result as Node, ctx)
+    }
+
+fun <T> Compiler.compute(node: Node, ctx: CompilationContext, name: Boolean): T {
+    val nc = this.get(ctx, node)
+    return (if (nc is IStdNodeCompiler)
+        nc.compute(node, this, ctx, name)
+    else node) as T
+}
+
+fun Compiler.applyAnnotation(node: Node, ctx: CompilationContext, annotation: Node) {
+    val nc = this.get(ctx, node);
+    if (nc is IStdNodeCompiler) {
+        nc.applyAnnotation(node, this, ctx, annotation)
+    }
+}
 
 fun CompilationContext.with(ctx: GlobalContext): CompilationContext =
     this.with("std/global", ctx)

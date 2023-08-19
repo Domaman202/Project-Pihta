@@ -1,14 +1,15 @@
 package ru.DmN.pht.std.compiler.java.compilers
 
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.SimpleNodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.ast.IGenericsContainer
+import ru.DmN.pht.std.compiler.java.applyAnnotation
+import ru.DmN.pht.std.compiler.java.compute
 
-object NCGeneric : SimpleNodeCompiler<NodeNodesList>() {
+object NCGeneric : StdSimpleNC<NodeNodesList>() {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val args = node.nodes.take(2).map { compiler.compute<String>(it, ctx, true) }
         val nodes = node.nodes.drop(2)
@@ -21,7 +22,6 @@ object NCGeneric : SimpleNodeCompiler<NodeNodesList>() {
         return compiler.compile(nodes.last(), ctx, ret)
     }
 
-    override fun applyAnnotation(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, annotation: Node) {
+    override fun applyAnnotation(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, annotation: Node) =
         node.nodes.drop(2).forEach { compiler.applyAnnotation(it, ctx, annotation) }
-    }
 }

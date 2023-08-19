@@ -2,16 +2,15 @@ package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeFMGet
-import ru.DmN.pht.std.compiler.java.ctx.global
-import ru.DmN.pht.std.compiler.java.ctx.method
+import ru.DmN.pht.std.compiler.java.global
+import ru.DmN.pht.std.compiler.java.method
 import ru.DmN.pht.std.utils.load
 
-object NCFieldGetB : NodeCompiler<NodeFMGet>() {
+object NCFieldGetB : IStdNodeCompiler<NodeFMGet> {
     override fun calc(node: NodeFMGet, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         compiler.calc(node.instance, ctx)!!.fields.find { it.name == node.name && it.static == node.static }!!.type
 

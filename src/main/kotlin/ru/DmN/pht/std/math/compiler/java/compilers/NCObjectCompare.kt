@@ -2,15 +2,15 @@ package ru.DmN.pht.std.math.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.ctx.method
+import ru.DmN.pht.std.compiler.java.compilers.IStdNodeCompiler
+import ru.DmN.pht.std.compiler.java.method
 import ru.DmN.pht.std.utils.loadCast
 
-object NCObjectCompare : NodeCompiler<NodeNodesList>() {
+object NCObjectCompare : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         VirtualType.INT
 

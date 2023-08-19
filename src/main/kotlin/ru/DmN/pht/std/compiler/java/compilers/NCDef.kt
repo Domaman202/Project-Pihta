@@ -2,19 +2,17 @@ package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Label
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.std.compiler.java.ctx.body
-import ru.DmN.pht.std.compiler.java.ctx.isBody
-import ru.DmN.pht.std.compiler.java.ctx.isMethod
-import ru.DmN.pht.std.compiler.java.ctx.method
+import ru.DmN.pht.std.compiler.java.body
+import ru.DmN.pht.std.compiler.java.compute
+import ru.DmN.pht.std.compiler.java.method
 import ru.DmN.pht.std.utils.load
 import ru.DmN.pht.std.utils.store
 
-object NCDef : NodeCompiler<NodeNodesList>() {
+object NCDef : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val mctx = ctx.method
         val bctx = ctx.body

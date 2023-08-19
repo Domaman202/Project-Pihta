@@ -76,6 +76,7 @@ class VirtualType(
         val VOID    = ofKlass(Void::class.javaPrimitiveType!!)
         val BOOLEAN = ofKlass(Boolean::class.javaPrimitiveType!!)
         val INT     = ofKlass(Int::class.javaPrimitiveType!!)
+        val UNIT    = ofKlass(Unit::class.java)
         val OBJECT  = ofKlass(Object::class.java)
         val STRING  = ofKlass(String::class.java)
 

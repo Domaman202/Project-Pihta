@@ -4,7 +4,6 @@ import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ast.Node
@@ -13,10 +12,11 @@ import ru.DmN.pht.base.utils.TypeOrGeneric
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.compiler.java.*
 import ru.DmN.pht.std.compiler.java.compilers.NCFunction.getDescriptor
 import ru.DmN.pht.std.compiler.java.ctx.*
 
-object NCEnumCtor : NodeCompiler<NodeNodesList>() {
+object NCEnumCtor : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val gctx = ctx.global
         val cctx = ctx.enum
@@ -26,7 +26,7 @@ object NCEnumCtor : NodeCompiler<NodeNodesList>() {
         val args = (parts[0] as List<Node>).map { compiler.compute<Any?>(it, ctx, true) }.map { it ->
             when (it) {
                 is String -> Pair(it, "java.lang.Object")
-                is List<*> -> it.map { (compiler.computeStringConst(it as Node, ctx)) }
+                is List<*> -> it.map { (compiler.computeName(it as Node, ctx)) }
                     .let { Pair(it.first(), it.last()) }
 
                 else -> throw RuntimeException()

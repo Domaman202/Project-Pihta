@@ -1,16 +1,14 @@
 package ru.DmN.pht.std.compiler.java.compilers
 
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.ctx.isMacro
-import ru.DmN.pht.std.compiler.java.ctx.macro
+import ru.DmN.pht.std.compiler.java.*
 
-object NCMacroArg : NodeCompiler<NodeNodesList>() {
+object NCMacroArg : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         if (ctx.isMacro())
             compiler.calc(macro(node, compiler, ctx), ctx)
@@ -33,5 +31,5 @@ object NCMacroArg : NodeCompiler<NodeNodesList>() {
     }
 
     private fun macro(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext) =
-        ctx.macro[compiler.computeStringConst(node.nodes.first(), ctx)]
+        ctx.macro[compiler.computeName(node.nodes.first(), ctx)]
 }

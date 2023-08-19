@@ -9,8 +9,12 @@ import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.parsers.NPDefault
 import ru.DmN.pht.base.unparser.unparsers.NUNodesList
 import ru.DmN.pht.base.utils.Variable
+import ru.DmN.pht.std.compiler.java.body
 import ru.DmN.pht.std.compiler.java.compilers.*
 import ru.DmN.pht.std.compiler.java.ctx.*
+import ru.DmN.pht.std.compiler.java.isBody
+import ru.DmN.pht.std.compiler.java.isMethod
+import ru.DmN.pht.std.compiler.java.method
 import ru.DmN.pht.std.parsers.*
 import ru.DmN.pht.std.unparsers.*
 import ru.DmN.pht.std.utils.Module

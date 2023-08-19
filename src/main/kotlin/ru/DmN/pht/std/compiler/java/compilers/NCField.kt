@@ -4,17 +4,17 @@ import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.FieldNode
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualField
+import ru.DmN.pht.std.compiler.java.*
 import ru.DmN.pht.std.compiler.java.ctx.*
 
-object NCField : NodeCompiler<NodeNodesList>() {
+object NCField : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        val nodes = node.nodes.map { it -> compiler.compute<List<Node>>(it, ctx, true).map { compiler.computeStringConst(it, ctx) } }
+        val nodes = node.nodes.map { it -> compiler.compute<List<Node>>(it, ctx, true).map { compiler.computeName(it, ctx) } }
         if (ctx.isMethod() && ctx.isBody()) {
             val mctx = ctx.method
             val label = Label()

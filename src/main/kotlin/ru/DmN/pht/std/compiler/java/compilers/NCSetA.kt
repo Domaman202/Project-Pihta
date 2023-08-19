@@ -2,19 +2,18 @@ package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.ctx.*
+import ru.DmN.pht.std.compiler.java.*
 import ru.DmN.pht.std.utils.load
 import ru.DmN.pht.std.utils.loadCast
 import ru.DmN.pht.std.utils.storeCast
 
-object NCSetA : NodeCompiler<NodeNodesList>() {
+object NCSetA : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? {
-        val name = compiler.computeStringConst(node, ctx)
+        val name = compiler.computeName(node, ctx)
         val variable = ctx.body[name]
         return if (variable == null) {
             if (ctx.isClass()) {
@@ -26,7 +25,7 @@ object NCSetA : NodeCompiler<NodeNodesList>() {
 
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val mnode = ctx.method.node
-        val name = compiler.computeStringConst(node.nodes.first(), ctx)
+        val name = compiler.computeName(node.nodes.first(), ctx)
         val variable = ctx.body[name]
         return if (variable == null) {
             if (ctx.isClass()) {

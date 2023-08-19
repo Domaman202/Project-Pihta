@@ -4,23 +4,26 @@ import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
+import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.*
+import ru.DmN.pht.std.compiler.java.compute
+import ru.DmN.pht.std.compiler.java.computeName
 import ru.DmN.pht.std.compiler.java.ctx.*
+import ru.DmN.pht.std.compiler.java.global
+import ru.DmN.pht.std.compiler.java.with
 
-object NCClass : NodeCompiler<NodeNodesList>() {
+object NCClass : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         compiler.tasks[CompileStage.TYPES_PREDEFINE].add {
             val gctx = ctx.global
             val parts = node.nodes.map { { name: Boolean -> compiler.compute<Any?>(it, ctx, name) } }
             val name = gctx.name(parts[0](true) as String)
             val parents = (parts[1](false) as List<Node>)
-                .map { compiler.computeStringConst(it, ctx) }
+                .map { compiler.computeName(it, ctx) }
                 .map { gctx.getType(compiler, it) }.toMutableList()
             //
             val isInterface = node.tkOperation.text == "intf"

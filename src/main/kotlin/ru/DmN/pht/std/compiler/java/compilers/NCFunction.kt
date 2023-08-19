@@ -4,16 +4,16 @@ import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.*
+import ru.DmN.pht.std.compiler.java.*
 import ru.DmN.pht.std.compiler.java.ctx.*
 import ru.DmN.pht.std.utils.insertRet
 
-object NCFunction : NodeCompiler<NodeNodesList>() {
+object NCFunction : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val gctx = ctx.global
         val cctx = ctx.clazz
@@ -27,7 +27,7 @@ object NCFunction : NodeCompiler<NodeNodesList>() {
         val args = (parts[2](false) as List<Node>).map { compiler.compute<Any?>(it, ctx, true) }.map { it ->
             when (it) {
                 is String -> Pair(it, "java.lang.Object")
-                is List<*> -> it.map { (compiler.computeStringConst(it as Node, ctx)) }
+                is List<*> -> it.map { (compiler.computeName(it as Node, ctx)) }
                     .let { Pair(it.first(), it.last()) }
 
                 else -> throw RuntimeException()

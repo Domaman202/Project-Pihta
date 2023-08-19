@@ -1,7 +1,7 @@
 package ru.DmN.pht.base.compiler.java
 
 import ru.DmN.pht.base.Parser
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
+import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.std.compiler.java.ctx.ClassContext
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
@@ -28,26 +28,12 @@ class Compiler {
         compile(Parser(Lexer(code)).parseNode(pctx)!!, ctx, false)
     fun compile(node: Node, ctx: CompilationContext, ret: Boolean): Variable? =
         this.get(ctx, node).compile(node, this, ctx, ret)
-    fun <T> compute(node: Node, ctx: CompilationContext, name: Boolean): T =
-        this.get(ctx, node).compute(node, this, ctx, name) as T
-    fun applyAnnotation(node: Node, ctx: CompilationContext, annotation: Node) =
-        this.get(ctx, node).applyAnnotation(node, this, ctx, annotation)
 
-    fun get(ctx: CompilationContext, node: Node): NodeCompiler<Node> {
+    fun get(ctx: CompilationContext, node: Node): INodeCompiler<Node> {
         val name = node.tkOperation.text!!
-        ctx.modules.forEach { it -> it.compilers[name]?.let { return it as NodeCompiler<Node> } }
+        ctx.modules.forEach { it -> it.compilers[name]?.let { return it as INodeCompiler<Node> } }
         throw RuntimeException()
     }
-
-    fun computeStringConst(node: Node, ctx: CompilationContext): String =
-        if (node.isConst())
-            node.getConstValueAsString()
-        else {
-            val result = compute<Any?>(node, ctx, true)
-            if (result is String)
-                result
-            else computeStringConst(result as Node, ctx)
-        }
 
     fun typeOf(klass: Klass): VirtualType =
         types.find { it.name == klass.name } ?: addType(klass)

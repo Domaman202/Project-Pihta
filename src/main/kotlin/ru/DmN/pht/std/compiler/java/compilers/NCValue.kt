@@ -3,16 +3,15 @@ package ru.DmN.pht.std.compiler.java.compilers
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.ast.NodeValue.Type.*
-import ru.DmN.pht.std.compiler.java.ctx.global
-import ru.DmN.pht.std.compiler.java.ctx.method
+import ru.DmN.pht.std.compiler.java.global
+import ru.DmN.pht.std.compiler.java.method
 
-object NCValue : NodeCompiler<NodeValue>() {
+object NCValue : IStdNodeCompiler<NodeValue> {
     override fun calc(node: NodeValue, compiler: Compiler, ctx: CompilationContext): VirtualType? =
             ctx.global.getType(
                 compiler, when (node.vtype) {
@@ -68,14 +67,7 @@ object NCValue : NodeCompiler<NodeValue>() {
         } else null
 
     override fun compute(node: NodeValue, compiler: Compiler, ctx: CompilationContext, name: Boolean): Any? =
-        if (name) node.value else node
-//        when (node.vtype) {
-//            NIL -> null
-//            BOOLEAN -> node.getBoolean()
-//            INT -> node.getInt()
-//            DOUBLE -> node.getDouble()
-//            STRING, NAMING -> node.getString()
-//            PRIMITIVE, CLASS -> node.getString()
-////            PRIMITIVE, CLASS -> if (ctx.type.clazz) ctx.clazz!!.getType(compiler, ctx.global, node.getString()) else ctx.global.getType(compiler, node.getString())
-//        }
+        if (name)
+            node.value
+        else node
 }

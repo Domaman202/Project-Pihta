@@ -2,17 +2,17 @@ package ru.DmN.pht.std.math.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.ctx.global
-import ru.DmN.pht.std.compiler.java.ctx.method
+import ru.DmN.pht.std.compiler.java.compilers.IStdNodeCompiler
+import ru.DmN.pht.std.compiler.java.global
+import ru.DmN.pht.std.compiler.java.method
+import ru.DmN.pht.std.math.ast.NodeMathNA
 import ru.DmN.pht.std.utils.calcNumberType
 import ru.DmN.pht.std.utils.load
-import ru.DmN.pht.std.math.ast.NodeMathNA
 
-object NCMathNA : NodeCompiler<NodeMathNA>() {
+object NCMathNA : IStdNodeCompiler<NodeMathNA> {
     override fun calc(node: NodeMathNA, compiler: Compiler, ctx: CompilationContext): VirtualType? = calcNumberType(
         compiler.calc(node.nodes.first(), ctx),
         compiler.calc(node.nodes.last(), ctx)

@@ -4,7 +4,6 @@ import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ast.Node
@@ -13,24 +12,26 @@ import ru.DmN.pht.base.utils.Generics
 import ru.DmN.pht.base.utils.TypeOrGeneric
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualMethod
+import ru.DmN.pht.std.compiler.java.*
 import ru.DmN.pht.std.compiler.java.compilers.NCFunction.getDescriptor
 import ru.DmN.pht.std.compiler.java.ctx.*
 import ru.DmN.pht.std.utils.insertRet
 
-object NCExFunction : NodeCompiler<NodeNodesList>() {
+object NCExFunction : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val gctx = ctx.global
         val cctx = ctx.clazz
         //
         val parts = node.nodes.map { compiler.compute<Any?>(it, ctx, true) }
-        val clazz = gctx.getType(compiler, compiler.computeStringConst(parts[0] as Node, ctx))
+        val clazz = gctx.getType(compiler, compiler.computeName(parts[0] as Node, ctx))
         val name = parts[1] as String
         val returnClass = (parts[2] as Node).getConstValueAsString()
         val returnType = cctx.getType(compiler, gctx, returnClass)
         val args = (parts[3] as List<Node>).map { compiler.compute<Any?>(it, ctx, true) }.map { it ->
             if (it is String)
                 Pair(it, "java.lang.Object")
-            else (it as List<Node>).map { (compiler.computeStringConst(it, ctx)) }
+            else (it as List<Node>)
+                .map { (compiler.computeName(it, ctx)) }
                 .let { Pair(it.first(), it.last()) }
         }
         val argsTypes = args.map { cctx.getType(compiler, gctx, it.second) }

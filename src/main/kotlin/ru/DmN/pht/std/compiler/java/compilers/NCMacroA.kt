@@ -1,8 +1,6 @@
 package ru.DmN.pht.std.compiler.java.compilers
 
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NCDefault
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.std.compiler.java.ctx.MacroContext
 import ru.DmN.pht.base.compiler.java.utils.MacroDefine
@@ -10,10 +8,11 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.ctx.global
-import ru.DmN.pht.std.compiler.java.ctx.with
+import ru.DmN.pht.std.compiler.java.computeName
+import ru.DmN.pht.std.compiler.java.global
+import ru.DmN.pht.std.compiler.java.with
 
-object NCMacroA : NodeCompiler<NodeNodesList>() {
+object NCMacroA : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? {
         val result = process(node, compiler, ctx)
         return NCDefault.calc(result.first, compiler, result.second)
@@ -30,7 +29,7 @@ object NCMacroA : NodeCompiler<NodeNodesList>() {
     }
 
     private fun process(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Pair<NodeNodesList, CompilationContext> {
-        val name = compiler.computeStringConst(node.nodes.first(), ctx)
+        val name = compiler.computeName(node.nodes.first(), ctx)
         val macro = ctx.global.macros.find { it.name == name }!!
         val mctx = MacroContext()
         macro.args.forEachIndexed { i, it -> mctx.args[it] = node.nodes[i + 1] }

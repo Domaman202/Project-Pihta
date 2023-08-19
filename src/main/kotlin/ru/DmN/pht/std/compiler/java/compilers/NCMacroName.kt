@@ -1,12 +1,12 @@
 package ru.DmN.pht.std.compiler.java.compilers
 
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.NodeNodesList
-import ru.DmN.pht.std.compiler.java.ctx.macro
+import ru.DmN.pht.std.compiler.java.computeName
+import ru.DmN.pht.std.compiler.java.macro
 
-object NCMacroName : NodeCompiler<NodeNodesList>() {
+object NCMacroName : IStdNodeCompiler<NodeNodesList> {
     override fun compute(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, name: Boolean): String =
-        compiler.computeStringConst(ctx.macro[compiler.computeStringConst(node.nodes.first(), ctx)], ctx)
+        compiler.computeName(ctx.macro[compiler.computeName(node.nodes.first(), ctx)], ctx)
 }

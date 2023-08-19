@@ -3,19 +3,22 @@ package ru.DmN.pht.std.compiler.java.compilers
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.FieldNode
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.Node
+import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualField
-import ru.DmN.pht.base.parser.ast.NodeNodesList
-import ru.DmN.pht.std.compiler.java.ctx.*
+import ru.DmN.pht.std.compiler.java.compute
+import ru.DmN.pht.std.compiler.java.computeName
+import ru.DmN.pht.std.compiler.java.ctx.EnumConstContext
+import ru.DmN.pht.std.compiler.java.ctx.FieldContext
+import ru.DmN.pht.std.compiler.java.enum
 
-object NCEnumField : NodeCompiler<NodeNodesList>() {
+object NCEnumField : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val cctx = ctx.enum
         node.nodes.map { compiler.compute<List<Node>>(it, ctx, false) }.forEach {
-            val name = compiler.computeStringConst(it.first(), ctx)
+            val name = compiler.computeName(it.first(), ctx)
             val fnode = cctx.node.visitField(
                 Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC + Opcodes.ACC_FINAL + Opcodes.ACC_ENUM,
                 name,

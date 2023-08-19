@@ -2,21 +2,21 @@ package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.ctx.global
-import ru.DmN.pht.std.compiler.java.ctx.method
+import ru.DmN.pht.std.compiler.java.computeName
+import ru.DmN.pht.std.compiler.java.global
+import ru.DmN.pht.std.compiler.java.method
 
-object NCNew : NodeCompiler<NodeNodesList>() {
+object NCNew : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
-        ctx.global.getType(compiler, compiler.computeStringConst(node.nodes.first(), ctx))
+        ctx.global.getType(compiler, compiler.computeName(node.nodes.first(), ctx))
 
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         ctx.method.node.run {
-            val type = ctx.global.getType(compiler, compiler.computeStringConst(node.nodes.first(), ctx))
+            val type = ctx.global.getType(compiler, compiler.computeName(node.nodes.first(), ctx))
             visitTypeInsn(Opcodes.NEW, type.className)
             visitInsn(Opcodes.DUP)
             NCMethodCall.compileWithOutRet(

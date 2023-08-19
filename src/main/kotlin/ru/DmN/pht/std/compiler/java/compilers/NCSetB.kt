@@ -2,17 +2,16 @@ package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeSet
-import ru.DmN.pht.std.compiler.java.ctx.*
+import ru.DmN.pht.std.compiler.java.*
 import ru.DmN.pht.std.utils.load
 import ru.DmN.pht.std.utils.store
 import ru.DmN.pht.std.utils.storeCast
 
-object NCSetB : NodeCompiler<NodeSet>() {
+object NCSetB : IStdNodeCompiler<NodeSet> {
     override fun calc(node: NodeSet, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         compiler.calc(node.value!!, ctx)
 

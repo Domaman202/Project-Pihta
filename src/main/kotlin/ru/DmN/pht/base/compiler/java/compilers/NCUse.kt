@@ -6,7 +6,7 @@ import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.parser.ast.NodeUse
 import ru.DmN.pht.std.utils.Module
 
-object NCUse : NodeCompiler<NodeUse>() {
+object NCUse : INodeCompiler<NodeUse> {
     override fun compile(node: NodeUse, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         node.names.map { Module.MODULES[it]!!.inject(compiler, ctx, ret) }.last()
 }

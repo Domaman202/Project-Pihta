@@ -1,13 +1,12 @@
 package ru.DmN.pht.std.compiler.java.compilers
 
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeGetOrName
 
-object NCGetOrName : NodeCompiler<NodeGetOrName>() {
+object NCGetOrName : IStdNodeCompiler<NodeGetOrName> {
     override fun calc(node: NodeGetOrName, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         NCGetB.calc(node, compiler, ctx)
 

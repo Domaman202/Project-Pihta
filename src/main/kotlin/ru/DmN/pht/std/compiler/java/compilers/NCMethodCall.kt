@@ -2,20 +2,20 @@ package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.compiler.java.*
 import ru.DmN.pht.std.compiler.java.ctx.*
 import ru.DmN.pht.std.utils.*
 
-object NCMethodCall : NodeCompiler<NodeNodesList>() {
+object NCMethodCall : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType {
         val instance = compiler.compute(node.nodes[0], ctx, false) as Node
-        val name = compiler.computeStringConst(node.nodes[1], ctx)
+        val name = compiler.computeName(node.nodes[1], ctx)
         return calcType(
             compiler,
             ctx,
@@ -34,7 +34,7 @@ object NCMethodCall : NodeCompiler<NodeNodesList>() {
 
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val instance = compiler.compute(node.nodes[0], ctx, false) as Node
-        val name = compiler.computeStringConst(node.nodes[1], ctx)
+        val name = compiler.computeName(node.nodes[1], ctx)
         val type = if (instance.isConstClass()) {
             val cname = node.nodes.first().getConstValueAsString()
             if (ctx.isClass())

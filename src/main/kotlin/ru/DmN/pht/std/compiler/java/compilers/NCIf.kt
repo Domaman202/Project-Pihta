@@ -3,16 +3,15 @@ package ru.DmN.pht.std.compiler.java.compilers
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.ctx.global
-import ru.DmN.pht.std.compiler.java.ctx.method
+import ru.DmN.pht.std.compiler.java.global
+import ru.DmN.pht.std.compiler.java.method
 import ru.DmN.pht.std.utils.load
 
-object NCIf : NodeCompiler<NodeNodesList>() {
+object NCIf : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
         node.nodes.map { compiler.calc(it, ctx) }.let { ru.DmN.pht.std.utils.calcType(it[1], it[2]) }.first
 

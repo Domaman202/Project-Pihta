@@ -4,16 +4,16 @@ import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.ctx.method
-import ru.DmN.pht.std.utils.load
+import ru.DmN.pht.std.compiler.java.compilers.IStdNodeCompiler
+import ru.DmN.pht.std.compiler.java.method
 import ru.DmN.pht.std.math.ast.NodeEquals
+import ru.DmN.pht.std.utils.load
 
-object NCPrimitiveCompare : NodeCompiler<NodeEquals>() { // todo: list
-    override fun calc(node: NodeEquals, compiler: Compiler, ctx: CompilationContext): VirtualType? =
+object NCPrimitiveCompare : IStdNodeCompiler<NodeEquals> { // todo: list
+    override fun calc(node: NodeEquals, compiler: Compiler, ctx: CompilationContext): VirtualType =
         VirtualType.BOOLEAN
 
     override fun compile(node: NodeEquals, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =

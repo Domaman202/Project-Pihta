@@ -2,14 +2,13 @@ package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.NodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeGetOrName
-import ru.DmN.pht.std.compiler.java.ctx.*
+import ru.DmN.pht.std.compiler.java.*
 
-object NCGetB : NodeCompiler<NodeGetOrName>() {
+object NCGetB : IStdNodeCompiler<NodeGetOrName> {
     override fun calc(node: NodeGetOrName, compiler: Compiler, ctx: CompilationContext): VirtualType? {
         val variable = ctx.body.variables.find { it.name == node.name }
         return if (variable == null)
