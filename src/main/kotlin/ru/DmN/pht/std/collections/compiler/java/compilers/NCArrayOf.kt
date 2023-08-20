@@ -15,7 +15,7 @@ import ru.DmN.pht.std.utils.ofPrimitive
 import ru.DmN.pht.std.utils.primitiveToObject
 
 object NCArrayOf : IStdNodeCompiler<NodeNodesList> {
-    override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? {
+    override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType {
         var type: VirtualType? = null
         node.nodes.forEach { type = calcType(type, ctx.global.getType(compiler, compiler.calc(it, ctx)!!.ofPrimitive()!!)).first }
         return type!!.arrayType

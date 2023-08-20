@@ -27,8 +27,7 @@ object CompilerMain {
                     (obj Main [^Any] (
                         (fn main ^Any [] (
                             (use std)
-                            (#println std (new-array String 4))
-                            (#println std (typeof (array-of 12 21)))
+                            (#println std (new-bytes 4))
                             (unit)
                         ))
                     ))
