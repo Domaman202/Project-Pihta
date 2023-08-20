@@ -168,7 +168,7 @@ object NCEnum : IStdNodeCompiler<NodeNodesList> {
                             visitInsn(Opcodes.DUP)
                             visitLdcInsn(it.name)
                             visitLdcInsn(i)
-                            NCMethodCall.compileWithOutRet(
+                            NCMethodCallA.compileWithOutRet(
                                 compiler,
                                 context,
                                 type,

@@ -13,7 +13,7 @@ import ru.DmN.pht.std.compiler.java.ctx.*
 import ru.DmN.pht.std.compiler.java.utils.*
 import ru.DmN.pht.std.utils.*
 
-object NCMethodCall : IStdNodeCompiler<NodeNodesList> {
+object NCMethodCallA : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType {
         val instance = compiler.compute(node.nodes[0], ctx, false) as Node
         val name = compiler.computeName(node.nodes[1], ctx)

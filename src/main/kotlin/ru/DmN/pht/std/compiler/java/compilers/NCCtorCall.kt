@@ -15,7 +15,7 @@ object NCCtorCall : IStdNodeCompiler<NodeNodesList> {
         var type = ctx.clazz.clazz
         if (compiler.computeName(node.nodes.first(), ctx) == "super")
             type = type.superclass!!
-        NCMethodCall.compileWithOutRet(
+        NCMethodCallA.compileWithOutRet(
             compiler,
             ctx,
             type,

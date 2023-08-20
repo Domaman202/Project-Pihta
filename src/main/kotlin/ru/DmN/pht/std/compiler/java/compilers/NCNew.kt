@@ -19,7 +19,7 @@ object NCNew : IStdNodeCompiler<NodeNodesList> {
             val type = ctx.global.getType(compiler, compiler.computeName(node.nodes.first(), ctx))
             visitTypeInsn(Opcodes.NEW, type.className)
             visitInsn(Opcodes.DUP)
-            NCMethodCall.compileWithOutRet(
+            NCMethodCallA.compileWithOutRet(
                 compiler,
                 ctx,
                 type,

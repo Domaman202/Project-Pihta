@@ -25,9 +25,4 @@ open class SimpleNP<T : NodeNodesList> : NodeParser() {
         parser.tokens.push(tk)
         return constructor.invoke(nodes)
     }
-
-    companion object {
-        @JvmStatic
-        val INSTANCE = SimpleNP<NodeNodesList>()
-    }
 }

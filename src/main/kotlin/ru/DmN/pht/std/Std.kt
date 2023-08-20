@@ -61,9 +61,8 @@ object Std : Module("std") {
         // Создать / Выполнить / Вызвать Супер-Конструктор / Вызвать
         add("new",      NPDefault,  NUDefault,  NCNew)
         add("ccall",    NPDefault,  NUDefault,  NCCtorCall)
-//        add("tcall",    NPDefault,  NUDefault,  NCThisCall)
         add("mcall!",   NPMethodCallB)
-        add("mcall",    NPDefault,  NUDefault,  NCMethodCall)
+        add("mcall",    NPDefault,  NUDefault,  NCMethodCallA)
         // Сеттеры
         add("fset!",    NPFieldSet, NUFieldSet, NCSetB)
         add("set!",     NPSet,      NUSet,      NCSetB)
