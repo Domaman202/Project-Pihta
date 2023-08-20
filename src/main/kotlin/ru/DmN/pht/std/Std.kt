@@ -25,8 +25,7 @@ object Std : Module("std") {
         add("macro-unroll", NPDefault,  NUDefault,  NCMacroUnroll)
         add("macro-arg",    NPMacroArg, NUMacroArg, NCMacroArg)
         add("macro-name",   NPMacroArg, NUMacroArg, NCMacroName)
-        add("macro!",       NPMacro,    NUMacro,    NCMacroB)
-//        add("macro",        NPDefault,  NUDefault,  NCMacroA) // todo:
+        add("macro!",       NPMacro,    NUMacro,    NCMacro)
         // Аннотации
         add("@abstract",NPDefault,NUDefault,NCAnnotation)
         add("@final",   NPDefault,NUDefault,NCAnnotation)

@@ -8,9 +8,13 @@ import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeMacro
+import ru.DmN.pht.std.compiler.java.ctx.MacroContext
 import ru.DmN.pht.std.compiler.java.utils.global
+import ru.DmN.pht.std.compiler.java.utils.isMacro
+import ru.DmN.pht.std.compiler.java.utils.macro
+import ru.DmN.pht.std.compiler.java.utils.with
 
-object NCMacroB : IStdNodeCompiler<NodeMacro> {
+object NCMacro : IStdNodeCompiler<NodeMacro> {
     override fun calc(node: NodeMacro, compiler: Compiler, ctx: CompilationContext): VirtualType? {
         val result = process(node, ctx)
         return NCDefault.calc(result.first, compiler, result.second)
@@ -28,7 +32,7 @@ object NCMacroB : IStdNodeCompiler<NodeMacro> {
 
     private fun process(node: NodeMacro, ctx: CompilationContext): Pair<NodeNodesList, CompilationContext> {
         val macro = ctx.global.macros.find { it.name == node.name }!!
-        val mctx = NCMacroA.ctxOf(ctx)
+        val mctx = ctxOf(ctx)
         if (macro.args.size == node.nodes.size)
             macro.args.forEachIndexed { i, it -> mctx.args[it] = node.nodes[i] }
         else if (macro.args.isNotEmpty()) {
@@ -38,6 +42,12 @@ object NCMacroB : IStdNodeCompiler<NodeMacro> {
                 node.nodes.drop(macro.args.size - 1).toMutableList()
             )
         }
-        return NCMacroA.process(macro, ctx, mctx)
+        return Pair(macro.toNodesList(), ctx.with(macro.ctx.combineWith(ctx.global)).with(mctx))
+    }
+
+    fun ctxOf(ctx: CompilationContext): MacroContext {
+        return if (ctx.isMacro())
+            MacroContext(ctx.macro.args)
+        else MacroContext()
     }
 }
