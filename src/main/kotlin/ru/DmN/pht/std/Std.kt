@@ -22,6 +22,7 @@ object Std : Module("std") {
         add("use",          NPDefault,  NUDefault,  NCUse)
         // Определить Макрос / Вставить Аргумент / Макрос
         add("defmacro",     NPMacroDef, NUMacroDef, NCDefMacro)
+        add("macro-unroll", NPDefault,  NUDefault,  NCMacroUnroll)
         add("macro-arg",    NPMacroArg, NUMacroArg, NCMacroArg)
         add("macro-name",   NPMacroArg, NUMacroArg, NCMacroName)
         add("macro!",       NPMacro,    NUMacro,    NCMacroB)

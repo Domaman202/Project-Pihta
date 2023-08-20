@@ -13,7 +13,7 @@ object ParserMain {
             Lexer("""
             (
                 (use std)
-                (get o/value)
+                (tcall 12 21)
             )
             """)
         ).parseNode(ParsingContext(mutableListOf(Base)))?.print())

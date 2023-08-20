@@ -6,6 +6,14 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.std.compiler.java.compilers.IStdNodeCompiler
 import ru.DmN.pht.std.compiler.java.ctx.*
 
+fun sliceInsert(list: MutableList<Any?>, index: Int, elements: List<Any?>) {
+    val right = list.subList(index + 1, list.size).toList()
+    for (i in list.size until elements.size + index + right.size)
+        list.add(null)
+    elements.forEachIndexed { i, it -> list[index + i] = it }
+    right.forEachIndexed { i, it -> list[index + i + elements.size] = it }
+}
+
 fun Compiler.computeName(node: Node, ctx: CompilationContext): String =
     if (node.isConst())
         node.getConstValueAsString()

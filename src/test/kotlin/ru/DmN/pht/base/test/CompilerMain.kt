@@ -23,10 +23,12 @@ object CompilerMain {
                 (ns ru.DmN.test (
                     (import [java.lang.Object Any][java.lang.String String])
                     (import-macro [pht.std.*])
+                    
+                    (defmacro println [value] ((use std)(macro-unroll (#println std (macro-arg value)))))
 
                     (obj Main [^Any] (
                         (fn main ^Any [] (
-                            (doto (use std) (tcall println "Hi!"))
+                            (println "[Meow]" "Hello," "World!")
                             (unit)
                         ))
                     ))
