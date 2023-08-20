@@ -32,7 +32,7 @@ object NCMacroB : IStdNodeCompiler<NodeMacro> {
         if (macro.args.size == node.nodes.size)
             macro.args.forEachIndexed { i, it -> mctx.args[it] = node.nodes[i] }
         else if (macro.args.isNotEmpty()) {
-            macro.args.drop(1).forEachIndexed { i, it -> mctx.args[it] = node.nodes[i] }
+            macro.args.dropLast(1).forEachIndexed { i, it -> mctx.args[it] = node.nodes[i] }
             mctx.args[macro.args.last()] = NodeNodesList(
                 Token(node.tkOperation.line, Token.Type.OPERATION, "valn"),
                 node.nodes.drop(macro.args.size - 1).toMutableList()

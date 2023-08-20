@@ -26,7 +26,7 @@ object Std : Module("std") {
         add("macro-arg",    NPMacroArg, NUMacroArg, NCMacroArg)
         add("macro-name",   NPMacroArg, NUMacroArg, NCMacroName)
         add("macro!",       NPMacro,    NUMacro,    NCMacroB)
-        add("macro",        NPDefault,  NUDefault,  NCMacroA)
+//        add("macro",        NPDefault,  NUDefault,  NCMacroA) // todo:
         // Аннотации
         add("@abstract",NPDefault,NUDefault,NCAnnotation)
         add("@final",   NPDefault,NUDefault,NCAnnotation)

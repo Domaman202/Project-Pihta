@@ -9,7 +9,7 @@ import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.compiler.java.utils.*
 
-object NCMacroA : IStdNodeCompiler<NodeNodesList> {
+object NCMacroA : IStdNodeCompiler<NodeNodesList> { // todo:
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? {
         val result = process(node, compiler, ctx)
         return NCDefault.calc(result.first, compiler, result.second)
