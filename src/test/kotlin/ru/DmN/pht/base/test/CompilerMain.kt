@@ -34,7 +34,7 @@ object CompilerMain {
                     ))
                 ))
             )
-        """.trimIndent(), pctx, ctx) // todo: развёртывание макро-аргументов
+        """.trimIndent(), pctx, ctx)
         compiler.tasks.values.forEach { it.forEach(ICompilable::compile) }
         compiler.classes.map { it.second }.forEach {
             val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
