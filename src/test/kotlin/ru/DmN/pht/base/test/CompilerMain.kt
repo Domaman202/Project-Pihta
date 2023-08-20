@@ -18,7 +18,7 @@ object CompilerMain {
         val compiler = Compiler()
         compiler.compile("""
             (
-                (use std)
+                (use std std/collections)
                 
                 (ns ru.DmN.test (
                     (import [java.lang.Object Any][java.lang.String String])
@@ -26,7 +26,9 @@ object CompilerMain {
 
                     (obj Main [^Any] (
                         (fn main ^Any [] (
-                            (doto (use std) (tcall println "Hello, " "World!"))
+                            (use std)
+                            (#println std (new-array String 4))
+                            (#println std (typeof (array-of 12 21)))
                             (unit)
                         ))
                     ))

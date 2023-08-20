@@ -22,12 +22,12 @@ object NCExFunction : IStdNodeCompiler<NodeNodesList> {
         val gctx = ctx.global
         val cctx = ctx.clazz
         //
-        val parts = node.nodes.map { compiler.compute<Any?>(it, ctx, true) }
+        val parts = node.nodes.map { compiler.compute<Any?>(it, ctx, ComputeType.NAME) }
         val clazz = gctx.getType(compiler, compiler.computeName(parts[0] as Node, ctx))
         val name = parts[1] as String
         val returnClass = (parts[2] as Node).getConstValueAsString()
         val returnType = cctx.getType(compiler, gctx, returnClass)
-        val args = (parts[3] as List<Node>).map { compiler.compute<Any?>(it, ctx, true) }.map { it ->
+        val args = (parts[3] as List<Node>).map { compiler.compute<Any?>(it, ctx, ComputeType.NAME) }.map { it ->
             if (it is String)
                 Pair(it, "java.lang.Object")
             else (it as List<Node>)

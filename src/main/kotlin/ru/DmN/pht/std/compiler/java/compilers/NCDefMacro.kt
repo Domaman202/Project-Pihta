@@ -12,11 +12,11 @@ object NCDefMacro : IStdNodeCompiler<NodeMacroDef> {
     override fun compile(node: NodeMacroDef, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         compiler.tasks[CompileStage.MACROS_DEFINE_IMPORT].add {
             val gctx = ctx.global
-            val nodes = node.nodes.map { { name: Boolean -> compiler.compute<Any?>(it, ctx, name) } }
+            val nodes = node.nodes.map { { type: ComputeType -> compiler.compute<Any?>(it, ctx, type) } }
             val macro = MacroDefine(
                 node.name,
-                (nodes[0](false) as List<Node>).map { "${compiler.computeName(it, ctx)}$${node.name}" },
-                nodes.drop(1).map { it(true) as Node },
+                (nodes[0](ComputeType.NODE) as List<Node>).map { "${compiler.computeName(it, ctx)}$${node.name}" },
+                nodes.drop(1).map { it(ComputeType.NODE) as Node },
                 gctx
             )
             gctx.macros += macro

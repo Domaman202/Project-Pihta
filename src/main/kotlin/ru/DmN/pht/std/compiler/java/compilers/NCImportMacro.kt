@@ -13,7 +13,7 @@ object NCImportMacro : IStdNodeCompiler<NodeNodesList> {
         if (ctx.isGlobal()) {
             compiler.tasks[CompileStage.MACROS_DEFINE_IMPORT].add {
                 val gctx = ctx.global
-                node.nodes.map { it -> compiler.compute<List<Node>>(it, ctx, true).map { compiler.computeName(it, ctx) } }.first().forEach { it ->
+                node.nodes.map { it -> compiler.compute<List<Node>>(it, ctx, ComputeType.NAME).map { compiler.computeName(it, ctx) } }.first().forEach { it ->
                     val macro = it.substring(it.lastIndexOf('.') + 1)
                     val macros = compiler.contexts.macros[it.substring(0, it.lastIndexOf('.'))]!!
                     if (macro == "*")

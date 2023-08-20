@@ -7,16 +7,13 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.utils.compute
-import ru.DmN.pht.std.compiler.java.utils.computeName
-import ru.DmN.pht.std.compiler.java.utils.global
-import ru.DmN.pht.std.compiler.java.utils.method
+import ru.DmN.pht.std.compiler.java.utils.*
 import ru.DmN.pht.std.utils.load
 
 object NCFieldGetA : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? {
         val name = compiler.computeName(node.nodes.last(), ctx)
-        return (when (val type = compiler.compute<Any?>(node.nodes.first(), ctx, true)) {
+        return (when (val type = compiler.compute<Any?>(node.nodes.first(), ctx, ComputeType.NAME)) {
             is String -> ctx.global.getType(compiler, type)
             is Node -> compiler.calc(type, ctx)!!
             else -> throw RuntimeException()
@@ -26,7 +23,7 @@ object NCFieldGetA : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ret) {
             val name = compiler.computeName(node.nodes.last(), ctx)
-            when (val type = compiler.compute<Any?>(node.nodes.first(), ctx, true)) {
+            when (val type = compiler.compute<Any?>(node.nodes.first(), ctx, ComputeType.NAME)) {
                 is String -> {
                     val vtype = ctx.global.getType(compiler, type)
                     val field = vtype.fields.find { it.name == name }!!

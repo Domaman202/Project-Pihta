@@ -15,7 +15,7 @@ import ru.DmN.pht.std.utils.*
 
 object NCMethodCallA : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType {
-        val instance = compiler.compute(node.nodes[0], ctx, false) as Node
+        val instance = compiler.compute(node.nodes[0], ctx, ComputeType.NODE) as Node
         val name = compiler.computeName(node.nodes[1], ctx)
         return calcType(
             compiler,
@@ -34,7 +34,7 @@ object NCMethodCallA : IStdNodeCompiler<NodeNodesList> {
         ctx.global.getType(compiler, findFunction(args.map { compiler.calc(it, ctx)!! }, methods, ctx.global, compiler).rettype.type)
 
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        val instance = compiler.compute(node.nodes[0], ctx, false) as Node
+        val instance = compiler.compute(node.nodes[0], ctx, ComputeType.NODE) as Node
         val name = compiler.computeName(node.nodes[1], ctx)
         val type = if (instance.isConstClass()) {
             val cname = node.nodes.first().getConstValueAsString()

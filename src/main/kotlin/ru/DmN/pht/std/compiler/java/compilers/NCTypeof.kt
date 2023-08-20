@@ -15,7 +15,7 @@ object NCTypeof : IStdNodeCompiler<NodeNodesList> {
 
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ret) ctx.method.node.run {
-            visitLdcInsn(Type.getType(compiler.compile(node.nodes.first(), ctx, true)!!.type().desc))
+            visitLdcInsn(Type.getType(compiler.calc(node.nodes.first(), ctx)!!.desc))
             Variable("pht$${node.hashCode()}", "java.lang.Class", -1, true)
         } else null
 }

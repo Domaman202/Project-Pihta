@@ -6,6 +6,7 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
+import ru.DmN.pht.std.compiler.java.utils.ComputeType
 import ru.DmN.pht.std.compiler.java.utils.body
 import ru.DmN.pht.std.compiler.java.utils.compute
 import ru.DmN.pht.std.compiler.java.utils.method
@@ -20,8 +21,8 @@ object NCDef : IStdNodeCompiler<NodeNodesList> {
         val label = Label()
         mnode.visitLabel(label)
         node.nodes.forEach { it ->
-            val pair = compiler.compute<List<Node>>(it, ctx, false)
-                .map { compiler.compute<Node>(it, ctx, false) }
+            val pair = compiler.compute<List<Node>>(it, ctx, ComputeType.NODE)
+                .map { compiler.compute<Node>(it, ctx, ComputeType.NODE) }
             if (pair[0].isConstClass()) {
                 val variable = bctx.addVariable(pair[1].getValueAsString(), pair[0].getValueAsString())
                 mctx.variableStarts[variable.id] = label

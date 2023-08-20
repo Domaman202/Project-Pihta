@@ -12,12 +12,13 @@ import ru.DmN.pht.std.compiler.java.utils.compute
 import ru.DmN.pht.std.compiler.java.utils.computeName
 import ru.DmN.pht.std.compiler.java.ctx.EnumConstContext
 import ru.DmN.pht.std.compiler.java.ctx.FieldContext
+import ru.DmN.pht.std.compiler.java.utils.ComputeType
 import ru.DmN.pht.std.compiler.java.utils.enum
 
 object NCEnumField : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val cctx = ctx.enum
-        node.nodes.map { compiler.compute<List<Node>>(it, ctx, false) }.forEach {
+        node.nodes.map { compiler.compute<List<Node>>(it, ctx, ComputeType.NODE) }.forEach {
             val name = compiler.computeName(it.first(), ctx)
             val fnode = cctx.node.visitField(
                 Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC + Opcodes.ACC_FINAL + Opcodes.ACC_ENUM,

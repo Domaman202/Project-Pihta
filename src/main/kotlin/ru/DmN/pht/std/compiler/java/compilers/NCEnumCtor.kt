@@ -22,8 +22,8 @@ object NCEnumCtor : IStdNodeCompiler<NodeNodesList> {
         val cctx = ctx.enum
         val generics = cctx.clazz.generics
         //
-        val parts = node.nodes.map { compiler.compute<Any?>(it, ctx, false) }
-        val args = (parts[0] as List<Node>).map { compiler.compute<Any?>(it, ctx, true) }.map { it ->
+        val parts = node.nodes.map { compiler.compute<Any?>(it, ctx, ComputeType.NODE) }
+        val args = (parts[0] as List<Node>).map { compiler.compute<Any?>(it, ctx, ComputeType.NAME) }.map { it ->
             when (it) {
                 is String -> Pair(it, "java.lang.Object")
                 is List<*> -> it.map { (compiler.computeName(it as Node, ctx)) }

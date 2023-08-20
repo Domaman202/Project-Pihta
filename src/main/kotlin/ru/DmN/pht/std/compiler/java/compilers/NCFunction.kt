@@ -20,11 +20,11 @@ object NCFunction : IStdNodeCompiler<NodeNodesList> {
         val clazz = cctx.clazz
         val generics = clazz.generics
         //
-        val parts = node.nodes.map { { name: Boolean -> compiler.compute<Any?>(it, ctx, name) } }
-        val name = parts[0](true) as String
-        val returnClass = parts[1](true) as String
+        val parts = node.nodes.map { { type: ComputeType -> compiler.compute<Any?>(it, ctx, type) } }
+        val name = parts[0](ComputeType.NAME) as String
+        val returnClass = parts[1](ComputeType.NAME) as String
         val returnType = cctx.getType(compiler, gctx, returnClass)
-        val args = (parts[2](false) as List<Node>).map { compiler.compute<Any?>(it, ctx, true) }.map { it ->
+        val args = (parts[2](ComputeType.NODE) as List<Node>).map { compiler.compute<Any?>(it, ctx, ComputeType.NAME) }.map { it ->
             when (it) {
                 is String -> Pair(it, "java.lang.Object")
                 is List<*> -> it.map { (compiler.computeName(it as Node, ctx)) }
@@ -35,7 +35,7 @@ object NCFunction : IStdNodeCompiler<NodeNodesList> {
         }
         val argsTypes = args.map { cctx.getType(compiler, gctx, it.second) }
         val argsTOGs = argsTypes.mapIndexed { i, it -> TypeOrGeneric.of(generics, args[i].second, it) }
-        val body = parts[3](false) as Node
+        val body = parts[3](ComputeType.NODE) as Node
         //
         val abstract = node.attributes.getOrPut("abstract") { false } as Boolean
         val final = node.attributes.getOrPut("final") { false } as Boolean

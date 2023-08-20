@@ -11,20 +11,17 @@ import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.*
-import ru.DmN.pht.std.compiler.java.utils.compute
-import ru.DmN.pht.std.compiler.java.utils.computeName
 import ru.DmN.pht.std.compiler.java.ctx.EnumContext
 import ru.DmN.pht.std.compiler.java.ctx.MethodContext
-import ru.DmN.pht.std.compiler.java.utils.global
-import ru.DmN.pht.std.compiler.java.utils.with
+import ru.DmN.pht.std.compiler.java.utils.*
 
 object NCEnum : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         compiler.tasks[CompileStage.TYPES_PREDEFINE].add {
             val gctx = ctx.global
-            val parts = node.nodes.map { { name: Boolean -> compiler.compute<Any?>(it, ctx, name) } }
-            val name = gctx.name(parts[0](true) as String)
-            val parents = (parts[1](false) as List<Node>)
+            val parts = node.nodes.map { { type: ComputeType -> compiler.compute<Any?>(it, ctx, type) } }
+            val name = gctx.name(parts[0](ComputeType.NAME) as String)
+            val parents = (parts[1](ComputeType.NODE) as List<Node>)
                 .map { compiler.computeName(it, ctx) }
                 .map { gctx.getType(compiler, it) }.toMutableList()
             //
@@ -124,7 +121,7 @@ object NCEnum : IStdNodeCompiler<NodeNodesList> {
                 compiler.tasks[CompileStage.METHODS_PREDEFINE].add {
                     val nctx = ctx.with(cctx)
                     if (parts.size > 2)
-                        compiler.compile(parts[2](false) as Node, nctx, false)
+                        compiler.compile(parts[2](ComputeType.NODE) as Node, nctx, false)
                     //
                     cnode.visitMethod(
                         Opcodes.ACC_PRIVATE + Opcodes.ACC_STATIC + Opcodes.ACC_SYNTHETIC,

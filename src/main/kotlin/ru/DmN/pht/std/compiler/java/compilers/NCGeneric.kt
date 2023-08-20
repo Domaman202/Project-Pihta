@@ -6,12 +6,13 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.ast.IGenericsContainer
+import ru.DmN.pht.std.compiler.java.utils.ComputeType
 import ru.DmN.pht.std.compiler.java.utils.applyAnnotation
 import ru.DmN.pht.std.compiler.java.utils.compute
 
 object NCGeneric : StdSimpleNC<NodeNodesList>() {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        val args = node.nodes.take(2).map { compiler.compute<String>(it, ctx, true) }
+        val args = node.nodes.take(2).map { compiler.compute<String>(it, ctx, ComputeType.NAME) }
         val nodes = node.nodes.drop(2)
         nodes.forEach {
             if (it is IGenericsContainer) {

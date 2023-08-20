@@ -7,18 +7,15 @@ import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.compiler.java.compilers.IStdNodeCompiler
-import ru.DmN.pht.std.compiler.java.utils.isMethod
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.utils.primitiveToObject
 
 object NCList : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
-        if (ctx.isMethod())
-            compiler.typeOf("java.util.List")
-        else null
+        compiler.typeOf(List::class.java)
 
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
-        if (ret && ctx.isMethod()) {
+        if (ret) {
             ctx.method.node.run {
                 visitLdcInsn(node.nodes.size)
                 visitTypeInsn(Opcodes.ANEWARRAY, "java/lang/Object")

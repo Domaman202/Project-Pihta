@@ -21,22 +21,12 @@ object NCIf : IStdNodeCompiler<NodeNodesList> {
             compiler.compile(node.nodes.first(), ctx, true)
             val labelIf = Label()
             visitJumpInsn(Opcodes.IFEQ, labelIf)
-            val typeA = compiler.compile(node.nodes[1], ctx, ret)?.apply { load(this, this@run) }?.type?.let {
-                gctx.getType(
-                    compiler,
-                    it
-                )
-            }
+            val typeA = compiler.compile(node.nodes[1], ctx, ret)?.apply { load(this, this@run) }?.type?.let { gctx.getType(compiler, it) }
             val labelExit = Label()
             visitJumpInsn(Opcodes.GOTO, labelExit)
             visitLabel(labelIf)
             val typeB = if (node.nodes.size == 3)
-                compiler.compile(node.nodes[2], ctx, ret)?.apply { load(this, this@run) }?.type?.let {
-                    gctx.getType(
-                        compiler,
-                        it
-                    )
-                }
+                compiler.compile(node.nodes[2], ctx, ret)?.apply { load(this, this@run) }?.type?.let { gctx.getType(compiler, it) }
             else null
             visitLabel(labelExit)
             if (ret)

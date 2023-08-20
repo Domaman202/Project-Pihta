@@ -8,6 +8,7 @@ import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.ast.NodeValue.Type.*
+import ru.DmN.pht.std.compiler.java.utils.ComputeType
 import ru.DmN.pht.std.compiler.java.utils.global
 import ru.DmN.pht.std.compiler.java.utils.method
 
@@ -66,8 +67,8 @@ object NCValue : IStdNodeCompiler<NodeValue> {
             )
         } else null
 
-    override fun compute(node: NodeValue, compiler: Compiler, ctx: CompilationContext, name: Boolean): Any? =
-        if (name)
+    override fun compute(node: NodeValue, compiler: Compiler, ctx: CompilationContext, type: ComputeType): Any =
+        if (type == ComputeType.NAME)
             node.value
         else node
 }

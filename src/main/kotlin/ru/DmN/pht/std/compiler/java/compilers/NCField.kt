@@ -14,7 +14,7 @@ import ru.DmN.pht.std.compiler.java.utils.*
 
 object NCField : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        val nodes = node.nodes.map { it -> compiler.compute<List<Node>>(it, ctx, true).map { compiler.computeName(it, ctx) } }
+        val nodes = node.nodes.map { it -> compiler.compute<List<Node>>(it, ctx, ComputeType.NAME).map { compiler.computeName(it, ctx) } }
         if (ctx.isMethod() && ctx.isBody()) {
             val mctx = ctx.method
             val label = Label()
