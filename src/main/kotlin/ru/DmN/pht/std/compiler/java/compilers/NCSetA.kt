@@ -38,7 +38,7 @@ object NCSetA : IStdNodeCompiler<NodeNodesList> {
                             visitInsn(Opcodes.DUP)
                         visitFieldInsn(Opcodes.PUTSTATIC, clazz.className, name, field.type.desc)
                     } else {
-                        visitVarInsn(Opcodes.ALOAD, 0) // "this" = 0
+                        visitVarInsn(Opcodes.ALOAD, ctx.body["this"]!!.id)
                         compiler.compile(node.nodes.last(), ctx, true)!!.apply { loadCast(this, field.type, mnode) }
                         if (ret)
                             visitInsn(Opcodes.DUP_X1)

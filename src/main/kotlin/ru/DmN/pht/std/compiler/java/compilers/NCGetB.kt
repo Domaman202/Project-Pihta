@@ -31,7 +31,7 @@ object NCGetB : IStdNodeCompiler<NodeGetOrName> {
                     if (field.static)
                         visitFieldInsn(Opcodes.GETSTATIC, clazz.className, field.name, field.desc)
                     else {
-                        visitVarInsn(Opcodes.ALOAD, 0) // "this" = 0
+                        visitVarInsn(Opcodes.ALOAD, ctx.body["this"]!!.id)
                         visitFieldInsn(Opcodes.GETFIELD, clazz.className, field.name, field.desc)
                     }
                 }
