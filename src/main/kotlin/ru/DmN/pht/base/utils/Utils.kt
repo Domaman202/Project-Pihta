@@ -40,7 +40,7 @@ typealias Klass = Class<*>
 fun klassOf(name: String): Klass =
     if (name.isPrimitive())
         name.getPrimitive()
-    else Class.forName(name) as Klass
+    else Class.forName(name.let { if (name.startsWith('L')) name.substring(1, name.length - 1).replace('/', '.') else name }) as Klass
 
 val Klass.desc
     get() = if (name.isPrimitive()) when (name) {

@@ -9,6 +9,10 @@ import ru.DmN.pht.std.collections.compiler.java.compilers.*
 
 object StdCollections : Module("std/collections") {
     init {
+        //
+        add("aset", NPDefault,  NUDefault,  NCArraySet)
+        add("aget", NPDefault,  NUDefault,  NCArrayGet)
+        //
         add("doubles-of",   NPDefault,  NUDefault,  NCIntsOf(VirtualType.DOUBLE,    Opcodes.T_DOUBLE,   Opcodes.DASTORE))
         add("floats-of",    NPDefault,  NUDefault,  NCIntsOf(VirtualType.FLOAT,     Opcodes.T_FLOAT,    Opcodes.FASTORE))
         add("longs-of",     NPDefault,  NUDefault,  NCIntsOf(VirtualType.LONG,      Opcodes.T_LONG,     Opcodes.LASTORE))
@@ -27,7 +31,8 @@ object StdCollections : Module("std/collections") {
         add("new-bytes",    NPDefault,  NUDefault,  NCNewInts(VirtualType.BYTE,     Opcodes.T_BYTE))
         add("new-booleans", NPDefault,  NUDefault,  NCNewInts(VirtualType.BOOLEAN,  Opcodes.T_BOOLEAN))
         add("new-array",    NPDefault,  NUDefault,  NCNewArray)
-        add("list",         NPDefault,  NUDefault,  NCList)
-        add("map",          NPDefault,  NUDefault)
+        //
+        add("list", NPDefault,  NUDefault,  NCList)
+        add("map",  NPDefault,  NUDefault)
     }
 }

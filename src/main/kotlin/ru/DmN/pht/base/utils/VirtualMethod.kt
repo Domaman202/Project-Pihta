@@ -30,15 +30,14 @@ data class VirtualMethod(
     fun overrideOrThis(): VirtualMethod =
         override?.overrideOrThis() ?: this
 
-    fun overridableBy(method: VirtualMethod, getType: (name: String) -> VirtualType): Boolean {
-        return if (!static && !method.static && extend == null && name == method.name && varargs == method.varargs && argsc.size == method.argsc.size) {
+    fun overridableBy(method: VirtualMethod, getType: (name: String) -> VirtualType): Boolean =
+        if (!static && !method.static && extend == null && name == method.name && varargs == method.varargs && argsc.size == method.argsc.size) {
             if (rettype.overridableBy(method.rettype, getType)) {
                 var j = 0
                 argsc.forEachIndexed { i, it -> if (it.overridableBy(method.argsc[i], getType)) j++ }
                 j == method.argsc.size
             } else false
         } else false
-    }
 
     companion object {
         fun of(compiler: Compiler, ctor: Constructor<*>): VirtualMethod =

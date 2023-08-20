@@ -19,6 +19,7 @@ class GlobalContext(
             extends.toMutableList(),
             macros.toMutableList()
         )
+
     fun combineWith(context: GlobalContext) =
         GlobalContext(
             namespace,
@@ -41,20 +42,13 @@ class GlobalContext(
         return ArrayList<VirtualMethod>().apply { extends.add(Pair(type.name, this)) }
     }
 
-    fun getType(compiler: Compiler, name: String): VirtualType =
+    fun getType(compiler: Compiler, name: String) =
         getTypeOrThrow(compiler, imports[name] ?: name)
-
-    fun getTypeOrNull(compiler: Compiler, name: String): VirtualType? =
-        try {
-            getType(compiler, name)
-        } catch (_: ClassNotFoundException) {
-            null
-        }
 
     private fun getTypeOrThrow(compiler: Compiler, name: String): VirtualType {
         val classes = compiler.classes.map { it.first }
         classes.find { it.name == name }?.let { return it }
-        return (if (name.contains('.') || name.isPrimitive()) name else name(name))
+        return (if (name.contains('.') || name.startsWith('[') || name.isPrimitive()) name else name(name))
             .let { n -> classes.find { it.name == name(n) } ?: compiler.typeOf(n) }
     }
 }
