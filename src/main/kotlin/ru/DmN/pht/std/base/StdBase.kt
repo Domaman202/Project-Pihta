@@ -27,11 +27,12 @@ object StdBase : Module("std/base") {
         // Пространство Имён
         add("ns",           NPDefault,  NUDefault,  NCNs)
         // Определить Макрос / Вставить Аргумент / Макрос
-        add("defmacro",     NPMacroDef, NUMacroDef, NCDefMacro)
-        add("macro-unroll", NPDefault,  NUDefault,  NCMacroUnroll)
-        add("macro-arg",    NPMacroArg, NUMacroArg, NCMacroArg)
-        add("macro-name",   NPMacroArg, NUMacroArg, NCMacroName)
-        add("macro!",       NPMacro,    NUMacro,    NCMacro)
+        add("defmacro",     NPMacroDef,     NUMacroDef, NCDefMacro)
+        add("macro-unroll", NPMacroUnroll,  NUDefault,  NCMacroUnroll)
+        add("macro-inline", NPDefault,      NUDefault,  NCMacroInline)
+        add("macro-arg",    NPMacroArg,     NUMacroArg, NCMacroArg)
+        add("macro-name",   NPMacroArg,     NUMacroArg, NCMacroName)
+        add("macro!",       NPMacro,        NUMacro,    NCMacro)
         // Аннотации
         add("@abstract",NPDefault,NUDefault, NCAnnotation)
         add("@final",   NPDefault,NUDefault, NCAnnotation)

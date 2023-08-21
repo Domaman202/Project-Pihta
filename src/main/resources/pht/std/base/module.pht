@@ -2,7 +2,7 @@
     (use std/base std/math)
     (ns pht.std
         (defmacro ctor [args body] (fn <init> ^void (macro-arg args) (macro-arg body)))
-        (defmacro tcall [name args] (macro-unroll [args] (mcall this (macro-name name) (macro-arg args))))
+        (defmacro tcall [name args] (macro-inline [args] (mcall this (macro-name name) (macro-arg args))))
         (defmacro doto [val expr] (body
             (let [this (macro-arg val)] (macro-arg expr))))
         (defmacro let [var expr] (body

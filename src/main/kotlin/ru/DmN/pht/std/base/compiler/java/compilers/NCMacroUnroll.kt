@@ -6,23 +6,18 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.base.ast.NodeMacroArg
-import ru.DmN.pht.std.base.compiler.java.utils.ComputeType
-import ru.DmN.pht.std.base.compiler.java.utils.compute
-import ru.DmN.pht.std.base.compiler.java.utils.computeName
-import ru.DmN.pht.std.base.compiler.java.utils.sliceInsert
+import ru.DmN.pht.std.base.ast.NodeMacroUnroll
+import ru.DmN.pht.std.base.compiler.java.utils.*
 
-object NCMacroUnroll : StdSimpleNC<NodeNodesList>() {
-    override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        val names = compiler.compute<List<Node>>(node.nodes.first(), ctx, ComputeType.NODE).map { "${compiler.computeName(it,ctx)}$" }
-        node.nodes.drop(1).forEach { expr ->
-            for (i in 0 until expr.nodes.size) {
-                val it = expr.nodes[i]
-                if (it is NodeMacroArg && names.any { name -> it.name.startsWith(name) }) { // todo: check tk oper
-                    val list = expr.nodes as MutableList<Any?>
-                    sliceInsert(list, i, compiler.compute(it, ctx, ComputeType.NODE))
-                }
-            }
-        }
-        return super.compile(node, compiler, ctx, ret)
+object NCMacroUnroll : IStdNodeCompiler<NodeMacroUnroll> {
+    override fun compile(node: NodeMacroUnroll, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
+        val mctx = ctx.macro
+        val expr = compiler.compute<Node>(node.nodes.last(), ctx, ComputeType.NODE)
+        val pair = compiler.compute<List<Node>>(node.nodes.first(), ctx, ComputeType.NODE).map { compiler.computeName(it, ctx) }
+        val name = "${pair.first()}$${node.macro}"
+        compiler.compute<Any?>(mctx["${pair.last()}$${node.macro}"], ctx, ComputeType.NODE)
+            .let { if (it is Node) listOf(it) else it as List<Node> }
+            .forEach { compiler.compile(expr, ctx.with(mctx.with(name, it)), false) }
+        return null
     }
 }

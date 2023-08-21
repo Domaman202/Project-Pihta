@@ -23,10 +23,14 @@ object CompilerMain {
                 (import [java.lang.Object Any][java.lang.String String])
                 
                 (ns ru.DmN.test (
+                    (defmacro print [args] (
+                        (use std/base)
+                        (macro-unroll [arg args]
+                            (#println std (macro-arg arg)))))
+                
                     (obj Main [^Any] (
                         (fn main ^Any [] (
-                            (use std/base)
-                            (#println std (symbol (*ns-name*) "." "Test"))
+                            (print "Hi!" "xD")
                             (unit)))
                     ))
                 ))
