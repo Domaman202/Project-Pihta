@@ -21,17 +21,12 @@ object CompilerMain {
                 (use std/base std/util)
                 
                 (import [java.lang.Object Any][java.lang.String String])
-                (import-macro [ru.DmN.test.sub.*])
                 
                 (ns ru.DmN.test (
-                    (ns sub (defmacro macroA [] (*ns-name*)))
-                
                     (obj Main [^Any] (
                         (fn main ^Any [] (
                             (use std/base)
-                            (#println std (as ^int 12.21))
-                            (#println std (as ^float 21.33))
-                            (#println std (as ^double 33))
+                            (#println std (symbol (*ns-name*) "." (*cls-name*)))
                             (unit)))
                     ))
                 ))

@@ -14,10 +14,12 @@ import ru.DmN.pht.std.base.compiler.java.utils.macro
 import ru.DmN.pht.std.base.compiler.java.utils.method
 import ru.DmN.pht.std.base.unparsers.NUDefault
 import ru.DmN.pht.std.util.compiler.java.compilers.NCCompileTimeName
+import ru.DmN.pht.std.util.compiler.java.compilers.NCSymbol
 
 object StdUtil : Module("std/util") {
     init {
         // Compile-Time значения
+        add("symbol",       NPDefault,  NUDefault,  NCSymbol)
         add("*cls-name*",   NPDefault,  NUDefault,  NCCompileTimeName { _, ctx -> ctx.clazz.clazz.name })
         add("*fn-name*",    NPDefault,  NUDefault,  NCCompileTimeName { _, ctx -> ctx.method.method.name })
         add("*ns-name*",    NPDefault,  NUDefault,  NCCompileTimeName { _, ctx -> ctx.global.namespace })
