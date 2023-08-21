@@ -19,7 +19,13 @@ import ru.DmN.pht.std.base.unparsers.*
 object StdBase : Module("std/base") {
     init {
         // Use
-        add("use",          NPDefault,  NUDefault,  NCUse)
+        add("use",              NPDefault,  NUDefault,  NCUse)
+        // Импорт
+        add("import-macro",     NPDefault,  NUDefault,  NCImportMacro)
+        add("import-extend",    NPDefault,  NUDefault,  NCImportExtends)
+        add("import",           NPDefault,  NUDefault,  NCImport)
+        // Пространство Имён
+        add("ns",           NPDefault,  NUDefault,  NCNs)
         // Определить Макрос / Вставить Аргумент / Макрос
         add("defmacro",     NPMacroDef, NUMacroDef, NCDefMacro)
         add("macro-unroll", NPDefault,  NUDefault,  NCMacroUnroll)
@@ -33,12 +39,6 @@ object StdBase : Module("std/base") {
         add("@override",NPDefault,NUDefault, NCAnnotation)
         add("@static",  NPDefault,NUDefault, NCAnnotation)
         add("@varargs", NPDefault,NUDefault, NCAnnotation)
-        // Импорт
-        add("import-macro",     NPDefault,  NUDefault,  NCImportMacro)
-        add("import-extend",    NPDefault,  NUDefault,  NCImportExtends)
-        add("import",           NPDefault,  NUDefault,  NCImport)
-        // Пространство Имён
-        add("ns",   NPNs,       NUNs,       NCNs)
         // Объект / Класс / Интерфейс
         add("obj",  NPDefault,  NUDefault,  NCClass)
         add("cls",  NPDefault,  NUDefault,  NCClass)
