@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.base.compiler.java.compilers
+package ru.DmN.pht.std.enums.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.FieldNode
@@ -8,6 +8,7 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualField
+import ru.DmN.pht.std.base.compiler.java.compilers.IStdNodeCompiler
 import ru.DmN.pht.std.base.compiler.java.utils.compute
 import ru.DmN.pht.std.base.compiler.java.utils.computeName
 import ru.DmN.pht.std.base.compiler.java.ctx.EnumConstContext

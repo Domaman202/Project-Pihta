@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.base.compiler.java.compilers
+package ru.DmN.pht.std.enums.compiler.java.compilers
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
@@ -12,6 +12,7 @@ import ru.DmN.pht.base.utils.TypeOrGeneric
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.base.compiler.java.compilers.IStdNodeCompiler
 import ru.DmN.pht.std.base.compiler.java.compilers.NCFn.getDescriptor
 import ru.DmN.pht.std.base.compiler.java.ctx.BodyContext
 import ru.DmN.pht.std.base.compiler.java.ctx.MethodContext
