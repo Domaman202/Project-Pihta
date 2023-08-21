@@ -26,7 +26,7 @@ object CompilerMain {
                     (obj Main [^Any] (
                         (fn main ^Any [] (
                             (use std/base)
-                            (#println std (symbol (*ns-name*) "." (*cls-name*)))
+                            (#println std (symbol (*ns-name*) "." "Test"))
                             (unit)))
                     ))
                 ))
