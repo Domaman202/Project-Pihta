@@ -13,7 +13,7 @@ import ru.DmN.pht.std.base.compiler.java.ctx.*
 import ru.DmN.pht.std.base.compiler.java.utils.*
 import ru.DmN.pht.std.base.utils.insertRet
 
-object NCFunction : IStdNodeCompiler<NodeNodesList> {
+object NCFn : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val gctx = ctx.global
         val cctx = ctx.clazz
@@ -38,6 +38,7 @@ object NCFunction : IStdNodeCompiler<NodeNodesList> {
         val body = parts[3](ComputeType.NODE) as Node
         //
         val abstract = node.attributes.getOrPut("abstract") { false } as Boolean
+        val bridge = node.attributes.getOrPut("bridge") { false } as Boolean
         val final = node.attributes.getOrPut("final") { false } as Boolean
         val override = node.attributes.getOrPut("override") { false } as Boolean
         val static = node.attributes.getOrPut("static") { false } as Boolean
@@ -80,14 +81,9 @@ object NCFunction : IStdNodeCompiler<NodeNodesList> {
             compiler.tasks[CompileStage.METHODS_DEFINE].add {
                 if (override) {
                     method.override = clazz.getAllMethods().find { it ->
-                        it.declaringClass != clazz && it.overridableBy(method) {
-                            gctx.getType(
-                                compiler,
-                                it
-                            )
-                        }
+                        it.declaringClass != clazz && it.desc != mnode.desc && it.overridableBy(method) { gctx.getType(compiler, it) }
                     }!!.apply {
-                        if (desc != mnode.desc) {
+                        if (bridge) {
                             cctx.node.visitMethod(
                                 Opcodes.ACC_PUBLIC + Opcodes.ACC_SYNTHETIC + Opcodes.ACC_BRIDGE,
                                 name,
@@ -166,11 +162,12 @@ object NCFunction : IStdNodeCompiler<NodeNodesList> {
 
     override fun applyAnnotation(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, annotation: Node) {
         when (annotation.tkOperation.text) {
-            "@abstract" -> node.attributes["abstract"] = true
-            "@final" -> node.attributes["final"] = true
-            "@override" -> node.attributes["override"] = true
-            "@static" -> node.attributes["static"] = true
-            "@varargs" -> node.attributes["varargs"] = true
+            "@abstract" -> node.attributes["abstract"]  = true
+            "@bridge"   -> node.attributes["bridge"]    = true
+            "@final"    -> node.attributes["final"]     = true
+            "@override" -> node.attributes["override"]  = true
+            "@static"   -> node.attributes["static"]    = true
+            "@varargs"  -> node.attributes["varargs"]   = true
         }
     }
 

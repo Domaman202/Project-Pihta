@@ -12,12 +12,12 @@ import ru.DmN.pht.base.utils.Generics
 import ru.DmN.pht.base.utils.TypeOrGeneric
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualMethod
-import ru.DmN.pht.std.base.compiler.java.compilers.NCFunction.getDescriptor
+import ru.DmN.pht.std.base.compiler.java.compilers.NCFn.getDescriptor
 import ru.DmN.pht.std.base.compiler.java.ctx.*
 import ru.DmN.pht.std.base.compiler.java.utils.*
 import ru.DmN.pht.std.base.utils.insertRet
 
-object NCExFunction : IStdNodeCompiler<NodeNodesList> {
+object NCExFn : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val gctx = ctx.global
         val cctx = ctx.clazz

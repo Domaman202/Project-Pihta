@@ -7,7 +7,7 @@ import ru.DmN.pht.std.base.compiler.java.compilers.NCEnumCtor
 import ru.DmN.pht.std.base.compiler.java.compilers.NCEnumField
 import ru.DmN.pht.std.base.unparsers.NUDefault
 
-object StdEnums : Module("std/enums") {
+object StdEnums : Module("std/enums") { // todo: move compilers
     init {
         add("enum",     NPDefault,  NUDefault,  NCEnum)
         add("ector",    NPDefault,  NUDefault,  NCEnumCtor)

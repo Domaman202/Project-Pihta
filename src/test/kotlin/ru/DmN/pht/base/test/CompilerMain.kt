@@ -23,15 +23,13 @@ object CompilerMain {
                 (import [java.lang.Object Any][java.lang.String String])
                 
                 (ns ru.DmN.test (
-                    (defmacro print [args] (
-                        (use std/base)
-                        (macro-unroll [arg args]
-                            (#println std (macro-arg arg)))))
-                
-                    (obj Main [^Any] (
-                        (fn main ^Any [] (
-                            (print "Hi!" "xD")
-                            (unit)))
+                    (obj Main [^Any ^IFoo] (
+                        (fn foo ^void [[o ^String]]
+                            ((use std/base)
+                            (#println std o)))
+                        (bfn foo ^void [^Any] [^String])
+                        (fn main ^Any []
+                            (#foo this "Hi!"))
                     ))
                 ))
             )
