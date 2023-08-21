@@ -78,8 +78,6 @@ object StdBase : Module("std/base") {
         add("as",           NPDefault,  NUDefault,  NCAs)
         add("is",           NPDefault,  NUDefault,  NCIs)
         add("typeof",       NPDefault,  NUDefault,  NCTypeof)
-        // Compile-Time значения
-        add("ns-name",      NPDefault,  NUDefault,  NCNsName)
         // Значения
         add("valn",         NPValn,     NUNodesList,    NCValn)
         add("value!",       NPValueB)
@@ -93,18 +91,18 @@ object StdBase : Module("std/base") {
             super.inject(compiler, ctx, ret)
             ctx.contexts["std/global"] = GlobalContext()
             compiler.contexts["std/macros"] = HashMap<String, MutableList<MacroDefine>>()
-            compiler.compile(String(StdBase::class.java.getResourceAsStream("/pht/std/module.pht")!!.readAllBytes()), ParsingContext(mutableListOf(Base)), ctx)
+            compiler.compile(String(StdBase::class.java.getResourceAsStream("/pht/std/base/module.pht")!!.readAllBytes()), ParsingContext(mutableListOf(Base)), ctx)
         }
         return if (ctx.isMethod() && ctx.isBody()) {
-            val variable = ctx.body.addVariable("std", "ru.DmN.pht.std.StdFunctions", tmp = ret)
+            val variable = ctx.body.addVariable("std", "ru.DmN.pht.std.base.StdFunctions", tmp = ret)
             val label = Label()
             ctx.method.node.run {
                 visitLabel(label)
                 visitFieldInsn(
                     Opcodes.GETSTATIC,
-                    "ru/DmN/pht/std/StdFunctions",
+                    "ru/DmN/pht/std/base/StdFunctions",
                     "INSTANCE",
-                    "Lru/DmN/pht/std/StdFunctions;"
+                    "Lru/DmN/pht/std/base/StdFunctions;"
                 )
                 if (ret)
                     variable

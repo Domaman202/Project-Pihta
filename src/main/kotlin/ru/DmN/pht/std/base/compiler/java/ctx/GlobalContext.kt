@@ -5,6 +5,8 @@ import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.base.utils.isPrimitive
 import ru.DmN.pht.std.base.compiler.java.utils.MacroDefine
+import ru.DmN.pht.std.base.compiler.java.utils.SubList
+import ru.DmN.pht.std.base.compiler.java.utils.SubMap
 
 class GlobalContext(
     val namespace: String = "",
@@ -15,17 +17,17 @@ class GlobalContext(
     fun with(namespace: String) =
         GlobalContext(
             namespace,
-            imports.toMutableMap(),
-            extends.toMutableList(),
-            macros.toMutableList()
+            SubMap(imports),
+            SubList(extends),
+            SubList(macros)
         )
 
     fun combineWith(context: GlobalContext) =
         GlobalContext(
             namespace,
-            (imports + context.imports).toMutableMap(),
-            (extends + context.extends).toMutableList(),
-            (macros + context.macros).toMutableList()
+            SubMap(imports, context.imports),
+            SubList(extends, context.extends),
+            SubList(macros, context.macros)
         )
 
     fun name(name: String): String =

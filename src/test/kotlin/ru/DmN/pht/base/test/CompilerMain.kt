@@ -18,25 +18,22 @@ object CompilerMain {
         val compiler = Compiler()
         compiler.compile("""
             (
-                (use std/base std/enums)
+                (use std/base std/util)
                 
                 (import [java.lang.Object Any][java.lang.String String])
+                (import-macro [ru.DmN.test.sub.*])
                 
                 (ns ru.DmN.test (
-                    (enum Colors [] (
-                        (ector [[r ^int][g ^int][b ^int]] ((set red r) (set green g) (set blue b)))
-                        (@final (field
-                            [red    ^int]
-                            [green  ^int]
-                            [blue   ^int]))
-                        (efield
-                            [RED    255 0 0]
-                            [GREEN  0 255 0]
-                            [BLUE   0 0 255])
-                    ))
+                    (ns sub (defmacro macroA [] (*ns-name*)))
                 
-                    (cls Main [^Any] (@static
-                        (fn main ^Any [] (return ^Colors/RED/red))
+                    (obj Main [^Any] (
+                        (fn main ^Any [] (
+                            (use std/base)
+                            (#println std (*cls-name*))
+                            (#println std (*fn-name*))
+                            (#println std (macroA))
+                            (#println std (*ns-name*))
+                            (unit)))
                     ))
                 ))
             )
@@ -57,7 +54,7 @@ object CompilerMain {
             Unsafe.forceSetAccessible(method)
             method.invoke(CompilerMain::class.java.classLoader, b, 0, b.size) as Klass
         }
-//        println(Class.forName("ru.DmN.test.Main").run { getMethod("main").invoke(getField("INSTANCE").get(null)) } )
-        println(Class.forName("ru.DmN.test.Main").getMethod("main").invoke(null))
+        println(Class.forName("ru.DmN.test.Main").run { getMethod("main").invoke(getField("INSTANCE").get(null)) } )
+//        println(Class.forName("ru.DmN.test.Main").getMethod("main").invoke(null))
     }
 }

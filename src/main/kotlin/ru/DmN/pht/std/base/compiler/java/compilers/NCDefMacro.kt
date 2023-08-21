@@ -10,7 +10,7 @@ import ru.DmN.pht.std.base.compiler.java.utils.*
 
 object NCDefMacro : IStdNodeCompiler<NodeMacroDef> {
     override fun compile(node: NodeMacroDef, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        compiler.tasks[CompileStage.MACROS_DEFINE_IMPORT].add {
+        compiler.tasks[CompileStage.MACROS_DEFINE].add {
             val gctx = ctx.global
             val nodes = node.nodes.map { { type: ComputeType -> compiler.compute<Any?>(it, ctx, type) } }
             val macro = MacroDefine(
