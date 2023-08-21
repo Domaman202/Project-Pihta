@@ -20,7 +20,7 @@ object NCObjectCompare : IStdNodeCompiler<NodeNodesList> {
                 loadCast(compiler.compile(node.nodes.first(), ctx, true)!!, VirtualType.ofKlass(Comparable::class.java), this)
                 loadCast(compiler.compile(node.nodes.last(), ctx, true)!!, VirtualType.OBJECT, this)
                 visitMethodInsn(Opcodes.INVOKEINTERFACE, "java/lang/Comparable", "compareTo", "(Ljava/lang/Object;)I", true)
-                Variable("lul$${node.hashCode()}", "int", -1, true)
+                Variable("pht$${node.hashCode()}", "int", -1, true)
             }
         else null
 }

@@ -28,7 +28,7 @@ object NCFieldGetA : IStdNodeCompiler<NodeNodesList> {
                     val vtype = ctx.global.getType(compiler, type)
                     val field = vtype.fields.find { it.name == name }!!
                     ctx.method.node.visitFieldInsn(Opcodes.GETSTATIC, vtype.className, name, field.desc)
-                    Variable("lul$${node.hashCode()}", field.type.name, -1, true)
+                    Variable("pht$${node.hashCode()}", field.type.name, -1, true)
                 }
 
                 is Node -> {
@@ -38,7 +38,7 @@ object NCFieldGetA : IStdNodeCompiler<NodeNodesList> {
                         val instanceType = ctx.global.getType(compiler, instance.type())
                         val field = instanceType.fields.find { it.name == name }!!
                         visitFieldInsn(Opcodes.GETFIELD, instanceType.className, name, field.desc)
-                        Variable("lul$${node.hashCode()}", field.type.name, -1, true)
+                        Variable("pht$${node.hashCode()}", field.type.name, -1, true)
                     }
                 }
 

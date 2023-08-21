@@ -45,14 +45,14 @@ object NCSetA : IStdNodeCompiler<NodeNodesList> {
                         visitFieldInsn(Opcodes.PUTFIELD, clazz.className, name, field.type.desc)
                     }
                 }
-                Variable("lul$${node.hashCode()}", field.type.name, -1, true)
+                Variable("pht$${node.hashCode()}", field.type.name, -1, true)
             } else throw RuntimeException()
         } else {
             val type = compiler.compile(node.nodes.last(), ctx, true)!!.apply { load(this, mnode) }.type()
             if (ret)
                 mnode.visitInsn(Opcodes.DUP)
             storeCast(variable, ctx.global.getType(compiler, type), mnode)
-            Variable("lul$${node.hashCode()}", type, -1, true)
+            Variable("pht$${node.hashCode()}", type, -1, true)
         }
     }
 }

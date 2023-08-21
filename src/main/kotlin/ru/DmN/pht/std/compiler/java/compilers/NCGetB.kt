@@ -35,7 +35,7 @@ object NCGetB : IStdNodeCompiler<NodeGetOrName> {
                         visitFieldInsn(Opcodes.GETFIELD, clazz.className, field.name, field.desc)
                     }
                 }
-                Variable("lul$${node.hashCode()}", field.type.name, -1, true)
+                Variable("pht$${node.hashCode()}", field.type.name, -1, true)
             } else throw RuntimeException()
         else null
 }

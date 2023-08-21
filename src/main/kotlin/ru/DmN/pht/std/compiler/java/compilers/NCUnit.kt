@@ -15,6 +15,6 @@ object NCUnit : IStdNodeCompiler<Node> {
     override fun compile(node: Node, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ret) {
             ctx.method.node.visitFieldInsn(Opcodes.GETSTATIC, "kotlin/Unit", "INSTANCE", "Lkotlin/Unit;")
-            Variable("lul$${node.hashCode()}", "kotlin.Unit", -1, true)
+            Variable("pht$${node.hashCode()}", "kotlin.Unit", -1, true)
         } else null
 }

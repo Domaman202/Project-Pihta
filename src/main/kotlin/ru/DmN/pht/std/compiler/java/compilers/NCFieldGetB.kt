@@ -30,7 +30,7 @@ object NCFieldGetB : IStdNodeCompiler<NodeFMGet> {
                     node.name,
                     field.desc
                 )
-                Variable("lul$${node.hashCode()}", field.type.name, -1, true)
+                Variable("pht$${node.hashCode()}", field.type.name, -1, true)
             }
         else null
 }
