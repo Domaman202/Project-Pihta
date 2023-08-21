@@ -51,7 +51,7 @@ fun Compiler.applyAnnotation(node: Node, ctx: CompilationContext, annotation: No
 fun CompilationContext.with(ctx: GlobalContext): CompilationContext =
     this.with("std/global", ctx)
 fun CompilationContext.with(ctx: EnumContext): CompilationContext =
-    this.with("std/enum", ctx)
+    this.with("std/enum", ctx).apply { this.contexts["std/class"] = ctx }
 fun CompilationContext.with(ctx: ClassContext): CompilationContext =
     this.with("std/class", ctx)
 fun CompilationContext.with(ctx: MethodContext): CompilationContext =

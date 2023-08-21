@@ -173,7 +173,7 @@ object NCEnum : IStdNodeCompiler<NodeNodesList> {
                                 it.args,
                                 {},
                                 enumCtor = true,
-                                special = false
+                                special = true
                             )
                             visitFieldInsn(Opcodes.PUTSTATIC, cnode.name, it.name, typeDesc)
                         }

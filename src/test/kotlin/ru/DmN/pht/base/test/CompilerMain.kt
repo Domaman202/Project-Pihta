@@ -18,18 +18,25 @@ object CompilerMain {
         val compiler = Compiler()
         compiler.compile("""
             (
-                (use std std/collections)
+                (use std)
+                
+                (import [java.lang.Object Any][java.lang.String String])
                 
                 (ns ru.DmN.test (
-                    (import [java.lang.Object Any][java.lang.String String])
-                    (import-macro [pht.std.*])
-
-                    (obj Main [^Any] (
-                        (fn main ^Any [] (
-                            (use std)
-                            (#println std (ns-name))
-                            (unit)
-                        ))
+                    (enum Colors [] (
+                        (ector [[r ^int][g ^int][b ^int]] ((set red r) (set green g) (set blue b)))
+                        (@final (field
+                            [red    ^int]
+                            [green  ^int]
+                            [blue   ^int]))
+                        (efield
+                            [RED    255 0 0]
+                            [GREEN  0 255 0]
+                            [BLUE   0 0 255])
+                    ))
+                
+                    (cls Main [^Any] (@static
+                        (fn main ^Any [] (return ^Colors/RED/red))
                     ))
                 ))
             )
@@ -50,7 +57,7 @@ object CompilerMain {
             Unsafe.forceSetAccessible(method)
             method.invoke(CompilerMain::class.java.classLoader, b, 0, b.size) as Klass
         }
-        println(Class.forName("ru.DmN.test.Main").run { getMethod("main").invoke(getField("INSTANCE").get(null)) } )
-//        println(Class.forName("ru.DmN.test.Main").getMethod("main").invoke(null))
+//        println(Class.forName("ru.DmN.test.Main").run { getMethod("main").invoke(getField("INSTANCE").get(null)) } )
+        println(Class.forName("ru.DmN.test.Main").getMethod("main").invoke(null))
     }
 }
