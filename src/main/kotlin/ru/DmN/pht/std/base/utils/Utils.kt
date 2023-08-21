@@ -193,7 +193,10 @@ fun loadCast(variable: Variable, to: VirtualType, node: MethodNode) {
         } else {
             primitiveToObject(variable, node)
         }
-    } else load(variable, node)
+    } else {
+        load(variable, node)
+        bytecodeCast(variable.type(), to.name, node)
+    }
 }
 
 fun load(variable: Variable, node: MethodNode) {
@@ -236,6 +239,33 @@ fun store(variable: Variable, node: MethodNode) {
             variable.id
         )
     }
+}
+
+fun bytecodeCast(from: String, to: String, node: MethodNode) {
+    node.visitInsn(when (from) {
+        "boolean", "byte", "short", "char", "int" -> when (to) {
+            "boolean", "byte" -> Opcodes.I2B
+            "short" -> Opcodes.I2S
+            "char" -> Opcodes.I2C
+            "long" -> Opcodes.I2L
+            "float" -> Opcodes.I2F
+            "double" -> Opcodes.I2D
+            else -> return
+        }
+        "float" -> when (to) {
+            "boolean", "byte", "short", "char", "int" -> Opcodes.F2I
+            "long" -> Opcodes.F2L
+            "double" -> Opcodes.F2D
+            else -> return
+        }
+        "double" -> when (to) {
+            "boolean", "byte", "short", "char", "int" -> Opcodes.D2I
+            "long" -> Opcodes.D2L
+            "float" -> Opcodes.D2F
+            else -> return
+        }
+        else -> return
+    })
 }
 
 fun primitiveToObject(variable: Variable, node: MethodNode): String? {

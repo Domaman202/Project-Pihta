@@ -29,10 +29,9 @@ object CompilerMain {
                     (obj Main [^Any] (
                         (fn main ^Any [] (
                             (use std/base)
-                            (#println std (*cls-name*))
-                            (#println std (*fn-name*))
-                            (#println std (macroA))
-                            (#println std (*ns-name*))
+                            (#println std (as ^int 12.21))
+                            (#println std (as ^float 21.33))
+                            (#println std (as ^double 33))
                             (unit)))
                     ))
                 ))
