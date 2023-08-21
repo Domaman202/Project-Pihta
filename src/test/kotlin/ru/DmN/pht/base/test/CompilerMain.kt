@@ -27,8 +27,7 @@ object CompilerMain {
                     (obj Main [^Any] (
                         (fn main ^Any [] (
                             (use std)
-                            (def [arr (ints-of 12 21 0)])
-                            (#println std (aset arr 2 33))
+                            (#println std (ns-name))
                             (unit)
                         ))
                     ))

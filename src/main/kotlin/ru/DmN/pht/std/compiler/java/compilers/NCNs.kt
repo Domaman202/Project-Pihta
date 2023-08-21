@@ -7,7 +7,7 @@ import ru.DmN.pht.std.ast.NodeNamespace
 import ru.DmN.pht.std.compiler.java.utils.global
 import ru.DmN.pht.std.compiler.java.utils.with
 
-object NCNamespace : IStdNodeCompiler<NodeNamespace> {
+object NCNs : IStdNodeCompiler<NodeNamespace> {
     override fun compile(node: NodeNamespace, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val gctx = ctx.global
         val context = ctx.with(gctx.with(gctx.name(node.name)))

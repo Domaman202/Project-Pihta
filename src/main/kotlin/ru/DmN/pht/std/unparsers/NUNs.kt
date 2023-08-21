@@ -5,7 +5,7 @@ import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparser.unparsers.NodeUnparser
 import ru.DmN.pht.std.ast.NodeNamespace
 
-object NUNamespace : NodeUnparser<NodeNamespace>() {
+object NUNs : NodeUnparser<NodeNamespace>() {
     override fun unparse(unparser: Unparser, ctx: UnparsingContext, node: NodeNamespace) {
         unparser.out.apply {
             append('(').append(node.tkOperation.text).append(' ').append(node.name).append(" (")

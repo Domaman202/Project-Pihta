@@ -7,7 +7,7 @@ import ru.DmN.pht.base.parser.parsers.SimpleNP
 import ru.DmN.pht.std.ast.NodeNamespace
 import ru.DmN.pht.base.utils.nextOperation
 
-object NPNamespace : SimpleNP<NodeNamespace>() {
+object NPNs : SimpleNP<NodeNamespace>() {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): NodeNamespace {
         val name = parser.nextOperation().text!!
         return parse(parser, ctx) { NodeNamespace(operationToken, name, it) }

@@ -38,7 +38,7 @@ object Std : Module("std") {
         add("import-extend",    NPDefault,  NUDefault,  NCImportExtends)
         add("import",           NPDefault,  NUDefault,  NCImport)
         // Пространство Имён
-        add("ns",   NPNamespace,NUNamespace,NCNamespace)
+        add("ns",   NPNs,       NUNs,       NCNs)
         // Перечисление / Объект / Класс / Интерфейс
         add("enum", NPDefault,  NUDefault,  NCEnum)
         add("obj",  NPDefault,  NUDefault,  NCClass)
@@ -81,6 +81,8 @@ object Std : Module("std") {
         add("as",           NPDefault,  NUDefault,  NCAs)
         add("is",           NPDefault,  NUDefault,  NCIs)
         add("typeof",       NPDefault,  NUDefault,  NCTypeof)
+        // Compile-Time значения
+        add("ns-name",      NPDefault,  NUDefault,  NCNsName)
         // Значения
         add("valn",         NPValn,     NUNodesList,    NCValn)
         add("value!",       NPValueB)
