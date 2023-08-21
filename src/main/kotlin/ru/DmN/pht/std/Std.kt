@@ -39,13 +39,11 @@ object Std : Module("std") {
         add("import",           NPDefault,  NUDefault,  NCImport)
         // Пространство Имён
         add("ns",   NPNs,       NUNs,       NCNs)
-        // Перечисление / Объект / Класс / Интерфейс
-        add("enum", NPDefault,  NUDefault,  NCEnum)
+        // Объект / Класс / Интерфейс
         add("obj",  NPDefault,  NUDefault,  NCClass)
         add("cls",  NPDefault,  NUDefault,  NCClass)
         add("intf", NPDefault,  NUDefault,  NCClass)
-        // Конструктор Enum-а / Конструктор / Расширение / Перегрузка / Абстрактная Функция / Функция / Лямбда
-        add("ector",NPDefault,  NUDefault,  NCEnumCtor)
+        // Расширение / Функция
         add("efn",  NPDefault,  NUDefault,  NCExFunction)
         add("fn",   NPDefault,  NUDefault,  NCFunction)
         // Циклы
@@ -73,8 +71,7 @@ object Std : Module("std") {
         add("get!",         NPGet,      NUGetOrName,NCGetB)
         add("get",          NPDefault,  NUDefault,  NCGetA)
         add("get-or-name",  NPGetOrName,NUGetOrName,NCGetOrName)
-        // Поля / Переменные
-        add("efield",       NPDefault,  NUDefault,  NCEnumField)
+        // Поле / Переменная
         add("field",        NPDefault,  NUDefault,  NCField)
         add("def",          NPDefault,  NUDefault,  NCDef)
         // Преобразование, Проверка, Получение типов
