@@ -2,9 +2,9 @@ package ru.DmN.pht.std.collections
 
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.parser.parsers.NPDefault
-import ru.DmN.pht.std.unparsers.NUDefault
 import ru.DmN.pht.base.utils.Module
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.base.unparsers.NUDefault
 import ru.DmN.pht.std.collections.compiler.java.compilers.*
 
 object StdCollections : Module("std/collections") {

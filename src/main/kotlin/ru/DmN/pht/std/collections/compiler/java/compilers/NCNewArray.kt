@@ -6,8 +6,11 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.compilers.IStdNodeCompiler
-import ru.DmN.pht.std.compiler.java.utils.*
+import ru.DmN.pht.std.base.compiler.java.compilers.IStdNodeCompiler
+import ru.DmN.pht.std.base.compiler.java.utils.computeInt
+import ru.DmN.pht.std.base.compiler.java.utils.computeName
+import ru.DmN.pht.std.base.compiler.java.utils.global
+import ru.DmN.pht.std.base.compiler.java.utils.method
 
 object NCNewArray : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType =

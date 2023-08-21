@@ -1,6 +1,6 @@
 (
-    (use std std/math)
-    (ns pht.std.util
+    (use std/base std/math)
+    (ns pht.std
         (import [java.util.Iterable][java.lang.Iterator])
         (defmacro for [name iter body] (
             (def [iter (macro-arg iter)])

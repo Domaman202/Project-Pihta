@@ -7,12 +7,12 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.compilers.IStdNodeCompiler
-import ru.DmN.pht.std.compiler.java.utils.global
-import ru.DmN.pht.std.compiler.java.utils.method
-import ru.DmN.pht.std.utils.calcType
-import ru.DmN.pht.std.utils.ofPrimitive
-import ru.DmN.pht.std.utils.primitiveToObject
+import ru.DmN.pht.std.base.compiler.java.compilers.IStdNodeCompiler
+import ru.DmN.pht.std.base.compiler.java.utils.global
+import ru.DmN.pht.std.base.compiler.java.utils.method
+import ru.DmN.pht.std.base.utils.calcType
+import ru.DmN.pht.std.base.utils.ofPrimitive
+import ru.DmN.pht.std.base.utils.primitiveToObject
 
 object NCArrayOf : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType {

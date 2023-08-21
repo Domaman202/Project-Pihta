@@ -5,12 +5,12 @@ import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.compilers.IStdNodeCompiler
-import ru.DmN.pht.std.compiler.java.utils.global
-import ru.DmN.pht.std.compiler.java.utils.method
+import ru.DmN.pht.std.base.compiler.java.compilers.IStdNodeCompiler
+import ru.DmN.pht.std.base.compiler.java.utils.global
+import ru.DmN.pht.std.base.compiler.java.utils.method
+import ru.DmN.pht.std.base.utils.calcNumberType
+import ru.DmN.pht.std.base.utils.load
 import ru.DmN.pht.std.math.ast.NodeMathNA
-import ru.DmN.pht.std.utils.calcNumberType
-import ru.DmN.pht.std.utils.load
 
 object NCMathNA : IStdNodeCompiler<NodeMathNA> {
     override fun calc(node: NodeMathNA, compiler: Compiler, ctx: CompilationContext): VirtualType? = calcNumberType(

@@ -6,9 +6,9 @@ import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.compilers.IStdNodeCompiler
-import ru.DmN.pht.std.compiler.java.utils.method
-import ru.DmN.pht.std.utils.load
+import ru.DmN.pht.std.base.compiler.java.compilers.IStdNodeCompiler
+import ru.DmN.pht.std.base.compiler.java.utils.method
+import ru.DmN.pht.std.base.utils.load
 
 class NCIntsOf(val type: VirtualType, val tid: Int, val iid: Int) : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType =

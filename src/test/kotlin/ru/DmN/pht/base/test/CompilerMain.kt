@@ -18,7 +18,7 @@ object CompilerMain {
         val compiler = Compiler()
         compiler.compile("""
             (
-                (use std std/enums)
+                (use std/base std/enums)
                 
                 (import [java.lang.Object Any][java.lang.String String])
                 

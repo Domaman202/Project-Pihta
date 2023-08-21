@@ -9,7 +9,7 @@ import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.parsers.NodeParser
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparser.unparsers.NodeUnparser
-import ru.DmN.pht.std.Std
+import ru.DmN.pht.std.base.StdBase
 import ru.DmN.pht.std.collections.StdCollections
 import ru.DmN.pht.std.enums.StdEnums
 import ru.DmN.pht.std.math.StdMath
@@ -48,7 +48,7 @@ open class Module(val name: String) {
         val MODULES: MutableMap<String, Module> = HashMap()
 
         init {
-            for (module in listOf(Std, StdCollections, StdEnums, StdMath, StdUtil)) {
+            for (module in listOf(StdBase, StdCollections, StdEnums, StdMath, StdUtil)) {
                 MODULES[module.name] = module
             }
         }

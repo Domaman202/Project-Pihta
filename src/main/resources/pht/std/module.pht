@@ -1,5 +1,5 @@
 (
-    (use std std/math)
+    (use std/base std/math)
     (ns pht.std
         (defmacro ctor [args body] (fn <init> ^void (macro-arg args) (macro-arg body)))
         (defmacro tcall [name args] (macro-unroll [args] (mcall this (macro-name name) (macro-arg args))))
