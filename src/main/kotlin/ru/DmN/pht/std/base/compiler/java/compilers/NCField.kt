@@ -12,7 +12,7 @@ import ru.DmN.pht.base.utils.VirtualField
 import ru.DmN.pht.std.base.compiler.java.ctx.*
 import ru.DmN.pht.std.base.compiler.java.utils.*
 
-object NCField : IStdNodeCompiler<NodeNodesList> {
+object NCField : IStdNodeCompiler<NodeNodesList> { // todo: more fields
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val nodes = node.nodes.map { it -> compiler.compute<List<Node>>(it, ctx, ComputeType.NAME).map { compiler.computeName(it, ctx) } }
         if (ctx.isMethod() && ctx.isBody()) {
@@ -40,9 +40,7 @@ object NCField : IStdNodeCompiler<NodeNodesList> {
     }
 
     override fun applyAnnotation(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, annotation: Node) {
-        when (annotation.tkOperation.text) {
-            "@final" -> node.attributes["final"] = true
-            "@static" -> node.attributes["static"] = true
-        }
+        val text = annotation.tkOperation.text!!
+        node.attributes[text.substring(text.lastIndexOf('@') + 1)] = true
     }
 }

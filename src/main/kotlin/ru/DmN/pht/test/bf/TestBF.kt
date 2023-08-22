@@ -7,7 +7,7 @@ import ru.DmN.pht.test.bf.compiler.java.compilers.*
 import ru.DmN.pht.test.bf.parsers.NPSimple
 import ru.DmN.pht.test.bf.unparsers.NUSimple
 
-object BF : Module("test/bf") {
+object TestBF : Module("test/bf") {
     init {
         add("bf",   NPDefault,  NUDefault,  NCBF)
         add("next", NPSimple,   NUSimple,   NCNext)

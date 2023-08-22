@@ -92,8 +92,8 @@ object StdBase : Module("std/base") {
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (!ctx.modules.contains(this)) {
             super.inject(compiler, ctx, ret)
-            ctx.contexts["std/global"] = GlobalContext()
-            compiler.contexts["std/macros"] = HashMap<String, MutableList<MacroDefine>>()
+            ctx.contexts["std/base/global"] = GlobalContext()
+            compiler.contexts["std/base/macros"] = HashMap<String, MutableList<MacroDefine>>()
             compiler.compile(String(StdBase::class.java.getResourceAsStream("/pht/std/base/module.pht")!!.readAllBytes()), ParsingContext(mutableListOf(Base)), ctx)
         }
         return if (ctx.isMethod() && ctx.isBody()) {

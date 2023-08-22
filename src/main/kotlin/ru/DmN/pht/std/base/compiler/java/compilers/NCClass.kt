@@ -26,9 +26,9 @@ object NCClass : IStdNodeCompiler<NodeNodesList> {
                 .map { compiler.computeName(it, ctx) }
                 .map { gctx.getType(compiler, it) }.toMutableList()
             //
-            val isInterface = node.tkOperation.text == "intf"
-            val isClass = node.tkOperation.text == "cls"
-            val isObject = node.tkOperation.text == "obj"
+            val isInterface = node.tkOperation.text!!.endsWith("intf")
+            val isClass = node.tkOperation.text.endsWith("cls")
+            val isObject = node.tkOperation.text.endsWith("obj")
             //
             val generics = Generics()
             (node.attributes.getOrDefault(
@@ -39,11 +39,10 @@ object NCClass : IStdNodeCompiler<NodeNodesList> {
             }
             //
             val cnode = ClassNode()
-            val type = VirtualType(name, isInterface = isInterface, generics = generics)
+            val type = VirtualType(name, parents, isInterface = isInterface, generics = generics)
             val context = ClassContext(cnode, type)
             compiler.classes += Pair(type, cnode)
             compiler.tasks[CompileStage.TYPES_DEFINE].add {
-                type.parents = parents
                 cnode.visit(
                     Opcodes.V19,
                     if (isInterface)

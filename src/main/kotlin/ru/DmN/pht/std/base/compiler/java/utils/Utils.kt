@@ -3,6 +3,9 @@ package ru.DmN.pht.std.base.compiler.java.utils
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.Node
+import ru.DmN.pht.base.utils.Generic
+import ru.DmN.pht.base.utils.Generics
+import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.base.compiler.java.compilers.IStdNodeCompiler
 import ru.DmN.pht.std.base.compiler.java.ctx.*
 
@@ -48,45 +51,44 @@ fun Compiler.applyAnnotation(node: Node, ctx: CompilationContext, annotation: No
     }
 }
 
-fun CompilationContext.with(ctx: GlobalContext): CompilationContext =
-    this.with("std/global", ctx)
-fun CompilationContext.with(ctx: EnumContext): CompilationContext =
-    this.with("std/enum", ctx).apply { this.contexts["std/class"] = ctx }
-fun CompilationContext.with(ctx: ClassContext): CompilationContext =
-    this.with("std/class", ctx)
-fun CompilationContext.with(ctx: MethodContext): CompilationContext =
-    this.with("std/method", ctx)
-fun CompilationContext.with(ctx: BodyContext): CompilationContext =
-    this.with("std/body", ctx)
-fun CompilationContext.with(ctx: MacroContext): CompilationContext =
-    this.with("std/macro", ctx)
+fun CompilationContext.with(ctx: GlobalContext) =
+    this.with("std/base/global", ctx)
+fun CompilationContext.with(ctx: EnumContext) =
+    this.with("std/base/enum", ctx).apply { this.contexts["std/base/class"] = ctx }
+fun CompilationContext.with(ctx: ClassContext) =
+    this.with("std/base/class", ctx)
+fun CompilationContext.with(ctx: MethodContext) =
+    this.with("std/base/method", ctx)
+fun CompilationContext.with(ctx: BodyContext) =
+    this.with("std/base/body", ctx)
+fun CompilationContext.with(ctx: MacroContext) =
+    this.with("std/base/macro", ctx)
 
-fun CompilationContext.isGlobal(): Boolean =
-    contexts.containsKey("std/global")
-fun CompilationContext.isEnum(): Boolean =
-    contexts.containsKey("std/enum")
-fun CompilationContext.isClass(): Boolean =
-    contexts.containsKey("std/class") || isEnum()
-fun CompilationContext.isMethod(): Boolean =
-    contexts.containsKey("std/method")
-fun CompilationContext.isBody(): Boolean =
-    contexts.containsKey("std/body")
-fun CompilationContext.isMacro(): Boolean =
-    contexts.containsKey("std/macro")
+fun CompilationContext.isGlobal() =
+    contexts.containsKey("std/base/global")
+fun CompilationContext.isEnum() =
+    contexts.containsKey("std/base/enum")
+fun CompilationContext.isClass() =
+    contexts.containsKey("std/base/class") || isEnum()
+fun CompilationContext.isMethod() =
+    contexts.containsKey("std/base/method")
+fun CompilationContext.isBody() =
+    contexts.containsKey("std/base/body")
+fun CompilationContext.isMacro() =
+    contexts.containsKey("std/base/macro")
 
 val CompilationContext.global
-    get() = contexts["std/global"] as GlobalContext
+    get() = contexts["std/base/global"] as GlobalContext
 val CompilationContext.enum
-    get() = contexts["std/enum"] as EnumContext
+    get() = contexts["std/base/enum"] as EnumContext
 val CompilationContext.clazz
-    get() = contexts["std/class"] as ClassContext
+    get() = contexts["std/base/class"] as ClassContext
 val CompilationContext.method
-    get() = contexts["std/method"] as MethodContext
+    get() = contexts["std/base/method"] as MethodContext
 val CompilationContext.body
-    get() = contexts["std/body"] as BodyContext
+    get() = contexts["std/base/body"] as BodyContext
 val CompilationContext.macro
-    get() = contexts["std/macro"] as MacroContext
+    get() = contexts["std/base/macro"] as MacroContext
 
 val MutableMap<String, Any?>.macros
-    get() = this["std/macros"] as MutableMap<String, MutableList<MacroDefine>>
-//    get() = this.getOrPut("std/macros") { HashMap<String, MutableList<MacroDefine>>() } as MutableMap<String, MutableList<MacroDefine>>
+    get() = this["std/base/macros"] as MutableMap<String, MutableList<MacroDefine>>

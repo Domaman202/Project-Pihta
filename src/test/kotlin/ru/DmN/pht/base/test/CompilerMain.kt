@@ -18,13 +18,22 @@ object CompilerMain {
         val compiler = Compiler()
         compiler.compile("""
             (
-                (use std/base)
+                (use std/base std/decl)
                 
                 (import [java.lang.Object Any][java.lang.String String])
                 
+                (ns java.lang (
+                    (std/decl/cls Number [^Any] (
+                        (std/decl/field [i ^int])
+                        (std/decl/fn print ^void [])
+                    ))
+                ))
+                
                 (ns ru.DmN.test (
-                    (cls Main [^Any] (std/base/@static
-                        (fn main ^Any [] (std/base/unit))
+                    (cls Main [^Any] (@static
+                        (fn main ^Any [] (
+                            (fget (as ^java.lang.Number 12) i)
+                        ))
                     ))
                 ))
             )
