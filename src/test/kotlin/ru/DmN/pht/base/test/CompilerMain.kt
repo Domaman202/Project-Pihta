@@ -24,7 +24,7 @@ object CompilerMain {
                 
                 (ns java.lang (
                     (std/decl/cls Number [^Any] (
-                        (std/decl/field [i ^int])
+                        (std/decl/field [[i ^int]])
                         (std/decl/fn print ^void [])
                     ))
                 ))

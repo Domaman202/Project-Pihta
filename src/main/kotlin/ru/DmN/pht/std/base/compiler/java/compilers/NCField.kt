@@ -1,6 +1,5 @@
 package ru.DmN.pht.std.base.compiler.java.compilers
 
-import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.FieldNode
 import ru.DmN.pht.base.compiler.java.Compiler
@@ -9,32 +8,30 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualField
-import ru.DmN.pht.std.base.compiler.java.ctx.*
-import ru.DmN.pht.std.base.compiler.java.utils.*
+import ru.DmN.pht.std.base.compiler.java.ctx.FieldContext
+import ru.DmN.pht.std.base.compiler.java.utils.ComputeType
+import ru.DmN.pht.std.base.compiler.java.utils.clazz
+import ru.DmN.pht.std.base.compiler.java.utils.compute
+import ru.DmN.pht.std.base.compiler.java.utils.global
 
-object NCField : IStdNodeCompiler<NodeNodesList> { // todo: more fields
+object NCField : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        val nodes = node.nodes.map { it -> compiler.compute<List<Node>>(it, ctx, ComputeType.NAME).map { compiler.computeName(it, ctx) } }
-        if (ctx.isMethod() && ctx.isBody()) {
-            val mctx = ctx.method
-            val label = Label()
-            mctx.node.visitLabel(label)
-            nodes.forEach { mctx.createVariable(ctx.body, it.first(), it.last(), label) }
-        } else if (ctx.isClass()) {
-            val cctx = ctx.clazz
-            val static = node.attributes.getOrDefault("static", false) as Boolean
-            nodes.forEach {
-                var access = Opcodes.ACC_PUBLIC
-                if (node.attributes.getOrDefault("final", false) as Boolean)
-                    access += Opcodes.ACC_FINAL
-                if (static)
-                    access += Opcodes.ACC_STATIC
-                val type = cctx.getType(compiler, ctx.global, it.last())
-                val fnode = cctx.node.visitField(access, it.first(), type.desc, type.signature, null) as FieldNode
-                val field = VirtualField(it.first(), type, static, false)
-                cctx.clazz.fields += field
-                cctx.fields += FieldContext(fnode, field)
-            }
+        val cctx = ctx.clazz
+        val static = node.attributes.getOrDefault("static", false) as Boolean
+        var access = Opcodes.ACC_PUBLIC
+        if (node.attributes.getOrDefault("final", false) as Boolean)
+            access += Opcodes.ACC_FINAL
+        if (static)
+            access += Opcodes.ACC_STATIC
+        compiler.compute<List<Node>>(node.nodes.first(), ctx, ComputeType.NODE).forEach { it ->
+            val pair = compiler.compute<List<Node>>(it, ctx, ComputeType.NODE)
+                .map { compiler.compute<Node>(it, ctx, ComputeType.NODE) }
+            val type = cctx.getType(compiler, ctx.global, pair.last().getValueAsString())
+            val name = pair.first().getValueAsString()
+            val fnode = cctx.node.visitField(access, name, type.desc, type.signature, null) as FieldNode
+            val field = VirtualField(name, type, static, false)
+            cctx.clazz.fields += field
+            cctx.fields += FieldContext(fnode, field)
         }
         return null
     }

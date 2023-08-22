@@ -20,7 +20,7 @@ object NCDef : IStdNodeCompiler<NodeNodesList> {
         val mnode = mctx.node
         val label = Label()
         mnode.visitLabel(label)
-        node.nodes.forEach { it ->
+        compiler.compute<List<Node>>(node.nodes.first(), ctx, ComputeType.NODE).forEach { it ->
             val pair = compiler.compute<List<Node>>(it, ctx, ComputeType.NODE)
                 .map { compiler.compute<Node>(it, ctx, ComputeType.NODE) }
             if (pair[0].isConstClass()) {
