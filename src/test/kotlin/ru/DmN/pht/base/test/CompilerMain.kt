@@ -18,18 +18,15 @@ object CompilerMain {
         val compiler = Compiler()
         compiler.compile("""
             (
-                (use std/base std/util)
+                (use test/bf std/base)
                 
                 (import [java.lang.Object Any][java.lang.String String])
                 
                 (ns ru.DmN.test (
-                    (obj Main [^Any ^IFoo] (
-                        (fn foo ^void [[o ^String]]
-                            ((use std/base)
-                            (#println std o)))
-                        (bfn foo ^void [^Any] [^String])
-                        (fn main ^Any []
-                            (#foo this "Hi!"))
+                    (obj Main [^Any] (
+                        (fn main ^Any [] (
+                            (bf (next)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(start)(prev)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(next)(dec)(stop)(prev)(put)(next)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(start)(prev)(inc)(inc)(inc)(inc)(next)(dec)(stop)(prev)(inc)(put)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(put)(put)(inc)(inc)(inc)(put)(next)(next)(next)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(start)(prev)(inc)(inc)(inc)(inc)(next)(dec)(stop)(prev)(put)(next)(next)(next)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(start)(prev)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(next)(dec)(stop)(prev)(dec)(dec)(dec)(put)(prev)(prev)(prev)(prev)(put)(inc)(inc)(inc)(put)(dec)(dec)(dec)(dec)(dec)(dec)(put)(dec)(dec)(dec)(dec)(dec)(dec)(dec)(dec)(put)(next)(next)(inc)(put)(next)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(put))
+                        ))
                     ))
                 ))
             )

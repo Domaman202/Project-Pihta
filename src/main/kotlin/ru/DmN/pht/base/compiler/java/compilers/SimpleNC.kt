@@ -12,6 +12,8 @@ open class SimpleNC<T : NodeNodesList> : INodeCompiler<T> {
 
     override fun compile(node: T, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         node.nodes.dropLast(1).forEach { compiler.compile(it, ctx, false) }
-        return compiler.compile(node.nodes.last(), ctx, ret)
+        return if (node.nodes.isEmpty())
+            null
+        else compiler.compile(node.nodes.last(), ctx, ret)
     }
 }
