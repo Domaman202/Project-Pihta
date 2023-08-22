@@ -15,6 +15,7 @@ import ru.DmN.pht.std.base.compiler.java.ctx.GlobalContext
 import ru.DmN.pht.std.base.compiler.java.utils.*
 import ru.DmN.pht.std.base.parsers.*
 import ru.DmN.pht.std.base.unparsers.*
+import ru.DmN.pht.std.math.StdMath
 
 object StdBase : Module("std/base") {
     init {
@@ -94,7 +95,11 @@ object StdBase : Module("std/base") {
             super.inject(compiler, ctx, ret)
             ctx.contexts["std/base/global"] = GlobalContext()
             compiler.contexts["std/base/macros"] = HashMap<String, MutableList<MacroDefine>>()
-            compiler.compile(String(StdBase::class.java.getResourceAsStream("/pht/std/base/module.pht")!!.readAllBytes()), ParsingContext(mutableListOf(Base)), ctx)
+            compiler.compile(
+                String(StdBase::class.java.getResourceAsStream("/pht/std/base/module.pht")!!.readAllBytes()),
+                ParsingContext(mutableListOf(Base, StdBase, StdMath)),
+                CompilationContext(mutableListOf(Base, StdBase, StdMath), ctx.contexts)
+            )
         }
         return if (ctx.isMethod() && ctx.isBody()) {
             val variable = ctx.body.addVariable("std", "ru.DmN.pht.std.base.StdFunctions", tmp = ret)

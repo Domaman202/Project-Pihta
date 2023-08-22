@@ -13,6 +13,7 @@ import ru.DmN.pht.std.base.compiler.java.utils.global
 import ru.DmN.pht.std.base.compiler.java.utils.macro
 import ru.DmN.pht.std.base.compiler.java.utils.method
 import ru.DmN.pht.std.base.unparsers.NUDefault
+import ru.DmN.pht.std.math.StdMath
 import ru.DmN.pht.std.util.compiler.java.compilers.NCCompileTimeName
 import ru.DmN.pht.std.util.compiler.java.compilers.NCSymbol
 
@@ -28,7 +29,11 @@ object StdUtil : Module("std/util") {
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (!ctx.modules.contains(this)) {
             super.inject(compiler, ctx, ret)
-            compiler.compile(String(StdBase::class.java.getResourceAsStream("/pht/std/util/module.pht")!!.readAllBytes()), ParsingContext(mutableListOf(Base)), ctx)
+            compiler.compile(
+                String(StdBase::class.java.getResourceAsStream("/pht/std/util/module.pht")!!.readAllBytes()),
+                ParsingContext(mutableListOf(Base, StdBase, StdMath)),
+                CompilationContext(mutableListOf(Base, StdBase, StdMath), ctx.contexts)
+            )
         }
         return null
     }

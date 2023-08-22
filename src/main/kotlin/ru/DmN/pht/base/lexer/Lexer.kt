@@ -16,10 +16,10 @@ class Lexer(private val input: String) : Iterator<Token?> {
         if (ptr >= input.length)
             return null
         when (val char = input[inc()]) {
-            '(' -> return Token(line, Token.Type.OPEN_BRACKET, null)
-            ')' -> return Token(line, Token.Type.CLOSE_BRACKET, null)
-            '[' -> return Token(line, Token.Type.OPEN_CBRACKET, null)
-            ']' -> return Token(line, Token.Type.CLOSE_CBRACKET, null)
+            '(' -> return Token(line, Token.Type.OPEN_BRACKET, "(")
+            ')' -> return Token(line, Token.Type.CLOSE_BRACKET, ")")
+            '[' -> return Token(line, Token.Type.OPEN_CBRACKET, "[")
+            ']' -> return Token(line, Token.Type.CLOSE_CBRACKET, "]")
             '^', '#' -> {
                 val str = StringBuilder()
                 while (ptr < input.length) {
