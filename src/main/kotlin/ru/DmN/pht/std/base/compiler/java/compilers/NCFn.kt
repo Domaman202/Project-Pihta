@@ -161,14 +161,8 @@ object NCFn : IStdNodeCompiler<NodeNodesList> {
     }
 
     override fun applyAnnotation(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, annotation: Node) {
-        when (annotation.tkOperation.text) {
-            "@abstract" -> node.attributes["abstract"]  = true
-            "@bridge"   -> node.attributes["bridge"]    = true
-            "@final"    -> node.attributes["final"]     = true
-            "@override" -> node.attributes["override"]  = true
-            "@static"   -> node.attributes["static"]    = true
-            "@varargs"  -> node.attributes["varargs"]   = true
-        }
+        val text = annotation.tkOperation.text!!
+        node.attributes[text.substring(text.lastIndexOf('@') + 1)] = true
     }
 
     fun getDescriptor(args: List<VirtualType>, returnType: VirtualType) =

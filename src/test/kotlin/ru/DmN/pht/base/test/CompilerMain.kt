@@ -18,15 +18,13 @@ object CompilerMain {
         val compiler = Compiler()
         compiler.compile("""
             (
-                (use test/bf std/base)
+                (use std/base)
                 
                 (import [java.lang.Object Any][java.lang.String String])
                 
                 (ns ru.DmN.test (
-                    (obj Main [^Any] (
-                        (fn main ^Any [] (
-                            (bf (next)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(start)(prev)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(next)(dec)(stop)(prev)(put)(next)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(start)(prev)(inc)(inc)(inc)(inc)(next)(dec)(stop)(prev)(inc)(put)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(put)(put)(inc)(inc)(inc)(put)(next)(next)(next)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(start)(prev)(inc)(inc)(inc)(inc)(next)(dec)(stop)(prev)(put)(next)(next)(next)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(start)(prev)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(next)(dec)(stop)(prev)(dec)(dec)(dec)(put)(prev)(prev)(prev)(prev)(put)(inc)(inc)(inc)(put)(dec)(dec)(dec)(dec)(dec)(dec)(put)(dec)(dec)(dec)(dec)(dec)(dec)(dec)(dec)(put)(next)(next)(inc)(put)(next)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(inc)(put))
-                        ))
+                    (cls Main [^Any] (std/base/@static
+                        (fn main ^Any [] (std/base/unit))
                     ))
                 ))
             )
@@ -47,7 +45,7 @@ object CompilerMain {
             Unsafe.forceSetAccessible(method)
             method.invoke(CompilerMain::class.java.classLoader, b, 0, b.size) as Klass
         }
-        println(Class.forName("ru.DmN.test.Main").run { getMethod("main").invoke(getField("INSTANCE").get(null)) } )
-//        println(Class.forName("ru.DmN.test.Main").getMethod("main").invoke(null))
+//        println(Class.forName("ru.DmN.test.Main").run { getMethod("main").invoke(getField("INSTANCE").get(null)) } )
+        println(Class.forName("ru.DmN.test.Main").getMethod("main").invoke(null))
     }
 }

@@ -54,8 +54,14 @@ class Parser(val lexer: Lexer) {
     fun parseValue(ctx: ParsingContext, token: Token) =
         get(ctx, "value!")!!.parse(this, ctx, token)!!
     fun get(ctx: ParsingContext, name: String): NodeParser? {
-        ctx.modules.forEach { it -> it.parsers[name]?.let { return it } }
-        return null
+        val i = name.lastIndexOf('/')
+        return if (i == -1) {
+            ctx.modules.forEach { it -> it.parsers[name]?.let { return it } }
+            null
+        } else {
+            val module = name.substring(0, i)
+            ctx.modules.find { it.name == module }?.parsers?.get(name.substring(i + 1))
+        }
     }
 
     private inline fun <T> pnb(body: () -> T): T = body.invoke().apply { tryClose() }
