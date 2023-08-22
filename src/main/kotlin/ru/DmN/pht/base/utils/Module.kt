@@ -15,7 +15,7 @@ import ru.DmN.pht.std.decl.StdDecl
 import ru.DmN.pht.std.enums.StdEnums
 import ru.DmN.pht.std.math.StdMath
 import ru.DmN.pht.std.util.StdUtil
-import ru.DmN.pht.test.bf.TestBF
+import ru.DmN.pht.example.bf.TestBF
 
 open class Module(val name: String) {
     val parsers: MutableMap<String, NodeParser> = HashMap()

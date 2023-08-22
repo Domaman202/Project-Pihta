@@ -1,4 +1,4 @@
-package ru.DmN.pht.test.bf.test
+package ru.DmN.pht.example.bf.test
 
 object BFGenerator {
     @JvmStatic

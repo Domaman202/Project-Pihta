@@ -1,4 +1,4 @@
-package ru.DmN.pht.test.bf.compiler.java.ctx
+package ru.DmN.pht.example.bf.compiler.java.ctx
 
 import org.objectweb.asm.Label
 import ru.DmN.pht.base.utils.Variable

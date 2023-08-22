@@ -1,4 +1,4 @@
-package ru.DmN.pht.test.bf.parsers
+package ru.DmN.pht.example.bf.parsers
 
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.Token

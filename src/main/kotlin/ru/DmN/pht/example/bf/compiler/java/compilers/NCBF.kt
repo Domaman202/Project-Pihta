@@ -1,4 +1,4 @@
-package ru.DmN.pht.test.bf.compiler.java.compilers
+package ru.DmN.pht.example.bf.compiler.java.compilers
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
@@ -12,8 +12,8 @@ import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.base.compiler.java.utils.body
 import ru.DmN.pht.std.base.compiler.java.utils.method
-import ru.DmN.pht.test.bf.compiler.java.ctx.BFContext
-import ru.DmN.pht.test.bf.compiler.java.utils.with
+import ru.DmN.pht.example.bf.compiler.java.ctx.BFContext
+import ru.DmN.pht.example.bf.compiler.java.utils.with
 
 object NCBF : INodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
