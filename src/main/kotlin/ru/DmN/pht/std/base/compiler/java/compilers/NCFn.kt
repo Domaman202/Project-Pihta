@@ -18,8 +18,10 @@ import ru.DmN.pht.std.base.utils.insertRet
 import kotlin.math.absoluteValue
 
 object NCFn : IStdNodeCompiler<NodeNodesList> {
-    override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType =
-        VirtualType.ofKlass("kotlin.jvm.functions.Function" + NCDefn.parseArgs(node.nodes.map { compiler.compute<Any?>(it, ctx, ComputeType.NODE) }[0] as List<Node>, compiler, ctx).size)
+    override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType {
+        val itfNode = compiler.compute<Any?>(node.nodes.first(), ctx, ComputeType.NODE)
+        return ctx.global.getType(compiler, if (itfNode is Node) compiler.computeName(itfNode, ctx) else "kotlin.jvm.functions.Function" + NCDefn.parseArgs(node.nodes.map { compiler.compute<Any?>(it, ctx, ComputeType.NODE) }[0] as List<Node>, compiler, ctx).size)
+    }
 
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val gctx = ctx.global

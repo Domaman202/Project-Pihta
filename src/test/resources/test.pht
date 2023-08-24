@@ -6,7 +6,7 @@
     (ns ru.DmN.test (
         (obj Main [^Any] (
             (defn main ^Any [] (
-                (#run (fn ^java.lang.Runnable [] (#println (use std/base) "text")))
+                (#invoke (fn [] (#println (use std/base) "text")))
                 (unit)))))
     ))
 )
