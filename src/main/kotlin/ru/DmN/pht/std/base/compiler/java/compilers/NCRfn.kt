@@ -15,9 +15,10 @@ import ru.DmN.pht.std.base.compiler.java.ctx.ClassContext
 import ru.DmN.pht.std.base.compiler.java.ctx.MethodContext
 import ru.DmN.pht.std.base.compiler.java.utils.*
 import ru.DmN.pht.std.base.utils.insertRet
+import ru.DmN.pht.std.base.utils.load
 import kotlin.math.absoluteValue
 
-object NCFn : IStdNodeCompiler<NodeNodesList> {
+object NCRfn : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType {
         val itfNode = compiler.compute<Any?>(node.nodes.first(), ctx, ComputeType.NODE)
         return ctx.global.getType(compiler, if (itfNode is Node) compiler.computeName(itfNode, ctx) else "kotlin.jvm.functions.Function" + NCDefn.parseArgs(node.nodes.map { compiler.compute<Any?>(it, ctx, ComputeType.NODE) }[0] as List<Node>, compiler, ctx).size)
@@ -27,13 +28,21 @@ object NCFn : IStdNodeCompiler<NodeNodesList> {
         val gctx = ctx.global
         //
         val parts = node.nodes.map { compiler.compute<Any?>(it, ctx, ComputeType.NODE) }
+        //
         val itfNode = parts.first()
         val offset = if (itfNode is Node) 1 else 0
-        val args0 = NCDefn.parseArgs(parts[offset] as List<Node>, compiler, ctx)
+        val args0 = NCDefn.parseArgs(parts[offset + 1] as List<Node>, compiler, ctx)
         val itf =  if (offset == 0)
             "kotlin.jvm.functions.Function" + args0.size
         else compiler.computeName(itfNode as Node, ctx)
         val imethod = gctx.getType(compiler, itf).methods.find { !it.static }!!
+        //
+        val refs = run {
+            val bctx = ctx.body
+            (parts[offset] as List<Node>)
+                .map { compiler.computeName(it, ctx) }
+                .map { bctx.variables.find { v -> v.name == it }!! }
+        }
         //
         val generics = Generics()
         val cnode = ClassNode()
@@ -54,48 +63,50 @@ object NCFn : IStdNodeCompiler<NodeNodesList> {
                 "java/lang/Object",
                 arrayOf(itf.className)
             )
-            cnode.visitField(
-                Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC + Opcodes.ACC_FINAL,
-                "INSTANCE",
-                type.desc,
-                null,
-                null
-            )
-            type.fields += VirtualField("INSTANCE", type, static = true, enum = false)
-            cnode.visitMethod(Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC, "<clinit>", "()V", null, null).run {
-                visitCode()
-                visitTypeInsn(Opcodes.NEW, cnode.name)
-                visitInsn(Opcodes.DUP)
-                visitMethodInsn(Opcodes.INVOKESPECIAL, cnode.name, "<init>", "()V", false)
-                visitFieldInsn(Opcodes.PUTSTATIC, cnode.name, "INSTANCE", type.desc)
-                visitInsn(Opcodes.RETURN)
-                visitEnd()
-            }
             //
             compiler.pushTask(ctx, CompileStage.METHODS_PREDEFINE) {
+                val refTypes = refs.map {
+                    val refType = compiler.typeOf(it.type!!)
+                    cnode.visitField(Opcodes.ACC_PUBLIC + Opcodes.ACC_FINAL, it.name, refType.desc, null, null)
+                    type.fields += VirtualField(it.name, refType, static = false, enum = false)
+                    refType
+                }
+                //
                 run {
+                    val mnode = cnode.visitMethod(
+                        Opcodes.ACC_PUBLIC,
+                        "<init>",
+                        NCDefn.getDescriptor(refTypes, VirtualType.VOID),
+                        null,
+                        null
+                    ) as MethodNode
                     val method =
                         VirtualMethod(
                             type,
                             "<init>",
                             TypeOrGeneric.of(generics, VirtualType.VOID),
-                            emptyList(),
+                            refTypes.map { TypeOrGeneric.of(generics, it) },
                             emptyList(),
                             generics = generics
                         )
                     type.methods += method
-                    val mnode =
-                        cnode.visitMethod(Opcodes.ACC_PRIVATE, "<init>", "()V", null, null) as MethodNode
-                    val mcontext = MethodContext(mnode, method)
-                    cctx.methods += mcontext
+                    cctx.methods += MethodContext(mnode, method)
                     mnode.run {
                         visitCode()
                         val labelStart = Label()
+                        val labelStop = Label()
                         visitLabel(labelStart)
                         visitVarInsn(Opcodes.ALOAD, 0)
+                        visitInsn(Opcodes.DUP)
                         visitMethodInsn(Opcodes.INVOKESPECIAL, cnode.superName, "<init>", "()V", false)
+                        refs.forEachIndexed { i, it ->
+                            visitInsn(Opcodes.DUP)
+                            load(it.type, i + 1, this)
+                            val desc = it.type!!.desc
+                            visitFieldInsn(Opcodes.PUTFIELD, type.className, it.name, desc)
+                            visitLocalVariable(it.name, desc, null, labelStart, labelStop, i + 1)
+                        }
                         visitInsn(Opcodes.RETURN)
-                        val labelStop = Label()
                         visitLabel(labelStop)
                         visitLocalVariable("this", type.desc, null, labelStart, labelStop, 0)
                         visitEnd()
@@ -103,7 +114,7 @@ object NCFn : IStdNodeCompiler<NodeNodesList> {
                 }
                 //
                 val args1 = NCDefn.parseArgs(args0, compiler, cctx, gctx, generics)
-                val body = parts[offset + 1] as Node
+                val body = parts[offset + 2] as Node
                 //
                 var access = Opcodes.ACC_PUBLIC
                 if (node.attributes.getOrPut("varargs") { false } as Boolean)
@@ -195,7 +206,7 @@ object NCFn : IStdNodeCompiler<NodeNodesList> {
                             context.variableStarts[bctx.addVariable(it.first, it.second).id] = label
                         }
                         val rettype = compiler.typeOf(imethod.rettype.type)
-                        insertRet(compiler.compile(body, ctx.with(context).with(bctx), rettype.name != "void"), rettype, mnode)
+                        insertRet(compiler.compile(body, ctx.with(cctx).with(context).with(bctx), rettype.name != "void"), rettype, mnode)
                         val stopLabel = Label()
                         mnode.visitLabel(stopLabel)
                         bctx.stopLabel = stopLabel
@@ -206,11 +217,9 @@ object NCFn : IStdNodeCompiler<NodeNodesList> {
             }
         }
         //
-        return if (ret)
-            ctx.method.node.run {
-                visitFieldInsn(Opcodes.GETSTATIC, type.className, "INSTANCE", type.desc)
-                Variable("pht$${node.hashCode()}", itf, -1, true)
-            }
-        else null
+        return if (ret) {
+            NCNew.insertNew(type, if (refs.isEmpty()) emptyList() else parts[offset] as List<Node>, node.hashCode(), compiler, ctx, true)
+            Variable("pht$${node.hashCode()}", itf, -1, true)
+        } else null
     }
 }

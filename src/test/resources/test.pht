@@ -6,7 +6,8 @@
     (ns ru.DmN.test (
         (obj Main [^Any] (
             (defn main ^Any [] (
-                (#invoke (fn [] (#println (use std/base) "text")))
+                (def [[str "Text"]])
+                (#invoke (rfn [str][] (#println (use std/base) str)))
                 (unit)))))
     ))
 )

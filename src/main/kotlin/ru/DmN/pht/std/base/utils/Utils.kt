@@ -201,18 +201,22 @@ fun loadCast(variable: Variable, to: VirtualType, node: MethodNode) {
 
 fun load(variable: Variable, node: MethodNode) {
     if (!variable.tmp) {
-        node.visitVarInsn(
-            when (variable.type) {
-                "void" -> throw RuntimeException()
-                "boolean", "byte", "short", "char", "int" -> Opcodes.ILOAD
-                "long" -> Opcodes.LLOAD
-                "float" -> Opcodes.FLOAD
-                "double" -> Opcodes.DLOAD
-                else -> Opcodes.ALOAD
-            },
-            variable.id
-        )
+        load(variable.type, variable.id, node)
     }
+}
+
+fun load(type: String?, id: Int, node: MethodNode) {
+    node.visitVarInsn(
+        when (type) {
+            "void" -> throw RuntimeException()
+            "boolean", "byte", "short", "char", "int" -> Opcodes.ILOAD
+            "long" -> Opcodes.LLOAD
+            "float" -> Opcodes.FLOAD
+            "double" -> Opcodes.DLOAD
+            else -> Opcodes.ALOAD
+        },
+        id
+    )
 }
 
 fun storeCast(variable: Variable, from: VirtualType, node: MethodNode) {
