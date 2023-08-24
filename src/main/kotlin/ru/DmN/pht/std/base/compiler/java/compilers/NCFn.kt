@@ -24,17 +24,7 @@ object NCFn : IStdNodeCompiler<NodeNodesList> {
         val name = parts[0](ComputeType.NAME) as String
         val returnClass = parts[1](ComputeType.NAME) as String
         val returnType = cctx.getType(compiler, gctx, returnClass)
-        val args = (parts[2](ComputeType.NODE) as List<Node>).map { compiler.compute<Any?>(it, ctx, ComputeType.NAME) }.map { it ->
-            when (it) {
-                is String -> Pair(it, "java.lang.Object")
-                is List<*> -> it.map { (compiler.computeName(it as Node, ctx)) }
-                    .let { Pair(it.first(), it.last()) }
-
-                else -> throw RuntimeException()
-            }
-        }
-        val argsTypes = args.map { cctx.getType(compiler, gctx, it.second) }
-        val argsTOGs = argsTypes.mapIndexed { i, it -> TypeOrGeneric.of(generics, args[i].second, it) }
+        val args = parseArgs(parts[2](ComputeType.NODE) as List<Node>, compiler, ctx, cctx, gctx, generics)
         val body = parts[3](ComputeType.NODE) as Node
         //
         val abstract = node.attributes.getOrPut("abstract") { false } as Boolean
@@ -57,16 +47,16 @@ object NCFn : IStdNodeCompiler<NodeNodesList> {
         val mnode = cctx.node.visitMethod(
             access,
             name,
-            getDescriptor(argsTypes, returnType),
-            getSignature(args.map { it.second }, returnClass, varargs) { ctx.clazz.getType(compiler, gctx, it) },
+            getDescriptor(args.second, returnType),
+            getSignature(args.first.map { it.second }, returnClass, varargs) { ctx.clazz.getType(compiler, gctx, it) },
             null
         ) as MethodNode
         val method = VirtualMethod(
             clazz,
             name,
             TypeOrGeneric.of(generics, returnType),
-            argsTOGs,
-            args.map { it.first },
+            args.third,
+            args.first.map { it.first },
             varargs,
             static,
             abstract,
@@ -139,16 +129,12 @@ object NCFn : IStdNodeCompiler<NodeNodesList> {
                         mnode.visitLabel(label)
                         context.variableStarts[bctx.addVariable("this", clazz.name).id] = label
                     }
-                    args.forEach {
+                    args.first.forEach {
                         val label = Label()
                         mnode.visitLabel(label)
                         context.variableStarts[bctx.addVariable(it.first, it.second).id] = label
                     }
-                    insertRet(
-                        compiler.compile(body, ctx.with(context).with(bctx), returnType.name != "void"),
-                        returnType,
-                        mnode
-                    )
+                    insertRet(compiler.compile(body, ctx.with(context).with(bctx), returnType.name != "void"), returnType, mnode)
                     val stopLabel = Label()
                     mnode.visitLabel(stopLabel)
                     bctx.stopLabel = stopLabel
@@ -188,4 +174,27 @@ object NCFn : IStdNodeCompiler<NodeNodesList> {
                 "T${it.substring(0, type.length - 1)};"
             else getType(it).desc
         }
+
+    fun parseArgs(parts: List<Node>, compiler: Compiler, ctx: CompilationContext): List<Pair<String, String>> =
+        parts.map { compiler.compute<Any?>(it, ctx, ComputeType.NAME) }.map { it ->
+            when (it) {
+                is String -> Pair(it, "java.lang.Object")
+                is List<*> -> it.map { (compiler.computeName(it as Node, ctx)) }
+                    .let { Pair(it.first(), it.last()) }
+
+                else -> throw RuntimeException()
+            }
+        }
+
+    fun parseArgs(args: List<Pair<String, String>>, compiler: Compiler, cctx: ClassContext, gctx: GlobalContext, generics: Generics): Triple<List<Pair<String, String>>, List<VirtualType>, List<TypeOrGeneric>> {
+        val argsTypes = args.map { cctx.getType(compiler, gctx, it.second) }
+        return Triple(
+            args,
+            argsTypes,
+            argsTypes.mapIndexed { i, it -> TypeOrGeneric.of(generics, args[i].second, it) }
+        )
+    }
+
+    fun parseArgs(parts: List<Node>, compiler: Compiler, ctx: CompilationContext, cctx: ClassContext, gctx: GlobalContext, generics: Generics): Triple<List<Pair<String, String>>, List<VirtualType>, List<TypeOrGeneric>> =
+        parseArgs(parseArgs(parts, compiler, ctx), compiler, cctx, gctx, generics)
 }

@@ -54,6 +54,7 @@ object StdBase : Module("std/base") {
         add("efn",  NPDefault,  NUDefault,  NCExFn)
         add("bfn",  NPDefault,  NUDefault,  NCBridgeFn)
         add("defn", NPDefault,  NUDefault,  NCFn)
+        add("fn",   NPDefault,  NUDefault,  NCLambda)
         // Циклы
         add("repeat",   NPDefault,  NUDefault,  NCRepeat)
         add("while",    NPDefault,  NUDefault,  NCWhile)
