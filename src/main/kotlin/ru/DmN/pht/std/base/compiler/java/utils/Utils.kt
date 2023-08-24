@@ -17,15 +17,16 @@ fun sliceInsert(list: MutableList<Any?>, index: Int, elements: List<Any?>) {
     right.forEachIndexed { i, it -> list[index + i + elements.size] = it }
 }
 
+fun Compiler.computeNL(node: Node, ctx: CompilationContext): List<Node> =
+    compute<Any?>(node, ctx, ComputeType.NODE).let { if (it is List<*>) it as List<Node> else computeNL(it as Node, ctx) }
+
+fun Compiler.computeOnlyNode(node: Node, ctx: CompilationContext): Node =
+    compute<Any>(node, ctx, ComputeType.NODE).let { if (it is Node) it else node }
+
 fun Compiler.computeInt(node: Node, ctx: CompilationContext): Int =
     if (node.isConst())
         node.getConstValueAsString().toInt()
-    else {
-        val result = compute<Any?>(node, ctx, ComputeType.NUMBER)
-        if (result is Int)
-            result
-        else computeInt(result as Node, ctx)
-    }
+    else compute<Any?>(node, ctx, ComputeType.NUMBER).let { if (it is Int) it else computeInt(it as Node, ctx) }
 
 fun Compiler.computeName(node: Node, ctx: CompilationContext): String =
     if (node.isConst())
@@ -36,6 +37,7 @@ fun Compiler.computeName(node: Node, ctx: CompilationContext): String =
             result
         else computeName(result as Node, ctx)
     }
+
 
 fun <T> Compiler.compute(node: Node, ctx: CompilationContext, type: ComputeType): T {
     val nc = this.get(ctx, node)

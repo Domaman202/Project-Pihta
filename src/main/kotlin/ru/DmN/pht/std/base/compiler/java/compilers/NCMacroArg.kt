@@ -21,6 +21,6 @@ object NCMacroArg : IStdNodeCompiler<NodeMacroArg> {
     override fun applyAnnotation(node: NodeMacroArg, compiler: Compiler, ctx: CompilationContext, annotation: Node) =
         compiler.applyAnnotation(macro(node, ctx), ctx, annotation)
 
-    private fun macro(node: NodeMacroArg, ctx: CompilationContext): Node =
+    fun macro(node: NodeMacroArg, ctx: CompilationContext): Node =
         ctx.macro[node.name]
 }

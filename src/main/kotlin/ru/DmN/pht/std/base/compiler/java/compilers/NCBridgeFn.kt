@@ -29,79 +29,88 @@ object NCBridgeFn : IStdNodeCompiler<NodeNodesList> {
         val src = parseArgs(parts[2], compiler, ctx, cctx, gctx, generics)
         val to = parseArgs(parts[3], compiler, ctx, cctx, gctx, generics)
         //
-        val final = node.attributes.getOrPut("final") { false } as Boolean
-        val static = node.attributes.getOrPut("static") { false } as Boolean
-        val varargs = node.attributes.getOrPut("varargs") { false } as Boolean
-        //
-        var access = Opcodes.ACC_PUBLIC + Opcodes.ACC_SYNTHETIC + Opcodes.ACC_BRIDGE
-        if (final)
-            access += Opcodes.ACC_FINAL
-        else if (static)
-            access += Opcodes.ACC_STATIC
-        if (varargs)
-            access += Opcodes.ACC_VARARGS
-        //
-        val mnode = cctx.node.visitMethod(
-            access,
-            name,
-            NCFn.getDescriptor(src.second, returnType),
-            NCFn.getSignature(src.first, returnClass, varargs) { ctx.clazz.getType(compiler, gctx, it) },
-            null
-        ) as MethodNode
-        val method = VirtualMethod(
-            clazz,
-            name,
-            TypeOrGeneric.of(generics, returnType),
-            src.third,
-            List(src.first.size) { i -> "arg$i"  },
-            varargs,
-            static,
-            false,
-            null,
-            null,
-            generics
-        )
-        clazz.methods += method
-        val context = MethodContext(mnode, method)
-        cctx.methods += context
-        compiler.tasks[CompileStage.METHODS_DEFINE].add {
-            mnode.apply {
-                val labelStart = Label()
-                visitLabel(labelStart)
-                visitVarInsn(Opcodes.ALOAD, 0)
-                method.argsc.forEachIndexed { i, it ->
-                    if (it.type.isPrimitive()) {
-                        visitVarInsn(
-                            when (it.type) {
-                                "void" -> throw RuntimeException()
-                                "boolean", "byte", "short", "char", "int" -> Opcodes.ILOAD
-                                "long" -> Opcodes.LLOAD
-                                "float" -> Opcodes.FLOAD
-                                "double" -> Opcodes.DLOAD
-                                else -> throw Error("Unreachable code")
-                            },
-                            i + 1
-                        )
-                    } else {
-                        visitVarInsn(Opcodes.ALOAD, i + 1)
-                        visitTypeInsn(Opcodes.CHECKCAST, to.second[i].className)
+        if (src.second != to.second) {
+            //
+            val final = node.attributes.getOrPut("final") { false } as Boolean
+            val static = node.attributes.getOrPut("static") { false } as Boolean
+            val varargs = node.attributes.getOrPut("varargs") { false } as Boolean
+            //
+            var access = Opcodes.ACC_PUBLIC + Opcodes.ACC_SYNTHETIC + Opcodes.ACC_BRIDGE
+            if (final)
+                access += Opcodes.ACC_FINAL
+            else if (static)
+                access += Opcodes.ACC_STATIC
+            if (varargs)
+                access += Opcodes.ACC_VARARGS
+            //
+            val mnode = cctx.node.visitMethod(
+                access,
+                name,
+                NCFn.getDescriptor(src.second, returnType),
+                NCFn.getSignature(src.first, returnClass, varargs) { ctx.clazz.getType(compiler, gctx, it) },
+                null
+            ) as MethodNode
+            val method = VirtualMethod(
+                clazz,
+                name,
+                TypeOrGeneric.of(generics, returnType),
+                src.third,
+                List(src.first.size) { i -> "arg$i" },
+                varargs,
+                static,
+                false,
+                null,
+                null,
+                generics
+            )
+            clazz.methods += method
+            val context = MethodContext(mnode, method)
+            cctx.methods += context
+            compiler.pushTask(ctx, CompileStage.METHODS_DEFINE) {
+                mnode.apply {
+                    val labelStart = Label()
+                    visitLabel(labelStart)
+                    visitVarInsn(Opcodes.ALOAD, 0)
+                    method.argsc.forEachIndexed { i, it ->
+                        if (it.type.isPrimitive()) {
+                            visitVarInsn(
+                                when (it.type) {
+                                    "void" -> throw RuntimeException()
+                                    "boolean", "byte", "short", "char", "int" -> Opcodes.ILOAD
+                                    "long" -> Opcodes.LLOAD
+                                    "float" -> Opcodes.FLOAD
+                                    "double" -> Opcodes.DLOAD
+                                    else -> throw Error("Unreachable code")
+                                },
+                                i + 1
+                            )
+                        } else {
+                            visitVarInsn(Opcodes.ALOAD, i + 1)
+                            visitTypeInsn(Opcodes.CHECKCAST, to.second[i].className)
+                        }
                     }
+                    visitMethodInsn(
+                        Opcodes.INVOKEVIRTUAL,
+                        clazz.className,
+                        name,
+                        NCFn.getDescriptor(to.second, returnType),
+                        false
+                    )
+                    visitInsn(
+                        when (method.rettype.type) {
+                            "void" -> Opcodes.RETURN
+                            "boolean", "byte", "short", "char", "int" -> Opcodes.IRETURN
+                            "long" -> Opcodes.LRETURN
+                            "float" -> Opcodes.FRETURN
+                            "double" -> Opcodes.DRETURN
+                            else -> Opcodes.ARETURN
+                        }
+                    )
+                    val labelStop = Label()
+                    visitLabel(labelStop)
+                    visitLocalVariable("this", clazz.desc, cctx.node.signature, labelStart, labelStop, 0)
+                    visitEnd()
                 }
-                visitMethodInsn(Opcodes.INVOKEVIRTUAL, clazz.className, name, NCFn.getDescriptor(to.second, returnType), false)
-                visitInsn(
-                    when (method.rettype.type) {
-                        "void" -> Opcodes.RETURN
-                        "boolean", "byte", "short", "char", "int" -> Opcodes.IRETURN
-                        "long" -> Opcodes.LRETURN
-                        "float" -> Opcodes.FRETURN
-                        "double" -> Opcodes.DRETURN
-                        else -> Opcodes.ARETURN
-                    }
-                )
-                val labelStop = Label()
-                visitLabel(labelStop)
-                visitLocalVariable("this", clazz.desc, cctx.node.signature, labelStart, labelStop, 0)
-                visitEnd()
             }
         }
         //

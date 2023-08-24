@@ -11,7 +11,7 @@ import ru.DmN.pht.std.base.compiler.java.utils.*
 object NCImportMacro : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (ctx.isGlobal()) {
-            compiler.tasks[CompileStage.MACROS_IMPORT].add {
+            compiler.pushTask(ctx, CompileStage.MACROS_IMPORT) {
                 val gctx = ctx.global
                 node.nodes.map { it -> compiler.compute<List<Node>>(it, ctx, ComputeType.NAME).map { compiler.computeName(it, ctx) } }.first().forEach { it ->
                     val macro = it.substring(it.lastIndexOf('.') + 1)

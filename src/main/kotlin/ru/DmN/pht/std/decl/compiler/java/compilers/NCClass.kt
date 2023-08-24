@@ -37,11 +37,11 @@ object NCClass : IStdNodeCompiler<NodeNodesList> {
         //
         val type = VirtualType(name, parents, isInterface = isInterface, generics = generics)
         compiler.types += type
-        compiler.tasks[CompileStage.TYPES_DEFINE].add {
+        compiler.pushTask(ctx, CompileStage.TYPES_DEFINE) {
             if (isObject)
                 type.fields += VirtualField("INSTANCE", type, static = true, enum = false)
             if (parts.size > 2) {
-                compiler.tasks[CompileStage.METHODS_PREDEFINE].add {
+                compiler.pushTask(ctx, CompileStage.METHODS_PREDEFINE) {
                     compiler.compile(parts[2](ComputeType.NODE) as Node, ctx.with(type), false)
                 }
             }

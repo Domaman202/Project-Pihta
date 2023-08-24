@@ -8,10 +8,10 @@ import ru.DmN.pht.std.base.compiler.java.utils.computeName
 import ru.DmN.pht.std.base.compiler.java.utils.global
 import ru.DmN.pht.std.base.compiler.java.utils.with
 
-object NCNs : IStdNodeCompiler<NodeNodesList> {
+object NCNewNs : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val gctx = ctx.global
-        val context = ctx.with(gctx.with(gctx.name(compiler.computeName(node.nodes.first(), ctx))))
+        val context = ctx.with(gctx.with(compiler.computeName(node.nodes.first(), ctx)))
         node.nodes.forEach { compiler.compile(it, context, ret) }
         return null
     }

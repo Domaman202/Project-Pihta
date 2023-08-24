@@ -31,7 +31,8 @@ object NCMacro : IStdNodeCompiler<NodeMacro> {
     }
 
     private fun process(node: NodeMacro, ctx: CompilationContext): Pair<NodeNodesList, CompilationContext> {
-        val macro = ctx.global.macros.find { it.name == node.name }!!
+        val macro = ctx.global.macros.find { it.name == node.name }
+            ?: throw RuntimeException("Macro '${node.name}' not founded")
         val mctx = ctxOf(ctx)
         if (macro.args.size == node.nodes.size)
             macro.args.forEachIndexed { i, it -> mctx.args[it] = node.nodes[i] }

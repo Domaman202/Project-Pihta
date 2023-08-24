@@ -39,6 +39,12 @@ class Compiler {
         }
     }
 
+    fun pushTask(ctx: CompilationContext, stage: CompileStage, task: ICompilable) {
+        if (stage.ordinal >= ctx.stage.ordinal)
+            task()
+        else tasks[stage] += task
+    }
+
     fun typeOf(klass: Klass): VirtualType =
         types.find { it.name == klass.name } ?: addType(klass)
 

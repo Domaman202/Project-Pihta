@@ -57,7 +57,7 @@ object NCEnumCtor : IStdNodeCompiler<NodeNodesList> {
             cctx.clazz.methods += method
             val mctx = MethodContext(this as MethodNode, method)
             cctx.methods += mctx
-            compiler.tasks[CompileStage.METHODS_DEFINE].add {
+            compiler.pushTask(ctx, CompileStage.METHODS_DEFINE) {
                 val bctx = BodyContext.of(mctx)
                 val context = ctx.with(mctx).with(bctx)
                 val start = Label()

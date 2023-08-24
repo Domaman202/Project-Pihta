@@ -5,6 +5,7 @@ import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
+import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.parsers.NPDefault
 import ru.DmN.pht.base.unparser.unparsers.NUNodesList
@@ -26,14 +27,17 @@ object StdBase : Module("std/base") {
         add("import-extend",    NPDefault,  NUDefault,  NCImportExtends)
         add("import",           NPDefault,  NUDefault,  NCImport)
         // Пространство Имён
-        add("ns",           NPDefault,  NUDefault,  NCNs)
-        // Определить Макрос / Вставить Аргумент / Макрос
-        add("defmacro",     NPMacroDef,     NUMacroDef, NCDefMacro)
-        add("macro-unroll", NPMacroUnroll,  NUDefault,  NCMacroUnroll)
-        add("macro-inline", NPDefault,      NUDefault,  NCMacroInline)
-        add("macro-arg",    NPMacroArg,     NUMacroArg, NCMacroArg)
-        add("macro-name",   NPMacroArg,     NUMacroArg, NCMacroName)
-        add("macro!",       NPMacro,        NUMacro,    NCMacro)
+        add("ns",       NPDefault,  NUDefault,  NCNewNs)
+        add("sub-ns",   NPDefault,  NUDefault,  NCSubNs)
+        // Макросы
+        add("defmacro",         NPMacroDef,     NUMacroDef, NCDefMacro)
+        add("macro-unroll",     NPMacroUnroll,  NUDefault,  NCMacroUnroll)
+        add("macro-inline",     NPDefault,      NUDefault,  NCMacroInline)
+        add("macro-arg-count",  NPMacroArg,     NUMacroArg, NCMacroArgCount)
+        add("macro-arg",        NPMacroArg,     NUMacroArg, NCMacroArg)
+        add("macro-name",       NPMacroArg,     NUMacroArg, NCMacroName)
+        add("macro-var",        NPMacroVar,     NUMacroVar, NCMacroVar)
+        add("macro!",           NPMacro,        NUMacro,    NCMacro)
         // Аннотации
         add("@abstract",NPDefault,  NUDefault,  NCAnnotation)
         add("@bridge",  NPDefault,  NUDefault,  NCAnnotation)
@@ -49,7 +53,7 @@ object StdBase : Module("std/base") {
         // Расширение / Функция
         add("efn",  NPDefault,  NUDefault,  NCExFn)
         add("bfn",  NPDefault,  NUDefault,  NCBridgeFn)
-        add("fn",   NPDefault,  NUDefault,  NCFn)
+        add("defn", NPDefault,  NUDefault,  NCFn)
         // Циклы
         add("repeat",   NPDefault,  NUDefault,  NCRepeat)
         add("while",    NPDefault,  NUDefault,  NCWhile)
@@ -98,7 +102,7 @@ object StdBase : Module("std/base") {
             compiler.compile(
                 String(StdBase::class.java.getResourceAsStream("/pht/std/base/module.pht")!!.readAllBytes()),
                 ParsingContext(mutableListOf(Base, StdBase, StdMath)),
-                CompilationContext(mutableListOf(Base, StdBase, StdMath), ctx.contexts)
+                CompilationContext(CompileStage.UNKNOWN, mutableListOf(Base, StdBase, StdMath), ctx.contexts)
             )
         }
         return if (ctx.isMethod() && ctx.isBody()) {

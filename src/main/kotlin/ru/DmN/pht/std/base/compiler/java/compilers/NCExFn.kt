@@ -62,7 +62,7 @@ object NCExFn : IStdNodeCompiler<NodeNodesList> {
         cctx.clazz.methods += method
         val context = MethodContext(mnode, method)
         cctx.methods += context
-        compiler.tasks[CompileStage.METHODS_DEFINE].add {
+        compiler.pushTask(ctx, CompileStage.METHODS_DEFINE) {
             val bctx = BodyContext.of(context)
             val label0 = Label()
             mnode.visitLabel(label0)

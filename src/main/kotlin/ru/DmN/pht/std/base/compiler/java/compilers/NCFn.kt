@@ -78,12 +78,12 @@ object NCFn : IStdNodeCompiler<NodeNodesList> {
         val context = MethodContext(mnode, method)
         cctx.methods += context
         if (!abstract) {
-            compiler.tasks[CompileStage.METHODS_DEFINE].add {
+            compiler.pushTask(ctx, CompileStage.METHODS_DEFINE) {
                 if (override) {
                     method.override = clazz.getAllMethods().find { it ->
-                        it.declaringClass != clazz && it.desc != mnode.desc && it.overridableBy(method) { gctx.getType(compiler, it) }
+                        it.declaringClass != clazz && it.name == name && it.overridableBy(method) { gctx.getType(compiler, it) }
                     }!!.apply {
-                        if (bridge) {
+                        if (bridge && desc != mnode.desc) {
                             cctx.node.visitMethod(
                                 Opcodes.ACC_PUBLIC + Opcodes.ACC_SYNTHETIC + Opcodes.ACC_BRIDGE,
                                 name,
@@ -131,7 +131,7 @@ object NCFn : IStdNodeCompiler<NodeNodesList> {
                         }
                     }
                 }
-                compiler.tasks[CompileStage.METHODS_BODY].add {
+                compiler.pushTask(ctx, CompileStage.METHODS_BODY) {
                     mnode.visitCode()
                     val bctx = BodyContext.of(context)
                     if (!static) {

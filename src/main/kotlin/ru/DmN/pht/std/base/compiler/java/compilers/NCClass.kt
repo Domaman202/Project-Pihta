@@ -18,7 +18,7 @@ import ru.DmN.pht.std.base.utils.getSignature
 
 object NCClass : IStdNodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        compiler.tasks[CompileStage.TYPES_PREDEFINE].add {
+        compiler.pushTask(ctx, CompileStage.TYPES_PREDEFINE) {
             val gctx = ctx.global
             val parts = node.nodes.map { { type: ComputeType -> compiler.compute<Any?>(it, ctx, type) } }
             val name = gctx.name(parts[0](ComputeType.NAME) as String)
@@ -42,7 +42,7 @@ object NCClass : IStdNodeCompiler<NodeNodesList> {
             val type = VirtualType(name, parents, isInterface = isInterface, generics = generics)
             val context = ClassContext(cnode, type)
             compiler.classes += Pair(type, cnode)
-            compiler.tasks[CompileStage.TYPES_DEFINE].add {
+            compiler.pushTask(ctx, CompileStage.TYPES_DEFINE) {
                 cnode.visit(
                     Opcodes.V19,
                     if (isInterface)
@@ -76,7 +76,7 @@ object NCClass : IStdNodeCompiler<NodeNodesList> {
                         visitEnd()
                     }
                 }
-                compiler.tasks[CompileStage.METHODS_PREDEFINE].add {
+                compiler.pushTask(ctx, CompileStage.METHODS_PREDEFINE) {
                     val nctx = ctx.with(context)
                     if (parts.size > 2)
                         compiler.compile(parts[2](ComputeType.NODE) as Node, nctx, false)

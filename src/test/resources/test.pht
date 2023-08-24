@@ -1,0 +1,20 @@
+(
+    (use std/base std/util)
+
+    (import [java.lang.Object Any][java.lang.String String])
+
+    (ns ru.DmN.test (
+        (defmacro fn [args body]
+            (macro-var [name (lazy-symbol "Lambda$" (rand-symbol))])
+            (macro-var [itf (symbol kotlin.jvm.functions.Function (macro-arg-count args))])
+            (ns pht.std.gen
+                (obj (macro-arg name) [^Any (class-of-symbol (macro-arg itf))]
+                    (@override (@bridge (defn invoke ^Any (macro-arg args) (macro-arg body))))))
+            (as (macro-arg itf) (fget (class-of-symbol (symbol "pht.std.gen." (macro-arg name))) INSTANCE)))
+
+        (obj Main [^Any] (
+            (defn main ^Any [] (
+                (#invoke (fn [[str ^String]] (#println (use std/base) str)) "Hi!")
+                (unit)))))
+    ))
+)
