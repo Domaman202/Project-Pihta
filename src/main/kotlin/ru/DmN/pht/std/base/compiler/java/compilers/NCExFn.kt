@@ -12,7 +12,7 @@ import ru.DmN.pht.base.utils.Generics
 import ru.DmN.pht.base.utils.TypeOrGeneric
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualMethod
-import ru.DmN.pht.std.base.compiler.java.compilers.NCFn.getDescriptor
+import ru.DmN.pht.std.base.compiler.java.compilers.NCDefn.getDescriptor
 import ru.DmN.pht.std.base.compiler.java.ctx.*
 import ru.DmN.pht.std.base.compiler.java.utils.*
 import ru.DmN.pht.std.base.utils.insertRet

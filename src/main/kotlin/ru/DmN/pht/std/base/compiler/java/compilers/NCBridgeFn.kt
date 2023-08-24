@@ -46,8 +46,8 @@ object NCBridgeFn : IStdNodeCompiler<NodeNodesList> {
             val mnode = cctx.node.visitMethod(
                 access,
                 name,
-                NCFn.getDescriptor(src.second, returnType),
-                NCFn.getSignature(src.first, returnClass, varargs) { ctx.clazz.getType(compiler, gctx, it) },
+                NCDefn.getDescriptor(src.second, returnType),
+                NCDefn.getSignature(src.first, returnClass, varargs) { ctx.clazz.getType(compiler, gctx, it) },
                 null
             ) as MethodNode
             val method = VirtualMethod(
@@ -93,7 +93,7 @@ object NCBridgeFn : IStdNodeCompiler<NodeNodesList> {
                         Opcodes.INVOKEVIRTUAL,
                         clazz.className,
                         name,
-                        NCFn.getDescriptor(to.second, returnType),
+                        NCDefn.getDescriptor(to.second, returnType),
                         false
                     )
                     visitInsn(

@@ -53,8 +53,8 @@ object StdBase : Module("std/base") {
         // Расширение / Функция
         add("efn",  NPDefault,  NUDefault,  NCExFn)
         add("bfn",  NPDefault,  NUDefault,  NCBridgeFn)
-        add("defn", NPDefault,  NUDefault,  NCFn)
-        add("fn",   NPDefault,  NUDefault,  NCLambda)
+        add("defn", NPDefault,  NUDefault,  NCDefn)
+        add("fn",   NPDefault,  NUDefault,  NCFn)
         // Циклы
         add("repeat",   NPDefault,  NUDefault,  NCRepeat)
         add("while",    NPDefault,  NUDefault,  NCWhile)
