@@ -35,8 +35,8 @@ object StdUtil : Module("std/util") {
             super.inject(compiler, ctx, ret)
             compiler.compile(
                 String(StdBase::class.java.getResourceAsStream("/pht/std/util/module.pht")!!.readAllBytes()),
-                ParsingContext(mutableListOf(Base, StdBase, StdMath)),
-                CompilationContext(CompileStage.UNKNOWN, mutableListOf(Base, StdBase, StdMath), ctx.contexts)
+                ParsingContext(mutableListOf(Base)),
+                ctx
             )
         }
         return null

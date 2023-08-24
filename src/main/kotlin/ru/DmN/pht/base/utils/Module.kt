@@ -34,6 +34,10 @@ open class Module(val name: String) {
         }
     }
 
+    open fun inject(compiler: Compiler, ctx: CompilationContext) {
+        inject(compiler, ctx, false)
+    }
+
     open fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (!ctx.modules.contains(this))
             ctx.modules += this

@@ -8,6 +8,7 @@
             (defn main ^Any [] (
                 (def [[str "Text"]])
                 (#invoke (rfn [str][] (#println (use std/base) str)))
+                (#invoke (fn [] (#println (use std/base) "Meow")))
                 (unit)))))
     ))
 )

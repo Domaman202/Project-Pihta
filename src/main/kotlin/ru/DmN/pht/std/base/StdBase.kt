@@ -103,8 +103,8 @@ object StdBase : Module("std/base") {
             compiler.contexts["std/base/macros"] = HashMap<String, MutableList<MacroDefine>>()
             compiler.compile(
                 String(StdBase::class.java.getResourceAsStream("/pht/std/base/module.pht")!!.readAllBytes()),
-                ParsingContext(mutableListOf(Base, StdBase, StdMath)),
-                CompilationContext(CompileStage.UNKNOWN, mutableListOf(Base, StdBase, StdMath), ctx.contexts)
+                ParsingContext(mutableListOf(Base)),
+                ctx
             )
         }
         return if (ctx.isMethod() && ctx.isBody()) {
