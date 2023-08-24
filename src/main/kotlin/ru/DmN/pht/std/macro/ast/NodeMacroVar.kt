@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.base.ast
+package ru.DmN.pht.std.macro.ast
 
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ast.Node

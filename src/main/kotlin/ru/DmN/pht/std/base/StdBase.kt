@@ -5,7 +5,6 @@ import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
-import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.parsers.NPDefault
 import ru.DmN.pht.base.unparser.unparsers.NUNodesList
@@ -16,7 +15,6 @@ import ru.DmN.pht.std.base.compiler.java.ctx.GlobalContext
 import ru.DmN.pht.std.base.compiler.java.utils.*
 import ru.DmN.pht.std.base.parsers.*
 import ru.DmN.pht.std.base.unparsers.*
-import ru.DmN.pht.std.math.StdMath
 
 object StdBase : Module("std/base") {
     init {
@@ -29,15 +27,6 @@ object StdBase : Module("std/base") {
         // Пространство Имён
         add("ns",       NPDefault,  NUDefault,  NCNewNs)
         add("sub-ns",   NPDefault,  NUDefault,  NCSubNs)
-        // Макросы
-        add("defmacro",         NPMacroDef,     NUMacroDef, NCDefMacro)
-        add("macro-unroll",     NPMacroUnroll,  NUDefault,  NCMacroUnroll)
-        add("macro-inline",     NPDefault,      NUDefault,  NCMacroInline)
-        add("macro-arg-count",  NPMacroArg,     NUMacroArg, NCMacroArgCount)
-        add("macro-arg",        NPMacroArg,     NUMacroArg, NCMacroArg)
-        add("macro-name",       NPMacroArg,     NUMacroArg, NCMacroName)
-        add("macro-var",        NPMacroVar,     NUMacroVar, NCMacroVar)
-        add("macro!",           NPMacro,        NUMacro,    NCMacro)
         // Аннотации
         add("@abstract",NPDefault,  NUDefault,  NCAnnotation)
         add("@bridge",  NPDefault,  NUDefault,  NCAnnotation)
@@ -100,7 +89,6 @@ object StdBase : Module("std/base") {
         if (!ctx.modules.contains(this)) {
             super.inject(compiler, ctx, ret)
             ctx.contexts["std/base/global"] = GlobalContext()
-            compiler.contexts["std/base/macros"] = HashMap<String, MutableList<MacroDefine>>()
             compiler.compile(
                 String(StdBase::class.java.getResourceAsStream("/pht/std/base/module.pht")!!.readAllBytes()),
                 ParsingContext(mutableListOf(Base)),

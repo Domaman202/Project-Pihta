@@ -1,10 +1,10 @@
-package ru.DmN.pht.std.base.parsers
+package ru.DmN.pht.std.macro.parsers
 
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.parsers.SimpleNP
-import ru.DmN.pht.std.base.ast.NodeMacroUnroll
+import ru.DmN.pht.std.macro.ast.NodeMacroUnroll
 
 object NPMacroUnroll : SimpleNP<NodeMacroUnroll>() {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): NodeMacroUnroll =

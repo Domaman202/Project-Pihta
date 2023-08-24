@@ -1,11 +1,12 @@
-package ru.DmN.pht.std.base.compiler.java.compilers
+package ru.DmN.pht.std.macro.compiler.java.compilers
 
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.base.ast.NodeMacroArg
+import ru.DmN.pht.std.base.compiler.java.compilers.IStdNodeCompiler
+import ru.DmN.pht.std.macro.ast.NodeMacroArg
 import ru.DmN.pht.std.base.compiler.java.utils.*
 
 object NCMacroArg : IStdNodeCompiler<NodeMacroArg> {

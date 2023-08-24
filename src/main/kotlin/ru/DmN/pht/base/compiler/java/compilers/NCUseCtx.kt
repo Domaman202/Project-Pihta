@@ -13,12 +13,12 @@ object NCUseCtx : INodeCompiler<NodeUseCtx> {
     override fun calc(node: NodeUseCtx, compiler: Compiler, ctx: CompilationContext): VirtualType? {
         val context = CompilationContext(ctx.stage, SubList(ctx.modules), SubMap(ctx.contexts))
         node.names.map { Module.MODULES[it]!!.inject(compiler, context) }
-        return NCDefault.calc(node, compiler, ctx)
+        return NCDefault.calc(node, compiler, context)
     }
 
     override fun compile(node: NodeUseCtx, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         val context = CompilationContext(ctx.stage, SubList(ctx.modules), SubMap(ctx.contexts))
         node.names.map { Module.MODULES[it]!!.inject(compiler, context, ret) }
-        return NCDefault.compile(node, compiler, ctx, ret)
+        return NCDefault.compile(node, compiler, context, ret)
     }
 }
