@@ -3,7 +3,7 @@ package ru.DmN.pht.std.enums.compiler.java.compilers
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ast.Node
@@ -74,7 +74,8 @@ object NCEnumCtor : IStdNodeCompiler<NodeNodesList> {
                 visitVarInsn(Opcodes.ALOAD, 1)
                 visitVarInsn(Opcodes.ILOAD, 2)
                 visitMethodInsn(Opcodes.INVOKESPECIAL, "java/lang/Enum", "<init>", "(Ljava/lang/String;I)V", false)
-                compiler.compile(parts[1] as Node, context, false)
+                if (parts.size == 2)
+                    compiler.compile(parts[1] as Node, context, false)
                 visitInsn(Opcodes.RETURN)
                 val stopLabel = Label()
                 visitLabel(stopLabel)

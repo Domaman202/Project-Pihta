@@ -1,6 +1,7 @@
 package ru.DmN.pht.base.utils
 
 import ru.DmN.uu.Unsafe
+import java.awt.event.KeyListener
 import java.lang.reflect.Type
 
 data class TypeOrGeneric(val generics: Generics, val type: String, val generic: String?) {
@@ -44,11 +45,12 @@ data class TypeOrGeneric(val generics: Generics, val type: String, val generic: 
             else type.typeName.substring(0, i)
         }
 
-        private fun getGenericType(generic: Type): Class<*>? {
+        private fun getGenericType(generic: Type): Klass? {
             return try {
-                val cTypeVariableImpl = Class.forName("sun.reflect.generics.reflectiveObjects.TypeVariableImpl")
+                val cTypeVariableImpl = klassOf("sun.reflect.generics.reflectiveObjects.TypeVariableImpl")
                 if (cTypeVariableImpl.isAssignableFrom(generic.javaClass))
-                    (cTypeVariableImpl.getMethod("getBounds").apply { Unsafe.forceSetAccessible(this) }.invoke(generic) as Array<Type>)[0] as Class<*>
+                    (cTypeVariableImpl.getMethod("getBounds").apply { Unsafe.forceSetAccessible(this) }.invoke(generic) as Array<Type>)[0]
+                        .let { if (it is Klass) it else null }
                 else null
             } catch (_: Throwable) { null }
         }

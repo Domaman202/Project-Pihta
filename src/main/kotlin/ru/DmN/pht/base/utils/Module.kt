@@ -1,7 +1,7 @@
 package ru.DmN.pht.base.utils
 
 import ru.DmN.pht.base.Parser
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext

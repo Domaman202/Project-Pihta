@@ -5,12 +5,6 @@ import ru.DmN.pht.base.Interpreter
 object InterpreterMain {
     @JvmStatic
     fun main(args: Array<String>) {
-        val interpreter = Interpreter()
-        //
-        val result = interpreter.eval("""
-            (use std)
-            (call std#println "Hi!")
-            """.trimIndent())
-        println(result)
+        println(Interpreter().eval(String(CompilerMain::class.java.getResourceAsStream("/test.pht").readAllBytes())))
     }
 }

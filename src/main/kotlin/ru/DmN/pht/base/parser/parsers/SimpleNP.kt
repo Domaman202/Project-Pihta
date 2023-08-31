@@ -6,11 +6,11 @@ import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 
-open class SimpleNP<T : NodeNodesList> : NodeParser() {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): T =
-        parse(parser, ctx) { NodeNodesList(operationToken, it) as T }
+open class SimpleNP : NodeParser() {
+    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
+        parse(parser, ctx) { NodeNodesList(operationToken, it) }
 
-    fun parse(parser: Parser, ctx: ParsingContext, constructor: (nodes: MutableList<Node>) -> T): T {
+    fun parse(parser: Parser, ctx: ParsingContext, constructor: (nodes: MutableList<Node>) -> Node): Node {
         val nodes = ArrayList<Node>()
         var tk = parser.nextToken()
         while (tk != null && tk.type != Token.Type.CLOSE_BRACKET) {

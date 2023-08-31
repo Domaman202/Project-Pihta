@@ -3,7 +3,7 @@ package ru.DmN.pht.std.base.utils
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.utils.*
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.base.compiler.java.ctx.GlobalContext
@@ -74,7 +74,7 @@ fun insertRet(variable: Variable?, rettype: VirtualType, node: MethodNode) {
     }
 }
 
-fun VirtualType.ofPrimitive(): String? = when (name) {
+fun VirtualType.ofPrimitive(): String = when (name) {
     "void" -> ("java.lang.Void")
     "boolean" -> ("java.lang.Boolean")
     "byte" -> ("java.lang.Byte")
@@ -84,7 +84,7 @@ fun VirtualType.ofPrimitive(): String? = when (name) {
     "long" -> ("java.lang.Long")
     "float" -> ("java.lang.Float")
     "double" -> ("java.lang.Double")
-    else -> null
+    else -> name
 }
 
 fun VirtualType.toPrimitive(): String? = when (name) {

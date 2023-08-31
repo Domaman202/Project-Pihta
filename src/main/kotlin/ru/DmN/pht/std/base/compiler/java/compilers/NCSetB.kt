@@ -1,7 +1,7 @@
 package ru.DmN.pht.std.base.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType

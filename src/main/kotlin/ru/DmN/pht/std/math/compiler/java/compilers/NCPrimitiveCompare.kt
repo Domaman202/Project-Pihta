@@ -3,7 +3,7 @@ package ru.DmN.pht.std.math.compiler.java.compilers
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
@@ -43,10 +43,10 @@ object NCPrimitiveCompare : IStdNodeCompiler<NodeEquals> { // todo: list
                             when (node.operation) {
                                 NodeEquals.Operation.EQ -> Opcodes.IFNE
                                 NodeEquals.Operation.NE -> Opcodes.IFEQ
-                                NodeEquals.Operation.LT -> Opcodes.IFLE
-                                NodeEquals.Operation.LE -> Opcodes.IFLT
-                                NodeEquals.Operation.GT -> Opcodes.IFGE
-                                NodeEquals.Operation.GE -> Opcodes.IFGT
+                                NodeEquals.Operation.LT -> Opcodes.IFLT
+                                NodeEquals.Operation.LE -> Opcodes.IFLE
+                                NodeEquals.Operation.GT -> Opcodes.IFGT
+                                NodeEquals.Operation.GE -> Opcodes.IFGE
                             }, labelIf
                         )
                     }
@@ -73,7 +73,7 @@ object NCPrimitiveCompare : IStdNodeCompiler<NodeEquals> { // todo: list
                             NodeEquals.Operation.EQ -> {}
                             NodeEquals.Operation.NE -> {
                                 visitInsn(Opcodes.ICONST_1)
-                                visitInsn(Opcodes.IADD)
+                                visitInsn(Opcodes.ISUB)
                             }
 
                             else -> throw UnsupportedOperationException()

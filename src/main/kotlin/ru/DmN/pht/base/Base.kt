@@ -13,10 +13,8 @@ import ru.DmN.pht.base.utils.Module
 
 object Base : Module("base") {
     init {
-        add("use-ctx!", NPUseCtx,   NUUseCtx,   NCUseCtx)
-        add("use-ctx",  NPUseCtx,   NUUseCtx,   NCUseCtx) // overrides by std
-        add("use!", NPUse,          NUUse,      NCUse)
-        add("use",  NPUse,          NUUse,      NCUse) // overrides by std
-        add("progn",NPNodesList,    NUNodesList,NCDefault)
+        add("use-ctx",  NPUseCtx,   NUUseCtx,   NCUseCtx)
+        add("use",      NPUse,      NUUse,      NCUse)
+        add("progn",    NPNodesList,NUNodesList,NCDefault)
     }
 }

@@ -1,5 +1,6 @@
 package ru.DmN.pht.base.lexer
 
+import ru.DmN.pht.base.lexer.Token.Type.*
 import ru.DmN.pht.base.utils.isPrimitive
 
 class Lexer(private val input: String) : Iterator<Token?> {
@@ -16,10 +17,10 @@ class Lexer(private val input: String) : Iterator<Token?> {
         if (ptr >= input.length)
             return null
         when (val char = input[inc()]) {
-            '(' -> return Token(line, Token.Type.OPEN_BRACKET, "(")
-            ')' -> return Token(line, Token.Type.CLOSE_BRACKET, ")")
-            '[' -> return Token(line, Token.Type.OPEN_CBRACKET, "[")
-            ']' -> return Token(line, Token.Type.CLOSE_CBRACKET, "]")
+            '(' -> return Token(line, OPEN_BRACKET, "(")
+            ')' -> return Token(line, CLOSE_BRACKET, ")")
+            '[' -> return Token(line, OPEN_CBRACKET, "[")
+            ']' -> return Token(line, CLOSE_CBRACKET, "]")
             '^', '#' -> {
                 val str = StringBuilder()
                 while (ptr < input.length) {
@@ -34,10 +35,14 @@ class Lexer(private val input: String) : Iterator<Token?> {
                 return str.toString().let {
                     Token(
                         line,
-                        if (char == '^') if (it.isPrimitive()) Token.Type.PRIMITIVE else Token.Type.CLASS else Token.Type.NAMING,
+                        if (char == '^') if (it.isPrimitive()) PRIMITIVE else CLASS else NAMING,
                         it
                     )
                 }
+            }
+            '\'' -> {
+                inc()
+                return Token(line, CHAR, input[inc() - 1].toString())
             }
             '"' -> {
                 val str = StringBuilder()
@@ -62,11 +67,11 @@ class Lexer(private val input: String) : Iterator<Token?> {
                     )
                     prev = c
                 }
-                return Token(line, Token.Type.STRING, str.toString())
+                return Token(line, STRING, str.toString())
             }
 
             else -> {
-                if (char.isDigit() || (char == '-' && input[ptr + 1].isDigit())) {
+                if (char.isDigit() || (char == '-' && input[ptr].isDigit())) {
                     val str = StringBuilder()
                     str.append(char)
                     while (ptr < input.length) {
@@ -76,7 +81,19 @@ class Lexer(private val input: String) : Iterator<Token?> {
                             str.append(c)
                         } else break
                     }
-                    return Token(line, Token.Type.NUMBER, str.toString())
+                    val type = when (input[inc()]) {
+                        'i' -> INTEGER
+                        'l' -> LONG
+                        'f' -> FLOAT
+                        'd' -> DOUBLE
+                        else -> {
+                            ptr--
+                            if (str.contains('.'))
+                                DOUBLE
+                            else INTEGER
+                        }
+                    }
+                    return Token(line, type, str.toString())
                 }
 
                 val str = StringBuilder()
@@ -91,7 +108,7 @@ class Lexer(private val input: String) : Iterator<Token?> {
                     }
                 }
                 return str.toString().let {
-                    Token(line, if (it == "nil") Token.Type.NIL else if (it == "true" || it == "false") Token.Type.BOOLEAN else if (it.endsWith('^')) Token.Type.CLASS else Token.Type.OPERATION, it)
+                    Token(line, if (it == "nil") NIL else if (it == "true" || it == "false") BOOLEAN else if (it.endsWith('^')) CLASS else OPERATION, it)
                 }
             }
         }

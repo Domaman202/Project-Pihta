@@ -3,7 +3,7 @@ package ru.DmN.pht.std.base.compiler.java.compilers
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ast.Node
@@ -23,9 +23,9 @@ object NCExFn : IStdNodeCompiler<NodeNodesList> {
         val cctx = ctx.clazz
         //
         val parts = node.nodes.map { compiler.compute<Any?>(it, ctx, ComputeType.NAME) }
-        val clazz = gctx.getType(compiler, compiler.computeName(parts[0] as Node, ctx))
+        val clazz = gctx.getType(compiler, parts[0] as String)
         val name = parts[1] as String
-        val returnClass = (parts[2] as Node).getConstValueAsString()
+        val returnClass = parts[2] as String
         val returnType = cctx.getType(compiler, gctx, returnClass)
         val args = (parts[3] as List<Node>).map { compiler.compute<Any?>(it, ctx, ComputeType.NAME) }.map { it ->
             if (it is String)

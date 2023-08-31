@@ -3,7 +3,7 @@ package ru.DmN.pht.std.base
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.Base
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.parsers.NPDefault
@@ -18,11 +18,8 @@ import ru.DmN.pht.std.base.unparsers.*
 
 object StdBase : Module("std/base") {
     init {
-        // Use
-        add("use",              NPDefault,  NUDefault,  NCUse)
         // Импорт
-        add("import-macro",     NPDefault,  NUDefault,  NCImportMacro)
-        add("import-extend",    NPDefault,  NUDefault,  NCImportExtends)
+        add("import-extends",   NPDefault,  NUDefault,  NCImportExtends)
         add("import",           NPDefault,  NUDefault,  NCImport)
         // Пространство Имён
         add("ns",       NPDefault,  NUDefault,  NCNewNs)
@@ -38,7 +35,7 @@ object StdBase : Module("std/base") {
         // Объект / Класс / Интерфейс
         add("obj",  NPDefault,  NUDefault,  NCClass)
         add("cls",  NPDefault,  NUDefault,  NCClass)
-        add("intf", NPDefault,  NUDefault,  NCClass)
+        add("itf",  NPDefault,  NUDefault,  NCClass)
         // Расширение / Функция
         add("efn",  NPDefault,  NUDefault,  NCExFn)
         add("bfn",  NPDefault,  NUDefault,  NCBridgeFn)
@@ -62,14 +59,14 @@ object StdBase : Module("std/base") {
         add("mcall",    NPDefault,  NUDefault,  NCMethodCallA)
         // Сеттеры
         add("fset!",    NPFieldSet, NUFieldSet, NCSetB)
-        add("set!",     NPSet,      NUSet,      NCSetB)
-        add("set",      NPDefault,  NUDefault,  NCSetA)
+        add("set!",     NPSetB,     NUSet,      NCSetB)
+        add("set",      NPSetA,     NUDefault,  NCSetA)
         // Геттеры
         add("fget!",                    compiler =  NCFieldGetB)
         add("fget",         NPDefault,  NUDefault,  NCFieldGetA)
         add("get!",         NPGet,      NUGetOrName,NCGetB)
         add("get",          NPDefault,  NUDefault,  NCGetA)
-        add("get-or-name",  NPGetOrName,NUGetOrName,NCGetOrName)
+        add("get-or-name!", NPGetOrName,NUGetOrName,NCGetOrName)
         // Поле / Переменная
         add("field",        NPDefault,  NUDefault,  NCField)
         add("def",          NPDefault,  NUDefault,  NCDef)
@@ -78,7 +75,8 @@ object StdBase : Module("std/base") {
         add("is",           NPDefault,  NUDefault,  NCIs)
         add("typeof",       NPDefault,  NUDefault,  NCTypeof)
         // Значения
-        add("valn",         NPValn,     NUNodesList,    NCValn)
+        add("valn!",        NPValnB)
+        add("valn",         NPValnA,    NUNodesList,    NCValn)
         add("value!",       NPValueB)
         add("value",        NPValueA,   NUValue,        NCValue)
         // Пустой блок

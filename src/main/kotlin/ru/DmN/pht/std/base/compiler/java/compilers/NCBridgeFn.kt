@@ -3,7 +3,7 @@ package ru.DmN.pht.std.base.compiler.java.compilers
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ast.Node
@@ -125,8 +125,7 @@ object NCBridgeFn : IStdNodeCompiler<NodeNodesList> {
         gctx: GlobalContext,
         generics: Generics
     ): Triple<List<String>, List<VirtualType>, List<TypeOrGeneric>> {
-        val srcArgs = (node(ComputeType.NODE) as List<Node>)
-            .map { compiler.compute<String>(it, ctx, ComputeType.NAME) }
+        val srcArgs = (node(ComputeType.NODE) as List<Node>).map { compiler.computeName(it, ctx) }
         val srcArgsTypes = srcArgs.map { cctx.getType(compiler, gctx, it) }
         return Triple(srcArgs, srcArgsTypes, srcArgsTypes.mapIndexed { i, it -> TypeOrGeneric.of(generics, srcArgs[i], it) })
     }

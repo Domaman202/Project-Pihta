@@ -4,7 +4,7 @@ import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ast.Node
@@ -26,7 +26,7 @@ object NCClass : IStdNodeCompiler<NodeNodesList> {
                 .map { compiler.computeName(it, ctx) }
                 .map { gctx.getType(compiler, it) }.toMutableList()
             //
-            val isInterface = node.tkOperation.text!!.endsWith("intf")
+            val isInterface = node.tkOperation.text!!.endsWith("itf")
             val isClass = node.tkOperation.text.endsWith("cls")
             val isObject = node.tkOperation.text.endsWith("obj")
             //

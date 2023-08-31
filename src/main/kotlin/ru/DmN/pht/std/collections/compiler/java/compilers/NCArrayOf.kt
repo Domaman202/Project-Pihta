@@ -2,7 +2,7 @@ package ru.DmN.pht.std.collections.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.TypeInsnNode
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
@@ -17,7 +17,7 @@ import ru.DmN.pht.std.base.utils.primitiveToObject
 object NCArrayOf : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType {
         var type: VirtualType? = null
-        node.nodes.forEach { type = calcType(type, ctx.global.getType(compiler, compiler.calc(it, ctx)!!.ofPrimitive()!!)).first }
+        node.nodes.forEach { type = calcType(type, ctx.global.getType(compiler, compiler.calc(it, ctx)!!.ofPrimitive())).first }
         return type!!.arrayType
     }
 

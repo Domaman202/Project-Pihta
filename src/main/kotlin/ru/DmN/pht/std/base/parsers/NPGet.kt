@@ -2,6 +2,8 @@ package ru.DmN.pht.std.base.parsers
 
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.Token
+import ru.DmN.pht.base.lexer.Token.Type
+import ru.DmN.pht.base.lexer.Token.Type.*
 import ru.DmN.pht.base.lexer.isNaming
 import ru.DmN.pht.base.lexer.isOperation
 import ru.DmN.pht.base.parser.ParsingContext
@@ -15,19 +17,19 @@ object NPGet : NodeParser() {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
         val nameToken = parser.nextToken()!!
         return when (nameToken.type) {
-            Token.Type.CLASS -> process(
+            CLASS -> process(
                 operationToken,
                 nameToken.text!!,
                 static = true,
                 klass = true
             )
-            Token.Type.OPERATION -> process(
+            OPERATION -> process(
                 operationToken,
                 nameToken.text!!,
                 static = false,
                 klass = false
             )
-            Token.Type.OPEN_BRACKET -> {
+            OPEN_BRACKET -> {
                 parser.tokens.push(nameToken)
                 return NodeFMGet(
                     operationToken,
@@ -56,7 +58,7 @@ object NPGet : NodeParser() {
         } else {
             val isStatic = static && j == 1
             NodeFMGet(
-                Token(operationToken.line, Token.Type.OPERATION, "fget!",),
+                Token(operationToken.line, OPERATION, "fget!",),
                 process(operationToken, parts, j, static, clazz),
                 parts[j],
                 isStatic

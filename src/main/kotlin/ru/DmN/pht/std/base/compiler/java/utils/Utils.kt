@@ -1,11 +1,8 @@
 package ru.DmN.pht.std.base.compiler.java.utils
 
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.Node
-import ru.DmN.pht.base.utils.Generic
-import ru.DmN.pht.base.utils.Generics
-import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.base.compiler.java.compilers.IStdNodeCompiler
 import ru.DmN.pht.std.base.compiler.java.ctx.*
 
@@ -18,7 +15,11 @@ fun sliceInsert(list: MutableList<Any?>, index: Int, elements: List<Any?>) {
 }
 
 fun Compiler.computeNL(node: Node, ctx: CompilationContext): List<Node> =
-    compute<Any?>(node, ctx, ComputeType.NODE).let { if (it is List<*>) it as List<Node> else computeNL(it as Node, ctx) }
+    compute<Any?>(node, ctx, ComputeType.NODE).let {
+        if (it is List<*>)
+            it as List<Node>
+        else computeNL(it as Node, ctx)
+    }
 
 fun Compiler.computeOnlyNode(node: Node, ctx: CompilationContext): Node =
     compute<Any>(node, ctx, ComputeType.NODE).let { if (it is Node) it else node }

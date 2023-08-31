@@ -14,8 +14,12 @@ data class Token(val line: Int, val type: Type, val text: String? = null) {
         NAMING,
 
         NIL,
+        BOOLEAN,
+        CHAR,
+        INTEGER,
+        LONG,
+        FLOAT,
+        DOUBLE,
         STRING,
-        NUMBER,
-        BOOLEAN
     }
 }

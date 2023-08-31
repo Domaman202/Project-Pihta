@@ -2,7 +2,7 @@ package ru.DmN.pht.std.base.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
@@ -18,7 +18,10 @@ object NCValue : IStdNodeCompiler<NodeValue> {
                 compiler, when (node.vtype) {
                     NIL -> "java.lang.Object"
                     BOOLEAN -> "boolean"
+                    CHAR -> "char"
                     INT -> "int"
+                    LONG -> "long"
+                    FLOAT -> "float"
                     DOUBLE -> "double"
                     STRING -> "java.lang.String"
                     PRIMITIVE, CLASS -> "java.lang.Class"
@@ -28,43 +31,59 @@ object NCValue : IStdNodeCompiler<NodeValue> {
 
     override fun compile(node: NodeValue, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ret) {
-            val mnode = ctx.method.node
-            Variable(
-                "(tmp$${node.hashCode()})",
-                when (node.vtype) {
-                    NIL -> {
-                        mnode.visitInsn(Opcodes.ACONST_NULL)
-                        "java.lang.Object"
-                    }
+            ctx.method.node.run {
+                Variable(
+                    "(tmp$${node.hashCode()})",
+                    when (node.vtype) {
+                        NIL -> {
+                            visitInsn(Opcodes.ACONST_NULL)
+                            "java.lang.Object"
+                        }
 
-                    BOOLEAN -> {
-                        mnode.visitLdcInsn(node.getBoolean())
-                        "boolean"
-                    }
+                        BOOLEAN -> {
+                            visitLdcInsn(node.getBoolean())
+                            "boolean"
+                        }
 
-                    INT -> {
-                        mnode.visitLdcInsn(node.getInt())
-                        "int"
-                    }
+                        CHAR -> {
+                            visitLdcInsn(node.getChar())
+                            "char"
+                        }
 
-                    DOUBLE -> {
-                        mnode.visitLdcInsn(node.getDouble())
-                        "double"
-                    }
+                        INT -> {
+                            visitLdcInsn(node.getInt())
+                            "int"
+                        }
 
-                    STRING -> {
-                        mnode.visitLdcInsn(node.getString())
-                        "java.lang.String"
-                    }
+                        LONG -> {
+                            visitLdcInsn(node.getLong())
+                            "long"
+                        }
 
-                    PRIMITIVE, CLASS -> {
-                        mnode.visitLdcInsn(Type.getType(ctx.global.getType(compiler, node.value).desc))
-                        "java.lang.Class"
-                    }
+                        FLOAT -> {
+                            visitLdcInsn(node.getFloat())
+                            "float"
+                        }
 
-                    NAMING -> throw RuntimeException()
-                }, -1, true
-            )
+                        DOUBLE -> {
+                            visitLdcInsn(node.getDouble())
+                            "double"
+                        }
+
+                        STRING -> {
+                            visitLdcInsn(node.getString())
+                            "java.lang.String"
+                        }
+
+                        PRIMITIVE, CLASS -> {
+                            visitLdcInsn(Type.getType(ctx.global.getType(compiler, node.value).desc))
+                            "java.lang.Class"
+                        }
+
+                        NAMING -> throw RuntimeException()
+                    }, -1, true
+                )
+            }
         } else null
 
     override fun compute(node: NodeValue, compiler: Compiler, ctx: CompilationContext, type: ComputeType): Any =

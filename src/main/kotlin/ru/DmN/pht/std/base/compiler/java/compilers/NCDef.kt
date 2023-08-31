@@ -1,16 +1,14 @@
 package ru.DmN.pht.std.base.compiler.java.compilers
 
 import org.objectweb.asm.Label
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.std.base.compiler.java.utils.ComputeType
-import ru.DmN.pht.std.base.compiler.java.utils.body
-import ru.DmN.pht.std.base.compiler.java.utils.compute
-import ru.DmN.pht.std.base.compiler.java.utils.method
+import ru.DmN.pht.std.base.compiler.java.utils.*
 import ru.DmN.pht.std.base.utils.load
+import ru.DmN.pht.std.base.utils.loadCast
 import ru.DmN.pht.std.base.utils.store
 
 object NCDef : IStdNodeCompiler<NodeNodesList> {
@@ -28,7 +26,7 @@ object NCDef : IStdNodeCompiler<NodeNodesList> {
                 mctx.variableStarts[variable.id] = label
                 pair.getOrNull(2)?.let {
                     compiler.compile(it, ctx, true)?.apply {
-                        load(this, mnode)
+                        loadCast(this, ctx.global.getType(compiler, variable.type!!), mnode)
                         store(variable, mnode)
                     }
                 }

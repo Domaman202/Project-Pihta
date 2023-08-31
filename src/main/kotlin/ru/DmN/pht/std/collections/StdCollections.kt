@@ -25,7 +25,7 @@ object StdCollections : Module("std/collections") {
         add("new-doubles",  NPDefault,  NUDefault,  NCNewInts(VirtualType.DOUBLE,   Opcodes.T_DOUBLE))
         add("new-floats",   NPDefault,  NUDefault,  NCNewInts(VirtualType.FLOAT,    Opcodes.T_FLOAT))
         add("new-longs",    NPDefault,  NUDefault,  NCNewInts(VirtualType.LONG,     Opcodes.T_LONG))
-        add("new-int",      NPDefault,  NUDefault,  NCNewInts(VirtualType.INT,      Opcodes.T_INT))
+        add("new-ints",     NPDefault,  NUDefault,  NCNewInts(VirtualType.INT,      Opcodes.T_INT))
         add("new-chars",    NPDefault,  NUDefault,  NCNewInts(VirtualType.CHAR,     Opcodes.T_CHAR))
         add("new-shorts",   NPDefault,  NUDefault,  NCNewInts(VirtualType.SHORT,    Opcodes.T_SHORT))
         add("new-bytes",    NPDefault,  NUDefault,  NCNewInts(VirtualType.BYTE,     Opcodes.T_BYTE))

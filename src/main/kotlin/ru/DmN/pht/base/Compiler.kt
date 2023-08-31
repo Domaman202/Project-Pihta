@@ -1,7 +1,6 @@
-package ru.DmN.pht.base.compiler.java
+package ru.DmN.pht.base
 
 import org.objectweb.asm.tree.ClassNode
-import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
@@ -30,7 +29,7 @@ class Compiler {
     fun get(ctx: CompilationContext, node: Node): INodeCompiler<Node> {
         val name = node.tkOperation.text!!
         val i = name.lastIndexOf('/')
-        if (i == -1) {
+        if (i < 1) {
             ctx.modules.forEach { it -> it.compilers[name]?.let { return it as INodeCompiler<Node> } }
             throw RuntimeException()
         } else {
@@ -40,7 +39,7 @@ class Compiler {
     }
 
     fun pushTask(ctx: CompilationContext, stage: CompileStage, task: ICompilable) {
-        if (stage.ordinal >= ctx.stage.ordinal)
+        if (stage.ordinal <= ctx.stage.get().ordinal)
             task()
         else tasks[stage] += task
     }

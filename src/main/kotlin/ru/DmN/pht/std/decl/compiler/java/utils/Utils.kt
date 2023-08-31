@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.decl.compiler.java.utils
 
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Generic
 import ru.DmN.pht.base.utils.Generics

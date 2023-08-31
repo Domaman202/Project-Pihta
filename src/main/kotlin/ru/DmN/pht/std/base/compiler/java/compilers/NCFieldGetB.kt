@@ -1,18 +1,21 @@
 package ru.DmN.pht.std.base.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.base.ast.NodeFMGet
+import ru.DmN.pht.std.base.compiler.java.utils.ComputeType
+import ru.DmN.pht.std.base.compiler.java.utils.computeName
 import ru.DmN.pht.std.base.compiler.java.utils.global
 import ru.DmN.pht.std.base.compiler.java.utils.method
 import ru.DmN.pht.std.base.utils.load
 
 object NCFieldGetB : IStdNodeCompiler<NodeFMGet> {
-    override fun calc(node: NodeFMGet, compiler: Compiler, ctx: CompilationContext): VirtualType? =
-        compiler.calc(node.instance, ctx)!!.fields.find { it.name == node.name && it.static == node.static }!!.type
+    override fun calc(node: NodeFMGet, compiler: Compiler, ctx: CompilationContext): VirtualType =
+        (if (node.static) ctx.global.getType(compiler, node.instance.getConstValueAsString()) else compiler.calc(node.instance, ctx)!!)
+            .fields.find { it.name == node.name && it.static == node.static }!!.type
 
     override fun compile(node: NodeFMGet, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ret)
@@ -33,4 +36,9 @@ object NCFieldGetB : IStdNodeCompiler<NodeFMGet> {
                 Variable("pht$${node.hashCode()}", field.type.name, -1, true)
             }
         else null
+
+    override fun compute(node: NodeFMGet, compiler: Compiler, ctx: CompilationContext, type: ComputeType): Any? =
+        if (type == ComputeType.NAME)
+            "${compiler.computeName(node.instance, ctx)}/${node.name}"
+        else node
 }

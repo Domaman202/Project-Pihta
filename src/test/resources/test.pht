@@ -1,14 +1,2 @@
-(
-    (use std/base std/util)
-
-    (import [java.lang.Object Any][java.lang.String String])
-
-    (ns ru.DmN.test (
-        (obj Main [^Any] (
-            (defn main ^Any [] (
-                (def [[str "Text"]])
-                (#invoke (rfn [str][] (#println (use std/base) str)))
-                (#invoke (fn [] (#println (use std/base) "Meow")))
-                (unit)))))
-    ))
-)
+(use std/base std/util)
+(valn-repeat (#println std "Левой!") 10)

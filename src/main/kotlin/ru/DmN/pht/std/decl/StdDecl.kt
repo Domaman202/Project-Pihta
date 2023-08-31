@@ -10,7 +10,7 @@ import ru.DmN.pht.std.decl.compiler.java.compilers.NCFn
 object StdDecl : Module("std/decl") {
     init {
         add("cls",  NPDefault,  NUDefault,  NCClass)
-        add("fn",   NPDefault,  NUDefault,  NCFn)
+        add("defn",   NPDefault,  NUDefault,  NCFn)
         add("field",NPDefault,  NUDefault,  NCField)
     }
 }

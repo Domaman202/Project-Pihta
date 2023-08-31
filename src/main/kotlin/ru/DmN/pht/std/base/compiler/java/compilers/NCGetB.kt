@@ -1,7 +1,7 @@
 package ru.DmN.pht.std.base.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
@@ -38,4 +38,9 @@ object NCGetB : IStdNodeCompiler<NodeGetOrName> {
                 Variable("pht$${node.hashCode()}", field.type.name, -1, true)
             } else throw RuntimeException()
         else null
+
+    override fun compute(node: NodeGetOrName, compiler: Compiler, ctx: CompilationContext, type: ComputeType): Any? =
+        if (type == ComputeType.NAME)
+            node.name
+        else node
 }

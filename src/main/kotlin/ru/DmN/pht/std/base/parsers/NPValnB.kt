@@ -7,7 +7,7 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.parser.parsers.NodeParser
 
-object NPValn : NodeParser() {
+object NPValnB : NodeParser() {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
         val nodes = ArrayList<Node>()
         var tk = parser.nextToken()

@@ -1,13 +1,12 @@
 package ru.DmN.pht.std.decl.compiler.java.compilers
 
-import ru.DmN.pht.base.compiler.java.Compiler
+import ru.DmN.pht.base.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.utils.*
 import ru.DmN.pht.std.base.compiler.java.compilers.IStdNodeCompiler
-import ru.DmN.pht.std.base.compiler.java.ctx.ClassContext
 import ru.DmN.pht.std.base.compiler.java.utils.ComputeType
 import ru.DmN.pht.std.base.compiler.java.utils.compute
 import ru.DmN.pht.std.base.compiler.java.utils.computeName

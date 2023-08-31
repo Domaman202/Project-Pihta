@@ -3,11 +3,12 @@ package ru.DmN.pht.std.base.parsers
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
+import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.parser.parsers.SimpleNP
 
-object NPMethodCallB : SimpleNP<NodeNodesList>() {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): NodeNodesList {
+object NPMethodCallB : SimpleNP() {
+    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
         val name = parser.parseNode(ctx)!!
         return super.parse(parser, ctx) {
             val list = mutableListOf(it.first())
