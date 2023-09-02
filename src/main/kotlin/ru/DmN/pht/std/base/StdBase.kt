@@ -3,18 +3,27 @@ package ru.DmN.pht.std.base
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.Base
+import ru.DmN.pht.base.Parser
+import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.parsers.NPDefault
-import ru.DmN.pht.base.unparser.unparsers.NUNodesList
+import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.Module
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.base.compiler.java.compilers.*
 import ru.DmN.pht.std.base.compiler.java.ctx.GlobalContext
-import ru.DmN.pht.std.base.compiler.java.utils.*
+import ru.DmN.pht.std.base.compiler.java.utils.body
+import ru.DmN.pht.std.base.compiler.java.utils.isBody
+import ru.DmN.pht.std.base.compiler.java.utils.isMethod
+import ru.DmN.pht.std.base.compiler.java.utils.method
 import ru.DmN.pht.std.base.parsers.*
-import ru.DmN.pht.std.base.unparsers.*
+import ru.DmN.pht.std.base.unparsers.NUDefault
+import ru.DmN.pht.std.base.unparsers.NUFieldSet
+import ru.DmN.pht.std.base.unparsers.NUGetOrName
+import ru.DmN.pht.std.base.unparsers.NUSet
+import ru.DmN.pht.std.value.StdValue
 
 object StdBase : Module("std/base") {
     init {
@@ -66,7 +75,6 @@ object StdBase : Module("std/base") {
         add("fget",         NPDefault,  NUDefault,  NCFieldGetA)
         add("get!",         NPGet,      NUGetOrName,NCGetB)
         add("get",          NPDefault,  NUDefault,  NCGetA)
-        add("get-or-name!", NPGetOrName,NUGetOrName,NCGetOrName)
         // Поле / Переменная
         add("field",        NPDefault,  NUDefault,  NCField)
         add("def",          NPDefault,  NUDefault,  NCDef)
@@ -74,22 +82,32 @@ object StdBase : Module("std/base") {
         add("as",           NPDefault,  NUDefault,  NCAs)
         add("is",           NPDefault,  NUDefault,  NCIs)
         add("typeof",       NPDefault,  NUDefault,  NCTypeof)
-        // Значения
-        add("valn!",        NPValnB)
-        add("valn",         NPValnA,    NUNodesList,    NCValn)
-        add("value!",       NPValueB)
-        add("value",        NPValueA,   NUValue,        NCValue)
         // Пустой блок
-        add("unit",         NPDefault,  NUDefault,      NCUnit)
+        add("unit",         NPDefault,  NUDefault,  NCUnit)
+    }
+
+    override fun inject(parser: Parser, ctx: ParsingContext) {
+        if (!ctx.modules.contains(this)) {
+            super.inject(parser, ctx)
+            StdValue.inject(parser, ctx)
+        }
+    }
+
+    override fun inject(unparser: Unparser, ctx: UnparsingContext) {
+        if (!ctx.modules.contains(this)) {
+            super.inject(unparser, ctx)
+            StdValue.inject(unparser, ctx)
+        }
     }
 
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (!ctx.modules.contains(this)) {
             super.inject(compiler, ctx, ret)
+            StdValue.inject(compiler, ctx, ret)
             ctx.contexts["std/base/global"] = GlobalContext()
             compiler.compile(
                 String(StdBase::class.java.getResourceAsStream("/pht/std/base/module.pht")!!.readAllBytes()),
-                ParsingContext(mutableListOf(Base)),
+                ParsingContext(mutableListOf(Base, StdValue)),
                 ctx
             )
         }
