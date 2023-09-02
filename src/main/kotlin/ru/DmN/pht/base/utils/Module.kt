@@ -21,9 +21,9 @@ import ru.DmN.pht.std.macro.StdMacro
 import ru.DmN.pht.std.value.StdValue
 
 open class Module(val name: String) {
-    val parsers: MutableMap<String, NodeParser> = HashMap()
-    val unparsers: MutableMap<String, NodeUnparser<*>> = HashMap()
-    val compilers: MutableMap<String, INodeCompiler<*>> = HashMap()
+    val parsers: MutableMap<Regex, NodeParser> = HashMap()
+    val unparsers: MutableMap<Regex, NodeUnparser<*>> = HashMap()
+    val compilers: MutableMap<Regex, INodeCompiler<*>> = HashMap()
 
     open fun inject(parser: Parser, ctx: ParsingContext) {
         if (!ctx.modules.contains(this)) {
@@ -46,7 +46,24 @@ open class Module(val name: String) {
         return null
     }
 
-    fun add(name: String, parser: NodeParser? = null, unparser: NodeUnparser<*>? = null, compiler: INodeCompiler<*>? = null) {
+    fun add(name: String, parser: NodeParser? = null, unparser: NodeUnparser<*>? = null, compiler: INodeCompiler<*>? = null): Unit =
+        add(
+            name
+                .replace(".", "\\.")
+                .replace("^", "\\^")
+                .replace("$", "\\$")
+                .replace("[", "\\[")
+                .replace("]", "\\]")
+                .replace("\\", "\\\\")
+                .replace("?", "\\?")
+                .replace("*", "\\*")
+                .replace("+", "\\+")
+                .replace("{", "\\{")
+                .replace("}", "\\}")
+                .toRegex(),
+            parser, unparser, compiler)
+
+    fun add(name: Regex, parser: NodeParser? = null, unparser: NodeUnparser<*>? = null, compiler: INodeCompiler<*>? = null) {
         parser?.let { parsers[name] = it }
         unparser?.let { unparsers[name] = it }
         compiler?.let { compilers[name] = it }
