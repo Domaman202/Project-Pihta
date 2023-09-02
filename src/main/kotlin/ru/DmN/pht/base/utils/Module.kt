@@ -16,6 +16,7 @@ import ru.DmN.pht.std.enums.StdEnums
 import ru.DmN.pht.std.math.StdMath
 import ru.DmN.pht.std.util.StdUtil
 import ru.DmN.pht.example.bf.BF
+import ru.DmN.pht.std.all.StdAll
 import ru.DmN.pht.std.macro.StdMacro
 
 open class Module(val name: String) {
@@ -23,21 +24,20 @@ open class Module(val name: String) {
     val unparsers: MutableMap<String, NodeUnparser<*>> = HashMap()
     val compilers: MutableMap<String, INodeCompiler<*>> = HashMap()
 
-    fun inject(parser: Parser, ctx: ParsingContext) {
+    open fun inject(parser: Parser, ctx: ParsingContext) {
         if (!ctx.modules.contains(this)) {
             ctx.modules += this
         }
     }
 
-    fun inject(unparser: Unparser, ctx: UnparsingContext) {
+    open fun inject(unparser: Unparser, ctx: UnparsingContext) {
         if (!ctx.modules.contains(this)) {
             ctx.modules += this
         }
     }
 
-    open fun inject(compiler: Compiler, ctx: CompilationContext) {
+    open fun inject(compiler: Compiler, ctx: CompilationContext) =
         inject(compiler, ctx, false)
-    }
 
     open fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (!ctx.modules.contains(this))
@@ -55,7 +55,7 @@ open class Module(val name: String) {
         val MODULES: MutableMap<String, Module> = HashMap()
 
         init {
-            for (module in listOf(StdBase, StdCollections, StdDecl, StdEnums, StdMacro, StdMath, StdUtil, BF)) {
+            for (module in listOf(StdAll, StdBase, StdCollections, StdDecl, StdEnums, StdMacro, StdMath, StdUtil, BF)) {
                 MODULES[module.name] = module
             }
         }

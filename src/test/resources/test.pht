@@ -1,2 +1,3 @@
-(use std/base std/util)
-(valn-repeat (#println std "Левой!") 10)
+(use std/base std/all)
+(defmacro print [] (#println std "Левой!"))
+(valn-repeat (print) 10)
