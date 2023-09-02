@@ -1,7 +1,7 @@
 package ru.DmN.pht.std.base.compiler.java.ctx
 
 import org.objectweb.asm.tree.ClassNode
-import ru.DmN.pht.base.Compiler
+import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.base.utils.Generic
 import ru.DmN.pht.base.utils.Generics

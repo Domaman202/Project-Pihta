@@ -1,6 +1,6 @@
-package ru.DmN.pht.base.test
+package ru.DmN.pht.base.test.java
 
-import ru.DmN.pht.base.Interpreter
+import ru.DmN.pht.base.compiler.java.Interpreter
 
 object InterpreterMain {
     @JvmStatic

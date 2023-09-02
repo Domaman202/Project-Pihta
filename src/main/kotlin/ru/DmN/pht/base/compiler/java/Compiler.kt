@@ -1,6 +1,7 @@
-package ru.DmN.pht.base
+package ru.DmN.pht.base.compiler.java
 
 import org.objectweb.asm.tree.ClassNode
+import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
