@@ -16,6 +16,7 @@ import ru.DmN.pht.std.enums.StdEnums
 import ru.DmN.pht.std.math.StdMath
 import ru.DmN.pht.std.util.StdUtil
 import ru.DmN.pht.example.bf.BF
+import ru.DmN.pht.example.lkl.LKL
 import ru.DmN.pht.std.all.StdAll
 import ru.DmN.pht.std.macro.StdMacro
 import ru.DmN.pht.std.value.StdValue
@@ -73,7 +74,7 @@ open class Module(val name: String) {
         val MODULES: MutableMap<String, Module> = HashMap()
 
         init {
-            for (module in listOf(StdAll, StdBase, StdCollections, StdDecl, StdEnums, StdMacro, StdMath, StdUtil, StdValue, BF)) {
+            for (module in listOf(StdAll, StdBase, StdCollections, StdDecl, StdEnums, StdMacro, StdMath, StdUtil, StdValue, BF, LKL)) {
                 MODULES[module.name] = module
             }
         }

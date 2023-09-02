@@ -1,2 +1,2 @@
-(use std/all)
-(#println std "Hi!")
+(use example/lkl)
+(lkl)

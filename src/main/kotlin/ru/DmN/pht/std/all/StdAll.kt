@@ -27,6 +27,14 @@ object StdAll : Module("std/all") {
         }
     }
 
+    override fun inject(compiler: Compiler, ctx: CompilationContext): Variable? {
+        if (!ctx.modules.contains(this)) {
+            super.inject(compiler, ctx)
+            STD_MODULES.forEach { it.value.inject(compiler, ctx) }
+        }
+        return null
+    }
+
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (!ctx.modules.contains(this)) {
             super.inject(compiler, ctx, ret)
