@@ -1,3 +1,2 @@
-(use std/all)
-(defmacro print [] (#println std "Левой!"))
-(valn-repeat (print) 10)
+(use example/lkl)
+(lkl)

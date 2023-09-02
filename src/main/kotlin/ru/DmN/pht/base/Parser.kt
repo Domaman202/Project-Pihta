@@ -6,6 +6,7 @@ import ru.DmN.pht.base.lexer.Token.Type.*
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.parsers.NodeParser
+import ru.DmN.pht.base.utils.getRegex
 import java.util.*
 
 class Parser(val lexer: Lexer) {
@@ -58,11 +59,11 @@ class Parser(val lexer: Lexer) {
     fun get(ctx: ParsingContext, name: String): NodeParser? {
         val i = name.lastIndexOf('/')
         return if (i < 1) {
-            ctx.modules.forEach { it -> it.parsers[name]?.let { return it } }
+            ctx.modules.forEach { it -> it.parsers.getRegex(name)?.let { return it } }
             null
         } else {
             val module = name.substring(0, i)
-            ctx.modules.find { it.name == module }?.parsers?.get(name.substring(i + 1))
+            ctx.modules.find { it.name == module }?.parsers?.getRegex(name.substring(i + 1))
         }
     }
 

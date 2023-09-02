@@ -16,14 +16,15 @@ import ru.DmN.pht.std.enums.StdEnums
 import ru.DmN.pht.std.math.StdMath
 import ru.DmN.pht.std.util.StdUtil
 import ru.DmN.pht.example.bf.BF
+import ru.DmN.pht.example.lkl.LKL
 import ru.DmN.pht.std.all.StdAll
 import ru.DmN.pht.std.macro.StdMacro
 import ru.DmN.pht.std.value.StdValue
 
 open class Module(val name: String) {
-    val parsers: MutableMap<String, NodeParser> = HashMap()
-    val unparsers: MutableMap<String, NodeUnparser<*>> = HashMap()
-    val compilers: MutableMap<String, INodeCompiler<*>> = HashMap()
+    val parsers: MutableMap<Regex, NodeParser> = HashMap()
+    val unparsers: MutableMap<Regex, NodeUnparser<*>> = HashMap()
+    val compilers: MutableMap<Regex, INodeCompiler<*>> = HashMap()
 
     open fun inject(parser: Parser, ctx: ParsingContext) {
         if (!ctx.modules.contains(this)) {
@@ -46,7 +47,24 @@ open class Module(val name: String) {
         return null
     }
 
-    fun add(name: String, parser: NodeParser? = null, unparser: NodeUnparser<*>? = null, compiler: INodeCompiler<*>? = null) {
+    fun add(name: String, parser: NodeParser? = null, unparser: NodeUnparser<*>? = null, compiler: INodeCompiler<*>? = null): Unit =
+        add(
+            name
+                .replace(".", "\\.")
+                .replace("^", "\\^")
+                .replace("$", "\\$")
+                .replace("[", "\\[")
+                .replace("]", "\\]")
+                .replace("\\", "\\\\")
+                .replace("?", "\\?")
+                .replace("*", "\\*")
+                .replace("+", "\\+")
+                .replace("{", "\\{")
+                .replace("}", "\\}")
+                .toRegex(),
+            parser, unparser, compiler)
+
+    fun add(name: Regex, parser: NodeParser? = null, unparser: NodeUnparser<*>? = null, compiler: INodeCompiler<*>? = null) {
         parser?.let { parsers[name] = it }
         unparser?.let { unparsers[name] = it }
         compiler?.let { compilers[name] = it }
@@ -56,7 +74,7 @@ open class Module(val name: String) {
         val MODULES: MutableMap<String, Module> = HashMap()
 
         init {
-            for (module in listOf(StdAll, StdBase, StdCollections, StdDecl, StdEnums, StdMacro, StdMath, StdUtil, StdValue, BF)) {
+            for (module in listOf(StdAll, StdBase, StdCollections, StdDecl, StdEnums, StdMacro, StdMath, StdUtil, StdValue, BF, LKL)) {
                 MODULES[module.name] = module
             }
         }

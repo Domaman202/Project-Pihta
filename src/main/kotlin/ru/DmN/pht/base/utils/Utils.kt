@@ -3,6 +3,9 @@ package ru.DmN.pht.base.utils
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.*
 
+fun <T> Map<Regex, T>.getRegex(key: String): T? =
+    entries.find { key.matches(it.key) }?.value
+
 val String.desc
     get() = when (this) {
         "void" -> "V"
