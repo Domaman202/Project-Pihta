@@ -17,7 +17,7 @@ import kotlin.math.absoluteValue
 class Interpreter {
     fun eval(code: String): Any? {
         eval0("""
-            (use-ctx std/base std/macro
+            (use-ctx std/all
                 (obj ru.DmN.pht.tmp.TMP${code.hashCode().absoluteValue} []
                     (defn run ^void [] (${code}))))
             """).first().run {

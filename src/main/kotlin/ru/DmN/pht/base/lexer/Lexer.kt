@@ -12,7 +12,7 @@ class Lexer(private val input: String) : Iterator<Token?> {
     override fun next(): Token? {
         if (ptr >= input.length)
             return null
-        while (ptr < input.length && (input[ptr] == ' ' || input[ptr] == '\n'))
+        while (ptr < input.length && (input[ptr] == ' ' || input[ptr] == '\t' || input[ptr] == '\n'))
             inc()
         if (ptr >= input.length)
             return null

@@ -1,2 +1,9 @@
-(use example/lkl)
-(lkl)
+(use-ctx std/all
+	(mcall
+		(fn
+			(valn)
+			(mcall
+				(use std/base)
+				(value #println)
+				(value "Слава Советскому Союзу!")))
+		(value #invoke)))

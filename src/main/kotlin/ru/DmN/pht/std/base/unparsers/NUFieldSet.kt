@@ -6,12 +6,12 @@ import ru.DmN.pht.std.base.ast.NodeFieldSet
 import ru.DmN.pht.base.unparser.unparsers.NodeUnparser
 
 object NUFieldSet : NodeUnparser<NodeFieldSet>() {
-    override fun unparse(unparser: Unparser, ctx: UnparsingContext, node: NodeFieldSet) {
+    override fun unparse(node: NodeFieldSet, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
             append('(').append(node.tkOperation.text).append(' ')
-            unparser.unparse(ctx, node.instance)
+            unparser.unparse(node.instance, ctx, indent)
             append("#${node.name} ")
-            unparser.unparse(ctx, node.value!!)
+            unparser.unparse(node.value!!, ctx, indent)
             append(')')
         }
     }
