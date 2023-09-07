@@ -7,8 +7,5 @@ import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.module.ast.NodeModule
 
 object NCModule : INodeCompiler<NodeModule> {
-    override fun compile(node: NodeModule, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        ctx.modules += node.module
-        return null
-    }
+    override fun compile(node: NodeModule, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? = null
 }

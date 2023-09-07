@@ -9,16 +9,15 @@ import java.util.concurrent.atomic.AtomicReference
 
 class CompilationContext(
     var stage: AtomicReference<CompileStage>,
-    val modules: MutableList<Module> = ArrayList(),
     val loadedModules: MutableList<Module> = ArrayList(),
     val contexts: MutableMap<String, Any> = HashMap()) {
     fun subCtx() =
-        CompilationContext(stage, modules, SubList(loadedModules), SubMap(contexts))
+        CompilationContext(stage, SubList(loadedModules), SubMap(contexts))
     fun with(name: String, ctx: Any) =
-        CompilationContext(stage, modules, loadedModules, contexts.toMutableMap().apply { this[name] = ctx })
+        CompilationContext(stage, loadedModules, contexts.toMutableMap().apply { this[name] = ctx })
 
     companion object {
         fun base() =
-            CompilationContext(AtomicReference(CompileStage.UNKNOWN), mutableListOf(Base), mutableListOf(Base))
+            CompilationContext(AtomicReference(CompileStage.UNKNOWN), mutableListOf(Base))
     }
 }

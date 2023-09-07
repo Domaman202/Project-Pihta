@@ -4,6 +4,7 @@ import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
+import ru.DmN.pht.base.parser.parsers.NPUse
 import ru.DmN.pht.base.parser.parsers.SimpleNP
 import ru.DmN.pht.base.utils.Module
 import ru.DmN.pht.base.utils.nextOperation
@@ -13,10 +14,12 @@ object NPModule : SimpleNP() {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
         NodeModule(operationToken, parserModuleArgs(parser)).apply {
             val name = data["name"] as String
-            module = Module.MODULES.getOrDefault(name, Module(name))
-            (data["files"] as List<String>?)?.let { module.files += it }
-            module.init = true
-            ctx.modules += module
+            module = Module.MODULES.getOrPut(name) { Module(name) }
+            if (!module.init) {
+                module.init = true
+                (data["files"] as List<String>?)?.let { module.files += it }
+                (data["deps"] as List<String>?)?.let { NPUse.process(it, parser, ctx) }
+            }
         }
 
     private fun parserModuleArgs(parser: Parser): Map<String, Any> {

@@ -1,4 +1,4 @@
-(use-ctx pht
+(use-ctx pht std/macro
     (ns pht.std
         (defmacro ctor [args body]
             (defn <init> ^void [] (macro-arg args) (macro-arg body)))

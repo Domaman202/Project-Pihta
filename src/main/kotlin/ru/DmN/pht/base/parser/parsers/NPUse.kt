@@ -1,6 +1,5 @@
 package ru.DmN.pht.base.parser.parsers
 
-import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
@@ -17,16 +16,16 @@ object NPUse : NodeParser() {
             names.add(tk.text!!)
             tk = parser.nextToken()!!
         }
-        process(names, parser, ctx, ctx)
+        process(names, parser, ctx)
         return NodeUse(operationToken, names)
     }
 
-    fun process(names: List<String>, parser: Parser, ctx: ParsingContext, context: ParsingContext) {
+    fun process(names: List<String>, parser: Parser, context: ParsingContext) {
         names.forEach { name ->
-            val module = ctx.modules.find { it.name == name }
+            val module = Module.MODULES[name]
             if (module?.init != true)
-                Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(ctx, mutableListOf(Base, StdModule)))
-            (module ?: ctx.modules.find { it.name == name }!!).inject(parser, context)
+                Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(listOf(StdModule)))
+            (module ?: Module.MODULES[name]!!).inject(parser, context)
         }
     }
 }

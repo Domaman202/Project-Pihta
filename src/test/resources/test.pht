@@ -1,1 +1,4 @@
-(use-ctx pht example/test)
+(use-ctx pht
+    (defmacro test [] (#println (use std/base) "Какой-то текст"))
+    (test)
+    (test))

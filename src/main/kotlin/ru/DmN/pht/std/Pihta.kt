@@ -15,7 +15,7 @@ import ru.DmN.pht.std.macro.StdMacro
 import ru.DmN.pht.std.math.StdMath
 import ru.DmN.pht.std.util.StdUtil
 
-object Pihta : Module("pht") { // todo: допилить некоторые моменты
+object Pihta : Module("pht") { // todo: ебучие циклические зависимости
     val STD_MODULES
         get() = listOf(StdBase, StdCollections, StdEnums, StdMacro, StdMath, StdUtil)
 
@@ -44,7 +44,7 @@ object Pihta : Module("pht") { // todo: допилить некоторые мо
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (!ctx.loadedModules.contains(this)) {
             super.inject(compiler, ctx, ret)
-            STD_MODULES.forEach { it.inject(compiler, ctx, ret) }
+            STD_MODULES.forEach { it.inject(compiler, ctx, false) }
         }
         return null
     }
