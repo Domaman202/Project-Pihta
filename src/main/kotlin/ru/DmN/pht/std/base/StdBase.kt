@@ -100,7 +100,7 @@ object StdBase : Module("std/base") {
     }
 
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        if (!ctx.modules.contains(this)) {
+        if (!ctx.loadedModules.contains(this)) {
             StdValue.inject(compiler, ctx, ret)
             ctx.contexts["std/base/global"] = GlobalContext()
             super.inject(compiler, ctx, ret)

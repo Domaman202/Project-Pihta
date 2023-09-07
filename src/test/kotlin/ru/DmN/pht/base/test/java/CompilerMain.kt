@@ -1,21 +1,18 @@
 package ru.DmN.pht.base.test.java
 
 import org.objectweb.asm.ClassWriter
-import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
-import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.compiler.java.utils.ICompilable
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.utils.Klass
 import ru.DmN.uu.Unsafe
 import java.io.FileOutputStream
-import java.util.concurrent.atomic.AtomicReference
 
 object CompilerMain {
     @JvmStatic
     fun main(args: Array<String>) {
-        val ctx = CompilationContext(AtomicReference(CompileStage.UNKNOWN), mutableListOf(Base))
+        val ctx = CompilationContext.base()
         val compiler = Compiler()
         compiler.compile(
             String(CompilerMain::class.java.getResourceAsStream("/test.pht").readAllBytes()),

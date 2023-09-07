@@ -1,14 +1,24 @@
 package ru.DmN.pht.base.compiler.java.ctx
 
+import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.utils.Module
+import ru.DmN.pht.std.base.compiler.java.utils.SubList
+import ru.DmN.pht.std.base.compiler.java.utils.SubMap
 import java.util.concurrent.atomic.AtomicReference
 
-class CompilationContext(var stage: AtomicReference<CompileStage>, val modules: MutableList<Module> = ArrayList(), val contexts: MutableMap<String, Any> = HashMap()) {
-    fun with(modules: MutableList<Module>) =
-        CompilationContext(stage, (this.modules + modules).toMutableList(), contexts)
-    fun with(contexts: MutableMap<String, Any>) =
-        CompilationContext(stage, modules, (this.contexts + contexts).toMutableMap())
+class CompilationContext(
+    var stage: AtomicReference<CompileStage>,
+    val modules: MutableList<Module> = ArrayList(),
+    val loadedModules: MutableList<Module> = ArrayList(),
+    val contexts: MutableMap<String, Any> = HashMap()) {
+    fun subCtx() =
+        CompilationContext(stage, modules, SubList(loadedModules), SubMap(contexts))
     fun with(name: String, ctx: Any) =
-        CompilationContext(stage, modules, contexts.toMutableMap().apply { this[name] = ctx })
+        CompilationContext(stage, modules, loadedModules, contexts.toMutableMap().apply { this[name] = ctx })
+
+    companion object {
+        fun base() =
+            CompilationContext(AtomicReference(CompileStage.UNKNOWN), mutableListOf(Base), mutableListOf(Base))
+    }
 }

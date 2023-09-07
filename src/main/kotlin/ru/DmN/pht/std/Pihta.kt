@@ -34,7 +34,7 @@ object Pihta : Module("pht") { // todo: допилить некоторые мо
     }
 
     override fun inject(compiler: Compiler, ctx: CompilationContext): Variable? {
-        if (!ctx.modules.contains(this)) {
+        if (!ctx.loadedModules.contains(this)) {
             super.inject(compiler, ctx)
             STD_MODULES.forEach { it.inject(compiler, ctx) }
         }
@@ -42,7 +42,7 @@ object Pihta : Module("pht") { // todo: допилить некоторые мо
     }
 
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        if (!ctx.modules.contains(this)) {
+        if (!ctx.loadedModules.contains(this)) {
             super.inject(compiler, ctx, ret)
             STD_MODULES.forEach { it.inject(compiler, ctx, ret) }
         }

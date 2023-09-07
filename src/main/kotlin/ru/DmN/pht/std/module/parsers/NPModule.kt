@@ -13,8 +13,9 @@ object NPModule : SimpleNP() {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
         NodeModule(operationToken, parserModuleArgs(parser)).apply {
             val name = data["name"] as String
-            val module = Module.MODULES.getOrDefault(name, Module(name))
+            module = Module.MODULES.getOrDefault(name, Module(name))
             (data["files"] as List<String>?)?.let { module.files += it }
+            module.init = true
             ctx.modules += module
         }
 

@@ -1,11 +1,13 @@
 package ru.DmN.pht.base.parser.parsers
 
+import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeUse
 import ru.DmN.pht.base.utils.Module
+import ru.DmN.pht.std.module.StdModule
 
 object NPUse : NodeParser() {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
@@ -15,7 +17,16 @@ object NPUse : NodeParser() {
             names.add(tk.text!!)
             tk = parser.nextToken()!!
         }
-        names.forEach { Module.MODULES[it]!!.inject(parser, ctx) }
+        process(names, parser, ctx, ctx)
         return NodeUse(operationToken, names)
+    }
+
+    fun process(names: List<String>, parser: Parser, ctx: ParsingContext, context: ParsingContext) {
+        names.forEach { name ->
+            val module = ctx.modules.find { it.name == name }
+            if (module?.init != true)
+                Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(ctx, mutableListOf(Base, StdModule)))
+            (module ?: ctx.modules.find { it.name == name }!!).inject(parser, context)
+        }
     }
 }

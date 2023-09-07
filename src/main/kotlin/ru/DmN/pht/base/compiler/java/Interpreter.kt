@@ -25,9 +25,9 @@ class Interpreter {
         }
     }
 
-    fun eval0(code: String): List<Klass> {
+    private fun eval0(code: String): List<Klass> {
         val compiler = Compiler()
-        val ctx = CompilationContext(AtomicReference(CompileStage.UNKNOWN), mutableListOf(Base))
+        val ctx = CompilationContext.base()
         compiler.compile(Parser(code).parseNode(ParsingContext.base())!!, ctx, false)
         compiler.tasks.forEach {
             ctx.stage.set(it.key)

@@ -1,2 +1,1 @@
-(use-ctx pht example/lkl
-    (lkl))
+(use-ctx pht example/test)

@@ -1,5 +1,4 @@
-(use-ctx std/module
-    (module
-        [name "std/module"]
-        [version "1.0.0"]
-        [author "DomamaN202"]))
+(module
+    [name "std/module"]
+    [version "1.0.0"]
+    [author "DomamaN202"])

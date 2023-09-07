@@ -35,7 +35,7 @@ object StdMacro : Module("std/macro") {
     }
 
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
-        if (!ctx.modules.contains(this)) {
+        if (!ctx.loadedModules.contains(this)) {
             super.inject(compiler, ctx, ret)
             compiler.contexts.getOrPut("std/base/macros") { HashMap<String, MutableList<MacroDefine>>() }
         }

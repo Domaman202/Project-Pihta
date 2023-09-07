@@ -1,5 +1,5 @@
 (module
-    [name "std/util"]
+    [name "example/test"]
     [version "1.0.0"]
     [files ["src.pht"]]
     [deps ["pht"]]

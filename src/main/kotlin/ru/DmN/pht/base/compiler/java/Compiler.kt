@@ -31,11 +31,11 @@ class Compiler {
         val name = node.tkOperation.text!!
         val i = name.lastIndexOf('/')
         if (i < 1) {
-            ctx.modules.forEach { it -> it.compilers.getRegex(name)?.let { return it as INodeCompiler<Node> } }
+            ctx.loadedModules.forEach { it -> it.compilers.getRegex(name)?.let { return it as INodeCompiler<Node> } }
             throw RuntimeException()
         } else {
             val module = name.substring(0, i)
-            return ctx.modules.find { it.name == module }!!.compilers.getRegex(name.substring(i + 1)) as INodeCompiler<Node>
+            return ctx.loadedModules.find { it.name == module }!!.compilers.getRegex(name.substring(i + 1)) as INodeCompiler<Node>
         }
     }
 
