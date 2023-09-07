@@ -17,7 +17,7 @@ import kotlin.math.absoluteValue
 class Interpreter {
     fun eval(code: String): Any? {
         eval0("""
-            (use-ctx std/all
+            (use-ctx pht
                 (obj ru.DmN.pht.tmp.TMP${code.hashCode().absoluteValue} []
                     (defn run ^void [] (${code}))))
             """).first().run {
@@ -28,7 +28,7 @@ class Interpreter {
     fun eval0(code: String): List<Klass> {
         val compiler = Compiler()
         val ctx = CompilationContext(AtomicReference(CompileStage.UNKNOWN), mutableListOf(Base))
-        compiler.compile(Parser(Lexer(code)).parseNode(ParsingContext(mutableListOf(Base)))!!, ctx, false)
+        compiler.compile(Parser(code).parseNode(ParsingContext.base())!!, ctx, false)
         compiler.tasks.forEach {
             ctx.stage.set(it.key)
             it.value.forEach(ICompilable::invoke)

@@ -10,7 +10,7 @@ import ru.DmN.pht.base.unparser.UnparsingContext
 object UnparserMain {
     @JvmStatic
     fun main(args: Array<String>) {
-        val node = Parser(Lexer(String(UnparserMain::class.java.getResourceAsStream("/test.pht").readAllBytes()))).parseNode(ParsingContext(mutableListOf(Base)))!!
+        val node = Parser(String(UnparserMain::class.java.getResourceAsStream("/test.pht").readAllBytes())).parseNode(ParsingContext.base())!!
         //
         println("\nParse:\n${node.print()}")
         //

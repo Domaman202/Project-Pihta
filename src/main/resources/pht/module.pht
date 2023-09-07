@@ -1,0 +1,6 @@
+(use-ctx std/module
+    (module
+        [name "pht"]
+        [version "1.0.0"]
+        [deps ["std/base" "std/collections" "std/enums" "std/macro" "std/math" "std/util"]]
+        [author "DomamaN202"]))

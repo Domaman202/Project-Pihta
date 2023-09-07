@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.all
+package ru.DmN.pht.std
 
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Unparser
@@ -15,12 +15,12 @@ import ru.DmN.pht.std.macro.StdMacro
 import ru.DmN.pht.std.math.StdMath
 import ru.DmN.pht.std.util.StdUtil
 
-object StdAll : Module("std/all") {
+object Pihta : Module("pht") { // todo: допилить некоторые моменты
     val STD_MODULES
         get() = listOf(StdBase, StdCollections, StdEnums, StdMacro, StdMath, StdUtil)
 
     override fun inject(parser: Parser, ctx: ParsingContext) {
-        if (!ctx.modules.contains(this)) {
+        if (!ctx.loadedModules.contains(this)) {
             super.inject(parser, ctx)
             STD_MODULES.forEach { it.inject(parser, ctx) }
         }

@@ -15,10 +15,13 @@ import java.util.concurrent.atomic.AtomicReference
 object CompilerMain {
     @JvmStatic
     fun main(args: Array<String>) {
-        val pctx = ParsingContext(mutableListOf(Base))
         val ctx = CompilationContext(AtomicReference(CompileStage.UNKNOWN), mutableListOf(Base))
         val compiler = Compiler()
-        compiler.compile(String(CompilerMain::class.java.getResourceAsStream("/test.pht").readAllBytes()), pctx, ctx)
+        compiler.compile(
+            String(CompilerMain::class.java.getResourceAsStream("/test.pht").readAllBytes()),
+            ParsingContext.base(),
+            ctx
+        )
         compiler.tasks.forEach {
             ctx.stage.set(it.key)
             it.value.forEach(ICompilable::invoke)
@@ -38,7 +41,7 @@ object CompilerMain {
             Unsafe.forceSetAccessible(method)
             method.invoke(CompilerMain::class.java.classLoader, b, 0, b.size) as Klass
         }
-        println(Class.forName("App").run { getMethod("main").invoke(getField("INSTANCE").get(null)) } )
+        println(Class.forName("App").run { getMethod("main").invoke(getField("INSTANCE").get(null)) })
 //        println(Class.forName("App").getMethod("main").invoke(null))
     }
 }

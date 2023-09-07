@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.base.compiler.java.utils
 
-class SubList<E>(val parent: List<E>, val list: MutableList<E> = ArrayList()) : MutableList<E> {
+class SubList<E>(val parent: List<E>, val list: MutableList<E> = ArrayList()) : AbstractList<E>(), MutableList<E> {
     override val size: Int
         get() = list.size + parent.size
 

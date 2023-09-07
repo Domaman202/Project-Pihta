@@ -12,6 +12,8 @@ import java.util.*
 class Parser(val lexer: Lexer) {
     val tokens = Stack<Token>()
 
+    constructor(code: String) : this(Lexer(code))
+
     fun parseNode(ctx: ParsingContext): Node? {
         val startToken = nextToken() ?: return null
         return when (startToken.type) {
@@ -59,11 +61,11 @@ class Parser(val lexer: Lexer) {
     fun get(ctx: ParsingContext, name: String): NodeParser? {
         val i = name.lastIndexOf('/')
         return if (i < 1) {
-            ctx.modules.forEach { it -> it.parsers.getRegex(name)?.let { return it } }
+            ctx.loadedModules.forEach { it -> it.parsers.getRegex(name)?.let { return it } }
             null
         } else {
             val module = name.substring(0, i)
-            ctx.modules.find { it.name == module }?.parsers?.getRegex(name.substring(i + 1))
+            ctx.loadedModules.find { it.name == module }?.parsers?.getRegex(name.substring(i + 1))
         }
     }
 

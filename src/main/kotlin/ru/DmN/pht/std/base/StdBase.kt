@@ -2,7 +2,6 @@ package ru.DmN.pht.std.base
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
-import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.compiler.java.Compiler
@@ -87,7 +86,7 @@ object StdBase : Module("std/base") {
     }
 
     override fun inject(parser: Parser, ctx: ParsingContext) {
-        if (!ctx.modules.contains(this)) {
+        if (!ctx.loadedModules.contains(this)) {
             super.inject(parser, ctx)
             StdValue.inject(parser, ctx)
         }
@@ -102,14 +101,9 @@ object StdBase : Module("std/base") {
 
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         if (!ctx.modules.contains(this)) {
-            super.inject(compiler, ctx, ret)
             StdValue.inject(compiler, ctx, ret)
             ctx.contexts["std/base/global"] = GlobalContext()
-            compiler.compile(
-                String(StdBase::class.java.getResourceAsStream("/pht/std/base/module.pht")!!.readAllBytes()),
-                ParsingContext(mutableListOf(Base, StdValue)),
-                ctx
-            )
+            super.inject(compiler, ctx, ret)
         }
         return if (ctx.isMethod() && ctx.isBody()) {
             val variable = ctx.body.addVariable("std", "ru.DmN.pht.std.base.StdFunctions", tmp = ret)

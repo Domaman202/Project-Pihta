@@ -1,0 +1,5 @@
+(use-ctx std/module
+    (module
+        [name "std/macro"]
+        [version "1.0.0"]
+        [author "DomamaN202"]))

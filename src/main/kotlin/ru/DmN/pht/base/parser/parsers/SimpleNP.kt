@@ -7,7 +7,7 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 
 open class SimpleNP : NodeParser() {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
+    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
         parse(parser, ctx) { NodeNodesList(operationToken, it) }
 
     fun parse(parser: Parser, ctx: ParsingContext, constructor: (nodes: MutableList<Node>) -> Node): Node {

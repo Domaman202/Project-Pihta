@@ -1,0 +1,7 @@
+(use-ctx std/module
+    (module
+        [name "std/util"]
+        [version "1.0.0"]
+        [files ["src.pht"]]
+        [deps ["pht"]]
+        [author "DomamaN202"]))

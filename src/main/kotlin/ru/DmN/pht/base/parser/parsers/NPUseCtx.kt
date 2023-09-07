@@ -17,7 +17,7 @@ object NPUseCtx : SimpleNP() {
             tk = parser.nextToken()!!
         }
         parser.tokens.push(tk)
-        val context = ParsingContext(SubList(ctx.modules), ctx.macros) // todo: sublstack
+        val context = ParsingContext(ctx.modules, SubList(ctx.loadedModules), ctx.macros) // todo: sublstack
         names.forEach { Module.MODULES[it]!!.inject(parser, context) }
         return parse(parser, context) { NodeUseCtx(operationToken, names, it) }
     }
