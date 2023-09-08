@@ -8,7 +8,7 @@ import ru.DmN.pht.base.parser.ast.NodeUse
 import ru.DmN.pht.base.utils.Module
 import ru.DmN.pht.std.module.StdModule
 
-object NPUse : NodeParser() {
+object NPUse : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
         val names = ArrayList<String>()
         var tk = parser.nextToken()!!
@@ -17,7 +17,7 @@ object NPUse : NodeParser() {
             tk = parser.nextToken()!!
         }
         process(names, parser, ctx)
-        return NodeUse(operationToken, names)
+        return NodeUse(operationToken, names, mutableListOf())
     }
 
     fun process(names: List<String>, parser: Parser, context: ParsingContext) {

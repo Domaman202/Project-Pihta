@@ -40,10 +40,10 @@ data class VirtualMethod(
         } else false
 
     companion object {
-        fun of(compiler: Compiler, ctor: Constructor<*>): VirtualMethod =
-            of(compiler.typeOf(ctor.declaringClass),ctor)
-        fun of(compiler: Compiler, method: Method): VirtualMethod =
-            of(compiler.typeOf(method.declaringClass), method)
+        fun of(typeOf: (name: String) -> VirtualType, ctor: Constructor<*>): VirtualMethod =
+            of(typeOf(ctor.declaringClass.name), ctor)
+        fun of(typeOf: (name: String) -> VirtualType, method: Method): VirtualMethod =
+            of(typeOf(method.declaringClass.name), method)
         fun of(ctor: Constructor<*>): VirtualMethod =
             of(VirtualType.ofKlass(ctor.declaringClass), ctor)
         fun of(method: Method): VirtualMethod =

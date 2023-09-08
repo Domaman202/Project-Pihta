@@ -6,13 +6,13 @@ import ru.DmN.pht.base.lexer.Token.Type.CLASS
 import ru.DmN.pht.base.lexer.Token.Type.OPERATION
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
-import ru.DmN.pht.base.parser.parsers.NodeParser
+import ru.DmN.pht.base.parser.parsers.INodeParser
 import ru.DmN.pht.std.base.ast.NodeFMGet
 import ru.DmN.pht.std.base.ast.NodeFieldSet
 import ru.DmN.pht.std.base.ast.NodeGetOrName
 import ru.DmN.pht.std.base.ast.NodeSet
 
-object NPSetB : NodeParser() {
+object NPSetB : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
         val name = parser.nextToken()!!
         return process(

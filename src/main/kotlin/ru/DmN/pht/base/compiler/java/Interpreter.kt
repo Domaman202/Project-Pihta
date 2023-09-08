@@ -1,17 +1,12 @@
 package ru.DmN.pht.base.compiler.java
 
 import org.objectweb.asm.ClassWriter
-import ru.DmN.pht.base.Base
-import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
-import ru.DmN.pht.base.compiler.java.utils.CompileStage
-import ru.DmN.pht.base.compiler.java.utils.ICompilable
-import ru.DmN.pht.base.lexer.Lexer
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.utils.Klass
+import ru.DmN.pht.base.utils.compile
 import ru.DmN.uu.Unsafe
 import java.io.File
-import java.util.concurrent.atomic.AtomicReference
 import kotlin.math.absoluteValue
 
 class Interpreter {
@@ -28,10 +23,10 @@ class Interpreter {
     private fun eval0(code: String): List<Klass> {
         val compiler = Compiler()
         val ctx = CompilationContext.base()
-        compiler.compile(Parser(code).parseNode(ParsingContext.base())!!, ctx, false)
+        compiler.compile(code, ParsingContext.base(), ctx)
         compiler.tasks.forEach {
             ctx.stage.set(it.key)
-            it.value.forEach(ICompilable::invoke)
+            it.value.forEach { it() }
         }
         return compiler.classes.map { it.second }.map {
             val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)

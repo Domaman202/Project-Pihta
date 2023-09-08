@@ -5,6 +5,6 @@ import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.unparser.UnparsingContext
 
 
-open class NodeUnparser<T : Node> {
-    open fun unparse(node: T, unparser: Unparser, ctx: UnparsingContext, indent: Int) {}
+interface INodeUnparser<T : Node> {
+    fun unparse(node: T, unparser: Unparser, ctx: UnparsingContext, indent: Int) = Unit
 }

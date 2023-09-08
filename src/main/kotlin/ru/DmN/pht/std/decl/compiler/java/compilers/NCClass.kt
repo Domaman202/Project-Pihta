@@ -35,7 +35,7 @@ object NCClass : IStdNodeCompiler<NodeNodesList> {
         }
         //
         val type = VirtualType(name, parents, isInterface = isInterface, generics = generics)
-        compiler.types += type
+        compiler.tp.types += type
         compiler.pushTask(ctx, CompileStage.TYPES_DEFINE) {
             if (isObject)
                 type.fields += VirtualField("INSTANCE", type, static = true, enum = false)

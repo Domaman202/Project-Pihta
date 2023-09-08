@@ -3,9 +3,9 @@ package ru.DmN.pht.base.test.java
 import org.objectweb.asm.ClassWriter
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
-import ru.DmN.pht.base.compiler.java.utils.ICompilable
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.utils.Klass
+import ru.DmN.pht.base.utils.compile
 import ru.DmN.uu.Unsafe
 import java.io.FileOutputStream
 
@@ -21,7 +21,7 @@ object CompilerMain {
         )
         compiler.tasks.forEach {
             ctx.stage.set(it.key)
-            it.value.forEach(ICompilable::invoke)
+            it.value.forEach { it() }
         }
         compiler.classes.map { it.second }.forEach {
             val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)

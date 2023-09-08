@@ -4,10 +4,9 @@ import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparser.unparsers.NUNodesList
 import ru.DmN.pht.std.math.ast.NodeMathNA
-import ru.DmN.pht.base.unparser.unparsers.NodeUnparser
-import ru.DmN.pht.base.utils.indent
+import ru.DmN.pht.base.unparser.unparsers.INodeUnparser
 
-object NUMathNA : NodeUnparser<NodeMathNA>() {
+object NUMathNA : INodeUnparser<NodeMathNA> {
     override fun unparse(node: NodeMathNA, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.run {
             append('(').append(

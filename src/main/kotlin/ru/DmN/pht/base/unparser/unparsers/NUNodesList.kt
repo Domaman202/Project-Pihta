@@ -3,9 +3,8 @@ package ru.DmN.pht.base.unparser.unparsers
 import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.unparser.UnparsingContext
-import ru.DmN.pht.base.utils.indent
 
-object NUNodesList : NodeUnparser<NodeNodesList>() {
+object NUNodesList : INodeUnparser<NodeNodesList> {
     override fun unparse(node: NodeNodesList, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.run {
             append('(').append(node.tkOperation.text)

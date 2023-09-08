@@ -4,9 +4,9 @@ import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparser.unparsers.NUNodesList
-import ru.DmN.pht.base.unparser.unparsers.NodeUnparser
+import ru.DmN.pht.base.unparser.unparsers.INodeUnparser
 
-object NUDefault : NodeUnparser<NodeNodesList>() {
+object NUDefault : INodeUnparser<NodeNodesList> {
     override fun unparse(node: NodeNodesList, unparser: Unparser, ctx: UnparsingContext, indent: Int) =
         NUNodesList.unparse(node, unparser, ctx, indent)
 }

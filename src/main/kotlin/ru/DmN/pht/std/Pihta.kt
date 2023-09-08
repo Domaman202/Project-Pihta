@@ -29,7 +29,7 @@ object Pihta : Module("pht") { // todo: ебучие циклические за
     }
 
     override fun inject(unparser: Unparser, ctx: UnparsingContext) {
-        if (!ctx.modules.contains(this)) {
+        if (!ctx.loadedModules.contains(this)) {
             super.inject(unparser, ctx)
             STD_MODULES.forEach { it.inject(unparser, ctx) }
         }

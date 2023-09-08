@@ -5,13 +5,13 @@ import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompileStage
 import ru.DmN.pht.base.parser.ParsingContext
-import ru.DmN.pht.base.parser.ast.NodeUseCtx
+import ru.DmN.pht.base.parser.ast.NodeUse
 import ru.DmN.pht.base.utils.Module
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.module.StdModule
 
-object NCUseCtx : INodeCompiler<NodeUseCtx> {
-    override fun compile(node: NodeUseCtx, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
+object NCUseCtx : INodeCompiler<NodeUse> {
+    override fun compile(node: NodeUse, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
         node.names.forEach { process(it, compiler) }
         compiler.pushTask(ctx, CompileStage.MODULE_POST_INIT) {
             val context = ctx.subCtx()

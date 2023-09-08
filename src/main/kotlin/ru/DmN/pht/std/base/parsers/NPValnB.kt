@@ -5,9 +5,9 @@ import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
-import ru.DmN.pht.base.parser.parsers.NodeParser
+import ru.DmN.pht.base.parser.parsers.INodeParser
 
-object NPValnB : NodeParser() {
+object NPValnB : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
         val nodes = ArrayList<Node>()
         var tk = parser.nextToken()

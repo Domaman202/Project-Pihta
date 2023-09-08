@@ -2,11 +2,11 @@ package ru.DmN.pht.std.base.unparsers
 
 import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.unparser.UnparsingContext
-import ru.DmN.pht.base.unparser.unparsers.NodeUnparser
+import ru.DmN.pht.base.unparser.unparsers.INodeUnparser
 import ru.DmN.pht.std.base.ast.NodeValue
 import ru.DmN.pht.std.base.ast.NodeValue.Type.*
 
-object NUValue : NodeUnparser<NodeValue>() {
+object NUValue : INodeUnparser<NodeValue> {
     override fun unparse(node: NodeValue, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.append('(').append(node.tkOperation.text).append(' ').append(
             when (node.vtype) {

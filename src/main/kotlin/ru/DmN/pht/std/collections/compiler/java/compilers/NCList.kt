@@ -12,7 +12,7 @@ import ru.DmN.pht.std.base.utils.primitiveToObject
 
 object NCList : IStdNodeCompiler<NodeNodesList> {
     override fun calc(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): VirtualType? =
-        compiler.typeOf(List::class.java)
+        compiler.tp.typeOf(List::class.java)
 
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? =
         if (ret) {

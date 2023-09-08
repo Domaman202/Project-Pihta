@@ -1,14 +1,17 @@
 package ru.DmN.pht.base.utils
 
 import ru.DmN.pht.base.Parser
+import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ParsingContext
-import ru.DmN.pht.base.parser.parsers.NodeParser
+import ru.DmN.pht.base.parser.parsers.INodeParser
+import ru.DmN.pht.base.processor.ProcessingContext
+import ru.DmN.pht.base.processor.processors.INodeProcessor
 import ru.DmN.pht.base.unparser.UnparsingContext
-import ru.DmN.pht.base.unparser.unparsers.NodeUnparser
+import ru.DmN.pht.base.unparser.unparsers.INodeUnparser
 import ru.DmN.pht.example.bf.BF
 import ru.DmN.pht.example.lkl.LKL
 import ru.DmN.pht.std.Pihta
@@ -26,8 +29,9 @@ import java.io.FileNotFoundException
 open class Module(val name: String, var init: Boolean = false) {
     val deps: MutableList<String> = ArrayList()
     val files: MutableList<String> = ArrayList()
-    val parsers: MutableMap<Regex, NodeParser> = HashMap()
-    val unparsers: MutableMap<Regex, NodeUnparser<*>> = HashMap()
+    val parsers: MutableMap<Regex, INodeParser> = HashMap()
+    val unparsers: MutableMap<Regex, INodeUnparser<*>> = HashMap()
+    val processors: MutableMap<Regex, INodeProcessor<*>> = HashMap()
     val compilers: MutableMap<Regex, INodeCompiler<*>> = HashMap()
 
     fun init() {
@@ -44,8 +48,14 @@ open class Module(val name: String, var init: Boolean = false) {
     }
 
     open fun inject(unparser: Unparser, ctx: UnparsingContext) {
-        if (!ctx.modules.contains(this)) {
-            ctx.modules += this
+        if (!ctx.loadedModules.contains(this)) {
+            ctx.loadedModules += this
+        }
+    }
+
+    open fun inject(processor: Processor, ctx: ProcessingContext) {
+        if (!ctx.loadedModules.contains(this)) {
+            ctx.loadedModules += this
         }
     }
 
@@ -71,7 +81,7 @@ open class Module(val name: String, var init: Boolean = false) {
     private fun getModuleFile(file: String) =
         String((Module::class.java.getResourceAsStream("/$name/$file") ?: throw FileNotFoundException("/$name/$file")).readAllBytes())
 
-    fun add(name: String, parser: NodeParser? = null, unparser: NodeUnparser<*>? = null, compiler: INodeCompiler<*>? = null): Unit =
+    fun add(name: String, parser: INodeParser? = null, unparser: INodeUnparser<*>? = null, processor: INodeProcessor<*>? = null, compiler: INodeCompiler<*>? = null): Unit =
         add(
             name
                 .replace(".", "\\.")
@@ -86,12 +96,13 @@ open class Module(val name: String, var init: Boolean = false) {
                 .replace("{", "\\{")
                 .replace("}", "\\}")
                 .toRegex(),
-            parser, unparser, compiler)
+            parser, unparser, processor, compiler)
 
-    fun add(name: Regex, parser: NodeParser? = null, unparser: NodeUnparser<*>? = null, compiler: INodeCompiler<*>? = null) {
-        parser?.let { parsers[name] = it }
-        unparser?.let { unparsers[name] = it }
-        compiler?.let { compilers[name] = it }
+    fun add(name: Regex, parser: INodeParser? = null, unparser: INodeUnparser<*>? = null, processor: INodeProcessor<*>? = null, compiler: INodeCompiler<*>? = null) {
+        parser      ?.let { parsers     [name] = it }
+        unparser    ?.let { unparsers   [name] = it }
+        processor   ?.let { processors  [name] = it }
+        compiler    ?.let { compilers   [name] = it }
     }
 
     override fun toString(): String =

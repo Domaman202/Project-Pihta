@@ -2,18 +2,17 @@ package ru.DmN.pht.std.base.parsers
 
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.lexer.Token.Type
 import ru.DmN.pht.base.lexer.Token.Type.*
 import ru.DmN.pht.base.lexer.isNaming
 import ru.DmN.pht.base.lexer.isOperation
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
-import ru.DmN.pht.base.parser.parsers.NodeParser
+import ru.DmN.pht.base.parser.parsers.INodeParser
 import ru.DmN.pht.std.base.ast.NodeFMGet
 import ru.DmN.pht.std.base.ast.NodeGetOrName
 import ru.DmN.pht.std.base.ast.NodeValue
 
-object NPGet : NodeParser() {
+object NPGet : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
         val nameToken = parser.nextToken()!!
         return when (nameToken.type) {

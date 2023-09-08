@@ -4,7 +4,7 @@ import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
-import ru.DmN.pht.base.parser.ast.NodeUseCtx
+import ru.DmN.pht.base.parser.ast.NodeUse
 import ru.DmN.pht.base.parser.parsers.NPUse.process
 import ru.DmN.pht.std.base.compiler.java.utils.SubList
 
@@ -19,6 +19,6 @@ object NPUseCtx : SimpleNP() {
         parser.tokens.push(tk)
         val context = ParsingContext(SubList(ctx.loadedModules), ctx.macros) // todo: sublstack
         process(names, parser, context)
-        return parse(parser, context) { NodeUseCtx(operationToken, names, it) }
+        return parse(parser, context) { NodeUse(operationToken, names, it) }
     }
 }

@@ -8,6 +8,7 @@ import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.parsers.NPDefault
+import ru.DmN.pht.base.processor.processors.NRDefault
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.Module
 import ru.DmN.pht.base.utils.Variable
@@ -27,62 +28,62 @@ import ru.DmN.pht.std.value.StdValue
 object StdBase : Module("std/base") {
     init {
         // Импорт
-        add("import-extends",   NPDefault,  NUDefault,  NCImportExtends)
-        add("import",           NPDefault,  NUDefault,  NCImport)
+        add("import-extends",   NPDefault,  NUDefault,  NRDefault,  NCImportExtends)
+        add("import",           NPDefault,  NUDefault,  NRDefault,  NCImport)
         // Пространство Имён
-        add("ns",       NPDefault,  NUDefault,  NCNewNs)
-        add("sub-ns",   NPDefault,  NUDefault,  NCSubNs)
+        add("ns",       NPDefault,  NUDefault,  NRDefault,  NCNewNs)
+        add("sub-ns",   NPDefault,  NUDefault,  NRDefault,  NCSubNs)
         // Аннотации
-        add("@abstract",NPDefault,  NUDefault,  NCAnnotation)
-        add("@bridge",  NPDefault,  NUDefault,  NCAnnotation)
-        add("@final",   NPDefault,  NUDefault,  NCAnnotation)
-        add("@generic", NPDefault,  NUDefault,  NCGeneric)
-        add("@override",NPDefault,  NUDefault,  NCAnnotation)
-        add("@static",  NPDefault,  NUDefault,  NCAnnotation)
-        add("@varargs", NPDefault,  NUDefault,  NCAnnotation)
+        add("@abstract",NPDefault,  NUDefault,  NRDefault,  NCAnnotation)
+        add("@bridge",  NPDefault,  NUDefault,  NRDefault,  NCAnnotation)
+        add("@final",   NPDefault,  NUDefault,  NRDefault,  NCAnnotation)
+        add("@generic", NPDefault,  NUDefault,  NRDefault,  NCGeneric)
+        add("@override",NPDefault,  NUDefault,  NRDefault,  NCAnnotation)
+        add("@static",  NPDefault,  NUDefault,  NRDefault,  NCAnnotation)
+        add("@varargs", NPDefault,  NUDefault,  NRDefault,  NCAnnotation)
         // Объект / Класс / Интерфейс
-        add("obj",  NPDefault,  NUDefault,  NCClass)
-        add("cls",  NPDefault,  NUDefault,  NCClass)
-        add("itf",  NPDefault,  NUDefault,  NCClass)
+        add("obj",  NPDefault,  NUDefault,  NRDefault,  NCClass)
+        add("cls",  NPDefault,  NUDefault,  NRDefault,  NCClass)
+        add("itf",  NPDefault,  NUDefault,  NRDefault,  NCClass)
         // Расширение / Функция
-        add("efn",  NPDefault,  NUDefault,  NCExFn)
-        add("bfn",  NPDefault,  NUDefault,  NCBridgeFn)
-        add("defn", NPDefault,  NUDefault,  NCDefn)
-        add("rfn",  NPDefault,  NUDefault,  NCRfn)
-        add("fn",   NPDefault,  NUDefault,  NCFn)
+        add("efn",  NPDefault,  NUDefault,  NRDefault,  NCExFn)
+        add("bfn",  NPDefault,  NUDefault,  NRDefault,  NCBridgeFn)
+        add("defn", NPDefault,  NUDefault,  NRDefault,  NCDefn)
+        add("rfn",  NPDefault,  NUDefault,  NRDefault,  NCRfn)
+        add("fn",   NPDefault,  NUDefault,  NRDefault,  NCFn)
         // Циклы
-        add("repeat",   NPDefault,  NUDefault,  NCRepeat)
-        add("while",    NPDefault,  NUDefault,  NCWhile)
+        add("repeat",   NPDefault,  NUDefault,  NRDefault,  NCRepeat)
+        add("while",    NPDefault,  NUDefault,  NRDefault,  NCWhile)
         // Условия
-        add("if",       NPDefault,  NUDefault,  NCIf)
+        add("if",       NPDefault,  NUDefault,  NRDefault,  NCIf)
         // Выход
-        add("return",   NPDefault,  NUDefault,  NCReturn)
-        add("yield",    NPDefault,  NUDefault,  NCYield)
+        add("return",   NPDefault,  NUDefault,  NRDefault,  NCReturn)
+        add("yield",    NPDefault,  NUDefault,  NRDefault,  NCYield)
         // Тело
-        add("body",     NPDefault,  NUDefault,  NCBody)
+        add("body",     NPDefault,  NUDefault,  NRDefault,  NCBody)
         // Создать / Выполнить / Вызвать Супер-Конструктор / Вызвать
-        add("new",      NPDefault,  NUDefault,  NCNew)
-        add("ccall",    NPDefault,  NUDefault,  NCCtorCall)
+        add("new",      NPDefault,  NUDefault,  NRDefault,  NCNew)
+        add("ccall",    NPDefault,  NUDefault,  NRDefault,  NCCtorCall)
         add("mcall!",   NPMethodCallB)
-        add("mcall",    NPDefault,  NUDefault,  NCMethodCallA)
+        add("mcall",    NPDefault,  NUDefault,  NRDefault,  NCMethodCallA)
         // Сеттеры
-        add("fset!",    NPFieldSet, NUFieldSet, NCSetB)
-        add("set!",     NPSetB,     NUSet,      NCSetB)
-        add("set",      NPSetA,     NUDefault,  NCSetA)
+        add("fset!",    NPFieldSet, NUFieldSet, NRDefault,  NCSetB)
+        add("set!",     NPSetB,     NUSet,      NRDefault,  NCSetB)
+        add("set",      NPSetA,     NUDefault,  NRDefault,  NCSetA)
         // Геттеры
-        add("fget!",                    compiler =  NCFieldGetB)
-        add("fget",         NPDefault,  NUDefault,  NCFieldGetA)
-        add("get!",         NPGet,      NUGetOrName,NCGetB)
-        add("get",          NPDefault,  NUDefault,  NCGetA)
+        add("fget!",        processor = NRDefault,  compiler =  NCFieldGetB)
+        add("fget",         NPDefault,  NUDefault,  NRDefault,  NCFieldGetA)
+        add("get!",         NPGet,      NUGetOrName,NRDefault,  NCGetB)
+        add("get",          NPDefault,  NUDefault,  NRDefault,  NCGetA)
         // Поле / Переменная
-        add("field",        NPDefault,  NUDefault,  NCField)
-        add("def",          NPDefault,  NUDefault,  NCDef)
+        add("field",        NPDefault,  NUDefault,  NRDefault,  NCField)
+        add("def",          NPDefault,  NUDefault,  NRDefault,  NCDef)
         // Преобразование, Проверка, Получение типов
-        add("as",           NPDefault,  NUDefault,  NCAs)
-        add("is",           NPDefault,  NUDefault,  NCIs)
-        add("typeof",       NPDefault,  NUDefault,  NCTypeof)
+        add("as",           NPDefault,  NUDefault,  NRDefault,  NCAs)
+        add("is",           NPDefault,  NUDefault,  NRDefault,  NCIs)
+        add("typeof",       NPDefault,  NUDefault,  NRDefault,  NCTypeof)
         // Пустой блок
-        add("unit",         NPDefault,  NUDefault,  NCUnit)
+        add("unit",         NPDefault,  NUDefault,  NRDefault,  NCUnit)
     }
 
     override fun inject(parser: Parser, ctx: ParsingContext) {
@@ -93,7 +94,7 @@ object StdBase : Module("std/base") {
     }
 
     override fun inject(unparser: Unparser, ctx: UnparsingContext) {
-        if (!ctx.modules.contains(this)) {
+        if (!ctx.loadedModules.contains(this)) {
             super.inject(unparser, ctx)
             StdValue.inject(unparser, ctx)
         }

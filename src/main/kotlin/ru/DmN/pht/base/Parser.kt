@@ -5,7 +5,7 @@ import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.lexer.Token.Type.*
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
-import ru.DmN.pht.base.parser.parsers.NodeParser
+import ru.DmN.pht.base.parser.parsers.INodeParser
 import ru.DmN.pht.base.utils.getRegex
 import java.util.*
 
@@ -58,7 +58,7 @@ class Parser(val lexer: Lexer) {
         get(ctx, "mcall!")!!.parse(this, ctx, token)
     fun parseValue(ctx: ParsingContext, token: Token) =
         get(ctx, "value!")!!.parse(this, ctx, token)!!
-    fun get(ctx: ParsingContext, name: String): NodeParser? {
+    fun get(ctx: ParsingContext, name: String): INodeParser? {
         val i = name.lastIndexOf('/')
         return if (i < 1) {
             ctx.loadedModules.forEach { it -> it.parsers.getRegex(name)?.let { return it } }

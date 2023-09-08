@@ -3,6 +3,7 @@ package ru.DmN.pht.std.macro
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.parser.parsers.NPDefault
+import ru.DmN.pht.base.processor.processors.NRDefault
 import ru.DmN.pht.base.utils.Module
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.std.base.compiler.java.compilers.NCImportMacro
@@ -18,20 +19,20 @@ import ru.DmN.pht.std.macro.unparsers.NUMacroVar
 object StdMacro : Module("std/macro") {
     init {
         // Импорт
-        add("import-macro",     NPDefault,      NUDefault,  NCImportMacro)
+        add("import-macro",     NPDefault,      NUDefault,  NRDefault,  NCImportMacro)
         // Определение
-        add("defmacro",         NPMacroDef,     NUMacroDef, NCDefMacro)
+        add("defmacro",         NPMacroDef,     NUMacroDef, NRDefault,  NCDefMacro)
         // Развёртка / Встраивание
-        add("macro-unroll",     NPMacroUnroll,  NUDefault,  NCMacroUnroll)
-        add("macro-inline",     NPDefault,      NUDefault,  NCMacroInline)
-        add("macro-arg",        NPMacroArg,     NUMacroArg, NCMacroArg)
-        add("macro-name",       NPMacroArg,     NUMacroArg, NCMacroName)
+        add("macro-unroll",     NPMacroUnroll,  NUDefault,  NRDefault,  NCMacroUnroll)
+        add("macro-inline",     NPDefault,      NUDefault,  NRDefault,  NCMacroInline)
+        add("macro-arg",        NPMacroArg,     NUMacroArg, NRDefault,  NCMacroArg)
+        add("macro-name",       NPMacroArg,     NUMacroArg, NRDefault,  NCMacroName)
         // Количество аргументов
-        add("macro-arg-count",  NPMacroArg,     NUMacroArg, NCMacroArgCount)
+        add("macro-arg-count",  NPMacroArg,     NUMacroArg, NRDefault,  NCMacroArgCount)
         // Переменная-макро-аргумент
-        add("macro-var",        NPMacroVar,     NUMacroVar, NCMacroVar)
+        add("macro-var",        NPMacroVar,     NUMacroVar, NRDefault,  NCMacroVar)
         // Использование
-        add("macro!",           NPMacro,        NUMacro,    NCMacro)
+        add("macro!",           NPMacro,        NUMacro,    NRDefault,  NCMacro)
     }
 
     override fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {

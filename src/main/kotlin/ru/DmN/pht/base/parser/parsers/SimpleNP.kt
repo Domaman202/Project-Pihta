@@ -6,7 +6,7 @@ import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.ast.NodeNodesList
 
-open class SimpleNP : NodeParser() {
+open class SimpleNP : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
         parse(parser, ctx) { NodeNodesList(operationToken, it) }
 

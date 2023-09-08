@@ -5,7 +5,7 @@ import ru.DmN.pht.base.parser.ast.NodeUse
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.Module
 
-object NUUse : NodeUnparser<NodeUse>() {
+object NUUse : INodeUnparser<NodeUse> {
     override fun unparse(node: NodeUse, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.let {
             it.append('(').append(node.tkOperation.text)
