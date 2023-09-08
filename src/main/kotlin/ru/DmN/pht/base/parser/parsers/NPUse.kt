@@ -24,7 +24,7 @@ object NPUse : NodeParser() {
         names.forEach { name ->
             val module = Module.MODULES[name]
             if (module?.init != true)
-                Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(listOf(StdModule)))
+                Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(StdModule))
             (module ?: Module.MODULES[name]!!).inject(parser, context)
         }
     }

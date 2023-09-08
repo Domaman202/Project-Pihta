@@ -11,7 +11,7 @@ class ParsingContext (
         fun base() =
             ParsingContext(mutableListOf(Base))
 
-        fun of(list: List<Module>) =
+        fun of(vararg list: Module) =
             base().apply { loadedModules += list }
     }
 }

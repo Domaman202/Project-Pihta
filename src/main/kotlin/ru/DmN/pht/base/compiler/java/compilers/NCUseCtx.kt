@@ -23,7 +23,7 @@ object NCUseCtx : INodeCompiler<NodeUseCtx> {
 
     fun process(name: String, compiler: Compiler) {
         compiler.compile(
-            Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(listOf(StdModule)))!!,
+            Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(StdModule))!!,
             CompilationContext.base().apply { loadedModules += StdModule },
             false
         )

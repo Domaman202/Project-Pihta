@@ -1,6 +1,5 @@
 package ru.DmN.pht.base.utils
 
-import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.compiler.java.Compiler
@@ -25,10 +24,17 @@ import ru.DmN.pht.std.value.StdValue
 import java.io.FileNotFoundException
 
 open class Module(val name: String, var init: Boolean = false) {
+    val deps: MutableList<String> = ArrayList()
     val files: MutableList<String> = ArrayList()
     val parsers: MutableMap<Regex, NodeParser> = HashMap()
     val unparsers: MutableMap<Regex, NodeUnparser<*>> = HashMap()
     val compilers: MutableMap<Regex, INodeCompiler<*>> = HashMap()
+
+    fun init() {
+        if (!init) {
+            Parser(getModuleFile()).parseNode(ParsingContext.of(StdModule))
+        }
+    }
 
     open fun inject(parser: Parser, ctx: ParsingContext) {
         if (!ctx.loadedModules.contains(this)) {
@@ -52,7 +58,7 @@ open class Module(val name: String, var init: Boolean = false) {
             files.forEach {
                 compiler.compile( // todo:
                     getModuleFile(it),
-                    ParsingContext.of(listOf(Base, StdValue)),
+                    ParsingContext.of(StdValue),
                     ctx
                 )
             }

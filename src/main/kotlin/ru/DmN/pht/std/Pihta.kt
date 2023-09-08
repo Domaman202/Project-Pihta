@@ -18,6 +18,8 @@ import ru.DmN.pht.std.util.StdUtil
 object Pihta : Module("pht") { // todo: ебучие циклические зависимости
     val STD_MODULES
         get() = listOf(StdBase, StdCollections, StdEnums, StdMacro, StdMath, StdUtil)
+            .map { it.apply { init() } }
+            .sortedWith { a, b -> a.deps.size.compareTo(b.deps.size) }
 
     override fun inject(parser: Parser, ctx: ParsingContext) {
         if (!ctx.loadedModules.contains(this)) {

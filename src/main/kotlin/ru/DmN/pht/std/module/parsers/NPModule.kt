@@ -18,7 +18,10 @@ object NPModule : SimpleNP() {
             if (!module.init) {
                 module.init = true
                 (data["files"] as List<String>?)?.let { module.files += it }
-                (data["deps"] as List<String>?)?.let { NPUse.process(it, parser, ctx) }
+                (data["deps"] as List<String>?)?.let {
+                    module.deps += it
+                    NPUse.process(it, parser, ctx)
+                }
             }
         }
 
