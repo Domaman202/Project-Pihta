@@ -6,5 +6,5 @@ import ru.DmN.pht.base.unparser.UnparsingContext
 
 
 interface INodeUnparser<T : Node> {
-    fun unparse(node: T, unparser: Unparser, ctx: UnparsingContext, indent: Int) = Unit
+    fun unparse(node: T, unparser: Unparser, ctx: UnparsingContext, indent: Int)
 }
