@@ -1,20 +1,52 @@
 package ru.DmN.pht.std.base.utils
 
-import org.objectweb.asm.Label
-import org.objectweb.asm.Opcodes
-import org.objectweb.asm.tree.MethodNode
-import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.utils.*
-import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.std.base.compiler.java.ctx.GlobalContext
+import ru.DmN.pht.base.Processor
+import ru.DmN.pht.base.parser.ast.Node
+import ru.DmN.pht.base.processor.utils.ProcessingContext
+import ru.DmN.pht.base.processor.utils.ValType
+import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.base.utils.klassOf
+import ru.DmN.pht.std.base.processor.processors.IStdNodeProcessor
+import ru.DmN.pht.std.base.processor.utils.ICastable
 import java.util.*
 import kotlin.jvm.optionals.getOrNull
 
-fun Generics.getSignature(compiler: Compiler, ctx: GlobalContext): String =
-    StringBuilder().apply { list.forEach { append(it.getSignature(compiler, ctx)) } }.toString()
+fun lenArgs(from: List<VirtualType>, to: List<ICastable>) =
+    from.mapIndexed { i, it -> to[i].castableTo(it) }.sum()
 
-fun Generic.getSignature(compiler: Compiler, ctx: GlobalContext): String =
-    "${name}:${ctx.getType(compiler, type).desc}"
+fun Processor.processNodes(node: Node, ctx: ProcessingContext, mode: ValType): List<Node> =
+    node.nodes.map {process(it, ctx, mode)!! }
+
+fun Processor.compute(node: Node, ctx: ProcessingContext): Node =
+    this.get(ctx, node).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.compute(node, this, ctx)
+        else node
+    }
+
+fun Processor.computeList(node: Node, ctx: ProcessingContext): List<Node> =
+    this.get(ctx, node).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.computeList(node, this, ctx)
+//        else node.nodes
+        else throw RuntimeException()
+    }
+
+fun Processor.computeString(node: Node, ctx: ProcessingContext): String =
+    this.get(ctx, node).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.computeString(node, this, ctx)
+//        else node.getValueAsString()
+        else throw RuntimeException()
+    }
+
+fun Processor.computeInt(node: Node, ctx: ProcessingContext): Int =
+    this.get(ctx, node).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.computeInt(node, this, ctx)
+//        else node.getValueAsString().toInt()
+        else throw RuntimeException()
+    }
 
 fun findCommonSuperclasses(vararg classes: VirtualType): List<VirtualType> {
     val commonSuperclasses = mutableListOf<VirtualType>()
@@ -45,35 +77,6 @@ fun VirtualType.allSuperclassesAndInterfaces(): Set<VirtualType> {
     return superclasses
 }
 
-fun insertRet(variable: Variable?, rettype: VirtualType, node: MethodNode) {
-    if (rettype.name == "void")
-        node.visitInsn(Opcodes.RETURN)
-    else {
-        if (variable == null) {
-            if (rettype.isPrimitive) {
-                node.visitLdcInsn(
-                    when (rettype.name) {
-                        "boolean", "byte", "short", "char", "int" -> Opcodes.ICONST_0
-                        "long" -> Opcodes.LCONST_0
-                        "float" -> Opcodes.FCONST_0
-                        "double" -> Opcodes.DCONST_0
-                        else -> throw Error("Unreachable code")
-                    }
-                )
-            } else node.visitFieldInsn(Opcodes.GETSTATIC, "kotlin/Unit", "INSTANCE", "Lkotlin/Unit;")
-        } else loadCast(variable, rettype, node)
-        node.visitInsn(
-            when (rettype.name) {
-                "boolean", "byte", "short", "char", "int" -> Opcodes.IRETURN
-                "long" -> Opcodes.LRETURN
-                "float" -> Opcodes.FRETURN
-                "double" -> Opcodes.DRETURN
-                else -> Opcodes.ARETURN
-            }
-        )
-    }
-}
-
 fun VirtualType.ofPrimitive(): String = when (name) {
     "void" -> ("java.lang.Void")
     "boolean" -> ("java.lang.Boolean")
@@ -98,10 +101,6 @@ fun VirtualType.toPrimitive(): String? = when (name) {
     "java.lang.Float" -> ("float")
     "java.lang.Double" -> ("double")
     else -> null
-}
-
-fun findFunction(input: List<VirtualType>, variants: List<VirtualMethod>, ctx: GlobalContext, compiler: Compiler): VirtualMethod {
-    return variants[findFunction(input, variants.map { it -> Pair(it.argsc.map { ctx.getType(compiler, it.type) }, it.varargs) })!!.first]
 }
 
 fun findFunction(input: List<VirtualType>, variants: List<Pair<List<VirtualType>, Boolean>>): Pair<Int, Int>? {
@@ -183,135 +182,4 @@ fun calcWeight(type: VirtualType?): Int {
         "double", "java.lang.Double" -> 6
         else -> throw RuntimeException()
     }
-}
-
-fun loadCast(variable: Variable, to: VirtualType, node: MethodNode) {
-    val from = variable.type()
-    if (from.isPrimitive() != to.isPrimitive) {
-        if (to.isPrimitive) {
-            objectToPrimitive(variable, node)
-        } else {
-            primitiveToObject(variable, node)
-        }
-    } else {
-        load(variable, node)
-        bytecodeCast(variable.type(), to.name, node)
-    }
-}
-
-fun load(variable: Variable, node: MethodNode) {
-    if (!variable.tmp) {
-        load(variable.type, variable.id, node)
-    }
-}
-
-fun load(type: String?, id: Int, node: MethodNode) {
-    node.visitVarInsn(
-        when (type) {
-            "void" -> throw RuntimeException()
-            "boolean", "byte", "short", "char", "int" -> Opcodes.ILOAD
-            "long" -> Opcodes.LLOAD
-            "float" -> Opcodes.FLOAD
-            "double" -> Opcodes.DLOAD
-            else -> Opcodes.ALOAD
-        },
-        id
-    )
-}
-
-fun storeCast(variable: Variable, from: VirtualType, node: MethodNode) {
-    val to = variable.type()
-    val tmp = Variable("tmp$${variable.hashCode() + from.hashCode()}", from.name, -1, true)
-    if (from.isPrimitive != to.isPrimitive())
-        if (to.isPrimitive())
-            objectToPrimitive(tmp, node)
-        else
-            primitiveToObject(tmp, node)
-    store(variable, node)
-}
-
-fun store(variable: Variable, node: MethodNode) {
-    if (!variable.tmp) {
-        node.visitVarInsn(
-            when (variable.type) {
-                "boolean", "byte", "short", "char", "int" -> Opcodes.ISTORE
-                "long" -> Opcodes.LSTORE
-                "float" -> Opcodes.FSTORE
-                "double" -> Opcodes.DSTORE
-                else -> Opcodes.ASTORE
-            },
-            variable.id
-        )
-    }
-}
-
-fun bytecodeCast(from: String, to: String, node: MethodNode) {
-    node.visitInsn(when (from) {
-        "boolean", "byte", "short", "char", "int" -> when (to) {
-            "boolean", "byte" -> Opcodes.I2B
-            "short" -> Opcodes.I2S
-            "char" -> Opcodes.I2C
-            "long" -> Opcodes.I2L
-            "float" -> Opcodes.I2F
-            "double" -> Opcodes.I2D
-            else -> return
-        }
-        "float" -> when (to) {
-            "boolean", "byte", "short", "char", "int" -> Opcodes.F2I
-            "long" -> Opcodes.F2L
-            "double" -> Opcodes.F2D
-            else -> return
-        }
-        "double" -> when (to) {
-            "boolean", "byte", "short", "char", "int" -> Opcodes.D2I
-            "long" -> Opcodes.D2L
-            "float" -> Opcodes.D2F
-            else -> return
-        }
-        else -> return
-    })
-}
-
-fun primitiveToObject(variable: Variable, node: MethodNode): String? {
-    val start = Label()
-    node.visitLabel(start)
-    load(variable, node)
-    return when (variable.type) {
-        "boolean" -> primitiveToObject(node, 'Z', "java.lang.Boolean")
-        "byte" -> primitiveToObject(node, 'B', "java.lang.Byte")
-        "short" -> primitiveToObject(node, 'S', "java.lang.Short")
-        "char" -> primitiveToObject(node, 'C', "java.lang.Character")
-        "int" -> primitiveToObject(node, 'I', "java.lang.Integer")
-        "long" -> primitiveToObject(node, 'J', "java.lang.Long")
-        "float" -> primitiveToObject(node, 'F', "java.lang.Float")
-        "double" -> primitiveToObject(node, 'D', "java.lang.Double")
-        else -> variable.type
-    }
-}
-
-private fun primitiveToObject(node: MethodNode, input: Char, type: String): String {
-    node.visitMethodInsn(Opcodes.INVOKESTATIC, type.replace('.', '/'), "valueOf", "($input)${type.desc}", false)
-    return type
-}
-
-fun objectToPrimitive(variable: Variable, node: MethodNode): String? {
-    val start = Label()
-    node.visitLabel(start)
-    return when (val type = variable.type) {
-        "java.lang.Boolean" -> objectToPrimitive(variable, node, type, "boolean", 'Z')
-        "java.lang.Byte" -> objectToPrimitive(variable, node, type, "byte", 'B')
-        "java.lang.Short" -> objectToPrimitive(variable, node, type, "short", 'S')
-        "java.lang.Character" -> objectToPrimitive(variable, node, type, "char", 'C')
-        "java.lang.Integer" -> objectToPrimitive(variable, node, type, "int", 'I')
-        "java.lang.Long" -> objectToPrimitive(variable, node, type, "long", 'J')
-        "java.lang.Float" -> objectToPrimitive(variable, node, type, "float", 'F')
-        "java.lang.Double" -> objectToPrimitive(variable, node, type, "double", 'D')
-        else -> type
-    }
-}
-
-private fun objectToPrimitive(variable: Variable, node: MethodNode, owner: String, name: String, rettype: Char): String {
-    load(variable, node)
-    node.visitMethodInsn(Opcodes.INVOKESTATIC, owner.replace('.', '/'), "${name}Value", "()$rettype", false)
-    return name
 }

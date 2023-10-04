@@ -2,5 +2,16 @@ package ru.DmN.pht.std.macro.ast
 
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ast.Node
+import ru.DmN.pht.base.parser.ast.NodeNodesList
+import ru.DmN.pht.base.utils.indent
+import java.util.UUID
 
-class NodeMacroArg(tkOperation: Token, val name: String) : Node(tkOperation)
+class NodeMacroArg(tkOperation: Token, nodes: MutableList<Node>, val uuids: List<UUID>) : NodeNodesList(tkOperation, nodes) {
+    override fun copy(): NodeMacroArg =
+        NodeMacroArg(tkOperation, copyNodes(), uuids)
+
+    override fun print(builder: StringBuilder, indent: Int): StringBuilder {
+        builder.indent(indent).append('[').append(tkOperation.text).append(" (").append(uuids).append(')')
+        return printNodes(builder, indent).append(']')
+    }
+}

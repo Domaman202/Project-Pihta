@@ -1,15 +1,14 @@
 package ru.DmN.pht.base.utils
 
 import ru.DmN.pht.base.Parser
-import ru.DmN.pht.base.Processor
-import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
 import ru.DmN.pht.base.lexer.*
-import ru.DmN.pht.base.parser.ParsingContext
-import ru.DmN.pht.base.processor.ProcessingContext
+import ru.DmN.pht.base.processor.utils.Platform
 
-fun Compiler.compile(code: String, pctx: ParsingContext, ctx: CompilationContext) =
-    compile(Processor(this::typeOf).process(Parser(code).parseNode(pctx)!!, ProcessingContext.base()), ctx, false)
+fun <T : IContextCollection<T>> T.with(ctx: Platform) =
+    this.with("base/platform", ctx)
+
+val IContextCollection<*>.platform
+    get() = contexts["base/platform"] as Platform
 
 fun <T> Map<Regex, T>.getRegex(key: String): T? =
     entries.find { key.matches(it.key) }?.value

@@ -4,8 +4,8 @@ import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
-import ru.DmN.pht.base.parser.parsers.NPUse
 import ru.DmN.pht.base.parser.parsers.SimpleNP
+import ru.DmN.pht.base.ups.NUPUseCtx
 import ru.DmN.pht.base.utils.Module
 import ru.DmN.pht.base.utils.nextOperation
 import ru.DmN.pht.std.module.ast.NodeModule
@@ -20,7 +20,7 @@ object NPModule : SimpleNP() {
                 (data["files"] as List<String>?)?.let { module.files += it }
                 (data["deps"] as List<String>?)?.let {
                     module.deps += it
-                    NPUse.process(it, parser, ctx)
+                    NUPUseCtx.loadModules(it, parser, ctx)
                 }
             }
         }

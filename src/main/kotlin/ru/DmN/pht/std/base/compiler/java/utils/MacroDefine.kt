@@ -1,11 +1,7 @@
 package ru.DmN.pht.std.base.compiler.java.utils
 
-import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ast.Node
-import ru.DmN.pht.base.parser.ast.NodeNodesList
-import ru.DmN.pht.std.base.compiler.java.ctx.GlobalContext
+import ru.DmN.pht.std.base.processor.ctx.GlobalContext
+import java.util.UUID
 
-class MacroDefine(val name: String, val args: List<String>, val body: List<Node>, val ctx: GlobalContext) {
-    fun toNodesList(): NodeNodesList =
-        NodeNodesList(Token(-1, Token.Type.OPERATION, "progn"), body.toMutableList())
-}
+class MacroDefine(val uuid: UUID, val name: String, val args: List<String>, val body: List<Node>, val ctx: GlobalContext)

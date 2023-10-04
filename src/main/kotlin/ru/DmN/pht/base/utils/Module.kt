@@ -4,12 +4,14 @@ import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
-import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
+import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.parser.ParsingContext
+import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.parsers.INodeParser
-import ru.DmN.pht.base.processor.ProcessingContext
+import ru.DmN.pht.base.processor.utils.ProcessingContext
 import ru.DmN.pht.base.processor.processors.INodeProcessor
+import ru.DmN.pht.base.processor.utils.ProcessingMode
+import ru.DmN.pht.base.processor.utils.ValType
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparser.unparsers.INodeUnparser
 import ru.DmN.pht.example.bf.BF
@@ -17,14 +19,17 @@ import ru.DmN.pht.example.lkl.LKL
 import ru.DmN.pht.std.Pihta
 import ru.DmN.pht.std.base.StdBase
 import ru.DmN.pht.std.collections.StdCollections
-import ru.DmN.pht.std.decl.StdDecl
 import ru.DmN.pht.std.enums.StdEnums
+import ru.DmN.pht.std.fp.StdFP
 import ru.DmN.pht.std.macro.StdMacro
 import ru.DmN.pht.std.math.StdMath
 import ru.DmN.pht.std.module.StdModule
+import ru.DmN.pht.std.oop.StdOOP
+import ru.DmN.pht.std.out.StdOut
 import ru.DmN.pht.std.util.StdUtil
 import ru.DmN.pht.std.value.StdValue
 import java.io.FileNotFoundException
+import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler as JavaNodeCompiler
 
 open class Module(val name: String, var init: Boolean = false) {
     val deps: MutableList<String> = ArrayList()
@@ -32,7 +37,7 @@ open class Module(val name: String, var init: Boolean = false) {
     val parsers: MutableMap<Regex, INodeParser> = HashMap()
     val unparsers: MutableMap<Regex, INodeUnparser<*>> = HashMap()
     val processors: MutableMap<Regex, INodeProcessor<*>> = HashMap()
-    val compilers: MutableMap<Regex, INodeCompiler<*>> = HashMap()
+    val javaCompilers: MutableMap<Regex, JavaNodeCompiler<*>> = HashMap()
 
     fun init() {
         if (!init) {
@@ -43,7 +48,6 @@ open class Module(val name: String, var init: Boolean = false) {
     open fun inject(parser: Parser, ctx: ParsingContext) {
         if (!ctx.loadedModules.contains(this)) {
             ctx.loadedModules += this
-//            Parser(getModuleFile()).parseNode(ParsingContext(SubList(listOf(Base, StdModule), ctx.modules), mutableListOf(Base, StdModule)))
         }
     }
 
@@ -53,25 +57,15 @@ open class Module(val name: String, var init: Boolean = false) {
         }
     }
 
-    open fun inject(processor: Processor, ctx: ProcessingContext) {
+    open fun inject(processor: Processor, ctx: ProcessingContext, mode: ValType): List<Node>? =
         if (!ctx.loadedModules.contains(this)) {
             ctx.loadedModules += this
-        }
-    }
+            files.map { processor.process(Parser(getModuleFile(it)).parseNode(ParsingContext.base())!!, ctx, mode) }.requireNoNulls()
+        } else null
 
-    open fun inject(compiler: Compiler, ctx: CompilationContext) =
-        inject(compiler, ctx, false)
-
-    open fun inject(compiler: Compiler, ctx: CompilationContext, ret: Boolean): Variable? {
+    open fun inject(compiler: Compiler, ctx: CompilationContext): Variable? {
         if (!ctx.loadedModules.contains(this)) {
             ctx.loadedModules += this
-            files.forEach {
-                compiler.compile( // todo:
-                    getModuleFile(it),
-                    ParsingContext.of(StdValue),
-                    ctx
-                )
-            }
         }
         return null
     }
@@ -81,10 +75,57 @@ open class Module(val name: String, var init: Boolean = false) {
     private fun getModuleFile(file: String) =
         String((Module::class.java.getResourceAsStream("/$name/$file") ?: throw FileNotFoundException("/$name/$file")).readAllBytes())
 
-    fun add(name: String, parser: INodeParser? = null, unparser: INodeUnparser<*>? = null, processor: INodeProcessor<*>? = null, compiler: INodeCompiler<*>? = null): Unit =
-        add(
-            name
-                .replace(".", "\\.")
+    fun add(name: String, compiler: JavaNodeCompiler<*>) =
+        add(name.toRegularExpr(), compiler)
+
+    fun add(name: Regex, compiler: JavaNodeCompiler<*>) {
+        javaCompilers[name] = compiler
+    }
+
+    fun add(name: String, parser: INodeParser?, unparser: INodeUnparser<*>?, processor: INodeProcessor<*>?): Unit =
+        add(name.toRegularExpr(), parser, unparser, processor)
+
+    fun add(name: Regex, parser: INodeParser?, unparser: INodeUnparser<*>?, processor: INodeProcessor<*>?) {
+        parser      ?.let { parsers     [name] = it }
+        unparser    ?.let { unparsers   [name] = it }
+        processor   ?.let { processors  [name] = it }
+    }
+
+    override fun toString(): String =
+        "Module[$name]"
+
+    companion object {
+        val MODULES: MutableMap<String, Module> = HashMap()
+
+        init {
+            for (module in listOf(
+                Pihta,
+                StdBase,
+                StdCollections,
+                StdEnums,
+                StdFP,
+                StdMacro,
+                StdMath,
+                StdModule,
+                StdOOP,
+                StdOut,
+                StdUtil,
+                StdValue,
+                BF,
+                LKL
+            )) {
+                MODULES[module.name] = module
+            }
+        }
+
+        fun getModuleFile(name: String) =
+            String(
+                (Module::class.java.getResourceAsStream("/$name/module.pht")
+                    ?: throw FileNotFoundException("/$name/module.pht")).readAllBytes()
+            )
+
+        fun String.toRegularExpr(): Regex =
+            this.replace(".", "\\.")
                 .replace("^", "\\^")
                 .replace("$", "\\$")
                 .replace("[", "\\[")
@@ -95,29 +136,6 @@ open class Module(val name: String, var init: Boolean = false) {
                 .replace("+", "\\+")
                 .replace("{", "\\{")
                 .replace("}", "\\}")
-                .toRegex(),
-            parser, unparser, processor, compiler)
-
-    fun add(name: Regex, parser: INodeParser? = null, unparser: INodeUnparser<*>? = null, processor: INodeProcessor<*>? = null, compiler: INodeCompiler<*>? = null) {
-        parser      ?.let { parsers     [name] = it }
-        unparser    ?.let { unparsers   [name] = it }
-        processor   ?.let { processors  [name] = it }
-        compiler    ?.let { compilers   [name] = it }
-    }
-
-    override fun toString(): String =
-        "Module[$name]"
-
-    companion object {
-        val MODULES: MutableMap<String, Module> = HashMap()
-
-        init {
-            for (module in listOf(Pihta, StdBase, StdCollections, StdDecl, StdEnums, StdMacro, StdMath, StdModule, StdUtil, StdValue, BF, LKL)) {
-                MODULES[module.name] = module
-            }
-        }
-
-        fun getModuleFile(name: String) =
-            String((Module::class.java.getResourceAsStream("/$name/module.pht") ?: throw FileNotFoundException("/$name/module.pht")).readAllBytes())
+                .toRegex()
     }
 }

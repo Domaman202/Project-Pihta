@@ -1,4 +1,5 @@
 (module
     [name "std/enums"]
     [version "1.0.0"]
+    [deps ["std/oop"]]
     [author "DomamaN202"])

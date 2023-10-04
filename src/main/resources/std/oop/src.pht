@@ -1,0 +1,3 @@
+(progn
+    (use std/base std/oop)
+    (import [java.lang.Object][java.lang.Object Any][java.lang.String][java.lang.Class]))

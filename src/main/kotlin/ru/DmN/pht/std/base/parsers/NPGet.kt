@@ -8,9 +8,9 @@ import ru.DmN.pht.base.lexer.isOperation
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parser.ast.Node
 import ru.DmN.pht.base.parser.parsers.INodeParser
-import ru.DmN.pht.std.base.ast.NodeFMGet
-import ru.DmN.pht.std.base.ast.NodeGetOrName
-import ru.DmN.pht.std.base.ast.NodeValue
+import ru.DmN.pht.std.fp.ast.NodeFMGet
+import ru.DmN.pht.std.value.ast.NodeGetOrName
+import ru.DmN.pht.std.fp.ast.NodeValue
 
 object NPGet : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
@@ -52,7 +52,7 @@ object NPGet : INodeParser {
         val j = i - 1
         return if (j == 0) {
             if (clazz)
-                NodeValue(Token(operationToken.line, operationToken.type, "value"), NodeValue.Type.CLASS, parts[0])
+                NodeValue.of(operationToken.line, NodeValue.Type.CLASS, parts[0])
             else NodeGetOrName(operationToken, parts[0], static)
         } else {
             val isStatic = static && j == 1

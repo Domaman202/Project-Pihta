@@ -1,97 +1,158 @@
 package ru.DmN.pht.std.base.compiler.java.utils
 
-import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.ctx.CompilationContext
-import ru.DmN.pht.base.parser.ast.Node
-import ru.DmN.pht.std.base.compiler.java.compilers.IStdNodeCompiler
-import ru.DmN.pht.std.base.compiler.java.ctx.*
+import org.objectweb.asm.Label
+import org.objectweb.asm.Opcodes
+import org.objectweb.asm.tree.MethodNode
+import ru.DmN.pht.base.utils.IContextCollection
+import ru.DmN.pht.base.utils.Variable
+import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.base.utils.desc
+import ru.DmN.pht.std.base.compiler.java.ctx.BodyContext
+import ru.DmN.pht.std.base.compiler.java.ctx.ClassContext
+import ru.DmN.pht.std.base.compiler.java.ctx.EnumContext
+import ru.DmN.pht.std.base.compiler.java.ctx.MethodContext
+import ru.DmN.pht.std.base.processor.utils.isEnum
 
-fun sliceInsert(list: MutableList<Any?>, index: Int, elements: List<Any?>) {
-    val right = list.subList(index + 1, list.size).toList()
-    for (i in list.size until elements.size + index + right.size)
-        list.add(null)
-    elements.forEachIndexed { i, it -> list[index + i] = it }
-    right.forEachIndexed { i, it -> list[index + i + elements.size] = it }
-}
-
-fun Compiler.computeNL(node: Node, ctx: CompilationContext): List<Node> =
-    compute<Any?>(node, ctx, ComputeType.NODE).let {
-        if (it is List<*>)
-            it as List<Node>
-        else computeNL(it as Node, ctx)
-    }
-
-fun Compiler.computeOnlyNode(node: Node, ctx: CompilationContext): Node =
-    compute<Any>(node, ctx, ComputeType.NODE).let { if (it is Node) it else node }
-
-fun Compiler.computeInt(node: Node, ctx: CompilationContext): Int =
-    if (node.isConst())
-        node.getConstValueAsString().toInt()
-    else compute<Any?>(node, ctx, ComputeType.NUMBER).let { if (it is Int) it else computeInt(it as Node, ctx) }
-
-fun Compiler.computeName(node: Node, ctx: CompilationContext): String =
-    if (node.isConst())
-        node.getConstValueAsString()
-    else {
-        val result = compute<Any?>(node, ctx, ComputeType.NAME)
-        if (result is String)
-            result
-        else computeName(result as Node, ctx)
-    }
-
-
-fun <T> Compiler.compute(node: Node, ctx: CompilationContext, type: ComputeType): T {
-    val nc = this.get(ctx, node)
-    return (if (nc is IStdNodeCompiler)
-        nc.compute(node, this, ctx, type)
-    else node) as T
-}
-
-fun Compiler.applyAnnotation(node: Node, ctx: CompilationContext, annotation: Node) {
-    val nc = this.get(ctx, node);
-    if (nc is IStdNodeCompiler) {
-        nc.applyAnnotation(node, this, ctx, annotation)
-    }
-}
-
-fun CompilationContext.with(ctx: GlobalContext) =
-    this.with("std/base/global", ctx)
-fun CompilationContext.with(ctx: EnumContext) =
+fun <T : IContextCollection<T>> T.with(ctx: EnumContext) =
     this.with("std/base/enum", ctx).apply { this.contexts["std/base/class"] = ctx }
-fun CompilationContext.with(ctx: ClassContext) =
+fun <T : IContextCollection<T>> T.with(ctx: ClassContext) =
     this.with("std/base/class", ctx)
-fun CompilationContext.with(ctx: MethodContext) =
+fun <T : IContextCollection<T>> T.with(ctx: MethodContext) =
     this.with("std/base/method", ctx)
-fun CompilationContext.with(ctx: BodyContext) =
+fun <T : IContextCollection<T>> T.with(ctx: BodyContext) =
     this.with("std/base/body", ctx)
-fun CompilationContext.with(ctx: MacroContext) =
-    this.with("std/base/macro", ctx)
 
-fun CompilationContext.isGlobal() =
-    contexts.containsKey("std/base/global")
-fun CompilationContext.isEnum() =
-    contexts.containsKey("std/base/enum")
-fun CompilationContext.isClass() =
+fun IContextCollection<*>.isClass() =
     contexts.containsKey("std/base/class") || isEnum()
-fun CompilationContext.isMethod() =
+fun IContextCollection<*>.isMethod() =
     contexts.containsKey("std/base/method")
-fun CompilationContext.isBody() =
+fun IContextCollection<*>.isBody() =
     contexts.containsKey("std/base/body")
-fun CompilationContext.isMacro() =
-    contexts.containsKey("std/base/macro")
 
-val CompilationContext.global
-    get() = contexts["std/base/global"] as GlobalContext
-val CompilationContext.enum
+val IContextCollection<*>.enum
     get() = contexts["std/base/enum"] as EnumContext
-val CompilationContext.clazz
+val IContextCollection<*>.clazz
     get() = contexts["std/base/class"] as ClassContext
-val CompilationContext.method
+val IContextCollection<*>.method
     get() = contexts["std/base/method"] as MethodContext
-val CompilationContext.body
-    get() = contexts["std/base/body"] as BodyContext
-val CompilationContext.macro
-    get() = contexts["std/base/macro"] as MacroContext
+val IContextCollection<*>.body
+    get() = this.bodyOrNull!!
+val IContextCollection<*>.bodyOrNull
+    get() = contexts["std/base/body"] as BodyContext?
 
-val MutableMap<String, Any?>.macros
-    get() = this["std/base/macros"] as MutableMap<String, MutableList<MacroDefine>>
+fun load(variable: Variable, node: MethodNode) {
+    if (!variable.tmp) {
+        load(variable.type?.name, variable.id, node)
+    }
+}
+
+fun load(type: String?, id: Int, node: MethodNode) {
+    node.visitVarInsn(
+        when (type) {
+            "void" -> throw RuntimeException()
+            "boolean", "byte", "short", "char", "int" -> Opcodes.ILOAD
+            "long" -> Opcodes.LLOAD
+            "float" -> Opcodes.FLOAD
+            "double" -> Opcodes.DLOAD
+            else -> Opcodes.ALOAD
+        },
+        id
+    )
+}
+
+fun storeCast(variable: Variable, from: VirtualType, node: MethodNode) {
+    val to = variable.type()
+    val tmp = Variable("tmp$${variable.hashCode() + from.hashCode()}", from, -1, true)
+    if (from.isPrimitive != to.isPrimitive)
+        if (to.isPrimitive)
+            objectToPrimitive(tmp, node)
+        else
+            primitiveToObject(tmp, node)
+    store(variable, node)
+}
+
+fun store(variable: Variable, node: MethodNode) {
+    if (!variable.tmp) {
+        node.visitVarInsn(
+            when (variable.type().name) {
+                "boolean", "byte", "short", "char", "int" -> Opcodes.ISTORE
+                "long" -> Opcodes.LSTORE
+                "float" -> Opcodes.FSTORE
+                "double" -> Opcodes.DSTORE
+                else -> Opcodes.ASTORE
+            },
+            variable.id
+        )
+    }
+}
+
+fun bytecodeCast(from: String, to: String, node: MethodNode) {
+    node.visitInsn(when (from) {
+        "boolean", "byte", "short", "char", "int" -> when (to) {
+            "boolean", "byte" -> Opcodes.I2B
+            "short" -> Opcodes.I2S
+            "char" -> Opcodes.I2C
+            "long" -> Opcodes.I2L
+            "float" -> Opcodes.I2F
+            "double" -> Opcodes.I2D
+            else -> return
+        }
+        "float" -> when (to) {
+            "boolean", "byte", "short", "char", "int" -> Opcodes.F2I
+            "long" -> Opcodes.F2L
+            "double" -> Opcodes.F2D
+            else -> return
+        }
+        "double" -> when (to) {
+            "boolean", "byte", "short", "char", "int" -> Opcodes.D2I
+            "long" -> Opcodes.D2L
+            "float" -> Opcodes.D2F
+            else -> return
+        }
+        else -> return
+    })
+}
+
+fun primitiveToObject(variable: Variable, node: MethodNode): VirtualType? {
+    val start = Label()
+    node.visitLabel(start)
+    load(variable, node)
+    return when (variable.type().name) {
+        "boolean" -> primitiveToObject(node, 'Z', VirtualType.ofKlass("java.lang.Boolean"))
+        "byte" -> primitiveToObject(node, 'B', VirtualType.ofKlass("java.lang.Byte"))
+        "short" -> primitiveToObject(node, 'S', VirtualType.ofKlass("java.lang.Short"))
+        "char" -> primitiveToObject(node, 'C', VirtualType.ofKlass("java.lang.Character"))
+        "int" -> primitiveToObject(node, 'I', VirtualType.ofKlass("java.lang.Integer"))
+        "long" -> primitiveToObject(node, 'J', VirtualType.ofKlass("java.lang.Long"))
+        "float" -> primitiveToObject(node, 'F', VirtualType.ofKlass("java.lang.Float"))
+        "double" -> primitiveToObject(node, 'D', VirtualType.ofKlass("java.lang.Double"))
+        else -> variable.type
+    }
+}
+
+private fun primitiveToObject(node: MethodNode, input: Char, type: VirtualType): VirtualType {
+    node.visitMethodInsn(Opcodes.INVOKESTATIC, type.className, "valueOf", "($input)${type.desc}", false)
+    return type
+}
+
+fun objectToPrimitive(variable: Variable, node: MethodNode): VirtualType? {
+    val start = Label()
+    node.visitLabel(start)
+    return when (val type = variable.type().name) {
+        "java.lang.Boolean" -> objectToPrimitive(variable, node, type, VirtualType.BOOLEAN, 'Z')
+        "java.lang.Byte" -> objectToPrimitive(variable, node, type, VirtualType.BYTE, 'B')
+        "java.lang.Short" -> objectToPrimitive(variable, node, type, VirtualType.SHORT, 'S')
+        "java.lang.Character" -> objectToPrimitive(variable, node, type, VirtualType.CHAR, 'C')
+        "java.lang.Integer" -> objectToPrimitive(variable, node, type, VirtualType.INT, 'I')
+        "java.lang.Long" -> objectToPrimitive(variable, node, type, VirtualType.LONG, 'J')
+        "java.lang.Float" -> objectToPrimitive(variable, node, type, VirtualType.FLOAT, 'F')
+        "java.lang.Double" -> objectToPrimitive(variable, node, type, VirtualType.DOUBLE, 'D')
+        else -> variable.type
+    }
+}
+
+private fun objectToPrimitive(variable: Variable, node: MethodNode, owner: String, name: VirtualType, rettype: Char): VirtualType {
+    load(variable, node)
+    node.visitMethodInsn(Opcodes.INVOKESTATIC, owner.replace('.', '/'), "${name}Value", "()$rettype", false)
+    return name
+}

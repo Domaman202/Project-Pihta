@@ -6,7 +6,7 @@ import java.util.*
 
 class ParsingContext (
     val loadedModules: MutableList<Module> = ArrayList(),
-    val macros: Stack<String> = Stack()) {
+    val macros: Stack<UUID> = Stack()) {
     companion object {
         fun base() =
             ParsingContext(mutableListOf(Base))

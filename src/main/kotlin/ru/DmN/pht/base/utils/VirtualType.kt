@@ -14,14 +14,19 @@ class VirtualType(
     var componentType: VirtualType? = null,
     //
     var isInterface: Boolean = false,
+    var abstract: Boolean = false,
     var final: Boolean = false,
     //
     var generics: Generics = Generics()
 ) {
+    val simpleName: String
+        get() = name.substring(name.lastIndexOf('.') + 1)
     val className: String
         get() = name.replace('.', '/')
     val superclass: VirtualType?
         get() = if (isInterface) null else parents.find { !it.isInterface }
+    val interfaces: List<VirtualType>
+        get() = if (isInterface) parents else parents.drop(1)
     val arrayType: VirtualType
         get() = VirtualType("[${desc.replace('/', '.')}", componentType = this)
     val isPrimitive
@@ -64,28 +69,43 @@ class VirtualType(
             true
         else parents.any { it.isAssignableFrom(target) }
 
+    override fun equals(other: Any?): Boolean =
+        if (other is VirtualType)
+            other.name == name
+        else false
+
     override fun toString(): String {
         return "VT($name)"
     }
 
     fun with(generics: Generics) =
-        VirtualType(name, parents, fields, methods, componentType, isInterface, final, generics)
+        VirtualType(
+            name = name,
+            parents = parents,
+            fields = fields,
+            methods = methods,
+            componentType = componentType,
+            isInterface = isInterface,
+            abstract = abstract,
+            final = final,
+            generics = generics
+        )
 
     companion object {
         private val TYPES: MutableMap<String, VirtualType> = WeakHashMap()
-        val VOID    = ofKlass(Void::class.javaPrimitiveType!!)
+        val VOID = ofKlass(Void::class.javaPrimitiveType!!)
         val BOOLEAN = ofKlass(Boolean::class.javaPrimitiveType!!)
-        val BYTE    = ofKlass(Byte::class.javaPrimitiveType!!)
-        val SHORT   = ofKlass(Short::class.javaPrimitiveType!!)
-        val CHAR    = ofKlass(Char::class.javaPrimitiveType!!)
-        val INT     = ofKlass(Int::class.javaPrimitiveType!!)
-        val LONG    = ofKlass(Long::class.javaPrimitiveType!!)
-        val FLOAT   = ofKlass(Float::class.javaPrimitiveType!!)
-        val DOUBLE  = ofKlass(Double::class.javaPrimitiveType!!)
-        val UNIT    = ofKlass(Unit::class.java)
-        val OBJECT  = ofKlass(Object::class.java)
-        val CLASS   = ofKlass(Class::class.java)
-        val STRING  = ofKlass(String::class.java)
+        val BYTE = ofKlass(Byte::class.javaPrimitiveType!!)
+        val SHORT = ofKlass(Short::class.javaPrimitiveType!!)
+        val CHAR = ofKlass(Char::class.javaPrimitiveType!!)
+        val INT = ofKlass(Int::class.javaPrimitiveType!!)
+        val LONG = ofKlass(Long::class.javaPrimitiveType!!)
+        val FLOAT = ofKlass(Float::class.javaPrimitiveType!!)
+        val DOUBLE = ofKlass(Double::class.javaPrimitiveType!!)
+        val UNIT = ofKlass(Unit::class.java)
+        val OBJECT = ofKlass(Object::class.java)
+        val CLASS = ofKlass(Class::class.java)
+        val STRING = ofKlass(String::class.java)
 
         fun ofKlass(name: String) =
             ofKlass(klassOf(name))
@@ -100,6 +120,7 @@ class VirtualType(
                 Arrays.stream(klass.interfaces).map { ofKlass(it.name) }.forEach(parents::add)
                 componentType = klass.componentType?.let(Companion::ofKlass)
                 isInterface = klass.isInterface
+                abstract = Modifier.isAbstract(klass.modifiers)
                 final = Modifier.isFinal(klass.modifiers) || klass.isEnum
                 fields += klass.declaredFields.map(VirtualField.Companion::of)
                 methods += klass.declaredConstructors.map(VirtualMethod.Companion::of) +

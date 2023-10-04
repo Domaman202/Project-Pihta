@@ -1,4 +1,3 @@
 (use-ctx pht
-    (defmacro test [] (#println (use std/base) "Какой-то текст"))
-    (test)
-    (test))
+	(app-fn
+	    (println (array-of 12 21))))
