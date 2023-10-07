@@ -9,13 +9,14 @@ import ru.DmN.pht.base.parser.parsers.SimpleNP
 import ru.DmN.pht.base.ups.NUPUseCtx
 import ru.DmN.pht.base.utils.Module
 import ru.DmN.pht.std.base.compiler.java.utils.SubList
+import ru.DmN.pht.std.base.compiler.java.utils.SubStack
 import ru.DmN.pht.std.module.StdModuleHelper
 import ru.DmN.pht.std.module.ast.IValueNode
 import ru.DmN.pht.std.module.ast.NodeModule
 
 object NPModule : SimpleNP() {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
-        val context = ParsingContext(SubList(ctx.loadedModules), ctx.macros) // todo: substack
+        val context = ParsingContext(SubList(ctx.loadedModules), SubStack(ctx.macros))
         context.loadedModules.add(0, StdModuleHelper)
         return NPDefault.parse(parser, context) { it ->
             NodeModule(operationToken, it.associate { Pair(it.tkOperation.text!!, (it as IValueNode).value) }).apply {

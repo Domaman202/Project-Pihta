@@ -17,6 +17,7 @@ import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparser.unparsers.NUDefault
 import ru.DmN.pht.base.utils.Module
 import ru.DmN.pht.std.base.compiler.java.utils.SubList
+import ru.DmN.pht.std.base.compiler.java.utils.SubStack
 import ru.DmN.pht.std.base.utils.INodeUniversalProcessor
 import ru.DmN.pht.std.module.StdModule
 
@@ -29,7 +30,7 @@ object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeUse> {
             tk = parser.nextToken()!!
         }
         parser.tokens.push(tk)
-        val context = ParsingContext(SubList(ctx.loadedModules), ctx.macros) // todo: substack
+        val context = ParsingContext(SubList(ctx.loadedModules), SubStack(ctx.macros))
         loadModules(names, parser, context)
         return NPDefault.parse(parser, context) { NodeUse(operationToken, names, it) }
     }

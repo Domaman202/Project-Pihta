@@ -13,6 +13,7 @@ import ru.DmN.pht.base.processor.utils.ValType
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.nextOperation
 import ru.DmN.pht.std.base.compiler.java.utils.SubList
+import ru.DmN.pht.std.base.compiler.java.utils.SubStack
 import ru.DmN.pht.std.base.processor.utils.global
 import ru.DmN.pht.std.base.utils.INodeUniversalProcessor
 import ru.DmN.pht.std.imports.StdImportsHelper
@@ -22,7 +23,7 @@ import ru.DmN.pht.std.imports.ast.IValueNode
 object NUPImport : INodeUniversalProcessor<NodeNodesList, NodeImport> {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
         val module = parser.nextOperation().text!!
-        val context = ParsingContext(SubList(ctx.loadedModules), ctx.macros) // todo: substack
+        val context = ParsingContext(SubList(ctx.loadedModules), SubStack(ctx.macros))
         context.loadedModules.add(0, StdImportsHelper)
         return NPDefault.parse(parser, context) { it ->
             val map = HashMap<String, MutableList<Any?>>()
