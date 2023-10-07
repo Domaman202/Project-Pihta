@@ -1,4 +1,0 @@
-(use-ctx pht
-	(obj App [^java.lang.Object]
-		(defn main ^void []
-		    (println "Hi!"))))
