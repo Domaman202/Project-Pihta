@@ -15,17 +15,20 @@ fun lenArgs(from: List<VirtualType>, to: List<ICastable>) =
     from.mapIndexed { i, it -> to[i].castableTo(it) }.sum()
 
 fun Processor.processNodes(node: Node, ctx: ProcessingContext, mode: ValType): List<Node> =
-    node.nodes.map {process(it, ctx, mode)!! }
+    node.nodes.map { process(it, ctx, mode)!! }
+
+fun Processor.computeStringNodes(node: Node, ctx: ProcessingContext): List<String> =
+    node.nodes.map { computeString(it, ctx) }
 
 fun Processor.compute(node: Node, ctx: ProcessingContext): Node =
-    this.get(ctx, node).let {
+    this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.compute(node, this, ctx)
         else node
     }
 
 fun Processor.computeList(node: Node, ctx: ProcessingContext): List<Node> =
-    this.get(ctx, node).let {
+    this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeList(node, this, ctx)
 //        else node.nodes
@@ -33,7 +36,7 @@ fun Processor.computeList(node: Node, ctx: ProcessingContext): List<Node> =
     }
 
 fun Processor.computeString(node: Node, ctx: ProcessingContext): String =
-    this.get(ctx, node).let {
+    this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeString(node, this, ctx)
 //        else node.getValueAsString()
@@ -41,7 +44,7 @@ fun Processor.computeString(node: Node, ctx: ProcessingContext): String =
     }
 
 fun Processor.computeInt(node: Node, ctx: ProcessingContext): Int =
-    this.get(ctx, node).let {
+    this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeInt(node, this, ctx)
 //        else node.getValueAsString().toInt()
@@ -158,8 +161,8 @@ fun calcType(otype: VirtualType?, ntype: VirtualType?): Pair<VirtualType?, Virtu
     else if (otype == null)
         Pair(ntype, null)
     else {
-        val typeA = otype.ofPrimitive()?.let { VirtualType.ofKlass(it) } ?: otype
-        val typeB = ntype.ofPrimitive()?.let { VirtualType.ofKlass(it) } ?: ntype
+        val typeA = otype.ofPrimitive().let { VirtualType.ofKlass(it) }
+        val typeB = ntype.ofPrimitive().let { VirtualType.ofKlass(it) }
         if (typeA.isAssignableFrom(typeB))
             Pair(ntype, otype)
         else if (typeB.isAssignableFrom(typeA))

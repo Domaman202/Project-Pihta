@@ -34,7 +34,12 @@ class GlobalContext(
     fun name(name: String): String =
         if (namespace.isEmpty()) name else "$namespace.$name"
 
-    fun getMethodVariants(type: VirtualType, name: String, args: List<ICastable>, tp: TypesProvider): List<VirtualMethod> =
+    fun getMethodVariants(
+        type: VirtualType,
+        name: String,
+        args: List<ICastable>,
+        tp: TypesProvider
+    ): List<VirtualMethod> =
         getAllMethods(type)
             .asSequence()
             .filter { it.name == name }
@@ -59,6 +64,12 @@ class GlobalContext(
         return ArrayList<VirtualMethod>().apply { extends.add(Pair(type.name, this)) }
     }
 
-    fun getType(name: String, tp: TypesProvider): VirtualType = // todo: check name (проверка на содержание . в имени)
-        imports[name]?.let { tp.typeOf(it) } ?: tp.typeOfOrNull(name) ?: tp.typeOf(name(name))
+    fun getTypeName(name: String): String? =
+        name.let { if (name.contains('.')) name else imports[name] }
+
+    fun getType(name: String, tp: TypesProvider): VirtualType =
+        getTypeName(name)
+            ?.let { tp.typeOf(it) }
+            ?: tp.typeOfOrNull(name)
+            ?: tp.typeOf(name(name))
 }

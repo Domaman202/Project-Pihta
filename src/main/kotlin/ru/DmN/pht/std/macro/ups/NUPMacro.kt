@@ -13,6 +13,7 @@ import ru.DmN.pht.base.processor.processors.NRDefault
 import ru.DmN.pht.base.processor.utils.ValType
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparser.unparsers.NUDefault
+import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.base.utils.nextOperation
 import ru.DmN.pht.std.base.processor.ctx.MacroContext
 import ru.DmN.pht.std.base.compiler.java.utils.*
@@ -35,8 +36,19 @@ object NUPMacro : INodeUniversalProcessor<NodeMacro, NodeMacro> { // todo: calc
         }
     }
 
+    override fun calc(node: NodeMacro, processor: Processor, ctx: ProcessingContext): VirtualType? {
+        val result = macroCalc(node, ctx)
+        return NRDefault.calc(result.first, processor, result.second)
+    }
+
     override fun process(node: NodeMacro, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
+        val result = macroCalc(node, ctx)
+        return NRDefault.process(result.first, processor, result.second, mode)
+    }
+
+    private fun macroCalc(node: NodeMacro, ctx: ProcessingContext): Pair<NodeNodesList, ProcessingContext> {
         val gctx = ctx.global
+        //
         val macro = gctx.macros.find { it.name == node.name }!!
         val args = HashMap<Pair<UUID, String>, Node>()
         //
@@ -50,11 +62,9 @@ object NUPMacro : INodeUniversalProcessor<NodeMacro, NodeMacro> { // todo: calc
             )
         }
         //
-        return NRDefault.process(
+        return Pair(
             nodePrognOf(node.tkOperation.line, macro.body.toMutableList()),
-            processor,
-            ctx.with(macro.ctx.combineWith(gctx)).with(macroCtxOf(ctx, args)),
-            mode
+            ctx.with(macro.ctx.combineWith(gctx)).with(macroCtxOf(ctx, args))
         )
     }
 

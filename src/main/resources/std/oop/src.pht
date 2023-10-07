@@ -1,4 +1,6 @@
 ((use pht)
     (import java
         (type java.lang.Object)
-        (type java.lang.String)))
+        (type java.lang.Class)
+        (type java.lang.String))
+    (alias-type Object Any))

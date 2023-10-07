@@ -15,11 +15,11 @@ class Processor(val tp: TypesProvider) {
     val contexts: MutableMap<String, Any?> = HashMap()
 
     fun calc(node: Node, ctx: ProcessingContext): VirtualType? =
-        get(ctx, node).calc(node, this, ctx)
+        get(node, ctx).calc(node, this, ctx)
     fun process(node: Node, ctx: ProcessingContext, mode: ValType): Node? =
-        get(ctx, node).process(node, this, ctx, mode)
+        get(node, ctx).process(node, this, ctx, mode)
 
-    fun get(ctx: ProcessingContext, node: Node): INodeProcessor<Node> {
+    fun get(node: Node, ctx: ProcessingContext): INodeProcessor<Node> {
         val name = node.tkOperation.text!!
         val i = name.lastIndexOf('/')
         if (i < 1) {

@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.collections.compiler.java.compilers
 
+import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
@@ -16,21 +17,7 @@ object NCASet : INodeCompiler<NodeASet> {
             load(arr, this)
             load(compiler.compileVal(node.index, ctx), this)
             load(compiler.compileVal(node.value, ctx), this)
-            visitInsn(
-                arr.type().componentType!!.run {
-                    if (isPrimitive)
-                        when (name) {
-                            "boolean", "byte", "int" -> Opcodes.IASTORE
-                            "short" -> Opcodes.SASTORE
-                            "char" -> Opcodes.CASTORE
-                            "long" -> Opcodes.LASTORE
-                            "float" -> Opcodes.FASTORE
-                            "double" -> Opcodes.DASTORE
-                            else -> throw RuntimeException()
-                        }
-                    else Opcodes.AASTORE
-                }
-            )
+            visitAStore(arr)
         }
     }
 
@@ -42,21 +29,25 @@ object NCASet : INodeCompiler<NodeASet> {
             val value = compiler.compileVal(node.value, ctx)
             load(value, this)
             visitInsn(Opcodes.DUP_X2)
-            visitInsn(
-                arr.type().componentType!!.run {
-                    if (isPrimitive)
-                        when (name) {
-                            "boolean", "byte", "int" -> Opcodes.IASTORE
-                            "short" -> Opcodes.SASTORE
-                            "char" -> Opcodes.CASTORE
-                            "long" -> Opcodes.LASTORE
-                            "float" -> Opcodes.FASTORE
-                            "double" -> Opcodes.DASTORE
-                            else -> throw RuntimeException()
-                        }
-                    else Opcodes.AASTORE
-                }
-            )
+            visitAStore(arr)
             Variable.tmp(node, value.type)
         }
-} // todo: deduplicate
+
+    private fun MethodVisitor.visitAStore(arr: Variable) {
+        visitInsn(
+            arr.type().componentType!!.run {
+                if (isPrimitive)
+                    when (name) {
+                        "boolean", "byte", "int" -> Opcodes.IASTORE
+                        "short" -> Opcodes.SASTORE
+                        "char" -> Opcodes.CASTORE
+                        "long" -> Opcodes.LASTORE
+                        "float" -> Opcodes.FASTORE
+                        "double" -> Opcodes.DASTORE
+                        else -> throw RuntimeException()
+                    }
+                else Opcodes.AASTORE
+            }
+        )
+    }
+}
