@@ -17,6 +17,7 @@ import ru.DmN.pht.std.base.utils.StdModule
 import ru.DmN.pht.std.collections.StdCollections
 import ru.DmN.pht.std.enums.StdEnums
 import ru.DmN.pht.std.fp.StdFP
+import ru.DmN.pht.std.imports.StdImports
 import ru.DmN.pht.std.macro.StdMacro
 import ru.DmN.pht.std.math.StdMath
 import ru.DmN.pht.std.oop.StdOOP
@@ -26,7 +27,7 @@ import ru.DmN.pht.std.value.StdValue
 
 object Pihta : StdModule("pht") {
     val STD_MODULES
-        get() = listOf(StdApp, StdBase, StdCollections, StdEnums, StdFP, StdMacro, StdMath, StdOOP, StdOut, StdUtil, StdValue)
+        get() = listOf(StdApp, StdBase, StdCollections, StdEnums, StdImports, StdFP, StdMacro, StdMath, StdOOP, StdOut, StdUtil, StdValue)
             .map { it.apply { init() } }
             .sortedWith { a, b -> a.deps.size.compareTo(b.deps.size) }
 

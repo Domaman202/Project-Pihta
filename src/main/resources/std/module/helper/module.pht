@@ -1,4 +1,4 @@
 (module
-    (name "example/lkl")
+    (name "std/module/helper")
     (version "1.0.0")
     (author "DomamaN202"))

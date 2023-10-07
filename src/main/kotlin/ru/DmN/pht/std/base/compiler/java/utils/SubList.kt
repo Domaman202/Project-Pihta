@@ -14,7 +14,7 @@ class SubList<E>(val parent: List<E>, val list: MutableList<E> = ArrayList()) : 
         throw UnsupportedOperationException("Not yet implemented")
 
     override fun add(index: Int, element: E) =
-        throw UnsupportedOperationException("Not yet implemented")
+        list.add(index, element)
 
     override fun add(element: E): Boolean =
         list.add(element)

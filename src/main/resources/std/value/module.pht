@@ -1,5 +1,5 @@
 (module
-    [name "std/value"]
-    [version "1.0.0"]
-    [deps ["std/fp"]]
-    [author "DomamaN202"])
+    (name "std/value")
+    (version "1.0.0")
+    (author "DomamaN202")
+    (deps ["pht"]))

@@ -1,5 +1,5 @@
 (module
-    [name "pht"]
-    [version "1.0.0"]
-    [deps ["std/app" "std/base" "std/collections" "std/enums" "std/fp" "std/macro" "std/math" "std/oop" "std/util" "std/value"]]
-    [author "DomamaN202"])
+    (name "pht")
+    (version "1.0.0")
+    (deps ["std/app" "std/base" "std/collections" "std/enums" "std/fp" "std/imports" "std/macro" "std/math" "std/oop" "std/util" "std/value"])
+    (author "DomamaN202"))

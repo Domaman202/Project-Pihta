@@ -1,5 +1,5 @@
 (module
-    (name "std/enums")
+    (name "std/imports")
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["pht"]))

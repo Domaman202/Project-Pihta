@@ -47,25 +47,25 @@ open class Module(val name: String, var init: Boolean = false) {
 
     open fun inject(parser: Parser, ctx: ParsingContext) {
         if (!ctx.loadedModules.contains(this)) {
-            ctx.loadedModules += this
+            ctx.loadedModules.add(0, this)
         }
     }
 
     open fun inject(unparser: Unparser, ctx: UnparsingContext) {
         if (!ctx.loadedModules.contains(this)) {
-            ctx.loadedModules += this
+            ctx.loadedModules.add(0, this)
         }
     }
 
     open fun inject(processor: Processor, ctx: ProcessingContext, mode: ValType): List<Node>? =
         if (!ctx.loadedModules.contains(this)) {
-            ctx.loadedModules += this
+            ctx.loadedModules.add(0, this)
             files.map { processor.process(Parser(getModuleFile(it)).parseNode(ParsingContext.base())!!, ctx, mode) }.requireNoNulls()
         } else null
 
     open fun inject(compiler: Compiler, ctx: CompilationContext): Variable? {
         if (!ctx.loadedModules.contains(this)) {
-            ctx.loadedModules += this
+            ctx.loadedModules.add(0, this)
         }
         return null
     }
@@ -82,10 +82,10 @@ open class Module(val name: String, var init: Boolean = false) {
         javaCompilers[name] = compiler
     }
 
-    fun add(name: String, parser: INodeParser?, unparser: INodeUnparser<*>?, processor: INodeProcessor<*>?): Unit =
+    fun add(name: String, parser: INodeParser? = null, unparser: INodeUnparser<*>? = null, processor: INodeProcessor<*>? = null): Unit =
         add(name.toRegularExpr(), parser, unparser, processor)
 
-    fun add(name: Regex, parser: INodeParser?, unparser: INodeUnparser<*>?, processor: INodeProcessor<*>?) {
+    fun add(name: Regex, parser: INodeParser? = null, unparser: INodeUnparser<*>? = null, processor: INodeProcessor<*>? = null) {
         parser      ?.let { parsers     [name] = it }
         unparser    ?.let { unparsers   [name] = it }
         processor   ?.let { processors  [name] = it }

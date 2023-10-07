@@ -1,0 +1,5 @@
+(module
+    (name "std/imports/helper")
+    (version "1.0.0")
+    (author "DomamaN202")
+    (deps "std/imports"))

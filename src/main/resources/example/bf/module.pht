@@ -1,4 +1,4 @@
 (module
-    [name "example/bf"]
-    [version "1.0.0"]
-    [author "DomamaN202"])
+    (name "example/bf")
+    (version "1.0.0")
+    (author "DomamaN202"))

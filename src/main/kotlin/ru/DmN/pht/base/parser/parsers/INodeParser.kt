@@ -7,4 +7,7 @@ import ru.DmN.pht.base.parser.ast.Node
 
 interface INodeParser {
     fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node?
+
+    fun skip(parser: Parser, ctx: ParsingContext, operationToken: Token): Unit =
+        throw UnsupportedOperationException()
 }

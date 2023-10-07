@@ -1,3 +1,4 @@
-(progn
-    (use std/base std/oop)
-    (import [java.lang.Object][java.lang.Object Any][java.lang.String][java.lang.Class]))
+((use pht)
+    (import java
+        (type java.lang.Object)
+        (type java.lang.String)))

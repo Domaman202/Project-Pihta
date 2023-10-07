@@ -10,10 +10,10 @@ import ru.DmN.pht.std.oop.ups.*
 
 object StdOOP : StdModule("std/oop") {
     init {
-        // Импорт типов
-        add("import",           NUPDefault, NRImport)
-        // Импорт расширений
-        add("import-extends",   NUPDefault, NRImportExtends)
+//        // Импорт типов
+//        add("import",           NUPDefault, NRImport)
+//        // Импорт расширений
+//        add("import-extends",   NUPDefault, NRImportExtends)
         // Аннотации
         add("@abstract",NUPDefault, NRAbstract)
         add("@final",   NUPDefault, NRFinal)

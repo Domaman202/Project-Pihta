@@ -1,4 +1,5 @@
 (module
-    [name "std/util"]
-    [version "1.0.0"]
-    [author "DomamaN202"])
+    (name "std/util")
+    (version "1.0.0")
+    (author "DomamaN202")
+    (deps ["pht"]))

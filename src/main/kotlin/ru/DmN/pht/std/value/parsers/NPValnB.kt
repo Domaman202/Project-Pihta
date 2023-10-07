@@ -8,7 +8,10 @@ import ru.DmN.pht.base.parser.ast.NodeNodesList
 import ru.DmN.pht.base.parser.parsers.INodeParser
 
 object NPValnB : INodeParser {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
+    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
+        parse(parser, ctx) { NodeNodesList(Token(operationToken.line, Token.Type.OPERATION, "valn"), it) }
+
+    fun parse(parser: Parser, ctx: ParsingContext, constructor: (it: MutableList<Node>) -> Node): Node {
         val nodes = ArrayList<Node>()
         var tk = parser.nextToken()
         while (tk != null && tk.type != Token.Type.CLOSE_CBRACKET) {
@@ -20,6 +23,6 @@ object NPValnB : INodeParser {
             )
             tk = parser.nextToken()
         }
-        return NodeNodesList(Token(operationToken.line, Token.Type.OPERATION, "valn"), nodes)
+        return constructor(nodes)
     }
 }
