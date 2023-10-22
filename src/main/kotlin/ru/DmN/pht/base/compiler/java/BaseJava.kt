@@ -9,7 +9,6 @@ import ru.DmN.pht.base.utils.ModuleCompilers
 object BaseJava : ModuleCompilers(Base) {
     override fun onInitialize() {
         add("use-ctx",  NCUseCtx)
-//        add("use",      NCUse) // todo:
         add("progn",    NCDefault)
     }
 }
