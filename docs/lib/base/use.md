@@ -4,8 +4,8 @@
 
 ### Применение
 
-1. `(use std/base std/math)`<br>
-`std/base`, `std/math` - _модули_.
+1. `(use pht bf)`<br>
+`pht` `bf` - _модули_.
 
 ### Примеры
 

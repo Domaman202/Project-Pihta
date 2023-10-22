@@ -1,4 +1,4 @@
 (use-ctx pht
-	(app-fn
-	    (defmacro tm [] "Слава СССР!")
-	    (println (typeof (tm)))))
+    (app-fn
+        (def [[i 12]])
+        (println (#invoke (rfn [i][] (+ i 21))))))

@@ -3,42 +3,45 @@ package ru.DmN.pht.base.ups
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
-import ru.DmN.pht.base.processor.utils.ProcessingStage
+import ru.DmN.pht.base.ast.*
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
-import ru.DmN.pht.base.parser.ast.Node
-import ru.DmN.pht.base.parser.ast.NodeProcessedUse
-import ru.DmN.pht.base.parser.ast.NodeUse
-import ru.DmN.pht.base.parser.parsers.NPDefault
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.processor.processors.NRDefault
-import ru.DmN.pht.base.processor.utils.ValType
+import ru.DmN.pht.base.parsers.NPDefault
+import ru.DmN.pht.base.processor.ProcessingContext
+import ru.DmN.pht.base.processor.ProcessingStage
+import ru.DmN.pht.base.processor.ValType
+import ru.DmN.pht.base.processors.NRDefault
 import ru.DmN.pht.base.unparser.UnparsingContext
-import ru.DmN.pht.base.unparser.unparsers.NUDefault
+import ru.DmN.pht.base.unparsers.NUDefault
 import ru.DmN.pht.base.utils.Module
-import ru.DmN.pht.std.base.compiler.java.utils.SubList
-import ru.DmN.pht.std.base.compiler.java.utils.SubStack
-import ru.DmN.pht.std.base.utils.INodeUniversalProcessor
 import ru.DmN.pht.std.module.StdModule
+import ru.DmN.pht.std.processor.utils.exports
+import ru.DmN.pht.std.processor.utils.isExports
+import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import java.util.*
 
-object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeUse> {
+object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeParsedUse> {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
         val names = ArrayList<String>()
+        val exports = ArrayList<NodeNodesList>()
         var tk = parser.nextToken()!!
         while (tk.type == Token.Type.OPERATION) {
             names.add(tk.text!!)
             tk = parser.nextToken()!!
         }
         parser.tokens.push(tk)
-        val context = ParsingContext(SubList(ctx.loadedModules), SubStack(ctx.macros))
+        val context = ctx.subCtx()
+        if (context.isExports())
+            context.exports.push(exports)
+        else context.exports = Stack<MutableList<NodeNodesList>>().apply { push(exports) }
         loadModules(names, parser, context)
-        return NPDefault.parse(parser, context) { NodeUse(operationToken, names, it) }
+        return NPDefault.parse(parser, context) { NodeParsedUse(operationToken, names, it, exports) }.apply { context.exports.pop() }
     }
 
     override fun unparse(node: NodeUse, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         loadModules(node.names, unparser, ctx)
         unparser.out.apply {
-            append('(').append(node.tkOperation.text).append(' ')
+            append('(').append(node.token.text).append(' ')
             node.names.forEachIndexed { i, it ->
                 append(it)
                 if (node.names.size + 1 < i) {
@@ -50,14 +53,15 @@ object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeUse> {
         }
     }
 
-    override fun process(node: NodeUse, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
+    override fun process(node: NodeParsedUse, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
         val processed = ArrayList<Node>()
         processor.pushTask(ctx, ProcessingStage.MODULE_POST_INIT) {
             val context = ctx.subCtx()
-            injectModules(node, processor, context, mode, processed)
+            injectModules(node, processor, context, ValType.NO_VALUE, processed)
+            node.exports.forEach { NRDefault.process(it, processor, ctx, ValType.NO_VALUE) }
             NRDefault.process(node, processor, context, mode)
         }
-        return NodeProcessedUse(node.tkOperation, node.names, node.nodes, processed)
+        return NodeProcessedUse(node.token, node.names, node.nodes, processed, node.exports)
     }
 
     fun loadModules(names: List<String>, parser: Parser, context: ParsingContext) {

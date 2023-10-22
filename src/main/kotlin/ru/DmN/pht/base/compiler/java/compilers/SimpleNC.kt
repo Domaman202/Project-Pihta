@@ -2,7 +2,7 @@ package ru.DmN.pht.base.compiler.java.compilers
 
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
-import ru.DmN.pht.base.parser.ast.NodeNodesList
+import ru.DmN.pht.base.ast.NodeNodesList
 import ru.DmN.pht.base.utils.Variable
 
 open class SimpleNC<T : NodeNodesList> : INodeCompiler<T> {

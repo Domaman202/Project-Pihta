@@ -15,9 +15,7 @@ class VirtualType(
     //
     var isInterface: Boolean = false,
     var abstract: Boolean = false,
-    var final: Boolean = false,
-    //
-    var generics: Generics = Generics()
+    var final: Boolean = false
 ) {
     val simpleName: String
         get() = name.substring(name.lastIndexOf('.') + 1)
@@ -37,37 +35,24 @@ class VirtualType(
         get() = if (this.isArray)
             "[${componentType!!.desc}"
         else when (name) {
-            "void" -> "V"
-            "boolean" -> "Z"
-            "byte" -> "B"
-            "short" -> "S"
-            "char" -> "C"
-            "int" -> "I"
-            "long" -> "J"
-            "double" -> "D"
+            "void"      -> "V"
+            "boolean"   -> "Z"
+            "byte"      -> "B"
+            "short"     -> "S"
+            "char"      -> "C"
+            "int"       -> "I"
+            "long"      -> "J"
+            "float"     ->"F"
+            "double"    -> "D"
             else -> "L$className;"
         }
-    val signature: String
-        get() =
-            if (this.generics.list.isEmpty())
-                this.desc
-            else {
-                val sb = StringBuilder()
-                this.generics.list.forEach { sb.append(it.extends) }
-                "L${this.className}<$sb>;"
-            }
-
-    fun getAllMethods(): MutableList<VirtualMethod> {
-        val list = ArrayList<VirtualMethod>()
-        list += methods
-        parents.forEach { list += it.methods }
-        return list
-    }
 
     fun isAssignableFrom(target: VirtualType): Boolean =
-        if (target.name == this.name)
+        if (target.name == this.name || parents.any { it.isAssignableFrom(target) })
             true
-        else parents.any { it.isAssignableFrom(target) }
+        else if (isInterface)
+            target == ofKlass(Any::class.java)
+        else false
 
     override fun equals(other: Any?): Boolean =
         if (other is VirtualType)
@@ -77,19 +62,6 @@ class VirtualType(
     override fun toString(): String {
         return "VT($name)"
     }
-
-    fun with(generics: Generics) =
-        VirtualType(
-            name = name,
-            parents = parents,
-            fields = fields,
-            methods = methods,
-            componentType = componentType,
-            isInterface = isInterface,
-            abstract = abstract,
-            final = final,
-            generics = generics
-        )
 
     companion object {
         private val TYPES: MutableMap<String, VirtualType> = WeakHashMap()
@@ -102,10 +74,6 @@ class VirtualType(
         val LONG = ofKlass(Long::class.javaPrimitiveType!!)
         val FLOAT = ofKlass(Float::class.javaPrimitiveType!!)
         val DOUBLE = ofKlass(Double::class.javaPrimitiveType!!)
-        val UNIT = ofKlass(Unit::class.java)
-        val OBJECT = ofKlass(Object::class.java)
-        val CLASS = ofKlass(Class::class.java)
-        val STRING = ofKlass(String::class.java)
 
         fun ofKlass(name: String) =
             ofKlass(klassOf(name))

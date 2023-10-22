@@ -1,10 +1,10 @@
 package ru.DmN.pht.base
 
-import ru.DmN.pht.base.parser.ast.Node
-import ru.DmN.pht.base.processor.processors.INodeProcessor
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.processor.utils.ProcessingStage
-import ru.DmN.pht.base.processor.utils.ValType
+import ru.DmN.pht.base.ast.Node
+import ru.DmN.pht.base.processors.INodeProcessor
+import ru.DmN.pht.base.processor.ProcessingContext
+import ru.DmN.pht.base.processor.ProcessingStage
+import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.utils.DefaultEnumMap
 import ru.DmN.pht.base.utils.TypesProvider
 import ru.DmN.pht.base.utils.VirtualType
@@ -20,7 +20,7 @@ class Processor(val tp: TypesProvider) {
         get(node, ctx).process(node, this, ctx, mode)
 
     fun get(node: Node, ctx: ProcessingContext): INodeProcessor<Node> {
-        val name = node.tkOperation.text!!
+        val name = node.token.text!!
         val i = name.lastIndexOf('/')
         if (i < 1) {
             ctx.loadedModules.forEach { it -> it.processors.getRegex(name)?.let { return it as INodeProcessor<Node> } }

@@ -4,8 +4,8 @@ import ru.DmN.pht.base.lexer.Lexer
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.lexer.Token.Type.*
 import ru.DmN.pht.base.parser.ParsingContext
-import ru.DmN.pht.base.parser.ast.Node
-import ru.DmN.pht.base.parser.parsers.INodeParser
+import ru.DmN.pht.base.ast.Node
+import ru.DmN.pht.base.parsers.INodeParser
 import ru.DmN.pht.base.utils.getRegex
 import java.util.*
 

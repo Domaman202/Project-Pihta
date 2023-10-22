@@ -5,8 +5,8 @@
 
 ### Применение
 
-1. `(use-ctx std/base std/math (expr0) (exprN))`<br>
-`std/base` `std/math` - _модули_.<br>
+1. `(use-ctx pht bf (expr0) (exprN))`<br>
+`pht` `bf` - _модули_.<br>
 `(expr0)` `(exprN)` - _выражения_.
 
 ### Примеры

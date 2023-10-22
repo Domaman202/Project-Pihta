@@ -2,7 +2,7 @@ package ru.DmN.pht.base.utils
 
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.*
-import ru.DmN.pht.base.processor.utils.Platform
+import ru.DmN.pht.base.processor.Platform
 
 fun <T : IContextCollection<T>> T.with(ctx: Platform) =
     this.with("base/platform", ctx)
@@ -50,7 +50,7 @@ typealias Klass = Class<*>
 fun klassOf(name: String): Klass =
     if (name.isPrimitive())
         name.getPrimitive()
-    else Class.forName(name.let { if (name.startsWith('L')) name.substring(1, name.length - 1).replace('/', '.') else name }) as Klass
+    else Class.forName(name.let { if (name.startsWith('L') && name.endsWith(';')) name.substring(1, name.length - 1).replace('/', '.') else name }) as Klass
 
 val Klass.desc
     get() = if (name.isPrimitive()) when (name) {

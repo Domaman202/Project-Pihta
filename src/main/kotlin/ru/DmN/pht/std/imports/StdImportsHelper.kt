@@ -5,9 +5,9 @@ import ru.DmN.pht.std.imports.parsers.NPArgument
 import ru.DmN.pht.std.imports.parsers.NPValue
 import ru.DmN.pht.std.imports.parsers.NPValueList
 
-object StdImportsHelper : Module("std/imports/helper") {
+object StdImportsHelper : Module("pht/imports/helper") {
     init {
-        add("type|extend|macro".toRegex(), NPArgument)
+        add("type|extends|macro".toRegex(), NPArgument)
         add("valn!",    NPValueList)
         add("value!",   NPValue)
     }

@@ -6,10 +6,9 @@ import java.lang.reflect.Modifier
 
 data class VirtualMethod(
     var declaringClass: VirtualType?,
-    var generics: Generics,
     var name: String,
-    var rettype: TypeOrGeneric,
-    var argsc: List<TypeOrGeneric>,
+    var rettype: VirtualType,
+    var argsc: List<VirtualType>,
     var argsn: List<String>,
     val modifiers: MethodModifiers,
     var extend: VirtualType? = null
@@ -17,11 +16,11 @@ data class VirtualMethod(
     val argsDesc: String
         get() {
             val str = StringBuilder()
-            argsc.forEach { str.append(it.type.desc) }
+            argsc.forEach { str.append(it.desc) }
             return str.toString()
         }
     val desc: String
-        get() = "($argsDesc)${if (name.startsWith("<")) "V" else rettype.type.desc}"
+        get() = "($argsDesc)${if (name.startsWith("<")) "V" else rettype.desc}"
 
     companion object {
         fun of(typeOf: (name: String) -> VirtualType, ctor: Constructor<*>): VirtualMethod =
@@ -34,26 +33,16 @@ data class VirtualMethod(
             of(VirtualType.ofKlass(method.declaringClass), method)
 
         private fun of(declaringClass: VirtualType, method: Constructor<*>): VirtualMethod {
-            val generics = Generics()
-            val argsc = ArrayList<TypeOrGeneric>()
+            val argsc = ArrayList<VirtualType>()
             val argsn = ArrayList<String>()
-            if (declaringClass.final) {
-                method.parameters.forEach {
-                    argsc += TypeOrGeneric.of(generics, it.type)
-                    argsn += it.name
-                }
-            } else {
-                val gpt = method.genericParameterTypes
-                method.parameters.forEachIndexed { i, it ->
-                    argsc += TypeOrGeneric.of(generics, gpt[i])
-                    argsn += it.name
-                }
+            method.parameters.forEach {
+                argsc += VirtualType.ofKlass(it.type)
+                argsn += it.name
             }
             return VirtualMethod(
                 declaringClass,
-                generics,
                 "<init>",
-                TypeOrGeneric.of(generics, VirtualType.VOID),
+                VirtualType.VOID,
                 argsc,
                 argsn,
                 MethodModifiers(
@@ -66,26 +55,16 @@ data class VirtualMethod(
         }
 
         private fun of(declaringClass: VirtualType, method: Method): VirtualMethod {
-            val generics = Generics()
-            val argsc = ArrayList<TypeOrGeneric>()
+            val argsc = ArrayList<VirtualType>()
             val argsn = ArrayList<String>()
-            if (declaringClass.final) {
-                method.parameters.forEach {
-                    argsc += TypeOrGeneric.of(generics, it.type)
-                    argsn += it.name
-                }
-            } else {
-                val gpt = method.genericParameterTypes
-                method.parameters.forEachIndexed { i, it ->
-                    argsc += TypeOrGeneric.of(generics, gpt[i])
-                    argsn += it.name
-                }
+            method.parameters.forEach {
+                argsc += VirtualType.ofKlass(it.type)
+                argsn += it.name
             }
             return VirtualMethod(
                 declaringClass,
-                generics,
                 method.name,
-                TypeOrGeneric.of(generics, method.genericReturnType),
+                VirtualType.ofKlass(method.returnType),
                 argsc,
                 argsn,
                 MethodModifiers(

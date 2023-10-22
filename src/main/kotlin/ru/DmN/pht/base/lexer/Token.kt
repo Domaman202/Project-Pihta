@@ -1,6 +1,9 @@
 package ru.DmN.pht.base.lexer
 
 data class Token(val line: Int, val type: Type, val text: String? = null) {
+    fun processed() =
+        Token(line, type, "!$text")
+
     companion object {
         fun operation(line: Int, text: String) =
             Token(line, Type.OPERATION, text)

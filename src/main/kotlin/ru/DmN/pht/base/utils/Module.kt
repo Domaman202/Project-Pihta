@@ -6,28 +6,17 @@ import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.parser.ParsingContext
-import ru.DmN.pht.base.parser.ast.Node
-import ru.DmN.pht.base.parser.parsers.INodeParser
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.processor.processors.INodeProcessor
-import ru.DmN.pht.base.processor.utils.ProcessingMode
-import ru.DmN.pht.base.processor.utils.ValType
+import ru.DmN.pht.base.ast.Node
+import ru.DmN.pht.base.parsers.INodeParser
+import ru.DmN.pht.base.processor.ProcessingContext
+import ru.DmN.pht.base.processors.INodeProcessor
+import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.unparser.UnparsingContext
-import ru.DmN.pht.base.unparser.unparsers.INodeUnparser
+import ru.DmN.pht.base.unparsers.INodeUnparser
 import ru.DmN.pht.example.bf.BF
 import ru.DmN.pht.example.lkl.LKL
 import ru.DmN.pht.std.Pihta
-import ru.DmN.pht.std.base.StdBase
-import ru.DmN.pht.std.collections.StdCollections
-import ru.DmN.pht.std.enums.StdEnums
-import ru.DmN.pht.std.fp.StdFP
-import ru.DmN.pht.std.macro.StdMacro
-import ru.DmN.pht.std.math.StdMath
 import ru.DmN.pht.std.module.StdModule
-import ru.DmN.pht.std.oop.StdOOP
-import ru.DmN.pht.std.out.StdOut
-import ru.DmN.pht.std.util.StdUtil
-import ru.DmN.pht.std.value.StdValue
 import java.io.FileNotFoundException
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler as JavaNodeCompiler
 
@@ -100,17 +89,7 @@ open class Module(val name: String, var init: Boolean = false) {
         init {
             for (module in listOf(
                 Pihta,
-                StdBase,
-                StdCollections,
-                StdEnums,
-                StdFP,
-                StdMacro,
-                StdMath,
                 StdModule,
-                StdOOP,
-                StdOut,
-                StdUtil,
-                StdValue,
                 BF,
                 LKL
             )) {

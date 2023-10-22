@@ -1,0 +1,35 @@
+(use-ctx pht
+    (ns ru.DmN.pht
+        (cls ArrayExtends [^Object]
+            (defmacro toList [type]
+                (efn (array-type (macro-arg type)) toList ^List [] (progn
+                    (def [[list (new ^ArrayList)]])
+                    (for [i this]
+                        (#add list i))
+                    list)))
+            (toList ^boolean)   (toList ^byte)
+            (toList ^short)     (toList ^char)
+            (toList ^int)       (toList ^long)
+            (toList ^float)     (toList ^double)
+            (toList ^Any))
+
+        (cls StringExtends [^Object]
+            (@varargs (efn ^String plus ^String [[arr (array-type ^String)]] (progn
+                (def [[str this]])
+                (for [e arr]
+                    (set str (#concat str e)))
+                str)))))
+
+    (export
+        (import java
+            (type java.lang.Class)
+            (type java.lang.Iterable)
+            (type java.lang.Object)
+            (type java.lang.String)
+            (type java.util.Iterator)
+            (type java.util.List)
+            (type java.util.ArrayList))
+        (alias-type Object Any)
+        (import pht
+            (extends ru.DmN.pht.ArrayExtends)
+            (extends ru.DmN.pht.StringExtends))))
