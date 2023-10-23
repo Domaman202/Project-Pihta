@@ -12,12 +12,13 @@ import ru.DmN.pht.std.ast.NodeEquals
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
 
-object NCPrimitiveCompare : INodeCompiler<NodeEquals> { // todo: list
+object NCPrimitiveCompare : INodeCompiler<NodeEquals> {
     override fun compileVal(node: NodeEquals, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.run {
             val type = node.nodes
                 .map { compiler.compileVal(it, ctx) }
-                .map { it.apply { load(it, this@run) }.type }.first() // todo: cast to общий type
+                .map { it.apply { load(it, this@run) }.type }
+                .first() // todo: cast to общий type
             val labelIf = Label()
             when (type) {
                 VirtualType.BOOLEAN,
@@ -29,10 +30,10 @@ object NCPrimitiveCompare : INodeCompiler<NodeEquals> { // todo: list
                         when (node.operation) {
                             NodeEquals.Operation.EQ -> Opcodes.IF_ICMPEQ
                             NodeEquals.Operation.NE -> Opcodes.IF_ICMPNE
-                            NodeEquals.Operation.LT -> Opcodes.IF_ICMPLT
-                            NodeEquals.Operation.LE -> Opcodes.IF_ICMPLE
-                            NodeEquals.Operation.GT -> Opcodes.IF_ICMPGT
-                            NodeEquals.Operation.GE -> Opcodes.IF_ICMPGE
+                            NodeEquals.Operation.LT -> Opcodes.IF_ICMPGT
+                            NodeEquals.Operation.LE -> Opcodes.IF_ICMPGE
+                            NodeEquals.Operation.GT -> Opcodes.IF_ICMPLT
+                            NodeEquals.Operation.GE -> Opcodes.IF_ICMPLE
                         }, labelIf
                     )
                 }
@@ -43,10 +44,10 @@ object NCPrimitiveCompare : INodeCompiler<NodeEquals> { // todo: list
                         when (node.operation) {
                             NodeEquals.Operation.EQ -> Opcodes.IFNE
                             NodeEquals.Operation.NE -> Opcodes.IFEQ
-                            NodeEquals.Operation.LT -> Opcodes.IFLE
-                            NodeEquals.Operation.LE -> Opcodes.IFLT
-                            NodeEquals.Operation.GT -> Opcodes.IFGE
-                            NodeEquals.Operation.GE -> Opcodes.IFGT
+                            NodeEquals.Operation.LT -> Opcodes.IFGE
+                            NodeEquals.Operation.LE -> Opcodes.IFGT
+                            NodeEquals.Operation.GT -> Opcodes.IFLE
+                            NodeEquals.Operation.GE -> Opcodes.IFLT
                         }, labelIf
                     )
                 }

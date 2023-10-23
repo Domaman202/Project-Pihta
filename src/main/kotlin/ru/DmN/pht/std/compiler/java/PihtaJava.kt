@@ -20,7 +20,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         // Работа с массивом
         add("array-size",   NCArraySize)
         add("!aset",        NCASet)
-        add("aget",         NCAGet)
+        add("!aget",         NCAGet)
         add("!new-array",   NCNewArray)
 
         /// FP

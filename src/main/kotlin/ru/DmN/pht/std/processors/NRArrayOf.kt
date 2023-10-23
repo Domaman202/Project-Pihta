@@ -10,7 +10,7 @@ import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.processor.utils.*
 
-object NRArrayOf : INodeProcessor<NodeNodesList> { // todo: нахождение среднего типа
+object NRArrayOf : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
         processor.calc(node.nodes[0], ctx)!!.arrayType
 

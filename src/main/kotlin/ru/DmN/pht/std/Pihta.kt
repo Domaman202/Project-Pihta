@@ -45,7 +45,8 @@ object Pihta : StdModule("pht") {
         add("array-size",   NUPDefault, NRArraySize)
         add("aset",         NUPDefault, NRASet)
         add("!aset",        NUPASet)
-        add("aget",         NUPAGet)
+        add("aget",         NUPDefault, NRAGet)
+        add("!aget",        NUPAGet)
         // Создание массива
         add("new-array",    NUPDefault, NRNewArray)
         add("!new-array",   NUPNewArrayX)

@@ -1,4 +1,3 @@
 (use-ctx pht
     (app-fn
-        (def [[i 12]])
-        (println (#invoke (rfn [i][] (+ i 21))))))
+        (println (#contentToString (array-of 12 21 33)))))

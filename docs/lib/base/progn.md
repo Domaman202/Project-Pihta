@@ -11,8 +11,9 @@
 ### Примеры
 
 ```pihta
-(progn
-    (use std/base)
-    (#println std "Здравствуй,")
-    (#println std "Товарищ!"))
+(use-ctx pht
+    (cls Foo [^Object]
+        (defn foo ^void [] (progn
+            (println "Foo! (1)")
+            (println "Foo! (2)")))))
 ```

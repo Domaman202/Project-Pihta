@@ -9,10 +9,8 @@ import ru.DmN.pht.base.processor.Platform
 import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.utils.platform
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.nodeProgn
-import ru.DmN.pht.std.processor.utils.nodeValn
 import ru.DmN.pht.std.ast.NodeValue
+import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.ups.NUPClass
 
 object NRApp : INodeProcessor<NodeNodesList> {
@@ -22,19 +20,14 @@ object NRApp : INodeProcessor<NodeNodesList> {
             Platform.JAVA -> {
                 val line = node.token.line
                 NUPClass.process(
-                    NodeNodesList(
-                        Token.operation(line, "cls"),
-                        mutableListOf(
-                            NodeValue.of(line, NodeValue.Type.STRING, ctx.global.name("App")),
-                            nodeValn(line, mutableListOf(NodeValue.of(line, NodeValue.Type.STRING, "java.lang.Object"))),
+                    nodeClass(
+                        line,
+                        "App",
+                        listOf("java.lang.Object"),
+                        listOf(
                             NodeNodesList(
-                                Token.operation(line, "defn"),
-                                mutableListOf(
-                                    NodeValue.of(line, NodeValue.Type.STRING, "main"),
-                                    NodeValue.of(line, NodeValue.Type.CLASS, "void"),
-                                    nodeValn(line, mutableListOf()),
-                                    nodeProgn(line, node.nodes)
-                                )
+                                Token.operation(line, "@static"),
+                                node.nodes
                             )
                         )
                     ), processor, ctx, mode

@@ -62,6 +62,8 @@ fun nodeASet(line: Int, name: String, index: Int, value: Node) =
 fun nodeAGet(line: Int, name: String, index: String) =
     NodeNodesList(Token.operation(line, "aget"),
         mutableListOf(nodeGetOrNameOf(line, name), nodeGetOrNameOf(line, index)))
+fun nodeArrayOf(line: Int, elements: MutableList<Node>) =
+    NodeNodesList(Token.operation(line, "array-of"), elements)
 fun nodeNewArray(line: Int, type: String, size: Int) =
     NodeNodesList(Token.operation(line, "new-array"),
         mutableListOf(nodeClass(line, type), nodeValueOf(line, size)))

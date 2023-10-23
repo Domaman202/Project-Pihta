@@ -4,14 +4,33 @@
             (defmacro toList [type]
                 (efn (array-type (macro-arg type)) toList ^List [] (progn
                     (def [[list (new ^ArrayList)]])
-                    (for [i this]
-                        (#add list i))
+                    (for [e this]
+                        (#add list e))
                     list)))
             (toList ^boolean)   (toList ^byte)
             (toList ^short)     (toList ^char)
             (toList ^int)       (toList ^long)
             (toList ^float)     (toList ^double)
-            (toList ^Any))
+            (toList ^Any)
+
+            (defmacro contentToString [type]
+                (efn (array-type (macro-arg type)) contentToString ^String [] (progn
+                    (def [[str (new ^StringBuilder)]])
+                    (#append str '[')
+                    (def [[i (- (array-size this) 1)]])
+                    (cycle (> i 0)
+                        (#append str (aget this i))
+                        (#append str ' ')
+                        (set i (- i 1)))
+                    (if (< (array-size this) 0)
+                        (#append str (aget this 0)))
+                    (#append str ']')
+                    (#toString str))))
+            (contentToString ^boolean)  (contentToString ^byte)
+            (contentToString ^short)    (contentToString ^char)
+            (contentToString ^int)      (contentToString ^long)
+            (contentToString ^float)    (contentToString ^double)
+            (contentToString ^Any))
 
         (cls StringExtends [^Object]
             (@varargs (efn ^String plus ^String [[arr (array-type ^String)]] (progn
@@ -26,6 +45,7 @@
             (type java.lang.Iterable)
             (type java.lang.Object)
             (type java.lang.String)
+            (type java.lang.StringBuilder)
             (type java.util.Iterator)
             (type java.util.List)
             (type java.util.ArrayList))

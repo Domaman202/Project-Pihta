@@ -15,14 +15,15 @@ import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.utils.processNodes
 import ru.DmN.pht.std.ast.NodeAGet
+import ru.DmN.pht.std.unparsers.NUDefaultX
 
-object NUPAGet : INodeUniversalProcessor<NodeAGet, NodeNodesList> {
+object NUPAGet : INodeUniversalProcessor<NodeAGet, NodeAGet> {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
         NPDefault.parse(parser, ctx, operationToken)
 
     override fun unparse(node: NodeAGet, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
-            append('(').append(node.token.text).append('\n').append("\t".repeat(indent + 1))
+            append('(').append(NUDefaultX.text(node.token)).append('\n').append("\t".repeat(indent + 1))
             unparser.unparse(node.arr, ctx, indent + 1)
             append('\n').append("\t".repeat(indent + 1))
             unparser.unparse(node.index, ctx, indent + 1)
@@ -30,12 +31,6 @@ object NUPAGet : INodeUniversalProcessor<NodeAGet, NodeNodesList> {
         }
     }
 
-    override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        processor.calc(node.nodes[0], ctx)!!.componentType
-
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeAGet? =
-        if (mode == ValType.VALUE) {
-            val nodes = processor.processNodes(node, ctx, ValType.VALUE)
-            NodeAGet(node.token, nodes[0], nodes[1])
-        } else null
+    override fun calc(node: NodeAGet, processor: Processor, ctx: ProcessingContext): VirtualType? =
+        processor.calc(node.arr, ctx)!!.componentType
 }
