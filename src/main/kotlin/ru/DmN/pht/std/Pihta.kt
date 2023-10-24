@@ -68,7 +68,8 @@ object Pihta : StdModule("pht") {
         // Тело
         add("body",     NUPDefault, NRBody)
         // Цикл
-        add("cycle",    NUPDefault)
+        add("cycle",    NUPDefault, NRCycle)
+        add("!cycle",   NUPDefaultX)
         // Условие
         add("if",       NUPDefault, NRIf)
         // Переменные
@@ -104,10 +105,11 @@ object Pihta : StdModule("pht") {
 
         /// MATH
 
-//        add("<=>",NUPDefault)
-        for (name in listOf("=", "!=", "<", "<=", ">=", ">"))
-            add(name,           NUPDefault)
-        for (name in listOf("+", "-", "*", "/")) {
+        for (name in listOf("=", "!=", "<", "<=", ">=", ">")) {
+            add(name,           NUPCompare, NRCompare)
+            add("!$name", NUPCompare)
+        }
+        for (name in listOf("+", "-", "*", "/", "%")) {
             add(name,           NUPMath,    NRMath)
             add("!$name", NUPMath)
         }

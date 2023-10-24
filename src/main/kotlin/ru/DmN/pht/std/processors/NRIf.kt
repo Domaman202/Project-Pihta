@@ -15,6 +15,11 @@ object NRIf : INodeProcessor<NodeNodesList> {
             processor.calc(node.nodes[1], ctx)
         else null
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node =
-        NRDefault.process(node, processor, ctx, mode)
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
+        node.nodes[0] = processor.process(node.nodes[0], ctx, ValType.VALUE)!!
+        node.nodes[1] = processor.process(node.nodes[1], ctx, mode)!!
+        if (node.nodes.size == 3)
+            node.nodes[2] = processor.process(node.nodes[2], ctx, mode)!!
+        return node
+    }
 }

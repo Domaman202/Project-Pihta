@@ -26,6 +26,7 @@ object NUPMath : INodeUniversalProcessor<NodeMath, NodeMath> {
                     "-" -> MINUS
                     "*" -> MUL
                     "/" -> DIV
+                    "%" -> REM
                     else -> throw RuntimeException()
                 }
             )

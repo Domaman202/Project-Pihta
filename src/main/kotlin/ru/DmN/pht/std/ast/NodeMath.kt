@@ -16,5 +16,6 @@ class NodeMath(tkOperation: Token, nodes: MutableList<Node>, val operation: Oper
         MINUS,
         MUL,
         DIV,
+        REM
     }
 }

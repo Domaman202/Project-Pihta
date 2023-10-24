@@ -22,4 +22,10 @@ abstract class SimpleNR<T : NodeNodesList> : INodeProcessor<T> {
         }
         return node
     }
+
+    fun processValue(node: T, processor: Processor, ctx: ProcessingContext): T {
+        for (i in 0 until node.nodes.size)
+            node.nodes[i] = processor.process(node.nodes[i], ctx, ValType.VALUE)!!
+        return node
+    }
 }

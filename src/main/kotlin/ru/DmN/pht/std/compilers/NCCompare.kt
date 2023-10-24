@@ -12,7 +12,7 @@ import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
 
-object NCPrimitiveCompare : INodeCompiler<NodeNodesList> {
+object NCCompare : INodeCompiler<NodeNodesList> {
     override fun compileVal(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Variable {
         insertIf(node.token.text!!, node.nodes, { ctx.method.node.visitInsn(Opcodes.ICONST_1) }, { ctx.method.node.visitInsn(Opcodes.ICONST_0) }, compiler, ctx)
         return Variable.tmp(node, VirtualType.BOOLEAN)
@@ -28,7 +28,7 @@ object NCPrimitiveCompare : INodeCompiler<NodeNodesList> {
             val elseLabel = Label()
             val exitLabel = Label()
             when (operation) {
-                "=" -> when (type) {
+                "!=" -> when (type) {
                     VirtualType.BOOLEAN,
                     VirtualType.BYTE,
                     VirtualType.SHORT,
@@ -37,7 +37,7 @@ object NCPrimitiveCompare : INodeCompiler<NodeNodesList> {
 
                     else -> throw RuntimeException()
                 }
-                "!=" -> when (type) {
+                "!!=" -> when (type) {
                     VirtualType.BOOLEAN,
                     VirtualType.BYTE,
                     VirtualType.SHORT,
@@ -45,7 +45,7 @@ object NCPrimitiveCompare : INodeCompiler<NodeNodesList> {
                     VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPNE, ifLabel)
                     else -> throw RuntimeException()
                 }
-                ">" -> when (type) {
+                "!>" -> when (type) {
                     VirtualType.BOOLEAN,
                     VirtualType.BYTE,
                     VirtualType.SHORT,
@@ -53,7 +53,7 @@ object NCPrimitiveCompare : INodeCompiler<NodeNodesList> {
                     VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPLT, ifLabel)
                     else -> throw RuntimeException()
                 }
-                ">=" -> when (type) {
+                "!>=" -> when (type) {
                     VirtualType.BOOLEAN,
                     VirtualType.BYTE,
                     VirtualType.SHORT,
@@ -61,7 +61,7 @@ object NCPrimitiveCompare : INodeCompiler<NodeNodesList> {
                     VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPLE, ifLabel)
                     else -> throw RuntimeException()
                 }
-                "<" -> when (type) {
+                "!<" -> when (type) {
                     VirtualType.BOOLEAN,
                     VirtualType.BYTE,
                     VirtualType.SHORT,
@@ -69,7 +69,7 @@ object NCPrimitiveCompare : INodeCompiler<NodeNodesList> {
                     VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPGT, ifLabel)
                     else -> throw RuntimeException()
                 }
-                "<=" -> when (type) {
+                "!<=" -> when (type) {
                     VirtualType.BOOLEAN,
                     VirtualType.BYTE,
                     VirtualType.SHORT,

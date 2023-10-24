@@ -4,7 +4,6 @@ import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.std.base.compiler.java.utils.*
 import ru.DmN.pht.std.ast.NodeDef
 import ru.DmN.pht.std.compiler.java.utils.body
 import ru.DmN.pht.std.compiler.java.utils.load

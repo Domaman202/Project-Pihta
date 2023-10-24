@@ -26,30 +26,29 @@ object PihtaJava : ModuleCompilers(Pihta) {
         /// FP
 
         // Функция
-        add("defn", NCDefn)
+        add("defn",     NCDefn)
         // Тело
-        add("body", NCBody)
+        add("body",     NCBody)
         // Цикл
-        add("cycle",NCCycle)
+        add("!cycle",   NCCycle)
         // Условие
-        add("if",   NCIf)
+        add("if",       NCIf)
         // Переменные
-        add("!def", NCDef)
+        add("!def",     NCDef)
         // Работа с типами
-        add("!as",  NCAs)
+        add("!as",      NCAs)
         // Возврат
-        add("ret",  NCRet)
+        add("ret",      NCRet)
         // Сеттеры
-        add("set!", NCSet)
+        add("set!",     NCSet)
         // Геттеры
-        add("get",  NCGetA)
+        add("get",      NCGetA)
 
         /// MATH
 
-//        add("<=>",NUPDefault)
         for (name in listOf("=", "!=", "<", "<=", ">=", ">"))
-            add(name,             NCPrimitiveCompare)
-        for (name in listOf("+", "-", "*", "/"))
+            add("!$name",   NCCompare)
+        for (name in listOf("+", "-", "*", "/", "%"))
             add("!$name",   NCMath)
         for (name in listOf("++", "--"))
             add("!$name",   NCIncDec)

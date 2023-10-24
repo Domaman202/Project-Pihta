@@ -1,3 +1,7 @@
 (use-ctx pht
     (app-fn
-        (println (#contentToString (new-array ^int 4)))))
+        (def [[i 0]])
+        (cycle (< i 10)
+            (if (= (% i 2) 0)
+                (println i))
+            (++ i))))

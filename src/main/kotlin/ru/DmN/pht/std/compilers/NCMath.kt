@@ -28,6 +28,7 @@ object NCMath : INodeCompiler<NodeMath> {
             NodeMath.Operation.MINUS    -> Opcodes.ISUB + calcOffset(type)
             NodeMath.Operation.MUL      -> Opcodes.IMUL + calcOffset(type)
             NodeMath.Operation.DIV      -> Opcodes.IDIV + calcOffset(type)
+            NodeMath.Operation.REM      -> Opcodes.IREM + calcOffset(type)
         }
 
     private fun calcOffset(type: String) =
@@ -35,10 +36,10 @@ object NCMath : INodeCompiler<NodeMath> {
             "boolean",
             "byte",
             "short",
-            "int" -> 0
-            "long" -> 1
+            "int"   -> 0
+            "long"  -> 1
             "float" -> 2
-            "double" -> 3
+            "double"-> 3
             else -> throw RuntimeException()
         }
 }
