@@ -10,7 +10,6 @@ import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.platform
-import ru.DmN.pht.std.ast.NodeEquals
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
@@ -58,13 +57,12 @@ object NRFor : INodeProcessor<NodeNodesList> {
                             nodeDef(line, i, nodeValueOf(line, 0)),
                             nodeCycle(
                                 line,
-                                NodeEquals(
+                                NodeNodesList(
                                     Token.operation(line, "<"),
                                     mutableListOf(
                                         nodeGetOrNameOf(line, i),
                                         nodeArraySize(line, arr)
-                                    ),
-                                    NodeEquals.Operation.GT
+                                    )
                                 ),
                                 listOf(nodeDef(line, name, nodeAGet(line, arr, i))) +
                                         node.nodes.drop(1) +

@@ -105,10 +105,8 @@ object Pihta : StdModule("pht") {
         /// MATH
 
 //        add("<=>",NUPDefault)
-        for (name in listOf("=", "!=", "<", "<=", ">=", ">")) {
-            add(name,           NUPEquals,  NREquals)
-            add("!$name", NUPEquals)
-        }
+        for (name in listOf("=", "!=", "<", "<=", ">=", ">"))
+            add(name,           NUPDefault)
         for (name in listOf("+", "-", "*", "/")) {
             add(name,           NUPMath,    NRMath)
             add("!$name", NUPMath)

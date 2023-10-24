@@ -15,7 +15,7 @@ object NCIf : INodeCompiler<NodeNodesList> {
         ctx.method.node.run {
             compiler.compileVal(node.nodes.first(), ctx)
             val labelIf = Label()
-            visitJumpInsn(Opcodes.IFEQ, labelIf)
+            visitJumpInsn(Opcodes.IFNE, labelIf)
             compiler.compile(node.nodes[1], ctx)
             val labelExit = Label()
             visitJumpInsn(Opcodes.GOTO, labelExit)
@@ -30,7 +30,7 @@ object NCIf : INodeCompiler<NodeNodesList> {
         ctx.method.node.run {
             compiler.compileVal(node.nodes.first(), ctx)
             val labelIf = Label()
-            visitJumpInsn(Opcodes.IFEQ, labelIf)
+            visitJumpInsn(Opcodes.IFNE, labelIf)
             val type = compiler.compileVal(node.nodes[1], ctx).apply { load(this, this@run) }.type
             val labelExit = Label()
             visitJumpInsn(Opcodes.GOTO, labelExit)

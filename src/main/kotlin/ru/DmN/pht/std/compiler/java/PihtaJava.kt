@@ -9,7 +9,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
     override fun onInitialize() {
         /// BASE
 
-        // Пространства имён // todo: on java process to progn
+        // Пространства имён
         add("ns",   NCDefault)
         add("sns",  NCDefault)
         // Пустой блок
@@ -20,7 +20,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         // Работа с массивом
         add("array-size",   NCArraySize)
         add("!aset",        NCASet)
-        add("!aget",         NCAGet)
+        add("!aget",        NCAGet)
         add("!new-array",   NCNewArray)
 
         /// FP
@@ -48,7 +48,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
 
 //        add("<=>",NUPDefault)
         for (name in listOf("=", "!=", "<", "<=", ">=", ">"))
-            add("!$name",   NCPrimitiveCompare)
+            add(name,             NCPrimitiveCompare)
         for (name in listOf("+", "-", "*", "/"))
             add("!$name",   NCMath)
         for (name in listOf("++", "--"))

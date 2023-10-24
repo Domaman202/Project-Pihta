@@ -93,10 +93,12 @@ fun nodeGetOrNameOf(line: Int, name: String) =
     NodeGetOrName(Token.operation(line, "get-or-name!"), name, false)
 fun nodeClass(line: Int, name: String) =
     NodeValue.of(line, NodeValue.Type.CLASS, name)
-fun nodeValueOf(line: Int, value: Int) =
-    NodeValue.of(line, NodeValue.Type.INT, value.toString())
 fun nodeValueOf(line: Int, value: String) =
     NodeValue.of(line, NodeValue.Type.STRING, value)
+fun nodeValueOf(line: Int, value: Int) =
+    NodeValue.of(line, NodeValue.Type.INT, value.toString())
+fun nodeValueOf(line: Int, value: Boolean) =
+    NodeValue.of(line, NodeValue.Type.BOOLEAN, value.toString())
 
 fun sliceInsert(list: MutableList<Any?>, index: Int, elements: List<Any?>) {
     val right = list.subList(index + 1, list.size).toList()
