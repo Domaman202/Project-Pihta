@@ -4,11 +4,15 @@ import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ValType
+import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.base.utils.klassOf
 import ru.DmN.pht.std.processors.IStdNodeProcessor
 import ru.DmN.pht.std.processor.utils.ICastable
 import java.util.*
+
+fun findLambdaMethod(type: VirtualType): VirtualMethod =
+    type.methods.first { it.declaringClass == type && it.modifiers.abstract }
 
 val Node.line
     get() = token.line

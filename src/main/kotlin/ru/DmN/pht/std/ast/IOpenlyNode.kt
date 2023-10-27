@@ -1,5 +1,5 @@
 package ru.DmN.pht.std.ast
 
-interface IOpenly {
+interface IOpenlyNode {
     var open: Boolean
 }

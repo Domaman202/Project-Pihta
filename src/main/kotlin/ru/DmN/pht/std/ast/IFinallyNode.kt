@@ -1,5 +1,5 @@
 package ru.DmN.pht.std.ast
 
-interface IFinally {
+interface IFinallyNode {
     var final: Boolean
 }

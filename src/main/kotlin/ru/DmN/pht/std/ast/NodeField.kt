@@ -4,7 +4,7 @@ import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.utils.indent
 
-class NodeField(tkOperation: Token, val fields: List<Pair<String, String>>) : Node(tkOperation), IStaticallyNode, IFinally {
+class NodeField(tkOperation: Token, val fields: List<Pair<String, String>>) : Node(tkOperation), IStaticallyNode, IFinallyNode {
     override var static: Boolean = false
     override var final: Boolean = false
 
