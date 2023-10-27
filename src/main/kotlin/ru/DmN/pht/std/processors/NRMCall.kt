@@ -8,6 +8,7 @@ import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.ast.IAdaptableNode
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.*
@@ -109,9 +110,10 @@ object NRMCall : INodeProcessor<NodeNodesList> {
     }
 
     fun findMethod(clazz: VirtualType, name: String, args: Sequence<Node>, processor: Processor, ctx: ProcessingContext): Pair<List<Node>, VirtualMethod> {
-        val methods = ctx.global.getMethodVariants(clazz, name, args.map { ICastable.of(processor.tp.typeOf(processor.calc(it, ctx)!!.name)) }.toList())
+        val methods = ctx.global.getMethodVariants(clazz, name, args.map { ICastable.of(it, processor, ctx) }.toList())
         if (methods.isEmpty())
             throw RuntimeException("Method '$name' not founded!")
-        return Pair(args.toList(), methods.first())
+        val method = methods.first()
+        return Pair(args.mapIndexed { i, it -> if (it is IAdaptableNode) it.adaptTo(method.argsc[i]); it }.toList(), method)
     }
 }
