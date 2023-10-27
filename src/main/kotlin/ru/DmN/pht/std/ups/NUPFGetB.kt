@@ -20,18 +20,20 @@ object NUPFGetB : INodeUniversalProcessor<Node, NodeFMGet> {
     override fun process(node: NodeFMGet, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeFGet? {
         return if (mode == ValType.VALUE) {
             val instance = processor.process(node.instance, ctx, ValType.VALUE)!!
+            val type = getInstanceType(node, processor, ctx)!!
             NodeFGet(
                 Token(node.token.line, Token.Type.OPERATION, "!fget"),
                 mutableListOf(instance),
                 node.name,
-                getInstanceType(node, processor, ctx).let {
+                type.let {
                     val field = NRFGetA.findField(it, node.name, node.static)
                     if (field == null)
                         NodeFGet.Type.UNKNOWN
                     else if (field.static)
                         NodeFGet.Type.STATIC
                     else NodeFGet.Type.INSTANCE
-                }
+                },
+                type
             )
         } else null
     }

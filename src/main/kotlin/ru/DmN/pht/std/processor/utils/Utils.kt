@@ -87,6 +87,13 @@ fun nodeFieldCtorSet(line: Int, name: String) =
         name,
         nodeGetOrNameOf(line, name),
         false)
+fun nodeFieldInit(line: Int, name: String, clazz: String, value: Node) =
+    NodeFieldSet(
+        Token.operation(line, "fset!"),
+        nodeClass(line, clazz),
+        name,
+        value,
+        false)
 fun nodeSet(line: Int, name: String, value: Node) =
     NodeSet(Token.operation(line, "set!"), name, value)
 fun nodeGetOrNameOf(line: Int, name: String) =

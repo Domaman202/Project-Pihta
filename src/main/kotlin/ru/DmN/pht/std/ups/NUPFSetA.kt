@@ -12,6 +12,7 @@ import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.std.ast.NodeFSet
+import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.utils.computeString
 
@@ -31,6 +32,7 @@ object NUPFSetA : INodeUniversalProcessor<NodeFSet, NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeFSet {
         val name = processor.computeString(node.nodes[1], ctx)
+        val type = if (node.nodes[0].isConstClass()) ctx.global.getType(processor.computeString(node.nodes[0], ctx), processor.tp) else processor.calc(node.nodes[0], ctx)!!
         return NodeFSet(
             node.token,
             mutableListOf(processor.process(node.nodes[0], ctx, ValType.VALUE)!!, processor.process(node.nodes[2], ctx, ValType.NO_VALUE)!!),
@@ -39,7 +41,8 @@ object NUPFSetA : INodeUniversalProcessor<NodeFSet, NodeNodesList> {
                 NodeFSet.Type.STATIC
             else if (processor.calc(node.nodes[0], ctx)!!.fields.find { it.name == name } != null)
                 NodeFSet.Type.INSTANCE
-            else NodeFSet.Type.UNKNOWN
+            else NodeFSet.Type.UNKNOWN,
+            type
         )
     }
 }

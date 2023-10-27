@@ -3,9 +3,11 @@ package ru.DmN.pht.std.ups
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
+import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.processor.ProcessingContext
+import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeValue
@@ -71,6 +73,11 @@ object NUPValue : INodeUniversalProcessor<NodeValue, NodeValue>, IStdNodeProcess
                 NodeValue.Type.NAMING -> throw RuntimeException()
             }, processor.tp
         )
+
+    override fun process(node: NodeValue, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
+        if (node.vtype == NodeValue.Type.CLASS)
+            NodeValue(node.token, NodeValue.Type.CLASS, ctx.global.getType(node.value, processor.tp).name)
+        else node
 
     override fun computeString(node: NodeValue, processor: Processor, ctx: ProcessingContext): String =
         node.getString()

@@ -45,7 +45,7 @@ object NUPEField : INodeUniversalProcessor<NodeEField, NodeNodesList> {
         }
     }
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeEField {
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeEField? {
         val type = ctx.clazz
         val fields = type.fields
         val enums = ctx.enum.enums
@@ -54,7 +54,7 @@ object NUPEField : INodeUniversalProcessor<NodeEField, NodeNodesList> {
             val name = processor.computeString(it[0], ctx)
             val nodes = it.drop(1)
             list.add(Pair(name, nodes))
-            fields += VirtualField(type, name, type, static = false, enum = true)
+            fields += VirtualField(type, name, type, static = true, enum = true)
             enums += EnumConstContext(name, nodes)
         }
         return NodeEField(node.token, list)

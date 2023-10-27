@@ -22,6 +22,7 @@ import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.with
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.ast.NodeDefn
+import ru.DmN.pht.std.utils.line
 
 object NUPCtor : INodeUniversalProcessor<NodeDefn, NodeNodesList> {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
@@ -69,7 +70,7 @@ object NUPCtor : INodeUniversalProcessor<NodeDefn, NodeNodesList> {
         )
         type.methods += method
         //
-        val new = NodeDefn(node.token, node.nodes.drop(1).toMutableList(), method)
+        val new = NodeDefn(Token.operation(node.line, "ctor"), node.nodes.drop(1).toMutableList(), method)
         processor.pushTask(ctx, ProcessingStage.METHODS_BODY) {
             NRDefault.process(
                 new,

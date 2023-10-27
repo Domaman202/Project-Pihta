@@ -12,7 +12,6 @@ import ru.DmN.pht.base.utils.platform
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.nodeDefn
 import ru.DmN.pht.std.processor.utils.nodeObj
-import ru.DmN.pht.std.ups.NUPClass
 import ru.DmN.pht.std.ups.NUPDefn
 import ru.DmN.pht.std.utils.compute
 import kotlin.math.absoluteValue
@@ -49,7 +48,7 @@ object NRFn : INodeProcessor<NodeNodesList> {
                 .first()
             //
             val line = node.token.line
-            NUPClass.process(
+            NRClass.process(
                 nodeObj(
                     line,
                     gctx.name("Lambda${node.hashCode().absoluteValue}"),

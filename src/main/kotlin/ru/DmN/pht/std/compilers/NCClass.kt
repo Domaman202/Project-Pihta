@@ -33,7 +33,7 @@ object NCClass : INodeCompiler<NodeType> { // todo: ret instance in val compilat
                 )
             }
             compiler.pushTask(ctx, CompilingStage.TYPES_DEFINE) {
-                if (node.token.text == "obj") {
+                if (node.token.text == "!obj") {
                     cn.visitField(Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC + Opcodes.ACC_FINAL, "INSTANCE", cn.name.desc, null, null)
                     cn.visitMethod(Opcodes.ACC_STATIC, "<clinit>", "()V", null, null).run {
                         visitCode()
@@ -46,7 +46,7 @@ object NCClass : INodeCompiler<NodeType> { // todo: ret instance in val compilat
                     }
                 }
                 NCDefault.compile(node, compiler, ctx.with(ClassContext(cn, node.type)))
-                if (node.token.text == "obj") {
+                if (node.token.text == "!obj") {
                     cn.methods.find { it.name == "<init>" && it.desc == "()V" } ?:
                     cn.visitMethod(Opcodes.ACC_PRIVATE, "<init>", "()V", null, null).run {
                         visitCode()

@@ -23,6 +23,10 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!aget",        NCAGet)
         add("!new-array",   NCNewArray)
 
+        /// ENUMS
+
+        add("efield",   NCEField)
+
         /// FP
 
         // Функция
@@ -62,9 +66,8 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("@open",    NCDefault)
         add("@static",  NCDefault)
         // Объект / Класс / Интерфейс
-        add("obj",      NCClass)
-        add("cls",      NCClass)
-        add("itf",      NCClass)
+        for (name in listOf("obj", "cls", "itf"))
+            add("!$name", NCClass)
         // Расширение
         add("efn",      NCDefn)
         // Конструктор

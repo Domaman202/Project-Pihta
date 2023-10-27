@@ -19,18 +19,20 @@ object NRFGetA : INodeProcessor<NodeNodesList> {
         return if (mode == ValType.VALUE) {
             val nodes = processor.processNodes(node, ctx, ValType.VALUE)
             val name = processor.computeString(nodes[1], ctx)
+            val type = processor.calc(nodes[0], ctx)!!
             NodeFGet(
                 node.token.processed(),
                 mutableListOf(nodes[0]),
                 name,
-                processor.calc(nodes[0], ctx).let {
+                type.let {
                     val field = findField(it, name, nodes[0].isConstClass())
                     if (field == null)
                         NodeFGet.Type.UNKNOWN
                     else if (field.static)
                         NodeFGet.Type.STATIC
                     else NodeFGet.Type.INSTANCE
-                }
+                },
+                type
             )
         } else null
     }

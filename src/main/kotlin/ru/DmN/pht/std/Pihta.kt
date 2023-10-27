@@ -130,9 +130,10 @@ object Pihta : StdModule("pht") {
         add("@varargs", NUPDefault, NRVarargs)
 
         // Объект / Класс / Интерфейс
-        add("obj",  NUPClass)
-        add("cls",  NUPClass)
-        add("inf",  NUPClass)
+        for (name in listOf("obj", "cls", "itf")) {
+            add(name,           NUPDefault, NRClass)
+            add("!$name", NUPClass)
+        }
         // Расширение
         add("efn",  NUPEFn)
         // Конструктор
@@ -210,7 +211,5 @@ object Pihta : StdModule("pht") {
     }
 }
 
-// todo: fn with variables
 // todo: lexer stream
 // todo: no return instruction return
-// todo: прикол есть такой, называется compute, можно использовать вместо process, чтобы не обосраться в работе с нодами (isConst и т.д.) в calc моментах, в process тож можно, но лучшее в process это process

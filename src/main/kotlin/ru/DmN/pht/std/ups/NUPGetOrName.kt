@@ -30,13 +30,13 @@ object NUPGetOrName : INodeUniversalProcessor<NodeGetOrName, NodeGetOrName>, ISt
         unparser.out.append(node.name)
     }
 
-    override fun calc(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): VirtualType {
-        val variable = ctx.body[node.name]
-        return variable?.type()
-            ?: if (ctx.isClass())
-                ctx.clazz.fields.find { it.name == node.name }!!.type
-            else throw RuntimeException()
-    }
+    override fun calc(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): VirtualType =
+        if (node.name == "super")
+            ctx.body["this"]!!.type()
+        else {
+            val variable = ctx.body[node.name]
+            variable?.type() ?: if (ctx.isClass()) ctx.clazz.fields.find { it.name == node.name }!!.type else throw RuntimeException()
+        }
 
     override fun computeString(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): String =
         node.getValueAsString()

@@ -1,7 +1,8 @@
 (use-ctx pht
-    (app-fn
-        (def [[i 0]])
-        (cycle (< i 10)
-            (if (= (% i 2) 0)
-                (println i))
-            (++ i))))
+    (import java
+        (type java.lang.Runnable))
+    (app
+        (defn test ^void [[o ^Runnable]]
+            (#run o))
+        (defn main ^void []
+            (#test ^App (fn ^Runnable [] (println "Run!"))))))

@@ -13,9 +13,12 @@ object NCFSet : INodeCompiler<NodeFSet> {
         ctx.method.node.run {
             when (node.type) {
                 NodeFSet.Type.UNKNOWN -> throw UnsupportedOperationException()
-                NodeFSet.Type.STATIC -> {
-                    TODO("Need Impl")
-                }
+                NodeFSet.Type.STATIC -> visitFieldInsn(
+                    Opcodes.PUTSTATIC,
+                    node.vtype.name,
+                    node.name,
+                    compiler.compileVal(node.nodes[1], ctx).apply { load(this, this@run) }.type().desc
+                )
 
                 NodeFSet.Type.INSTANCE -> {
                     val types = node.nodes.map { compiler.compileVal(it, ctx).apply { load(this, this@run) }.type() }
