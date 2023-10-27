@@ -2,7 +2,6 @@ package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.processors.INodeProcessor
@@ -10,8 +9,6 @@ import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeMath
 import ru.DmN.pht.std.processor.utils.nodeAs
 import ru.DmN.pht.std.processor.utils.nodeMCall
-import ru.DmN.pht.std.ups.NUPAs
-import ru.DmN.pht.std.ups.NUPMCallA
 import ru.DmN.pht.std.utils.line
 import ru.DmN.pht.std.utils.processNodes
 
@@ -20,7 +17,7 @@ object NRMath : INodeProcessor<NodeMath> {
         val firstType = processor.calc(node.nodes[0], ctx)
         return if (firstType!!.isPrimitive)
             firstType
-        else NUPMCallA.calc(
+        else NRMCall.calc(
             nodeMCall(
                 node.token.line,
                 node.nodes[0],
@@ -42,7 +39,7 @@ object NRMath : INodeProcessor<NodeMath> {
                     node.operation
                 )
             } else null
-        else NUPMCallA.process(
+        else NRMCall.process(
             nodeMCall(
                 node.line,
                 nodes[0],

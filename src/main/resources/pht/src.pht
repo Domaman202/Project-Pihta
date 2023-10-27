@@ -1,44 +1,4 @@
 (use-ctx pht
-    (ns ru.DmN.pht
-        (cls ArrayExtends [^Object]
-            (defmacro toList [type]
-                (efn (array-type (macro-arg type)) toList ^List [] (progn
-                    (def [[list (new ^ArrayList)]])
-                    (for [e this]
-                        (#add list e))
-                    list)))
-            (toList ^boolean)   (toList ^byte)
-            (toList ^short)     (toList ^char)
-            (toList ^int)       (toList ^long)
-            (toList ^float)     (toList ^double)
-            (toList ^Any)
-
-            (defmacro contentToString [type]
-                (efn (array-type (macro-arg type)) contentToString ^String [] (progn
-                    (def [[str (new ^StringBuilder)]])
-                    (#append str '[')
-                    (def [[i (- (array-size this) 1)]])
-                    (cycle (> i 0)
-                        (#append str (aget this i))
-                        (#append str ' ')
-                        (set i (- i 1)))
-                    (if (> (array-size this) 0)
-                        (#append str (aget this 0)))
-                    (#append str ']')
-                    (#toString str))))
-            (contentToString ^boolean)  (contentToString ^byte)
-            (contentToString ^short)    (contentToString ^char)
-            (contentToString ^int)      (contentToString ^long)
-            (contentToString ^float)    (contentToString ^double)
-            (contentToString ^Any))
-
-        (cls StringExtends [^Object]
-            (@varargs (efn ^String plus ^String [[arr (array-type ^String)]] (progn
-                (def [[str (new StringBuilder this)]])
-                (for [e arr]
-                    (#append str e))
-                (#toString str))))))
-
     (export
         (import java
             (type java.lang.Class)
@@ -49,7 +9,4 @@
             (type java.util.Iterator)
             (type java.util.List)
             (type java.util.ArrayList))
-        (alias-type Object Any)
-        (import pht
-            (extends ru.DmN.pht.ArrayExtends)
-            (extends ru.DmN.pht.StringExtends))))
+        (alias-type Object Any)))

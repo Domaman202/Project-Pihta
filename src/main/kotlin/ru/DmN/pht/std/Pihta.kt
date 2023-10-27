@@ -145,8 +145,9 @@ object Pihta : StdModule("pht") {
         add("new",      NUPNew)
         // Вызов конструктора / метода
         add("ccall",    NUPDefault, NRCCall)
-        add("mcall",    NUPMCallA)
-        add("mcall!",   NUPMCallB)
+        add("mcall",    NUPDefault, NRMCall)
+        add("mcall!",   NUPMCall)
+        add("!mcall",   NUPMCallX)
         // Сеттеры
         add("fset",     NUPFSetA)
         add("fset!",    NUPFSetB)

@@ -79,7 +79,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         // Создание объекта
         add("new",      NCNew)
         // Вызов
-        add("mcall",    NCMCall)
+        add("!mcall",   NCMCall)
         // Сеттеры
         add("fset",     NCFSet)
         // Геттеры

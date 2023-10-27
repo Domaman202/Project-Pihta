@@ -8,7 +8,7 @@ import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parsers.NPDefault
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 
-object NUPMCallB : INodeUniversalProcessor<Node, Node> {
+object NUPMCall : INodeUniversalProcessor<Node, Node> {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
         val name = parser.parseNode(ctx)!!
         return NPDefault.parse(parser, ctx) {
