@@ -6,11 +6,9 @@ import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.std.processor.utils.nodeMCall
-import ru.DmN.pht.std.ups.NUPMCallA
+import ru.DmN.pht.std.utils.line
 
 object NRPrint : INodeProcessor<NodeNodesList> {
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeNodesList {
-        val line = node.token.line
-        return NUPMCallA.process(nodeMCall(line, "ru.DmN.pht.std.utils.StdOut", node.token.text!!, node.nodes), processor, ctx, mode)
-    }
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeNodesList =
+        NRMCall.process(nodeMCall(node.line, "ru.DmN.pht.std.utils.StdOut", node.token.text!!, node.nodes), processor, ctx, mode)
 }

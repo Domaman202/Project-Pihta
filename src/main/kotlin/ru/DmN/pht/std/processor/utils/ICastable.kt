@@ -1,6 +1,10 @@
 package ru.DmN.pht.std.processor.utils
 
+import ru.DmN.pht.base.Processor
+import ru.DmN.pht.base.ast.Node
+import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.ast.IAdaptableNode
 
 interface ICastable {
     /**
@@ -10,7 +14,15 @@ interface ICastable {
     fun castableTo(to: VirtualType): Int
 
     companion object {
-        fun of(type: VirtualType) =
+        fun of(type: VirtualType): ICastable =
             CastableImpl(type)
+
+        fun of(node: IAdaptableNode): ICastable =
+            CastableAdaptImpl(node)
+
+        fun of(node: Node, processor: Processor, ctx: ProcessingContext): ICastable =
+            if (node is IAdaptableNode)
+                of(node)
+            else of(processor.tp.typeOf(processor.calc(node, ctx)!!.name))
     }
 }

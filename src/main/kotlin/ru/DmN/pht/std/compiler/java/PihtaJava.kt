@@ -31,6 +31,9 @@ object PihtaJava : ModuleCompilers(Pihta) {
 
         // Функция
         add("defn",     NCDefn)
+        // Лямбда
+        add("!rfn",     NCRFn)
+        add("!fn",      NCFn)
         // Тело
         add("body",     NCBody)
         // Цикл
@@ -77,7 +80,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         // Создание объекта
         add("new",      NCNew)
         // Вызов
-        add("mcall",    NCMCall)
+        add("!mcall",   NCMCall)
         // Сеттеры
         add("fset",     NCFSet)
         // Геттеры

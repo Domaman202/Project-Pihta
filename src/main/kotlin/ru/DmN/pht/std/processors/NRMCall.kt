@@ -1,43 +1,21 @@
-package ru.DmN.pht.std.ups
+package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
-import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.ast.NodeNodesList
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ParsingContext
-import ru.DmN.pht.base.parsers.NPDefault
 import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ValType
-import ru.DmN.pht.base.unparser.UnparsingContext
-import ru.DmN.pht.base.unparsers.NUDefault
+import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.ast.IAdaptableNode
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.*
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
-import ru.DmN.pht.std.processors.NRArrayOf
-import ru.DmN.pht.std.processors.NRAs
-import ru.DmN.pht.std.processors.NRNewArray
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.line
 
-object NUPMCallA : INodeUniversalProcessor<NodeMCall, NodeNodesList> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
-        NPDefault.parse(parser, ctx, operationToken)
-
-    override fun unparse(node: NodeMCall, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
-        unparser.out.apply {
-            append('(').append(node.token.text).append(' ')
-            unparser.unparse(node.instance, ctx, indent + 1)
-            append(' ').append(node.method.name)
-            NUDefault.unparseNodes(node, unparser, ctx, indent)
-            append(')')
-        }
-    }
-
+object NRMCall : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
         if (node is NodeMCall) node.method.rettype else findMethod(node, processor, ctx).third.rettype
 
@@ -48,7 +26,7 @@ object NUPMCallA : INodeUniversalProcessor<NodeMCall, NodeNodesList> {
         else processor.process(node.nodes[0], ctx, mode)!!
         return if (triple.third.extend == null)
             NodeMCall(
-                node.token,
+                node.token.processed(),
                 processArguments(node.line, processor, ctx, triple.third, triple.second),
                 instance,
                 triple.third,
@@ -59,7 +37,7 @@ object NUPMCallA : INodeUniversalProcessor<NodeMCall, NodeNodesList> {
                 else triple.first
             )
         else NodeMCall(
-            node.token,
+            node.token.processed(),
             processArguments(
                 node.line,
                 processor,
@@ -132,9 +110,10 @@ object NUPMCallA : INodeUniversalProcessor<NodeMCall, NodeNodesList> {
     }
 
     fun findMethod(clazz: VirtualType, name: String, args: Sequence<Node>, processor: Processor, ctx: ProcessingContext): Pair<List<Node>, VirtualMethod> {
-        val methods = ctx.global.getMethodVariants(clazz, name, args.map { ICastable.of(processor.tp.typeOf(processor.calc(it, ctx)!!.name)) }.toList())
+        val methods = ctx.global.getMethodVariants(clazz, name, args.map { ICastable.of(it, processor, ctx) }.toList())
         if (methods.isEmpty())
             throw RuntimeException("Method '$name' not founded!")
-        return Pair(args.toList(), methods.first())
+        val method = methods.first()
+        return Pair(args.mapIndexed { i, it -> if (it is IAdaptableNode) it.adaptTo(method.argsc[i]); it }.toList(), method)
     }
 }

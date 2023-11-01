@@ -7,7 +7,7 @@ import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.base.utils.indent
 
 class NodeType(tkOperation: Token, nodes: MutableList<Node>, val type: VirtualType) : NodeNodesList(tkOperation, nodes),
-    IAbstractlyNode, IFinally, IOpenly {
+    IAbstractlyNode, IFinallyNode, IOpenlyNode {
     override var abstract: Boolean
         get() = type.abstract
         set(value) { type.abstract = value }

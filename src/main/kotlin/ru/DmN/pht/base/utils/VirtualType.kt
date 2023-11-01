@@ -4,7 +4,7 @@ import java.lang.reflect.Modifier
 import java.util.*
 import kotlin.collections.ArrayList
 
-class VirtualType(
+data class VirtualType(
     var name: String,
     //
     var parents: MutableList<VirtualType> = ArrayList(),

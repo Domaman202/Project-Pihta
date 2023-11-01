@@ -4,5 +4,5 @@
     (app
         (defn test ^void [[o ^Runnable]]
             (#run o))
-        (defn main ^void []
-            (#test ^App (fn ^Runnable [] (println "Run!"))))))
+        (defn main ^void [] (progn
+            (#test ^App (fn [] (println "Арен брат, с днюхой!")))))))

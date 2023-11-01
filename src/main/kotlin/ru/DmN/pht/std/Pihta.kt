@@ -64,7 +64,9 @@ object Pihta : StdModule("pht") {
         add("defn",     NUPDefn)
         // Лямбда
         add("rfn",      NUPDefault, NRRFn)
+        add("!rfn",     NUPRFn)
         add("fn",       NUPDefault, NRFn)
+        add("!fn",      NUPFn)
         // Тело
         add("body",     NUPDefault, NRBody)
         // Цикл
@@ -144,8 +146,9 @@ object Pihta : StdModule("pht") {
         add("new",      NUPNew)
         // Вызов конструктора / метода
         add("ccall",    NUPDefault, NRCCall)
-        add("mcall",    NUPMCallA)
-        add("mcall!",   NUPMCallB)
+        add("mcall",    NUPDefault, NRMCall)
+        add("mcall!",   NUPMCall)
+        add("!mcall",   NUPMCallX)
         // Сеттеры
         add("fset",     NUPFSetA)
         add("fset!",    NUPFSetB)
