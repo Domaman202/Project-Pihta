@@ -27,7 +27,7 @@ object NUPField : INodeUniversalProcessor<NodeField, NodeNodesList> {
         unparser.out.apply {
             append('(').append(node.token.text).append(' ').append('[')
             node.fields.forEach {
-                append("[^").append(it.first).append(' ').append(it.second).append(']')
+                append("[^").append(it.type.name).append(' ').append(it.name).append(']')
             }
             append("])")
         }
@@ -36,12 +36,12 @@ object NUPField : INodeUniversalProcessor<NodeField, NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
         val gctx = ctx.global
         val clazz = ctx.clazz
-        val list = ArrayList<Pair<String, String>>()
+        val list = ArrayList<VirtualField>()
         processor.computeList(node.nodes[0], ctx).map { it -> processor.computeList(it, ctx).map { processor.computeString(it, ctx) } }.forEach {
-            val name = it[0]
-            val type = it[1]
-            list.add(Pair(type, name))
-            clazz.fields += VirtualField(clazz, name, gctx.getType(type, processor.tp), static = false, enum = false)
+            VirtualField(clazz, it[0], gctx.getType(it[1], processor.tp), static = false, enum = false).run {
+                list += this
+                clazz.fields += this
+            }
         }
         return NodeField(node.token, list)
     }

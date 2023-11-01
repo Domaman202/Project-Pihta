@@ -15,6 +15,7 @@ import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.compiler.java.utils.with
 import ru.DmN.pht.std.compilers.NCDefn.visit
+import ru.DmN.pht.std.utils.NVC
 import ru.DmN.pht.std.utils.findLambdaMethod
 import kotlin.math.absoluteValue
 
@@ -37,7 +38,7 @@ object NCRFn : INodeCompiler<NodeRFn> {
             "<init>",
             node.refs.run {
                 val str = StringBuilder()
-                forEach { str.append(it.type().desc) }
+                forEach { str.append(it.type.desc) }
                 "($str)V"
             },
             null,
@@ -49,10 +50,10 @@ object NCRFn : INodeCompiler<NodeRFn> {
             visitMethodInsn(Opcodes.INVOKESPECIAL, clazz.superName, "<init>", "()V", false)
             node.refs.forEachIndexed { i, it ->
                 visitInsn(Opcodes.DUP)
-                load(it.copy(id = i + 1), this)
-                visitFieldInsn(Opcodes.PUTFIELD, clazz.name, it.name, it.type().desc)
-                type.fields += VirtualField(type, it.name, it.type(), static = false, enum = false)
-                clazz.visitField(Opcodes.ACC_PRIVATE, it.name, it.type().desc, null, null)
+                it.load(this, i + 1)
+                visitFieldInsn(Opcodes.PUTFIELD, clazz.name, it.name, it.type.desc)
+                type.fields += VirtualField(type, it.name, it.type, static = false, enum = false)
+                clazz.visitField(Opcodes.ACC_PRIVATE, it.name, it.type.desc, null, null)
             }
             visitInsn(Opcodes.RETURN)
             this
@@ -71,7 +72,7 @@ object NCRFn : INodeCompiler<NodeRFn> {
         ctx.method.node.run {
             visitTypeInsn(Opcodes.NEW, clazz.name)
             visitInsn(Opcodes.DUP)
-            node.refs.forEach { load(it, this) }
+            node.refs.forEach { it.load(this) }
             visitMethodInsn(Opcodes.INVOKESPECIAL, clazz.name, "<init>", ctor.desc, false)
         }
         return Variable.tmp(node, node.type)

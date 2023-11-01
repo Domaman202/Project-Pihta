@@ -4,6 +4,7 @@ import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.utils.NVC
 
 class NodeRFn(
     token: Token,
@@ -11,5 +12,5 @@ class NodeRFn(
     type: VirtualType?,
     args: List<String>,
     val name: String,
-    val refs: List<Variable>
+    val refs: List<NVC>
 ) : NodeFn(token, nodes, type, args)

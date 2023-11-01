@@ -4,9 +4,8 @@ import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
-import ru.DmN.pht.base.utils.desc
-import ru.DmN.pht.std.compiler.java.utils.clazz
 import ru.DmN.pht.std.ast.NodeField
+import ru.DmN.pht.std.compiler.java.utils.clazz
 
 object NCField : INodeCompiler<NodeField> {
     override fun compile(node: NodeField, compiler: Compiler, ctx: CompilationContext) {
@@ -16,8 +15,8 @@ object NCField : INodeCompiler<NodeField> {
                 Opcodes.ACC_PUBLIC
                     .let { if (node.static) it + Opcodes.ACC_STATIC else it }
                     .let { if (node.final) it + Opcodes.ACC_FINAL else it },
-                it.second,
-                it.first.desc,
+                it.name,
+                it.desc,
                 null,
                 null
             )
