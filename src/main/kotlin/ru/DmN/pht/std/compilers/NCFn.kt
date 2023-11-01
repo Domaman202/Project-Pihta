@@ -7,8 +7,14 @@ import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.utils.Variable
+import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.base.utils.with
 import ru.DmN.pht.std.ast.NodeFn
+import ru.DmN.pht.std.compiler.java.ctx.BodyContext
+import ru.DmN.pht.std.compiler.java.ctx.ClassContext
+import ru.DmN.pht.std.compiler.java.ctx.MethodContext
 import ru.DmN.pht.std.compiler.java.utils.method
+import ru.DmN.pht.std.compiler.java.utils.with
 import ru.DmN.pht.std.compilers.NCDefn.visit
 import ru.DmN.pht.std.utils.findLambdaMethod
 import kotlin.math.absoluteValue
@@ -58,13 +64,16 @@ object NCFn : INodeCompiler<NodeFn> {
             visitInsn(Opcodes.RETURN)
         }
         val method = findLambdaMethod(node.type!!)
-        (clazz.visitMethod(
+        clazz.visitMethod(
             Opcodes.ACC_PUBLIC + Opcodes.ACC_FINAL,
             method.name,
             method.desc,
             null,
             null
-        ) as MethodNode).visit(node, method, compiler, ctx)
+        ).run {
+            this as MethodNode
+            visit(node, method, compiler, ctx.with(ClassContext(clazz, VirtualType(name, mutableListOf(node.type!!)))))
+        }
         ctx.method.node.visitFieldInsn(Opcodes.GETSTATIC, clazz.name, "INSTANCE", "L${clazz.name};")
         return Variable.tmp(node, node.type)
     }

@@ -5,4 +5,5 @@
         (defn test ^void [[o ^Runnable]]
             (#run o))
         (defn main ^void [] (progn
-            (#test ^App (fn [] (println "Z")))))))
+            (def [[i 12]])
+            (#test ^App (rfn [i][] (println i)))))))

@@ -6,7 +6,7 @@ import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.utils.findLambdaMethod
 
-class NodeFn(
+open class NodeFn(
     token: Token,
     nodes: MutableList<Node>,
     var type: VirtualType?,

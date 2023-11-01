@@ -64,6 +64,7 @@ object Pihta : StdModule("pht") {
         add("defn",     NUPDefn)
         // Лямбда
         add("rfn",      NUPDefault, NRRFn)
+        add("!rfn",     NUPRFn)
         add("fn",       NUPDefault, NRFn)
         add("!fn",      NUPFn)
         // Тело

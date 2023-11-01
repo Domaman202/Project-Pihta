@@ -18,11 +18,13 @@ object NRFn : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
         ctx.global.getType("Any", processor.tp)
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeFn {
         val context = ctx.with(BodyContext.of(null))
         val nodes = NRDefault.processValue(node, processor, context).nodes
         val offset = if (nodes[0].isConstClass()) 1 else 0
         val type = if (offset == 1) context.global.getType(nodes[0].getValueAsString(), processor.tp) else null
-        return NodeFn(node.token.processed(), nodes.drop(offset + 1).toMutableList(), type, processor.computeStringNodes(nodes[offset], context))
+        val args = processor.computeStringNodes(nodes[offset], context)
+        val body = nodes.drop(offset + 1).toMutableList()
+        return NodeFn(node.token.processed(), body, type, args)
     }
 }
