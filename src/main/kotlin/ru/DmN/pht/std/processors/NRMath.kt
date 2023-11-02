@@ -13,7 +13,7 @@ import ru.DmN.pht.std.utils.line
 import ru.DmN.pht.std.utils.processNodes
 
 object NRMath : INodeProcessor<NodeMath> {
-    override fun calc(node: NodeMath, processor: Processor, ctx: ProcessingContext): VirtualType? {
+    override fun calc(node: NodeMath, processor: Processor, ctx: ProcessingContext): VirtualType {
         val firstType = processor.calc(node.nodes[0], ctx)
         return if (firstType!!.isPrimitive)
             firstType

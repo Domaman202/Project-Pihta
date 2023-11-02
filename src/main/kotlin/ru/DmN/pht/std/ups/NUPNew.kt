@@ -41,7 +41,7 @@ object NUPNew : INodeUniversalProcessor<NodeNew, NodeNodesList> {
         val ctor = NRMCall.findMethod(
             ctx.global.getType(processor.computeString(nodes[0], ctx), processor.tp),
             "<init>",
-            nodes.asSequence().drop(1),
+            nodes.drop(1),
             processor,
             ctx
         )

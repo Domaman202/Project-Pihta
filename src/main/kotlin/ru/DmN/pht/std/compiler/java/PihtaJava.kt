@@ -23,6 +23,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!dec",         NCIncDec)
         add("!def",         NCDef)
         add("defn",         NCDefn)
+        add("!div",         NCMath)
         // e
         add("efield",       NCEField)
         add("efn",          NCDefn)
@@ -46,6 +47,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!less-or-eq",  NCCompare)
         // m
         add("!mcall",       NCMCall)
+        add("!mul",         NCMath)
         // n
         add("new",          NCNew)
         add("!new-array",   NCNewArray)
@@ -55,11 +57,13 @@ object PihtaJava : ModuleCompilers(Pihta) {
         // o
         add("!obj",         NCClass)
         // r
+        add("!rem",         NCMath)
         add("ret",          NCRet)
         add("!rfn",         NCRFn)
         // s
         add("set!",         NCSet)
         add("sns",          NCDefault)
+        add("!sub",         NCMath)
         // u
         add("unit",         NCUnit)
         // v

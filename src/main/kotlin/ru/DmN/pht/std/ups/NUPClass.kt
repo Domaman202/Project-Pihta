@@ -8,11 +8,12 @@ import ru.DmN.pht.base.unparsers.NUDefault
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeType
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.pht.std.unparsers.NUDefaultX
 
 object NUPClass : INodeUniversalProcessor<NodeType, NodeType> {
     override fun unparse(node: NodeType, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
-            append('(').append(node.token.text).append(' ').append(node.type.simpleName).append(" [")
+            append('(').append(NUDefaultX.text(node.token)).append(' ').append(node.type.simpleName).append(" [")
             node.type.parents.forEachIndexed { i, it ->
                 append('^').append(it.name)
                 if (node.type.parents.size + 1 < i) {

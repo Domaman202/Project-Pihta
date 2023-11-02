@@ -102,14 +102,14 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         val result = findMethod(
             clazz,
             processor.computeString(node.nodes[1], ctx),
-            node.nodes.asSequence().drop(2).map { processor.process(it, ctx, ValType.VALUE)!! },
+            node.nodes.drop(2).map { processor.process(it, ctx, ValType.VALUE)!! },
             processor,
             ctx
         )
         return Triple(type, result.first, result.second)
     }
 
-    fun findMethod(clazz: VirtualType, name: String, args: Sequence<Node>, processor: Processor, ctx: ProcessingContext): Pair<List<Node>, VirtualMethod> {
+    fun findMethod(clazz: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Pair<List<Node>, VirtualMethod> {
         val methods = ctx.global.getMethodVariants(clazz, name, args.map { ICastable.of(it, processor, ctx) }.toList())
         if (methods.isEmpty())
             throw RuntimeException("Method '$name' not founded!")

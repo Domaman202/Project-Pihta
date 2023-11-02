@@ -23,7 +23,7 @@ import kotlin.collections.HashMap
 object Pihta : StdModule("pht") {
     init {
         // a
-        add("add",          NUPMath, NRMath)
+        add("add",          NUPMath,    NRMath)
         add("!add",         NUPMath)
         add("aget",         NUPDefault, NRAGet)
         add("alias-type",   NUPAliasType)
@@ -84,7 +84,7 @@ object Pihta : StdModule("pht") {
         // i
         add("if",           NUPDefault, NRIf)
         add("import",       NUPImport)
-        add("inc",          NUPIncDec, NRIncDec)
+        add("inc",          NUPIncDec,  NRIncDec)
         add("!inc",         NUPIncDec)
         add("is",           NUPDefault, NRIs)
         add("itf",          NUPDefault, NRClass)
@@ -161,6 +161,10 @@ object Pihta : StdModule("pht") {
         add("*type-name*",  NUPDefault, NRCTSC { _, ctx -> ctx.clazz.name })
         add("*fn-name*",    NUPDefault, NRCTSC { _, ctx -> ctx.method.name })
         add("*ns-name*",    NUPDefault, NRCTSC { _, ctx -> ctx.global.namespace })
+
+        // Развёртки
+        add("->", NUPDefault, NRUnrollA)
+        add("<-", NUPDefault, NRUnrollB)
 
         ///
 

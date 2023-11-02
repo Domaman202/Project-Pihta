@@ -22,11 +22,11 @@ object NUPMath : INodeUniversalProcessor<NodeMath, NodeMath> {
                 operationToken,
                 it,
                 when (operationToken.text!!) {
-                    "+" -> PLUS
-                    "-" -> MINUS
-                    "*" -> MUL
-                    "/" -> DIV
-                    "%" -> REM
+                    "add", "+" -> PLUS
+                    "sub", "-" -> MINUS
+                    "mul", "*" -> MUL
+                    "div", "/" -> DIV
+                    "rem", "%" -> REM
                     else -> throw RuntimeException()
                 }
             )

@@ -12,13 +12,5 @@ import ru.DmN.pht.std.utils.line
 
 object NRIncDec : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeIncDec = // todo: no-int inc/dec
-        NodeIncDec(
-            node.token.processed(),
-            when (node.token.text) {
-                "++" -> NodeIncDec.Type.INC
-                "--" -> NodeIncDec.Type.DEC
-                else -> throw RuntimeException()
-            },
-            processor.computeString(node.nodes[0], ctx)
-        )
+        NodeIncDec(node.token.processed(), processor.computeString(node.nodes[0], ctx))
 }

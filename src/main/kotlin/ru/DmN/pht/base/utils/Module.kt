@@ -13,8 +13,6 @@ import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparsers.INodeUnparser
-import ru.DmN.pht.example.bf.BF
-import ru.DmN.pht.example.lkl.LKL
 import ru.DmN.pht.std.Pihta
 import ru.DmN.pht.std.module.StdModule
 import java.io.FileNotFoundException
@@ -87,12 +85,7 @@ open class Module(val name: String, var init: Boolean = false) {
         val MODULES: MutableMap<String, Module> = HashMap()
 
         init {
-            for (module in listOf(
-                Pihta,
-                StdModule,
-                BF,
-                LKL
-            )) {
+            for (module in listOf(Pihta, StdModule,)) {
                 MODULES[module.name] = module
             }
         }

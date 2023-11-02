@@ -13,9 +13,10 @@ import ru.DmN.pht.std.compiler.java.utils.method
 object NCIncDec : INodeCompiler<NodeIncDec> {
     override fun compile(node: NodeIncDec, compiler: Compiler, ctx: CompilationContext) {
         ctx.method.node.run {
-            visitIincInsn(ctx.body[node.name]!!.id, when (node.type) {
-                NodeIncDec.Type.INC -> 1
-                NodeIncDec.Type.DEC -> -1
+            visitIincInsn(ctx.body[node.name]!!.id, when (node.token.text) {
+                "inc", "++" -> 1
+                "dec", "--" -> -1
+                else -> throw RuntimeException()
             })
         }
     }
@@ -23,9 +24,10 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
     override fun compileVal(node: NodeIncDec, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.run {
             val id = ctx.body[node.name]!!.id
-            visitIincInsn(id, when (node.type) {
-                NodeIncDec.Type.INC -> 1
-                NodeIncDec.Type.DEC -> -1
+            visitIincInsn(id, when (node.token.text) {
+                "inc", "++" -> 1
+                "dec", "--" -> -1
+                else -> throw RuntimeException()
             })
             visitVarInsn(Opcodes.ILOAD, id)
         }
