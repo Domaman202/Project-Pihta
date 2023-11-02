@@ -27,7 +27,7 @@ object NUPNew : INodeUniversalProcessor<NodeNew, NodeNodesList> {
 
     override fun unparse(node: NodeNew, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
-            append('(').append(node.token.text).append(' ').append(NUPValue.unparseType(node.ctor.declaringClass!!.name))
+            append('(').append(node.token.text).append(' ').append(NUPValueA.unparseType(node.ctor.declaringClass!!.name))
             NUDefault.unparseNodes(node, unparser, ctx, indent)
             append(')')
         }

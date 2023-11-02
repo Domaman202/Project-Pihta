@@ -1,4 +1,0 @@
-(use-ctx pht
-    (obj App []
-        (defn main ^void []
-            (#println (use std/base) "Xd"))))

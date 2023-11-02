@@ -7,90 +7,68 @@ import ru.DmN.pht.std.compilers.*
 
 object PihtaJava : ModuleCompilers(Pihta) {
     override fun onInitialize() {
-        /// BASE
-
-        // Пространства имён
-        add("ns",   NCDefault)
-        add("sns",  NCDefault)
-        // Пустой блок
-        add("unit", NCUnit)
-
-        /// COLLECTIONS
-
-        // Работа с массивом
-        add("array-size",   NCArraySize)
-        add("!aset",        NCASet)
+        // a
+        add("!add",         NCMath)
         add("!aget",        NCAGet)
+        add("array-size",   NCArraySize)
+        add("!as",          NCAs)
+        add("!aset",        NCASet)
+        // b
+        add("body",         NCBody)
+        // c
+        add("!cls",         NCClass)
+        add("ctor",         NCDefn)
+        add("!cycle",       NCCycle)
+        // d
+        add("!dec",         NCIncDec)
+        add("!def",         NCDef)
+        add("defn",         NCDefn)
+        // e
+        add("efield",       NCEField)
+        add("efn",          NCDefn)
+        add("!eq",          NCCompare)
+        // f
+        add("!fget",        NCFGet)
+        add("field",        NCField)
+        add("!fn",          NCFn)
+        add("fset",         NCFSet)
+        // g
+        add("get",          NCGetA)
+        add("get-or-name!", NCGetB)
+        add("!great",       NCCompare)
+        add("!great-or-eq", NCCompare)
+        // i
+        add("if",           NCIf)
+        add("!inc",         NCIncDec)
+        add("!itf",         NCClass)
+        // l
+        add("!less",        NCCompare)
+        add("!less-or-eq",  NCCompare)
+        // m
+        add("!mcall",       NCMCall)
+        // n
+        add("new",          NCNew)
         add("!new-array",   NCNewArray)
-
-        /// ENUMS
-
-        add("efield",   NCEField)
-
-        /// FP
-
-        // Функция
-        add("defn",     NCDefn)
-        // Лямбда
-        add("!rfn",     NCRFn)
-        add("!fn",      NCFn)
-        // Тело
-        add("body",     NCBody)
-        // Цикл
-        add("!cycle",   NCCycle)
-        // Условие
-        add("if",       NCIf)
-        // Переменные
-        add("!def",     NCDef)
-        // Работа с типами
-        add("!as",      NCAs)
-        // Возврат
-        add("ret",      NCRet)
-        // Сеттеры
-        add("set!",     NCSet)
-        // Геттеры
-        add("get",      NCGetA)
-
-        /// MATH
-
-        for (name in listOf("=", "!=", "<", "<=", ">=", ">"))
-            add("!$name",   NCCompare)
-        for (name in listOf("+", "-", "*", "/", "%"))
-            add("!$name",   NCMath)
-        for (name in listOf("++", "--"))
-            add("!$name",   NCIncDec)
-        add("!!",           NCNot)
-
-        /// OOP
+        add("!not",         NCNot)
+        add("!not-eq",      NCCompare)
+        add("ns",           NCDefault)
+        // o
+        add("!obj",         NCClass)
+        // r
+        add("ret",          NCRet)
+        add("!rfn",         NCRFn)
+        // s
+        add("set!",         NCSet)
+        add("sns",          NCDefault)
+        // u
+        add("unit",         NCUnit)
+        // v
+        add("value",        NCValue)
 
         // Аннотации
-        add("@abstract",NCDefault)
-        add("@final",   NCDefault)
-        add("@open",    NCDefault)
-        add("@static",  NCDefault)
-        // Объект / Класс / Интерфейс
-        for (name in listOf("obj", "cls", "itf"))
-            add("!$name", NCClass)
-        // Расширение
-        add("efn",      NCDefn)
-        // Конструктор
-        add("ctor",     NCDefn)
-        // Поле
-        add("field",    NCField)
-        // Создание объекта
-        add("new",      NCNew)
-        // Вызов
-        add("!mcall",   NCMCall)
-        // Сеттеры
-        add("fset",     NCFSet)
-        // Геттеры
-        add("!fget",    NCFGet)
-
-        /// VALUE
-
-        // Имя или get
-        add("get-or-name!", NCGetB)
-        // Значение
-        add("value",        NCValue)
+        add("@abstract",    NCDefault)
+        add("@final",       NCDefault)
+        add("@open",        NCDefault)
+        add("@static",      NCDefault)
     }
 }

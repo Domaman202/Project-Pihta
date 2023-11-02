@@ -18,7 +18,7 @@ object NUPNewArrayX : INodeUniversalProcessor<NodeNewArray, NodeNewArray> {
     override fun unparse(node: NodeNewArray, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.run {
             append('(').append("new-array")
-                .append('\n').append("\t".repeat(indent + 1)).append(NUPValue.unparseType(node.type.name))
+                .append('\n').append("\t".repeat(indent + 1)).append(NUPValueA.unparseType(node.type.name))
                 .append('\n').append("\t".repeat(indent + 1))
             unparser.unparse(node.size, ctx, indent + 1)
             append(')')

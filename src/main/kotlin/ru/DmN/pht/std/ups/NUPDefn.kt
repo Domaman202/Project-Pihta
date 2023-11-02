@@ -40,7 +40,7 @@ object NUPDefn : INodeUniversalProcessor<NodeDefn, NodeNodesList> {
                     .append(" ^").append(rettype.name)
                     .append(" [")
                 argsn.forEachIndexed { i, it ->
-                    append('[').append(it).append(' ').append(NUPValue.unparseType(argsc[i].name)).append(']')
+                    append('[').append(it).append(' ').append(NUPValueA.unparseType(argsc[i].name)).append(']')
                     if (argsn.size + 1 < i) {
                         append(' ')
                     }

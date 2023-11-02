@@ -15,7 +15,7 @@ object NUPDef : INodeUniversalProcessor<NodeDef, NodeDef> {
                     append('\n').append("\t".repeat(indent + 1))
                     1
                 } else 0
-                append('[').append(NUPValue.unparseType(it.type.name)).append(' ').append(it.name)
+                append('[').append(NUPValueA.unparseType(it.type.name)).append(' ').append(it.name)
                 if (it.value != null) {
                     append('\n').append("\t".repeat(indent + 1 + offset))
                     unparser.unparse(it.value, ctx, indent + 1 + offset)

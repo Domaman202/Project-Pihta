@@ -8,7 +8,7 @@ import ru.DmN.pht.base.utils.ModuleCompilers
 
 object BaseJava : ModuleCompilers(Base) {
     override fun onInitialize() {
-        add("use-ctx",  NCUseCtx)
         add("progn",    NCDefault)
+        add("use-ctx",  NCUseCtx)
     }
 }

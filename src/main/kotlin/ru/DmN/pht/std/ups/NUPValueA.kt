@@ -15,7 +15,7 @@ import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.processors.IStdNodeProcessor
 
-object NUPValue : INodeUniversalProcessor<NodeValue, NodeValue>, IStdNodeProcessor<NodeValue> {
+object NUPValueA : INodeUniversalProcessor<NodeValue, NodeValue>, IStdNodeProcessor<NodeValue> {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): NodeValue {
         val value = parser.nextToken()!!
         return NodeValue(

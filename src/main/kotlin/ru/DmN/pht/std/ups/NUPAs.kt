@@ -12,7 +12,7 @@ import ru.DmN.pht.std.unparsers.NUDefaultX
 object NUPAs : INodeUniversalProcessor<NodeAs, NodeAs> {
     override fun unparse(node: NodeAs, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.run {
-            append('(').append(NUDefaultX.text(node.token)).append(' ').append(NUPValue.unparseType(node.type.name)).append('\n').append("\t".repeat(indent + 1))
+            append('(').append(NUDefaultX.text(node.token)).append(' ').append(NUPValueA.unparseType(node.type.name)).append('\n').append("\t".repeat(indent + 1))
             unparser.unparse(node.nodes[0], ctx, indent + 1)
             append(')')
         }

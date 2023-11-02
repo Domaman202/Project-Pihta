@@ -1,6 +1,0 @@
-(module
-    (name "example/test")
-    (version "1.0.0")
-    (files ["src.pht"])
-    (deps ["pht"])
-    (author "DomamaN202"))

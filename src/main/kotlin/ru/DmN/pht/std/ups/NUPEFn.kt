@@ -31,12 +31,12 @@ object NUPEFn : INodeUniversalProcessor<NodeDefn, NodeNodesList> {
         unparser.out.apply {
             node.method.apply {
                 append('(').append(node.token.text)
-                    .append(" ^").append(NUPValue.unparseType(node.method.extend!!.name))
+                    .append(" ^").append(NUPValueA.unparseType(node.method.extend!!.name))
                     .append(' ').append(name)
                     .append(" ^").append(rettype.name)
                     .append(" [")
                 argsn.forEachIndexed { i, it ->
-                    append('[').append(it).append(' ').append(NUPValue.unparseType(argsc[i].name)).append(']')
+                    append('[').append(it).append(' ').append(NUPValueA.unparseType(argsc[i].name)).append(']')
                     if (argsn.size + 1 < i) {
                         append(' ')
                     }

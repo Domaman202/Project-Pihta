@@ -22,107 +22,132 @@ import kotlin.collections.HashMap
 
 object Pihta : StdModule("pht") {
     init {
-        /// APP
-
-        add("app",      NUPDefault, NRApp)
-        add("app-fn",   NUPDefault, NRAppFn)
-
-        /// BASE
-
-        // Пространства имён
-        add("ns",       NPDefault, NUNs, NRNewNs)
-        add("sns",      NPDefault, NUNs, NRSubNs)
-        // Пустой блок
-        add("unit",     NUPDefault)
-
-        /// COLLECTIONS
-
-        // Перебор коллекций
-        add("for",          NUPDefault, NRFor)
-        // Создание коллекций
-        add("list-of",      NUPDefault, NRListOf)
-        // Работа с массивом
+        // a
+        add("add",          NUPMath, NRMath)
+        add("!add",         NUPMath)
+        add("aget",         NUPDefault, NRAGet)
+        add("alias-type",   NUPAliasType)
+        add("!aget",        NUPAGet)
+        add("app",          NUPDefault, NRApp)
+        add("app-fn",       NUPDefault, NRAppFn)
+        add("array-of",     NUPDefault, NRArrayOf)
         add("array-size",   NUPDefault, NRArraySize)
+        add("array-type",   NUPDefault, NRArrayType)
+        add("as",           NUPDefault, NRAs)
+        add("!as",          NUPAs)
         add("aset",         NUPDefault, NRASet)
         add("!aset",        NUPASet)
-        add("aget",         NUPDefault, NRAGet)
-        add("!aget",        NUPAGet)
-        // Создание массива
+        // b
+        add("body",         NUPDefault, NRBody)
+        // c
+        add("ccall",        NUPDefault, NRCCall)
+        add("cls",          NUPDefault, NRClass)
+        add("!cls",         NUPClass)
+        add("ctor",         NUPCtor)
+        add("cycle",        NUPDefault, NRCycle)
+        add("!cycle",       NUPDefaultX)
+        // d
+        add("debug",        NUPDebug)
+        add("dec",          NUPIncDec, NRIncDec)
+        add("!dec",         NUPIncDec)
+        add("def",          NUPDefault, NRDef)
+        add("!def",         NUPDef)
+        add("defmacro",     NUPDefMacro)
+        add("defn",         NUPDefn)
+        add("div",          NUPMath, NRMath)
+        add("!div",         NUPMath)
+        // e
+        add("ector",        NUPCtor)
+        add("efield",       NUPEField)
+        add("efn",          NUPEFn)
+        add("enum",         NUPEnum)
+        add("eq",           NUPCompare, NRCompare)
+        add("!eq",          NUPCompare)
+        // f
+        add("fget",         NUPDefault, NRFGetA)
+        add("fget!",        NUPFGetB)
+        add("!fget",        NUPFGetA)
+        add("field",        NUPField)
+        add("fn",           NUPDefault, NRFn)
+        add("!fn",          NUPFn)
+        add("for",          NUPDefault, NRFor)
+        add("fset",         NUPFSetA)
+        add("fset!",        NUPFSetB)
+        // g
+        add("get",          NUPGetA)
+        add("get!",         NUPGetB)
+        add("get-or-name!", NUPGetOrName)
+        add("great",        NUPCompare, NRCompare)
+        add("!great",       NUPCompare)
+        add("great-or-eq",  NUPCompare, NRCompare)
+        add("!great-or-eq", NUPCompare)
+        // i
+        add("if",           NUPDefault, NRIf)
+        add("import",       NUPImport)
+        add("inc",          NUPIncDec, NRIncDec)
+        add("!inc",         NUPIncDec)
+        add("is",           NUPDefault, NRIs)
+        add("itf",          NUPDefault, NRClass)
+        add("!itf",         NUPClass)
+        // l
+        add("lazy-symbol",  NUPLazySymbol)
+        add("less",         NUPCompare, NRCompare)
+        add("!less",        NUPCompare)
+        add("less-or-eq",   NUPCompare, NRCompare)
+        add("!less-or-eq",  NUPCompare)
+        add("list-of",      NUPDefault, NRListOf)
+        // m
+        add("macro!",       NUPMacro)
+        add("macro-arg",    NUPMacroArg)
+        add("macro-inline", NUPMacroInline)
+        add("macro-unroll", NUPMacroUnroll)
+        add("mcall",        NUPDefault, NRMCall)
+        add("mcall!",       NUPMCall)
+        add("!mcall",       NUPMCallX)
+        add("mul",          NUPMath, NRMath)
+        add("!mul",         NUPMath)
+        // n
+        add("new",          NUPNew)
         add("new-array",    NUPDefault, NRNewArray)
         add("!new-array",   NUPNewArrayX)
-        add("array-of",     NUPDefault, NRArrayOf)
-
-        /// ENUMS
-
-        add("enum",     NUPEnum)
-        add("ector",    NUPCtor)
-        add("efield",   NUPEField)
-
-        /// FP
-
-        // Функция
-        add("defn",     NUPDefn)
-        // Лямбда
-        add("rfn",      NUPDefault, NRRFn)
-        add("!rfn",     NUPRFn)
-        add("fn",       NUPDefault, NRFn)
-        add("!fn",      NUPFn)
-        // Тело
-        add("body",     NUPDefault, NRBody)
-        // Цикл
-        add("cycle",    NUPDefault, NRCycle)
-        add("!cycle",   NUPDefaultX)
-        // Условие
-        add("if",       NUPDefault, NRIf)
-        // Переменные
-        add("def",      NUPDefault, NRDef)
-        add("!def",     NUPDef)
-        // Работа с типами
-        add("as",       NUPDefault, NRAs)
-        add("!as",      NUPAs)
-        add("is",       NUPDefault, NRIs)
-        add("typeof",   NUPDefault, NRTypeof)
-        // Возвраты
-        add("ret",      NUPDefault, NRRet)
-        add("yield",    NUPDefault, NRYield)
-        // Сеттеры
-        add("set",      NUPSetA)
-        add("set!",     NUPSetB)
-        // Геттеры
-        add("get",      NUPGetA)
-        add("get!",     NUPGetB)
-
-        /// IMPORTS
-
-        add("import",       NUPImport)
-        add("alias-type",   NUPAliasType)
-
-        /// MACRO
-
-        add("defmacro",     NUPDefMacro)
-        add("macro-unroll", NUPMacroUnroll)
-        add("macro-inline", NUPMacroInline)
-        add("macro-arg",    NUPMacroArg)
-        add("macro!",       NUPMacro)
-
-        /// MATH
-
-        for (name in listOf("=", "!=", "<", "<=", ">=", ">")) {
-            add(name,           NUPCompare, NRCompare)
-            add("!$name", NUPCompare)
-        }
-        for (name in listOf("+", "-", "*", "/", "%")) {
-            add(name,           NUPMath,    NRMath)
-            add("!$name", NUPMath)
-        }
-        for (name in listOf("++", "--")) {
-            add(name,           NUPIncDec,  NRIncDec)
-            add("!$name", NUPIncDec)
-        }
-        add("!",    NUPDefault, NRNot)
-        add("!!",   NUPDefaultX)
-
-        /// OOP
+        add("not",          NUPDefault, NRNot)
+        add("!not",         NUPDefaultX)
+        add("not-eq",       NUPCompare, NRCompare)
+        add("!not-eq",      NUPCompare)
+        add("ns",           NPDefault,  NUNs, NRNewNs)
+        // o
+        add("obj",          NUPDefault, NRClass)
+        add("!obj",         NUPClass)
+        // p
+        add("print",        NUPDefault, NRPrint)
+        add("println",      NUPDefault, NRPrint)
+        // r
+        add("rand-symbol",  NUPDefault, NRRandSymbol)
+        add("rem",          NUPMath, NRMath)
+        add("!rem",         NUPMath)
+        add("ret",          NUPDefault, NRRet)
+        add("rfn",          NUPDefault, NRRFn)
+        add("!rfn",         NUPRFn)
+        // s
+        add("set",          NUPSetA)
+        add("set!",         NUPSetB)
+        add("skip",         NPSkip)
+        add("sns",          NPDefault,  NUNs, NRSubNs)
+        add("sub",          NUPMath, NRMath)
+        add("!sub",         NUPMath)
+        add("symbol",       NUPDefault, NRSymbol)
+        // t
+        add("typeof",       NUPDefault, NRTypeof)
+        // u
+        add("unit",         NUPDefault)
+        // v
+        add("valn",         NUPDefault, NPValnA)
+        add("valn!",        NUPValnB)
+        add("valn-repeat",  NUPDefault, NRValnRepeat)
+        add("value",        NUPValueA)
+        add("value!",       NUPValueB)
+        // y
+        add("yield",        NUPDefault, NRYield)
 
         // Аннотации
         add("@abstract",NUPDefault, NRAbstract)
@@ -131,68 +156,11 @@ object Pihta : StdModule("pht") {
         add("@static",  NUPDefault, NRStatic)
         add("@varargs", NUPDefault, NRVarargs)
 
-        // Объект / Класс / Интерфейс
-        for (name in listOf("obj", "cls", "itf")) {
-            add(name,           NUPDefault, NRClass)
-            add("!$name", NUPClass)
-        }
-        // Расширение
-        add("efn",  NUPEFn)
-        // Конструктор
-        add("ctor", NUPCtor)
-        // Поле
-        add("field",    NUPField)
-        // Создание нового объекта
-        add("new",      NUPNew)
-        // Вызов конструктора / метода
-        add("ccall",    NUPDefault, NRCCall)
-        add("mcall",    NUPDefault, NRMCall)
-        add("mcall!",   NUPMCall)
-        add("!mcall",   NUPMCallX)
-        // Сеттеры
-        add("fset",     NUPFSetA)
-        add("fset!",    NUPFSetB)
-        // Геттеры
-        add("fget",     NUPDefault, NRFGetA)
-        add("!fget",    NUPFGetA)
-        add("fget!",    NUPFGetB)
-
-        /// OUT
-
-        add("print",    NUPDefault, NRPrint)
-        add("println",  NUPDefault, NRPrint)
-
-        /// UTILS
-
-        // Прочее
-        add("skip",         NPSkip)
-        add("valn-repeat",  NUPDefault, NRValnRepeat)
-        // Символы
-        add("rand-symbol",  NUPDefault, NRRandSymbol)
-        add("lazy-symbol",  NUPLazySymbol)
-        add("symbol",       NUPDefault, NRSymbol)
         // Compile-Type Константы
         add("*module-name*",NUPDefault, NRCTSC { _, ctx -> ctx.module.name })
         add("*type-name*",  NUPDefault, NRCTSC { _, ctx -> ctx.clazz.name })
         add("*fn-name*",    NUPDefault, NRCTSC { _, ctx -> ctx.method.name })
         add("*ns-name*",    NUPDefault, NRCTSC { _, ctx -> ctx.global.namespace })
-
-        /// VALUE
-
-        // Имя или get
-        add("get-or-name!", NUPGetOrName)
-        // Список выражений
-        add("valn",         NUPDefault, NPValnA)
-        add("valn!",        NUPValnB)
-        // Тип массива
-        add("array-type",   NUPDefault, NRArrayType)
-        // Значение
-        add("value",        NUPValue)
-        add("value!",       NPValueB, null, null)
-
-        /// DEBUG
-
-        add("debug",        NUPDebug)
 
         ///
 
