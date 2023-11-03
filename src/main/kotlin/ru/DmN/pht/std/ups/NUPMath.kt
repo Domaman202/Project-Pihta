@@ -11,9 +11,8 @@ import ru.DmN.pht.base.parsers.NPDefault
 import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.processor.utils.nodeMCall
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
-import ru.DmN.pht.std.processors.NRMCall
+import ru.DmN.pht.std.processors.NRMath
 import ru.DmN.pht.std.unparsers.NUDefaultX
 
 object NUPMath : INodeUniversalProcessor<NodeNodesList, NodeNodesList> {
@@ -39,17 +38,6 @@ object NUPMath : INodeUniversalProcessor<NodeNodesList, NodeNodesList> {
     override fun unparse(node: NodeNodesList, unparser: Unparser, ctx: UnparsingContext, indent: Int) =
         NUDefaultX.unparse(node, unparser, ctx, indent)
 
-    override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
-        val firstType = processor.calc(node.nodes[0], ctx)
-        return if (firstType!!.isPrimitive)
-            firstType // todo: primitive extensions
-        else NRMCall.calc(
-            nodeMCall(
-                node.token.line,
-                node.nodes[0],
-                node.token.text!!,
-                node.nodes.drop(1)
-            ), processor, ctx
-        )
-    }
+    override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
+        NRMath.calc(node, processor, ctx)
 }

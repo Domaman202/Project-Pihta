@@ -3,12 +3,16 @@ package ru.DmN.pht.std.processors
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.ast.NodeNodesList
+import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.processors.INodeProcessor
+import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.processor.utils.nodeAs
-import ru.DmN.pht.std.processor.utils.nodeMCall
+import ru.DmN.pht.std.ast.IAdaptableNode
+import ru.DmN.pht.std.ast.NodeMCall
+import ru.DmN.pht.std.processor.ctx.GlobalContext
+import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.line
 import ru.DmN.pht.std.utils.processNodes
 
@@ -16,7 +20,7 @@ object NRMath : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
         val firstType = processor.calc(node.nodes[0], ctx)
         return if (firstType!!.isPrimitive)
-            firstType // todo: primitive extensions
+            findExtend(firstType, node.token.text!!, node.nodes.drop(1), processor, ctx)?.rettype ?: firstType
         else NRMCall.calc(
             nodeMCall(
                 node.token.line,
@@ -31,11 +35,21 @@ object NRMath : INodeProcessor<NodeNodesList> {
         val nodes = processor.processNodes(node, ctx, ValType.VALUE)
         val firstType = processor.calc(nodes[0], ctx)
         return if (firstType!!.isPrimitive)
-            if (mode == ValType.VALUE) { // todo: primitive extensions
+            if (mode == ValType.VALUE) {
                 val line = node.line
-                NodeNodesList(
-                    node.token.processed(),
-                    nodes.map { NRAs.process(nodeAs(line, it, firstType.name), processor, ctx, ValType.VALUE)!! }.toMutableList(),
+                val result = getExtend(firstType, node.token.text!!, nodes.drop(1), processor, ctx)
+                if (result == null)
+                    NodeNodesList(
+                        node.token.processed(),
+                        nodes.map { NRAs.process(nodeAs(line, it, firstType.name), processor, ctx, ValType.VALUE)!! }
+                            .toMutableList(),
+                    )
+                else NodeMCall(
+                    Token.operation(line, "!mcall"),
+                    NRMCall.processArguments(line, processor, ctx, result.second, listOf(nodes[0]) + result.first),
+                    nodeClass(line, result.second.declaringClass!!.name),
+                    result.second,
+                    NodeMCall.Type.EXTEND
                 )
             } else null
         else NRMCall.process(
@@ -47,4 +61,12 @@ object NRMath : INodeProcessor<NodeNodesList> {
             ), processor, ctx, ValType.VALUE
         )
     }
+
+    fun getExtend(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Pair<List<Node>, VirtualMethod>? {
+        val method = findExtend(type, name, args, processor, ctx) ?: return null
+        return Pair(args.mapIndexed { i, it -> if (it is IAdaptableNode) it.adaptTo(method.argsc[i]); it }.toList(), method)
+    }
+
+    fun findExtend(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): VirtualMethod? =
+        ctx.global.getMethodVariants(type, name, args.map { ICastable.of(it, processor, ctx) }.toList()).firstOrNull()
 }
