@@ -64,7 +64,7 @@ object NUPEFn : INodeUniversalProcessor<NodeDefn, NodeNodesList> {
         val extend = gctx.getType(processor.computeString(node.nodes[0], ctx), processor.tp)
         val name = processor.computeString(node.nodes[1], ctx)
         val returnType = gctx.getType(processor.computeString(node.nodes[2], ctx), processor.tp)
-        val args = NUPDefn.parseArguments(node.nodes[3], processor, ctx)
+        val args = NRDefn.parseArguments(node.nodes[3], processor, ctx)
         //
         args.first.add(0, extend.name)
         args.second.add(0, "this")

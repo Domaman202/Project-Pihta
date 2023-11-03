@@ -1,4 +1,11 @@
 (use-ctx pht
-    (app-fn
-        (println (<- 0 (mul 3) (sub 2)))
-        (println (-> 0 (add 2) (mul 2) (add 2)))))
+    (import java
+        (type java.lang.Runnable))
+    (app
+        (defn test ^void [[o ^Runnable]]
+            (#run o))
+        (field [[i ^int] [j ^int]])
+        (defn main ^void [] (progn
+            (set i 12)
+            (set j 21)
+            (#test ^App (rfn [i j][] (println (+ i j))))))))

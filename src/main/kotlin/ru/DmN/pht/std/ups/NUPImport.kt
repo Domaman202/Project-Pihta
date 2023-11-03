@@ -3,10 +3,9 @@ package ru.DmN.pht.std.ups
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
+import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.ast.NodeNodesList
 import ru.DmN.pht.base.parsers.NPDefault
 import ru.DmN.pht.base.processor.Platform
 import ru.DmN.pht.base.processor.ProcessingContext
@@ -15,13 +14,13 @@ import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.nextOperation
 import ru.DmN.pht.base.utils.platform
+import ru.DmN.pht.std.ast.NodeImport
+import ru.DmN.pht.std.imports.StdImportsHelper
+import ru.DmN.pht.std.imports.ast.IValueNode
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
-import ru.DmN.pht.std.imports.StdImportsHelper
-import ru.DmN.pht.std.ast.NodeImport
-import ru.DmN.pht.std.imports.ast.IValueNode
 
-object NUPImport : INodeUniversalProcessor<NodeNodesList, NodeImport> {
+object NUPImport : INodeUniversalProcessor<NodeImport, NodeImport> {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
         val module = parser.nextOperation().text!!
         val context = ctx.subCtx()
@@ -33,8 +32,15 @@ object NUPImport : INodeUniversalProcessor<NodeNodesList, NodeImport> {
         }
     }
 
-    override fun unparse(node: NodeNodesList, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
-        TODO("Not yet implemented")
+    override fun unparse(node: NodeImport, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
+        unparser.out.apply {
+            append('(').append(node.token.text).append(' ').append(node.module)
+            node.data.forEach {
+                append('\n').append("\t".repeat(indent + 1))
+                    .append('(').append(it.key).append(' ').append(it.value).append(')')
+            }
+            append(')')
+        }
     }
 
     override fun process(node: NodeImport, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeImport? {

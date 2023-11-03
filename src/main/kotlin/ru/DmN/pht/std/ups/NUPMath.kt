@@ -4,37 +4,39 @@ import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.ast.Node
+import ru.DmN.pht.base.ast.NodeNodesList
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parsers.NPDefault
 import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.ast.NodeMath
-import ru.DmN.pht.std.ast.NodeMath.Operation.*
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.unparsers.NUDefaultX
 
-object NUPMath : INodeUniversalProcessor<NodeMath, NodeMath> {
+object NUPMath : INodeUniversalProcessor<NodeNodesList, NodeNodesList> {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
         NPDefault.parse(parser, ctx) {
-            NodeMath(
-                operationToken,
-                it,
-                when (operationToken.text!!) {
-                    "add", "+" -> PLUS
-                    "sub", "-" -> MINUS
-                    "mul", "*" -> MUL
-                    "div", "/" -> DIV
-                    "rem", "%" -> REM
-                    else -> throw RuntimeException()
-                }
+            val text = operationToken.text!!
+            NodeNodesList(
+                Token.operation(
+                    operationToken.line,
+                    when (text) {
+                        "+" -> "add"
+                        "-" -> "sub"
+                        "*" -> "mul"
+                        "/" -> "div"
+                        "%" -> "rem"
+                        else -> text
+                    }
+                ),
+                it
             )
         }
 
-    override fun unparse(node: NodeMath, unparser: Unparser, ctx: UnparsingContext, indent: Int) =
+    override fun unparse(node: NodeNodesList, unparser: Unparser, ctx: UnparsingContext, indent: Int) =
         NUDefaultX.unparse(node, unparser, ctx, indent)
 
-    override fun calc(node: NodeMath, processor: Processor, ctx: ProcessingContext): VirtualType? =
+    override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
         processor.calc(node.nodes[0], ctx)
 }

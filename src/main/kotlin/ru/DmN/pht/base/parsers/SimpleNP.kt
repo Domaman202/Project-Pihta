@@ -31,7 +31,7 @@ open class SimpleNP : INodeParser {
             nodes.add(
                 if (tk.type == Token.Type.OPEN_BRACKET || tk.type == Token.Type.OPEN_CBRACKET) {
                     parser.tokens.push(tk)
-                    parser.parseNode(ctx)!!
+                    parser.parseNode(ctx) ?: continue
                 } else parser.parseValue(ctx, tk)
             )
             tk = parser.nextToken()

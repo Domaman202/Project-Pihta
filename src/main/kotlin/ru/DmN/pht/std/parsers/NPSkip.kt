@@ -7,7 +7,7 @@ import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parsers.INodeParser
 import ru.DmN.pht.base.parsers.NPDefault
 
-object NPSkip : INodeParser { // todo: кривая ересь.
+object NPSkip : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? {
         NPDefault.skip(parser, ctx, operationToken)
         return null

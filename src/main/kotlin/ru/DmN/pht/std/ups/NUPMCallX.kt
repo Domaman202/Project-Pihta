@@ -1,8 +1,11 @@
 package ru.DmN.pht.std.ups
 
+import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
+import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparsers.NUDefault
+import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.unparsers.NUDefaultX
@@ -17,4 +20,7 @@ object NUPMCallX : INodeUniversalProcessor<NodeMCall, NodeMCall> {
             append(')')
         }
     }
+
+    override fun calc(node: NodeMCall, processor: Processor, ctx: ProcessingContext): VirtualType =
+        node.method.rettype
 }

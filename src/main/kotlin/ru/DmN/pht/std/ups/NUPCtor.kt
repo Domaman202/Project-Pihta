@@ -58,7 +58,7 @@ object NUPCtor : INodeUniversalProcessor<NodeDefn, NodeNodesList> {
         val gctx = ctx.global
         val type = ctx.clazz
         //
-        val args = NUPDefn.parseArguments(node.nodes[0], processor, ctx)
+        val args = NRDefn.parseArguments(node.nodes[0], processor, ctx)
         //
         val method = VirtualMethod(
             type,

@@ -14,11 +14,14 @@ class NodeField(tkOperation: Token, val fields: List<VirtualField>) : Node(tkOpe
         indent(indent).append('[').append(token.text).append(' ')
             .append(if (static) "(static)" else "(nostatic)").append(' ')
             .append(if (final) "(final)" else "(nofinal)")
-        fields.forEach {
-            append('\n').indent(indent + 1).append("[\n")
-                .indent(indent + 2).append("name = ").append(it.name)
-                .append('\n').indent(indent + 2).append("type = ").append(it.type.name)
-            append('\n').indent(indent + 1).append("]\n").indent(indent)
+        if (fields.isNotEmpty()) {
+            fields.forEach {
+                append('\n').indent(indent + 1).append("[\n")
+                    .indent(indent + 2).append("name = ").append(it.name)
+                    .append('\n').indent(indent + 2).append("type = ").append(it.type.name)
+                append('\n').indent(indent + 1).append(']')
+            }
+            append('\n').indent(indent)
         }
         append(']')
     }

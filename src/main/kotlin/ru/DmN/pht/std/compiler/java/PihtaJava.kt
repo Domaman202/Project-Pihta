@@ -74,5 +74,6 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("@final",       NCDefault)
         add("@open",        NCDefault)
         add("@static",      NCDefault)
+        add("@varargs",     NCDefault)
     }
 }

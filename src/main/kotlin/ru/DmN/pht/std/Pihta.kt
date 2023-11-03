@@ -7,6 +7,7 @@ import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parsers.NPDefault
 import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ValType
+import ru.DmN.pht.std.ast.*
 import ru.DmN.pht.std.compiler.java.PihtaJava
 import ru.DmN.pht.std.parser.macros
 import ru.DmN.pht.std.parsers.*
@@ -26,7 +27,8 @@ object Pihta : StdModule("pht") {
         add("add",          NUPMath,    NRMath)
         add("!add",         NUPMath)
         add("aget",         NUPDefault, NRAGet)
-        add("alias-type",   NUPAliasType)
+        add("alias-type",   NUPDefault, NRAliasType)
+        add("!alias-type",  NUPAliasType)
         add("!aget",        NUPAGet)
         add("app",          NUPDefault, NRApp)
         add("app-fn",       NUPDefault, NRAppFn)
@@ -48,12 +50,13 @@ object Pihta : StdModule("pht") {
         add("!cycle",       NUPDefaultX)
         // d
         add("debug",        NUPDebug)
-        add("dec",          NUPIncDec, NRIncDec)
+        add("dec",          NUPIncDec,  NRIncDec)
         add("!dec",         NUPIncDec)
         add("def",          NUPDefault, NRDef)
         add("!def",         NUPDef)
         add("defmacro",     NUPDefMacro)
-        add("defn",         NUPDefn)
+        add("defn",         NUPDefault, NRDefn)
+        add("!defn",        NUPDefn)
         add("div",          NUPMath, NRMath)
         add("!div",         NUPMath)
         // e
@@ -67,7 +70,8 @@ object Pihta : StdModule("pht") {
         add("fget",         NUPDefault, NRFGetA)
         add("fget!",        NUPFGetB)
         add("!fget",        NUPFGetA)
-        add("field",        NUPField)
+        add("field",        NUPDefault, NRField)
+        add("!field",       NUPField)
         add("fn",           NUPDefault, NRFn)
         add("!fn",          NUPFn)
         add("for",          NUPDefault, NRFor)
@@ -104,13 +108,13 @@ object Pihta : StdModule("pht") {
         add("mcall",        NUPDefault, NRMCall)
         add("mcall!",       NUPMCall)
         add("!mcall",       NUPMCallX)
-        add("mul",          NUPMath, NRMath)
+        add("mul",          NUPMath,    NRMath)
         add("!mul",         NUPMath)
         // n
         add("new",          NUPNew)
         add("new-array",    NUPDefault, NRNewArray)
         add("!new-array",   NUPNewArrayX)
-        add("not",          NUPDefault, NRNot)
+        add("not",          NUPNot)
         add("!not",         NUPDefaultX)
         add("not-eq",       NUPCompare, NRCompare)
         add("!not-eq",      NUPCompare)
@@ -123,7 +127,7 @@ object Pihta : StdModule("pht") {
         add("println",      NUPDefault, NRPrint)
         // r
         add("rand-symbol",  NUPDefault, NRRandSymbol)
-        add("rem",          NUPMath, NRMath)
+        add("rem",          NUPMath,    NRMath)
         add("!rem",         NUPMath)
         add("ret",          NUPDefault, NRRet)
         add("rfn",          NUPDefault, NRRFn)
@@ -150,11 +154,11 @@ object Pihta : StdModule("pht") {
         add("yield",        NUPDefault, NRYield)
 
         // Аннотации
-        add("@abstract",NUPDefault, NRAbstract)
-        add("@final",   NUPDefault, NRFinal)
-        add("@open",    NUPDefault, NROpen)
-        add("@static",  NUPDefault, NRStatic)
-        add("@varargs", NUPDefault, NRVarargs)
+        add("@abstract",NUPDefault, NRSA { it, _, _ -> if (it is IAbstractlyNode) it.abstract = true })
+        add("@final",   NUPDefault, NRSA { it, _, _ -> if (it is IFinallyNode) it.final = true })
+        add("@open",    NUPDefault, NRSA { it, _, _ -> if (it is IOpenlyNode) it.open = true })
+        add("@static",  NUPDefault, NRSA { it, _, _ -> if (it is IStaticallyNode) it.static = true })
+        add("@varargs", NUPDefault, NRSA { it, _, _ -> if (it is IVarargNode) it.varargs = true })
 
         // Compile-Type Константы
         add("*module-name*",NUPDefault, NRCTSC { _, ctx -> ctx.module.name })
@@ -165,6 +169,20 @@ object Pihta : StdModule("pht") {
         // Развёртки
         add("->", NUPDefault, NRUnrollA)
         add("<-", NUPDefault, NRUnrollB)
+
+        // Мат/Лог операции
+        add("+",    NUPMath)
+        add("-",    NUPMath)
+        add("*",    NUPMath)
+        add("/",    NUPMath)
+        add("%",    NUPMath)
+        add("!",    NUPNot)
+        add("=",    NUPCompare)
+        add("!=",   NUPCompare)
+        add(">",    NUPCompare)
+        add(">=",   NUPCompare)
+        add("<",    NUPCompare)
+        add("<=",   NUPCompare)
 
         ///
 

@@ -22,7 +22,7 @@ import ru.DmN.pht.std.compiler.java.utils.SubMap
 import ru.DmN.pht.std.processor.utils.*
 import java.util.UUID
 
-object NUPMacro : INodeUniversalProcessor<NodeMacro, NodeMacro> { // todo: calc
+object NUPMacro : INodeUniversalProcessor<NodeMacro, NodeMacro> {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
         val name = parser.nextOperation().text!!
         return NPDefault.parse(parser, ctx) { NodeMacro(operationToken, it, name) }

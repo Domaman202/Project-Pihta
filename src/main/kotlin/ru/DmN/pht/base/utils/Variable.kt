@@ -3,7 +3,7 @@ package ru.DmN.pht.base.utils
 import kotlin.math.absoluteValue
 
 data class Variable(var name: String, var type: VirtualType?, var id: Int, var tmp: Boolean) {
-    fun type(): VirtualType = // todo: remove
+    fun type(): VirtualType =
         type ?: VirtualType.ofKlass("java.lang.Object")
 
     companion object {

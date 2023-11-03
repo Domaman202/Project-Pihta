@@ -50,7 +50,7 @@ object NCRFn : INodeCompiler<NodeRFn> {
             visitMethodInsn(Opcodes.INVOKESPECIAL, clazz.superName, "<init>", "()V", false)
             node.refs.forEachIndexed { i, it ->
                 visitInsn(Opcodes.DUP)
-                it.load(this, i + 1)
+                load(it.type.name, i + 1, this)
                 visitFieldInsn(Opcodes.PUTFIELD, clazz.name, it.name, it.type.desc)
                 type.fields += VirtualField(type, it.name, it.type, static = false, enum = false)
                 clazz.visitField(Opcodes.ACC_PRIVATE, it.name, it.type.desc, null, null)

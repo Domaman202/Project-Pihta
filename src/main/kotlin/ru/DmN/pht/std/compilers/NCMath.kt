@@ -1,16 +1,16 @@
 package ru.DmN.pht.std.compilers
 
 import org.objectweb.asm.Opcodes
+import ru.DmN.pht.base.ast.NodeNodesList
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.std.ast.NodeMath
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
 
-object NCMath : INodeCompiler<NodeMath> {
-    override fun compileVal(node: NodeMath, compiler: Compiler, ctx: CompilationContext): Variable {
+object NCMath : INodeCompiler<NodeNodesList> {
+    override fun compileVal(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.run {
             val type = compiler.compileVal(node.nodes[0], ctx).apply { load(this, this@run) }.type()
             val operation = calcOperation(node, type.name)
@@ -22,13 +22,14 @@ object NCMath : INodeCompiler<NodeMath> {
         }
     }
 
-    private fun calcOperation(node: NodeMath, type: String) =
-        when (node.operation) {
-            NodeMath.Operation.PLUS     -> Opcodes.IADD + calcOffset(type)
-            NodeMath.Operation.MINUS    -> Opcodes.ISUB + calcOffset(type)
-            NodeMath.Operation.MUL      -> Opcodes.IMUL + calcOffset(type)
-            NodeMath.Operation.DIV      -> Opcodes.IDIV + calcOffset(type)
-            NodeMath.Operation.REM      -> Opcodes.IREM + calcOffset(type)
+    private fun calcOperation(node: NodeNodesList, type: String) =
+        when (node.token.text) {
+            "!add" -> Opcodes.IADD + calcOffset(type)
+            "!sub" -> Opcodes.ISUB + calcOffset(type)
+            "!mul" -> Opcodes.IMUL + calcOffset(type)
+            "!div" -> Opcodes.IDIV + calcOffset(type)
+            "!rem" -> Opcodes.IREM + calcOffset(type)
+            else  -> throw RuntimeException()
         }
 
     private fun calcOffset(type: String) =

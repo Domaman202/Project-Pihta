@@ -19,7 +19,6 @@ import ru.DmN.pht.std.ast.NodeType
 import ru.DmN.pht.std.processor.ctx.EnumContext
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
-import ru.DmN.pht.std.processors.NRStatic
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.line
@@ -60,7 +59,7 @@ object NUPEnum : INodeUniversalProcessor<NodeType, NodeNodesList> {
                 val ectx = EnumContext(type)
                 val context = ctx.with(ectx)
                 NRDefault.process(new, processor, context, ValType.NO_VALUE)
-                new.nodes += NRStatic.process(
+                new.nodes += processor.process(
                     NodeNodesList(
                         Token.operation(line, "@static"), mutableListOf(
                             nodeDefn(
@@ -83,8 +82,8 @@ object NUPEnum : INodeUniversalProcessor<NodeType, NodeNodesList> {
                                 )
                             )
                         )
-                    ), processor, context, ValType.NO_VALUE
-                )
+                    ), context, ValType.NO_VALUE
+                )!!
             }
         }
         return new

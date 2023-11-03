@@ -14,15 +14,16 @@ import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.compiler.java.utils.with
 import ru.DmN.pht.std.ast.NodeType
 
-object NCClass : INodeCompiler<NodeType> { // todo: ret instance in val compilation
+object NCClass : INodeCompiler<NodeType> {
     override fun compile(node: NodeType, compiler: Compiler, ctx: CompilationContext) {
-        compiler.pushTask(ctx, CompilingStage.TYPES_PREDEFINE) { // todo: itf
+        compiler.pushTask(ctx, CompilingStage.TYPES_PREDEFINE) {
             val cn = ClassNode().apply {
                 compiler.classes[node.type.name] = this
                 visit(
                     Opcodes.V20,
                     Opcodes.ACC_PUBLIC.let {
-                        if (node.abstract) it + Opcodes.ACC_ABSTRACT
+                        if (node.token.text == "itf") it + Opcodes.ACC_INTERFACE
+                        else if (node.abstract) it + Opcodes.ACC_ABSTRACT
                         else if (node.open) it
                         else it + Opcodes.ACC_FINAL
                     },
