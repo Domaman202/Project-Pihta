@@ -54,6 +54,9 @@ data class VirtualType(
             target == ofKlass(Any::class.java)
         else false
 
+    override fun hashCode(): Int =
+        name.hashCode()
+
     override fun equals(other: Any?): Boolean =
         if (other is VirtualType)
             other.name == name

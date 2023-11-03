@@ -57,7 +57,7 @@ object Pihta : StdModule("pht") {
         add("defmacro",     NUPDefMacro)
         add("defn",         NUPDefault, NRDefn)
         add("!defn",        NUPDefn)
-        add("div",          NUPMath, NRMath)
+        add("div",          NUPMath,    NRMath)
         add("!div",         NUPMath)
         // e
         add("ector",        NUPCtor)
@@ -137,7 +137,7 @@ object Pihta : StdModule("pht") {
         add("set!",         NUPSetB)
         add("skip",         NPSkip)
         add("sns",          NPDefault,  NUNs, NRSubNs)
-        add("sub",          NUPMath, NRMath)
+        add("sub",          NUPMath,    NRMath)
         add("!sub",         NUPMath)
         add("symbol",       NUPDefault, NRSymbol)
         // t
@@ -171,18 +171,20 @@ object Pihta : StdModule("pht") {
         add("<-", NUPDefault, NRUnrollB)
 
         // Мат/Лог операции
+        add("++",   NUPIncDec)
+        add("--",   NUPIncDec)
         add("+",    NUPMath)
         add("-",    NUPMath)
         add("*",    NUPMath)
         add("/",    NUPMath)
         add("%",    NUPMath)
         add("!",    NUPNot)
-        add("=",    NUPCompare)
-        add("!=",   NUPCompare)
-        add(">",    NUPCompare)
-        add(">=",   NUPCompare)
-        add("<",    NUPCompare)
-        add("<=",   NUPCompare)
+        add("=",    NUPCompare, NRCompare)
+        add("!=",   NUPCompare, NRCompare)
+        add(">",    NUPCompare, NRCompare)
+        add(">=",   NUPCompare, NRCompare)
+        add("<",    NUPCompare, NRCompare)
+        add("<=",   NUPCompare, NRCompare)
 
         ///
 

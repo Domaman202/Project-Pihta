@@ -7,7 +7,7 @@ import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.std.ast.NodeEquals
+import ru.DmN.pht.std.ast.NodeCompare
 import ru.DmN.pht.std.processor.utils.nodeValueOf
 import ru.DmN.pht.std.utils.line
 
@@ -25,7 +25,7 @@ object NCIf : INodeCompiler<NodeNodesList> {
         val cond = node.nodes[0]
         if (cond.token.text == "!=")
             println()
-        if (cond is NodeEquals) {
+        if (cond is NodeCompare) {
             NCCompare.insertIf(
                 cond.token.text!!,
                 cond.nodes,

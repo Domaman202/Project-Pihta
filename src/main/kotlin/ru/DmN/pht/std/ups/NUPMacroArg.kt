@@ -16,6 +16,7 @@ import ru.DmN.pht.std.parser.macros
 import ru.DmN.pht.std.processor.ctx.MacroContext
 import ru.DmN.pht.std.processor.utils.macro
 import ru.DmN.pht.std.processors.IStdNodeUniversalProcessor
+import ru.DmN.pht.std.utils.compute
 import ru.DmN.pht.std.utils.computeString
 import java.util.*
 
@@ -33,7 +34,7 @@ object NUPMacroArg : IStdNodeUniversalProcessor<NodeMacroArg, NodeMacroArg> {
         processor.process(compute(node, processor, ctx), ctx, mode)
 
     override fun compute(node: NodeMacroArg, processor: Processor, ctx: ProcessingContext): Node =
-        findMacroArgument(node, processor, ctx).copy()
+        processor.compute(findMacroArgument(node, processor, ctx), ctx).copy()
 
     fun findMacroArgument(node: NodeMacroArg, processor: Processor, ctx: ProcessingContext): Node =
         findMacroArgument(ctx.macro, node.uuids, processor.computeString(node.nodes[0], ctx))

@@ -46,13 +46,13 @@ object NUPMacroUnroll : INodeUniversalProcessor<NodeMacroUnroll, NodeMacroUnroll
             .map { it -> processor.computeList(it, ctx).map { processor.computeString(it, ctx) } }
             .forEach {
                 names += Triple(
-                    processor.computeList(NUPMacroArg.findMacroArgument(macro, node.uuids, it[1]), ctx).apply { maxIndex = min(maxIndex, it.size) },
+                    processor.computeList(NUPMacroArg.findMacroArgument(macro, node.uuids, it[1]), ctx).apply { maxIndex = min(maxIndex, size) },
                     it[0],
                     node.uuids.first()
                 )
             }
         if (maxIndex != Int.MAX_VALUE) {
-            for (i in 0 until maxIndex + 1) {
+            for (i in 0 until maxIndex) {
                 val args = HashMap<Pair<UUID, String>, Node>()
                 names.forEach {
                     args[Pair(it.third, it.second)] = it.first[i]

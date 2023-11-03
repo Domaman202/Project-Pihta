@@ -24,7 +24,7 @@ class Processor(val tp: TypesProvider) {
         val i = name.lastIndexOf('/')
         if (i < 1) {
             ctx.loadedModules.forEach { it -> it.processors.getRegex(name)?.let { return it as INodeProcessor<Node> } }
-            throw RuntimeException()
+            throw RuntimeException("Processor for \"$name\" not founded!")
         } else {
             val module = name.substring(0, i)
             return ctx.loadedModules.find { it.name == module }!!.processors.getRegex(name.substring(i + 1)) as INodeProcessor<Node>

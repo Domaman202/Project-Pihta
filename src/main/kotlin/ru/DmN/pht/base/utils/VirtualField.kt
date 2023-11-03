@@ -13,6 +13,9 @@ data class VirtualField(
     val desc
         get() = type.desc
 
+    override fun hashCode(): Int =
+        name.hashCode() + type.hashCode() + (declaringClass?.hashCode() ?: 0)
+
     companion object {
         fun of(typeOf: (name: String) -> VirtualType, field: Field): VirtualField =
             VirtualField(typeOf(field.declaringClass.name), field.name, typeOf(field.type.name), Modifier.isStatic(field.modifiers), field.isEnumConstant)

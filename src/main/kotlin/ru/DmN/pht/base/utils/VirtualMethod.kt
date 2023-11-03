@@ -22,6 +22,9 @@ data class VirtualMethod(
     val desc: String
         get() = "($argsDesc)${if (name.startsWith("<")) "V" else rettype.desc}"
 
+    override fun hashCode(): Int =
+        name.hashCode() + desc.hashCode() + (declaringClass?.hashCode() ?: 0)
+
     companion object {
         fun of(typeOf: (name: String) -> VirtualType, ctor: Constructor<*>): VirtualMethod =
             of(typeOf(ctor.declaringClass.name), ctor)

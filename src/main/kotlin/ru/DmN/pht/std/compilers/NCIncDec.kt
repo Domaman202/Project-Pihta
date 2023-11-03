@@ -14,8 +14,8 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
     override fun compile(node: NodeIncDec, compiler: Compiler, ctx: CompilationContext) {
         ctx.method.node.run {
             visitIincInsn(ctx.body[node.name]!!.id, when (node.token.text) {
-                "inc", "++" -> 1
-                "dec", "--" -> -1
+                "!inc" -> 1
+                "!dec" -> -1
                 else -> throw RuntimeException()
             })
         }

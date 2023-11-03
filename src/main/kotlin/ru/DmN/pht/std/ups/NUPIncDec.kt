@@ -14,7 +14,16 @@ import ru.DmN.pht.std.unparsers.NUDefaultX
 
 object NUPIncDec : INodeUniversalProcessor<NodeIncDec, NodeNodesList> {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
-        NPDefault.parse(parser, ctx, operationToken)
+        NPDefault.parse(
+            parser, ctx, Token.operation(
+                operationToken.line,
+                when (operationToken.text!!) {
+                    "++" -> "inc"
+                    "--" -> "dec"
+                    else -> operationToken.text
+                }
+            )
+        )
 
     override fun unparse(node: NodeIncDec, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.append('(').append(NUDefaultX.text(node.token)).append(' ').append(node.name).append(')')

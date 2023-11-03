@@ -16,7 +16,7 @@ object NRMath : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
         val firstType = processor.calc(node.nodes[0], ctx)
         return if (firstType!!.isPrimitive)
-            firstType
+            firstType // todo: primitive extensions
         else NRMCall.calc(
             nodeMCall(
                 node.token.line,

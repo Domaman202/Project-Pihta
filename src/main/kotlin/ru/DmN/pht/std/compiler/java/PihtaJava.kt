@@ -10,6 +10,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         // a
         add("!add",         NCMath)
         add("!aget",        NCAGet)
+        add("!alias-type",  NCSkip)
         add("array-size",   NCArraySize)
         add("!as",          NCAs)
         add("!aset",        NCASet)
@@ -22,7 +23,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         // d
         add("!dec",         NCIncDec)
         add("!def",         NCDef)
-        add("defn",         NCDefn)
+        add("!defn",         NCDefn)
         add("!div",         NCMath)
         // e
         add("efield",       NCEField)

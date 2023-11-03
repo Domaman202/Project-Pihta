@@ -28,7 +28,7 @@ object NCCompare : INodeCompiler<NodeNodesList> {
             val elseLabel = Label()
             val exitLabel = Label()
             when (operation) {
-                "eq" -> when (type) {
+                "!eq" -> when (type) {
                     VirtualType.BOOLEAN,
                     VirtualType.BYTE,
                     VirtualType.SHORT,
@@ -37,7 +37,7 @@ object NCCompare : INodeCompiler<NodeNodesList> {
 
                     else -> throw RuntimeException()
                 }
-                "not-eq" -> when (type) {
+                "!not-eq" -> when (type) {
                     VirtualType.BOOLEAN,
                     VirtualType.BYTE,
                     VirtualType.SHORT,
@@ -45,7 +45,7 @@ object NCCompare : INodeCompiler<NodeNodesList> {
                     VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPNE, ifLabel)
                     else -> throw RuntimeException()
                 }
-                "great" -> when (type) {
+                "!great" -> when (type) {
                     VirtualType.BOOLEAN,
                     VirtualType.BYTE,
                     VirtualType.SHORT,
@@ -53,7 +53,7 @@ object NCCompare : INodeCompiler<NodeNodesList> {
                     VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPLT, ifLabel)
                     else -> throw RuntimeException()
                 }
-                "great-or-eq" -> when (type) {
+                "!great-or-eq" -> when (type) {
                     VirtualType.BOOLEAN,
                     VirtualType.BYTE,
                     VirtualType.SHORT,
@@ -61,7 +61,7 @@ object NCCompare : INodeCompiler<NodeNodesList> {
                     VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPLE, ifLabel)
                     else -> throw RuntimeException()
                 }
-                "less" -> when (type) {
+                "!less" -> when (type) {
                     VirtualType.BOOLEAN,
                     VirtualType.BYTE,
                     VirtualType.SHORT,
@@ -69,7 +69,7 @@ object NCCompare : INodeCompiler<NodeNodesList> {
                     VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPGT, ifLabel)
                     else -> throw RuntimeException()
                 }
-                "less-or-eq" -> when (type) {
+                "!less-or-eq" -> when (type) {
                     VirtualType.BOOLEAN,
                     VirtualType.BYTE,
                     VirtualType.SHORT,
@@ -77,7 +77,7 @@ object NCCompare : INodeCompiler<NodeNodesList> {
                     VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPGE, ifLabel)
                     else -> throw RuntimeException()
                 }
-                else -> throw RuntimeException()
+                else -> throw RuntimeException("Unknown operation \"$operation\"!")
             }
             visitLabel(elseLabel)
             elseInsert()
