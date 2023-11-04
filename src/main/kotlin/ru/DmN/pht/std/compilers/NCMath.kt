@@ -6,6 +6,7 @@ import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.utils.Variable
+import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
 
@@ -24,15 +25,38 @@ object NCMath : INodeCompiler<NodeNodesList> {
 
     private fun calcOperation(node: NodeNodesList, type: String) =
         when (node.token.text) {
-            "!add" -> Opcodes.IADD + calcOffset(type)
-            "!sub" -> Opcodes.ISUB + calcOffset(type)
-            "!mul" -> Opcodes.IMUL + calcOffset(type)
-            "!div" -> Opcodes.IDIV + calcOffset(type)
-            "!rem" -> Opcodes.IREM + calcOffset(type)
+            "!add" -> Opcodes.IADD + calcOffsetMath(type)
+            "!sub" -> Opcodes.ISUB + calcOffsetMath(type)
+            "!mul" -> Opcodes.IMUL + calcOffsetMath(type)
+            "!div" -> Opcodes.IDIV + calcOffsetMath(type)
+            "!rem" -> Opcodes.IREM + calcOffsetMath(type)
+            "!neg" -> Opcodes.INEG + calcOffsetMath(type)
+            "!and" -> Opcodes.IAND + calcOffsetAndOr(type)
+            "!or"  -> Opcodes.IOR  + calcOffsetAndOr(type)
+            "!xor" -> Opcodes.IXOR + calcOffsetXor(type)
             else  -> throw RuntimeException()
         }
 
-    private fun calcOffset(type: String) =
+    private fun calcOffsetXor(type: String) =
+        when (type) {
+            "boolean",
+            "byte",
+            "short",
+            "int"   -> 0
+            else    -> throw RuntimeException()
+        }
+
+    private fun calcOffsetAndOr(type: String) =
+        when (type) {
+            "boolean",
+            "byte",
+            "short",
+            "int"   -> 0
+            "long"  -> 1
+            else    -> throw RuntimeException()
+        }
+
+    private fun calcOffsetMath(type: String) =
         when (type) {
             "boolean",
             "byte",

@@ -11,6 +11,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!add",         NCMath)
         add("!aget",        NCAGet)
         add("!alias-type",  NCSkip)
+        add("!and",         NCMath)
         add("array-size",   NCArraySize)
         add("!as",          NCAs)
         add("!aset",        NCASet)
@@ -50,6 +51,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!mcall",       NCMCall)
         add("!mul",         NCMath)
         // n
+        add("!neg",         NCMath)
         add("new",          NCNew)
         add("!new-array",   NCNewArray)
         add("!not",         NCNot)
@@ -57,6 +59,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("ns",           NCDefault)
         // o
         add("!obj",         NCClass)
+        add("!or",          NCMath)
         // r
         add("!rem",         NCMath)
         add("ret",          NCRet)
@@ -69,6 +72,8 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("unit",         NCUnit)
         // v
         add("value",        NCValue)
+        // x
+        add("!xor",         NCMath)
 
         // Аннотации
         add("@abstract",    NCDefault)

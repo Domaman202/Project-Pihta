@@ -28,6 +28,8 @@ object Pihta : StdModule("pht") {
         add("!add",         NUPMath)
         add("aget",         NUPDefault, NRAGet)
         add("alias-type",   NUPDefault, NRAliasType)
+        add("and",          NUPMath,    NRMath)
+        add("!and",         NUPMath)
         add("!alias-type",  NUPAliasType)
         add("!aget",        NUPAGet)
         add("app",          NUPDefault, NRApp)
@@ -111,6 +113,8 @@ object Pihta : StdModule("pht") {
         add("mul",          NUPMath,    NRMath)
         add("!mul",         NUPMath)
         // n
+        add("neg",          NUPMath,    NRMath)
+        add("!neg",         NUPMath)
         add("new",          NUPNew)
         add("new-array",    NUPDefault, NRNewArray)
         add("!new-array",   NUPNewArrayX)
@@ -122,6 +126,8 @@ object Pihta : StdModule("pht") {
         // o
         add("obj",          NUPDefault, NRClass)
         add("!obj",         NUPClass)
+        add("or",           NUPMath,    NRMath)
+        add("!or",          NUPMath)
         // p
         add("print",        NUPDefault, NRPrint)
         add("println",      NUPDefault, NRPrint)
@@ -150,6 +156,9 @@ object Pihta : StdModule("pht") {
         add("valn-repeat",  NUPDefault, NRValnRepeat)
         add("value",        NUPValueA)
         add("value!",       NUPValueB)
+        // x
+        add("xor",          NUPMath,    NRMath)
+        add("!xor",         NUPMath)
         // y
         add("yield",        NUPDefault, NRYield)
 

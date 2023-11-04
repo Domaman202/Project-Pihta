@@ -25,31 +25,21 @@ object NRMath : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
         val nodes = processor.processNodes(node, ctx, ValType.VALUE)
         val firstType = processor.calc(nodes[0], ctx)!!
-        return if (firstType.isPrimitive)
-            if (mode == ValType.VALUE) {
-                val line = node.line
-                val result = getExtend(firstType, node.token.text!!, nodes.drop(1), processor, ctx)
-                if (result == null)
-                    NodeNodesList(
-                        node.token.processed(),
-                        nodes.map { NRAs.process(nodeAs(line, it, firstType.name), processor, ctx, ValType.VALUE)!! }
-                            .toMutableList(),
-                    )
-                else NodeMCall(
-                    Token.operation(line, "!mcall"),
-                    NRMCall.processArguments(line, processor, ctx, result.second, listOf(nodes[0]) + result.first),
-                    nodeClass(line, result.second.declaringClass!!.name),
-                    result.second,
-                    NodeMCall.Type.EXTEND
+        val result = getExtend(firstType, node.token.text!!, nodes.drop(1), processor, ctx)
+        val line = node.line
+        return if (result == null)
+            if (mode == ValType.VALUE)
+                NodeNodesList(
+                    node.token.processed(),
+                    nodes.map { NRAs.process(nodeAs(line, it, firstType.name), processor, ctx, ValType.VALUE)!! }.toMutableList(),
                 )
-            } else null
-        else NRMCall.process(
-            nodeMCall(
-                node.line,
-                nodes[0],
-                node.token.text!!,
-                nodes.drop(1)
-            ), processor, ctx, ValType.VALUE
+            else null
+        else NodeMCall(
+            Token.operation(line, "!mcall"),
+            NRMCall.processArguments(line, processor, ctx, result.second, listOf(nodes[0]) + result.first),
+            nodeClass(line, result.second.declaringClass!!.name),
+            result.second,
+            NodeMCall.Type.EXTEND
         )
     }
 
