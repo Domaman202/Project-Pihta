@@ -205,6 +205,3 @@ object Pihta : StdModule("pht") {
         return super.inject(processor, ctx, mode)
     }
 }
-
-// todo: lexer stream
-// todo: no return instruction return

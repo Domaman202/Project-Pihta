@@ -17,14 +17,12 @@ object NCIf : INodeCompiler<NodeNodesList> {
 
     override fun compileVal(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Variable {
         var type: VirtualType? = null
-        insertIf(node, { type = compiler.compileVal(node, ctx).type }, compiler, ctx)
+        insertIf(node, { type = compiler.compileVal(it, ctx).type }, compiler, ctx)
         return Variable.tmp(node, type)
     }
 
     private fun insertIf(node: NodeNodesList, compile: (Node) -> Unit, compiler: Compiler, ctx: CompilationContext) {
         val cond = node.nodes[0]
-        if (cond.token.text == "!=")
-            println()
         if (cond is NodeCompare) {
             NCCompare.insertIf(
                 cond.token.text!!,

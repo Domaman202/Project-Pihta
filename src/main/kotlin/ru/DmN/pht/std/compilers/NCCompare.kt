@@ -50,7 +50,7 @@ object NCCompare : INodeCompiler<NodeNodesList> {
                     VirtualType.BYTE,
                     VirtualType.SHORT,
                     VirtualType.CHAR,
-                    VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPLT, ifLabel)
+                    VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPGT, ifLabel)
                     else -> throw RuntimeException()
                 }
                 "!great-or-eq" -> when (type) {
@@ -58,7 +58,7 @@ object NCCompare : INodeCompiler<NodeNodesList> {
                     VirtualType.BYTE,
                     VirtualType.SHORT,
                     VirtualType.CHAR,
-                    VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPLE, ifLabel)
+                    VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPGE, ifLabel)
                     else -> throw RuntimeException()
                 }
                 "!less" -> when (type) {
@@ -66,7 +66,7 @@ object NCCompare : INodeCompiler<NodeNodesList> {
                     VirtualType.BYTE,
                     VirtualType.SHORT,
                     VirtualType.CHAR,
-                    VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPGT, ifLabel)
+                    VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPLT, ifLabel)
                     else -> throw RuntimeException()
                 }
                 "!less-or-eq" -> when (type) {
@@ -74,7 +74,7 @@ object NCCompare : INodeCompiler<NodeNodesList> {
                     VirtualType.BYTE,
                     VirtualType.SHORT,
                     VirtualType.CHAR,
-                    VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPGE, ifLabel)
+                    VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPLE, ifLabel)
                     else -> throw RuntimeException()
                 }
                 else -> throw RuntimeException("Unknown operation \"$operation\"!")

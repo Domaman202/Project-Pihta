@@ -1,6 +1,3 @@
 (use-ctx pht
-    (@abstract
-    (cls Test [^Object]
-        (@abstract
-        (defn foo ^void []))))
-    (app-fn))
+    (app-fn
+        (println (if (> 2 1) 0 1))))
