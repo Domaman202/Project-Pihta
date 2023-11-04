@@ -11,24 +11,15 @@ import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.IAdaptableNode
 import ru.DmN.pht.std.ast.NodeMCall
-import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.unparsers.NUDefaultX
 import ru.DmN.pht.std.utils.line
 import ru.DmN.pht.std.utils.processNodes
 
 object NRMath : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
-        val firstType = processor.calc(node.nodes[0], ctx)
-        return if (firstType!!.isPrimitive)
-            findExtend(firstType, node.token.text!!, node.nodes.drop(1), processor, ctx)?.rettype ?: firstType
-        else NRMCall.calc(
-            nodeMCall(
-                node.token.line,
-                node.nodes[0],
-                node.token.text!!,
-                node.nodes.drop(1)
-            ), processor, ctx
-        )
+        val firstType = processor.calc(node.nodes[0], ctx)!!
+        return findExtend(firstType, NUDefaultX.text(node.token), node.nodes.drop(1), processor, ctx)?.rettype ?: firstType
     }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
