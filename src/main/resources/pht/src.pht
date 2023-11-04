@@ -46,7 +46,7 @@
                 (#longBitsToDouble ^java.lang.Double
                     (and
                         (#doubleToLongBits ^java.lang.Double this)
-                        (#doubleToLongBits ^java.lang.Double this))))
+                        (#doubleToLongBits ^java.lang.Double other))))
 
             (efn ^float or ^float [[other ^float]]
                 (#intBitsToFloat ^java.lang.Float
@@ -57,12 +57,22 @@
                 (#longBitsToDouble ^java.lang.Double
                     (or
                         (#doubleToLongBits ^java.lang.Double this)
-                        (#doubleToLongBits ^java.lang.Double this))))
+                        (#doubleToLongBits ^java.lang.Double other))))
 
             (efn ^long xor ^long [[other ^long]]
                 (or
                     (and (as ^long (xor (as ^int (and this 4294967295l)) (as ^int (and other 4294967295l)))) 4294967295l)
-                    (<< (as ^long (xor (as ^int (>> this 32)) (as ^int (>> other 32)))) 32)))))
+                    (<< (as ^long (xor (as ^int (>> this 32)) (as ^int (>> other 32)))) 32)))
+            (efn ^float xor ^float [[other ^float]]
+                (#intBitsToFloat ^java.lang.Float
+                    (xor
+                        (#floatToRawIntBits ^java.lang.Float this)
+                        (#floatToRawIntBits ^java.lang.Float other))))
+            (efn ^double xor ^double [[other ^double]]
+                (#longBitsToDouble ^java.lang.Double
+                    (xor
+                        (#doubleToLongBits ^java.lang.Double this)
+                        (#doubleToLongBits ^java.lang.Double other))))))
 
     (export
         (import java

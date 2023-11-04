@@ -1,3 +1,3 @@
 (use-ctx pht
     (app-fn
-        (println (xor 2147483649l 2147483648l))))
+        (println (xor 7d 2d))))
