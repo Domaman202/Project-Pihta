@@ -1,3 +1,6 @@
 (use-ctx pht
+    (cls LogicExtends [^Object]
+        (efn ^int great ^boolean [[other ^int]]
+            (less this other)))
     (app-fn
-        (println (if (> 2 1) 0 1))))
+        (println (> 2 1))))

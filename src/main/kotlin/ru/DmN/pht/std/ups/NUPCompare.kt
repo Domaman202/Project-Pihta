@@ -13,6 +13,7 @@ import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeCompare
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.pht.std.processors.NRCompare
 import ru.DmN.pht.std.unparsers.NUDefaultX
 
 object NUPCompare : INodeUniversalProcessor<NodeCompare, NodeCompare> {
@@ -38,5 +39,5 @@ object NUPCompare : INodeUniversalProcessor<NodeCompare, NodeCompare> {
         NUDefaultX.unparse(node, unparser, ctx, indent)
 
     override fun calc(node: NodeCompare, processor: Processor, ctx: ProcessingContext): VirtualType =
-        VirtualType.BOOLEAN
+        NRCompare.calc(node, processor, ctx)
 }
