@@ -1,4 +1,6 @@
 (use-ctx pht
-    (app
-        (app-fn
-            (println "Слава России!"))))
+    (@abstract
+    (cls Test [^Object]
+        (@abstract
+        (defn foo ^void []))))
+    (app-fn))

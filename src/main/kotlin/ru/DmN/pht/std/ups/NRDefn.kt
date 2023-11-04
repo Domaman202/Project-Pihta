@@ -44,11 +44,13 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         val line = node.line
         val new = NodeDefn(
             node.token.processed(),
-            mutableListOf(
-                if (method.rettype == VirtualType.VOID)
-                    node.nodes.last()
-                else NRAs.process(nodeAs(line, node.nodes.last(), method.rettype.name), processor, ctx, ValType.VALUE)!!
-            ),
+            if (node.nodes.size > 3)
+                mutableListOf(
+                    if (method.rettype == VirtualType.VOID)
+                        node.nodes.last()
+                    else NRAs.process(nodeAs(line, node.nodes.last(), method.rettype.name), processor, ctx, ValType.VALUE)!!
+                )
+            else ArrayList(),
             method
         )
         processor.pushTask(ctx, ProcessingStage.METHODS_BODY) {

@@ -21,7 +21,7 @@ import ru.DmN.pht.std.compiler.java.utils.SubList
 import ru.DmN.pht.std.compiler.java.utils.load
 
 object NCDefn : INodeCompiler<NodeDefn> {
-    override fun compile(node: NodeDefn, compiler: Compiler, ctx: CompilationContext) { // todo: abstract
+    override fun compile(node: NodeDefn, compiler: Compiler, ctx: CompilationContext) {
         val method = ctx.clazz.node.visitMethod(
             Opcodes.ACC_PUBLIC.let {
                 if (node.static) it + Opcodes.ACC_STATIC
@@ -33,8 +33,10 @@ object NCDefn : INodeCompiler<NodeDefn> {
             null,
             null
         ) as MethodNode
-        compiler.pushTask(ctx, CompilingStage.METHODS_BODY) {
-            method.visit(node, node.method, compiler, ctx)
+        if (!node.abstract) {
+            compiler.pushTask(ctx, CompilingStage.METHODS_BODY) {
+                method.visit(node, node.method, compiler, ctx)
+            }
         }
     }
 

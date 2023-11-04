@@ -23,7 +23,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         // d
         add("!dec",         NCIncDec)
         add("!def",         NCDef)
-        add("!defn",         NCDefn)
+        add("!defn",        NCDefn)
         add("!div",         NCMath)
         // e
         add("efield",       NCEField)
