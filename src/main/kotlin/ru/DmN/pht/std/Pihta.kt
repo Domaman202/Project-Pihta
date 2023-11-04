@@ -42,6 +42,10 @@ object Pihta : StdModule("pht") {
         add("aset",         NUPDefault, NRASet)
         add("!aset",        NUPASet)
         // b
+        add("bit-shift-left",   NUPMath,    NRMath)
+        add("!bit-shift-left",  NUPMath,    NRMath)
+        add("bit-shift-right",  NUPMath,    NRMath)
+        add("!bit-shift-right", NUPMath,    NRMath)
         add("body",         NUPDefault, NRBody)
         // c
         add("ccall",        NUPDefault, NRCCall)
@@ -194,6 +198,8 @@ object Pihta : StdModule("pht") {
         add(">=",   NUPCompare, NRCompare)
         add("<",    NUPCompare, NRCompare)
         add("<=",   NUPCompare, NRCompare)
+        add(">>",   NUPMath,    NRMath)
+        add("<<",   NUPMath,    NRMath)
 
         ///
 

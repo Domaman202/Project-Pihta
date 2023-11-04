@@ -33,11 +33,13 @@ object NCMath : INodeCompiler<NodeNodesList> {
             "!neg" -> Opcodes.INEG + calcOffsetMath(type)
             "!and" -> Opcodes.IAND + calcOffsetAndOr(type)
             "!or"  -> Opcodes.IOR  + calcOffsetAndOr(type)
-            "!xor" -> Opcodes.IXOR + calcOffsetXor(type)
+            "!xor" -> Opcodes.IXOR + calcOffsetXorShift(type)
+            "!bit-shift-left"  -> Opcodes.ISHL + calcOffsetXorShift(type)
+            "!bit-shift-right" -> Opcodes.ISHR + calcOffsetXorShift(type)
             else  -> throw RuntimeException()
         }
 
-    private fun calcOffsetXor(type: String) =
+    private fun calcOffsetXorShift(type: String) =
         when (type) {
             "boolean",
             "byte",

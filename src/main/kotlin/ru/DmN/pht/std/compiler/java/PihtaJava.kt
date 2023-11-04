@@ -4,6 +4,8 @@ import ru.DmN.pht.base.compiler.java.compilers.NCDefault
 import ru.DmN.pht.base.utils.ModuleCompilers
 import ru.DmN.pht.std.Pihta
 import ru.DmN.pht.std.compilers.*
+import ru.DmN.pht.std.processors.NRMath
+import ru.DmN.pht.std.ups.NUPMath
 
 object PihtaJava : ModuleCompilers(Pihta) {
     override fun onInitialize() {
@@ -16,6 +18,8 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!as",          NCAs)
         add("!aset",        NCASet)
         // b
+        add("!bit-shift-left",  NCMath)
+        add("!bit-shift-right", NCMath)
         add("body",         NCBody)
         // c
         add("!cls",         NCClass)

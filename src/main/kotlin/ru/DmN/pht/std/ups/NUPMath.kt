@@ -23,11 +23,13 @@ object NUPMath : INodeUniversalProcessor<NodeNodesList, NodeNodesList> {
                 Token.operation(
                     token.line,
                     when (text) {
-                        "+" -> "add"
-                        "-" -> "sub"
-                        "*" -> "mul"
-                        "/" -> "div"
-                        "%" -> "rem"
+                        "+"  -> "add"
+                        "-"  -> "sub"
+                        "*"  -> "mul"
+                        "/"  -> "div"
+                        "%"  -> "rem"
+                        ">>" -> "bit-shift-right"
+                        "<<" -> "bit-shift-left"
                         else -> text
                     }
                 ),
