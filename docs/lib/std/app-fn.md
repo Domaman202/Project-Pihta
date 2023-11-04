@@ -13,3 +13,10 @@
     (app-fn
         (println "Слава Советскому Союзу!")))
 ```
+
+```pihta
+(use-ctx pht
+    (app
+        (app-fn
+            (println "Слава России!"))))
+```

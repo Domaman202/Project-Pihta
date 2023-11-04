@@ -31,7 +31,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!eq",          NCCompare)
         // f
         add("!fget",        NCFGet)
-        add("field",        NCField)
+        add("!field",       NCField)
         add("!fn",          NCFn)
         add("fset",         NCFSet)
         // g

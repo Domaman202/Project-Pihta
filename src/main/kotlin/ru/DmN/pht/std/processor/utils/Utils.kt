@@ -155,7 +155,9 @@ var IContextCollection<*>.global
 val IContextCollection<*>.enum
     get() = contexts["pht/enum"] as EnumContext
 val IContextCollection<*>.clazz
-    get() = contexts["pht/class"] as VirtualType
+    get() = this.clazzOrNull!!
+val IContextCollection<*>.clazzOrNull
+    get() = contexts["pht/class"] as VirtualType?
 val IContextCollection<*>.method
     get() = contexts["pht/method"] as VirtualMethod
 val IContextCollection<*>.body

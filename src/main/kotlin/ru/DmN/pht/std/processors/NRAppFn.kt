@@ -9,9 +9,7 @@ import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.utils.platform
-import ru.DmN.pht.std.processor.utils.nodeClass
-import ru.DmN.pht.std.processor.utils.nodeDefn
-import ru.DmN.pht.std.processor.utils.nodeProgn
+import ru.DmN.pht.std.processor.utils.*
 
 object NRAppFn : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node =
@@ -19,26 +17,29 @@ object NRAppFn : INodeProcessor<NodeNodesList> {
             Platform.UNIVERSAL -> node
             Platform.JAVA -> {
                 val line = node.token.line
-                NRClass.process(
-                    nodeClass(
-                        line,
-                        "App",
-                        listOf("java.lang.Object"),
-                        mutableListOf(
-                            NodeNodesList(
-                                Token.operation(line, "@static"), mutableListOf(
-                                    nodeDefn(
-                                        line,
-                                        "main",
-                                        "void",
-                                        emptyList(),
-                                        mutableListOf(nodeProgn(line, node.nodes))
-                                    )
-                                )
-                            )
+                val fn = NodeNodesList(
+                    Token.operation(line, "@static"), mutableListOf(
+                        nodeDefn(
+                            line,
+                            "main",
+                            "void",
+                            emptyList(),
+                            mutableListOf(nodeProgn(line, node.nodes))
                         )
-                    ), processor, ctx, mode
+                    )
                 )
+                if (ctx.clazzOrNull?.name == "App")
+                    processor.process(fn, ctx, mode)!!
+                else {
+                    NRClass.process(
+                        nodeClass(
+                            line,
+                            "App",
+                            listOf("java.lang.Object"),
+                            mutableListOf(fn)
+                        ), processor, ctx, mode
+                    )
+                }
             }
         }
 }

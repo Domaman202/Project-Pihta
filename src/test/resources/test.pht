@@ -1,6 +1,4 @@
 (use-ctx pht
-    (cls MathExtends [^Object]
-        (efn ^int add ^String [[other ^int]] "Мяу!"))
-    (app-fn
-        (println (+ 2 2))
-        (println (- 5 3))))
+    (app
+        (app-fn
+            (println "Слава России!"))))
