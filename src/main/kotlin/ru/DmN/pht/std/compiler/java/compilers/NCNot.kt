@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.compilers
+package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.ast.NodeNodesList
@@ -10,12 +10,12 @@ import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
 
-object NCArraySize : INodeCompiler<NodeNodesList> {
+object NCNot : INodeCompiler<NodeNodesList> {
     override fun compileVal(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.run {
             load(compiler.compileVal(node.nodes[0], ctx), this)
-            visitInsn(Opcodes.ARRAYLENGTH)
+            visitInsn(Opcodes.INEG)
         }
-        return Variable.tmp(node, VirtualType.INT)
+        return Variable.tmp(node, VirtualType.BOOLEAN)
     }
 }

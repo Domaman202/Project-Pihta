@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.compilers
+package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
@@ -8,14 +8,11 @@ import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.base.utils.with
 import ru.DmN.pht.std.ast.NodeFn
-import ru.DmN.pht.std.compiler.java.ctx.BodyContext
 import ru.DmN.pht.std.compiler.java.ctx.ClassContext
-import ru.DmN.pht.std.compiler.java.ctx.MethodContext
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.compiler.java.utils.with
-import ru.DmN.pht.std.compilers.NCDefn.visit
+import ru.DmN.pht.std.compiler.java.compilers.NCDefn.visit
 import ru.DmN.pht.std.utils.findLambdaMethod
 import kotlin.math.absoluteValue
 

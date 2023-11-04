@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.compilers
+package ru.DmN.pht.std.compiler.java.compilers
 
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.ast.NodeNodesList

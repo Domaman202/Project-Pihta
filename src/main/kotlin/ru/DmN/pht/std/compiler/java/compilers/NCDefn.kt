@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.compilers
+package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.MethodVisitor

@@ -3,9 +3,7 @@ package ru.DmN.pht.std.compiler.java
 import ru.DmN.pht.base.compiler.java.compilers.NCDefault
 import ru.DmN.pht.base.utils.ModuleCompilers
 import ru.DmN.pht.std.Pihta
-import ru.DmN.pht.std.compilers.*
-import ru.DmN.pht.std.processors.NRMath
-import ru.DmN.pht.std.ups.NUPMath
+import ru.DmN.pht.std.compiler.java.compilers.*
 
 object PihtaJava : ModuleCompilers(Pihta) {
     override fun onInitialize() {

@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.compilers
+package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
@@ -10,14 +10,12 @@ import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualField
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeRFn
+import ru.DmN.pht.std.compiler.java.compilers.NCDefn.visit
 import ru.DmN.pht.std.compiler.java.ctx.ClassContext
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.compiler.java.utils.with
-import ru.DmN.pht.std.compilers.NCDefn.visit
-import ru.DmN.pht.std.utils.NVC
 import ru.DmN.pht.std.utils.findLambdaMethod
-import kotlin.math.absoluteValue
 
 object NCRFn : INodeCompiler<NodeRFn> {
     override fun compileVal(node: NodeRFn, compiler: Compiler, ctx: CompilationContext): Variable {
