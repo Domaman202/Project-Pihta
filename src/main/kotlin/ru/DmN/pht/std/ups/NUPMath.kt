@@ -28,8 +28,8 @@ object NUPMath : INodeUniversalProcessor<NodeNodesList, NodeNodesList> {
                         "*"  -> "mul"
                         "/"  -> "div"
                         "%"  -> "rem"
-                        ">>" -> "bit-shift-right"
-                        "<<" -> "bit-shift-left"
+                        ">>" -> "shift-right"
+                        "<<" -> "shift-left"
                         else -> text
                     }
                 ),

@@ -16,8 +16,6 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!as",          NCAs)
         add("!aset",        NCASet)
         // b
-        add("!bit-shift-left",  NCMath)
-        add("!bit-shift-right", NCMath)
         add("body",         NCBody)
         // c
         add("!cls",         NCClass)
@@ -68,6 +66,8 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!rfn",         NCRFn)
         // s
         add("set!",         NCSet)
+        add("!shift-left",  NCMath)
+        add("!shift-right", NCMath)
         add("sns",          NCDefault)
         add("!sub",         NCMath)
         // u
