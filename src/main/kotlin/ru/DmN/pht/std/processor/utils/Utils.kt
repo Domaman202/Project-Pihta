@@ -48,7 +48,7 @@ fun nodeDef(line: Int, name: String, value: Node) =
     NodeNodesList(Token.operation(line, "def"),
         mutableListOf(nodeValn(line, nodeValn(line, mutableListOf(nodeValueOf(line, name), value)))))
 fun nodeAs(line: Int, node: Node, type: String) =
-    NodeNodesList(Token.operation(line, "!as"),
+    NodeNodesList(Token.operation(line, "as"),
         mutableListOf(nodeClass(line, type), node))
 fun nodeCycle(line: Int, cond: Node, body: List<Node>) =
     NodeNodesList(Token.operation(line, "cycle"),

@@ -20,7 +20,7 @@ object NRAs : INodeProcessor<NodeNodesList> {
             val from = processor.calc(node.nodes[1], ctx)!!
             val to = calc(node, processor, ctx)
             if (from.isAssignableFrom(to))
-                node.nodes[1]
-            else NodeAs(node.token, mutableListOf(processor.process(node.nodes[1], ctx, ValType.VALUE)!!), to)
+                processor.process(node.nodes[1], ctx, ValType.VALUE)
+            else NodeAs(node.token.processed(), mutableListOf(processor.process(node.nodes[1], ctx, ValType.VALUE)!!), to)
         } else null
 }

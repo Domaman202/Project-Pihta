@@ -34,7 +34,30 @@
                 (def [[str (new StringBuilder this)]])
                 (for [e arr]
                     (#append str e))
-                (#toString str))))))
+                (#toString str)))))
+
+        (cls MathExtends [^Object]
+            (efn ^float and ^float [[other ^float]]
+                (#intBitsToFloat ^java.lang.Float
+                    (and
+                        (#floatToRawIntBits ^java.lang.Float this)
+                        (#floatToRawIntBits ^java.lang.Float other))))
+            (efn ^double and ^double [[other ^double]]
+                (#longBitsToDouble ^java.lang.Double
+                    (and
+                        (#doubleToLongBits ^java.lang.Double this)
+                        (#doubleToLongBits ^java.lang.Double this))))
+
+            (efn ^float or ^float [[other ^float]]
+                (#intBitsToFloat ^java.lang.Float
+                    (or
+                        (#floatToRawIntBits ^java.lang.Float this)
+                        (#floatToRawIntBits ^java.lang.Float other))))
+            (efn ^double or ^double [[other ^double]]
+                (#longBitsToDouble ^java.lang.Double
+                    (or
+                        (#doubleToLongBits ^java.lang.Double this)
+                        (#doubleToLongBits ^java.lang.Double this))))))
 
     (export
         (import java
@@ -49,4 +72,5 @@
         (alias-type Object Any)
         (import pht
             (extends ru.DmN.pht.ArrayExtends)
-            (extends ru.DmN.pht.StringExtends))))
+            (extends ru.DmN.pht.StringExtends)
+            (extends ru.DmN.pht.MathExtends))))
