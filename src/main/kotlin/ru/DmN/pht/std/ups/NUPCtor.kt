@@ -25,8 +25,8 @@ import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.utils.line
 
 object NUPCtor : INodeUniversalProcessor<NodeDefn, NodeNodesList> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
-        NPDefault.parse(parser, ctx, operationToken)
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
+        NPDefault.parse(parser, ctx, token)
 
     override fun unparse(node: NodeDefn, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {

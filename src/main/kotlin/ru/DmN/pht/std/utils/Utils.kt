@@ -14,6 +14,8 @@ import java.util.*
 fun findLambdaMethod(type: VirtualType): VirtualMethod =
     type.methods.first { it.declaringClass == type && it.modifiers.abstract }
 
+val Node.text
+    get() = token.text!!
 val Node.line
     get() = token.line
 

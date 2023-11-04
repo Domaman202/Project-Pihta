@@ -171,8 +171,8 @@ object Pihta : StdModule("pht") {
         add("<-", NUPDefault, NRUnrollB)
 
         // Мат/Лог операции
-        add("++",   NUPIncDec)
-        add("--",   NUPIncDec)
+        add("++",   NUPIncDec, NRIncDec)
+        add("--",   NUPIncDec, NRIncDec)
         add("+",    NUPMath)
         add("-",    NUPMath)
         add("*",    NUPMath)

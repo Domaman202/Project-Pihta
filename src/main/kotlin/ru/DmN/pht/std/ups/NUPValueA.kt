@@ -16,10 +16,10 @@ import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.processors.IStdNodeProcessor
 
 object NUPValueA : INodeUniversalProcessor<NodeValue, NodeValue>, IStdNodeProcessor<NodeValue> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): NodeValue {
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): NodeValue {
         val value = parser.nextToken()!!
         return NodeValue(
-            operationToken, when (value.type) {
+            token, when (value.type) {
                 Token.Type.OPERATION -> if (value.text == "nil") NodeValue.Type.NIL else throw RuntimeException()
                 Token.Type.CLASS -> NodeValue.Type.CLASS
                 Token.Type.NAMING -> NodeValue.Type.NAMING

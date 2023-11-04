@@ -14,12 +14,13 @@ import ru.DmN.pht.std.ast.NodeFieldSet
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.ast.NodeSet
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.pht.std.utils.text
 
 object NUPSetB : INodeUniversalProcessor<NodeSet, NodeSet> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val name = parser.nextToken()!!
         return parse(
-            Token(operationToken.line, Token.Type.OPERATION, "set!"),
+            Token(token.line, Token.Type.OPERATION, "set!"),
             name.text!!,
             when (name.type) {
                 Token.Type.CLASS -> true
@@ -30,15 +31,15 @@ object NUPSetB : INodeUniversalProcessor<NodeSet, NodeSet> {
         )
     }
 
-    private fun parse(operationToken: Token, name: String, static: Boolean, value: Node): Node {
+    private fun parse(token: Token, name: String, static: Boolean, value: Node): Node {
         val parts = name.split("/")
         return if (parts.size == 1) NodeSet(
-            Token(operationToken.line, Token.Type.OPERATION, "set!"),
+            Token(token.line, Token.Type.OPERATION, "set!"),
             parts.last(),
             value
         ) else NodeFieldSet(
-            Token(operationToken.line, Token.Type.OPERATION, "fset!"),
-            parse(operationToken.line, parts, 1, static),
+            Token(token.line, Token.Type.OPERATION, "fset!"),
+            parse(token.line, parts, 1, static),
             parts.last(),
             value,
             static
@@ -58,7 +59,7 @@ object NUPSetB : INodeUniversalProcessor<NodeSet, NodeSet> {
     }
     override fun unparse(node: NodeSet, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
-            append('(').append(node.token.text).append(' ').append(node.name)
+            append('(').append(node.text).append(' ').append(node.name)
             if (node.value != null) {
                 append(' ')
                 unparser.unparse(node.value!!, ctx, indent + 1)

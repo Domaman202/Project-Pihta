@@ -13,17 +13,17 @@ import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.ast.NodeValue
 
 object NPGet : INodeParser {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val nameToken = parser.nextToken()!!
         return when (nameToken.type) {
             CLASS -> process(
-                operationToken,
+                token,
                 nameToken.text!!,
                 static = true,
                 klass = true
             )
             OPERATION -> process(
-                operationToken,
+                token,
                 nameToken.text!!,
                 static = false,
                 klass = false
@@ -31,7 +31,7 @@ object NPGet : INodeParser {
             OPEN_BRACKET -> {
                 parser.tokens.push(nameToken)
                 return NodeFMGet(
-                    operationToken,
+                    token,
                     parser.parseNode(ctx)!!,
                     parser.nextToken()!!
                         .let { if (it.isOperation() || it.isNaming()) it else throw RuntimeException() }.text!!,
@@ -43,22 +43,22 @@ object NPGet : INodeParser {
         }
     }
 
-    private fun process(operationToken: Token, name: String, static: Boolean, klass: Boolean): Node {
+    private fun process(token: Token, name: String, static: Boolean, klass: Boolean): Node {
         val parts = name.split("/", "#") as MutableList<String>
-        return process(operationToken, parts, parts.size, static, klass)
+        return process(token, parts, parts.size, static, klass)
     }
 
-    private fun process(operationToken: Token, parts: List<String>, i: Int, static: Boolean, clazz: Boolean): Node {
+    private fun process(token: Token, parts: List<String>, i: Int, static: Boolean, clazz: Boolean): Node {
         val j = i - 1
         return if (j == 0) {
             if (clazz)
-                NodeValue.of(operationToken.line, NodeValue.Type.CLASS, parts[0])
-            else NodeGetOrName(operationToken, parts[0], static)
+                NodeValue.of(token.line, NodeValue.Type.CLASS, parts[0])
+            else NodeGetOrName(token, parts[0], static)
         } else {
             val isStatic = static && j == 1
             NodeFMGet(
-                Token(operationToken.line, OPERATION, "fget!",),
-                process(operationToken, parts, j, static, clazz),
+                Token(token.line, OPERATION, "fget!",),
+                process(token, parts, j, static, clazz),
                 parts[j],
                 isStatic
             )

@@ -10,6 +10,7 @@ import ru.DmN.pht.base.utils.DefaultEnumMap
 import ru.DmN.pht.base.utils.TypesProvider
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.getRegex
+import ru.DmN.pht.std.utils.text
 
 class Compiler(val tp: TypesProvider = JavaTypesProvider()) {
     val tasks: DefaultEnumMap<CompilingStage, MutableList<() -> Unit>> = DefaultEnumMap(CompilingStage::class.java) { ArrayList() }
@@ -21,7 +22,7 @@ class Compiler(val tp: TypesProvider = JavaTypesProvider()) {
         get(ctx, node).compileVal(node, this, ctx)
 
     fun get(ctx: CompilationContext, node: Node): INodeCompiler<Node> {
-        val name = node.token.text!!
+        val name = node.text
         val i = name.lastIndexOf('/')
         if (i < 1) {
             ctx.loadedModules.forEach { it -> it.javaCompilers.getRegex(name)?.let { return it as INodeCompiler<Node> } }

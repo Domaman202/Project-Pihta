@@ -9,6 +9,7 @@ import ru.DmN.pht.base.utils.DefaultEnumMap
 import ru.DmN.pht.base.utils.TypesProvider
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.base.utils.getRegex
+import ru.DmN.pht.std.utils.text
 
 class Processor(val tp: TypesProvider) {
     val tasks: DefaultEnumMap<ProcessingStage, MutableList<() -> Unit>> = DefaultEnumMap(ProcessingStage::class.java) { java.util.ArrayList() }
@@ -20,7 +21,7 @@ class Processor(val tp: TypesProvider) {
         get(node, ctx).process(node, this, ctx, mode)
 
     fun get(node: Node, ctx: ProcessingContext): INodeProcessor<Node> {
-        val name = node.token.text!!
+        val name = node.text
         val i = name.lastIndexOf('/')
         if (i < 1) {
             ctx.loadedModules.forEach { it -> it.processors.getRegex(name)?.let { return it as INodeProcessor<Node> } }

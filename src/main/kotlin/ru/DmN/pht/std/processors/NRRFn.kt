@@ -27,7 +27,7 @@ object NRRFn : INodeProcessor<NodeNodesList> {
         val cctx = ctx.clazz
         val bctx = ctx.body
         val fakeType = VirtualType(gctx.name("PhtLambda${node.hashCode().absoluteValue}"))
-        val context = ctx.with(BodyContext.of(null)).with(fakeType)
+        val context = ctx.with(BodyContext.of(null))
         val nodes = LazyProcessValueList(node, processor, context)
         val offset = if (nodes[0].isConstClass()) 1 else 0
         val type = if (offset == 1) gctx.getType(nodes[0].getValueAsString(), processor.tp) else null

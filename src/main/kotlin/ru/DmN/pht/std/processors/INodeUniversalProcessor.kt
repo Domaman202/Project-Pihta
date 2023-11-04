@@ -15,7 +15,7 @@ import ru.DmN.pht.base.unparsers.INodeUnparser
 import ru.DmN.pht.base.utils.VirtualType
 
 interface INodeUniversalProcessor<A : Node, B : Node> : INodeParser, INodeUnparser<A>, INodeProcessor<B> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
         throw UnsupportedOperationException("Not yet implemented")
 
     override fun unparse(node: A, unparser: Unparser, ctx: UnparsingContext, indent: Int): Unit =

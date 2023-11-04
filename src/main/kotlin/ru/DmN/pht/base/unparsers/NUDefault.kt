@@ -3,11 +3,12 @@ package ru.DmN.pht.base.unparsers
 import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.ast.NodeNodesList
 import ru.DmN.pht.base.unparser.UnparsingContext
+import ru.DmN.pht.std.utils.text
 
 object NUDefault : INodeUnparser<NodeNodesList> {
     override fun unparse(node: NodeNodesList, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.run {
-            append('(').append(node.token.text)
+            append('(').append(node.text)
             if (node.nodes.isNotEmpty())
                 append(' ')
             unparseNodes(node, unparser, ctx, indent)

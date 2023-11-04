@@ -13,6 +13,7 @@ import ru.DmN.pht.std.compiler.java.ctx.ClassContext
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.compiler.java.utils.with
 import ru.DmN.pht.std.ast.NodeType
+import ru.DmN.pht.std.utils.text
 
 object NCClass : INodeCompiler<NodeType> {
     override fun compile(node: NodeType, compiler: Compiler, ctx: CompilationContext) {
@@ -47,7 +48,7 @@ object NCClass : INodeCompiler<NodeType> {
                     }
                 }
                 NCDefault.compile(node, compiler, ctx.with(ClassContext(cn, node.type)))
-                if (node.token.text == "!obj") {
+                if (node.text == "!obj") {
                     cn.methods.find { it.name == "<init>" && it.desc == "()V" } ?:
                     cn.visitMethod(Opcodes.ACC_PRIVATE, "<init>", "()V", null, null).run {
                         visitCode()

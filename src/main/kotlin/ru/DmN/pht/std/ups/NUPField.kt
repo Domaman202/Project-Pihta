@@ -12,8 +12,8 @@ import ru.DmN.pht.std.ast.NodeField
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 
 object NUPField : INodeUniversalProcessor<NodeField, NodeNodesList> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
-        NPDefault.parse(parser, ctx, operationToken)
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
+        NPDefault.parse(parser, ctx, token)
 
     override fun unparse(node: NodeField, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {

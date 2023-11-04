@@ -2,6 +2,7 @@ package ru.DmN.pht.base.ast
 
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.utils.indent
+import ru.DmN.pht.std.utils.text
 
 open class NodeNodesList(token: Token, override val nodes: MutableList<Node> = mutableListOf()) : Node(token) {
     override fun copy(): NodeNodesList =
@@ -11,7 +12,7 @@ open class NodeNodesList(token: Token, override val nodes: MutableList<Node> = m
         nodes.map { it.copy() }.toMutableList()
 
     override fun print(builder: StringBuilder, indent: Int): StringBuilder =
-        printNodes(builder.indent(indent).append('[').append(token.text), indent).append(']')
+        printNodes(builder.indent(indent).append('[').append(text), indent).append(']')
 
     fun printNodes(builder: StringBuilder, indent: Int): StringBuilder {
         if (nodes.isNotEmpty())

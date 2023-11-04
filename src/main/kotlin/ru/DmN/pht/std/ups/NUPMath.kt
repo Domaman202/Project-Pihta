@@ -16,12 +16,12 @@ import ru.DmN.pht.std.processors.NRMath
 import ru.DmN.pht.std.unparsers.NUDefaultX
 
 object NUPMath : INodeUniversalProcessor<NodeNodesList, NodeNodesList> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
         NPDefault.parse(parser, ctx) {
-            val text = operationToken.text!!
+            val text = token.text!!
             NodeNodesList(
                 Token.operation(
-                    operationToken.line,
+                    token.line,
                     when (text) {
                         "+" -> "add"
                         "-" -> "sub"

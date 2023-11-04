@@ -9,11 +9,11 @@ import ru.DmN.pht.base.parsers.NPDefault
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 
 object NUPSetA : INodeUniversalProcessor<Node, Node> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? {
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val name = parser.nextToken().apply { parser.tokens.push(this) }!!
         return when (name.type) {
-            Token.Type.CLASS, Token.Type.OPERATION -> NUPSetB.parse(parser, ctx, operationToken)
-            else -> NPDefault.parse(parser, ctx) { NodeNodesList(operationToken, it) }
+            Token.Type.CLASS, Token.Type.OPERATION -> NUPSetB.parse(parser, ctx, token)
+            else -> NPDefault.parse(parser, ctx) { NodeNodesList(token, it) }
         }
     }
 }

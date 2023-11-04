@@ -1,5 +1,9 @@
 (use-ctx pht
     (cls MathExtends [^Object]
-        (efn ^int add ^String [[other ^int]] "Мяу!"))
+        (efn ^int inc ^void []
+            (println this)))
     (app-fn
-        (println (+ 2 2))))
+        (def [[i 12]])
+        (inc i)
+        (dec i)
+        (println i)))

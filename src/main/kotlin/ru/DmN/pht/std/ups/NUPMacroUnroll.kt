@@ -24,11 +24,11 @@ import kotlin.collections.HashMap
 import kotlin.math.min
 
 object NUPMacroUnroll : INodeUniversalProcessor<NodeMacroUnroll, NodeMacroUnroll> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val uuid = UUID.randomUUID()
         ctx.macros.push(uuid)
         return NPDefault.parse(parser, ctx) {
-            NodeMacroUnroll(operationToken, it.toMutableList(), ctx.macros.reversed()).apply {
+            NodeMacroUnroll(token, it.toMutableList(), ctx.macros.reversed()).apply {
                 ctx.macros.pop()
             }
         }

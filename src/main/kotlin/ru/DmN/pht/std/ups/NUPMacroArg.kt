@@ -21,11 +21,8 @@ import ru.DmN.pht.std.utils.computeString
 import java.util.*
 
 object NUPMacroArg : IStdNodeUniversalProcessor<NodeMacroArg, NodeMacroArg> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
-        NPDefault.parse(parser, ctx) { NodeMacroArg(operationToken, it, ctx.macros.reversed()) }
-
-    override fun unparse(node: NodeMacroArg, unparser: Unparser, ctx: UnparsingContext, indent: Int) =
-        throw UnsupportedOperationException("Not yet implemented")
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
+        NPDefault.parse(parser, ctx) { NodeMacroArg(token, it, ctx.macros.reversed()) }
 
     override fun calc(node: NodeMacroArg, processor: Processor, ctx: ProcessingContext): VirtualType? =
         processor.calc(compute(node, processor, ctx), ctx)

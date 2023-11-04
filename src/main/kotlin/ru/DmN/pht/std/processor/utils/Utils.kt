@@ -119,9 +119,9 @@ fun <T : IContextCollection<T>> T.with(ctx: GlobalContext) =
     this.with("pht/global", ctx)
 fun <T : IContextCollection<T>> T.with(ctx: EnumContext) =
     this.with("pht/enum", ctx).apply { this.contexts["pht/class"] = ctx.type }
-fun <T : IContextCollection<T>> T.with(ctx: VirtualType) =
+fun <T : IContextCollection<T>> T.with(ctx: VirtualType?) =
     this.with("pht/class", ctx)
-fun <T : IContextCollection<T>> T.with(ctx: VirtualMethod) =
+fun <T : IContextCollection<T>> T.with(ctx: VirtualMethod?) =
     this.with("pht/method", ctx)
 fun <T : IContextCollection<T>> T.with(ctx: BodyContext) =
     this.with("pht/body", ctx)

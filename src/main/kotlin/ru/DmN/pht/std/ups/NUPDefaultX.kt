@@ -17,8 +17,8 @@ import ru.DmN.pht.std.processors.IStdNodeUniversalProcessor
 import ru.DmN.pht.std.unparsers.NUDefaultX
 
 object NUPDefaultX : IStdNodeUniversalProcessor<NodeNodesList, NodeNodesList> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
-        NPDefault.parse(parser, ctx, operationToken)
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
+        NPDefault.parse(parser, ctx, token)
 
     override fun unparse(node: NodeNodesList, unparser: Unparser, ctx: UnparsingContext, indent: Int) =
         NUDefaultX.unparse(node, unparser, ctx, indent)

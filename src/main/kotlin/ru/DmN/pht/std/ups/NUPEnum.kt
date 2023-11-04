@@ -24,8 +24,8 @@ import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.line
 
 object NUPEnum : INodeUniversalProcessor<NodeType, NodeNodesList> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
-        NPDefault.parse(parser, ctx, operationToken)
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
+        NPDefault.parse(parser, ctx, token)
 
     override fun unparse(node: NodeType, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {

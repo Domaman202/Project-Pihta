@@ -9,13 +9,13 @@ import ru.DmN.pht.base.parsers.NPDefault
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 
 object NUPMCall : INodeUniversalProcessor<Node, Node> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val name = parser.parseNode(ctx)!!
         return NPDefault.parse(parser, ctx) {
             val list = mutableListOf(it.first())
             list += name
             list += it.drop(1)
-            NodeNodesList(Token(operationToken.line, operationToken.type, "mcall"), list)
+            NodeNodesList(Token(token.line, token.type, "mcall"), list)
         }
     }
 }

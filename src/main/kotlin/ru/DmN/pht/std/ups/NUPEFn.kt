@@ -15,6 +15,7 @@ import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.MethodModifiers
 import ru.DmN.pht.base.utils.VirtualMethod
+import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.processor.ctx.BodyContext
 import ru.DmN.pht.std.processor.utils.clazz
@@ -24,8 +25,8 @@ import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.utils.computeString
 
 object NUPEFn : INodeUniversalProcessor<NodeDefn, NodeNodesList> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
-        NPDefault.parse(parser, ctx, operationToken)
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
+        NPDefault.parse(parser, ctx, token)
 
     override fun unparse(node: NodeDefn, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
@@ -87,7 +88,9 @@ object NUPEFn : INodeUniversalProcessor<NodeDefn, NodeNodesList> {
                 new,
                 processor,
                 ctx.with(method).with(BodyContext.of(method)),
-                mode
+                if (method.rettype == VirtualType.VOID)
+                    ValType.NO_VALUE
+                else ValType.VALUE
             )
         }
         return new

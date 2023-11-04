@@ -10,9 +10,6 @@ import ru.DmN.pht.std.ast.NodeASet
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 
 object NUPASet : INodeUniversalProcessor<NodeASet, NodeASet> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
-        throw UnsupportedOperationException("Not yet implemented")
-
     override fun unparse(node: NodeASet, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
             append('(').append("aset").append('\n').append("\t".repeat(indent + 1))

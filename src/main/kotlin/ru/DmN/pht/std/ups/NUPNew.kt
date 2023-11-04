@@ -20,14 +20,15 @@ import ru.DmN.pht.std.processors.NRMCall
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.line
 import ru.DmN.pht.std.utils.processNodes
+import ru.DmN.pht.std.utils.text
 
 object NUPNew : INodeUniversalProcessor<NodeNew, NodeNodesList> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
-        NPDefault.parse(parser, ctx, operationToken)
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
+        NPDefault.parse(parser, ctx, token)
 
     override fun unparse(node: NodeNew, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
-            append('(').append(node.token.text).append(' ').append(NUPValueA.unparseType(node.ctor.declaringClass!!.name))
+            append('(').append(node.text).append(' ').append(NUPValueA.unparseType(node.ctor.declaringClass!!.name))
             NUDefault.unparseNodes(node, unparser, ctx, indent)
             append(')')
         }

@@ -8,10 +8,9 @@ import ru.DmN.pht.base.parsers.INodeParser
 import ru.DmN.pht.std.imports.ast.NodeValue
 
 object NPValue : INodeParser {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
-        when (operationToken.type) {
-            Token.Type.OPERATION, Token.Type.STRING ->
-                NodeValue(operationToken, operationToken.text!!)
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
+        when (token.type) {
+            Token.Type.OPERATION, Token.Type.STRING -> NodeValue(token, token.text!!)
             else -> throw RuntimeException()
         }
 }

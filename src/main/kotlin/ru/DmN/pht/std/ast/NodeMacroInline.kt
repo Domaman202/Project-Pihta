@@ -4,6 +4,7 @@ import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.ast.NodeNodesList
 import ru.DmN.pht.base.utils.indent
+import ru.DmN.pht.std.utils.text
 import java.util.UUID
 
 class NodeMacroInline(tkOperation: Token, nodes: MutableList<Node>, val uuids: List<UUID>) : NodeNodesList(tkOperation, nodes) {
@@ -11,5 +12,5 @@ class NodeMacroInline(tkOperation: Token, nodes: MutableList<Node>, val uuids: L
         NodeMacroInline(token, copyNodes(), uuids)
 
     override fun print(builder: StringBuilder, indent: Int): StringBuilder =
-        printNodes(builder.indent(indent).append('[').append(token.text).append(" (").append(uuids).append(')'), indent).append(']')
+        printNodes(builder.indent(indent).append('[').append(text).append(" (").append(uuids).append(')'), indent).append(']')
 }

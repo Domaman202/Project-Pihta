@@ -19,22 +19,23 @@ import ru.DmN.pht.std.imports.StdImportsHelper
 import ru.DmN.pht.std.imports.ast.IValueNode
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.pht.std.utils.text
 
 object NUPImport : INodeUniversalProcessor<NodeImport, NodeImport> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val module = parser.nextOperation().text!!
         val context = ctx.subCtx()
         context.loadedModules.add(0, StdImportsHelper)
         return NPDefault.parse(parser, context) { it ->
             val map = HashMap<String, MutableList<Any?>>()
-            it.forEach { map.getOrPut(it.token.text!!) { ArrayList() } += (it as IValueNode).value }
-            NodeImport(operationToken, module, map)
+            it.forEach { map.getOrPut(it.text) { ArrayList() } += (it as IValueNode).value }
+            NodeImport(token, module, map)
         }
     }
 
     override fun unparse(node: NodeImport, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
-            append('(').append(node.token.text).append(' ').append(node.module)
+            append('(').append(node.text).append(' ').append(node.module)
             node.data.forEach {
                 append('\n').append("\t".repeat(indent + 1))
                     .append('(').append(it.key).append(' ').append(it.value).append(')')

@@ -9,6 +9,6 @@ import ru.DmN.pht.std.module.ast.IValueNode
 import ru.DmN.pht.std.module.ast.NodeArgument
 
 object NPArgument : INodeParser {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
-        NodeArgument(operationToken, (parser.parseNode(ctx) as IValueNode).value)
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
+        NodeArgument(token, (parser.parseNode(ctx) as IValueNode).value)
 }

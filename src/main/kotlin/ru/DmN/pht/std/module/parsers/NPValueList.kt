@@ -10,6 +10,6 @@ import ru.DmN.pht.std.module.ast.NodeValueList
 import ru.DmN.pht.std.ups.NUPValnB
 
 object NPValueList : INodeParser {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
-        NUPValnB.parse(parser, ctx) { it -> NodeValueList(operationToken, it.map { (it as IValueNode).value }) }
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
+        NUPValnB.parse(parser, ctx) { it -> NodeValueList(token, it.map { (it as IValueNode).value }) }
 }

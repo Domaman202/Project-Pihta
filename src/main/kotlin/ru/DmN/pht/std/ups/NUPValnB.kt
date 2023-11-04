@@ -8,8 +8,8 @@ import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 
 object NUPValnB : INodeUniversalProcessor<Node, Node> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
-        parse(parser, ctx) { NodeNodesList(Token(operationToken.line, Token.Type.OPERATION, "valn"), it) }
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
+        parse(parser, ctx) { NodeNodesList(Token(token.line, Token.Type.OPERATION, "valn"), it) }
 
     fun parse(parser: Parser, ctx: ParsingContext, constructor: (it: MutableList<Node>) -> Node): Node {
         val nodes = ArrayList<Node>()

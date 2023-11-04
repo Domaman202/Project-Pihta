@@ -20,17 +20,18 @@ import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.ast.NodeMacro
 import ru.DmN.pht.std.compiler.java.utils.SubMap
 import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.utils.text
 import java.util.UUID
 
 object NUPMacro : INodeUniversalProcessor<NodeMacro, NodeMacro> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val name = parser.nextOperation().text!!
-        return NPDefault.parse(parser, ctx) { NodeMacro(operationToken, it, name) }
+        return NPDefault.parse(parser, ctx) { NodeMacro(token, it, name) }
     }
 
     override fun unparse(node: NodeMacro, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
-            append('(').append(node.token.text).append(' ').append(node.name)
+            append('(').append(node.text).append(' ').append(node.name)
             NUDefault.unparseNodes(node, unparser, ctx, indent)
             append(')')
         }

@@ -33,8 +33,8 @@ object NRMath : INodeProcessor<NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
         val nodes = processor.processNodes(node, ctx, ValType.VALUE)
-        val firstType = processor.calc(nodes[0], ctx)
-        return if (firstType!!.isPrimitive)
+        val firstType = processor.calc(nodes[0], ctx)!!
+        return if (firstType.isPrimitive)
             if (mode == ValType.VALUE) {
                 val line = node.line
                 val result = getExtend(firstType, node.token.text!!, nodes.drop(1), processor, ctx)

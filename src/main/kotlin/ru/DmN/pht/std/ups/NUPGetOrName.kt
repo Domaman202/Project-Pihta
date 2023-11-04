@@ -18,12 +18,12 @@ import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.processors.IStdNodeProcessor
 
 object NUPGetOrName : INodeUniversalProcessor<NodeGetOrName, NodeGetOrName>, IStdNodeProcessor<NodeGetOrName> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? {
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? {
         val tk = parser.nextOperation()
         return if (tk.text!!.contains("[/#]".toRegex())) {
             parser.tokens.push(tk)
-            parser.get(ctx, "get!")!!.parse(parser, ctx, Token(operationToken.line, Token.Type.OPERATION, "get!"))
-        } else NodeGetOrName(operationToken, tk.text, false)
+            parser.get(ctx, "get!")!!.parse(parser, ctx, Token(token.line, Token.Type.OPERATION, "get!"))
+        } else NodeGetOrName(token, tk.text, false)
     }
 
     override fun unparse(node: NodeGetOrName, unparser: Unparser, ctx: UnparsingContext, indent: Int) {

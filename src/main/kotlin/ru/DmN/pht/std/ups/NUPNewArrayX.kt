@@ -12,9 +12,6 @@ import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.ast.NodeNewArray
 
 object NUPNewArrayX : INodeUniversalProcessor<NodeNewArray, NodeNewArray> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Nothing =
-        throw UnsupportedOperationException("Not yet implemented")
-
     override fun unparse(node: NodeNewArray, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.run {
             append('(').append("new-array")

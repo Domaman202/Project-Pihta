@@ -4,6 +4,7 @@ import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.ast.IValueNode
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.utils.indent
+import ru.DmN.pht.std.utils.text
 
 class NodeValue(tkOperation: Token, val vtype: Type, val value: String) : Node(tkOperation), IValueNode {
     fun getBoolean() =
@@ -22,7 +23,7 @@ class NodeValue(tkOperation: Token, val vtype: Type, val value: String) : Node(t
         value
 
     override fun print(builder: StringBuilder, indent: Int): StringBuilder =
-        builder.indent(indent).append("[${token.text} ($vtype) $value]")
+        builder.indent(indent).append("[${text} ($vtype) $value]")
 
     override fun isConst(): Boolean = true
     override fun isConstClass(): Boolean = vtype == Type.PRIMITIVE || vtype == Type.CLASS

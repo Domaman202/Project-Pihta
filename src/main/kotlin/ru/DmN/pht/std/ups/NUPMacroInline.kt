@@ -21,9 +21,9 @@ import ru.DmN.pht.std.ast.NodeMacroInline
 import ru.DmN.pht.std.parser.macros
 
 object NUPMacroInline : INodeUniversalProcessor<NodeMacroInline, NodeMacroInline> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
         NPDefault.parse(parser, ctx) {
-            NodeMacroInline(operationToken, it.toMutableList(), ctx.macros.reversed())
+            NodeMacroInline(token, it.toMutableList(), ctx.macros.reversed())
         }
 
     override fun unparse(node: NodeMacroInline, unparser: Unparser, ctx: UnparsingContext, indent: Int) =

@@ -16,19 +16,19 @@ import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.unparsers.NUDefaultX
 
 object NUPCompare : INodeUniversalProcessor<NodeCompare, NodeCompare> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
         NPDefault.parse(parser, ctx) {
             NodeNodesList(
                 Token.operation(
-                    operationToken.line,
-                    when (operationToken.text!!) {
+                    token.line,
+                    when (token.text!!) {
                         "="     -> "eq"
                         "!="    -> "not-eq"
                         ">"     -> "great"
                         ">="    -> "great-or-eq"
                         "<"     -> "less"
                         "<="    -> "less-or-eq"
-                        else    -> operationToken.text
+                        else    -> token.text
                     }
                 ), it
             )

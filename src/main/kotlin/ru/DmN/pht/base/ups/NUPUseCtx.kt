@@ -18,6 +18,7 @@ import ru.DmN.pht.std.module.StdModule
 import ru.DmN.pht.std.processor.utils.exports
 import ru.DmN.pht.std.processor.utils.isExports
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.pht.std.utils.text
 import java.util.*
 
 object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeParsedUse> {
@@ -41,7 +42,7 @@ object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeParsedUse> {
     override fun unparse(node: NodeUse, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         loadModules(node.names, unparser, ctx)
         unparser.out.apply {
-            append('(').append(node.token.text).append(' ')
+            append('(').append(node.text).append(' ')
             node.names.forEachIndexed { i, it ->
                 append(it)
                 if (node.names.size + 1 < i) {

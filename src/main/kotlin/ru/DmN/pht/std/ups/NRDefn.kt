@@ -56,7 +56,9 @@ object NRDefn : INodeProcessor<NodeNodesList> {
                 new,
                 processor,
                 ctx.with(method).with(BodyContext.of(method)),
-                ValType.NO_VALUE
+                if (method.rettype == VirtualType.VOID)
+                    ValType.NO_VALUE
+                else ValType.VALUE
             )
         }
         return new
