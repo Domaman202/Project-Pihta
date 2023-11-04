@@ -34,8 +34,8 @@ object NCMath : INodeCompiler<NodeNodesList> {
             "!and" -> Opcodes.IAND + calcOffsetAndOr(type)
             "!or"  -> Opcodes.IOR  + calcOffsetAndOr(type)
             "!xor" -> Opcodes.IXOR + calcOffsetXorShift(type)
-            "!shift-left"  -> Opcodes.ISHL + calcOffsetXorShift(type)
-            "!shift-right" -> Opcodes.ISHR + calcOffsetXorShift(type)
+            "!shift-left"  -> Opcodes.ISHL + calcOffsetAndOr(type)
+            "!shift-right" -> Opcodes.ISHR + calcOffsetAndOr(type)
             else  -> throw RuntimeException()
         }
 

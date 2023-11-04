@@ -57,7 +57,12 @@
                 (#longBitsToDouble ^java.lang.Double
                     (or
                         (#doubleToLongBits ^java.lang.Double this)
-                        (#doubleToLongBits ^java.lang.Double this))))))
+                        (#doubleToLongBits ^java.lang.Double this))))
+
+            (efn ^long xor ^long [[other ^long]]
+                (or
+                    (and (as ^long (xor (as ^int (and this 4294967295l)) (as ^int (and other 4294967295l)))) 4294967295l)
+                    (<< (as ^long (xor (as ^int (>> this 32)) (as ^int (>> other 32)))) 32)))))
 
     (export
         (import java

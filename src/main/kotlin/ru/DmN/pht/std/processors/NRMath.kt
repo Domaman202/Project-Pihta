@@ -15,6 +15,7 @@ import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.unparsers.NUDefaultX
 import ru.DmN.pht.std.utils.line
 import ru.DmN.pht.std.utils.processNodes
+import ru.DmN.pht.std.utils.text
 
 object NRMath : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
@@ -31,7 +32,8 @@ object NRMath : INodeProcessor<NodeNodesList> {
             if (mode == ValType.VALUE)
                 NodeNodesList(
                     node.token.processed(),
-                    nodes.map { NRAs.process(nodeAs(line, it, firstType.name), processor, ctx, ValType.VALUE)!! }.toMutableList(),
+                    (if (node.text.startsWith("shift")) nodes else nodes.map { NRAs.process(nodeAs(line, it, firstType.name), processor, ctx, ValType.VALUE)!! })
+                        .toMutableList(),
                 )
             else null
         else NodeMCall(
