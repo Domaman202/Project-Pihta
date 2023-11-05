@@ -1,6 +1,3 @@
 (use-ctx pht
     (app-fn
-        (def [[i 0]])
-        (cycle (< i 10)
-            (println i)
-            (++ i))))
+        (println (+ "a = " "12"))))
