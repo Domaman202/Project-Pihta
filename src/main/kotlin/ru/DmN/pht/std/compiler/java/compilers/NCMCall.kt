@@ -34,6 +34,8 @@ object NCMCall : INodeCompiler<NodeMCall> {
                     Opcodes.INVOKESTATIC
                 else if (declaringClass!!.isInterface)
                     Opcodes.INVOKEINTERFACE
+                else if (node.type == NodeMCall.Type.SUPER)
+                    Opcodes.INVOKESPECIAL
                 else Opcodes.INVOKEVIRTUAL,
                 declaringClass!!.className,
                 name,
