@@ -1,8 +1,4 @@
 (use-ctx pht
-    (cls Test [^Object]
-        (ctor [] (ccall))
-        (field [[i ^int]]))
+    (comment Слава России (и Сербии\)!)
     (app-fn
-        (def [[o (new ^Test)]])
-        (set o/i 12)
-        (println o/i)))
+        (println "Славься Сербский Брат!"))

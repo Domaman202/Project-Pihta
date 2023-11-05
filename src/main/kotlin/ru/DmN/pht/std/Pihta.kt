@@ -47,6 +47,7 @@ object Pihta : StdModule("pht") {
         add("ccall",        NUPDefault, NRCCall)
         add("cls",          NUPDefault, NRClass)
         add("!cls",         NUPClass)
+        add("comment",      NUPComment)
         add("ctor",         NUPCtor)
         add("cycle",        NUPDefault, NRCycle)
         add("!cycle",       NUPDefaultX)
