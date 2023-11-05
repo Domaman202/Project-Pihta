@@ -58,7 +58,7 @@ object NRFor : INodeProcessor<NodeNodesList> {
                             nodeDef(line, i, nodeValueOf(line, 0)),
                             nodeCycle(
                                 line,
-                                NodeCompare(
+                                NodeNodesList(
                                     Token.operation(line, "less"),
                                     mutableListOf(
                                         nodeGetOrNameOf(line, i),

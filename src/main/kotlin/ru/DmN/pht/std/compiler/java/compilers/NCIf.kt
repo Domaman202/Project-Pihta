@@ -10,6 +10,7 @@ import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeCompare
 import ru.DmN.pht.std.processor.utils.nodeValueOf
 import ru.DmN.pht.std.utils.line
+import ru.DmN.pht.std.utils.text
 
 object NCIf : INodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext) =
@@ -22,21 +23,23 @@ object NCIf : INodeCompiler<NodeNodesList> {
     }
 
     private fun insertIf(node: NodeNodesList, compile: (Node) -> Unit, compiler: Compiler, ctx: CompilationContext) {
+        val ifInsert = { compile(node.nodes[1]) }
+        val elseInsert = { if (node.nodes.size == 3) compile(node.nodes[2]) }
         val cond = node.nodes[0]
         if (cond is NodeCompare) {
             NCCompare.insertIf(
-                cond.token.text!!,
+                cond.text,
                 cond.nodes,
-                { compile(node.nodes[1]) },
-                { if (node.nodes.size == 3) compile(node.nodes[2]) },
+                ifInsert,
+                elseInsert,
                 compiler, ctx
             )
         } else {
             NCCompare.insertIf(
-                "=",
+                "eq",
                 mutableListOf(cond, nodeValueOf(node.line, true)),
-                { compile(node.nodes[1]) },
-                { if (node.nodes.size == 3) compile(node.nodes[2]) },
+                ifInsert,
+                elseInsert,
                 compiler, ctx
             )
         }
