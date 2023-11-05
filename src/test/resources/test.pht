@@ -1,8 +1,7 @@
 (use-ctx pht
     (cls Test [^Object]
         (ctor [] (ccall))
-        (defn setI ^void [[value ^int]]
-            (println value)))
+        (def [[i ^int]]))
     (app-fn
         (def [[o (new ^Test)]])
         (set o/i 21)))

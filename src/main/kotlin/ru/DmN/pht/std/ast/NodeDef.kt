@@ -5,7 +5,10 @@ import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.utils.indent
 import ru.DmN.pht.std.processor.utils.Variable
 
-class NodeDef(tkOperation: Token, val variables: List<Variable>) : Node(tkOperation) {
+class NodeDef(tkOperation: Token, val variables: List<Variable>) : Node(tkOperation), IStaticallyNode, IFinallyNode {
+    override var static: Boolean = false
+    override var final: Boolean = false
+
     override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
         indent(indent).append('[').append(token.text)
         if (variables.isNotEmpty()) {
