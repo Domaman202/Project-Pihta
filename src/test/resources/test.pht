@@ -1,3 +1,3 @@
 (use-ctx pht
     (app-fn
-        (println (shift-left 2.1f 12))))
+        (println (+ "a = " "12"))))

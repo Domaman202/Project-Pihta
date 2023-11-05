@@ -30,7 +30,7 @@
             (universal-array-extends [^boolean ^byte ^short ^char ^int ^long ^float ^double ^Any]))
 
         (cls StringExtends [^Object]
-            (@varargs (efn ^String plus ^String [[arr (array-type ^String)]] (progn
+            (@varargs (efn ^String add ^String [[arr (array-type ^String)]] (progn
                 (def [[str (new StringBuilder this)]])
                 (for [e arr]
                     (#append str e))
