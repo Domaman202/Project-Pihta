@@ -1,3 +1,3 @@
 (use-ctx pht
     (app-fn
-        (println (xor 7d 2d))))
+        (println (shift-left 2.1f 12))))

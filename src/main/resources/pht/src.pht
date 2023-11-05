@@ -72,7 +72,29 @@
                 (#longBitsToDouble ^java.lang.Double
                     (xor
                         (#doubleToLongBits ^java.lang.Double this)
-                        (#doubleToLongBits ^java.lang.Double other))))))
+                        (#doubleToLongBits ^java.lang.Double other))))
+
+            (efn ^float shift-left ^float [[offset ^int]]
+                (#intBitsToFloat ^java.lang.Float
+                    (shift-left
+                        (#floatToRawIntBits ^java.lang.Float this)
+                        offset)))
+            (efn ^double shift-left ^double [[offset ^int]]
+                (#longBitsToDouble ^java.lang.Double
+                    (shift-left
+                        (#doubleToLongBits ^java.lang.Double this)
+                        offset)))
+
+            (efn ^float shift-right ^float [[offset ^int]]
+                (#intBitsToFloat ^java.lang.Float
+                    (shift-right
+                        (#floatToRawIntBits ^java.lang.Float this)
+                        offset)))
+            (efn ^double shift-right ^double [[offset ^int]]
+                (#longBitsToDouble ^java.lang.Double
+                    (shift-right
+                        (#doubleToLongBits ^java.lang.Double this)
+                        offset)))))
 
     (export
         (import java
