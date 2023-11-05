@@ -10,7 +10,6 @@ import ru.DmN.pht.std.ast.NodeFGet
 import ru.DmN.pht.std.ast.NodeFMGet
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.nodeMCall
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.processors.NRFGetA
 import ru.DmN.pht.std.processors.NRMCall
@@ -25,24 +24,34 @@ object NUPFGetB : INodeUniversalProcessor<Node, NodeFMGet> {
         return if (mode == ValType.VALUE) {
             val instance = processor.process(node.instance, ctx, ValType.VALUE)!!
             val type = getInstanceType(node, processor, ctx)!!
-            val field = NRFGetA.findField(type, node.name, node.static)
-            if (field == null)
-                NRMCall.process(
-                    nodeMCall(node.line, instance, "get${node.name.let { it[0].toUpperCase() + it.substring(1) }}", emptyList()),
-                    processor,
-                    ctx,
-                    ValType.VALUE
+            val result = NRMCall.findMethodOrNull(
+                type,
+                "get${node.name.let { it[0].toUpperCase() + it.substring(1) }}",
+                emptyList(),
+                processor,
+                ctx
+            )
+            if (result == null)
+                NodeFGet(
+                    Token(node.token.line, Token.Type.OPERATION, "!fget"),
+                    mutableListOf(instance),
+                    node.name,
+                    type.let {
+                        val field = NRFGetA.findField(type, node.name, node.static)
+                        if (field == null)
+                            NodeFGet.Type.UNKNOWN
+                        else if (field.static)
+                            NodeFGet.Type.STATIC
+                        else NodeFGet.Type.INSTANCE
+                    },
+                    type
                 )
-            else NodeFGet(
-                Token(node.token.line, Token.Type.OPERATION, "!fget"),
-                mutableListOf(instance),
-                node.name,
-                type.let {
-                    if (field.static)
-                        NodeFGet.Type.STATIC
-                    else NodeFGet.Type.INSTANCE
-                },
-                type
+            else NodeMCall(
+                Token.operation(node.line, "!mcall"),
+                mutableListOf(),
+                instance,
+                result.second,
+                NodeMCall.Type.VIRTUAL
             )
         } else null
     }
