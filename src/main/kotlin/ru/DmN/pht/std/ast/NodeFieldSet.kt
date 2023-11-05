@@ -4,7 +4,7 @@ import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.utils.indent
 
-class NodeFieldSet(token: Token, val instance: Node, name: String, value: Node?, val static: Boolean) : NodeSet(token, name, value) {
+class NodeFieldSet(token: Token, val instance: Node, name: String, value: Node?, val static: Boolean, val native: Boolean = false) : NodeSet(token, name, value) {
     override fun copy(): NodeFieldSet =
         NodeFieldSet(token, instance, name, value?.copy(), static)
 

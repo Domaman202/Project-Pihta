@@ -1,8 +1,8 @@
 package ru.DmN.pht.std.compiler.java.utils
 
 import org.objectweb.asm.Label
+import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
-import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.base.utils.IContextCollection
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
@@ -34,13 +34,13 @@ val IContextCollection<*>.body
 val IContextCollection<*>.bodyOrNull
     get() = contexts["pht/body"] as BodyContext?
 
-fun load(variable: Variable, node: MethodNode) {
+fun load(variable: Variable, node: MethodVisitor) {
     if (!variable.tmp) {
         load(variable.type?.name, variable.id, node)
     }
 }
 
-fun load(type: String?, id: Int, node: MethodNode) {
+fun load(type: String?, id: Int, node: MethodVisitor) {
     node.visitVarInsn(
         when (type) {
             "void" -> throw RuntimeException()
@@ -54,7 +54,7 @@ fun load(type: String?, id: Int, node: MethodNode) {
     )
 }
 
-fun storeCast(variable: Variable, from: VirtualType, node: MethodNode) {
+fun storeCast(variable: Variable, from: VirtualType, node: MethodVisitor) {
     val to = variable.type()
     val tmp = Variable("tmp$${variable.hashCode() + from.hashCode()}", from, -1, true)
     if (from.isPrimitive != to.isPrimitive)
@@ -65,7 +65,7 @@ fun storeCast(variable: Variable, from: VirtualType, node: MethodNode) {
     store(variable, node)
 }
 
-fun store(variable: Variable, node: MethodNode) {
+fun store(variable: Variable, node: MethodVisitor) {
     if (!variable.tmp) {
         node.visitVarInsn(
             when (variable.type().name) {
@@ -80,7 +80,7 @@ fun store(variable: Variable, node: MethodNode) {
     }
 }
 
-fun bytecodeCast(from: String, to: String, node: MethodNode) {
+fun bytecodeCast(from: String, to: String, node: MethodVisitor) {
     node.visitInsn(when (from) {
         "boolean", "byte", "short", "char", "int" -> when (to) {
             "boolean",
@@ -126,7 +126,7 @@ fun bytecodeCast(from: String, to: String, node: MethodNode) {
     })
 }
 
-fun primitiveToObject(variable: Variable, node: MethodNode): VirtualType? {
+fun primitiveToObject(variable: Variable, node: MethodVisitor): VirtualType? {
     val start = Label()
     node.visitLabel(start)
     load(variable, node)
@@ -143,12 +143,12 @@ fun primitiveToObject(variable: Variable, node: MethodNode): VirtualType? {
     }
 }
 
-private fun primitiveToObject(node: MethodNode, input: Char, type: VirtualType): VirtualType {
+private fun primitiveToObject(node: MethodVisitor, input: Char, type: VirtualType): VirtualType {
     node.visitMethodInsn(Opcodes.INVOKESTATIC, type.className, "valueOf", "($input)${type.desc}", false)
     return type
 }
 
-fun objectToPrimitive(variable: Variable, node: MethodNode): VirtualType? {
+fun objectToPrimitive(variable: Variable, node: MethodVisitor): VirtualType? {
     val start = Label()
     node.visitLabel(start)
     return when (val type = variable.type().name) {
@@ -164,7 +164,7 @@ fun objectToPrimitive(variable: Variable, node: MethodNode): VirtualType? {
     }
 }
 
-private fun objectToPrimitive(variable: Variable, node: MethodNode, owner: String, name: VirtualType, rettype: Char): VirtualType {
+private fun objectToPrimitive(variable: Variable, node: MethodVisitor, owner: String, name: VirtualType, rettype: Char): VirtualType {
     load(variable, node)
     node.visitMethodInsn(Opcodes.INVOKESTATIC, owner.replace('.', '/'), "${name}Value", "()$rettype", false)
     return name

@@ -24,13 +24,16 @@ object NUPFGetB : INodeUniversalProcessor<Node, NodeFMGet> {
         return if (mode == ValType.VALUE) {
             val instance = processor.process(node.instance, ctx, ValType.VALUE)!!
             val type = getInstanceType(node, processor, ctx)!!
-            val result = NRMCall.findMethodOrNull(
-                type,
-                "get${node.name.let { it[0].toUpperCase() + it.substring(1) }}",
-                emptyList(),
-                processor,
-                ctx
-            )
+            val result =
+                if (node.native)
+                    null
+                else NRMCall.findMethodOrNull(
+                    type,
+                    "get${node.name.let { it[0].toUpperCase() + it.substring(1) }}",
+                    emptyList(),
+                    processor,
+                    ctx
+                )
             if (result == null)
                 NodeFGet(
                     Token(node.token.line, Token.Type.OPERATION, "!fget"),

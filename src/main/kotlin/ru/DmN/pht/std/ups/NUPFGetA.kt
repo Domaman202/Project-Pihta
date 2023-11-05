@@ -27,7 +27,9 @@ object NUPFGetA : INodeUniversalProcessor<NodeFGet, NodeFGet> {
             NodeFGet.Type.STATIC -> { it: VirtualField -> it.static }
             NodeFGet.Type.INSTANCE -> { it: VirtualField -> !it.static }
         }
-        return (if (node.type == NodeFGet.Type.STATIC) ctx.global.getType(processor.computeString(node.nodes[0], ctx), processor.tp) else processor.calc(node.nodes[0], ctx)!!).fields
+        return (if (node.type == NodeFGet.Type.STATIC)
+            ctx.global.getType(processor.computeString(node.nodes[0], ctx), processor.tp)
+        else processor.calc(node.nodes[0], ctx)!!).fields
             .asSequence()
             .filter { it.name == node.name }
             .filter(filter)

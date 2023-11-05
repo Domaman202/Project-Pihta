@@ -50,24 +50,28 @@ object NCDefn : INodeCompiler<NodeDefn> {
             visitInsn(Opcodes.RETURN)
         } else {
             load(NCDefault.compileVal(node, compiler, context), this)
-            visitInsn(
-                when (method.rettype) {
-                    VirtualType.BOOLEAN,
-                    VirtualType.BYTE,
-                    VirtualType.SHORT,
-                    VirtualType.CHAR,
-                    VirtualType.INT     -> Opcodes.IRETURN
-                    VirtualType.LONG    -> Opcodes.LRETURN
-                    VirtualType.FLOAT   -> Opcodes.FRETURN
-                    VirtualType.DOUBLE  -> Opcodes.DRETURN
-                    else                -> Opcodes.ARETURN
-                }
-            )
+            visitReturn(this, method.rettype)
         }
         val stop = Label()
         visitLabel(stop)
         body.stop = stop
         visit(body)
+    }
+
+    fun visitReturn(node: MethodVisitor, rettype: VirtualType) {
+        node.visitInsn(
+            when (rettype) {
+                VirtualType.BOOLEAN,
+                VirtualType.BYTE,
+                VirtualType.SHORT,
+                VirtualType.CHAR,
+                VirtualType.INT     -> Opcodes.IRETURN
+                VirtualType.LONG    -> Opcodes.LRETURN
+                VirtualType.FLOAT   -> Opcodes.FRETURN
+                VirtualType.DOUBLE  -> Opcodes.DRETURN
+                else                -> Opcodes.ARETURN
+            }
+        )
     }
 
     private fun MethodNode.visit(body: BodyContext) {

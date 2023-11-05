@@ -20,13 +20,16 @@ object NUPFSetB : INodeUniversalProcessor<Node, NodeFieldSet> {
         val type = if (instance.isConstClass())
             ctx.global.getType(processor.computeString(instance, ctx), processor.tp)
         else processor.calc(node.instance, ctx)!!
-        val result = NRMCall.findMethodOrNull(
-            type,
-            "set${node.name.let { it[0].toUpperCase() + it.substring(1) }}",
-            listOf(node.value!!),
-            processor,
-            ctx
-        )
+        val result =
+            if (node.native)
+                null
+            else NRMCall.findMethodOrNull(
+                type,
+                "set${node.name.let { it[0].toUpperCase() + it.substring(1) }}",
+                listOf(node.value!!),
+                processor,
+                ctx
+            )
         return if (result == null)
             NodeFSet(
                 Token(node.line, Token.Type.OPERATION, "fset"),
