@@ -5,7 +5,7 @@
 
 1. `(cycle cond (expr0) (exprN))`<br>
 `cond` - _условие_.<br>
-`expr0` `exprN` - _выражения_.
+`(expr0)` `(exprN)` - _выражения_.
 
 ### Примеры
 

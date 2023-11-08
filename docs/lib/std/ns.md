@@ -5,7 +5,7 @@
 
 1. `(ns ru.pht.test (expr0) (exprN))`<br>
 `ru.pht.test` - _пространство имён_.<br>
-`expr0` `exprN` - _выражения_.
+`(expr0)` `(exprN)` - _выражения_.
 
 ### Примеры
 

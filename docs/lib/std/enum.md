@@ -6,7 +6,7 @@
 1. `(enum Colors [^Object] (expr0) (exprN))`<br>
 `Colors` - _имя_.<br>
 `Object` - _предки_.<br>
-`expr0` `exprN` - _тело_.
+`(expr0)` `(exprN)` - _тело_.
 
 ### Примеры
 

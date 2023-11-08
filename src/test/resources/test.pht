@@ -1,3 +1,6 @@
 (use-ctx pht
-    (app-fn
-        (println (eq 6 6))))
+    (app
+        (defn foo ^void []
+            (println "Foo!"))
+        (app-fn
+            (#foo ^App))))
