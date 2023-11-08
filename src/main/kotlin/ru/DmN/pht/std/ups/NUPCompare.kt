@@ -23,6 +23,7 @@ object NUPCompare : INodeUniversalProcessor<NodeCompare, NodeCompare> {
                 Token.operation(
                     token.line,
                     when (token.text!!) {
+                        "!"     -> "not"
                         "="     -> "eq"
                         "!="    -> "not-eq"
                         ">"     -> "great"

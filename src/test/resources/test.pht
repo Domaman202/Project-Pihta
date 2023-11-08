@@ -1,4 +1,3 @@
 (use-ctx pht
-    (comment Слава России (и Сербии\)!)
     (app-fn
-        (println "Славься Сербский Брат!"))
+        (println (eq 6 6))))

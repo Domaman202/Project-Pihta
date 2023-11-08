@@ -3,9 +3,9 @@
 
 ### Применение
 
-1. `(alias-type Type Alias)`<br>
-`Type` - _тип_.<br>
-`Alias` - _псевдоним_.
+1. `(alias-type type alias)`<br>
+`type` - _тип_.<br>
+`alias` - _псевдоним_.
 
 ### Примеры
 

@@ -28,13 +28,16 @@ object NCCompare : INodeCompiler<NodeNodesList> {
             val elseLabel = Label()
             val exitLabel = Label()
             when (operation) {
+                "!not" -> when (type) {
+                    VirtualType.BOOLEAN -> visitInsn(Opcodes.INEG)
+                    else -> throw RuntimeException()
+                }
                 "!eq" -> when (type) {
                     VirtualType.BOOLEAN,
                     VirtualType.BYTE,
                     VirtualType.SHORT,
                     VirtualType.CHAR,
                     VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPEQ, ifLabel)
-
                     else -> throw RuntimeException()
                 }
                 "!not-eq" -> when (type) {

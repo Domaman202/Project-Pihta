@@ -9,15 +9,20 @@ import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
+import ru.DmN.pht.std.utils.text
 
 object NCMath : INodeCompiler<NodeNodesList> {
     override fun compileVal(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.run {
             val type = compiler.compileVal(node.nodes[0], ctx).apply { load(this, this@run) }.type()
-            val operation = calcOperation(node, type.name)
-            node.nodes.drop(1).forEach {
-                load(compiler.compileVal(it, ctx), this)
-                visitInsn(operation)
+            if (node.text == "!neg")
+                visitInsn(calcOperation(node, type.name))
+            else {
+                val operation = calcOperation(node, type.name)
+                node.nodes.drop(1).forEach {
+                    load(compiler.compileVal(it, ctx), this)
+                    visitInsn(operation)
+                }
             }
             return Variable.tmp(node, type)
         }

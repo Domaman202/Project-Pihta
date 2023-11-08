@@ -52,9 +52,9 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!mul",         NCMath)
         // n
         add("!neg",         NCMath)
-        add("new",          NCNew)
+        add("!new",         NCNew)
         add("!new-array",   NCNewArray)
-        add("!not",         NCNot)
+        add("!not",         NCCompare)
         add("!not-eq",      NCCompare)
         add("ns",           NCDefault)
         // o
