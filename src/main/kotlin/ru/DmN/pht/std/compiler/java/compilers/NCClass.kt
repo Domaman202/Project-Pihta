@@ -23,10 +23,14 @@ object NCClass : INodeCompiler<NodeType> {
                 visit(
                     Opcodes.V20,
                     Opcodes.ACC_PUBLIC.let {
-                        if (node.text == "!itf") it + Opcodes.ACC_INTERFACE + Opcodes.ACC_ABSTRACT
-                        else if (node.abstract) it + Opcodes.ACC_ABSTRACT
-                        else if (node.open) it
-                        else it + Opcodes.ACC_FINAL
+                        when (node.text) {
+                            "!enum" -> it + Opcodes.ACC_ENUM
+                            "!itf" -> it + Opcodes.ACC_INTERFACE + Opcodes.ACC_ABSTRACT
+                            else ->
+                                if (node.abstract) it + Opcodes.ACC_ABSTRACT
+                                else if (node.open) it
+                                else it + Opcodes.ACC_FINAL
+                        }
                     },
                     node.type.className,
                     null,
@@ -36,7 +40,13 @@ object NCClass : INodeCompiler<NodeType> {
             }
             compiler.pushTask(ctx, CompilingStage.TYPES_DEFINE) {
                 if (node.token.text == "!obj") {
-                    cn.visitField(Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC + Opcodes.ACC_FINAL, "INSTANCE", cn.name.desc, null, null)
+                    cn.visitField(
+                        Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC + Opcodes.ACC_FINAL,
+                        "INSTANCE",
+                        cn.name.desc,
+                        null,
+                        null
+                    )
                     cn.visitMethod(Opcodes.ACC_STATIC, "<clinit>", "()V", null, null).run {
                         visitCode()
                         visitTypeInsn(Opcodes.NEW, cn.name)
@@ -49,8 +59,13 @@ object NCClass : INodeCompiler<NodeType> {
                 }
                 NCDefault.compile(node, compiler, ctx.with(ClassContext(cn, node.type)))
                 if (node.text == "!obj") {
-                    cn.methods.find { it.name == "<init>" && it.desc == "()V" } ?:
-                    cn.visitMethod(Opcodes.ACC_PRIVATE, "<init>", "()V", null, null).run {
+                    cn.methods.find { it.name == "<init>" && it.desc == "()V" } ?: cn.visitMethod(
+                        Opcodes.ACC_PRIVATE,
+                        "<init>",
+                        "()V",
+                        null,
+                        null
+                    ).run {
                         visitCode()
                         visitVarInsn(Opcodes.ALOAD, 0)
                         visitMethodInsn(Opcodes.INVOKESPECIAL, cn.superName, "<init>", "()V", false)

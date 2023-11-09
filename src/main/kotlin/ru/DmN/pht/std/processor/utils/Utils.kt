@@ -21,17 +21,9 @@ fun nodeValn(line: Int, nodes: MutableList<Node>) =
     NodeNodesList(Token.operation(line, "valn"), nodes)
 fun nodeValn(line: Int, node: Node) =
     NodeNodesList(Token.operation(line, "valn"), mutableListOf(node))
-fun nodeObj(line: Int, name: String, parents: List<String>, nodes: List<Node>) =
-    NodeNodesList(Token.operation(line, "obj"),
-        mutableListOf(nodeValueOf(line, name), nodeValn(line, parents.map { nodeValueOf(line, it) }.toMutableList())).apply { addAll(nodes) })
 fun nodeClass(line: Int, name: String, parents: List<String>, nodes: List<Node>) =
     NodeNodesList(Token.operation(line, "cls"),
         mutableListOf(nodeValueOf(line, name), nodeValn(line, parents.map { nodeValueOf(line, it) }.toMutableList())).apply { addAll(nodes) })
-fun nodeCtor(line: Int, args: List<Pair<String, String>>, body: MutableList<Node>) =
-    NodeNodesList(Token.operation(line, "ctor"),
-        mutableListOf(
-            nodeValn(line, args.map { nodeValn(line, mutableListOf(nodeValueOf(line, it.first), nodeClass(line, it.second))) }.toMutableList()),
-            nodeProgn(line, body)))
 fun nodeFields(line: Int, fields: List<Pair<String, String>>) =
     NodeNodesList(Token.operation(line, "field"),
         fields.map { nodeValn(line, nodeValn(line, mutableListOf(nodeValueOf(line, it.first), nodeClass(line, it.second)))) }.toMutableList())
@@ -80,22 +72,6 @@ fun nodeMCall(line: Int, instance: Node, name: String, args: List<Node>) =
 fun nodeMCall(line: Int, type: String, name: String, args: List<Node>) =
     NodeNodesList(Token.operation(line, "mcall"),
         mutableListOf<Node>(nodeClass(line, type), nodeValueOf(line, name)).apply { addAll(args) })
-fun nodeFieldCtorSet(line: Int, name: String) =
-    NodeFieldSet(
-        Token.operation(line, "fset!"),
-        nodeGetOrNameOf(line, "this"),
-        name,
-        nodeGetOrNameOf(line, name),
-        false)
-fun nodeFieldInit(line: Int, name: String, clazz: String, value: Node) =
-    NodeFieldSet(
-        Token.operation(line, "fset!"),
-        nodeClass(line, clazz),
-        name,
-        value,
-        false)
-fun nodeSet(line: Int, name: String, value: Node) =
-    NodeSet(Token.operation(line, "set!"), name, value)
 fun nodeGetOrNameOf(line: Int, name: String) =
     NodeGetOrName(Token.operation(line, "get-or-name!"), name, false)
 fun nodeClass(line: Int, name: String) =

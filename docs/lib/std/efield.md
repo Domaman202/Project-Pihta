@@ -1,3 +1,15 @@
+## efield
+Определяет экземпляры перечисления.
+
+### Применение
+
+1. `(efield [[name0 arg0 argN] [nameN arg0 argN]])`<br>
+`name` - _имя_.<br>
+`arg0` `argN` - _аргументы_. 
+
+### Примеры
+
+```pihta
 (use-ctx pht
     (enum Colors [^Object]
         (ector [[r ^int] [g ^int] [b ^int]]
@@ -15,3 +27,4 @@
             [BLUE   0 0 255]]))
     (app-fn
         (println ^Colors/RED)))
+```

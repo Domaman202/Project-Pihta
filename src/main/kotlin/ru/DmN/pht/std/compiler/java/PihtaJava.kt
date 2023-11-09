@@ -4,6 +4,7 @@ import ru.DmN.pht.base.compiler.java.compilers.NCDefault
 import ru.DmN.pht.base.utils.ModuleCompilers
 import ru.DmN.pht.std.Pihta
 import ru.DmN.pht.std.compiler.java.compilers.*
+import ru.DmN.pht.std.ups.NUPEnum
 
 object PihtaJava : ModuleCompilers(Pihta) {
     override fun onInitialize() {
@@ -29,6 +30,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         // e
         add("efield",       NCEField)
         add("efn",          NCDefn)
+        add("!enum",        NCClass)
         add("!eq",          NCCompare)
         // f
         add("!fget",        NCFGet)

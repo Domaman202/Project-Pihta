@@ -1,3 +1,15 @@
+## ector
+Определяет конструктор перечисления.
+
+### Применение
+
+1. `(ector [[arg0 ^type0] [argN ^typeN]] (expr0) (exprN))`<br>
+   `[[arg0 ^type0] [argN ^typeN]]` - _аргументы_.<br>
+   `(expr0)` `(exprN)` - _тело_.
+
+### Примеры
+
+```pihta
 (use-ctx pht
     (enum Colors [^Object]
         (ector [[r ^int] [g ^int] [b ^int]]
@@ -15,3 +27,4 @@
             [BLUE   0 0 255]]))
     (app-fn
         (println ^Colors/RED)))
+```

@@ -15,10 +15,12 @@ import ru.DmN.pht.base.processors.NRDefault
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparsers.NUDefault
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.ast.NodeFieldSet
 import ru.DmN.pht.std.ast.NodeType
 import ru.DmN.pht.std.processor.ctx.EnumContext
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.pht.std.unparsers.NUDefaultX
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.line
@@ -29,7 +31,7 @@ object NUPEnum : INodeUniversalProcessor<NodeType, NodeNodesList> {
 
     override fun unparse(node: NodeType, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
-            append('(').append(node.token.text).append(' ').append(node.type.simpleName).append(" [")
+            append('(').append(NUDefaultX.text(node.token)).append(' ').append(node.type.simpleName).append(" [")
             node.type.parents.forEachIndexed { i, it ->
                 append('^').append(it.name)
                 if (node.type.parents.size + 1 < i) {
@@ -50,7 +52,7 @@ object NUPEnum : INodeUniversalProcessor<NodeType, NodeNodesList> {
         processor.tp.types += type
         //
         val line = node.line
-        val new = NodeType(Token.operation(line, "cls"), node.nodes.drop(2).toMutableList(), type)
+        val new = NodeType(Token.operation(line, "!enum"), node.nodes.drop(2).toMutableList(), type)
         processor.pushTask(ctx, ProcessingStage.TYPES_PREDEFINE) {
             type.parents = processor.computeList(processor.process(node.nodes[1], ctx, ValType.VALUE)!!, ctx)
                 .map { gctx.getType(processor.computeString(it, ctx), processor.tp) }
@@ -71,11 +73,12 @@ object NUPEnum : INodeUniversalProcessor<NodeType, NodeNodesList> {
                                     nodeProgn(
                                         line,
                                         ectx.enums.map {
-                                            nodeFieldInit(
-                                                line,
+                                            NodeFieldSet(
+                                                Token.operation(line, "fset!"),
+                                                nodeClass(line, type.name),
                                                 it.name,
-                                                type.name,
-                                                nodeNew(line, type.name, it.args)
+                                                nodeNew(line, type.name, it.args),
+                                                true
                                             )
                                         }.toMutableList()
                                     )
