@@ -1,6 +1,6 @@
 (use-ctx pht
     (app
-        (def [[i ^int]])
+        (defn foo ^void []
+            (println "Foo!"))
         (app-fn
-            (set ^App/i 202)
-            (println ^App/i))))
+            (#foo ^App))))

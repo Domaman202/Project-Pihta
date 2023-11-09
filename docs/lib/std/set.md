@@ -20,8 +20,7 @@
 ```pihta
 (use-ctx pht
     (app
-        (@static
-            (def [[j ^int]]))
+        (def [[j ^int]])
         (app-fn
             (set ^App/j 21)
             (println ^App/j))))
