@@ -1,6 +1,3 @@
 (use-ctx pht
-    (app
-        (defn foo ^void []
-            (println "Foo!"))
-        (app-fn
-            (#foo ^App))))
+    (app-fn
+        (valn-repeat 3 (println "Слава России!"))))

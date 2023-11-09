@@ -23,17 +23,17 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 object NUPDefMacro : INodeUniversalProcessor<NodeDefMacro, NodeDefMacro> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? {
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val uuid = UUID.randomUUID()
         ctx.macros.push(uuid)
         return NPDefault.parse(parser, ctx) {
             ctx.macros.pop()
-            NodeDefMacro(operationToken, it.toMutableList(), uuid)
+            NodeDefMacro(token, it.toMutableList(), uuid)
         }
     }
 
     override fun unparse(node: NodeDefMacro, unparser: Unparser, ctx: UnparsingContext, indent: Int) =
-        throw UnsupportedOperationException("Not yet implemented")
+        NUPDefault.unparse(node, unparser, ctx, indent)
 
     override fun process(node: NodeDefMacro, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
         processor.pushTask(ctx, ProcessingStage.MACROS_DEFINE) {

@@ -8,7 +8,7 @@ import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.utils.computeString
 
-object NRSymbol : ru.DmN.pht.std.processors.IStdNodeProcessor<NodeNodesList> {
+object NRSymbol : IStdNodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
         if (mode == ValType.VALUE)
             NodeValue.of(node.token.line, NodeValue.Type.STRING, computeString(node, processor, ctx))

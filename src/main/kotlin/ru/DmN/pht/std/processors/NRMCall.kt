@@ -3,13 +3,16 @@ package ru.DmN.pht.std.processors
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.ast.NodeNodesList
+import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.IAdaptableNode
+import ru.DmN.pht.std.ast.NodeFGet
 import ru.DmN.pht.std.ast.NodeMCall
+import ru.DmN.pht.std.ast.NodeMCall.Type.*
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeString
@@ -21,20 +24,32 @@ object NRMCall : INodeProcessor<NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeMCall {
         val triple = findMethod(node, processor, ctx)
-        val instance = if (triple.first == NodeMCall.Type.SUPER)
+        val instance = if (triple.first == SUPER)
             nodeGetOrNameOf(node.line, "this")
         else processor.process(node.nodes[0], ctx, mode)!!
         return if (triple.third.extend == null)
             NodeMCall(
                 node.token.processed(),
                 processArguments(node.line, processor, ctx, triple.third, triple.second),
-                instance,
+                if (triple.first == INSTANCE)
+                    NodeFGet(
+                        Token.operation(node.line, "!fget"),
+                        mutableListOf(nodeClass(node.line, triple.third.declaringClass!!.name)),
+                        "INSTANCE",
+                        NodeFGet.Type.STATIC,
+                        triple.third.declaringClass!!
+                    )
+                else instance,
                 triple.third,
-                if (triple.first == NodeMCall.Type.UNKNOWN)
-                    if (triple.third.modifiers.static)
-                        NodeMCall.Type.STATIC
-                    else NodeMCall.Type.VIRTUAL
-                else triple.first
+                when (triple.first) {
+                    UNKNOWN ->
+                        if (triple.third.modifiers.static)
+                            STATIC
+                        else VIRTUAL
+
+                    INSTANCE -> VIRTUAL
+                    else -> triple.first
+                }
             )
         else NodeMCall(
             node.token.processed(),
@@ -80,23 +95,24 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         val type = node.nodes[0].let {
             if (it.isConstClass()) {
                 clazz = ctx.global.getType(it.getConstValueAsString(), processor.tp)
-                NodeMCall.Type.STATIC
+                STATIC
             } else {
                 if (it.isLiteral()) {
                     when (processor.computeString(it, ctx)) {
                         "this" -> {
                             clazz = processor.calc(it, ctx)!!
-                            return@let NodeMCall.Type.THIS
+                            return@let THIS
                         }
+
                         "super" -> {
                             clazz = ctx.clazz.superclass!!
-                            return@let NodeMCall.Type.SUPER
+                            return@let SUPER
                         }
                     }
                 }
 
                 clazz = processor.calc(it, ctx)!!
-                NodeMCall.Type.UNKNOWN
+                UNKNOWN
             }
         }
         val result = findMethod(
@@ -106,7 +122,15 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             processor,
             ctx
         )
-        return Triple(type, result.first, result.second)
+        return Triple(
+            if (type == STATIC)
+                if (result.second.modifiers.static)
+                    STATIC
+                else INSTANCE
+            else type,
+            result.first,
+            result.second
+        )
     }
 
     fun findMethod(clazz: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Pair<List<Node>, VirtualMethod> =

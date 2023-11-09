@@ -23,7 +23,7 @@ object NCClass : INodeCompiler<NodeType> {
                 visit(
                     Opcodes.V20,
                     Opcodes.ACC_PUBLIC.let {
-                        if (node.token.text == "itf") it + Opcodes.ACC_INTERFACE
+                        if (node.text == "!itf") it + Opcodes.ACC_INTERFACE + Opcodes.ACC_ABSTRACT
                         else if (node.abstract) it + Opcodes.ACC_ABSTRACT
                         else if (node.open) it
                         else it + Opcodes.ACC_FINAL

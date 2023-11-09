@@ -19,11 +19,15 @@ class NodeMCall(tkOperation: Token, nodes: MutableList<Node>, val instance: Node
     }
 
     enum class Type {
+        // for compiler
         UNKNOWN,
         EXTEND,
         STATIC,
         VIRTUAL,
+        // for processor & compiler
+        SUPER,
+        // for processor
         THIS,
-        SUPER
+        INSTANCE
     }
 }

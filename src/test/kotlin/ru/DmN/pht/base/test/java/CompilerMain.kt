@@ -18,6 +18,8 @@ import ru.DmN.pht.base.utils.with
 import ru.DmN.uu.Unsafe
 import java.io.File
 import java.io.FileOutputStream
+import java.net.URL
+import java.net.URLClassLoader
 
 object CompilerMain {
     @JvmStatic
@@ -44,19 +46,10 @@ object CompilerMain {
                 it.accept(writer)
                 val b = writer.toByteArray()
                 stream.write(b)
-                // test
-                val method = ClassLoader::class.java.getDeclaredMethod(
-                    "defineClass",
-                    ByteArray::class.java,
-                    Int::class.javaPrimitiveType,
-                    Int::class.javaPrimitiveType
-                )
-                Unsafe.forceSetAccessible(method)
-                method.invoke(this::class.java.classLoader, b, 0, b.size) as Klass
             }
         }
         // test
-        println(Class.forName("App").getMethod("main").invoke(null))
+        println(Class.forName("App", true, URLClassLoader(arrayOf(File("dump").toURL()))).getMethod("main").invoke(null))
 //        println(Class.forName("App").run { getMethod("main").invoke(getField("INSTANCE").get(null)) })
     }
 
