@@ -22,7 +22,7 @@ object NUPGetOrName : INodeUniversalProcessor<NodeGetOrName, NodeGetOrName>, ISt
         val tk = parser.nextOperation()
         return if (tk.text!!.contains("[/#]".toRegex())) {
             parser.tokens.push(tk)
-            parser.get(ctx, "get!")!!.parse(parser, ctx, Token(token.line, Token.Type.OPERATION, "get!"))
+            parser.get(ctx, "get")!!.parse(parser, ctx, Token(token.line, Token.Type.OPERATION, "get!"))
         } else NodeGetOrName(token, tk.text, false)
     }
 

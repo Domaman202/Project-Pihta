@@ -8,6 +8,7 @@ import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.utils.VirtualField
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeFGet
+import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.processNodes
 
@@ -19,7 +20,10 @@ object NRFGetA : INodeProcessor<NodeNodesList> {
         return if (mode == ValType.VALUE) {
             val nodes = processor.processNodes(node, ctx, ValType.VALUE)
             val name = processor.computeString(nodes[1], ctx)
-            val type = processor.calc(nodes[0], ctx)!!
+            val type =
+                if (nodes[0].isConstClass())
+                    ctx.global.getType(processor.computeString(node.nodes[0], ctx), processor.tp)
+                else processor.calc(nodes[0], ctx)!!
             NodeFGet(
                 node.token.processed(),
                 mutableListOf(nodes[0]),

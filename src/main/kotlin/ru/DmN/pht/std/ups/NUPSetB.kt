@@ -33,11 +33,13 @@ object NUPSetB : INodeUniversalProcessor<NodeSet, NodeSet> {
 
     private fun parse(token: Token, name: String, static: Boolean, value: Node): Node {
         val parts = name.split("/")
-        return if (parts.size == 1) NodeSet(
-            Token(token.line, Token.Type.OPERATION, "set!"),
-            parts.last(),
-            value
-        ) else NodeFieldSet(
+        return if (parts.size == 1)
+            NodeSet(
+                Token(token.line, Token.Type.OPERATION, "set!"),
+                parts.last(),
+                value
+            )
+        else NodeFieldSet(
             Token(token.line, Token.Type.OPERATION, "fset!"),
             parse(token.line, parts, 1, static),
             parts.last(),

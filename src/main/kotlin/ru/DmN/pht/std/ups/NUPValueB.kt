@@ -21,7 +21,7 @@ object NUPValueB : INodeUniversalProcessor<Node, Node> {
                     Token.Type.CLASS -> {
                         if (text.contains("[/#]".toRegex())) {
                             parser.tokens.push(operationToken)
-                            return parser.get(ctx, "get!")!!.parse(parser, ctx, Token(operationToken.line, Token.Type.OPERATION, "get_"))
+                            return parser.get(ctx, "get")!!.parse(parser, ctx, Token(operationToken.line, Token.Type.OPERATION, "get_"))
                         } else NodeValue.Type.CLASS
                     }
                     Token.Type.NAMING -> NodeValue.Type.NAMING

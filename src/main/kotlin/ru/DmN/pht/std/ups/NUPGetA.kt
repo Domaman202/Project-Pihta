@@ -1,39 +1,66 @@
 package ru.DmN.pht.std.ups
 
 import ru.DmN.pht.base.Parser
-import ru.DmN.pht.base.Processor
-import ru.DmN.pht.base.Unparser
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.ast.NodeNodesList
-import ru.DmN.pht.base.parsers.NPDefault
-import ru.DmN.pht.base.processor.ProcessingContext
-import ru.DmN.pht.base.processor.ValType
-import ru.DmN.pht.base.unparser.UnparsingContext
-import ru.DmN.pht.std.ast.NodeGetA
-import ru.DmN.pht.std.processor.utils.body
-import ru.DmN.pht.std.processor.utils.clazz
-import ru.DmN.pht.std.processor.utils.isBody
-import ru.DmN.pht.std.processor.utils.isClass
+import ru.DmN.pht.base.lexer.Token
+import ru.DmN.pht.base.lexer.isNaming
+import ru.DmN.pht.base.lexer.isOperation
+import ru.DmN.pht.base.parser.ParsingContext
+import ru.DmN.pht.std.ast.NodeFMGet
+import ru.DmN.pht.std.ast.NodeGetOrName
+import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
-import ru.DmN.pht.std.utils.computeString
 
-object NUPGetA : INodeUniversalProcessor<NodeGetA, NodeNodesList> {
-    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
-        NPDefault.parse(parser, ctx, token)
+object NUPGetA : INodeUniversalProcessor<Node, Node> {
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
+        val nameToken = parser.nextToken()!!
+        return when (nameToken.type) {
+            Token.Type.CLASS -> parse(
+                token,
+                nameToken.text!!,
+                static = true,
+                klass = true
+            )
+            Token.Type.OPERATION -> parse(
+                token,
+                nameToken.text!!,
+                static = false,
+                klass = false
+            )
+            Token.Type.OPEN_BRACKET -> {
+                parser.tokens.push(nameToken)
+                return NodeFMGet(
+                    token,
+                    parser.parseNode(ctx)!!,
+                    parser.nextToken()!!
+                        .let { if (it.isOperation() || it.isNaming()) it else throw RuntimeException() }.text!!,
+                    false
+                )
+            }
 
-    override fun unparse(node: NodeGetA, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
-        unparser.out.append('(').append(node.token.text).append(' ').append(node.name).append(')')
+            else -> throw RuntimeException()
+        }
     }
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeGetA {
-        val name = processor.computeString(processor.process(node.nodes[0], ctx, mode)!!, ctx)
-        var type = NodeGetA.Type.UNKNOWN
-        if (ctx.isBody() && ctx.body[name] != null)
-            type = NodeGetA.Type.VARIABLE
-        else if (ctx.isClass() && ctx.clazz.fields.find { it.name == name } != null)
-            type = NodeGetA.Type.THIS_FIELD
-        return NodeGetA(node.token, name, type)
+    private fun parse(token: Token, name: String, static: Boolean, klass: Boolean): Node {
+        val parts = name.split("/", "#") as MutableList<String>
+        return parse(token, parts, parts.size, static, klass)
+    }
+
+    private fun parse(token: Token, parts: List<String>, i: Int, static: Boolean, clazz: Boolean): Node {
+        val j = i - 1
+        return if (j == 0) {
+            if (clazz)
+                NodeValue(Token(token.line, Token.Type.OPERATION, "value"), NodeValue.Type.CLASS, parts[0])
+            else NodeGetOrName(Token(token.line, Token.Type.OPERATION, "get-or-name!"), parts[0], static)
+        } else {
+            val isStatic = static && j == 1
+            NodeFMGet(
+                Token(token.line, Token.Type.OPERATION, "fget!",),
+                parse(token, parts, j, static, clazz),
+                parts[j],
+                isStatic
+            )
+        }
     }
 }

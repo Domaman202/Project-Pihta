@@ -10,6 +10,8 @@ import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.utils.VirtualField
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeDef
+import ru.DmN.pht.std.ast.NodeDef.VariableOrField
+import ru.DmN.pht.std.ast.NodeDef.VariableOrField.Companion
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
@@ -18,7 +20,7 @@ import ru.DmN.pht.std.utils.line
 object NRDef : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeDef {
         val gctx = ctx.global
-        val list = ArrayList<Variable>()
+        val list = ArrayList<VariableOrField>()
         //
         if (ctx.isBody()) {
             val bctx = ctx.body
@@ -35,15 +37,14 @@ object NRDef : INodeProcessor<NodeNodesList> {
                         name = processor.computeString(it[0], ctx)
                         it[1]
                     }?.let { processor.process(it, ctx, ValType.VALUE) }
-                list.add(Variable(name, type, value, bctx.addVariable(name, type).id))
+                list.add(VariableOrField.of(Variable(name, type, value, bctx.addVariable(name, type).id)))
             }
         } else {
             val clazz = ctx.clazz
             processor.computeList(node.nodes[0], ctx).map { processor.computeList(it, ctx) }.forEach {
                 val name = processor.computeString(it[0], ctx)
                 val type = gctx.getType(processor.computeString(it[1], ctx), processor.tp)
-                list.add(Variable(name, type, null, -1))
-                VirtualField(clazz, name, type, static = false, enum = false).run { clazz.fields += this }
+                list.add(VariableOrField.of(VirtualField(clazz, name, type, static = false, enum = false).apply { clazz.fields += this }))
             }
         }
         //
