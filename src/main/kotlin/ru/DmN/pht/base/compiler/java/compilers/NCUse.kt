@@ -15,7 +15,7 @@ object NCUse : INodeCompiler<NodeProcessedUse> {
 
     fun injectModules(node: NodeProcessedUse, compiler: Compiler, ctx: CompilationContext): CompilationContext {
         val context = ctx.subCtx()
-        node.names.forEach{ Module.MODULES[it]!!.inject(compiler, context) }
+        node.names.forEach{ Module.getOrThrow(it).inject(compiler, context) }
         node.processed.forEach { compiler.compile(it, context) }
         return context
     }

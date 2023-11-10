@@ -1,4 +1,5 @@
 (module
     (name "pht/module")
     (version "1.0.0")
+    (class "ru.DmN.pht.std.module.StdModule")
     (author "DomamaN202"))

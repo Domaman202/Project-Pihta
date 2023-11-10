@@ -19,7 +19,11 @@ object NPModule : SimpleNP() {
         return NPDefault.parse(parser, context) { it ->
             NodeModule(operationToken, it.associate { Pair(it.token.text!!, (it as IValueNode).value) }).apply {
                 val name = data["name"] as String
-                module = Module.MODULES.getOrPut(name) { Module(name) }
+                module = Module.getOrPut(name) {
+                    if (data["class"] == null)
+                        Module(name)
+                    else Class.forName(data["class"] as String).getField("INSTANCE").get(null) as Module
+                }
                 if (!module.init) {
                     module.init = true
                     (data["files"] as List<String>?)?.let { module.files += it }

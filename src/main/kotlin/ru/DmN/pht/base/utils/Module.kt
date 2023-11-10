@@ -3,19 +3,19 @@ package ru.DmN.pht.base.utils
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
+import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.parser.ParsingContext
-import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.parsers.INodeParser
 import ru.DmN.pht.base.processor.ProcessingContext
-import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.processor.ValType
+import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparsers.INodeUnparser
-import ru.DmN.pht.std.Pihta
 import ru.DmN.pht.std.module.StdModule
 import java.io.FileNotFoundException
+import java.lang.ref.WeakReference
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler as JavaNodeCompiler
 
 open class Module(val name: String, var init: Boolean = false) {
@@ -82,19 +82,29 @@ open class Module(val name: String, var init: Boolean = false) {
         "Module[$name]"
 
     companion object {
-        val MODULES: MutableMap<String, Module> = HashMap()
+        val MODULES: MutableList<WeakReference<Module>> = ArrayList()
 
-        init {
-            for (module in listOf(Pihta, StdModule,)) {
-                MODULES[module.name] = module
+        fun getOrPut(name: String, put: () -> Module): Module =
+            get(name) ?: put().apply { MODULES.add(WeakReference(this)) }
+
+        fun getOrThrow(name: String) =
+            get(name) ?: throw RuntimeException("Module '$name' not founded!")
+
+        operator fun get(name: String): Module? {
+            for (i in 0 until MODULES.size) {
+                val module = MODULES[i].get()
+                if (module == null)
+                    MODULES.removeAt(i)
+                else if (module.name == name) {
+                    return module
+                }
             }
+
+            return null
         }
 
         fun getModuleFile(name: String) =
-            String(
-                (Module::class.java.getResourceAsStream("/$name/module.pht")
-                    ?: throw FileNotFoundException("/$name/module.pht")).readAllBytes()
-            )
+            String((Module::class.java.getResourceAsStream("/$name/module.pht") ?: throw FileNotFoundException("/$name/module.pht")).readAllBytes())
 
         fun String.toRegularExpr(): Regex =
             this.replace(".", "\\.")

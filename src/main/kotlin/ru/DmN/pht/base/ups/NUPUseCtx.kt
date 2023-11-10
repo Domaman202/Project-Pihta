@@ -67,22 +67,22 @@ object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeParsedUse> {
 
     fun loadModules(names: List<String>, parser: Parser, context: ParsingContext) {
         names.forEach { name ->
-            val module = Module.MODULES[name]
+            val module = Module[name]
             if (module?.init != true)
                 Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(StdModule))
-            (module ?: Module.MODULES[name]!!).inject(parser, context)
+            (module ?: Module.getOrThrow(name)).inject(parser, context)
         }
     }
 
     fun loadModules(names: List<String>, unparser: Unparser, context: UnparsingContext) {
         names.forEach { name ->
-            val module = Module.MODULES[name]
+            val module = Module[name]
             if (module?.init != true)
                 Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(StdModule))
-            (module ?: Module.MODULES[name]!!).inject(unparser, context)
+            (module ?: Module.getOrThrow(name)).inject(unparser, context)
         }
     }
 
     fun injectModules(node: NodeUse, processor: Processor, ctx: ProcessingContext, mode: ValType, list: MutableList<Node>) =
-        node.names.forEachIndexed { i, it -> Module.MODULES[it]!!.inject(processor, ctx, if (i + 1 < node.names.size) ValType.NO_VALUE else mode)?.let { list += it } }
+        node.names.forEachIndexed { i, it -> Module.getOrThrow(it).inject(processor, ctx, if (i + 1 < node.names.size) ValType.NO_VALUE else mode)?.let { list += it } }
 }

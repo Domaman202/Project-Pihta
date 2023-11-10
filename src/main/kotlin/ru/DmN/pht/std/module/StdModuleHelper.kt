@@ -7,7 +7,7 @@ import ru.DmN.pht.std.module.parsers.NPValueList
 
 object StdModuleHelper : Module("pht/module/helper") {
     init {
-        add("name|version|files|deps|author".toRegex(), NPArgument)
+        add("name|version|files|class|deps|author".toRegex(), NPArgument)
         add("valn!",    NPValueList)
         add("value!",   NPValue)
     }
