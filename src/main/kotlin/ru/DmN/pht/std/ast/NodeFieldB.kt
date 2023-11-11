@@ -5,7 +5,7 @@ import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.utils.VirtualField
 import ru.DmN.pht.base.utils.indent
 
-class NodeField(tkOperation: Token, val fields: List<VirtualField>) : Node(tkOperation), IStaticallyNode, IFinallyNode {
+class NodeFieldB(tkOperation: Token, val fields: List<VirtualField>) : Node(tkOperation), IStaticallyNode, IFinallyNode {
     override var static: Boolean = false
         set(value) { field = value; fields.forEach { it.static = value } }
     override var final: Boolean = false

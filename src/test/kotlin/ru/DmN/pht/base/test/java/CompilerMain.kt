@@ -41,7 +41,9 @@ object CompilerMain {
             it.value.forEach { it() }
         }
         compiler.classes.values.forEach {
-            FileOutputStream("dump/${it.name.replace('/', '.')}.class").use { stream ->
+            if (it.name.contains('/'))
+                File("dump/${it.name.substring(0, it.name.lastIndexOf('/'))}").mkdirs()
+            FileOutputStream("dump/${it.name}.class").use { stream ->
                 val writer = ClassWriter(COMPUTE_FRAMES + COMPUTE_MAXS)
                 it.accept(writer)
                 val b = writer.toByteArray()

@@ -1,3 +1,6 @@
-(use-ctx pht
-    (app-fn
-        (println (<- 1 (+ 1) (* 2)))))
+(use-ctx pht swt
+    (app
+        (fld [[i ^int]])
+        (app-fn
+            (set ^App/i 777)
+            (println ^App/i))))

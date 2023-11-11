@@ -4,11 +4,11 @@ import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
-import ru.DmN.pht.std.ast.NodeField
+import ru.DmN.pht.std.ast.NodeFieldB
 import ru.DmN.pht.std.compiler.java.utils.clazz
 
-object NCField : INodeCompiler<NodeField> {
-    override fun compile(node: NodeField, compiler: Compiler, ctx: CompilationContext) {
+object NCField : INodeCompiler<NodeFieldB> {
+    override fun compile(node: NodeFieldB, compiler: Compiler, ctx: CompilationContext) {
         val clazz = ctx.clazz.node
         node.fields.forEach { it ->
             clazz.visitField(

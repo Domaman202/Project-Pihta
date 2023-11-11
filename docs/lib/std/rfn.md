@@ -34,7 +34,7 @@
     (app
         (defn test ^void [[o ^Runnable]]
             (#run o))
-        (field [[i ^int] [j ^int]])
+        (fld [[i ^int] [j ^int]])
         (defn main ^void [] (progn
             (set i 12)
             (set j 21)

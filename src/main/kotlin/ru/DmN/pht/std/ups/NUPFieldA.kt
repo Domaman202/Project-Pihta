@@ -1,24 +1,36 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.std.ups
 
+import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
+import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.ast.NodeNodesList
 import ru.DmN.pht.base.lexer.Token
+import ru.DmN.pht.base.parser.ParsingContext
+import ru.DmN.pht.base.parsers.NPDefault
 import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ValType
-import ru.DmN.pht.base.processors.INodeProcessor
-import ru.DmN.pht.base.processors.NRDefault
+import ru.DmN.pht.base.unparser.UnparsingContext
+import ru.DmN.pht.base.unparsers.NUDefault
 import ru.DmN.pht.base.utils.VirtualField
 import ru.DmN.pht.std.ast.NodeFMGet
-import ru.DmN.pht.std.ast.NodeField
+import ru.DmN.pht.std.ast.NodeFieldA
+import ru.DmN.pht.std.ast.NodeFieldB
 import ru.DmN.pht.std.ast.NodeFieldSet
 import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.line
 
-object NRField : INodeProcessor<NodeNodesList> {
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
+object NUPFieldA : INodeUniversalProcessor<NodeFieldA, NodeFieldA> {
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
+        NPDefault.parse(parser, ctx) { NodeFieldA(token, it) }
+
+    override fun unparse(node: NodeFieldA, unparser: Unparser, ctx: UnparsingContext, indent: Int) =
+        NUDefault.unparse(node, unparser, ctx, indent)
+
+    override fun process(node: NodeFieldA, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
         val gctx = ctx.global
         val clazz = ctx.clazz
         val body = ArrayList<Node>()
@@ -26,7 +38,7 @@ object NRField : INodeProcessor<NodeNodesList> {
         val line = node.line
         processor.computeList(node.nodes[0], ctx)
             .map { it -> processor.computeList(it, ctx).map { processor.computeString(it, ctx) } }.forEach { it ->
-                VirtualField(clazz, it[0], gctx.getType(it[1], processor.tp), static = false, enum = false).run {
+                VirtualField(clazz, it[0], gctx.getType(it[1], processor.tp), static = node.static, enum = false).run {
                     fields += this
                     clazz.fields += this
                     body += nodeDefn(
@@ -35,7 +47,16 @@ object NRField : INodeProcessor<NodeNodesList> {
                         "void",
                         listOf(Pair(name, type.name)),
                         listOf(
-                            NodeFieldSet(
+                            if (node.static)
+                                NodeFieldSet(
+                                    Token.operation(line, "fset!"),
+                                    nodeClass(line, clazz.name),
+                                    name,
+                                    nodeGetOrNameOf(line, name),
+                                    static = true,
+                                    native = true
+                                )
+                            else NodeFieldSet(
                                 Token.operation(line, "fset!"),
                                 nodeGetOrNameOf(line, "this"),
                                 name,
@@ -51,7 +72,13 @@ object NRField : INodeProcessor<NodeNodesList> {
                         type.name,
                         emptyList(),
                         listOf(
-                            NodeFMGet(
+                            if (node.static)
+                                NodeFMGet(
+                                    Token.operation(line, "fget!"), nodeClass(line, clazz.name), name,
+                                    static = true,
+                                    native = true
+                                )
+                            else NodeFMGet(
                                 Token.operation(line, "fget!"), nodeGetOrNameOf(line, "this"), name,
                                 static = false,
                                 native = true
@@ -60,11 +87,12 @@ object NRField : INodeProcessor<NodeNodesList> {
                     )
                 }
             }
-        return NRDefault.process(
-            nodeProgn(line, body.apply { this += NodeField(node.token.processed(), fields) }),
-            processor,
+        return processor.process(
+            NodeNodesList(
+                Token.operation(line, "@static"),
+                body.apply { this += NodeFieldB(node.token.processed(), fields) }),
             ctx,
             mode
-        )
+        )!!
     }
 }

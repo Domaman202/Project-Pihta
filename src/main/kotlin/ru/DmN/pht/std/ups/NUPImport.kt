@@ -18,6 +18,7 @@ import ru.DmN.pht.std.ast.NodeImport
 import ru.DmN.pht.std.imports.StdImportsHelper
 import ru.DmN.pht.std.imports.ast.IValueNode
 import ru.DmN.pht.std.processor.utils.global
+import ru.DmN.pht.std.processor.utils.macros
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.utils.text
 
@@ -47,8 +48,21 @@ object NUPImport : INodeUniversalProcessor<NodeImport, NodeImport> {
     override fun process(node: NodeImport, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeImport? {
         val gctx = ctx.global
 
+        processor.pushTask(ctx, ProcessingStage.MACROS_IMPORT) {
+            node.data["macros"]?.run {
+                val cmacros = gctx.macros
+                val pmacros = processor.contexts.macros
+                forEach { it ->
+                    it as String
+                    val i = it.lastIndexOf('.')
+                    val name = it.substring(i + 1)
+                    cmacros += pmacros[it.substring(0, i)]!!.find { it.name == name }!!
+                }
+            }
+        }
+
         processor.pushTask(ctx, ProcessingStage.TYPES_IMPORT) {
-            node.data["type"]?.run {
+            node.data["types"]?.run {
                 val imports = gctx.imports
                 forEach {
                     it as String

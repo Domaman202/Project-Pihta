@@ -18,11 +18,11 @@
             (set this/red r)
             (set this/green g)
             (set this/blue b))
-        (field [
+        (fld [
             [red    ^int]
             [green  ^int]
             [blue   ^int]])
-        (efield [
+        (efld [
             [RED    255 0 0]
             [GREEN  0 255 0]
             [BLUE   0 0 255]]))

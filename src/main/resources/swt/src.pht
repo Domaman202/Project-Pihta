@@ -1,0 +1,12 @@
+(use-ctx pht
+    (ns ru.DmN.pht.swt
+        (cls Window [^Object]
+            (ctor []
+                (ccall)))
+
+        (defmacro new-window []
+            (new ^Window)))
+
+    (export
+        (import swt
+            (macros ru.DmN.pht.swt.new-window))))

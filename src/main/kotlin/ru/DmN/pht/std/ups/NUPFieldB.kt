@@ -7,15 +7,15 @@ import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parsers.NPDefault
 import ru.DmN.pht.base.unparser.UnparsingContext
-import ru.DmN.pht.std.ast.NodeField
+import ru.DmN.pht.std.ast.NodeFieldB
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.unparsers.NUDefaultX
 
-object NUPField : INodeUniversalProcessor<NodeField, NodeField> {
+object NUPFieldB : INodeUniversalProcessor<NodeFieldB, NodeFieldB> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
         NPDefault.parse(parser, ctx, token)
 
-    override fun unparse(node: NodeField, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
+    override fun unparse(node: NodeFieldB, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
             append('(').append(NUDefaultX.text(node.token)).append(' ').append('[')
             node.fields.forEach {

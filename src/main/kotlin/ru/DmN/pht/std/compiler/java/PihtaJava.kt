@@ -28,13 +28,13 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!defn",        NCDefn)
         add("!div",         NCMath)
         // e
-        add("efield",       NCEField)
+        add("efld",         NCEField)
         add("efn",          NCDefn)
         add("!enum",        NCClass)
         add("!eq",          NCCompare)
         // f
         add("!fget",        NCFGet)
-        add("!field",       NCField)
+        add("!fld",         NCField)
         add("!fn",          NCFn)
         add("fset",         NCFSet)
         // g

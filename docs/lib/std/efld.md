@@ -1,9 +1,9 @@
-## efield
+## efld
 Определяет экземпляры перечисления.
 
 ### Применение
 
-1. `(efield [[name0 arg0 argN] [nameN arg0 argN]])`<br>
+1. `(efld [[name0 arg0 argN] [nameN arg0 argN]])`<br>
 `name` - _имя_.<br>
 `arg0` `argN` - _аргументы_. 
 
@@ -17,11 +17,11 @@
             (set this/red r)
             (set this/green g)
             (set this/blue b))
-        (field [
+        (fld [
             [red    ^int]
             [green  ^int]
             [blue   ^int]])
-        (efield [
+        (efld [
             [RED    255 0 0]
             [GREEN  0 255 0]
             [BLUE   0 0 255]]))

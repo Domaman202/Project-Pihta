@@ -1,4 +1,11 @@
 (use-ctx pht
+    (import java
+        (types java.lang.Iterable)
+        (types java.util.Iterator)
+        (types java.lang.StringBuilder)
+        (types java.util.List)
+        (types java.util.ArrayList))
+
     (ns ru.DmN.pht
         (cls ArrayExtends [^Object]
             (defmacro toList [type]
@@ -98,14 +105,9 @@
 
     (export
         (import java
-            (type java.lang.Class)
-            (type java.lang.Iterable)
-            (type java.lang.Object)
-            (type java.lang.String)
-            (type java.lang.StringBuilder)
-            (type java.util.Iterator)
-            (type java.util.List)
-            (type java.util.ArrayList))
+            (types java.lang.Class)
+            (types java.lang.Object)
+            (types java.lang.String))
         (alias-type Object Any)
         (import pht
             (extends ru.DmN.pht.ArrayExtends)
