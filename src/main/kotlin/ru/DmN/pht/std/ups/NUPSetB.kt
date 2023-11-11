@@ -48,17 +48,16 @@ object NUPSetB : INodeUniversalProcessor<NodeSet, NodeSet> {
         )
     }
 
-    private fun parse(line: Int, parts: List<String>, i: Int, static: Boolean): Node {
-        val j = i + 1
-        return if (j == parts.size)
-            NodeGetOrName(Token(line, Token.Type.OPERATION, "get-or-name!"), parts[parts.size - j], static)
+    private fun parse(line: Int, parts: List<String>, i: Int, static: Boolean): Node =
+        if (i + 1 == parts.size)
+            NodeGetOrName(Token(line, Token.Type.OPERATION, "get-or-name!"), parts[parts.size - i - 1], static)
         else NodeFMGet(
             Token(line, Token.Type.OPERATION, "fget!"),
-            parse(line, parts, j, static),
-            parts[parts.size - j],
+            parse(line, parts, i + 1, static),
+            parts[parts.size - i - 1],
             static
         )
-    }
+
     override fun unparse(node: NodeSet, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
             append('(').append(node.text).append(' ').append(node.name)

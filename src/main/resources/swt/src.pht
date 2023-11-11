@@ -1,11 +1,19 @@
 (use-ctx pht
     (ns ru.DmN.pht.swt
-        (cls Window [^Object]
-            (ctor []
-                (ccall)))
+        (import java
+            (types javax.swing.JFrame))
 
-        (defmacro new-window []
-            (new ^Window)))
+        (cls Window [^Object]
+            (fld [[frame ^JFrame]])
+
+            (ctor [[name ^String] [width ^int] [height ^int]]
+                (ccall)
+                (set this/frame (new JFrame name))
+                (#setSize this/frame width height)
+                (set this/frame/visible true)))
+
+        (defmacro new-window [name width height]
+            (new ^Window (macro-arg name) (macro-arg width) (macro-arg height))))
 
     (export
         (import swt

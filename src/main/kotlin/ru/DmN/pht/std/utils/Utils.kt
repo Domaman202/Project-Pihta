@@ -53,6 +53,9 @@ fun Processor.compute(node: Node, ctx: ProcessingContext): Node =
         else node
     }
 
+val Node.isComputeList: Boolean
+    get() = if (this is IStdNodeProcessor<*>) this.isComputeList else false
+
 fun Processor.computeList(node: Node, ctx: ProcessingContext): List<Node> =
     this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
@@ -61,6 +64,9 @@ fun Processor.computeList(node: Node, ctx: ProcessingContext): List<Node> =
         else throw RuntimeException()
     }
 
+val Node.isComputeString: Boolean
+    get() = if (this is IStdNodeProcessor<*>) this.isComputeString else false
+
 fun Processor.computeString(node: Node, ctx: ProcessingContext): String =
     this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
@@ -68,6 +74,10 @@ fun Processor.computeString(node: Node, ctx: ProcessingContext): String =
 //        else node.getValueAsString()
         else throw RuntimeException()
     }
+
+
+val Node.isComputeInt: Boolean
+    get() = if (this is IStdNodeProcessor<*>) this.isComputeInt else false
 
 fun Processor.computeInt(node: Node, ctx: ProcessingContext): Int =
     this.get(node, ctx).let {

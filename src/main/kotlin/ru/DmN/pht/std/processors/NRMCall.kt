@@ -16,6 +16,7 @@ import ru.DmN.pht.std.ast.NodeMCall.Type.*
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.isComputeString
 import ru.DmN.pht.std.utils.line
 
 object NRMCall : INodeProcessor<NodeNodesList> {
@@ -26,7 +27,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         val triple = findMethod(node, processor, ctx)
         val instance = if (triple.first == SUPER)
             nodeGetOrNameOf(node.line, "this")
-        else processor.process(node.nodes[0], ctx, mode)!!
+        else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
         return if (triple.third.extend == null)
             NodeMCall(
                 node.token.processed(),

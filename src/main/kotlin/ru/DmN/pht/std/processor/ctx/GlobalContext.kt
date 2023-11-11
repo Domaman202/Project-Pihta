@@ -36,7 +36,6 @@ class GlobalContext(
 
     fun getMethodVariants(type: VirtualType, name: String, args: List<ICastable>): List<VirtualMethod> =
         getAllMethods(type)
-            .asSequence()
             .filter { it.name == name }
             .map { Pair(it, if (it.modifiers.extend) listOf(ICastable.of(it.extend!!)) + args else args) }
             .filter { it.first.argsc.size == it.second.size || it.first.modifiers.varargs }
@@ -46,21 +45,16 @@ class GlobalContext(
             .map { it.first }
             .toList()
 
-    fun getAllMethods(type: VirtualType): List<VirtualMethod> =
-        ArrayList<VirtualMethod>().apply {
-            addAll(type.methods)
-            addAll(getAllExtends(type))
-        }
+    private fun getAllMethods(type: VirtualType): Sequence<VirtualMethod> =
+        type.methods.asSequence() + getAllExtends(type)
 
-    fun getAllExtends(type: VirtualType): List<VirtualMethod> =
-        ArrayList(getExtends(type)).apply {
-            type.parents.forEach { addAll(getAllExtends(it)) }
-            if (type.isArray) {
-                type.componentType!!.parents.forEach {
-                    addAll(getAllExtends(it.arrayType))
-                }
-            }
-        }
+    private fun getAllExtends(type: VirtualType): Sequence<VirtualMethod> {
+        var seq = getExtends(type).asSequence()
+        type.parents.forEach { seq += getAllExtends(it) }
+        if (type.isArray)
+            type.componentType!!.parents.forEach { seq += getAllExtends(it.arrayType) }
+        return seq
+    }
 
     fun getExtends(type: VirtualType): MutableList<VirtualMethod> {
         extends.find { it.first == type.name }?.let { return it.second }

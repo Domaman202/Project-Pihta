@@ -28,8 +28,16 @@ class JavaTypesProvider : TypesProvider() {
         ).apply {
             types += this
             fields += klass.declaredFields.map { VirtualField.of(::typeOf, it) }
-            methods += klass.declaredConstructors.map { VirtualMethod.of(::typeOf, it) } +
-                    klass.declaredMethods.map { VirtualMethod.of(::typeOf, it) }
+            methods += klass.declaredConstructors.map { VirtualMethod.of(::typeOf, it) }
+            scanTypeMethods(methods, klass)
         }
+    }
+
+    private fun scanTypeMethods(list: MutableList<VirtualMethod>, klass: Klass) {
+        list += klass.declaredMethods.map { VirtualMethod.of(::typeOf, it) }
+        if (klass.superclass == null)
+            return
+        scanTypeMethods(list, klass.superclass)
+        klass.interfaces.forEach { scanTypeMethods(list, it) }
     }
 }

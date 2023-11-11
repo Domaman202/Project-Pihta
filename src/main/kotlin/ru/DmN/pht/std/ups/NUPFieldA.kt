@@ -89,7 +89,7 @@ object NUPFieldA : INodeUniversalProcessor<NodeFieldA, NodeFieldA> {
             }
         return processor.process(
             NodeNodesList(
-                Token.operation(line, "@static"),
+                Token.operation(line, if (node.static) "@static" else "progn"),
                 body.apply { this += NodeFieldB(node.token.processed(), fields) }),
             ctx,
             mode

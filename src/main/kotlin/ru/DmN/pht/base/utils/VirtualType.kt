@@ -94,8 +94,16 @@ data class VirtualType(
                 abstract = Modifier.isAbstract(klass.modifiers)
                 final = Modifier.isFinal(klass.modifiers) || klass.isEnum
                 fields += klass.declaredFields.map(VirtualField.Companion::of)
-                methods += klass.declaredConstructors.map(VirtualMethod.Companion::of) +
-                        klass.declaredMethods.map(VirtualMethod.Companion::of)
+                methods += klass.declaredConstructors.map(VirtualMethod.Companion::of)
+                scanMethods(methods, klass)
             }
+
+        private fun scanMethods(list: MutableList<VirtualMethod>, klass: Klass) {
+            list += klass.declaredMethods.map(VirtualMethod.Companion::of)
+            if (klass.superclass == null)
+                return
+            scanMethods(list, klass.superclass)
+            klass.interfaces.forEach { scanMethods(list, it) }
+        }
     }
 }

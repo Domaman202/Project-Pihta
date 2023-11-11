@@ -1,6 +1,3 @@
 (use-ctx pht swt
-    (app
-        (fld [[i ^int]])
-        (app-fn
-            (set ^App/i 777)
-            (println ^App/i))))
+    (app-fn
+        (def [[window (new-window "Простое окно" 640 480)]])))
