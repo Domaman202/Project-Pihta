@@ -16,6 +16,6 @@ class Title(text: String, val size: Int) : IComponent {
     override fun resize(page: Page, dim: DimData) {
         val size = (size * dim.ratio.pow((4 * dim.ratio) / (dim.ratio * 1.5f))).toInt()
         jlabel.font = Font(jlabel.font.name, jlabel.font.style, size)
-        jlabel.setBounds((dim.width / (2 * (jlabel.text.length / 10f))).toInt(), 0, dim.width, (26 * dim.ratio).toInt())
+        jlabel.setBounds(dim.width / 2 - jlabel.text.length * 14 / 2, 0, dim.width / 2, (26 * dim.heightRatio).toInt())
     }
 }
