@@ -1,2 +1,12 @@
-(use-ctx pht swt
-    (app-fn))
+(use-ctx pht phtx/spt
+    (import phtx/spt
+        (types ru.DmN.phtx.spt.Window)
+        (types ru.DmN.phtx.spt.Title)
+        (types ru.DmN.phtx.spt.Page))
+    (app-fn
+        (def [[window (new ^Window 640 480)]])
+        (body
+            (def [[page (new ^Page)]])
+            (#add page/components (new ^Title "Крещение Руси"))
+            (#add window page))
+        (#showNext window)))

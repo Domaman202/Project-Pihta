@@ -82,20 +82,18 @@ open class Module(val name: String, var init: Boolean = false) {
         "Module[$name]"
 
     companion object {
-        val MODULES: MutableList<WeakReference<Module>> = ArrayList()
+        val MODULES: MutableList<Module> = ArrayList()
 
         fun getOrPut(name: String, put: () -> Module): Module =
-            get(name) ?: put().apply { MODULES.add(WeakReference(this)) }
+            get(name) ?: put().apply { MODULES.add(this) }
 
         fun getOrThrow(name: String) =
             get(name) ?: throw RuntimeException("Module '$name' not founded!")
 
         operator fun get(name: String): Module? {
             for (i in 0 until MODULES.size) {
-                val module = MODULES[i].get()
-                if (module == null)
-                    MODULES.removeAt(i)
-                else if (module.name == name) {
+                val module = MODULES[i]
+                if (module.name == name) {
                     return module
                 }
             }
