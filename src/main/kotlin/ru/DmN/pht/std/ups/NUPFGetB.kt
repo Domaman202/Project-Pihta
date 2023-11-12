@@ -17,8 +17,20 @@ import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.line
 
 object NUPFGetB : INodeUniversalProcessor<Node, NodeFMGet> {
-    override fun calc(node: NodeFMGet, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        NRFGetA.findField(getInstanceType(node, processor, ctx), node.name, node.static)?.type
+    override fun calc(node: NodeFMGet, processor: Processor, ctx: ProcessingContext): VirtualType? {
+        val type = getInstanceType(node, processor, ctx)!!
+        val result =
+            if (node.native)
+                null
+            else NRMCall.findMethodOrNull(
+                type,
+                "get${node.name.let { it[0].toUpperCase() + it.substring(1) }}",
+                emptyList(),
+                processor,
+                ctx
+            )
+        return result?.second?.rettype ?: NRFGetA.findField(getInstanceType(node, processor, ctx), node.name, node.static)?.type
+    }
 
     override fun process(node: NodeFMGet, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
         return if (mode == ValType.VALUE) {

@@ -147,7 +147,7 @@ fun lenArgs(src: VirtualType?, dist: VirtualType): Int =
     else if (dist.isPrimitive == src.isPrimitive)
         if (dist.isPrimitive)
             if (src == dist) 0
-            else -1
+            else 1
         else if (src.isAssignableFrom(dist))
             if (src == dist) 0
             else lenArgs(src.superclass, dist) + 1

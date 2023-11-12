@@ -1,3 +1,2 @@
 (use-ctx pht swt
-    (app-fn
-        (def [[window (new-window "Простое окно" 640 480)]])))
+    (app-fn))

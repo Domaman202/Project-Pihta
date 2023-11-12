@@ -1,16 +1,31 @@
 (use-ctx pht
     (ns ru.DmN.pht.swt
         (import java
-            (types javax.swing.JFrame))
+            (types javax.swing.JFrame)
+            (types javax.swing.JPanel)
+            (types javax.swing.JLabel)
+            (types java.awt.Font))
 
         (cls Window [^Object]
-            (fld [[frame ^JFrame]])
-
+            (fld [[frame ^JFrame] [panel ^JPanel]])
             (ctor [[name ^String] [width ^int] [height ^int]]
                 (ccall)
                 (set this/frame (new JFrame name))
+                (set this/panel (new JPanel))
+                (#add this/frame this/panel)
                 (#setSize this/frame width height)
-                (set this/frame/visible true)))
+                (set this/frame/visible true))
+            (defn show-text ^Text [[text ^String] [x ^int] [y ^int] [font-size ^int]]
+                (def [[label (new ^JLabel text)] [size label/preferredSize]])
+                (set label/bounds x y size/width size/height)
+                (set label/font (new ^Font label/font/name ^Font/PLAIN font-size))
+                (#add this/panel label)
+                (new ^Text label)))
+        (cls Text [^Object]
+            (fld [[label ^JLabel]])
+            (ctor [[label ^JLabel]]
+                (ccall)
+                (set this/label label)))
 
         (defmacro new-window [name width height]
             (new ^Window (macro-arg name) (macro-arg width) (macro-arg height))))

@@ -75,9 +75,9 @@ object NUPEnum : INodeUniversalProcessor<NodeType, NodeNodesList> {
                                         ectx.enums.map {
                                             NodeFieldSet(
                                                 Token.operation(line, "fset!"),
+                                                mutableListOf(nodeNew(line, type.name, it.args)),
                                                 nodeClass(line, type.name),
                                                 it.name,
-                                                nodeNew(line, type.name, it.args),
                                                 true
                                             )
                                         }.toMutableList()

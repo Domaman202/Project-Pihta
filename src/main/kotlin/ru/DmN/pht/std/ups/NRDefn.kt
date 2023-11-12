@@ -13,11 +13,9 @@ import ru.DmN.pht.base.utils.VirtualMethod
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.processor.ctx.BodyContext
-import ru.DmN.pht.std.processor.utils.clazz
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.nodeAs
-import ru.DmN.pht.std.processor.utils.with
+import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.processors.NRAs
+import ru.DmN.pht.std.processors.NRBody
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.line
@@ -44,26 +42,44 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         val line = node.line
         val new = NodeDefn(
             node.token.processed(),
-            ArrayList(),
+            if (node.nodes.size > 3)
+                node.nodes.drop(3).toMutableList()
+            else ArrayList(),
             method
         )
         if (node.nodes.size > 3) {
             processor.pushTask(ctx, ProcessingStage.METHODS_BODY) {
-                val context = ctx.with(method).with(BodyContext.of(method))
-                new.nodes += if (method.rettype == VirtualType.VOID)
-                    node.nodes.last()
-                else NRAs.process(nodeAs(line, node.nodes.last(), method.rettype.name), processor, context, ValType.VALUE)!!
-                NRDefault.process(
-                    new,
-                    processor,
-                    context,
-                    if (method.rettype == VirtualType.VOID)
-                        ValType.NO_VALUE
-                    else ValType.VALUE
-                )
+                processNodes(method, new, processor, ctx.with(method).with(BodyContext.of(method)))
             }
         }
         return new
+    }
+
+    fun processNodes(method: VirtualMethod, new: NodeNodesList, processor: Processor, ctx: ProcessingContext) {
+        var i = 0
+        while (i < new.nodes.size - 1) {
+            val it = processor.process(new.nodes[i], ctx, ValType.NO_VALUE)
+            if (it == null) {
+                new.nodes.removeAt(i)
+                i--
+            } else new.nodes[i] = it
+            i++
+        }
+        if (new.nodes.isNotEmpty()) {
+            if (method.rettype == VirtualType.VOID) {
+                val result = processor.process(new.nodes.last(), ctx, ValType.NO_VALUE)
+                if (result == null)
+                    new.nodes.removeLast()
+                else new.nodes[new.nodes.lastIndex] = result
+            } else {
+                new.nodes[new.nodes.lastIndex] = NRAs.process(
+                    nodeAs(new.line, new.nodes.last(), method.rettype.name),
+                    processor,
+                    ctx,
+                    ValType.VALUE
+                )!!
+            }
+        }
     }
 
     fun parseArguments(list: Node, processor: Processor, ctx: ProcessingContext): Pair<MutableList<String>, MutableList<String>> {

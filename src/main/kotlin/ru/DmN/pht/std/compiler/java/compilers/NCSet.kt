@@ -10,13 +10,17 @@ import ru.DmN.pht.std.compiler.java.utils.*
 object NCSet : INodeCompiler<NodeSet> {
     override fun compile(node: NodeSet, compiler: Compiler, ctx: CompilationContext) {
         ctx.method.node.run {
-            val value = compiler.compileVal(node.value!!, ctx)
+            val value = compiler.compileVal(node.nodes.first(), ctx)
             load(value, this)
-            ctx.body[node.name]?.let {
-                storeCast(it, value.type(), this)
-            } ?: ctx.clazz.clazz.fields.find { it.name == node.name }!!.run {
-                visitFieldInsn(if (static) Opcodes.PUTSTATIC else Opcodes.PUTFIELD, declaringClass!!.className, name, desc)
-            }
+            ctx.body[node.name]?.let { storeCast(it, value.type(), this) }
+                ?: ctx.clazz.clazz.fields.find { it.name == node.name }!!.run {
+                    visitFieldInsn(
+                        if (static) Opcodes.PUTSTATIC else Opcodes.PUTFIELD,
+                        declaringClass!!.className,
+                        name,
+                        desc
+                    )
+                }
         }
     }
 }

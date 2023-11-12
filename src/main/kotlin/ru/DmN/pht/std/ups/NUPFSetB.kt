@@ -30,14 +30,14 @@ object NUPFSetB : INodeUniversalProcessor<Node, NodeFieldSet> {
             else NRMCall.findMethodOrNull(
                 type,
                 "set${node.name.let { it[0].toUpperCase() + it.substring(1) }}",
-                listOf(node.value!!),
+                node.nodes,
                 processor,
                 ctx
             )
         return if (result == null)
             NodeFSet(
                 Token(node.line, Token.Type.OPERATION, "fset"),
-                mutableListOf(instance, processor.process(node.value!!, ctx, ValType.VALUE)!!),
+                mutableListOf(instance, processor.process(node.nodes.first(), ctx, ValType.VALUE)!!),
                 node.name,
                 if (instance.isConstClass())
                     NodeFSet.Type.STATIC
@@ -46,7 +46,7 @@ object NUPFSetB : INodeUniversalProcessor<Node, NodeFieldSet> {
             )
         else NodeMCall(
             Token.operation(node.line, "!mcall"),
-            NRMCall.processArguments(node.line, processor, ctx, result.second, listOf(node.value!!)),
+            NRMCall.processArguments(node.line, processor, ctx, result.second, node.nodes),
             instance,
             result.second,
             NodeMCall.Type.VIRTUAL

@@ -16,7 +16,6 @@ import ru.DmN.pht.std.ast.NodeMCall.Type.*
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeString
-import ru.DmN.pht.std.utils.isComputeString
 import ru.DmN.pht.std.utils.line
 
 object NRMCall : INodeProcessor<NodeNodesList> {
