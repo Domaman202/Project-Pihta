@@ -7,7 +7,7 @@ import java.awt.Graphics
 class Page(val window: Window) {
     val jpanel = DrawCallbackJPanel(::draw)
     private val components: MutableList<IComponent> = ArrayList()
-    private val dim: DimData = DimData().apply { resize(window.jframe.width, window.jframe.height) }
+    private val dim: DimData = DimData(window.width, window.height).apply { resize(window.jframe.width, window.jframe.height) }
 
     fun add(component: IComponent) {
         components += component
@@ -16,6 +16,7 @@ class Page(val window: Window) {
     fun show() {
         if (window.pageIndex > 0)
             window.jframe.remove(window.pages[window.pageIndex - 1].jpanel)
+        jpanel.components.forEach(jpanel::remove)
         components.forEach { it.show(this) }
         window.jframe.add(jpanel)
     }

@@ -6,7 +6,7 @@ import java.awt.Font
 import javax.swing.JLabel
 import kotlin.math.pow
 
-class Title(text: String, val size: Int) : IComponent {
+class Text(text: String, val x: Int, val y: Int, val width: Int, val height: Int, val size: Int) : IComponent {
     private val jlabel = JLabel(text)
 
     override fun show(page: Page) {
@@ -14,8 +14,13 @@ class Title(text: String, val size: Int) : IComponent {
     }
 
     override fun resize(page: Page, dim: DimData) {
-        val size = (size * dim.ratio.pow((4 * dim.ratio) / (dim.ratio * 1.5f))).toInt()
+        val size = (size * dim.ratio.pow((2 * dim.ratio) / dim.ratio)).toInt()
         jlabel.font = Font(jlabel.font.name, jlabel.font.style, size)
-        jlabel.setBounds((dim.width / (2 * (jlabel.text.length / 10f))).toInt(), 0, dim.width, (26 * dim.ratio).toInt())
+        jlabel.setBounds(
+            (x * dim.widthRatio).toInt(),
+            (y * dim.heightRatio).toInt(),
+            (width * dim.widthRatio).toInt(),
+            (height * dim.heightRatio).toInt()
+        )
     }
 }

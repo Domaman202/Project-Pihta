@@ -18,11 +18,12 @@ class Image(var image: Image, val ix: Int, val iy: Int, val iwidth: Int, val ihe
     }
 
     override fun resize(page: Page, dim: DimData) {
-        val w = dim.width / page.window.width.toFloat()
-        val h = dim.height / page.window.height.toFloat()
-        x = (ix * w).toInt()
-        y = (iy * h).toInt()
-        image = image.getScaledInstance((iwidth * w).toInt(), (iheight * h).toInt(), Image.SCALE_AREA_AVERAGING)
-        println("$w $h")
+        x = (ix * dim.widthRatio).toInt()
+        y = (iy * dim.heightRatio).toInt()
+        image = image.getScaledInstance(
+            (iwidth * dim.widthRatio).toInt(),
+            (iheight * dim.heightRatio).toInt(),
+            Image.SCALE_AREA_AVERAGING
+        )
     }
 }
