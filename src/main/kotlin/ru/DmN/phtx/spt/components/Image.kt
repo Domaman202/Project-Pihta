@@ -5,9 +5,9 @@ import ru.DmN.phtx.spt.Page
 import java.awt.Graphics
 import java.awt.Image
 
-class Image(var image: Image, val ix: Int, val iy: Int, val iwidth: Int, val iheight: Int) : IComponent {
-    var x = ix
-    var y = iy
+class Image(private var image: Image, private val ix: Int, private val iy: Int, private val iwidth: Int, private val iheight: Int) : IComponent {
+    private var x = ix
+    private var y = iy
 
     init {
         image = image.getScaledInstance(iwidth, iheight, Image.SCALE_AREA_AVERAGING)

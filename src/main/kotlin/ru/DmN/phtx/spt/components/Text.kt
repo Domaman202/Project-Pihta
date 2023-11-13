@@ -3,24 +3,24 @@ package ru.DmN.phtx.spt.components
 import ru.DmN.phtx.spt.DimData
 import ru.DmN.phtx.spt.Page
 import java.awt.Font
-import javax.swing.JLabel
+import java.awt.Graphics
 import kotlin.math.pow
 
-class Text(text: String, val x: Int, val y: Int, val width: Int, val height: Int, val size: Int) : IComponent {
-    private val jlabel = JLabel(text)
+class Text(val text: String, private val ix: Int, private val iy: Int, val size: Int) : IComponent {
+    private var x = ix
+    private var y = iy
+    private var ratio = 0f
 
-    override fun show(page: Page) {
-        page.jpanel.add(jlabel)
+    override fun draw(page: Page, g: Graphics) {
+        val oldFont = g.font
+        g.font = Font(g.font.name, Font.BOLD, (size * ratio).toInt())
+        g.drawString(text, x, y)
+        g.font = oldFont
     }
 
     override fun resize(page: Page, dim: DimData) {
-        val size = (size * dim.ratio.pow((2 * dim.ratio) / dim.ratio)).toInt()
-        jlabel.font = Font(jlabel.font.name, jlabel.font.style, size)
-        jlabel.setBounds(
-            (x * dim.widthRatio).toInt(),
-            (y * dim.heightRatio).toInt(),
-            (width * dim.widthRatio).toInt(),
-            (height * dim.heightRatio).toInt()
-        )
+        x = (ix * dim.widthRatio).toInt()
+        y = (iy * dim.heightRatio).toInt()
+        ratio = dim.ratio.pow(2)
     }
 }
