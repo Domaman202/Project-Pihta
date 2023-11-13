@@ -5,6 +5,7 @@ import ru.DmN.phtx.spt.Page
 import java.awt.Font
 import java.awt.Graphics
 import kotlin.math.pow
+import kotlin.math.sqrt
 
 class Text(val text: String, private val ix: Int, private val iy: Int, val size: Int) : IComponent {
     private var x = ix
@@ -19,7 +20,8 @@ class Text(val text: String, private val ix: Int, private val iy: Int, val size:
     }
 
     override fun resize(page: Page, dim: DimData) {
-        x = (ix * dim.widthRatio).toInt()
+        val i = (ix * dim.widthRatio)
+        x = (if (sqrt(i) > 25) i * 1.06f else i).toInt()
         y = (iy * dim.heightRatio).toInt()
         ratio = dim.ratio.pow(2)
     }
