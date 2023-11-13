@@ -27,7 +27,7 @@ object NRArrayOf : INodeProcessor<NodeNodesList> {
                     )
                 )
                 this.addAll(node.nodes.mapIndexed { i, it -> nodeASet(line, tmp, i, it) })
-                this.add(nodeGetOrNameOf(line, tmp))
+                this.add(nodeGetOrName(line, tmp))
             }), processor, ctx, ValType.VALUE)
         } else null
 }

@@ -2,4 +2,5 @@
     (name "phtx/spt")
     (version "1.0.0")
     (files ["src.pht"])
+    (class "ru.DmN.phtx.spt.SPT")
     (author "DomamaN202"))

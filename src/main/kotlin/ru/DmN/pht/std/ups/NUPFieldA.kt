@@ -50,7 +50,7 @@ object NUPFieldA : INodeUniversalProcessor<NodeFieldA, NodeFieldA> {
                             if (node.static)
                                 NodeFieldSet(
                                     Token.operation(line, "fset!"),
-                                    mutableListOf(nodeGetOrNameOf(line, name)),
+                                    mutableListOf(nodeGetOrName(line, name)),
                                     nodeClass(line, clazz.name),
                                     name,
                                     static = true,
@@ -58,8 +58,8 @@ object NUPFieldA : INodeUniversalProcessor<NodeFieldA, NodeFieldA> {
                                 )
                             else NodeFieldSet(
                                 Token.operation(line, "fset!"),
-                                mutableListOf(nodeGetOrNameOf(line, name)),
-                                nodeGetOrNameOf(line, "this"),
+                                mutableListOf(nodeGetOrName(line, name)),
+                                nodeGetOrName(line, "this"),
                                 name,
                                 static = false,
                                 native = true
@@ -79,7 +79,7 @@ object NUPFieldA : INodeUniversalProcessor<NodeFieldA, NodeFieldA> {
                                     native = true
                                 )
                             else NodeFMGet(
-                                Token.operation(line, "fget!"), nodeGetOrNameOf(line, "this"), name,
+                                Token.operation(line, "fget!"), nodeGetOrName(line, "this"), name,
                                 static = false,
                                 native = true
                             )

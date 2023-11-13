@@ -25,7 +25,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeMCall {
         val triple = findMethod(node, processor, ctx)
         val instance = if (triple.first == SUPER)
-            nodeGetOrNameOf(node.line, "this")
+            nodeGetOrName(node.line, "this")
         else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
         return if (triple.third.extend == null)
             NodeMCall(

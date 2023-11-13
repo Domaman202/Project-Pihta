@@ -162,23 +162,3 @@ fun lenArgs(src: VirtualType?, dist: VirtualType): Int =
             dist.toPrimitive()
                 ?.let { lenArgs(src, VirtualType.ofKlass(it)).let { i -> if (i == -1) return -1 else i } + 1 }
                 ?: lenArgs(VirtualType.ofKlass(src.ofPrimitive()), dist)
-
-fun calcType(otype: VirtualType?, ntype: VirtualType?): Pair<VirtualType?, VirtualType?> {
-    return if (otype == ntype)
-        Pair(otype, ntype)
-    else if (ntype == null)
-        Pair(otype, null)
-    else if (otype == null)
-        Pair(ntype, null)
-    else {
-        val typeA = otype.ofPrimitive().let { VirtualType.ofKlass(it) }
-        val typeB = ntype.ofPrimitive().let { VirtualType.ofKlass(it) }
-        if (typeA.isAssignableFrom(typeB))
-            Pair(ntype, otype)
-        else if (typeB.isAssignableFrom(typeA))
-            Pair(otype, ntype)
-        else Pair(findCommonSuperclasses(otype, ntype).last { !it.name.startsWith("kotlin.jvm.internal.") }, otype) // todo: remake
-//        else throw ClassCastException("$ntype no casts to $otype")
-    }
-}
-

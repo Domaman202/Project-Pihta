@@ -1,6 +1,6 @@
 package ru.DmN.phtx.spt.components
 
-import ru.DmN.phtx.spt.DimData
+import ru.DmN.phtx.spt.utils.DimData
 import ru.DmN.phtx.spt.Page
 import java.awt.Graphics
 import java.awt.Image

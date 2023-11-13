@@ -1,4 +1,4 @@
-package ru.DmN.phtx.spt
+package ru.DmN.phtx.spt.utils
 
 import kotlin.math.log10
 

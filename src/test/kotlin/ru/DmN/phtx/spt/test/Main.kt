@@ -9,10 +9,14 @@ import javax.imageio.ImageIO
 object Main {
     @JvmStatic
     fun main(args: Array<String>) {
-        val window = Window(640, 480)
+        test()
+    }
+
+    fun test() {
+        val window = Window("Крещение Матушки Руси", 640, 480)
         window.newPage().run {
             jpanel.layout = null
-            add(Title("Крещение Руси", 12))
+            add(Title("Крещение Руси"))
             add(Image(ImageIO.read(Main::class.java.getResourceAsStream("/phtx/spt/img0.jpg")), 20, 50, 280, 340))
             add(Image(ImageIO.read(Main::class.java.getResourceAsStream("/phtx/spt/img3.jpg")), 340, 50, 270, 340))
             add(Text("Рис. 1", 150, 420, 14))

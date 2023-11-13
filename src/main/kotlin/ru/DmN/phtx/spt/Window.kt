@@ -4,8 +4,8 @@ import java.awt.event.ComponentAdapter
 import java.awt.event.ComponentEvent
 import javax.swing.JFrame
 
-class Window(val width: Int, val height: Int) {
-    val jframe = JFrame()
+class Window(title: String, val width: Int, val height: Int) {
+    val jframe = JFrame(title)
     val pages: MutableList<Page> = ArrayList()
     var pageIndex = -1
 

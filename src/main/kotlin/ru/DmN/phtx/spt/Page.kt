@@ -2,6 +2,7 @@ package ru.DmN.phtx.spt
 
 import ru.DmN.phtx.spt.components.IComponent
 import ru.DmN.phtx.spt.internal.DrawCallbackJPanel
+import ru.DmN.phtx.spt.utils.DimData
 import java.awt.Graphics
 
 class Page(val window: Window) {

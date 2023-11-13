@@ -47,13 +47,13 @@ fun nodeCycle(line: Int, cond: Node, body: List<Node>) =
         mutableListOf(cond).apply { addAll(body) })
 fun nodeArraySize(line: Int, name: String) =
     NodeNodesList(Token.operation(line, "array-size"),
-        mutableListOf(nodeGetOrNameOf(line, name)))
+        mutableListOf(nodeGetOrName(line, name)))
 fun nodeASet(line: Int, name: String, index: Int, value: Node) =
     NodeNodesList(Token.operation(line, "aset"),
-        mutableListOf(nodeGetOrNameOf(line, name), nodeValueOf(line, index), value))
+        mutableListOf(nodeGetOrName(line, name), nodeValueOf(line, index), value))
 fun nodeAGet(line: Int, name: String, index: String) =
     NodeNodesList(Token.operation(line, "aget"),
-        mutableListOf(nodeGetOrNameOf(line, name), nodeGetOrNameOf(line, index)))
+        mutableListOf(nodeGetOrName(line, name), nodeGetOrName(line, index)))
 fun nodeArrayOf(line: Int, elements: MutableList<Node>) =
     NodeNodesList(Token.operation(line, "array-of"), elements)
 fun nodeNewArray(line: Int, type: String, size: Int) =
@@ -72,7 +72,7 @@ fun nodeMCall(line: Int, instance: Node, name: String, args: List<Node>) =
 fun nodeMCall(line: Int, type: String, name: String, args: List<Node>) =
     NodeNodesList(Token.operation(line, "mcall"),
         mutableListOf<Node>(nodeClass(line, type), nodeValueOf(line, name)).apply { addAll(args) })
-fun nodeGetOrNameOf(line: Int, name: String) =
+fun nodeGetOrName(line: Int, name: String) =
     NodeGetOrName(Token.operation(line, "get-or-name!"), name, false)
 fun nodeClass(line: Int, name: String) =
     NodeValue.of(line, NodeValue.Type.CLASS, name)

@@ -10,7 +10,6 @@ import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.platform
-import ru.DmN.pht.std.ast.NodeCompare
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
@@ -30,14 +29,14 @@ object NRFor : INodeProcessor<NodeNodesList> {
                 else nodeDef(line, iter, nodes[1])
                 code += nodeCycle(
                     line,
-                    nodeMCall(line, nodeGetOrNameOf(line, iter), "hasNext", listOf()),
+                    nodeMCall(line, nodeGetOrName(line, iter), "hasNext", listOf()),
                     listOf(
                         nodeDef(
                             line,
                             name,
                             nodeMCall(
                                 line,
-                                nodeGetOrNameOf(line, iter),
+                                nodeGetOrName(line, iter),
                                 "next",
                                 emptyList()
                             )
@@ -61,7 +60,7 @@ object NRFor : INodeProcessor<NodeNodesList> {
                                 NodeNodesList(
                                     Token.operation(line, "less"),
                                     mutableListOf(
-                                        nodeGetOrNameOf(line, i),
+                                        nodeGetOrName(line, i),
                                         nodeArraySize(line, arr)
                                     )
                                 ),
