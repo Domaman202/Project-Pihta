@@ -16,11 +16,11 @@ object SPT : StdModule("phtx/spt") {
         add("image",        NUPDefault, NRComponent(Image::class.java))
         add("img-ifile",    NUPDefault, NRImgIFile)
         // p
-        add("page",     NUPDefault, NRPage)
+        add("page",         NUPDefault, NRPage)
         // t
-        add("text",     NUPDefault, NRComponent(Text::class.java))
-        add("title",    NUPDefault, NRComponent(Title::class.java))
+        add("text",         NUPDefault, NRComponent(Text::class.java))
+        add("title",        NUPDefault, NRComponent(Title::class.java))
         // w
-        add("window",   NUPDefault, NRWindow)
+        add("window",       NUPDefault, NRWindow)
     }
 }

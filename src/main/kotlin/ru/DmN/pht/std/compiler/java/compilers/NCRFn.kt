@@ -24,7 +24,7 @@ object NCRFn : INodeCompiler<NodeRFn> {
         val clazz = ClassNode()
         compiler.classes[node.name] = clazz
         clazz.visit(
-            Opcodes.V20,
+            Opcodes.V19,
             Opcodes.ACC_PUBLIC + Opcodes.ACC_FINAL,
             node.name,
             null,

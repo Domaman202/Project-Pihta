@@ -22,7 +22,7 @@ object NCFn : INodeCompiler<NodeFn> {
         val clazz = ClassNode()
         compiler.classes[name] = clazz
         clazz.visit(
-            Opcodes.V20,
+            Opcodes.V19,
             Opcodes.ACC_PUBLIC + Opcodes.ACC_FINAL,
             name,
             null,

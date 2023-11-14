@@ -1,6 +1,6 @@
 (module
     (name "pht")
     (version "1.0.0")
+    (author "DomamaN202")
     (files ["src.pht"])
-    (class "ru.DmN.pht.std.Pihta")
-    (author "DomamaN202"))
+    (class "ru.DmN.pht.std.Pihta"))

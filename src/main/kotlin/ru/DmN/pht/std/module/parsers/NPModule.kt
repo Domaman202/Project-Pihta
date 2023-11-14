@@ -26,11 +26,13 @@ object NPModule : SimpleNP() {
                 }
                 if (!module.init) {
                     module.init = true
-                    (data["files"] as List<String>?)?.let { module.files += it }
+                    (data["version"] as String?)?.let { module.version = it }
                     (data["deps"] as List<String>?)?.let {
                         module.deps += it
                         NUPUseCtx.loadModules(it, parser, ctx)
                     }
+                    (data["files"] as List<String>?)?.let { module.files += it }
+                    (data["author"] as String?)?.let { module.author = it }
                 }
             }
         }

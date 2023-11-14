@@ -14,11 +14,14 @@ import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparsers.INodeUnparser
 import ru.DmN.pht.std.module.StdModule
+import java.io.File
 import java.io.FileNotFoundException
 import java.lang.ref.WeakReference
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler as JavaNodeCompiler
 
 open class Module(val name: String, var init: Boolean = false) {
+    lateinit var version: String
+    lateinit var author: String
     val deps: MutableList<String> = ArrayList()
     val files: MutableList<String> = ArrayList()
     val parsers: MutableMap<Regex, INodeParser> = HashMap()
@@ -28,7 +31,7 @@ open class Module(val name: String, var init: Boolean = false) {
 
     fun init() {
         if (!init) {
-            Parser(getModuleFile()).parseNode(ParsingContext.of(StdModule))
+            Parser(getModuleFile(name)).parseNode(ParsingContext.of(StdModule))
         }
     }
 
@@ -57,10 +60,16 @@ open class Module(val name: String, var init: Boolean = false) {
         return null
     }
 
-    private fun getModuleFile() =
-        String((this.javaClass.getResourceAsStream("/$name/module.pht") ?: throw FileNotFoundException("/$name/module.pht")).readAllBytes())
-    private fun getModuleFile(file: String) =
-        String((Module::class.java.getResourceAsStream("/$name/$file") ?: throw FileNotFoundException("/$name/$file")).readAllBytes())
+    fun getModuleFile(file: String): String {
+        val stream = Module::class.java.getResourceAsStream("/$name/$file")
+        if (stream == null) {
+            val f = File("$name/$file")
+            if (f.isFile)
+                return String(f.readBytes())
+            throw FileNotFoundException("/$name/$file")
+        }
+        return String(stream.readAllBytes())
+    }
 
     fun add(name: String, compiler: JavaNodeCompiler<*>) =
         add(name.toRegularExpr(), compiler)
@@ -82,7 +91,7 @@ open class Module(val name: String, var init: Boolean = false) {
         "Module[$name]"
 
     companion object {
-        val MODULES: MutableList<Module> = ArrayList()
+        private val MODULES: MutableList<Module> = ArrayList()
 
         fun getOrPut(name: String, put: () -> Module): Module =
             get(name) ?: put().apply { MODULES.add(this) }
@@ -101,8 +110,16 @@ open class Module(val name: String, var init: Boolean = false) {
             return null
         }
 
-        fun getModuleFile(name: String) =
-            String((Module::class.java.getResourceAsStream("/$name/module.pht") ?: throw FileNotFoundException("/$name/module.pht")).readAllBytes())
+        fun getModuleFile(name: String): String {
+            val stream = Module::class.java.getResourceAsStream("/$name/module.pht")
+            if (stream == null) {
+                val file = File("$name/module.pht")
+                if (file.isFile)
+                    return String(file.readBytes())
+                throw FileNotFoundException("/$name/module.pht")
+            }
+            return String(stream.readAllBytes())
+        }
 
         fun String.toRegularExpr(): Regex =
             this.replace(".", "\\.")

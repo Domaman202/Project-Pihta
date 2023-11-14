@@ -21,7 +21,7 @@ object NCClass : INodeCompiler<NodeType> {
             val cn = ClassNode().apply {
                 compiler.classes[node.type.name] = this
                 visit(
-                    Opcodes.V20,
+                    Opcodes.V19,
                     Opcodes.ACC_PUBLIC.let {
                         when (node.text) {
                             "!enum" -> it + Opcodes.ACC_ENUM

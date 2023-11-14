@@ -24,8 +24,7 @@ import java.net.URLClassLoader
 object CompilerMain {
     @JvmStatic
     fun main(args: Array<String>) {
-        val source = Parser(String(UnparserMain::class.java.getResourceAsStream("/test.pht").readAllBytes())).parseNode(
-            ParsingContext.base())!!
+        val source = Parser(String(UnparserMain::class.java.getResourceAsStream("/test.pht").readAllBytes())).parseNode(ParsingContext.base())!!
         val processor = Processor(JavaTypesProvider())
         val pctx = ProcessingContext.base().with(Platform.JAVA)
         val processed = processor.process(source, pctx, ValType.NO_VALUE)!!
