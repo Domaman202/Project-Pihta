@@ -59,7 +59,7 @@ object NUPMacro : INodeUniversalProcessor<NodeMacro, NodeMacro> {
             macro.args.dropLast(1).forEachIndexed { i, it -> args[Pair(macro.uuid, it)] = node.nodes[i] }
             args[Pair(macro.uuid, macro.args.last())] = NodeNodesList(
                 Token(node.token.line, Token.Type.OPERATION, "valn"),
-                node.nodes.drop(args.size - 1).toMutableList()
+                node.nodes.drop(args.size - 1).toMutableList() // todo:
             )
         }
         //

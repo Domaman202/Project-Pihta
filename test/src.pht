@@ -1,9 +1,6 @@
 (use-ctx pht
-    (cls StringExtends [^Object]
-        (@varargs (efn ^String sub ^String [[arr (array-type ^String)]] (progn
-            (def [[str (new ^StringBuilder this)]])
-            (for [e arr]
-                (#append str e))
-            (#toString str)))))
     (app-fn
-        (println (- "Слава " "России!"))))
+        (defmacro print-args [argsA argsB]
+            (macro-unroll [[a argsA] [b argsB]]
+                (println (macro-arg a) (macro-arg b))))
+        (print-args ["202" "203" "213"] ["Первый" "Второй" "Третий"])))
