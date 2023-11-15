@@ -15,7 +15,7 @@ object NUPMCall : INodeUniversalProcessor<Node, Node> {
             val list = mutableListOf(it.first())
             list += name
             list += it.drop(1)
-            NodeNodesList(Token(token.line, token.type, "mcall"), list)
+            NodeNodesList(Token.operation(token.line, "mcall"), list)
         }
     }
 }

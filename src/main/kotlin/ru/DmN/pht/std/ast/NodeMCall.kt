@@ -24,10 +24,6 @@ class NodeMCall(tkOperation: Token, nodes: MutableList<Node>, val instance: Node
         EXTEND,
         STATIC,
         VIRTUAL,
-        // for processor & compiler
-        SUPER,
-        // for processor
-        THIS,
-        INSTANCE
+        SUPER
     }
 }

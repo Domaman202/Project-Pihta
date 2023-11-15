@@ -21,8 +21,7 @@ object NCCompare : INodeCompiler<NodeNodesList> {
     fun insertIf(operation: String, nodes: List<Node>, ifInsert: () -> Unit, elseInsert: () -> Unit, compiler: Compiler, ctx: CompilationContext) {
         ctx.method.node.run {
             val type = nodes
-                .map { compiler.compileVal(it, ctx) }
-                .map { it.apply { load(it, this@run) }.type }
+                .map { compiler.compileVal(it, ctx).apply { load(this, this@run) }.type }
                 .first()
             val ifLabel = Label()
             val elseLabel = Label()

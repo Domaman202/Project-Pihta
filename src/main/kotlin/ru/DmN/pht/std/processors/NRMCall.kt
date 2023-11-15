@@ -24,14 +24,15 @@ object NRMCall : INodeProcessor<NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeMCall {
         val triple = findMethod(node, processor, ctx)
-        val instance = if (triple.first == SUPER)
-            nodeGetOrName(node.line, "this")
-        else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
+        val instance =
+            if (triple.first == SUPER)
+                nodeGetOrName(node.line, "this")
+            else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
         return if (triple.third.extend == null)
             NodeMCall(
                 node.token.processed(),
                 processArguments(node.line, processor, ctx, triple.third, triple.second),
-                if (triple.first == INSTANCE)
+                if (triple.first == VIRTUAL)
                     NodeFGet(
                         Token.operation(node.line, "!fget"),
                         mutableListOf(nodeClass(node.line, triple.third.declaringClass!!.name)),
@@ -46,8 +47,6 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                         if (triple.third.modifiers.static)
                             STATIC
                         else VIRTUAL
-
-                    INSTANCE -> VIRTUAL
                     else -> triple.first
                 }
             )
@@ -99,9 +98,14 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             } else {
                 if (it.isLiteral()) {
                     when (processor.computeString(it, ctx)) {
+                        "." -> {
+                            clazz = ctx.clazz
+                            return@let UNKNOWN
+                        }
+
                         "this" -> {
                             clazz = processor.calc(it, ctx)!!
-                            return@let THIS
+                            return@let VIRTUAL
                         }
 
                         "super" -> {
@@ -126,7 +130,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             if (type == STATIC)
                 if (result.second.modifiers.static)
                     STATIC
-                else INSTANCE
+                else VIRTUAL
             else type,
             result.first,
             result.second

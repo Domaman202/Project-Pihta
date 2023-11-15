@@ -8,6 +8,8 @@ import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeCompare
+import ru.DmN.pht.std.compiler.java.utils.load
+import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.processor.utils.nodeValueOf
 import ru.DmN.pht.std.utils.line
 import ru.DmN.pht.std.utils.text
@@ -18,7 +20,7 @@ object NCIf : INodeCompiler<NodeNodesList> {
 
     override fun compileVal(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Variable {
         var type: VirtualType? = null
-        insertIf(node, { type = compiler.compileVal(it, ctx).type }, compiler, ctx)
+        insertIf(node, { type = compiler.compileVal(it, ctx).apply { load(this, ctx.method.node) }.type }, compiler, ctx)
         return Variable.tmp(node, type)
     }
 
