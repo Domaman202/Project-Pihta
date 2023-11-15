@@ -1,9 +1,10 @@
 (use-ctx pht
-    (app
-        (defn fib ^int [[n ^int]]
-            (if (<= n 1)
-                n
-                (+  (#fib . (- n 2))
-                    (#fib . (- n 1)))))
-        (app-fn
-            (println (#fib . 10)))))
+    (@abstract
+        (cls Foo [^Object]
+            (ctor [] (ccall))
+            (defn foo ^void []
+                (println "Foo!"))))
+    (obj FooImpl [^Foo]
+        (ctor [] (ccall)))
+    (app-fn
+        (#foo ^FooImpl)))

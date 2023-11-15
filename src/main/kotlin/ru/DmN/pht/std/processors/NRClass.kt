@@ -14,6 +14,7 @@ import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.with
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.text
 
 object NRClass : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
@@ -25,7 +26,7 @@ object NRClass : INodeProcessor<NodeNodesList> {
         val gctx = ctx.global
         //
         val type = VirtualType(gctx.name(processor.computeString(processor.process(node.nodes[0], ctx, ValType.VALUE)!!, ctx)))
-        when (node.token.text) {
+        when (node.text) {
             "obj" -> type.fields += VirtualField(type, "INSTANCE", type, static = true, enum = false)
             "itf" -> type.isInterface = true
         }

@@ -66,6 +66,10 @@ data class VirtualType(
         return "VT($name)"
     }
 
+    fun copyMethodsTo(to: VirtualType) {
+        to.methods += this.methods
+    }
+
     companion object {
         private val TYPES: MutableMap<String, VirtualType> = WeakHashMap()
         val VOID = ofKlass(Void::class.javaPrimitiveType!!)
@@ -95,7 +99,8 @@ data class VirtualType(
                 final = Modifier.isFinal(klass.modifiers) || klass.isEnum
                 fields += klass.declaredFields.map(VirtualField.Companion::of)
                 methods += klass.declaredConstructors.map(VirtualMethod.Companion::of)
-                scanMethods(methods, klass)
+                methods += klass.declaredMethods.map(VirtualMethod.Companion::of)
+//                scanMethods(methods, klass)
             }
 
         private fun scanMethods(list: MutableList<VirtualMethod>, klass: Klass) {

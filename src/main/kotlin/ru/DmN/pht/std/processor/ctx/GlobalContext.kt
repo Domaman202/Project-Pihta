@@ -45,14 +45,9 @@ class GlobalContext(
             .map { it.first }
             .toList()
 
-    private fun getAllMethods(type: VirtualType): Sequence<VirtualMethod> =
-        type.methods.asSequence() + getAllExtends(type)
-
-    private fun getAllExtends(type: VirtualType): Sequence<VirtualMethod> {
-        var seq = getExtends(type).asSequence()
-        type.parents.forEach { seq += getAllExtends(it) }
-        if (type.isArray)
-            type.componentType!!.parents.forEach { seq += getAllExtends(it.arrayType) }
+    private fun getAllMethods(type: VirtualType): Sequence<VirtualMethod> {
+        var seq = type.methods.asSequence() + getExtends(type).asSequence()
+        type.parents.forEach { seq += getAllMethods(it) }
         return seq
     }
 
