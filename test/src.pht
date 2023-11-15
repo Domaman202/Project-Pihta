@@ -1,10 +1,9 @@
 (use-ctx pht
-    (@abstract
-        (cls Foo [^Object]
-            (ctor [] (ccall))
-            (defn foo ^void []
-                (println "Foo!"))))
-    (obj FooImpl [^Foo]
-        (ctor [] (ccall)))
+    (cls StringExtends [^Object]
+        (@varargs (efn ^String sub ^String [[arr (array-type ^String)]] (progn
+            (def [[str (new ^StringBuilder this)]])
+            (for [e arr]
+                (#append str e))
+            (#toString str)))))
     (app-fn
-        (#foo ^FooImpl)))
+        (println (- "Слава " "России!"))))

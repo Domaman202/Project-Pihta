@@ -23,15 +23,7 @@ object NCCycle : INodeCompiler<NodeNodesList> {
             val cond = node.nodes[0]
             if (cond is NodeCompare) {
                 NCCompare.insertIf(
-                    when (cond.text) {
-                        "!eq"          -> "!not-eq"
-                        "!not-eq"      -> "!eq"
-                        "!less"        -> "!great"
-                        "!less-or-eq"  -> "!great-or-eq"
-                        "!great"       -> "!less"
-                        "!great-or-eq" -> "!less-or-eq"
-                        else -> throw RuntimeException()
-                    },
+                    cond.text,
                     cond.nodes,
                     ifInsert,
                     elseInsert,
@@ -39,7 +31,7 @@ object NCCycle : INodeCompiler<NodeNodesList> {
                 )
             } else {
                 NCCompare.insertIf(
-                    "not-eq",
+                    "!eq",
                     mutableListOf(cond, nodeValueOf(node.line, true)),
                     ifInsert,
                     elseInsert,

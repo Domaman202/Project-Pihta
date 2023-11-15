@@ -169,11 +169,11 @@ object Pihta : StdModule("pht") {
         add("yield",        NUPDefault, NRYield)
 
         // Аннотации
-        add("@abstract",NUPDefault, NRSA { it, _, _ -> if (it is IAbstractlyNode) it.abstract = true })
-        add("@final",   NUPDefault, NRSA { it, _, _ -> if (it is IFinallyNode) it.final = true })
-        add("@open",    NUPDefault, NRSA { it, _, _ -> if (it is IOpenlyNode) it.open = true })
-        add("@static",  NUPDefault, NRSA { it, _, _ -> if (it is IStaticallyNode) it.static = true })
-        add("@varargs", NUPDefault, NRSA { it, _, _ -> if (it is IVarargNode) it.varargs = true })
+        add("@abstract",NUPDefault, NRSA { it, _, _ -> if (it is IAbstractlyNode)   it.abstract = true })
+        add("@final",   NUPDefault, NRSA { it, _, _ -> if (it is IFinallyNode)      it.final = true })
+        add("@open",    NUPDefault, NRSA { it, _, _ -> if (it is IOpenlyNode)       it.open = true })
+        add("@static",  NUPDefault, NRSA { it, _, _ -> if (it is IStaticallyNode)   it.static = true })
+        add("@varargs", NUPDefault, NRSA { it, _, _ -> if (it is IVarargNode)       it.varargs = true })
 
         // Compile-Type Константы
         add("*module-name*",NUPDefault, NRCTSC { _, ctx -> ctx.module.name })
