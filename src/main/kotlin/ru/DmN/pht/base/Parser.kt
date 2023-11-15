@@ -29,7 +29,7 @@ class Parser(val lexer: Lexer) {
                         val parser = get(ctx, operationToken.text!!)
                         if (parser == null) {
                             tokens.push(operationToken)
-                            parseMacro(ctx, Token(operationToken.line, OPERATION, "macro!"))
+                            parseMacro(ctx, Token(operationToken.line, OPERATION, "macro"))
                         } else parser.parse(this, ctx, operationToken)
                     }
                     NAMING -> {
@@ -53,7 +53,7 @@ class Parser(val lexer: Lexer) {
     fun parseValn(ctx: ParsingContext, token: Token) =
         get(ctx, "valn!")!!.parse(this, ctx, token)
     fun parseMacro(ctx: ParsingContext, token: Token) =
-        get(ctx, "macro!")!!.parse(this, ctx, token)
+        get(ctx, "macro")!!.parse(this, ctx, token)
     fun parseMCall(ctx: ParsingContext, token: Token) =
         get(ctx, "mcall!")!!.parse(this, ctx, token)
     fun parseValue(ctx: ParsingContext, token: Token) =

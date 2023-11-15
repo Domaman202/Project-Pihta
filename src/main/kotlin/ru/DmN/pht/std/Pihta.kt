@@ -104,7 +104,7 @@ object Pihta : StdModule("pht") {
         add("!less-or-eq",  NUPCompare)
         add("list-of",      NUPDefault, NRListOf)
         // m
-        add("macro!",       NUPMacro)
+        add("macro",        NUPMacro)
         add("macro-arg",    NUPMacroArg)
         add("macro-inline", NUPMacroInline)
         add("macro-unroll", NUPMacroUnroll)
