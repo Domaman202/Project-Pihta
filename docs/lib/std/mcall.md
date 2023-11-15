@@ -11,6 +11,7 @@
 `instance` - _объект_.<br>
 `name` - _имя_.<br>
 `arg0` `argN` - _аргументы_.<br><br>
+
 3. `(#name ^type arg0 argN)`<br>
 `^type` - _класс_.<br>
 `name` - _имя_.<br>
@@ -19,6 +20,10 @@
 `instance` - _объект_.<br>
 `name` - _имя_.<br>
 `arg0` `argN` - _аргументы_.<br><br>
+5. `(#name . arg0 argN)`<br>
+`.` - ___текущий класс или объект___.<br>
+`name` - _имя_.<br>
+`arg0` `argN` - аргументы.
 
 ### Примеры
 
@@ -58,4 +63,16 @@
             (println "Foo!")))
     (app-fn
         (#foo (new ^Test))))
+```
+
+```pihta
+(use-ctx pht
+    (app
+        (defn fib ^int [[n ^int]]
+            (if (<= n 1)
+                n
+                (+  (#fib . (- n 2))
+                    (#fib . (- n 1)))))
+        (app-fn
+            (println (#fib . 10)))))
 ```
