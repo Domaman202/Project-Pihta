@@ -1,5 +1,4 @@
 (use-ctx pht
     (app-fn
-        (defmacro print-sum [a b]
-            (println (- (macro-arg a) (macro-arg b))))
-        (print-sum 213 202)))
+        (def [[^int o 12]])
+        (println o)))

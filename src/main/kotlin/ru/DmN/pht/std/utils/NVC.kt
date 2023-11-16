@@ -39,7 +39,7 @@ abstract class NVC {
             get() = this.field.type
 
         override fun load(node: MethodNode, i: Int) {
-            node.visitFieldInsn(if (field.static) Opcodes.GETSTATIC else Opcodes.GETFIELD, field.declaringClass!!.className, field.name, field.desc)
+            node.visitFieldInsn(if (field.isStatic) Opcodes.GETSTATIC else Opcodes.GETFIELD, field.declaringClass!!.className, field.name, field.desc)
         }
     }
 }

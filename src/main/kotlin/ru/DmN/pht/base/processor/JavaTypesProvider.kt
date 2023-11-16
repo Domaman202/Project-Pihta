@@ -1,6 +1,7 @@
 package ru.DmN.pht.base.processor
 
 import ru.DmN.pht.base.utils.*
+import ru.DmN.pht.base.utils.VirtualType.VirtualTypeImpl
 import java.lang.reflect.Modifier
 import java.util.*
 
@@ -17,14 +18,14 @@ class JavaTypesProvider : TypesProvider() {
         Arrays.stream(klass.interfaces).map { typeOf(it.name) }.forEach(parents::add)
         val fields = ArrayList<VirtualField>()
         val methods = ArrayList<VirtualMethod>()
-        return VirtualType(
+        return VirtualTypeImpl(
             klass.name,
             parents,
             fields,
             methods,
             componentType = klass.componentType?.let(::typeOf),
             isInterface = klass.isInterface,
-            final = Modifier.isFinal(klass.modifiers) || klass.isEnum
+            isFinal = Modifier.isFinal(klass.modifiers) || klass.isEnum
         ).apply {
             types += this
             fields += klass.declaredFields.map { VirtualField.of(::typeOf, it) }

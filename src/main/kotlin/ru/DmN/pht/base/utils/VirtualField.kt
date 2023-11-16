@@ -3,23 +3,33 @@ package ru.DmN.pht.base.utils
 import java.lang.reflect.Field
 import java.lang.reflect.Modifier
 
-data class VirtualField(
-    var declaringClass: VirtualType?,
-    var name: String,
-    var type: VirtualType,
-    var static: Boolean,
-    var enum: Boolean
-) {
+abstract class VirtualField {
+    abstract val declaringClass: VirtualType?
+    abstract val name: String
+    abstract val type: VirtualType
+    abstract val isStatic: Boolean
+    abstract val isEnum: Boolean
     val desc
         get() = type.desc
 
     override fun hashCode(): Int =
         name.hashCode() + type.hashCode() + (declaringClass?.hashCode() ?: 0)
 
+    override fun equals(other: Any?): Boolean =
+        other is VirtualField && other.hashCode() == hashCode()
+
     companion object {
         fun of(typeOf: (name: String) -> VirtualType, field: Field): VirtualField =
-            VirtualField(typeOf(field.declaringClass.name), field.name, typeOf(field.type.name), Modifier.isStatic(field.modifiers), field.isEnumConstant)
+            VirtualFieldImpl(typeOf(field.declaringClass.name), field.name, typeOf(field.type.name), Modifier.isStatic(field.modifiers), field.isEnumConstant)
         fun of(field: Field): VirtualField =
-            VirtualField(VirtualType.ofKlass(field.type), field.name, VirtualType.ofKlass(field.type), Modifier.isStatic(field.modifiers), field.isEnumConstant)
+            VirtualFieldImpl(VirtualType.ofKlass(field.type), field.name, VirtualType.ofKlass(field.type), Modifier.isStatic(field.modifiers), field.isEnumConstant)
     }
+
+    class VirtualFieldImpl(
+        override var declaringClass: VirtualType?,
+        override var name: String,
+        override var type: VirtualType,
+        override var isStatic: Boolean,
+        override var isEnum: Boolean
+    ) : VirtualField()
 }

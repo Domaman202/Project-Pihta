@@ -55,7 +55,7 @@ object NUPFGetB : INodeUniversalProcessor<Node, NodeFMGet> {
                         val field = NRFGetA.findField(type, node.name, node.static)
                         if (field == null)
                             NodeFGet.Type.UNKNOWN
-                        else if (field.static)
+                        else if (field.isStatic)
                             NodeFGet.Type.STATIC
                         else NodeFGet.Type.INSTANCE
                     },

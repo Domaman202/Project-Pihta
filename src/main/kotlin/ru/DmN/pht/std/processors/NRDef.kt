@@ -3,19 +3,16 @@ package ru.DmN.pht.std.processors
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.ast.NodeNodesList
-import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.processors.INodeProcessor
-import ru.DmN.pht.base.utils.VirtualField
+import ru.DmN.pht.base.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeDef
 import ru.DmN.pht.std.ast.NodeDef.VariableOrField
-import ru.DmN.pht.std.ast.NodeDef.VariableOrField.Companion
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
-import ru.DmN.pht.std.utils.line
 
 object NRDef : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeDef {
@@ -44,7 +41,7 @@ object NRDef : INodeProcessor<NodeNodesList> {
             processor.computeList(node.nodes[0], ctx).map { processor.computeList(it, ctx) }.forEach {
                 val name = processor.computeString(it[0], ctx)
                 val type = gctx.getType(processor.computeString(it[1], ctx), processor.tp)
-                list.add(VariableOrField.of(VirtualField(clazz, name, type, static = false, enum = false).apply { clazz.fields += this }))
+                list.add(VariableOrField.of(VirtualFieldImpl(clazz, name, type, isStatic = false, isEnum = false).apply { clazz.fields += this }))
             }
         }
         //

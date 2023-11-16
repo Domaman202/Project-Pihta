@@ -24,8 +24,8 @@ object NUPFGetA : INodeUniversalProcessor<NodeFGet, NodeFGet> {
     override fun calc(node: NodeFGet, processor: Processor, ctx: ProcessingContext): VirtualType? {
         val filter = when (node.type) {
             NodeFGet.Type.UNKNOWN -> { _: VirtualField -> true }
-            NodeFGet.Type.STATIC -> { it: VirtualField -> it.static }
-            NodeFGet.Type.INSTANCE -> { it: VirtualField -> !it.static }
+            NodeFGet.Type.STATIC -> { it: VirtualField -> it.isStatic }
+            NodeFGet.Type.INSTANCE -> { it: VirtualField -> !it.isStatic }
         }
         return (if (node.type == NodeFGet.Type.STATIC)
             ctx.global.getType(processor.computeString(node.nodes[0], ctx), processor.tp)

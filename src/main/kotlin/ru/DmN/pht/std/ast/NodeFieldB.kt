@@ -1,13 +1,13 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.utils.VirtualField
+import ru.DmN.pht.base.lexer.Token
+import ru.DmN.pht.base.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.pht.base.utils.indent
 
-class NodeFieldB(tkOperation: Token, val fields: List<VirtualField>) : Node(tkOperation), IStaticallyNode, IFinallyNode {
+class NodeFieldB(tkOperation: Token, val fields: List<VirtualFieldImpl>) : Node(tkOperation), IStaticallyNode, IFinallyNode {
     override var static: Boolean = false
-        set(value) { field = value; fields.forEach { it.static = value } }
+        set(value) { field = value; fields.forEach { it.isStatic = value } }
     override var final: Boolean = false
 
     override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {

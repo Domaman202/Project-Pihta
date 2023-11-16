@@ -12,7 +12,7 @@ import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparsers.NUDefault
-import ru.DmN.pht.base.utils.VirtualField
+import ru.DmN.pht.base.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.pht.std.ast.NodeFMGet
 import ru.DmN.pht.std.ast.NodeFieldA
 import ru.DmN.pht.std.ast.NodeFieldB
@@ -34,11 +34,11 @@ object NUPFieldA : INodeUniversalProcessor<NodeFieldA, NodeFieldA> {
         val gctx = ctx.global
         val clazz = ctx.clazz
         val body = ArrayList<Node>()
-        val fields = ArrayList<VirtualField>()
+        val fields = ArrayList<VirtualFieldImpl>()
         val line = node.line
         processor.computeList(node.nodes[0], ctx)
             .map { it -> processor.computeList(it, ctx).map { processor.computeString(it, ctx) } }.forEach { it ->
-                VirtualField(clazz, it[0], gctx.getType(it[1], processor.tp), static = node.static, enum = false).run {
+                VirtualFieldImpl(clazz, it[0], gctx.getType(it[1], processor.tp), isStatic = node.static, isEnum = false).run {
                     fields += this
                     clazz.fields += this
                     body += nodeDefn(

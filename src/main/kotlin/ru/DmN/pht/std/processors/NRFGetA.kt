@@ -32,7 +32,7 @@ object NRFGetA : INodeProcessor<NodeNodesList> {
                     val field = findField(it, name, nodes[0].isConstClass())
                     if (field == null)
                         NodeFGet.Type.UNKNOWN
-                    else if (field.static)
+                    else if (field.isStatic)
                         NodeFGet.Type.STATIC
                     else NodeFGet.Type.INSTANCE
                 },
@@ -42,5 +42,5 @@ object NRFGetA : INodeProcessor<NodeNodesList> {
     }
 
     fun findField(instance: VirtualType?, name: String, static: Boolean): VirtualField? =
-        instance?.fields?.find { it.name == name && it.static == static }
+        instance?.fields?.find { it.name == name && it.isStatic == static }
 }

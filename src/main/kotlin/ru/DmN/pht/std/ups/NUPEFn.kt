@@ -3,18 +3,18 @@ package ru.DmN.pht.std.ups
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
-import ru.DmN.pht.base.processor.ProcessingStage
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.ast.NodeNodesList
+import ru.DmN.pht.base.lexer.Token
+import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parsers.NPDefault
 import ru.DmN.pht.base.processor.ProcessingContext
-import ru.DmN.pht.base.processors.NRDefault
+import ru.DmN.pht.base.processor.ProcessingStage
 import ru.DmN.pht.base.processor.ValType
+import ru.DmN.pht.base.processors.NRDefault
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.MethodModifiers
-import ru.DmN.pht.base.utils.VirtualMethod
+import ru.DmN.pht.base.utils.VirtualMethod.VirtualMethodImpl
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.processor.ctx.BodyContext
@@ -70,7 +70,7 @@ object NUPEFn : INodeUniversalProcessor<NodeDefn, NodeNodesList> {
         args.first.add(0, extend.name)
         args.second.add(0, "this")
         //
-        val method = VirtualMethod(
+        val method = VirtualMethodImpl(
             type,
             name,
             returnType,

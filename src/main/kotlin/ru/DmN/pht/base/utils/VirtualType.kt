@@ -4,19 +4,19 @@ import java.lang.reflect.Modifier
 import java.util.*
 import kotlin.collections.ArrayList
 
-data class VirtualType(
-    var name: String,
+abstract class VirtualType {
+    abstract val name: String
     //
-    var parents: MutableList<VirtualType> = ArrayList(),
-    var fields: MutableList<VirtualField> = ArrayList(),
-    var methods: MutableList<VirtualMethod> = ArrayList(),
+    abstract val parents: MutableList<VirtualType>
+    abstract val fields: MutableList<VirtualField>
+    abstract val methods: MutableList<VirtualMethod>
     //
-    var componentType: VirtualType? = null,
+    abstract val componentType: VirtualType?
     //
-    var isInterface: Boolean = false,
-    var abstract: Boolean = false,
-    var final: Boolean = false
-) {
+    abstract val isInterface: Boolean
+    abstract val isAbstract: Boolean
+    abstract val isFinal: Boolean
+
     val simpleName: String
         get() = name.substring(name.lastIndexOf('.') + 1)
     val className: String
@@ -26,7 +26,7 @@ data class VirtualType(
     val interfaces: List<VirtualType>
         get() = if (isInterface) parents else parents.drop(1)
     val arrayType: VirtualType
-        get() = VirtualType("[${desc.replace('/', '.')}", componentType = this)
+        get() = VirtualTypeImpl("[${desc.replace('/', '.')}", componentType = this)
     val isPrimitive
         get() = name.isPrimitive()
     val isArray
@@ -66,10 +66,6 @@ data class VirtualType(
         return "VT($name)"
     }
 
-    fun copyMethodsTo(to: VirtualType) {
-        to.methods += this.methods
-    }
-
     companion object {
         private val TYPES: MutableMap<String, VirtualType> = WeakHashMap()
         val VOID = ofKlass(Void::class.javaPrimitiveType!!)
@@ -89,26 +85,31 @@ data class VirtualType(
             TYPES[klass.name] ?: createOfKlass(klass)
 
         private fun createOfKlass(klass: Klass): VirtualType =
-            VirtualType(klass.name).apply {
+            VirtualTypeImpl(klass.name).apply {
                 TYPES[klass.name] = this
                 klass.superclass?.let { parents.add(ofKlass(it.name)) }
                 Arrays.stream(klass.interfaces).map { ofKlass(it.name) }.forEach(parents::add)
                 componentType = klass.componentType?.let(Companion::ofKlass)
                 isInterface = klass.isInterface
-                abstract = Modifier.isAbstract(klass.modifiers)
-                final = Modifier.isFinal(klass.modifiers) || klass.isEnum
+                isAbstract = Modifier.isAbstract(klass.modifiers)
+                isFinal = Modifier.isFinal(klass.modifiers) || klass.isEnum
                 fields += klass.declaredFields.map(VirtualField.Companion::of)
                 methods += klass.declaredConstructors.map(VirtualMethod.Companion::of)
                 methods += klass.declaredMethods.map(VirtualMethod.Companion::of)
-//                scanMethods(methods, klass)
             }
-
-        private fun scanMethods(list: MutableList<VirtualMethod>, klass: Klass) {
-            list += klass.declaredMethods.map(VirtualMethod.Companion::of)
-            if (klass.superclass == null)
-                return
-            scanMethods(list, klass.superclass)
-            klass.interfaces.forEach { scanMethods(list, it) }
-        }
     }
+
+    class VirtualTypeImpl(
+        override var name: String,
+        //
+        override var parents: MutableList<VirtualType> = ArrayList(),
+        override var fields: MutableList<VirtualField> = ArrayList(),
+        override var methods: MutableList<VirtualMethod> = ArrayList(),
+        //
+        override var componentType: VirtualType? = null,
+        //
+        override var isInterface: Boolean = false,
+        override var isAbstract: Boolean = false,
+        override var isFinal: Boolean = false
+    ) : VirtualType()
 }

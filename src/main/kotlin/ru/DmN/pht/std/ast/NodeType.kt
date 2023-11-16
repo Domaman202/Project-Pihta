@@ -1,23 +1,23 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.ast.NodeNodesList
-import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.base.lexer.Token
+import ru.DmN.pht.base.utils.VirtualType.VirtualTypeImpl
 import ru.DmN.pht.base.utils.indent
 import ru.DmN.pht.std.utils.text
 
-class NodeType(tkOperation: Token, nodes: MutableList<Node>, val type: VirtualType) : NodeNodesList(tkOperation, nodes),
+class NodeType(tkOperation: Token, nodes: MutableList<Node>, val type: VirtualTypeImpl) : NodeNodesList(tkOperation, nodes),
     IAbstractlyNode, IFinallyNode, IOpenlyNode {
     override var abstract: Boolean
-        get() = type.abstract
-        set(value) { type.abstract = value }
+        get() = type.isAbstract
+        set(value) { type.isAbstract = value }
     override var final: Boolean
-        get() = type.final
-        set(value) { type.final = value }
+        get() = type.isFinal
+        set(value) { type.isFinal = value }
     override var open: Boolean
-        get() = !type.final
-        set(value) { type.final = !value }
+        get() = !type.isFinal
+        set(value) { type.isFinal = !value }
 
     override fun copy(): NodeType =
         NodeType(token, copyNodes(), type)

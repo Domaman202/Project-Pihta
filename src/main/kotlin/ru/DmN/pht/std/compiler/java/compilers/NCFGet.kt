@@ -15,14 +15,14 @@ object NCFGet : INodeCompiler<NodeFGet> {
             when (node.type) {
                 NodeFGet.Type.UNKNOWN -> throw UnsupportedOperationException()
                 NodeFGet.Type.STATIC -> {
-                    val field = node.vtype.fields.asSequence().filter { it.static }.filter { it.name == node.name }.first()
+                    val field = node.vtype.fields.asSequence().filter { it.isStatic }.filter { it.name == node.name }.first()
                     visitFieldInsn(Opcodes.GETSTATIC, node.vtype.className, node.name, field.desc)
                     Variable.tmp(node, field.type)
                 }
 
                 NodeFGet.Type.INSTANCE -> {
                     val clazz = compiler.compileVal(node.nodes[0], ctx).apply { load(this, this@run) }.type()
-                    val field = clazz.fields.asSequence().filter { !it.static }.filter { it.name == node.name }.first()
+                    val field = clazz.fields.asSequence().filter { !it.isStatic }.filter { it.name == node.name }.first()
                     visitFieldInsn(Opcodes.GETFIELD, clazz.className, node.name, field.desc)
                     Variable.tmp(node, field.type)
                 }

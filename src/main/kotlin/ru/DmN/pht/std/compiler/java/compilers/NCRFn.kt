@@ -7,8 +7,8 @@ import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.base.utils.VirtualField
-import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.base.utils.VirtualField.VirtualFieldImpl
+import ru.DmN.pht.base.utils.VirtualType.VirtualTypeImpl
 import ru.DmN.pht.std.ast.NodeRFn
 import ru.DmN.pht.std.compiler.java.compilers.NCDefn.visit
 import ru.DmN.pht.std.compiler.java.ctx.ClassContext
@@ -19,7 +19,7 @@ import ru.DmN.pht.std.utils.findLambdaMethod
 
 object NCRFn : INodeCompiler<NodeRFn> {
     override fun compileVal(node: NodeRFn, compiler: Compiler, ctx: CompilationContext): Variable {
-        val type = VirtualType(node.name, mutableListOf(node.type!!))
+        val type = VirtualTypeImpl(node.name, mutableListOf(node.type!!))
         compiler.tp.types += type
         val clazz = ClassNode()
         compiler.classes[node.name] = clazz
@@ -50,7 +50,7 @@ object NCRFn : INodeCompiler<NodeRFn> {
                 visitInsn(Opcodes.DUP)
                 load(it.type.name, i + 1, this)
                 visitFieldInsn(Opcodes.PUTFIELD, clazz.name, it.name, it.type.desc)
-                type.fields += VirtualField(type, it.name, it.type, static = false, enum = false)
+                type.fields += VirtualFieldImpl(type, it.name, it.type, isStatic = false, isEnum = false)
                 clazz.visitField(Opcodes.ACC_PRIVATE, it.name, it.type.desc, null, null)
             }
             visitInsn(Opcodes.RETURN)

@@ -3,25 +3,25 @@ package ru.DmN.pht.std.ups
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
-import ru.DmN.pht.base.processor.ProcessingStage
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.ast.NodeNodesList
+import ru.DmN.pht.base.lexer.Token
+import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parsers.NPDefault
 import ru.DmN.pht.base.processor.ProcessingContext
-import ru.DmN.pht.base.processors.NRDefault
+import ru.DmN.pht.base.processor.ProcessingStage
 import ru.DmN.pht.base.processor.ValType
+import ru.DmN.pht.base.processors.NRDefault
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.MethodModifiers
-import ru.DmN.pht.base.utils.VirtualMethod
+import ru.DmN.pht.base.utils.VirtualMethod.VirtualMethodImpl
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.processor.ctx.BodyContext
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.with
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
-import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.utils.line
 
 object NUPCtor : INodeUniversalProcessor<NodeDefn, NodeNodesList> {
@@ -60,7 +60,7 @@ object NUPCtor : INodeUniversalProcessor<NodeDefn, NodeNodesList> {
         //
         val args = NRDefn.parseArguments(node.nodes[0], processor, ctx)
         //
-        val method = VirtualMethod(
+        val method = VirtualMethodImpl(
             type,
             "<init>",
             VirtualType.VOID,

@@ -7,15 +7,17 @@ import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ProcessingStage
 import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.processors.INodeProcessor
-import ru.DmN.pht.base.processors.NRDefault
 import ru.DmN.pht.base.utils.MethodModifiers
 import ru.DmN.pht.base.utils.VirtualMethod
+import ru.DmN.pht.base.utils.VirtualMethod.VirtualMethodImpl
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.processor.ctx.BodyContext
-import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.processor.utils.clazz
+import ru.DmN.pht.std.processor.utils.global
+import ru.DmN.pht.std.processor.utils.nodeAs
+import ru.DmN.pht.std.processor.utils.with
 import ru.DmN.pht.std.processors.NRAs
-import ru.DmN.pht.std.processors.NRBody
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.line
@@ -29,7 +31,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         val returnType = processor.computeString(node.nodes[1], ctx)
         val args = parseArguments(node.nodes[2], processor, ctx)
         //
-        val method = VirtualMethod(
+        val method = VirtualMethodImpl(
             type,
             name,
             gctx.getType(returnType, processor.tp),

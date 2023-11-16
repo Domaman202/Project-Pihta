@@ -7,8 +7,9 @@ import ru.DmN.pht.base.processor.ProcessingStage
 import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.processors.NRDefault
-import ru.DmN.pht.base.utils.VirtualField
+import ru.DmN.pht.base.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.base.utils.VirtualType.VirtualTypeImpl
 import ru.DmN.pht.std.ast.NodeType
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.with
@@ -25,9 +26,9 @@ object NRClass : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeType {
         val gctx = ctx.global
         //
-        val type = VirtualType(gctx.name(processor.computeString(processor.process(node.nodes[0], ctx, ValType.VALUE)!!, ctx)))
+        val type = VirtualTypeImpl(gctx.name(processor.computeString(processor.process(node.nodes[0], ctx, ValType.VALUE)!!, ctx)))
         when (node.text) {
-            "obj" -> type.fields += VirtualField(type, "INSTANCE", type, static = true, enum = false)
+            "obj" -> type.fields += VirtualFieldImpl(type, "INSTANCE", type, isStatic = true, isEnum = false)
             "itf" -> type.isInterface = true
         }
         processor.tp.types += type
