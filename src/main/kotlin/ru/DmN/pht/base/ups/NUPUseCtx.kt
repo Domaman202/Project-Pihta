@@ -1,5 +1,6 @@
 package ru.DmN.pht.base.ups
 
+import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
@@ -69,7 +70,7 @@ object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeParsedUse> {
         names.forEach { name ->
             val module = Module[name]
             if (module?.init != true)
-                Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(StdModule))
+                Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(Base, StdModule))
             (module ?: Module.getOrThrow(name)).inject(parser, context)
         }
     }
@@ -78,7 +79,7 @@ object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeParsedUse> {
         names.forEach { name ->
             val module = Module[name]
             if (module?.init != true)
-                Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(StdModule))
+                Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(Base, StdModule))
             (module ?: Module.getOrThrow(name)).inject(unparser, context)
         }
     }

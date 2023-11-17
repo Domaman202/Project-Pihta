@@ -1,5 +1,6 @@
 package ru.DmN.pht.base.utils
 
+import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
@@ -16,7 +17,6 @@ import ru.DmN.pht.base.unparsers.INodeUnparser
 import ru.DmN.pht.std.module.StdModule
 import java.io.File
 import java.io.FileNotFoundException
-import java.lang.ref.WeakReference
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler as JavaNodeCompiler
 
 open class Module(val name: String, var init: Boolean = false) {
@@ -31,7 +31,7 @@ open class Module(val name: String, var init: Boolean = false) {
 
     fun init() {
         if (!init) {
-            Parser(getModuleFile(name)).parseNode(ParsingContext.of(StdModule))
+            Parser(getModuleFile(name)).parseNode(ParsingContext.of(Base, StdModule))
         }
     }
 
