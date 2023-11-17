@@ -13,6 +13,7 @@ import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparsers.NUDefault
 import ru.DmN.pht.base.utils.VirtualField.VirtualFieldImpl
+import ru.DmN.pht.base.utils.VirtualType.VirtualTypeImpl
 import ru.DmN.pht.std.ast.NodeFMGet
 import ru.DmN.pht.std.ast.NodeFieldA
 import ru.DmN.pht.std.ast.NodeFieldB
@@ -32,7 +33,7 @@ object NUPFieldA : INodeUniversalProcessor<NodeFieldA, NodeFieldA> {
 
     override fun process(node: NodeFieldA, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
         val gctx = ctx.global
-        val clazz = ctx.clazz
+        val clazz = ctx.clazz as VirtualTypeImpl
         val body = ArrayList<Node>()
         val fields = ArrayList<VirtualFieldImpl>()
         val line = node.line

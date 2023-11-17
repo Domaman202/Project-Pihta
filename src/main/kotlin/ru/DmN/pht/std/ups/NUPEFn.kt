@@ -16,6 +16,7 @@ import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.MethodModifiers
 import ru.DmN.pht.base.utils.VirtualMethod.VirtualMethodImpl
 import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.pht.base.utils.VirtualType.VirtualTypeImpl
 import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.processor.ctx.BodyContext
 import ru.DmN.pht.std.processor.utils.clazz
@@ -60,7 +61,7 @@ object NUPEFn : INodeUniversalProcessor<NodeDefn, NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeDefn {
         val gctx = ctx.global
-        val type = ctx.clazz
+        val type = ctx.clazz as VirtualTypeImpl
         //
         val extend = gctx.getType(processor.computeString(node.nodes[0], ctx), processor.tp)
         val name = processor.computeString(node.nodes[1], ctx)

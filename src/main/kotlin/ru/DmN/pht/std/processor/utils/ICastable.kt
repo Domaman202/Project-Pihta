@@ -5,6 +5,7 @@ import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.IAdaptableNode
+import ru.DmN.pht.std.utils.VTDynamic
 
 interface ICastable {
     /**
@@ -15,7 +16,9 @@ interface ICastable {
 
     companion object {
         fun of(type: VirtualType): ICastable =
-            CastableImpl(type)
+            if (type == VTDynamic)
+                CastableDynamicImpl()
+            else CastableImpl(type)
 
         fun of(node: IAdaptableNode): ICastable =
             CastableAdaptImpl(node)

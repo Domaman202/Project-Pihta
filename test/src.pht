@@ -1,4 +1,4 @@
 (use-ctx pht
     (app-fn
-        (def [[^int o 12]])
-        (println o)))
+        (def [[^dynamic o "Русь"]])
+        (println o/getValue)))

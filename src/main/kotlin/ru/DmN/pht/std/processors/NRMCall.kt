@@ -15,6 +15,7 @@ import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.ast.NodeMCall.Type.*
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.utils.VTDynamic
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.line
 
@@ -119,7 +120,15 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 UNKNOWN
             }
         }
-        val result = findMethod(
+        val result = if (clazz == VTDynamic)
+            findMethod(
+                ctx.global.getType("ru.DmN.pht.std.utils.DynamicUtils", processor.tp),
+                "invokeMethod",
+                node.nodes.map { processor.process(it, ctx, ValType.VALUE)!! },
+                processor,
+                ctx
+            )
+        else findMethod(
             clazz,
             processor.computeString(node.nodes[1], ctx),
             node.nodes.drop(2).map { processor.process(it, ctx, ValType.VALUE)!! },

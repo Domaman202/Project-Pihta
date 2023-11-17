@@ -1,9 +1,4 @@
-(use-ctx pht phtx/spt
+(use-ctx pht
     (app-fn
-        (def [[window (window "Крещение Матушки Руси" 640 480
-            (page (title "Крещение Руси")
-                (image (img-ifile "/phtx/spt/img0.jpg") 20  50 280 340)
-                (image (img-ifile "/phtx/spt/img3.jpg") 340 50 270 340)
-                (text "Рис. 1" 150 420 14)
-                (text "Рис. 2" 450 420 14)))]])
-        (#showNext window)))
+        (def [[^dynamic o "Русь"]])
+        (println o/value)))

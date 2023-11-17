@@ -2,14 +2,19 @@ package ru.DmN.pht.base.processor
 
 import ru.DmN.pht.base.utils.*
 import ru.DmN.pht.base.utils.VirtualType.VirtualTypeImpl
+import ru.DmN.pht.std.utils.VTDynamic
 import java.lang.reflect.Modifier
 import java.util.*
 
 class JavaTypesProvider : TypesProvider() {
+    init {
+        types.add(VTDynamic)
+    }
+
     override fun typeOf(name: String): VirtualType =
         types.find { it.name == name } ?: addType(klassOf(name))
 
-    fun typeOf(klass: Klass): VirtualType =
+    private fun typeOf(klass: Klass): VirtualType =
         types.find { it.name == klass.name } ?: addType(klass)
 
     private fun addType(klass: Klass): VirtualType {

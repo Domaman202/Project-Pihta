@@ -37,7 +37,7 @@ object NRDef : INodeProcessor<NodeNodesList> {
                 list.add(VariableOrField.of(Variable(name, type, value, bctx.addVariable(name, type).id)))
             }
         } else {
-            val clazz = ctx.clazz
+            val clazz = ctx.clazz as VirtualType.VirtualTypeImpl
             processor.computeList(node.nodes[0], ctx).map { processor.computeList(it, ctx) }.forEach {
                 val name = processor.computeString(it[0], ctx)
                 val type = gctx.getType(processor.computeString(it[1], ctx), processor.tp)

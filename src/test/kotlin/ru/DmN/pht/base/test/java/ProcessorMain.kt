@@ -20,7 +20,7 @@ object ProcessorMain {
         val source = Parser(String(UnparserMain::class.java.getResourceAsStream("/test.pht").readAllBytes())).parseNode(
             ParsingContext.base())!!
         logTxt("pre", source.print())
-        logPht("pre-unparse", Unparser().let { it.unparse(source, UnparsingContext(mutableListOf(Base)), 0); it.out.toString() })
+//        logPht("pre-unparse", Unparser().let { it.unparse(source, UnparsingContext(mutableListOf(Base)), 0); it.out.toString() })
         val processor = Processor(JavaTypesProvider())
         val ctx = ProcessingContext.base().with(Platform.JAVA)
         val processed = processor.process(source, ctx, ValType.NO_VALUE)!!

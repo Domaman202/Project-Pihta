@@ -12,6 +12,7 @@ import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.VirtualField.VirtualFieldImpl
+import ru.DmN.pht.base.utils.VirtualType.VirtualTypeImpl
 import ru.DmN.pht.std.ast.NodeEField
 import ru.DmN.pht.std.processor.ctx.EnumConstContext
 import ru.DmN.pht.std.processor.utils.clazz
@@ -46,7 +47,7 @@ object NUPEField : INodeUniversalProcessor<NodeEField, NodeNodesList> {
     }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeEField? {
-        val type = ctx.clazz
+        val type = ctx.clazz as VirtualTypeImpl
         val fields = type.fields
         val enums = ctx.enum.enums
         val list = ArrayList<Pair<String, List<Node>>>()

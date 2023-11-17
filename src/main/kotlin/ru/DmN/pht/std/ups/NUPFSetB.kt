@@ -13,6 +13,7 @@ import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.nodeClass
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.processors.NRMCall
+import ru.DmN.pht.std.utils.VTDynamic
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.line
 
@@ -27,7 +28,23 @@ object NUPFSetB : INodeUniversalProcessor<Node, NodeFieldSet> {
         val result =
             if (node.native)
                 null
-            else NRMCall.findMethodOrNull(
+            else if (type == VTDynamic) {
+                NRMCall.findMethodOrNull(
+                    ctx.global.getType("ru.DmN.pht.std.utils.DynamicUtils", processor.tp),
+                    "invokeSetter",
+                    node.nodes,
+                    processor,
+                    ctx
+                )?.let {
+                    return NodeMCall(
+                        Token.operation(node.line, "!mcall"),
+                        NRMCall.processArguments(node.line, processor, ctx, it.second, listOf(instance) + node.nodes),
+                        nodeClass(node.line, it.second.declaringClass!!.name),
+                        it.second,
+                        NodeMCall.Type.VIRTUAL
+                    )
+                }
+            } else NRMCall.findMethodOrNull(
                 type,
                 "set${node.name.let { it[0].toUpperCase() + it.substring(1) }}",
                 node.nodes,

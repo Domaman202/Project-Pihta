@@ -7,9 +7,9 @@ import kotlin.collections.ArrayList
 abstract class VirtualType {
     abstract val name: String
     //
-    abstract val parents: MutableList<VirtualType>
-    abstract val fields: MutableList<VirtualField>
-    abstract val methods: MutableList<VirtualMethod>
+    abstract val parents: List<VirtualType>
+    abstract val fields: List<VirtualField>
+    abstract val methods: List<VirtualMethod>
     //
     abstract val componentType: VirtualType?
     //
@@ -17,21 +17,21 @@ abstract class VirtualType {
     abstract val isAbstract: Boolean
     abstract val isFinal: Boolean
 
-    val simpleName: String
+    open val simpleName: String
         get() = name.substring(name.lastIndexOf('.') + 1)
-    val className: String
+    open val className: String
         get() = name.replace('.', '/')
-    val superclass: VirtualType?
+    open val superclass: VirtualType?
         get() = if (isInterface) null else parents.find { !it.isInterface }
-    val interfaces: List<VirtualType>
+    open val interfaces: List<VirtualType>
         get() = if (isInterface) parents else parents.drop(1)
-    val arrayType: VirtualType
+    open val arrayType: VirtualType
         get() = VirtualTypeImpl("[${desc.replace('/', '.')}", componentType = this)
-    val isPrimitive
+    open val isPrimitive
         get() = name.isPrimitive()
-    val isArray
+    open val isArray
         get() = componentType != null
-    val desc: String
+    open val desc: String
         get() = if (this.isArray)
             "[${componentType!!.desc}"
         else when (name) {
@@ -47,7 +47,7 @@ abstract class VirtualType {
             else -> "L$className;"
         }
 
-    fun isAssignableFrom(target: VirtualType): Boolean =
+    open fun isAssignableFrom(target: VirtualType): Boolean =
         if (target.name == this.name || parents.any { it.isAssignableFrom(target) })
             true
         else if (isInterface)

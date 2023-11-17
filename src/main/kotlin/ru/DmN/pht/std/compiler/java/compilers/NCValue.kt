@@ -45,7 +45,7 @@ object NCValue : INodeCompiler<NodeValue> {
                         visitLdcInsn(node.getDouble())
                         VirtualType.DOUBLE
                     }
-                    NodeValue.Type.STRING -> {
+                    NodeValue.Type.STRING, NodeValue.Type.NAMING -> {
                         visitLdcInsn(node.getString())
                         VirtualType.ofKlass("java.lang.String")
                     }
@@ -53,7 +53,6 @@ object NCValue : INodeCompiler<NodeValue> {
                         visitLdcInsn(Type.getType(node.value.desc))
                         VirtualType.ofKlass("java.lang.Class")
                     }
-                    NodeValue.Type.NAMING -> throw UnsupportedOperationException()
                 }
             }
         )

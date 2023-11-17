@@ -24,6 +24,7 @@ class NodeMCall(tkOperation: Token, nodes: MutableList<Node>, val instance: Node
         EXTEND,
         STATIC,
         VIRTUAL,
-        SUPER
+        SUPER,
+        DYNAMIC
     }
 }

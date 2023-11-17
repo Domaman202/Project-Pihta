@@ -68,9 +68,8 @@ object NUPValueA : INodeUniversalProcessor<NodeValue, NodeValue>, IStdNodeProces
                 NodeValue.Type.LONG -> "long"
                 NodeValue.Type.FLOAT -> "float"
                 NodeValue.Type.DOUBLE -> "double"
-                NodeValue.Type.STRING -> "String"
+                NodeValue.Type.STRING, NodeValue.Type.NAMING -> "String"
                 NodeValue.Type.PRIMITIVE, NodeValue.Type.CLASS -> "Class"
-                NodeValue.Type.NAMING -> throw RuntimeException()
             }, processor.tp
         )
 
