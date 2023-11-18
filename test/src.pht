@@ -1,4 +1,3 @@
 (use-ctx pht
     (app-fn
-        (def [[^dynamic o "Русь"]])
-        (println o/getValue)))
+        (set o/value 123)))
