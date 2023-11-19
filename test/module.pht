@@ -2,5 +2,5 @@
     (name "test")
     (version "1.0.0")
     (author "DomamaN202")
-    (deps ["pht"])
+    (deps ["pht" "phtx/pxx"])
     (files ["src.pht"]))
