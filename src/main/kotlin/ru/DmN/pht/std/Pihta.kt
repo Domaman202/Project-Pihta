@@ -186,26 +186,30 @@ object Pihta : StdModule("pht") {
         add("<-", NUPDefault, NRUnrollB)
 
         // Мат/Лог операции
-        add("++",   NUPIncDec)
-        add("--",   NUPIncDec)
-        add("+",    NUPMath)
-        add("-",    NUPMath)
-        add("*",    NUPMath)
-        add("/",    NUPMath)
-        add("%",    NUPMath)
-        add("!",    NUPCompare)
-        add("=",    NUPCompare)
-        add("!=",   NUPCompare)
-        add(">",    NUPCompare)
-        add(">=",   NUPCompare)
-        add("<",    NUPCompare)
-        add("<=",   NUPCompare)
-        add(">>",   NUPMath)
-        add("<<",   NUPMath)
+        "++" to "inc"
+        "--" to "dec"
+        "+"  to "add"
+        "-"  to "sub"
+        "*"  to "mul"
+        "/"  to "div"
+        "%"  to "rem"
+        "!"  to "not"
+        "="  to "eq"
+        "!=" to "not-eq"
+        ">"  to "great"
+        ">=" to "great-or-eq"
+        "<"  to "less"
+        "<=" to "less-or-eq"
+        ">>" to "shift-right"
+        "<<" to "shift-left"
 
         ///
 
         PihtaJava.init()
+    }
+
+    infix fun String.to(alias: String) {
+        add(this, NUPNodeAlias(alias))
     }
 
     override fun inject(parser: Parser, ctx: ParsingContext) {

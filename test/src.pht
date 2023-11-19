@@ -1,3 +1,8 @@
 (use-ctx pht
-    (app-fn
-        (set o/value 123)))
+    (app
+        (defn fact ^int [[n ^int]]
+            (if (= n 1)
+                1
+                (* n (#fact . (- n 1)))))
+        (app-fn
+            (println (#fact . 10)))))

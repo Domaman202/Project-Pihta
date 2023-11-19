@@ -4,7 +4,6 @@ import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.ast.NodeNodesList
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parsers.NPDefault
@@ -17,24 +16,8 @@ import ru.DmN.pht.std.processors.NRCompare
 import ru.DmN.pht.std.unparsers.NUDefaultX
 
 object NUPCompare : INodeUniversalProcessor<NodeCompare, NodeCompare> {
-    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
-        NPDefault.parse(parser, ctx) {
-            NodeNodesList(
-                Token.operation(
-                    token.line,
-                    when (token.text!!) {
-                        "!"     -> "not"
-                        "="     -> "eq"
-                        "!="    -> "not-eq"
-                        ">"     -> "great"
-                        ">="    -> "great-or-eq"
-                        "<"     -> "less"
-                        "<="    -> "less-or-eq"
-                        else    -> token.text
-                    }
-                ), it
-            )
-        }
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
+        NPDefault.parse(parser, ctx, token)
 
     override fun unparse(node: NodeCompare, unparser: Unparser, ctx: UnparsingContext, indent: Int) =
         NUDefaultX.unparse(node, unparser, ctx, indent)

@@ -16,26 +16,8 @@ import ru.DmN.pht.std.processors.NRMath
 import ru.DmN.pht.std.unparsers.NUDefaultX
 
 object NUPMath : INodeUniversalProcessor<NodeNodesList, NodeNodesList> {
-    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
-        NPDefault.parse(parser, ctx) {
-            val text = token.text!!
-            NodeNodesList(
-                Token.operation(
-                    token.line,
-                    when (text) {
-                        "+"  -> "add"
-                        "-"  -> "sub"
-                        "*"  -> "mul"
-                        "/"  -> "div"
-                        "%"  -> "rem"
-                        ">>" -> "shift-right"
-                        "<<" -> "shift-left"
-                        else -> text
-                    }
-                ),
-                it
-            )
-        }
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
+        NPDefault.parse(parser, ctx, token)
 
     override fun unparse(node: NodeNodesList, unparser: Unparser, ctx: UnparsingContext, indent: Int) =
         NUDefaultX.unparse(node, unparser, ctx, indent)
