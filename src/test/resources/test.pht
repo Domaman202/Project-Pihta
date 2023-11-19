@@ -1,3 +1,8 @@
 (use-ctx pht
-    (app-fn
-        (println "Сало!")))
+    (import java
+        (types java.lang.Runnable))
+    (app
+        (defn test ^void [[o ^Runnable]]
+            (#run o))
+        (defn main ^void [] (progn
+            (#test ^App (fn ^Runnable [][] (println "Арен брат, с днюхой!")))))))

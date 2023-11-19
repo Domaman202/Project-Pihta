@@ -4,7 +4,6 @@ import ru.DmN.pht.base.compiler.java.compilers.NCDefault
 import ru.DmN.pht.base.utils.ModuleCompilers
 import ru.DmN.pht.std.Pihta
 import ru.DmN.pht.std.compiler.java.compilers.*
-import ru.DmN.pht.std.ups.NUPEnum
 
 object PihtaJava : ModuleCompilers(Pihta) {
     override fun onInitialize() {
@@ -65,7 +64,6 @@ object PihtaJava : ModuleCompilers(Pihta) {
         // r
         add("!rem",         NCMath)
         add("ret",          NCRet)
-        add("!rfn",         NCRFn)
         // s
         add("set!",         NCSet)
         add("!shift-left",  NCMath)

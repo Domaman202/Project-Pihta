@@ -16,19 +16,26 @@ object NUPFn : INodeUniversalProcessor<NodeFn, NodeFn> {
             append('(').append(NUDefaultX.text(node.token)).append(' ')
             node.type?.let { append('^').append(it.name) }
             append(" [")
+            node.refs.forEachIndexed { i, it ->
+                append(it.name)
+                if (i + 1 < node.refs.size) {
+                    append(' ')
+                }
+            }
+            append("] [")
             node.args.forEachIndexed { i, it ->
                 append(it)
                 if (i + 1 < node.args.size) {
                     append(' ')
                 }
             }
-            append(']')
+            append("]")
             if (node.nodes.isNotEmpty()) {
                 append('\n')
                 node.nodes.forEachIndexed { i, it ->
                     append("\t".repeat(indent + 1))
                     unparser.unparse(it, ctx, indent + 1)
-                    if (i + 1 < node.nodes.size) {
+                    if (node.nodes.size + 1 < i) {
                         append('\n')
                     }
                 }

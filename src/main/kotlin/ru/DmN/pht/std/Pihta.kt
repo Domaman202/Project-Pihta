@@ -138,8 +138,6 @@ object Pihta : StdModule("pht") {
         add("rem",          NUPMath,    NRMath)
         add("!rem",         NUPMath)
         add("ret",          NUPDefault, NRRet)
-        add("rfn",          NUPDefault, NRRFn)
-        add("!rfn",         NUPRFn)
         // s
         add("set",          NUPSetA)
         add("set!",         NUPSetB)
