@@ -23,7 +23,7 @@ import ru.DmN.pht.std.utils.text
 import java.util.*
 
 object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeParsedUse> {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node {
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val names = ArrayList<String>()
         val exports = ArrayList<NodeNodesList>()
         var tk = parser.nextToken()!!
@@ -37,7 +37,7 @@ object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeParsedUse> {
             context.exports.push(exports)
         else context.exports = Stack<MutableList<NodeNodesList>>().apply { push(exports) }
         loadModules(names, parser, context)
-        return NPDefault.parse(parser, context) { NodeParsedUse(operationToken, names, it, exports) }.apply { context.exports.pop() }
+        return NPDefault.parse(parser, context) { NodeParsedUse(token, names, it, exports) }.apply { context.exports.pop() }
     }
 
     override fun unparse(node: NodeUse, unparser: Unparser, ctx: UnparsingContext, indent: Int) {

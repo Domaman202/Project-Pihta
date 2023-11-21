@@ -1,12 +1,12 @@
 package ru.DmN.pht.base.utils
 
-import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
+import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parsers.INodeParser
 import ru.DmN.pht.base.processor.ProcessingContext
@@ -14,7 +14,9 @@ import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparsers.INodeUnparser
+import ru.DmN.pht.base.ups.NUPUse
 import ru.DmN.pht.std.module.StdModule
+import ru.DmN.pht.std.processor.utils.nodeProgn
 import java.io.File
 import java.io.FileNotFoundException
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler as JavaNodeCompiler
@@ -23,6 +25,7 @@ open class Module(val name: String, var init: Boolean = false) {
     lateinit var version: String
     lateinit var author: String
     val deps: MutableList<String> = ArrayList()
+    val uses: MutableList<String> = ArrayList()
     val files: MutableList<String> = ArrayList()
     val parsers: MutableMap<Regex, INodeParser> = HashMap()
     val unparsers: MutableMap<Regex, INodeUnparser<*>> = HashMap()
@@ -31,7 +34,7 @@ open class Module(val name: String, var init: Boolean = false) {
 
     fun init() {
         if (!init) {
-            Parser(getModuleFile(name)).parseNode(ParsingContext.of(Base, StdModule))
+            Parser(getModuleFile(name)).parseNode(ParsingContext.of(StdModule))
         }
     }
 
@@ -50,7 +53,17 @@ open class Module(val name: String, var init: Boolean = false) {
     open fun inject(processor: Processor, ctx: ProcessingContext, mode: ValType): List<Node>? =
         if (!ctx.loadedModules.contains(this)) {
             ctx.loadedModules.add(0, this)
-            files.map { processor.process(Parser(getModuleFile(it)).parseNode(ParsingContext.base())!!, ctx, mode) }.requireNoNulls()
+            files.map {
+                val pctx = ParsingContext.base()
+                processor.process(
+                    nodeProgn(-1, mutableListOf(
+                        NUPUse.parse(uses, Token.operation(-1, "use"), Parser(""), pctx),
+                        Parser(getModuleFile(it)).parseNode(pctx)!!
+                    )),
+                    ctx,
+                    mode
+                )
+            }.requireNoNulls()
         } else null
 
     open fun inject(compiler: Compiler, ctx: CompilationContext): Variable? {

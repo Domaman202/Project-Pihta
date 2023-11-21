@@ -10,5 +10,6 @@ object BaseJava : ModuleCompilers(Base) {
     override fun onInitialize() {
         add("progn",    NCDefault)
         add("use-ctx",  NCUseCtx)
+        add("use",      NCUse)
     }
 }

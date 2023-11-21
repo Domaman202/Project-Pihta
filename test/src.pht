@@ -1,3 +1,2 @@
-(use-ctx pht
-    (app-fn
-        (println "Слава России!")))
+(app-fn
+    (println "Слава России!"))

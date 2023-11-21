@@ -31,6 +31,7 @@ object NPModule : SimpleNP() {
                         module.deps += it
                         NUPUseCtx.loadModules(it, parser, ctx)
                     }
+                    (data["use"] as List<String>?)?.let { module.uses += it }
                     (data["files"] as List<String>?)?.let { module.files += it }
                     (data["author"] as String?)?.let { module.author = it }
                 }
