@@ -1,7 +1,0 @@
-(module
-    (name "phtx/spt")
-    (version "1.0.0")
-    (author "DomamaN202")
-    (deps ["pht"])
-    (files ["src.pht"])
-    (class "ru.DmN.phtx.spt.SPT"))
