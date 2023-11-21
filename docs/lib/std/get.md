@@ -15,12 +15,12 @@
 (use-ctx pht
     (app-fn
         (def [[i 33]])
-        (println i))))
+        (println i)))
 ```
 
 ```pihta
 (use-ctx pht
     (app-fn
         (def [[i 44]])
-        (println (get i)))))
+        (println (get i))))
 ```

@@ -12,8 +12,9 @@
 
 ```pihta
 (use-ctx pht
-    (cls Foo [^Object]
-        (defn foo ^void [] (progn
+    (app-fn
+        (progn
             (println "Foo! (1)")
-            (println "Foo! (2)")))))
+            (println "Foo! (23)")
+            (println "Foo! (3)"))))
 ```

@@ -13,5 +13,5 @@
 (use-ctx pht
     (app-fn
         (alias-type java.lang.Integer i32)
-        (println ^i32))
+        (println ^i32)))
 ```

@@ -12,5 +12,5 @@
 ```pihta
 (use-ctx pht
     (app-fn
-        (println (as ^double 33)))
+        (println (as ^double 33))))
 ```

@@ -13,6 +13,7 @@
 
 ```pht
 (use-ctx pht
-    (println "Здравствуй,")
-    (println "Товарищ!"))
+    (app-fn
+        (println "Здравствуй,")
+        (println "Товарищ!")))
 ```

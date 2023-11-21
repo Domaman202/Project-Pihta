@@ -4,7 +4,6 @@ import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.parser.ParsingContext
-import ru.DmN.pht.base.parsers.NPDefault
 import ru.DmN.pht.base.processor.ProcessingContext
 import ru.DmN.pht.base.processor.ValType
 import ru.DmN.pht.std.ast.*
@@ -15,7 +14,6 @@ import ru.DmN.pht.std.processor.NRCCall
 import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.processors.*
-import ru.DmN.pht.std.unparsers.NUNs
 import ru.DmN.pht.std.ups.*
 import ru.DmN.pht.std.utils.StdModule
 import java.util.*
@@ -124,7 +122,8 @@ object Pihta : StdModule("pht") {
         add("!not",         NUPCompare)
         add("not-eq",       NUPCompare, NRCompare)
         add("!not-eq",      NUPCompare)
-        add("ns",           NPDefault,  NUNs, NRNewNs)
+        add("ns",           NUPDefault, NRNs)
+        add("!ns",          NUPNs)
         // o
         add("obj",          NUPDefault, NRClass)
         add("!obj",         NUPClass)
@@ -146,7 +145,6 @@ object Pihta : StdModule("pht") {
         add("shift-right",  NUPMath,    NRMath)
         add("!shift-right", NUPMath)
         add("skip",         NPSkip)
-        add("sns",          NPDefault,  NUNs, NRSubNs)
         add("sub",          NUPMath,    NRMath)
         add("!sub",         NUPMath)
         add("symbol",       NUPDefault, NRSymbol)

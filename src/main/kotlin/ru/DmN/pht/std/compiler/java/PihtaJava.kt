@@ -57,7 +57,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!new-array",   NCNewArray)
         add("!not",         NCCompare)
         add("!not-eq",      NCCompare)
-        add("ns",           NCDefault)
+        add("!ns",          NCDefault)
         // o
         add("!obj",         NCClass)
         add("!or",          NCMath)

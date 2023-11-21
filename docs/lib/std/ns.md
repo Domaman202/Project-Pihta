@@ -12,7 +12,9 @@
 ```
 (use-ctx pht
     (ns ru.DmN.pht
-        (cls Foo [^Object]
+        (obj Foo [^Object]
             (defn foo ^void []
-                (println "Foo!")))))
+                (println "Foo!"))))
+    (app-fn
+        (#foo ^ru.DmN.pht.Foo)))
 ```
