@@ -3,8 +3,8 @@ package ru.DmN.pht.std.utils
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.ast.NodeNodesList
-import ru.DmN.pht.base.processor.ProcessingContext
-import ru.DmN.pht.base.processor.ValType
+import ru.DmN.pht.base.processor.utils.ProcessingContext
+import ru.DmN.pht.base.processor.utils.ValType
 
 class LazyProcessValueList(
     val node: NodeNodesList,

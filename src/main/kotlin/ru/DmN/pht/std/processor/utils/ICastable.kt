@@ -2,7 +2,7 @@ package ru.DmN.pht.std.processor.utils
 
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.processor.ProcessingContext
+import ru.DmN.pht.base.processor.utils.ProcessingContext
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.IAdaptableNode
 import ru.DmN.pht.std.utils.VTDynamic

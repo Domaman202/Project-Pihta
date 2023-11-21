@@ -3,8 +3,8 @@ package ru.DmN.pht.std.ups
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.processor.ProcessingContext
-import ru.DmN.pht.base.processor.ValType
+import ru.DmN.pht.base.processor.utils.ProcessingContext
+import ru.DmN.pht.base.processor.utils.ValType
 import ru.DmN.pht.std.ast.NodeFSet
 import ru.DmN.pht.std.ast.NodeFieldSet
 import ru.DmN.pht.std.ast.NodeMCall

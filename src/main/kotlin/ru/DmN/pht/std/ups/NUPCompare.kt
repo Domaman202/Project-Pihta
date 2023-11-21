@@ -7,7 +7,7 @@ import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parsers.NPDefault
-import ru.DmN.pht.base.processor.ProcessingContext
+import ru.DmN.pht.base.processor.utils.ProcessingContext
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeCompare

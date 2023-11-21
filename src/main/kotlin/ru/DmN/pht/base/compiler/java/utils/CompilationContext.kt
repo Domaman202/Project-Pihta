@@ -1,7 +1,7 @@
 package ru.DmN.pht.base.compiler.java.utils
 
 import ru.DmN.pht.base.Base
-import ru.DmN.pht.base.processor.Platform
+import ru.DmN.pht.base.processor.utils.Platform
 import ru.DmN.pht.base.utils.IContextCollection
 import ru.DmN.pht.base.utils.Module
 import ru.DmN.pht.base.utils.with

@@ -5,14 +5,13 @@ import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompilingStage
 import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.processor.JavaTypesProvider
 import ru.DmN.pht.base.utils.DefaultEnumMap
 import ru.DmN.pht.base.utils.TypesProvider
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.getRegex
 import ru.DmN.pht.std.utils.text
 
-class Compiler(val tp: TypesProvider = JavaTypesProvider()) {
+class Compiler(val tp: TypesProvider = TypesProvider.JAVA) {
     val tasks: DefaultEnumMap<CompilingStage, MutableList<() -> Unit>> = DefaultEnumMap(CompilingStage::class.java) { ArrayList() }
     val contexts: MutableMap<String, Any?> = HashMap()
     val classes: MutableMap<String, ClassNode> = HashMap()

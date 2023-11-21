@@ -2,7 +2,7 @@ package ru.DmN.pht.base.utils
 
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.*
-import ru.DmN.pht.base.processor.Platform
+import ru.DmN.pht.base.processor.utils.Platform
 
 fun <T : IContextCollection<T>> T.with(ctx: Platform) =
     this.with("base/platform", ctx)

@@ -9,8 +9,8 @@ import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parsers.INodeParser
-import ru.DmN.pht.base.processor.ProcessingContext
-import ru.DmN.pht.base.processor.ValType
+import ru.DmN.pht.base.processor.utils.ProcessingContext
+import ru.DmN.pht.base.processor.utils.ValType
 import ru.DmN.pht.base.processors.INodeProcessor
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparsers.INodeUnparser

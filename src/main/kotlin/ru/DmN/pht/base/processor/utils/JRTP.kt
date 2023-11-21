@@ -1,4 +1,4 @@
-package ru.DmN.pht.base.processor
+package ru.DmN.pht.base.processor.utils
 
 import ru.DmN.pht.base.utils.*
 import ru.DmN.pht.base.utils.VirtualType.VirtualTypeImpl
@@ -6,7 +6,10 @@ import ru.DmN.pht.std.utils.VTDynamic
 import java.lang.reflect.Modifier
 import java.util.*
 
-class JavaTypesProvider : TypesProvider() {
+/**
+ * Java Runtime Types Provider
+ */
+class JRTP : TypesProvider() {
     init {
         types.add(VTDynamic)
     }

@@ -42,7 +42,7 @@ abstract class VirtualType {
             "char"      -> "C"
             "int"       -> "I"
             "long"      -> "J"
-            "float"     ->"F"
+            "float"     -> "F"
             "double"    -> "D"
             else -> "L$className;"
         }
@@ -68,15 +68,15 @@ abstract class VirtualType {
 
     companion object {
         private val TYPES: MutableMap<String, VirtualType> = WeakHashMap()
-        val VOID = ofKlass(Void::class.javaPrimitiveType!!)
+        val VOID    = ofKlass(Void::class.javaPrimitiveType!!)
         val BOOLEAN = ofKlass(Boolean::class.javaPrimitiveType!!)
-        val BYTE = ofKlass(Byte::class.javaPrimitiveType!!)
-        val SHORT = ofKlass(Short::class.javaPrimitiveType!!)
-        val CHAR = ofKlass(Char::class.javaPrimitiveType!!)
-        val INT = ofKlass(Int::class.javaPrimitiveType!!)
-        val LONG = ofKlass(Long::class.javaPrimitiveType!!)
-        val FLOAT = ofKlass(Float::class.javaPrimitiveType!!)
-        val DOUBLE = ofKlass(Double::class.javaPrimitiveType!!)
+        val BYTE    = ofKlass(Byte::class.javaPrimitiveType!!)
+        val SHORT   = ofKlass(Short::class.javaPrimitiveType!!)
+        val CHAR    = ofKlass(Char::class.javaPrimitiveType!!)
+        val INT     = ofKlass(Int::class.javaPrimitiveType!!)
+        val LONG    = ofKlass(Long::class.javaPrimitiveType!!)
+        val FLOAT   = ofKlass(Float::class.javaPrimitiveType!!)
+        val DOUBLE  = ofKlass(Double::class.javaPrimitiveType!!)
 
         fun ofKlass(name: String) =
             ofKlass(klassOf(name))

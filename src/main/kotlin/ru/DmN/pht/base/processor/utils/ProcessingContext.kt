@@ -1,4 +1,4 @@
-package ru.DmN.pht.base.processor
+package ru.DmN.pht.base.processor.utils
 
 import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.utils.IContextCollection

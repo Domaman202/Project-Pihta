@@ -8,8 +8,8 @@ import ru.DmN.pht.base.ast.NodeNodesList
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.parsers.NPDefault
-import ru.DmN.pht.base.processor.ProcessingContext
-import ru.DmN.pht.base.processor.ValType
+import ru.DmN.pht.base.processor.utils.ProcessingContext
+import ru.DmN.pht.base.processor.utils.ValType
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.unparsers.NUDefault
 import ru.DmN.pht.base.utils.VirtualField.VirtualFieldImpl

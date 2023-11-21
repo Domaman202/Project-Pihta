@@ -4,13 +4,13 @@ import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.parser.ParsingContext
-import ru.DmN.pht.base.processor.ProcessingContext
-import ru.DmN.pht.base.processor.ValType
+import ru.DmN.pht.base.processor.utils.ProcessingContext
+import ru.DmN.pht.base.processor.utils.ValType
 import ru.DmN.pht.std.ast.*
 import ru.DmN.pht.std.compiler.java.PihtaJava
 import ru.DmN.pht.std.parser.macros
 import ru.DmN.pht.std.parsers.*
-import ru.DmN.pht.std.processor.NRCCall
+import ru.DmN.pht.std.processors.NRCCall
 import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.processors.*

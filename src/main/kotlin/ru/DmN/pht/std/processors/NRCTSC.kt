@@ -2,9 +2,9 @@ package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.processor.ProcessingContext
+import ru.DmN.pht.base.processor.utils.ProcessingContext
 import ru.DmN.pht.base.processors.INodeProcessor
-import ru.DmN.pht.base.processor.ValType
+import ru.DmN.pht.base.processor.utils.ValType
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.global

@@ -2,9 +2,9 @@ package ru.DmN.pht.base
 
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.processors.INodeProcessor
-import ru.DmN.pht.base.processor.ProcessingContext
-import ru.DmN.pht.base.processor.ProcessingStage
-import ru.DmN.pht.base.processor.ValType
+import ru.DmN.pht.base.processor.utils.ProcessingContext
+import ru.DmN.pht.base.processor.utils.ProcessingStage
+import ru.DmN.pht.base.processor.utils.ValType
 import ru.DmN.pht.base.utils.DefaultEnumMap
 import ru.DmN.pht.base.utils.TypesProvider
 import ru.DmN.pht.base.utils.VirtualType

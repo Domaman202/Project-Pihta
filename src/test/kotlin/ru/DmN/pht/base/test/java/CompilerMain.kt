@@ -8,24 +8,21 @@ import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.parser.ParsingContext
-import ru.DmN.pht.base.processor.JavaTypesProvider
-import ru.DmN.pht.base.processor.Platform
-import ru.DmN.pht.base.processor.ProcessingContext
-import ru.DmN.pht.base.processor.ValType
+import ru.DmN.pht.base.processor.utils.Platform
+import ru.DmN.pht.base.processor.utils.ProcessingContext
+import ru.DmN.pht.base.processor.utils.ValType
 import ru.DmN.pht.base.test.UnparserMain
-import ru.DmN.pht.base.utils.Klass
+import ru.DmN.pht.base.utils.TypesProvider
 import ru.DmN.pht.base.utils.with
-import ru.DmN.uu.Unsafe
 import java.io.File
 import java.io.FileOutputStream
-import java.net.URL
 import java.net.URLClassLoader
 
 object CompilerMain {
     @JvmStatic
     fun main(args: Array<String>) {
         val source = Parser(String(UnparserMain::class.java.getResourceAsStream("/test.pht").readAllBytes())).parseNode(ParsingContext.base())!!
-        val processor = Processor(JavaTypesProvider())
+        val processor = Processor(TypesProvider.JAVA)
         val pctx = ProcessingContext.base().with(Platform.JAVA)
         val processed = processor.process(source, pctx, ValType.NO_VALUE)!!
         processor.tasks.forEach {
