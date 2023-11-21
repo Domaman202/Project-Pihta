@@ -16,8 +16,8 @@ class SubMap<K, V>(val parent: Map<K, V>, val map: MutableMap<K, V> = HashMap())
     override fun isEmpty(): Boolean =
         map.isEmpty() && parent.isEmpty()
 
-    override fun remove(key: K): V =
-        throw UnsupportedOperationException("Not yet implemented")
+    override fun remove(key: K): V? =
+        map.remove(key)
 
     override fun putAll(from: Map<out K, V>) =
         map.putAll(from)

@@ -3,21 +3,23 @@ package ru.DmN.pht.std
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.parser.ParsingContext
+import ru.DmN.pht.base.parser.ctx.ParsingContext
 import ru.DmN.pht.base.processor.utils.ProcessingContext
 import ru.DmN.pht.base.processor.utils.ValType
 import ru.DmN.pht.std.ast.*
 import ru.DmN.pht.std.compiler.java.PihtaJava
+import ru.DmN.pht.std.parser.clearMacros
 import ru.DmN.pht.std.parser.macros
-import ru.DmN.pht.std.parsers.*
-import ru.DmN.pht.std.processors.NRCCall
+import ru.DmN.pht.std.parser.phtParseNode
+import ru.DmN.pht.std.parser.prevParseNode
+import ru.DmN.pht.std.parsers.NPSkip
+import ru.DmN.pht.std.parsers.NPValnA
 import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.processors.*
 import ru.DmN.pht.std.ups.*
 import ru.DmN.pht.std.utils.StdModule
 import java.util.*
-import kotlin.collections.HashMap
 
 object Pihta : StdModule("pht") {
     init {
@@ -208,17 +210,27 @@ object Pihta : StdModule("pht") {
         add(this, NUPNodeAlias(alias))
     }
 
-    override fun inject(parser: Parser, ctx: ParsingContext) {
-        if (!ctx.loadedModules.contains(this))
+    override fun load(parser: Parser, ctx: ParsingContext) {
+        if (!ctx.loadedModules.contains(this)) {
             ctx.macros = Stack()
-        super.inject(parser, ctx)
+            ctx.prevParseNode = parser.parseNode
+            parser.parseNode = { phtParseNode(it) }
+        }
+        super.load(parser, ctx)
     }
 
-    override fun inject(processor: Processor, ctx: ProcessingContext, mode: ValType): List<Node>? {
+    override fun clear(parser: Parser, ctx: ParsingContext) {
+        if (ctx.loadedModules.contains(this)) {
+            parser.parseNode = ctx.prevParseNode
+        }
+        super.clear(parser, ctx)
+    }
+
+    override fun load(processor: Processor, ctx: ProcessingContext, mode: ValType): List<Node>? {
         if (!ctx.loadedModules.contains(this)) {
             processor.contexts.macros = HashMap()
             ctx.global = GlobalContext()
         }
-        return super.inject(processor, ctx, mode)
+        return super.load(processor, ctx, mode)
     }
 }

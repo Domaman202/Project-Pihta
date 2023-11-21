@@ -4,7 +4,8 @@ import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.ast.NodeNodesList
 import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ParsingContext
+import ru.DmN.pht.base.parser.ctx.ParsingContext
+import ru.DmN.pht.std.parser.parseValue
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 
 object NUPValnB : INodeUniversalProcessor<Node, Node> {

@@ -52,7 +52,7 @@ class SubList<E>(val parent: List<E>, val list: MutableList<E> = ArrayList()) : 
         throw UnsupportedOperationException("Not yet implemented")
 
     override fun remove(element: E): Boolean =
-        throw UnsupportedOperationException("Not yet implemented")
+        list.remove(element)
 
     override fun lastIndexOf(element: E): Int =
         throw UnsupportedOperationException("Not yet implemented")

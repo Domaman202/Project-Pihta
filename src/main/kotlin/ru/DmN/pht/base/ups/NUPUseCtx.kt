@@ -6,7 +6,7 @@ import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.ast.*
 import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ParsingContext
+import ru.DmN.pht.base.parser.ctx.ParsingContext
 import ru.DmN.pht.base.parsers.NPDefault
 import ru.DmN.pht.base.processor.utils.ProcessingContext
 import ru.DmN.pht.base.processor.utils.ProcessingStage
@@ -37,7 +37,10 @@ object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeParsedUse> {
             context.exports.push(exports)
         else context.exports = Stack<MutableList<NodeNodesList>>().apply { push(exports) }
         loadModules(names, parser, context)
-        return NPDefault.parse(parser, context) { NodeParsedUse(token, names, it, exports) }.apply { context.exports.pop() }
+        return NPDefault.parse(parser, context) { NodeParsedUse(token, names, it, exports) }.apply {
+            context.exports.pop()
+            context.loadedModules.filter { names.contains(it.name) }.forEach { it.clear(parser, context) }
+        }
     }
 
     override fun unparse(node: NodeUse, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
@@ -71,7 +74,7 @@ object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeParsedUse> {
             val module = Module[name]
             if (module?.init != true)
                 Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(Base, StdModule))
-            (module ?: Module.getOrThrow(name)).inject(parser, context)
+            (module ?: Module.getOrThrow(name)).load(parser, context)
         }
     }
 
@@ -80,10 +83,10 @@ object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeParsedUse> {
             val module = Module[name]
             if (module?.init != true)
                 Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(Base, StdModule))
-            (module ?: Module.getOrThrow(name)).inject(unparser, context)
+            (module ?: Module.getOrThrow(name)).load(unparser, context)
         }
     }
 
     fun injectModules(node: NodeUse, processor: Processor, ctx: ProcessingContext, mode: ValType, list: MutableList<Node>) =
-        node.names.forEachIndexed { i, it -> Module.getOrThrow(it).inject(processor, ctx, if (i + 1 < node.names.size) ValType.NO_VALUE else mode)?.let { list += it } }
+        node.names.forEachIndexed { i, it -> Module.getOrThrow(it).load(processor, ctx, if (i + 1 < node.names.size) ValType.NO_VALUE else mode)?.let { list += it } }
 }

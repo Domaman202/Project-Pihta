@@ -20,7 +20,7 @@ object NCUse : INodeCompiler<NodeProcessedUse> {
     }
 
     fun injectModules(node: NodeProcessedUse, compiler: Compiler, ctx: CompilationContext) {
-        node.names.forEach{ Module.getOrThrow(it).inject(compiler, ctx) }
+        node.names.forEach{ Module.getOrThrow(it).load(compiler, ctx) }
         node.processed.forEach { compiler.compile(it, ctx) }
     }
 }

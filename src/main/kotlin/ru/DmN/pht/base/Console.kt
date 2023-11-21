@@ -4,7 +4,7 @@ import org.objectweb.asm.ClassWriter
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
-import ru.DmN.pht.base.parser.ParsingContext
+import ru.DmN.pht.base.parser.ctx.ParsingContext
 import ru.DmN.pht.base.processor.utils.Platform
 import ru.DmN.pht.base.processor.utils.ProcessingContext
 import ru.DmN.pht.base.processor.utils.ValType
@@ -90,7 +90,7 @@ object Console {
         val processed = ArrayList<Node>()
         val processor = Processor(TypesProvider.JAVA)
         val pctx = ProcessingContext.base().with(Platform.JAVA)
-        processed += module.inject(processor, pctx, ValType.NO_VALUE)!!
+        processed += module.load(processor, pctx, ValType.NO_VALUE)!!
         processor.tasks.forEach {
             pctx.stage.set(it.key)
             it.value.forEach { it() }

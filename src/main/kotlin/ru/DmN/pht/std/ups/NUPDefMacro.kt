@@ -5,7 +5,7 @@ import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
 import ru.DmN.pht.base.processor.utils.ProcessingStage
 import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ParsingContext
+import ru.DmN.pht.base.parser.ctx.ParsingContext
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.parsers.NPDefault
 import ru.DmN.pht.base.processor.utils.ProcessingContext

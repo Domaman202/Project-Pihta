@@ -1,10 +1,6 @@
 package ru.DmN.pht.std.ups
 
-import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Unparser
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ParsingContext
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.std.ast.NodeASet
 import ru.DmN.pht.std.processors.INodeUniversalProcessor

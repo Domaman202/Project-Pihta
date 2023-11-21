@@ -7,7 +7,7 @@ import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ParsingContext
+import ru.DmN.pht.base.parser.ctx.ParsingContext
 import ru.DmN.pht.base.parsers.INodeParser
 import ru.DmN.pht.base.processor.utils.ProcessingContext
 import ru.DmN.pht.base.processor.utils.ValType
@@ -38,19 +38,21 @@ open class Module(val name: String, var init: Boolean = false) {
         }
     }
 
-    open fun inject(parser: Parser, ctx: ParsingContext) {
+    open fun load(parser: Parser, ctx: ParsingContext) {
         if (!ctx.loadedModules.contains(this)) {
             ctx.loadedModules.add(0, this)
         }
     }
 
-    open fun inject(unparser: Unparser, ctx: UnparsingContext) {
+    open fun clear(parser: Parser, ctx: ParsingContext) = Unit
+
+    open fun load(unparser: Unparser, ctx: UnparsingContext) {
         if (!ctx.loadedModules.contains(this)) {
             ctx.loadedModules.add(0, this)
         }
     }
 
-    open fun inject(processor: Processor, ctx: ProcessingContext, mode: ValType): List<Node>? =
+    open fun load(processor: Processor, ctx: ProcessingContext, mode: ValType): List<Node>? =
         if (!ctx.loadedModules.contains(this)) {
             ctx.loadedModules.add(0, this)
             files.map {
@@ -66,7 +68,7 @@ open class Module(val name: String, var init: Boolean = false) {
             }.requireNoNulls()
         } else null
 
-    open fun inject(compiler: Compiler, ctx: CompilationContext): Variable? {
+    open fun load(compiler: Compiler, ctx: CompilationContext): Variable? {
         if (!ctx.loadedModules.contains(this)) {
             ctx.loadedModules.add(0, this)
         }

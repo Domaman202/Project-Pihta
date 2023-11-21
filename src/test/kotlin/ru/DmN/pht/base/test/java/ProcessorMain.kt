@@ -4,11 +4,10 @@ import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
-import ru.DmN.pht.base.parser.ParsingContext
+import ru.DmN.pht.base.parser.ctx.ParsingContext
 import ru.DmN.pht.base.processor.utils.Platform
 import ru.DmN.pht.base.processor.utils.ProcessingContext
 import ru.DmN.pht.base.processor.utils.ValType
-import ru.DmN.pht.base.test.UnparserMain
 import ru.DmN.pht.base.unparser.UnparsingContext
 import ru.DmN.pht.base.utils.TypesProvider
 import ru.DmN.pht.base.utils.with
@@ -17,7 +16,7 @@ import java.io.File
 object ProcessorMain {
     @JvmStatic
     fun main(args: Array<String>) {
-        val source = Parser(String(UnparserMain::class.java.getResourceAsStream("/test.pht").readAllBytes())).parseNode(
+        val source = Parser(String(ProcessorMain::class.java.getResourceAsStream("/test.pht").readAllBytes())).parseNode(
             ParsingContext.base())!!
         logTxt("pre", source.print())
 //        logPht("pre-unparse", Unparser().let { it.unparse(source, UnparsingContext(mutableListOf(Base)), 0); it.out.toString() })

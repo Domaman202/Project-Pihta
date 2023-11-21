@@ -1,4 +1,4 @@
-package ru.DmN.pht.base.parser
+package ru.DmN.pht.base.parser.ctx
 
 import ru.DmN.pht.base.Base
 import ru.DmN.pht.base.utils.IContextCollection
