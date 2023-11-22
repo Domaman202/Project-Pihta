@@ -1,14 +1,36 @@
 package ru.DmN.pht.base.utils
 
+import org.objectweb.asm.Opcodes
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.lexer.*
-import ru.DmN.pht.base.processor.utils.Platform
+import java.io.DataInputStream
+import java.io.InputStream
 
-fun <T : IContextCollection<T>> T.with(ctx: Platform) =
-    this.with("base/platform", ctx)
+fun InputStream.readAllBytes(): ByteArray {
+    val bytes = ByteArray(available())
+    DataInputStream(this).readFully(bytes)
+    return bytes
+}
 
-val IContextCollection<*>.platform
-    get() = contexts["base/platform"] as Platform
+fun getJavaClassVersion(): Int {
+    val version = getJavaVersion()
+    if (version > 7)
+        return Opcodes.V1_8 + version - 8
+    throw RuntimeException("Unsupported platform!")
+}
+
+fun getJavaVersion(): Int {
+    var version = System.getProperty("java.version")
+    if (version.startsWith("1.")) {
+        version = version.substring(2, 3)
+    } else {
+        val dot = version.indexOf(".")
+        if (dot != -1) {
+            version = version.substring(0, dot)
+        }
+    }
+    return version.toInt()
+}
 
 fun <T> Map<Regex, T>.getRegex(key: String): T? =
     entries.find { key.matches(it.key) }?.value

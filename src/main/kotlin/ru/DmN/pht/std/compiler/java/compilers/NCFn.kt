@@ -6,6 +6,7 @@ import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
+import ru.DmN.pht.base.processor.utils.javaClassVersion
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.pht.base.utils.VirtualType.VirtualTypeImpl
@@ -25,7 +26,7 @@ object NCFn : INodeCompiler<NodeFn> {
             val clazz = ClassNode()
             compiler.classes[name] = clazz
             clazz.visit(
-                Opcodes.V19,
+                ctx.javaClassVersion,
                 Opcodes.ACC_PUBLIC + Opcodes.ACC_FINAL,
                 name,
                 null,
@@ -82,7 +83,7 @@ object NCFn : INodeCompiler<NodeFn> {
             val clazz = ClassNode()
             compiler.classes[node.name] = clazz
             clazz.visit(
-                Opcodes.V19,
+                ctx.javaClassVersion,
                 Opcodes.ACC_PUBLIC + Opcodes.ACC_FINAL,
                 node.name,
                 null,

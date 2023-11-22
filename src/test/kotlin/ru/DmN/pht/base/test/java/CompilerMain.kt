@@ -8,11 +8,10 @@ import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.parser.ctx.ParsingContext
-import ru.DmN.pht.base.processor.utils.Platform
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.processor.utils.ValType
+import ru.DmN.pht.base.processor.utils.*
 import ru.DmN.pht.base.utils.TypesProvider
-import ru.DmN.pht.base.utils.with
+import ru.DmN.pht.base.utils.getJavaClassVersion
+import ru.DmN.pht.base.utils.readAllBytes
 import java.io.File
 import java.io.FileOutputStream
 import java.net.URLClassLoader
@@ -23,7 +22,7 @@ object CompilerMain {
         val source = Parser(String(CompilerMain::class.java.getResourceAsStream("/test.pht").readAllBytes())).parseNode(
             ParsingContext.base())!!
         val processor = Processor(TypesProvider.JAVA)
-        val pctx = ProcessingContext.base().with(Platform.JAVA)
+        val pctx = ProcessingContext.base().with(Platform.JAVA).withJCV(getJavaClassVersion())
         val processed = processor.process(source, pctx, ValType.NO_VALUE)!!
         processor.tasks.forEach {
             pctx.stage.set(it.key)

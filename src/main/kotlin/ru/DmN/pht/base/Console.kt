@@ -5,12 +5,10 @@ import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.compiler.java.Compiler
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.parser.ctx.ParsingContext
-import ru.DmN.pht.base.processor.utils.Platform
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.processor.utils.ValType
+import ru.DmN.pht.base.processor.utils.*
 import ru.DmN.pht.base.utils.Module
 import ru.DmN.pht.base.utils.TypesProvider
-import ru.DmN.pht.base.utils.with
+import ru.DmN.pht.base.utils.getJavaClassVersion
 import ru.DmN.pht.std.module.StdModule
 import ru.DmN.pht.std.module.ast.NodeModule
 import java.io.File
@@ -89,7 +87,7 @@ object Console {
         printModuleInfo(module)
         val processed = ArrayList<Node>()
         val processor = Processor(TypesProvider.JAVA)
-        val pctx = ProcessingContext.base().with(Platform.JAVA)
+        val pctx = ProcessingContext.base().with(Platform.JAVA).withJCV(getJavaClassVersion())
         processed += module.load(processor, pctx, ValType.NO_VALUE)!!
         processor.tasks.forEach {
             pctx.stage.set(it.key)

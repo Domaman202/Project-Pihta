@@ -7,8 +7,8 @@ import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.processor.utils.Platform
 import ru.DmN.pht.base.processor.utils.ProcessingContext
 import ru.DmN.pht.base.processor.utils.ValType
+import ru.DmN.pht.base.processor.utils.platform
 import ru.DmN.pht.base.processors.INodeProcessor
-import ru.DmN.pht.base.utils.platform
 import ru.DmN.pht.std.processor.utils.nodeClass
 
 object NRApp : INodeProcessor<NodeNodesList> {

@@ -9,6 +9,7 @@ import ru.DmN.pht.base.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.pht.base.utils.VirtualMethod.VirtualMethodImpl
 import ru.DmN.pht.base.utils.VirtualType
 import ru.DmN.pht.base.utils.VirtualType.VirtualTypeImpl
+import ru.DmN.pht.base.utils.readAllBytes
 import ru.DmN.pht.std.utils.VTDynamic
 
 /**

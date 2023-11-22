@@ -7,12 +7,13 @@ import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
 import ru.DmN.pht.base.compiler.java.compilers.NCDefault
 import ru.DmN.pht.base.compiler.java.utils.CompilationContext
 import ru.DmN.pht.base.compiler.java.utils.CompilingStage
+import ru.DmN.pht.base.processor.utils.javaClassVersion
 import ru.DmN.pht.base.utils.Variable
 import ru.DmN.pht.base.utils.desc
+import ru.DmN.pht.std.ast.NodeType
 import ru.DmN.pht.std.compiler.java.ctx.ClassContext
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.compiler.java.utils.with
-import ru.DmN.pht.std.ast.NodeType
 import ru.DmN.pht.std.utils.text
 
 object NCClass : INodeCompiler<NodeType> {
@@ -21,7 +22,7 @@ object NCClass : INodeCompiler<NodeType> {
             val cn = ClassNode().apply {
                 compiler.classes[node.type.name] = this
                 visit(
-                    Opcodes.V19,
+                    ctx.javaClassVersion,
                     Opcodes.ACC_PUBLIC.let {
                         when (node.text) {
                             "!enum" -> it + Opcodes.ACC_ENUM
