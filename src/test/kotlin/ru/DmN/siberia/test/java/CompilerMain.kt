@@ -3,14 +3,16 @@ package ru.DmN.siberia.test.java
 import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.ClassWriter.COMPUTE_FRAMES
 import org.objectweb.asm.ClassWriter.COMPUTE_MAXS
+import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
-import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.parser.ctx.ParsingContext
-import ru.DmN.siberia.processor.utils.*
+import ru.DmN.siberia.processor.utils.Platform
+import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.with
 import ru.DmN.siberia.utils.TypesProvider
-import ru.DmN.siberia.utils.getJavaClassVersion
 import ru.DmN.siberia.utils.readAllBytes
 import java.io.File
 import java.io.FileOutputStream
@@ -22,13 +24,13 @@ object CompilerMain {
         val source = Parser(String(CompilerMain::class.java.getResourceAsStream("/test.pht").readAllBytes())).parseNode(
             ParsingContext.base())!!
         val processor = Processor(TypesProvider.JAVA)
-        val pctx = ProcessingContext.base().with(Platform.JAVA).withJCV(getJavaClassVersion())
+        val pctx = ProcessingContext.base().with(Platform.JAVA)
         val processed = processor.process(source, pctx, ValType.NO_VALUE)!!
         processor.tasks.forEach {
             pctx.stage.set(it.key)
             it.value.forEach { it() }
         }
-        val compiler = Compiler()
+        val compiler = Compiler(TypesProvider.JAVA)
         val cctx = CompilationContext.base()
         compiler.compile(processed, cctx)
         compiler.tasks.forEach {
