@@ -1,7 +1,6 @@
 package ru.DmN.pht.std.ast
 
 import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.ast.IValueNode
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.utils.indent
 import ru.DmN.pht.std.utils.text
@@ -25,7 +24,6 @@ class NodeValue(tkOperation: Token, val vtype: Type, val value: String) : Node(t
     override fun print(builder: StringBuilder, indent: Int): StringBuilder =
         builder.indent(indent).append("[${text} ($vtype) $value]")
 
-    override fun isConst(): Boolean = true
     override fun isConstClass(): Boolean = vtype == Type.PRIMITIVE || vtype == Type.CLASS
     override fun getValueAsString(): String = value
 

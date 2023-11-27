@@ -13,6 +13,7 @@ import ru.DmN.pht.std.ast.NodeDef.VariableOrField
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.isConstClass
 
 object NRDef : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeDef {
@@ -25,7 +26,7 @@ object NRDef : INodeProcessor<NodeNodesList> {
                 lateinit var type: VirtualType
                 lateinit var name: String
                 val value: Node? =
-                    if (it[0].isConstClass()) {
+                    if (it[0].isConstClass) {
                         type = gctx.getType(processor.computeString(it[0], ctx), processor.tp)
                         name = processor.computeString(it[1], ctx)
                         it.getOrNull(2)

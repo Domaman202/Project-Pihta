@@ -14,15 +14,12 @@ import ru.DmN.pht.std.processor.utils.body
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.with
-import ru.DmN.pht.std.utils.LazyProcessValueList
-import ru.DmN.pht.std.utils.NVC
-import ru.DmN.pht.std.utils.computeString
-import ru.DmN.pht.std.utils.computeStringNodes
+import ru.DmN.pht.std.utils.*
 import kotlin.math.absoluteValue
 
 object NRFn : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType(if (node.nodes[0].isConstClass()) processor.computeString(node.nodes[0], ctx) else "Any", processor.tp)
+        ctx.global.getType(if (node.nodes[0].isConstClass) processor.computeString(node.nodes[0], ctx) else "Any", processor.tp)
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeFn {
         val gctx = ctx.global
@@ -31,8 +28,8 @@ object NRFn : INodeProcessor<NodeNodesList> {
         val fakeType = VirtualTypeImpl(gctx.name("PhtLambda${node.hashCode().absoluteValue}"))
         val context = ctx.with(BodyContext.of(null))
         val nodes = LazyProcessValueList(node, processor, context)
-        val offset = if (nodes[0].isConstClass()) 1 else 0
-        val type = if (offset == 1) gctx.getType(nodes[0].getValueAsString(), processor.tp) else null
+        val offset = if (nodes[0].isConstClass) 1 else 0
+        val type = if (offset == 1) gctx.getType(nodes[0].valueAsString, processor.tp) else null
         val refs = processor.computeStringNodes(nodes[offset], context)
             .map { ref -> bctx[ref]?.let { NVC.of(it) } ?: NVC.of(cctx.fields.find { it.name == ref }!!) }
         refs.forEach { fakeType.fields += VirtualFieldImpl(fakeType, it.name, it.type, isStatic = false, isEnum = false) }

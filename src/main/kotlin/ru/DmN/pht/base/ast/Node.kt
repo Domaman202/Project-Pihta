@@ -4,7 +4,10 @@ import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.utils.indent
 import ru.DmN.pht.std.utils.text
 
-open class Node(val token: Token) : IValueNode, Cloneable {
+/**
+ * Базовая AST нода
+ */
+open class Node(val token: Token) {
     open val nodes: List<Node>
         get() = emptyList()
     open fun copy(): Node =

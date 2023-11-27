@@ -15,6 +15,7 @@ import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.processors.NRMCall
 import ru.DmN.pht.std.utils.VTDynamic
 import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.isConstClass
 import ru.DmN.pht.std.utils.line
 
 object NUPFSetB : INodeUniversalProcessor<Node, NodeFieldSet> {
@@ -56,7 +57,7 @@ object NUPFSetB : INodeUniversalProcessor<Node, NodeFieldSet> {
                 Token(node.line, Token.Type.OPERATION, "fset"),
                 mutableListOf(instance, processor.process(node.nodes.first(), ctx, ValType.VALUE)!!),
                 node.name,
-                if (instance.isConstClass())
+                if (instance.isConstClass)
                     NodeFSet.Type.STATIC
                 else NodeFSet.Type.INSTANCE,
                 type

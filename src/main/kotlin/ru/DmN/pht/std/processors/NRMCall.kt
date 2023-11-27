@@ -15,9 +15,7 @@ import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.ast.NodeMCall.Type.*
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.*
-import ru.DmN.pht.std.utils.VTDynamic
-import ru.DmN.pht.std.utils.computeString
-import ru.DmN.pht.std.utils.line
+import ru.DmN.pht.std.utils.*
 
 object NRMCall : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
@@ -93,11 +91,11 @@ object NRMCall : INodeProcessor<NodeNodesList> {
     private fun findMethod(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): Triple<NodeMCall.Type, List<Node>, VirtualMethod> {
         lateinit var clazz: VirtualType
         val type = node.nodes[0].let {
-            if (it.isConstClass()) {
-                clazz = ctx.global.getType(it.getConstValueAsString(), processor.tp)
+            if (it.isConstClass) {
+                clazz = ctx.global.getType(it.valueAsString, processor.tp)
                 STATIC
             } else {
-                if (it.isLiteral()) {
+                if (it.isLiteral) {
                     when (processor.computeString(it, ctx)) {
                         "." -> {
                             clazz = ctx.clazz

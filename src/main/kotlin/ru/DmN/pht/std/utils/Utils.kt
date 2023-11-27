@@ -1,6 +1,7 @@
 package ru.DmN.pht.std.utils
 
 import ru.DmN.pht.base.Processor
+import ru.DmN.pht.std.ast.IValueNode
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.processor.utils.ProcessingContext
 import ru.DmN.pht.base.processor.utils.ValType
@@ -10,6 +11,13 @@ import ru.DmN.pht.base.utils.klassOf
 import ru.DmN.pht.std.processors.IStdNodeProcessor
 import ru.DmN.pht.std.processor.utils.ICastable
 import java.util.*
+
+val Node.isLiteral
+    get() = if (this is IValueNode) this.isLiteral() else false
+val Node.isConstClass
+    get() = if (this is IValueNode) this.isConstClass() else false
+val Node.valueAsString
+    get() = (this as IValueNode).getValueAsString()
 
 fun findLambdaMethod(type: VirtualType): VirtualMethod =
     type.methods.first { it.declaringClass == type && it.modifiers.abstract }

@@ -4,7 +4,7 @@ import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.utils.indent
 
-open class NodeGetOrName(token: Token, val name: String, val static: Boolean) : Node(token) {
+open class NodeGetOrName(token: Token, val name: String, val static: Boolean) : Node(token), IValueNode {
     override fun isLiteral(): Boolean =
         true
 
