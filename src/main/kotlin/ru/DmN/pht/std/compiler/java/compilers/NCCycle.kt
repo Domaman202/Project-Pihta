@@ -2,15 +2,15 @@ package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
-import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.Compiler
-import ru.DmN.siberia.compilers.INodeCompiler
-import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.pht.std.ast.NodeCompare
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.processor.utils.nodeValueOf
-import ru.DmN.pht.std.utils.line
-import ru.DmN.pht.std.utils.text
+import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.compilers.INodeCompiler
+import ru.DmN.siberia.utils.line
+import ru.DmN.siberia.utils.text
 
 object NCCycle : INodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext) {

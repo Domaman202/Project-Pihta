@@ -1,13 +1,9 @@
 package ru.DmN.pht.std.processor.ctx
 
-import ru.DmN.siberia.utils.TypesProvider
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.compiler.java.utils.MacroDefine
-import ru.DmN.pht.std.compiler.java.utils.SubList
-import ru.DmN.pht.std.compiler.java.utils.SubMap
 import ru.DmN.pht.std.processor.utils.ICastable
 import ru.DmN.pht.std.utils.lenArgs
+import ru.DmN.siberia.utils.*
 
 class GlobalContext(
     val namespace: String = "",

@@ -1,5 +1,0 @@
-(module
-    (name "std/module/helper")
-    (version "1.0.0")
-    (class "ru.DmN.pht.std.module.StdModuleHelper")
-    (author "DomamaN202"))

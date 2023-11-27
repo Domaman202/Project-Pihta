@@ -1,5 +1,14 @@
 package ru.DmN.pht.std.ups
 
+import ru.DmN.pht.std.ast.NodeDefn
+import ru.DmN.pht.std.processor.ctx.BodyContext
+import ru.DmN.pht.std.processor.utils.clazz
+import ru.DmN.pht.std.processor.utils.global
+import ru.DmN.pht.std.processor.utils.nodeAs
+import ru.DmN.pht.std.processor.utils.with
+import ru.DmN.pht.std.processors.NRAs
+import ru.DmN.pht.std.utils.computeList
+import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -12,16 +21,7 @@ import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualMethod.VirtualMethodImpl
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
-import ru.DmN.pht.std.ast.NodeDefn
-import ru.DmN.pht.std.processor.ctx.BodyContext
-import ru.DmN.pht.std.processor.utils.clazz
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.nodeAs
-import ru.DmN.pht.std.processor.utils.with
-import ru.DmN.pht.std.processors.NRAs
-import ru.DmN.pht.std.utils.computeList
-import ru.DmN.pht.std.utils.computeString
-import ru.DmN.pht.std.utils.line
+import ru.DmN.siberia.utils.line
 
 object NRDefn : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeDefn {
@@ -42,7 +42,6 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         )
         type.methods += method
         //
-        val line = node.line
         val new = NodeDefn(
             node.token.processed(),
             if (node.nodes.size > 3)

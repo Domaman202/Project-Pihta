@@ -1,14 +1,14 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.std.utils.computeInt
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.utils.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processors.NRDefault
 import ru.DmN.siberia.utils.VirtualType
-import ru.DmN.pht.std.processor.utils.nodeProgn
-import ru.DmN.pht.std.utils.computeInt
 
 object NRValnRepeat : IStdNodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =

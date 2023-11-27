@@ -1,5 +1,10 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.std.ast.NodeType
+import ru.DmN.pht.std.processor.utils.global
+import ru.DmN.pht.std.processor.utils.with
+import ru.DmN.pht.std.utils.computeList
+import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.utils.ProcessingContext
@@ -10,12 +15,7 @@ import ru.DmN.siberia.processors.NRDefault
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
-import ru.DmN.pht.std.ast.NodeType
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.with
-import ru.DmN.pht.std.utils.computeList
-import ru.DmN.pht.std.utils.computeString
-import ru.DmN.pht.std.utils.text
+import ru.DmN.siberia.utils.text
 
 object NRClass : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =

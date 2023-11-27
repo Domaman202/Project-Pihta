@@ -1,6 +1,0 @@
-(module
-    (name "siberia")
-    (version "1.0.0")
-    (author "DomamaN202")
-    (files ["src.pht"])
-    (class "ru.DmN.siberia.Siberia"))

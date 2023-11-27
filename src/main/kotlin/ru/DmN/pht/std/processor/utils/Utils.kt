@@ -1,22 +1,20 @@
 package ru.DmN.pht.std.processor.utils
 
-import ru.DmN.siberia.lexer.Token
-import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.utils.IContextCollection
-import ru.DmN.siberia.utils.Module
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
-import ru.DmN.pht.std.ast.*
+import ru.DmN.pht.std.ast.NodeGetOrName
+import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.compiler.java.utils.MacroDefine
 import ru.DmN.pht.std.processor.ctx.BodyContext
 import ru.DmN.pht.std.processor.ctx.EnumContext
 import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.ctx.MacroContext
-import java.util.Stack
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.utils.IContextCollection
+import ru.DmN.siberia.utils.Module
+import ru.DmN.siberia.utils.VirtualMethod
+import ru.DmN.siberia.utils.VirtualType
 
-fun nodeProgn(line: Int, nodes: MutableList<Node>) =
-    NodeNodesList(Token.operation(line, "progn"), nodes)
 fun nodeValn(line: Int, nodes: MutableList<Node>) =
     NodeNodesList(Token.operation(line, "valn"), nodes)
 fun nodeValn(line: Int, node: Node) =
@@ -106,8 +104,6 @@ fun <T : IContextCollection<T>> T.with(ctx: MacroContext) =
 
 fun IContextCollection<*>.isModule() =
     contexts.containsKey("pht/module")
-fun IContextCollection<*>.isExports() =
-    contexts.containsKey("pht/exports")
 fun IContextCollection<*>.isEnum() =
     contexts.containsKey("pht/enum")
 fun IContextCollection<*>.isClass() =
@@ -122,9 +118,6 @@ fun IContextCollection<*>.isMacro() =
 var IContextCollection<*>.module
     set(value) { contexts["pht/module"] = value }
     get() = contexts["pht/module"] as Module
-var IContextCollection<*>.exports
-    set(value) { contexts["pht/exports"] = value }
-    get() = contexts["pht/exports"] as Stack<MutableList<NodeNodesList>>
 var IContextCollection<*>.global
     set(value) { contexts["pht/global"] = value }
     get() = contexts["pht/global"] as GlobalContext

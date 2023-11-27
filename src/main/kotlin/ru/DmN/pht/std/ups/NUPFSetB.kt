@@ -1,22 +1,22 @@
 package ru.DmN.pht.std.ups
 
-import ru.DmN.siberia.Processor
-import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.lexer.Token
-import ru.DmN.siberia.processor.utils.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.pht.std.ast.NodeFSet
 import ru.DmN.pht.std.ast.NodeFieldSet
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.nodeClass
-import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.processors.NRMCall
-import ru.DmN.pht.std.utils.VTDynamic
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.isConstClass
-import ru.DmN.pht.std.utils.line
+import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.utils.INUP
+import ru.DmN.siberia.utils.VTDynamic
+import ru.DmN.siberia.utils.line
 
 object NUPFSetB : INUP<Node, NodeFieldSet> {
     override fun process(node: NodeFieldSet, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {

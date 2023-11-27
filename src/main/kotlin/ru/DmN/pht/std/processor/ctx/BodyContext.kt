@@ -1,9 +1,9 @@
 package ru.DmN.pht.std.processor.ctx
 
+import ru.DmN.siberia.utils.SubList
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.utils.SubList
 import java.util.concurrent.atomic.AtomicInteger
 
 class BodyContext(

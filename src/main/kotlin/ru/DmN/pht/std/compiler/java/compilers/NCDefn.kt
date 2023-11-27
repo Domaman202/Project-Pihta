@@ -4,21 +4,21 @@ import org.objectweb.asm.Label
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.Compiler
-import ru.DmN.siberia.compilers.INodeCompiler
-import ru.DmN.siberia.compilers.NCDefault
-import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.compiler.utils.CompilingStage
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.compiler.java.ctx.BodyContext
 import ru.DmN.pht.std.compiler.java.ctx.MethodContext
 import ru.DmN.pht.std.compiler.java.utils.clazz
-import ru.DmN.pht.std.compiler.java.utils.with
-import ru.DmN.pht.std.ast.NodeDefn
-import ru.DmN.pht.std.compiler.java.utils.SubList
 import ru.DmN.pht.std.compiler.java.utils.load
+import ru.DmN.pht.std.compiler.java.utils.with
+import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.compiler.utils.CompilingStage
+import ru.DmN.siberia.compilers.INodeCompiler
+import ru.DmN.siberia.compilers.NCDefault
+import ru.DmN.siberia.utils.SubList
+import ru.DmN.siberia.utils.VirtualMethod
+import ru.DmN.siberia.utils.VirtualType
 
 object NCDefn : INodeCompiler<NodeDefn> {
     override fun compile(node: NodeDefn, compiler: Compiler, ctx: CompilationContext) {

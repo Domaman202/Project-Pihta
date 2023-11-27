@@ -1,14 +1,14 @@
 package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
-import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.Compiler
-import ru.DmN.siberia.compilers.INodeCompiler
-import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.utils.Variable
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
-import ru.DmN.pht.std.utils.text
+import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.compilers.INodeCompiler
+import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.text
 
 object NCMath : INodeCompiler<NodeNodesList> {
     override fun compileVal(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Variable {

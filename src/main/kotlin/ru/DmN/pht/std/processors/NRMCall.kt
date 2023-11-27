@@ -16,6 +16,8 @@ import ru.DmN.pht.std.ast.NodeMCall.Type.*
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.*
+import ru.DmN.siberia.utils.VTDynamic
+import ru.DmN.siberia.utils.line
 
 object NRMCall : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =

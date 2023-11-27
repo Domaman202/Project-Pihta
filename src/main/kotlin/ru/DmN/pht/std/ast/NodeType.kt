@@ -5,7 +5,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
 import ru.DmN.siberia.utils.indent
-import ru.DmN.pht.std.utils.text
+import ru.DmN.siberia.utils.text
 
 class NodeType(tkOperation: Token, nodes: MutableList<Node>, val type: VirtualTypeImpl) : NodeNodesList(tkOperation, nodes),
     IAbstractlyNode, IFinallyNode, IOpenlyNode {

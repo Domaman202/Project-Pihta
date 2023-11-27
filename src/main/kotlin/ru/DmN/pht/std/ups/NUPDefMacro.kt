@@ -19,6 +19,7 @@ import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.ast.NodeDefMacro
 import ru.DmN.pht.std.parser.macros
+import ru.DmN.siberia.ups.NUPDefault
 import java.util.*
 import kotlin.collections.ArrayList
 

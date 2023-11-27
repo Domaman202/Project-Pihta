@@ -1,10 +1,10 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.indent
-import ru.DmN.pht.std.utils.text
+import ru.DmN.siberia.utils.text
 
 class NodeNewArray(tkOperation: Token, val type: VirtualType, val size: Node) : Node(tkOperation) {
     override fun print(builder: StringBuilder, indent: Int): StringBuilder =

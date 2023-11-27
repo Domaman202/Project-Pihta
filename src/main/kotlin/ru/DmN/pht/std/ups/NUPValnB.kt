@@ -5,7 +5,7 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.parser.ctx.ParsingContext
-import ru.DmN.pht.std.parser.parseValue
+import ru.DmN.siberia.parser.utils.parseValue
 import ru.DmN.siberia.utils.INUP
 
 object NUPValnB : INUP<Node, Node> {

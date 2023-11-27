@@ -23,7 +23,7 @@ object NUPGetOrName : INUP<NodeGetOrName, NodeGetOrName>, IStdNodeProcessor<Node
         return if (tk.text!!.contains("[/#]".toRegex())) {
             parser.tokens.push(tk)
             parser.get(ctx, "get")!!.parse(parser, ctx, Token(token.line, Token.Type.OPERATION, "get!"))
-        } else NodeGetOrName(token, tk.text, false)
+        } else NodeGetOrName(token, tk.text!!, false)
     }
 
     override fun unparse(node: NodeGetOrName, unparser: Unparser, ctx: UnparsingContext, indent: Int) {

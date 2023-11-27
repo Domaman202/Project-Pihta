@@ -4,6 +4,7 @@ import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.parser.ctx.ParsingContext
+import ru.DmN.siberia.parser.utils.*
 import ru.DmN.siberia.utils.IContextCollection
 import java.util.Stack
 import java.util.UUID
@@ -41,17 +42,6 @@ fun Parser.phtParseNode(ctx: ParsingContext): Node? {
         }
     }
 }
-
-fun Parser.parseProgn(ctx: ParsingContext, token: Token) =
-    get(ctx, "progn")!!.parse(this, ctx, token)
-fun Parser.parseValn(ctx: ParsingContext, token: Token) =
-    get(ctx, "valn!")!!.parse(this, ctx, token)
-fun Parser.parseMacro(ctx: ParsingContext, token: Token) =
-    get(ctx, "macro")!!.parse(this, ctx, token)
-fun Parser.parseMCall(ctx: ParsingContext, token: Token) =
-    get(ctx, "mcall!")!!.parse(this, ctx, token)
-fun Parser.parseValue(ctx: ParsingContext, token: Token) =
-    get(ctx, "value!")!!.parse(this, ctx, token)!!
 
 fun IContextCollection<*>.clearMacros() {
     this.contexts.remove("pht/macro")

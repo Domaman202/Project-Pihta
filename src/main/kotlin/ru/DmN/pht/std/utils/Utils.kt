@@ -23,11 +23,6 @@ val Node.valueAsString
 fun findLambdaMethod(type: VirtualType): VirtualMethod =
     type.methods.first { it.declaringClass == type && it.modifiers.abstract }
 
-val Node.text
-    get() = token.text!!
-val Node.line
-    get() = token.line
-
 fun lenArgs(from: List<VirtualType>, to: List<ICastable>, varargs: Boolean): Int =
     if (varargs)
         lenArgs(to) {

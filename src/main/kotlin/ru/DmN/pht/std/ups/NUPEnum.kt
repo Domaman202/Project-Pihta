@@ -1,5 +1,11 @@
 package ru.DmN.pht.std.ups
 
+import ru.DmN.pht.std.ast.NodeFieldSet
+import ru.DmN.pht.std.ast.NodeType
+import ru.DmN.pht.std.processor.ctx.EnumContext
+import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.utils.computeList
+import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.Unparser
@@ -11,17 +17,12 @@ import ru.DmN.siberia.parsers.NPDefault
 import ru.DmN.siberia.processor.utils.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processors.NRDefault
 import ru.DmN.siberia.unparser.UnparsingContext
-import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
-import ru.DmN.pht.std.ast.NodeFieldSet
-import ru.DmN.pht.std.ast.NodeType
-import ru.DmN.pht.std.processor.ctx.EnumContext
-import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.siberia.utils.INUP
-import ru.DmN.pht.std.utils.computeList
-import ru.DmN.pht.std.utils.computeString
-import ru.DmN.pht.std.utils.line
+import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
+import ru.DmN.siberia.utils.line
 
 object NUPEnum : INUP<NodeType, NodeNodesList> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =

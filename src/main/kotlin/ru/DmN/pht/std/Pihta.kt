@@ -1,12 +1,5 @@
 package ru.DmN.pht.std
 
-import ru.DmN.siberia.Parser
-import ru.DmN.siberia.Processor
-import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.parser.ctx.ParsingContext
-import ru.DmN.siberia.parser.utils.parsersPool
-import ru.DmN.siberia.processor.utils.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.pht.std.ast.*
 import ru.DmN.pht.std.compiler.java.PihtaJava
 import ru.DmN.pht.std.parser.clearMacros
@@ -18,10 +11,19 @@ import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.processors.*
 import ru.DmN.pht.std.ups.*
-import ru.DmN.pht.std.utils.StdModule
+import ru.DmN.siberia.Parser
+import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.parser.ctx.ParsingContext
+import ru.DmN.siberia.parser.utils.parsersPool
+import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.ups.NUPDefault
+import ru.DmN.siberia.utils.Module
+import ru.DmN.siberia.utils.adda
 import java.util.*
 
-object Pihta : StdModule("pht") {
+object Pihta : Module("pht") {
     init {
         // a
         adda("add",          NUPMath,    NRMath)

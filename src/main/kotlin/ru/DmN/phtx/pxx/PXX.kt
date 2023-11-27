@@ -1,9 +1,9 @@
 package ru.DmN.phtx.pxx
 
 import ru.DmN.pht.std.ups.NUPNodeAlias
-import ru.DmN.pht.std.utils.StdModule
+import ru.DmN.siberia.utils.Module
 
-object PXX : StdModule("phtx/pxx") {
+object PXX : Module("phtx/pxx") {
     init {
         // б
         "боле"           to "great"

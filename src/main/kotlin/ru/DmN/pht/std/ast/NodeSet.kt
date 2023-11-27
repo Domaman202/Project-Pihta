@@ -1,10 +1,10 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.utils.indent
-import ru.DmN.pht.std.utils.text
+import ru.DmN.siberia.utils.text
 
 open class NodeSet(token: Token, nodes: MutableList<Node>, val name: String) : NodeNodesList(token, nodes) {
     override fun copy(): NodeSet =
