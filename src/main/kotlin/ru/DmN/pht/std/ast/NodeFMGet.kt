@@ -1,10 +1,13 @@
 package ru.DmN.pht.std.ast
 
+import ru.DmN.pht.base.ast.INodesList
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.utils.indent
 
-class NodeFMGet(token: Token, val instance: Node, name: String, static: Boolean, val native: Boolean = false) : NodeGetOrName(token, name, static) {
+class NodeFMGet(token: Token, val instance: Node, name: String, static: Boolean, val native: Boolean = false) : NodeGetOrName(token, name, static), INodesList {
+    override val nodes: MutableList<Node> = mutableListOf()
+
     override fun isLiteral(): Boolean =
         false
 

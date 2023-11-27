@@ -3,6 +3,7 @@ package ru.DmN.pht.std.ups
 import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.Unparser
+import ru.DmN.pht.base.ast.INodesList
 import ru.DmN.pht.base.lexer.Token
 import ru.DmN.pht.base.parser.ctx.ParsingContext
 import ru.DmN.pht.base.ast.Node
@@ -32,10 +33,11 @@ object NUPMacroInline : INodeUniversalProcessor<NodeMacroInline, NodeMacroInline
     override fun process(node: NodeMacroInline, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
         val names = processor.computeList(node.nodes[0], ctx).map { processor.computeString(it, ctx) }
         node.nodes.drop(1).forEach { expr ->
+            expr as INodesList
             for (i in 0 until expr.nodes.size) {
                 val it = expr.nodes[i]
                 if (it is NodeMacroArg && names.any { name -> processor.computeString(it.nodes[0], ctx) == name }) {
-                    sliceInsert(expr.nodes as MutableList<Any?>, i, processor.process(it, ctx, mode)!!.nodes)
+                    sliceInsert(expr.nodes as MutableList<Any?>, i, (processor.process(it, ctx, mode)!! as INodesList).nodes)
                 }
             }
         }

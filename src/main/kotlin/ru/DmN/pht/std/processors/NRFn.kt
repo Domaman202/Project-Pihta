@@ -1,6 +1,7 @@
 package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.base.Processor
+import ru.DmN.pht.base.ast.INodesList
 import ru.DmN.pht.base.ast.NodeNodesList
 import ru.DmN.pht.base.processor.utils.ProcessingContext
 import ru.DmN.pht.base.processor.utils.ValType
@@ -30,10 +31,10 @@ object NRFn : INodeProcessor<NodeNodesList> {
         val nodes = LazyProcessValueList(node, processor, context)
         val offset = if (nodes[0].isConstClass) 1 else 0
         val type = if (offset == 1) gctx.getType(nodes[0].valueAsString, processor.tp) else null
-        val refs = processor.computeStringNodes(nodes[offset], context)
+        val refs = processor.computeStringNodes(nodes[offset] as INodesList, context)
             .map { ref -> bctx[ref]?.let { NVC.of(it) } ?: NVC.of(cctx.fields.find { it.name == ref }!!) }
         refs.forEach { fakeType.fields += VirtualFieldImpl(fakeType, it.name, it.type, isStatic = false, isEnum = false) }
-        val args = processor.computeStringNodes(nodes[offset + 1], context)
+        val args = processor.computeStringNodes(nodes[offset + 1] as INodesList, context)
         val body = nodes.dropAndProcess(offset + 2).toMutableList()
         return NodeFn(node.token.processed(), body, type, args, fakeType.name, refs)
     }

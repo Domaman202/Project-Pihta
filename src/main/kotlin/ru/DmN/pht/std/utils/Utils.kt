@@ -1,6 +1,7 @@
 package ru.DmN.pht.std.utils
 
 import ru.DmN.pht.base.Processor
+import ru.DmN.pht.base.ast.INodesList
 import ru.DmN.pht.std.ast.IValueNode
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.processor.utils.ProcessingContext
@@ -48,10 +49,10 @@ fun lenArgs(to: List<ICastable>, getter: (index: Int) -> VirtualType): Int {
     return j
 }
 
-fun Processor.processNodes(node: Node, ctx: ProcessingContext, mode: ValType): List<Node> =
+fun Processor.processNodes(node: INodesList, ctx: ProcessingContext, mode: ValType): List<Node> =
     node.nodes.map { process(it, ctx, mode)!! }
 
-fun Processor.computeStringNodes(node: Node, ctx: ProcessingContext): List<String> =
+fun Processor.computeStringNodes(node: INodesList, ctx: ProcessingContext): List<String> =
     node.nodes.map { computeString(it, ctx) }
 
 fun Processor.compute(node: Node, ctx: ProcessingContext): Node =

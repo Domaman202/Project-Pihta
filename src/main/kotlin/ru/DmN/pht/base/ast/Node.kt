@@ -8,8 +8,6 @@ import ru.DmN.pht.std.utils.text
  * Базовая AST нода
  */
 open class Node(val token: Token) {
-    open val nodes: List<Node>
-        get() = emptyList()
     open fun copy(): Node =
         this
 
