@@ -1,9 +1,8 @@
 package ru.DmN.siberia.parser.ctx
 
-import ru.DmN.siberia.Base
-import ru.DmN.pht.base.parser.utils.parsersPool
-import ru.DmN.pht.base.utils.IContextCollection
-import ru.DmN.pht.base.utils.Module
+import ru.DmN.siberia.parser.utils.parsersPool
+import ru.DmN.siberia.utils.IContextCollection
+import ru.DmN.siberia.utils.Module
 import ru.DmN.pht.std.compiler.java.utils.SubList
 import ru.DmN.pht.std.compiler.java.utils.SubMap
 import java.util.*
@@ -21,7 +20,7 @@ class ParsingContext (
 
     companion object {
         fun base() =
-            ParsingContext(mutableListOf(ru.DmN.siberia.Base)).apply { this.parsersPool = Stack() }
+            ParsingContext(mutableListOf(ru.DmN.siberia.Siberia)).apply { this.parsersPool = Stack() }
 
         fun of(vararg list: Module) =
             base().apply { loadedModules += list }

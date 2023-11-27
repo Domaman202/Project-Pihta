@@ -1,8 +1,7 @@
 package ru.DmN.siberia.processor.utils
 
-import ru.DmN.siberia.Base
-import ru.DmN.pht.base.utils.IContextCollection
-import ru.DmN.pht.base.utils.Module
+import ru.DmN.siberia.utils.IContextCollection
+import ru.DmN.siberia.utils.Module
 import ru.DmN.pht.std.compiler.java.utils.SubList
 import ru.DmN.pht.std.compiler.java.utils.SubMap
 import java.util.concurrent.atomic.AtomicReference
@@ -17,6 +16,6 @@ class ProcessingContext(
         ProcessingContext(stage, loadedModules, contexts.toMutableMap().apply { this[name] = ctx })
     companion object {
         fun base() =
-            ProcessingContext(AtomicReference(ProcessingStage.UNKNOWN), mutableListOf(ru.DmN.siberia.Base))
+            ProcessingContext(AtomicReference(ProcessingStage.UNKNOWN), mutableListOf(ru.DmN.siberia.Siberia))
     }
 }

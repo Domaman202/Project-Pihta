@@ -1,10 +1,10 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.ast.NodeNodesList
-import ru.DmN.pht.base.utils.VirtualMethod
-import ru.DmN.pht.base.utils.indent
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.utils.VirtualMethod
+import ru.DmN.siberia.utils.indent
 
 class NodeMCall(tkOperation: Token, nodes: MutableList<Node>, val instance: Node, val method: VirtualMethod, val type: Type) : NodeNodesList(tkOperation, nodes) {
     override fun copy(): NodeMCall =

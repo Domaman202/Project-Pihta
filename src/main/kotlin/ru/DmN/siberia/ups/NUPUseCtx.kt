@@ -1,20 +1,19 @@
 package ru.DmN.siberia.ups
 
-import ru.DmN.siberia.Base
-import ru.DmN.pht.base.Parser
-import ru.DmN.pht.base.Processor
-import ru.DmN.pht.base.Unparser
-import ru.DmN.pht.base.ast.*
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ctx.ParsingContext
-import ru.DmN.pht.base.parsers.NPDefault
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.processor.utils.ProcessingStage
-import ru.DmN.pht.base.processor.utils.ValType
-import ru.DmN.pht.base.processors.NRDefault
-import ru.DmN.pht.base.unparser.UnparsingContext
-import ru.DmN.pht.base.unparsers.NUDefault
-import ru.DmN.pht.base.utils.Module
+import ru.DmN.siberia.Parser
+import ru.DmN.siberia.Processor
+import ru.DmN.siberia.Unparser
+import ru.DmN.siberia.ast.*
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.parser.ctx.ParsingContext
+import ru.DmN.siberia.parsers.NPDefault
+import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.utils.ProcessingStage
+import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processors.NRDefault
+import ru.DmN.siberia.unparser.UnparsingContext
+import ru.DmN.siberia.unparsers.NUDefault
+import ru.DmN.siberia.utils.Module
 import ru.DmN.pht.std.module.StdModule
 import ru.DmN.pht.std.processor.utils.exports
 import ru.DmN.pht.std.processor.utils.isExports
@@ -73,7 +72,7 @@ object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeParsedUse> {
         names.forEach { name ->
             val module = Module[name]
             if (module?.init != true)
-                Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(ru.DmN.siberia.Base, StdModule))
+                Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(ru.DmN.siberia.Siberia, StdModule))
             (module ?: Module.getOrThrow(name)).load(parser, context)
         }
     }
@@ -82,7 +81,7 @@ object NUPUseCtx : INodeUniversalProcessor<NodeUse, NodeParsedUse> {
         names.forEach { name ->
             val module = Module[name]
             if (module?.init != true)
-                Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(ru.DmN.siberia.Base, StdModule))
+                Parser(Module.getModuleFile(name)).parseNode(ParsingContext.of(ru.DmN.siberia.Siberia, StdModule))
             (module ?: Module.getOrThrow(name)).load(unparser, context)
         }
     }

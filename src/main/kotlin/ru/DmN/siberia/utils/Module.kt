@@ -1,25 +1,25 @@
 package ru.DmN.siberia.utils
 
-import ru.DmN.pht.base.Parser
-import ru.DmN.pht.base.Processor
-import ru.DmN.pht.base.Unparser
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.utils.CompilationContext
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ctx.ParsingContext
-import ru.DmN.pht.base.parsers.INodeParser
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.processor.utils.ValType
-import ru.DmN.pht.base.processors.INodeProcessor
-import ru.DmN.pht.base.unparser.UnparsingContext
-import ru.DmN.pht.base.unparsers.INodeUnparser
-import ru.DmN.pht.base.ups.NUPUse
+import ru.DmN.siberia.Parser
+import ru.DmN.siberia.Processor
+import ru.DmN.siberia.Unparser
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.compiler.java.Compiler
+import ru.DmN.siberia.compiler.java.utils.CompilationContext
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.parser.ctx.ParsingContext
+import ru.DmN.siberia.parsers.INodeParser
+import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.unparser.UnparsingContext
+import ru.DmN.siberia.unparsers.INodeUnparser
+import ru.DmN.siberia.ups.NUPUse
 import ru.DmN.pht.std.module.StdModule
 import ru.DmN.pht.std.processor.utils.nodeProgn
 import java.io.File
 import java.io.FileNotFoundException
-import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler as JavaNodeCompiler
+import ru.DmN.siberia.compiler.java.compilers.INodeCompiler as JavaNodeCompiler
 
 open class Module(val name: String, var init: Boolean = false) {
     lateinit var version: String

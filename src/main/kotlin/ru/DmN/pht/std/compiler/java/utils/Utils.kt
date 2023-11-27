@@ -3,9 +3,9 @@ package ru.DmN.pht.std.compiler.java.utils
 import org.objectweb.asm.Label
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
-import ru.DmN.pht.base.utils.IContextCollection
-import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.siberia.utils.IContextCollection
+import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.compiler.java.ctx.BodyContext
 import ru.DmN.pht.std.compiler.java.ctx.ClassContext
 import ru.DmN.pht.std.compiler.java.ctx.MethodContext

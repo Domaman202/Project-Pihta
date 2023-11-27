@@ -1,5 +1,5 @@
 package ru.DmN.siberia.processors
 
-import ru.DmN.pht.base.ast.NodeNodesList
+import ru.DmN.siberia.ast.NodeNodesList
 
 object NRDefault : SimpleNR<NodeNodesList>()

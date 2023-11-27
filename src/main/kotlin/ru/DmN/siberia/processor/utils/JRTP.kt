@@ -1,7 +1,7 @@
 package ru.DmN.siberia.processor.utils
 
-import ru.DmN.pht.base.utils.*
-import ru.DmN.pht.base.utils.VirtualType.VirtualTypeImpl
+import ru.DmN.siberia.utils.*
+import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
 import ru.DmN.pht.std.utils.VTDynamic
 import java.lang.reflect.Modifier
 import java.util.*

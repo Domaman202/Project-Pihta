@@ -1,10 +1,10 @@
 package ru.DmN.siberia.processors
 
-import ru.DmN.pht.base.Processor
-import ru.DmN.pht.base.ast.NodeNodesList
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.processor.utils.ValType
-import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.utils.VirtualType
 
 abstract class SimpleNR<T : NodeNodesList> : INodeProcessor<T> {
     override fun calc(node: T, processor: Processor, ctx: ProcessingContext): VirtualType? =

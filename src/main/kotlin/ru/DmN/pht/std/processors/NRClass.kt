@@ -1,15 +1,15 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.base.Processor
-import ru.DmN.pht.base.ast.NodeNodesList
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.processor.utils.ProcessingStage
-import ru.DmN.pht.base.processor.utils.ValType
-import ru.DmN.pht.base.processors.INodeProcessor
-import ru.DmN.pht.base.processors.NRDefault
-import ru.DmN.pht.base.utils.VirtualField.VirtualFieldImpl
-import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.base.utils.VirtualType.VirtualTypeImpl
+import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.utils.ProcessingStage
+import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.processors.NRDefault
+import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
+import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
 import ru.DmN.pht.std.ast.NodeType
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.with

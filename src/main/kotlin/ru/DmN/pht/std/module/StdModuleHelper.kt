@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.module
 
-import ru.DmN.pht.base.utils.Module
+import ru.DmN.siberia.utils.Module
 import ru.DmN.pht.std.module.parsers.NPArgument
 import ru.DmN.pht.std.module.parsers.NPValue
 import ru.DmN.pht.std.module.parsers.NPValueList

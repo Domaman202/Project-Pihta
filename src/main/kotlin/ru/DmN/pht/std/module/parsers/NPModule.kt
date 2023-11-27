@@ -1,13 +1,13 @@
 package ru.DmN.pht.std.module.parsers
 
-import ru.DmN.pht.base.Parser
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ctx.ParsingContext
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.parsers.NPDefault
-import ru.DmN.pht.base.parsers.SimpleNP
-import ru.DmN.pht.base.ups.NUPUseCtx
-import ru.DmN.pht.base.utils.Module
+import ru.DmN.siberia.Parser
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.parser.ctx.ParsingContext
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.parsers.NPDefault
+import ru.DmN.siberia.parsers.SimpleNP
+import ru.DmN.siberia.ups.NUPUseCtx
+import ru.DmN.siberia.utils.Module
 import ru.DmN.pht.std.module.StdModuleHelper
 import ru.DmN.pht.std.module.ast.IValueNode
 import ru.DmN.pht.std.module.ast.NodeModule

@@ -1,6 +1,6 @@
 package ru.DmN.siberia.ast
 
-import ru.DmN.pht.base.lexer.Token
+import ru.DmN.siberia.lexer.Token
 
 class NodeProcessedUse(
     tkOperation: Token,

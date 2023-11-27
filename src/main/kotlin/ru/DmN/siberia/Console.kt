@@ -1,14 +1,14 @@
 package ru.DmN.siberia
 
 import org.objectweb.asm.ClassWriter
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.utils.CompilationContext
-import ru.DmN.pht.base.parser.ctx.ParsingContext
-import ru.DmN.pht.base.processor.utils.*
-import ru.DmN.pht.base.utils.Module
-import ru.DmN.pht.base.utils.TypesProvider
-import ru.DmN.pht.base.utils.getJavaClassVersion
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.compiler.java.Compiler
+import ru.DmN.siberia.compiler.java.utils.CompilationContext
+import ru.DmN.siberia.parser.ctx.ParsingContext
+import ru.DmN.siberia.processor.utils.*
+import ru.DmN.siberia.utils.Module
+import ru.DmN.siberia.utils.TypesProvider
+import ru.DmN.siberia.utils.getJavaClassVersion
 import ru.DmN.pht.std.module.StdModule
 import ru.DmN.pht.std.module.ast.NodeModule
 import java.io.File

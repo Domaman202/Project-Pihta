@@ -1,12 +1,12 @@
 package ru.DmN.pht.std
 
-import ru.DmN.pht.base.Parser
-import ru.DmN.pht.base.Processor
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.parser.ctx.ParsingContext
-import ru.DmN.pht.base.parser.utils.parsersPool
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.processor.utils.ValType
+import ru.DmN.siberia.Parser
+import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.parser.ctx.ParsingContext
+import ru.DmN.siberia.parser.utils.parsersPool
+import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.pht.std.ast.*
 import ru.DmN.pht.std.compiler.java.PihtaJava
 import ru.DmN.pht.std.parser.clearMacros

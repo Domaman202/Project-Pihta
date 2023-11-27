@@ -2,10 +2,10 @@ package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
-import ru.DmN.pht.base.ast.NodeNodesList
-import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
-import ru.DmN.pht.base.compiler.java.utils.CompilationContext
+import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.compiler.java.Compiler
+import ru.DmN.siberia.compiler.java.compilers.INodeCompiler
+import ru.DmN.siberia.compiler.java.utils.CompilationContext
 import ru.DmN.pht.std.ast.NodeCompare
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.processor.utils.nodeValueOf

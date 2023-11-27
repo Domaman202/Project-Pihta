@@ -1,9 +1,9 @@
 package ru.DmN.pht.std.ups
 
-import ru.DmN.pht.base.Parser
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ctx.ParsingContext
+import ru.DmN.siberia.Parser
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 
 object NUPComment : INodeUniversalProcessor<Node, Node> {

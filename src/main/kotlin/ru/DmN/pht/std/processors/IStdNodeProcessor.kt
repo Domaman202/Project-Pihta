@@ -1,9 +1,9 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.base.Processor
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.processors.INodeProcessor
+import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processors.INodeProcessor
 
 interface IStdNodeProcessor<T : Node> : INodeProcessor<T> {
     fun compute(node: T, processor: Processor, ctx: ProcessingContext): Node =

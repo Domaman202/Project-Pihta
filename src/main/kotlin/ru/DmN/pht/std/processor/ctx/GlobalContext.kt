@@ -1,8 +1,8 @@
 package ru.DmN.pht.std.processor.ctx
 
-import ru.DmN.pht.base.utils.TypesProvider
-import ru.DmN.pht.base.utils.VirtualMethod
-import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.siberia.utils.TypesProvider
+import ru.DmN.siberia.utils.VirtualMethod
+import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.compiler.java.utils.MacroDefine
 import ru.DmN.pht.std.compiler.java.utils.SubList
 import ru.DmN.pht.std.compiler.java.utils.SubMap

@@ -1,9 +1,9 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.base.Processor
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.processor.utils.ValType
+import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.utils.ValType
 import java.util.Random
 import kotlin.math.absoluteValue
 

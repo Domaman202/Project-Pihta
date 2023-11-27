@@ -1,7 +1,7 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.ast.Node
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.ast.Node
 
 class NodeGetA(tkOperation: Token, val name: String, val type: Type) : Node(tkOperation) {
     enum class Type {

@@ -2,14 +2,14 @@ package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
-import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
-import ru.DmN.pht.base.compiler.java.compilers.NCDefault
-import ru.DmN.pht.base.compiler.java.utils.CompilationContext
-import ru.DmN.pht.base.compiler.java.utils.CompilingStage
-import ru.DmN.pht.base.processor.utils.javaClassVersion
-import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.base.utils.desc
+import ru.DmN.siberia.compiler.java.Compiler
+import ru.DmN.siberia.compiler.java.compilers.INodeCompiler
+import ru.DmN.siberia.compiler.java.compilers.NCDefault
+import ru.DmN.siberia.compiler.java.utils.CompilationContext
+import ru.DmN.siberia.compiler.java.utils.CompilingStage
+import ru.DmN.siberia.processor.utils.javaClassVersion
+import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.desc
 import ru.DmN.pht.std.ast.NodeType
 import ru.DmN.pht.std.compiler.java.ctx.ClassContext
 import ru.DmN.pht.std.compiler.java.utils.method

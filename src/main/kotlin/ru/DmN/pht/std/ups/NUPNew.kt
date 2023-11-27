@@ -1,11 +1,11 @@
 package ru.DmN.pht.std.ups
 
-import ru.DmN.pht.base.Processor
-import ru.DmN.pht.base.Unparser
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.unparser.UnparsingContext
-import ru.DmN.pht.base.unparsers.NUDefault
-import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.siberia.Processor
+import ru.DmN.siberia.Unparser
+import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.unparser.UnparsingContext
+import ru.DmN.siberia.unparsers.NUDefault
+import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeNew
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 import ru.DmN.pht.std.unparsers.NUDefaultX

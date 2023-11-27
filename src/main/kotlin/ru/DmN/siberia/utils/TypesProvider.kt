@@ -1,7 +1,7 @@
 package ru.DmN.siberia.utils
 
-import ru.DmN.pht.base.processor.utils.JBTP
-import ru.DmN.pht.base.processor.utils.JRTP
+import ru.DmN.siberia.processor.utils.JBTP
+import ru.DmN.siberia.processor.utils.JRTP
 import java.util.*
 
 abstract class TypesProvider {

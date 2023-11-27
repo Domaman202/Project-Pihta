@@ -2,9 +2,9 @@ package ru.DmN.pht.std.utils
 
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.base.utils.VirtualField
-import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.VirtualField
+import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.compiler.java.utils.load
 
 abstract class NVC {

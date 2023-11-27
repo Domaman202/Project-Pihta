@@ -1,8 +1,8 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.utils.indent
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.utils.indent
 
 class NodeFieldSet(token: Token, nodes: MutableList<Node>, val instance: Node, name: String, val static: Boolean, val native: Boolean = false) : NodeSet(token, nodes, name) {
     override fun copy(): NodeFieldSet =

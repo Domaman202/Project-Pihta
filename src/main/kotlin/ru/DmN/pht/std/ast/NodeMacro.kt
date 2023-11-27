@@ -1,9 +1,9 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.ast.NodeNodesList
-import ru.DmN.pht.base.utils.indent
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.utils.indent
 
 class NodeMacro(tkOperation: Token, nodes: MutableList<Node>, val name: String) : NodeNodesList(tkOperation, nodes) {
     override fun copy(): NodeMacro =

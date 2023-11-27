@@ -1,12 +1,12 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.base.Processor
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.ast.NodeNodesList
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.processor.utils.ValType
-import ru.DmN.pht.base.processors.INodeProcessor
-import ru.DmN.pht.base.processors.NRDefault
+import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.processors.NRDefault
 
 /***
  * Simple Annotation

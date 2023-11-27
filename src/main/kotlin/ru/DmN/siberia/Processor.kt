@@ -1,14 +1,14 @@
 package ru.DmN.siberia
 
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.processors.INodeProcessor
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.processor.utils.ProcessingStage
-import ru.DmN.pht.base.processor.utils.ValType
-import ru.DmN.pht.base.utils.DefaultEnumMap
-import ru.DmN.pht.base.utils.TypesProvider
-import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.base.utils.getRegex
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.utils.ProcessingStage
+import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.utils.DefaultEnumMap
+import ru.DmN.siberia.utils.TypesProvider
+import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.getRegex
 import ru.DmN.pht.std.utils.text
 
 class Processor(val tp: TypesProvider) {

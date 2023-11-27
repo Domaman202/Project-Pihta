@@ -1,10 +1,10 @@
 package ru.DmN.siberia.compiler.java.compilers
 
-import ru.DmN.pht.base.ast.NodeProcessedUse
-import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.utils.CompilationContext
-import ru.DmN.pht.base.utils.Module
-import ru.DmN.pht.base.utils.Variable
+import ru.DmN.siberia.ast.NodeProcessedUse
+import ru.DmN.siberia.compiler.java.Compiler
+import ru.DmN.siberia.compiler.java.utils.CompilationContext
+import ru.DmN.siberia.utils.Module
+import ru.DmN.siberia.utils.Variable
 
 object NCUseCtx : INodeCompiler<NodeProcessedUse> {
     override fun compile(node: NodeProcessedUse, compiler: Compiler, ctx: CompilationContext) {

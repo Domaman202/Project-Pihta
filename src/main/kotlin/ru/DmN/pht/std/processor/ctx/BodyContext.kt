@@ -1,8 +1,8 @@
 package ru.DmN.pht.std.processor.ctx
 
-import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.base.utils.VirtualMethod
-import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.VirtualMethod
+import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.compiler.java.utils.SubList
 import java.util.concurrent.atomic.AtomicInteger
 

@@ -1,11 +1,11 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.base.Processor
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.ast.NodeNodesList
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.processor.utils.ValType
-import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.nodeClass
 import ru.DmN.pht.std.utils.compute

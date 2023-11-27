@@ -1,7 +1,7 @@
 package ru.DmN.pht.std.processor.utils
 
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.utils.VirtualType
 
 data class Variable(
     val name: String,

@@ -1,7 +1,7 @@
 package ru.DmN.siberia.lexer
 
-import ru.DmN.pht.base.lexer.Token.Type.*
-import ru.DmN.pht.base.utils.isPrimitive
+import ru.DmN.siberia.lexer.Token.Type.*
+import ru.DmN.siberia.utils.isPrimitive
 
 class Lexer(private val input: String) : Iterator<Token?> {
     private var ptr: Int = 0

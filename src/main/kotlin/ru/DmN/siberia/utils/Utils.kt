@@ -1,8 +1,8 @@
 package ru.DmN.siberia.utils
 
 import org.objectweb.asm.Opcodes
-import ru.DmN.pht.base.Parser
-import ru.DmN.pht.base.lexer.*
+import ru.DmN.siberia.Parser
+import ru.DmN.siberia.lexer.*
 import java.io.DataInputStream
 import java.io.InputStream
 

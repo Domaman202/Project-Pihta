@@ -1,9 +1,9 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.base.ast.INodesList
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.utils.indent
+import ru.DmN.siberia.ast.INodesList
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.utils.indent
 
 class NodeFMGet(token: Token, val instance: Node, name: String, static: Boolean, val native: Boolean = false) : NodeGetOrName(token, name, static), INodesList {
     override val nodes: MutableList<Node> = mutableListOf()

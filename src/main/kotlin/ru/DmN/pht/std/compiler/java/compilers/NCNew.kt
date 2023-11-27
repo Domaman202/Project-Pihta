@@ -1,10 +1,10 @@
 package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
-import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
-import ru.DmN.pht.base.compiler.java.utils.CompilationContext
-import ru.DmN.pht.base.utils.Variable
+import ru.DmN.siberia.compiler.java.Compiler
+import ru.DmN.siberia.compiler.java.compilers.INodeCompiler
+import ru.DmN.siberia.compiler.java.utils.CompilationContext
+import ru.DmN.siberia.utils.Variable
 import ru.DmN.pht.std.ast.NodeNew
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method

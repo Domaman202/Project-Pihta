@@ -1,9 +1,9 @@
 package ru.DmN.siberia.compiler.java.compilers
 
-import ru.DmN.pht.base.compiler.java.Compiler
-import ru.DmN.pht.base.compiler.java.utils.CompilationContext
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.utils.Variable
+import ru.DmN.siberia.compiler.java.Compiler
+import ru.DmN.siberia.compiler.java.utils.CompilationContext
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.utils.Variable
 
 interface INodeCompiler<T : Node> {
     fun compile(node: T, compiler: Compiler, ctx: CompilationContext) {

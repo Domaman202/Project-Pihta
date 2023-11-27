@@ -1,9 +1,9 @@
 package ru.DmN.siberia.parser.utils
 
-import ru.DmN.pht.base.Parser
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.parser.ctx.ParsingContext
+import ru.DmN.siberia.Parser
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.pht.std.parser.parseProgn
 import ru.DmN.pht.std.parser.parseValn
 import ru.DmN.pht.std.parser.parseValue
@@ -33,5 +33,5 @@ fun Parser.baseParseNode(ctx: ParsingContext): Node? {
 }
 
 var ParsingContext.parsersPool
-    set(value) { this.contexts["base/pp"] = value }
-    get() = this.contexts["base/pp"] as Stack<Parser.(ctx: ParsingContext) -> Node?>
+    set(value) { this.contexts["siberia/pp"] = value }
+    get() = this.contexts["siberia/pp"] as Stack<Parser.(ctx: ParsingContext) -> Node?>

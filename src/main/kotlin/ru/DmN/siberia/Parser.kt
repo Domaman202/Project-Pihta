@@ -1,13 +1,13 @@
 package ru.DmN.siberia
 
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.lexer.Lexer
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.lexer.Token.Type.CLOSE_BRACKET
-import ru.DmN.pht.base.parser.ctx.ParsingContext
-import ru.DmN.pht.base.parser.utils.baseParseNode
-import ru.DmN.pht.base.parsers.INodeParser
-import ru.DmN.pht.base.utils.getRegex
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.lexer.Lexer
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.lexer.Token.Type.CLOSE_BRACKET
+import ru.DmN.siberia.parser.ctx.ParsingContext
+import ru.DmN.siberia.parser.utils.baseParseNode
+import ru.DmN.siberia.parsers.INodeParser
+import ru.DmN.siberia.utils.getRegex
 import java.util.*
 
 class Parser(val lexer: Lexer, var parseNode: Parser.(ctx: ParsingContext) -> Node?) {

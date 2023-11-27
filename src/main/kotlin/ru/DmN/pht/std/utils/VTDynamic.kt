@@ -1,8 +1,8 @@
 package ru.DmN.pht.std.utils
 
-import ru.DmN.pht.base.utils.VirtualField
-import ru.DmN.pht.base.utils.VirtualMethod
-import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.siberia.utils.VirtualField
+import ru.DmN.siberia.utils.VirtualMethod
+import ru.DmN.siberia.utils.VirtualType
 
 object VTDynamic : VirtualType() {
     override val name: String

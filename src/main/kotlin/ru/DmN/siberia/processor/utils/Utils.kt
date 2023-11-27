@@ -1,15 +1,15 @@
 package ru.DmN.siberia.processor.utils
 
-import ru.DmN.pht.base.utils.IContextCollection
+import ru.DmN.siberia.utils.IContextCollection
 
 fun <T : IContextCollection<T>> T.with(ctx: Platform) =
-    this.with("base/platform", ctx)
+    this.with("siberia/platform", ctx)
 fun <T : IContextCollection<T>> T.withJCV(ctx: Int) =
-    this.with("base/jcv", ctx)
+    this.with("siberia/jcv", ctx)
 
 var IContextCollection<*>.platform
-    set(value) { this.contexts["base/platform"] = value }
-    get() = this.contexts["base/platform"] as Platform
+    set(value) { this.contexts["siberia/platform"] = value }
+    get() = this.contexts["siberia/platform"] as Platform
 var IContextCollection<*>.javaClassVersion
-    set(value) { this.contexts["base/jcv"] = value }
-    get() = this.contexts["base/jcv"] as Int
+    set(value) { this.contexts["siberia/jcv"] = value }
+    get() = this.contexts["siberia/jcv"] as Int

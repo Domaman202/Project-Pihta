@@ -3,13 +3,13 @@ package ru.DmN.siberia.processor.utils
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
-import ru.DmN.pht.base.utils.MethodModifiers
-import ru.DmN.pht.base.utils.TypesProvider
-import ru.DmN.pht.base.utils.VirtualField.VirtualFieldImpl
-import ru.DmN.pht.base.utils.VirtualMethod.VirtualMethodImpl
-import ru.DmN.pht.base.utils.VirtualType
-import ru.DmN.pht.base.utils.VirtualType.VirtualTypeImpl
-import ru.DmN.pht.base.utils.readAllBytes
+import ru.DmN.siberia.utils.MethodModifiers
+import ru.DmN.siberia.utils.TypesProvider
+import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
+import ru.DmN.siberia.utils.VirtualMethod.VirtualMethodImpl
+import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
+import ru.DmN.siberia.utils.readAllBytes
 import ru.DmN.pht.std.utils.VTDynamic
 
 /**

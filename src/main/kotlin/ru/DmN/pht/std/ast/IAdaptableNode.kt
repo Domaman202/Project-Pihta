@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.siberia.utils.VirtualType
 
 interface IAdaptableNode {
     fun isAdaptableTo(type: VirtualType): Boolean

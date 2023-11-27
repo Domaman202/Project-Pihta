@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.processor.utils
 
-import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.ast.IAdaptableNode
 
 data class CastableAdaptImpl(val node: IAdaptableNode) : ICastable {

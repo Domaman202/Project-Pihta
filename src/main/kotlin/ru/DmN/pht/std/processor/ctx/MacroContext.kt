@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.processor.ctx
 
-import ru.DmN.pht.base.ast.Node
+import ru.DmN.siberia.ast.Node
 import java.util.UUID
 
 class MacroContext(val args: MutableMap<Pair<UUID, String>, Node> = HashMap()) {

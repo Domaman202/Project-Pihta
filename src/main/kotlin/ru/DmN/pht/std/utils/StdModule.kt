@@ -1,9 +1,9 @@
 package ru.DmN.pht.std.utils
 
-import ru.DmN.pht.base.parsers.INodeParser
-import ru.DmN.pht.base.processors.INodeProcessor
-import ru.DmN.pht.base.unparsers.INodeUnparser
-import ru.DmN.pht.base.utils.Module
+import ru.DmN.siberia.parsers.INodeParser
+import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.unparsers.INodeUnparser
+import ru.DmN.siberia.utils.Module
 import ru.DmN.pht.std.processors.INodeUniversalProcessor
 
 open class StdModule(name: String, init: Boolean = false) : Module(name, init) {

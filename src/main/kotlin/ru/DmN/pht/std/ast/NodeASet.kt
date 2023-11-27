@@ -1,8 +1,8 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.utils.indent
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.utils.indent
 
 class NodeASet(tkOperation: Token, val arr: Node, val index: Node, val value: Node) : Node(tkOperation) {
     override fun print(builder: StringBuilder, indent: Int): StringBuilder =

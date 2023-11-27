@@ -1,9 +1,9 @@
 package ru.DmN.pht.std.processor.utils
 
-import ru.DmN.pht.base.Processor
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.processor.utils.ProcessingContext
-import ru.DmN.pht.base.utils.VirtualType
+import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.ast.IAdaptableNode
 import ru.DmN.pht.std.utils.VTDynamic
 

@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.ast.Node
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.ast.Node
 
 class NodeImport(tkOperation: Token, val module: String, val data: Map<String, List<Any?>>) : Node(tkOperation)

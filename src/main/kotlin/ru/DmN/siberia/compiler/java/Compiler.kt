@@ -1,14 +1,14 @@
 package ru.DmN.siberia.compiler.java
 
 import org.objectweb.asm.tree.ClassNode
-import ru.DmN.pht.base.compiler.java.compilers.INodeCompiler
-import ru.DmN.pht.base.compiler.java.utils.CompilationContext
-import ru.DmN.pht.base.compiler.java.utils.CompilingStage
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.utils.DefaultEnumMap
-import ru.DmN.pht.base.utils.TypesProvider
-import ru.DmN.pht.base.utils.Variable
-import ru.DmN.pht.base.utils.getRegex
+import ru.DmN.siberia.compiler.java.compilers.INodeCompiler
+import ru.DmN.siberia.compiler.java.utils.CompilationContext
+import ru.DmN.siberia.compiler.java.utils.CompilingStage
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.utils.DefaultEnumMap
+import ru.DmN.siberia.utils.TypesProvider
+import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.getRegex
 import ru.DmN.pht.std.utils.text
 
 class Compiler(val tp: TypesProvider = TypesProvider.JAVA) {

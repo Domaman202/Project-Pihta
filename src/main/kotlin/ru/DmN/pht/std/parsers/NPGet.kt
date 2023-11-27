@@ -1,13 +1,13 @@
 package ru.DmN.pht.std.parsers
 
-import ru.DmN.pht.base.Parser
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.lexer.Token.Type.*
-import ru.DmN.pht.base.lexer.isNaming
-import ru.DmN.pht.base.lexer.isOperation
-import ru.DmN.pht.base.parser.ctx.ParsingContext
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.parsers.INodeParser
+import ru.DmN.siberia.Parser
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.lexer.Token.Type.*
+import ru.DmN.siberia.lexer.isNaming
+import ru.DmN.siberia.lexer.isOperation
+import ru.DmN.siberia.parser.ctx.ParsingContext
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.pht.std.ast.NodeFMGet
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.ast.NodeValue

@@ -1,9 +1,9 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.utils.VirtualField.VirtualFieldImpl
-import ru.DmN.pht.base.utils.indent
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
+import ru.DmN.siberia.utils.indent
 
 class NodeFieldB(tkOperation: Token, val fields: List<VirtualFieldImpl>) : Node(tkOperation), IStaticallyNode, IFinallyNode {
     override var static: Boolean = false

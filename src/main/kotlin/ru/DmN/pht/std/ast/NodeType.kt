@@ -1,10 +1,10 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.base.ast.Node
-import ru.DmN.pht.base.ast.NodeNodesList
-import ru.DmN.pht.base.lexer.Token
-import ru.DmN.pht.base.utils.VirtualType.VirtualTypeImpl
-import ru.DmN.pht.base.utils.indent
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
+import ru.DmN.siberia.utils.indent
 import ru.DmN.pht.std.utils.text
 
 class NodeType(tkOperation: Token, nodes: MutableList<Node>, val type: VirtualTypeImpl) : NodeNodesList(tkOperation, nodes),
