@@ -1,6 +1,7 @@
 package ru.DmN.pht.base.parser.ctx
 
 import ru.DmN.pht.base.Base
+import ru.DmN.pht.base.parser.utils.parsersPool
 import ru.DmN.pht.base.utils.IContextCollection
 import ru.DmN.pht.base.utils.Module
 import ru.DmN.pht.std.compiler.java.utils.SubList
@@ -20,7 +21,7 @@ class ParsingContext (
 
     companion object {
         fun base() =
-            ParsingContext(mutableListOf(Base))
+            ParsingContext(mutableListOf(Base)).apply { this.parsersPool = Stack() }
 
         fun of(vararg list: Module) =
             base().apply { loadedModules += list }

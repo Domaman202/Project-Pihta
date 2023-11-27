@@ -7,6 +7,7 @@ import ru.DmN.pht.base.parser.ctx.ParsingContext
 import ru.DmN.pht.std.parser.parseProgn
 import ru.DmN.pht.std.parser.parseValn
 import ru.DmN.pht.std.parser.parseValue
+import java.util.Stack
 
 fun Parser.baseParseNode(ctx: ParsingContext): Node? {
     val startToken = nextToken() ?: return null
@@ -30,3 +31,7 @@ fun Parser.baseParseNode(ctx: ParsingContext): Node? {
         }
     }
 }
+
+var ParsingContext.parsersPool
+    set(value) { this.contexts["base/pp"] = value }
+    get() = this.contexts["base/pp"] as Stack<Parser.(ctx: ParsingContext) -> Node?>

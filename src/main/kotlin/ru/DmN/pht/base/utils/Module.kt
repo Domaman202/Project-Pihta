@@ -46,6 +46,12 @@ open class Module(val name: String, var init: Boolean = false) {
 
     open fun clear(parser: Parser, ctx: ParsingContext) = Unit
 
+    open fun unload(parser: Parser, ctx: ParsingContext) {
+        if (ctx.loadedModules.contains(this)) {
+            ctx.loadedModules.remove(this)
+        }
+    }
+
     open fun load(unparser: Unparser, ctx: UnparsingContext) {
         if (!ctx.loadedModules.contains(this)) {
             ctx.loadedModules.add(0, this)

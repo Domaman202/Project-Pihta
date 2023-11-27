@@ -4,6 +4,7 @@ import ru.DmN.pht.base.Parser
 import ru.DmN.pht.base.Processor
 import ru.DmN.pht.base.ast.Node
 import ru.DmN.pht.base.parser.ctx.ParsingContext
+import ru.DmN.pht.base.parser.utils.parsersPool
 import ru.DmN.pht.base.processor.utils.ProcessingContext
 import ru.DmN.pht.base.processor.utils.ValType
 import ru.DmN.pht.std.ast.*
@@ -11,7 +12,6 @@ import ru.DmN.pht.std.compiler.java.PihtaJava
 import ru.DmN.pht.std.parser.clearMacros
 import ru.DmN.pht.std.parser.macros
 import ru.DmN.pht.std.parser.phtParseNode
-import ru.DmN.pht.std.parser.prevParseNode
 import ru.DmN.pht.std.parsers.NPSkip
 import ru.DmN.pht.std.parsers.NPValnA
 import ru.DmN.pht.std.processor.ctx.GlobalContext
@@ -213,7 +213,7 @@ object Pihta : StdModule("pht") {
     override fun load(parser: Parser, ctx: ParsingContext) {
         if (!ctx.loadedModules.contains(this)) {
             ctx.macros = Stack()
-            ctx.prevParseNode = parser.parseNode
+            ctx.parsersPool.push(parser.parseNode)
             parser.parseNode = { phtParseNode(it) }
         }
         super.load(parser, ctx)
@@ -221,9 +221,16 @@ object Pihta : StdModule("pht") {
 
     override fun clear(parser: Parser, ctx: ParsingContext) {
         if (ctx.loadedModules.contains(this)) {
-            parser.parseNode = ctx.prevParseNode
+            parser.parseNode = ctx.parsersPool.pop()
         }
-        super.clear(parser, ctx)
+    }
+
+    override fun unload(parser: Parser, ctx: ParsingContext) {
+        if (ctx.loadedModules.contains(this)) {
+            ctx.clearMacros()
+            parser.parseNode = ctx.parsersPool.pop()
+        }
+        super.unload(parser, ctx)
     }
 
     override fun load(processor: Processor, ctx: ProcessingContext, mode: ValType): List<Node>? {

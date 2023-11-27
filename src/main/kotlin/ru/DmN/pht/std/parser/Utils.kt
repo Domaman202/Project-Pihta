@@ -60,6 +60,3 @@ fun IContextCollection<*>.clearMacros() {
 var IContextCollection<*>.macros
     set(value) { this.contexts["pht/macro"] = value }
     get() = this.contexts["pht/macro"] as Stack<UUID>
-var IContextCollection<*>.prevParseNode
-    set(value) { this.contexts["pht/ppn"] = value }
-    get() = this.contexts["pht/ppn"] as Parser.(ctx: ParsingContext) -> Node?
