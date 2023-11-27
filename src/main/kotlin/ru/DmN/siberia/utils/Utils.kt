@@ -6,12 +6,18 @@ import ru.DmN.siberia.lexer.*
 import java.io.DataInputStream
 import java.io.InputStream
 
+/**
+ * Читает все байты из потока в массив.
+ */
 fun InputStream.readAllBytes(): ByteArray {
     val bytes = ByteArray(available())
     DataInputStream(this).readFully(bytes)
     return bytes
 }
 
+/**
+ * Возвращает текущую версию классов.
+ */
 fun getJavaClassVersion(): Int {
     val version = getJavaVersion()
     if (version > 7)
@@ -19,6 +25,9 @@ fun getJavaClassVersion(): Int {
     throw RuntimeException("Unsupported platform!")
 }
 
+/**
+ * Возвращает текущую версию java.
+ */
 fun getJavaVersion(): Int {
     var version = System.getProperty("java.version")
     if (version.startsWith("1.")) {
@@ -35,6 +44,9 @@ fun getJavaVersion(): Int {
 fun <T> Map<Regex, T>.getRegex(key: String): T? =
     entries.find { key.matches(it.key) }?.value
 
+/**
+ * Возвращает дексриптор типа.
+ */
 val String.desc
     get() = when (this) {
         "void" -> "V"
@@ -58,6 +70,9 @@ val String.desc
         }
     }
 
+/**
+ * Переводит тип в имя класса.
+ */
 val String.className
     get() = this.replace('.', '/')
 
@@ -69,26 +84,38 @@ fun Parser.nextNaming(): Token = this.nextToken()!!.checkNaming()
 
 typealias Klass = Class<*>
 
+/**
+ * Получает класс по имени / дескриптору
+ */
 fun klassOf(name: String): Klass =
     if (name.isPrimitive())
         name.getPrimitive()
     else Class.forName(name.let { if (name.startsWith('L') && name.endsWith(';')) name.substring(1, name.length - 1).replace('/', '.') else name }) as Klass
 
+/**
+ * Возвращает дескриптор класса
+ */
 val Klass.desc
-    get() = if (name.isPrimitive()) when (name) {
-        "void" -> "V"
-        "boolean" -> "Z"
-        "byte" -> "B"
-        "char" -> "C"
-        "short" -> "S"
-        "int" -> "I"
-        "long" -> "J"
-        "float" -> "F"
-        "double" -> "D"
-        else -> throw RuntimeException()
-    } else "L${name.replace('.', '/')};"
+    get() =
+        if (name.isPrimitive())
+            when (name) {
+                "void" -> "V"
+                "boolean" -> "Z"
+                "byte" -> "B"
+                "char" -> "C"
+                "short" -> "S"
+                "int" -> "I"
+                "long" -> "J"
+                "float" -> "F"
+                "double" -> "D"
+                else -> throw RuntimeException()
+            }
+        else "L${name.replace('.', '/')};"
 
 
+/**
+ * Возвращает примитивный класс от типа.
+ */
 fun String.getPrimitive(): Klass {
     return when (this) {
         "void" -> Void::class.javaPrimitiveType
@@ -104,6 +131,9 @@ fun String.getPrimitive(): Klass {
     } as Klass
 }
 
+/**
+ * Проверяет на примитивность тип.
+ */
 fun String.isPrimitive(): Boolean {
     return when (this) {
         "void",
@@ -120,6 +150,9 @@ fun String.isPrimitive(): Boolean {
     }
 }
 
+/**
+ * Отступ.
+ */
 fun StringBuilder.indent(indent: Int): StringBuilder {
     this.append("|\t".repeat(indent))
     return this

@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.siberia.utils
 
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
@@ -12,9 +12,11 @@ import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.unparsers.INodeUnparser
-import ru.DmN.siberia.utils.VirtualType
 
-interface INodeUniversalProcessor<A : Node, B : Node> : INodeParser, INodeUnparser<A>, INodeProcessor<B> {
+/**
+ * Node Universal (Parser/Unparser/Processor)
+ */
+interface INUP<A : Node, B : Node> : INodeParser, INodeUnparser<A>, INodeProcessor<B> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
         throw UnsupportedOperationException("Not yet implemented")
 

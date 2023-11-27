@@ -14,6 +14,8 @@ import ru.DmN.pht.std.utils.VTDynamic
 
 /**
  * Java Bytecode Types Provider
+ *
+ * Предоставляет типы путём разбора .class файлов.
  */
 class JBTP : TypesProvider() {
     init {

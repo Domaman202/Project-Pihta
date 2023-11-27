@@ -11,15 +11,40 @@ import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.getRegex
 import ru.DmN.pht.std.utils.text
 
-class Processor(val tp: TypesProvider) {
+/**
+ * Обработчик.
+ */
+class Processor(
+    /**
+     * Провайдер типов.
+     */
+    val tp: TypesProvider
+) {
+    /**
+     * Список задач.
+     */
     val tasks: DefaultEnumMap<ProcessingStage, MutableList<() -> Unit>> = DefaultEnumMap(ProcessingStage::class.java) { java.util.ArrayList() }
+
+    /**
+     * Глобальные контексты.
+     */
     val contexts: MutableMap<String, Any?> = HashMap()
 
+    /**
+     * Вычисляет тип, который возвращает нода, в случае наличия такового, в противном случае возвращает null.
+     */
     fun calc(node: Node, ctx: ProcessingContext): VirtualType? =
         get(node, ctx).calc(node, this, ctx)
+
+    /**
+     * Обрабатывает ноду.
+     */
     fun process(node: Node, ctx: ProcessingContext, mode: ValType): Node? =
         get(node, ctx).process(node, this, ctx, mode)
 
+    /**
+     * Возвращает обработчик нод.
+     */
     fun get(node: Node, ctx: ProcessingContext): INodeProcessor<Node> {
         val name = node.text
         val i = name.lastIndexOf('/')
@@ -32,6 +57,11 @@ class Processor(val tp: TypesProvider) {
         }
     }
 
+    /**
+     * Помещает новую задачу в список.
+     *
+     * @param stage Стадия обработки.
+     */
     fun pushTask(ctx: ProcessingContext, stage: ProcessingStage, task: () -> Unit) {
         if (stage.ordinal <= ctx.stage.get().ordinal)
             task()

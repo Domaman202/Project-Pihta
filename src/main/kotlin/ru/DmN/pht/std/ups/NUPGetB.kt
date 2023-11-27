@@ -16,10 +16,10 @@ import ru.DmN.pht.std.processor.utils.body
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.isBody
 import ru.DmN.pht.std.processor.utils.isClass
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.utils.computeString
 
-object NUPGetB : INodeUniversalProcessor<NodeGetA, NodeNodesList> {
+object NUPGetB : INUP<NodeGetA, NodeNodesList> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
         NPDefault.parse(parser, ctx, token)
 

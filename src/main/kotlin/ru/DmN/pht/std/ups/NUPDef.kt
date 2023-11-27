@@ -3,10 +3,10 @@ package ru.DmN.pht.std.ups
 import ru.DmN.siberia.Unparser
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.pht.std.ast.NodeDef
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.unparsers.NUDefaultX
 
-object NUPDef : INodeUniversalProcessor<NodeDef, NodeDef> {
+object NUPDef : INUP<NodeDef, NodeDef> {
     override fun unparse(node: NodeDef, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
             append('(').append(NUDefaultX.text(node.token)).append(" [")

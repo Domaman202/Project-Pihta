@@ -10,14 +10,36 @@ import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.siberia.utils.getRegex
 import java.util.*
 
-class Parser(val lexer: Lexer, var parseNode: Parser.(ctx: ParsingContext) -> Node?) {
+/**
+ * Парсер.
+ */
+class Parser(
+    /**
+     * Лексический анализатор.
+     */
+    val lexer: Lexer,
+    /**
+     * Функция парсинга нод.
+     */
+    var parseNode: Parser.(ctx: ParsingContext) -> Node?
+) {
+    /**
+     * Буфер токенов.
+     */
     val tokens = Stack<Token>()
 
     constructor(code: String) : this(Lexer(code), { baseParseNode(it) })
 
+    /**
+     * Парсит ноду.
+     */
     fun parseNode(ctx: ParsingContext) =
         parseNode(this, ctx)
 
+
+    /**
+     * Получает парсер нод.
+     */
     fun get(ctx: ParsingContext, name: String): INodeParser? {
         val i = name.lastIndexOf('/')
         return if (i < 1) {
@@ -29,8 +51,14 @@ class Parser(val lexer: Lexer, var parseNode: Parser.(ctx: ParsingContext) -> No
         }
     }
 
+    /**
+     * Выполняет код в теле, после чего закрывает скобку.
+     */
     inline fun <T> pnb(body: () -> T): T = body.invoke().apply { tryClose() }
 
+    /**
+     * Закрытие скобки
+     */
     fun tryClose() {
         val token = nextToken()
         if (token?.type != CLOSE_BRACKET) {
@@ -38,6 +66,9 @@ class Parser(val lexer: Lexer, var parseNode: Parser.(ctx: ParsingContext) -> No
         }
     }
 
+    /**
+     * Возвращает следующий токен.
+     */
     fun nextToken(): Token? {
         return if (tokens.empty())
             lexer.next()

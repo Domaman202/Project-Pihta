@@ -2,4 +2,12 @@ package ru.DmN.siberia.unparser
 
 import ru.DmN.siberia.utils.Module
 
-class UnparsingContext(val loadedModules: MutableList<Module> = ArrayList())
+/**
+ * Контекст де-парсинга.
+ */
+class UnparsingContext(
+    /**
+     * Загруженные модули.
+     */
+    val loadedModules: MutableList<Module> = ArrayList()
+)

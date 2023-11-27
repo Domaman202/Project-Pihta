@@ -18,12 +18,12 @@ import ru.DmN.pht.std.ast.NodeFieldSet
 import ru.DmN.pht.std.ast.NodeType
 import ru.DmN.pht.std.processor.ctx.EnumContext
 import ru.DmN.pht.std.processor.utils.*
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.line
 
-object NUPEnum : INodeUniversalProcessor<NodeType, NodeNodesList> {
+object NUPEnum : INUP<NodeType, NodeNodesList> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
         NPDefault.parse(parser, ctx, token)
 

@@ -8,11 +8,11 @@ import ru.DmN.siberia.utils.VirtualField
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeFGet
 import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.unparsers.NUDefaultX
 import ru.DmN.pht.std.utils.computeString
 
-object NUPFGetA : INodeUniversalProcessor<NodeFGet, NodeFGet> {
+object NUPFGetA : INUP<NodeFGet, NodeFGet> {
     override fun unparse(node: NodeFGet, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
             append('(').append(NUDefaultX.text(node.token)).append(' ')

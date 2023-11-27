@@ -1,5 +1,8 @@
 package ru.DmN.siberia.utils
 
+/**
+ * Модификаторы метода.
+ */
 data class MethodModifiers(
     var varargs: Boolean = false,
     var ctor: Boolean = false,

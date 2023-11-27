@@ -14,10 +14,10 @@ import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.processor.utils.body
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.isClass
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.processors.IStdNodeProcessor
 
-object NUPGetOrName : INodeUniversalProcessor<NodeGetOrName, NodeGetOrName>, IStdNodeProcessor<NodeGetOrName> {
+object NUPGetOrName : INUP<NodeGetOrName, NodeGetOrName>, IStdNodeProcessor<NodeGetOrName> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? {
         val tk = parser.nextOperation()
         return if (tk.text!!.contains("[/#]".toRegex())) {

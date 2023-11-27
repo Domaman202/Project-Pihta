@@ -10,11 +10,11 @@ import ru.DmN.siberia.parsers.NPDefault
 import ru.DmN.siberia.processor.utils.ProcessingContext
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.utils.VirtualType
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.ast.NodeAGet
 import ru.DmN.pht.std.unparsers.NUDefaultX
 
-object NUPAGet : INodeUniversalProcessor<NodeAGet, NodeAGet> {
+object NUPAGet : INUP<NodeAGet, NodeAGet> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
         NPDefault.parse(parser, ctx, token)
 

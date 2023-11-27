@@ -5,9 +5,9 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.unparsers.NUDefault
 import ru.DmN.pht.std.ast.NodeNs
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 
-object NUPNs : INodeUniversalProcessor<NodeNs, NodeNodesList> {
+object NUPNs : INUP<NodeNs, NodeNodesList> {
     override fun unparse(node: NodeNs, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
             append('(').append(node.token.text).append(' ').append(node.namespace)

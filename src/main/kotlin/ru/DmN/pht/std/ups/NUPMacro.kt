@@ -16,14 +16,14 @@ import ru.DmN.siberia.unparsers.NUDefault
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.nextOperation
 import ru.DmN.pht.std.processor.ctx.MacroContext
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.ast.NodeMacro
 import ru.DmN.pht.std.compiler.java.utils.SubMap
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.text
 import java.util.UUID
 
-object NUPMacro : INodeUniversalProcessor<NodeMacro, NodeMacro> {
+object NUPMacro : INUP<NodeMacro, NodeMacro> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val name = parser.nextOperation().text!!
         return NPDefault.parse(parser, ctx) { NodeMacro(token, it, name) }

@@ -1,6 +1,5 @@
 package ru.DmN.siberia
 
-import ru.DmN.siberia.compiler.java.BaseJava
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parser.utils.baseParseNode
 import ru.DmN.siberia.ups.NUPExport
@@ -11,17 +10,13 @@ import ru.DmN.pht.std.utils.StdModule
 
 object Siberia : StdModule("siberia") {
     init {
-        add("export",   NUPExport)
-        add("progn",    NUPDefault)
-        add("use-ctx",  NUPUseCtx)
-        add("use",      NUPUse)
-
-        ///
-
-        BaseJava.init()
+        adda("export",   NUPExport)
+        addb("progn",    NUPDefault)
+        addb("use-ctx",  NUPUseCtx)
+        addb("use",      NUPUse)
     }
 
-    override fun load(parser: ru.DmN.siberia.Parser, ctx: ParsingContext) {
+    override fun load(parser: Parser, ctx: ParsingContext) {
         parser.parseNode = { baseParseNode(it) }
     }
 }

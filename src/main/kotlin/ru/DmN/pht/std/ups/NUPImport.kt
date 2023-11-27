@@ -15,10 +15,10 @@ import ru.DmN.pht.std.imports.StdImportsHelper
 import ru.DmN.pht.std.imports.ast.IValueNode
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.macros
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.utils.text
 
-object NUPImport : INodeUniversalProcessor<NodeImport, NodeImport> {
+object NUPImport : INUP<NodeImport, NodeImport> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val module = parser.nextOperation().text!!
         val context = ctx.subCtx()

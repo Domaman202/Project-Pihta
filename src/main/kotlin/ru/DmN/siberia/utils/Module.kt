@@ -4,8 +4,8 @@ import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.Unparser
 import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.compiler.java.Compiler
-import ru.DmN.siberia.compiler.java.utils.CompilationContext
+import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
@@ -19,7 +19,7 @@ import ru.DmN.pht.std.module.StdModule
 import ru.DmN.pht.std.processor.utils.nodeProgn
 import java.io.File
 import java.io.FileNotFoundException
-import ru.DmN.siberia.compiler.java.compilers.INodeCompiler as JavaNodeCompiler
+import ru.DmN.siberia.compilers.INodeCompiler as JavaNodeCompiler
 
 open class Module(val name: String, var init: Boolean = false) {
     lateinit var version: String
@@ -99,7 +99,7 @@ open class Module(val name: String, var init: Boolean = false) {
         javaCompilers[name] = compiler
     }
 
-    fun add(name: String, parser: INodeParser? = null, unparser: INodeUnparser<*>? = null, processor: INodeProcessor<*>? = null): Unit =
+    fun add(name: String, parser: INodeParser? = null, unparser: INodeUnparser<*>? = null, processor: INodeProcessor<*>? = null) =
         add(name.toRegularExpr(), parser, unparser, processor)
 
     fun add(name: Regex, parser: INodeParser? = null, unparser: INodeUnparser<*>? = null, processor: INodeProcessor<*>? = null) {

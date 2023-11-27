@@ -6,9 +6,9 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.NPDefault
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 
-object NUPMCall : INodeUniversalProcessor<Node, Node> {
+object NUPMCall : INUP<Node, Node> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val name = parser.parseNode(ctx)!!
         return NPDefault.parse(parser, ctx) {

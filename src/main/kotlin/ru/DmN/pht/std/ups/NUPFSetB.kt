@@ -11,14 +11,14 @@ import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.nodeClass
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.processors.NRMCall
 import ru.DmN.pht.std.utils.VTDynamic
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.isConstClass
 import ru.DmN.pht.std.utils.line
 
-object NUPFSetB : INodeUniversalProcessor<Node, NodeFieldSet> {
+object NUPFSetB : INUP<Node, NodeFieldSet> {
     override fun process(node: NodeFieldSet, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
         val instance = processor.process(node.instance, ctx, ValType.VALUE)!!
             .let { if (node.static) nodeClass(node.line, processor.computeString(it, ctx)) else it }

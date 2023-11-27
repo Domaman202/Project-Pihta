@@ -7,10 +7,10 @@ import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.unparsers.NUDefault
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeMCall
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.unparsers.NUDefaultX
 
-object NUPMCallX : INodeUniversalProcessor<NodeMCall, NodeMCall> {
+object NUPMCallX : INUP<NodeMCall, NodeMCall> {
     override fun unparse(node: NodeMCall, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
             append('(').append(NUDefaultX.text(node.token)).append(' ')

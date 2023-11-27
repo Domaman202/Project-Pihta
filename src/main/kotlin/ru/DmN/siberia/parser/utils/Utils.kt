@@ -9,6 +9,9 @@ import ru.DmN.pht.std.parser.parseValn
 import ru.DmN.pht.std.parser.parseValue
 import java.util.Stack
 
+/**
+ * Стандартная функция парсинга.
+ */
 fun Parser.baseParseNode(ctx: ParsingContext): Node? {
     val startToken = nextToken() ?: return null
     return when (startToken.type) {
@@ -32,6 +35,12 @@ fun Parser.baseParseNode(ctx: ParsingContext): Node? {
     }
 }
 
+/**
+ * Пул функций парсинга.
+ *
+ * При смене функции парсинга старая функция помещается суда (push),
+ * После чего может быть возвращена обратно (pop).
+ */
 var ParsingContext.parsersPool
     set(value) { this.contexts["siberia/pp"] = value }
     get() = this.contexts["siberia/pp"] as Stack<Parser.(ctx: ParsingContext) -> Node?>

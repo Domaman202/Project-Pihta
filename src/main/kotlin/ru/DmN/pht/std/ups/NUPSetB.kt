@@ -15,10 +15,10 @@ import ru.DmN.pht.std.ast.NodeFMGet
 import ru.DmN.pht.std.ast.NodeFieldSet
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.ast.NodeSet
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.utils.text
 
-object NUPSetB : INodeUniversalProcessor<NodeSet, NodeSet> {
+object NUPSetB : INUP<NodeSet, NodeSet> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val name = parser.nextToken()!!
         return NPDefault.parse(parser, ctx) {

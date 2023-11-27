@@ -4,10 +4,16 @@ import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.utils.indent
 import ru.DmN.pht.std.utils.text
 
+/**
+ * Нода с под-нодами.
+ */
 open class NodeNodesList(token: Token, override val nodes: MutableList<Node> = mutableListOf()) : Node(token), INodesList {
     override fun copy(): NodeNodesList =
         NodeNodesList(token, copyNodes())
 
+    /**
+     * Копирует под-ноды
+     */
     fun copyNodes(): MutableList<Node> =
         nodes.map { it.copy() }.toMutableList()
 

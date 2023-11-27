@@ -5,9 +5,9 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.pht.std.ast.NodeValue
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 
-object NUPValueB : INodeUniversalProcessor<Node, Node> {
+object NUPValueB : INUP<Node, Node> {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
         operationToken.text!!.let { text ->
             NodeValue(

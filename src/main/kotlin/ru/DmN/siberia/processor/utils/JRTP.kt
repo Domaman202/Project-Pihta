@@ -8,6 +8,8 @@ import java.util.*
 
 /**
  * Java Runtime Types Provider
+ *
+ * Предоставляет типы путём получения классов из ClassLoader-а.
  */
 class JRTP : TypesProvider() {
     init {

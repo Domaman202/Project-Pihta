@@ -2,8 +2,7 @@ package ru.DmN.siberia
 
 import org.objectweb.asm.ClassWriter
 import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.compiler.java.Compiler
-import ru.DmN.siberia.compiler.java.utils.CompilationContext
+import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.processor.utils.*
 import ru.DmN.siberia.utils.Module
@@ -11,6 +10,7 @@ import ru.DmN.siberia.utils.TypesProvider
 import ru.DmN.siberia.utils.getJavaClassVersion
 import ru.DmN.pht.std.module.StdModule
 import ru.DmN.pht.std.module.ast.NodeModule
+import ru.DmN.siberia.Compiler
 import java.io.File
 import java.io.FileOutputStream
 import java.net.URLClassLoader
@@ -43,22 +43,22 @@ object Console {
 
                 1 -> {
                     print("Введите название модуля: ")
-                    ru.DmN.siberia.Console.printModuleInfo(readln().let {
+                    printModuleInfo(readln().let {
                         val module = Module[it]
                         if (module?.init != true)
-                            ru.DmN.siberia.Parser(Module.getModuleFile(it)).parseNode(ParsingContext.of(StdModule))
+                            Parser(Module.getModuleFile(it)).parseNode(ParsingContext.of(StdModule))
                         (module ?: Module.getOrThrow(it))
                     })
                 }
 
                 2 -> {
                     print("Введите расположение модуля: ")
-                    ru.DmN.siberia.Console.compileModule(readln())
+                    compileModule(readln())
                 }
 
                 3 -> {
                     print("Введите расположение модуля: ")
-                    ru.DmN.siberia.Console.compileModule(readln())
+                    compileModule(readln())
                     println()
                     println(Class.forName("App", true, URLClassLoader(arrayOf(File("dump").toURL()))).getMethod("main").invoke(null))
                 }
@@ -74,7 +74,7 @@ object Console {
             Имя:           ${module.name}
             Версия:        ${module.version}
             Автор:         ${module.author}
-            Зависимости:   ${module.deps}
+            Зависимости:   ${module.dependencies}
             Использование: ${module.uses}
             Файлы:         ${module.files}
             Класс:         ${module.javaClass}
@@ -82,18 +82,30 @@ object Console {
         )
     }
 
+    private val Module.dependencies: String
+        get() {
+            val list = ArrayList<Pair<Int, String>>()
+            printDeps(this, list, 0)
+            return list.map { "${"'".repeat(it.first)}${it.second}" }.toString()
+        }
+
+    private fun printDeps(module: Module, list: MutableList<Pair<Int, String>>, i: Int) {
+        list.addAll(module.deps.map { Pair(i, it) })
+        module.deps.forEach { printDeps(Module.getOrThrow(it), list, i + 1) }
+    }
+
     private fun compileModule(dir: String) {
-        val module = (ru.DmN.siberia.Parser(Module.getModuleFile(dir)).parseNode(ParsingContext.of(StdModule)) as NodeModule).module
-        ru.DmN.siberia.Console.printModuleInfo(module)
+        val module = (Parser(Module.getModuleFile(dir)).parseNode(ParsingContext.of(StdModule)) as NodeModule).module
+        printModuleInfo(module)
         val processed = ArrayList<Node>()
-        val processor = ru.DmN.siberia.Processor(TypesProvider.JAVA)
-        val pctx = ProcessingContext.base().with(Platform.JAVA).withJCV(getJavaClassVersion())
+        val processor = Processor(TypesProvider.JAVA)
+        val pctx = ProcessingContext.base().with(Platform.JAVA)
         processed += module.load(processor, pctx, ValType.NO_VALUE)!!
         processor.tasks.forEach {
             pctx.stage.set(it.key)
             it.value.forEach { it() }
         }
-        val compiler = Compiler()
+        val compiler = Compiler(TypesProvider.JAVA)
         val cctx = CompilationContext.base()
         processed.forEach { compiler.compile(it, cctx) }
         compiler.tasks.forEach {

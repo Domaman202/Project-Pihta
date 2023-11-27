@@ -5,8 +5,8 @@ import org.objectweb.asm.ClassWriter.COMPUTE_FRAMES
 import org.objectweb.asm.ClassWriter.COMPUTE_MAXS
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
-import ru.DmN.siberia.compiler.java.Compiler
-import ru.DmN.siberia.compiler.java.utils.CompilationContext
+import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.processor.utils.*
 import ru.DmN.siberia.utils.TypesProvider

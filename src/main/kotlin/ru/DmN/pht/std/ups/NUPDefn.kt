@@ -8,9 +8,9 @@ import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.NPDefault
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.pht.std.ast.NodeDefn
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 
-object NUPDefn : INodeUniversalProcessor<NodeDefn, NodeDefn> {
+object NUPDefn : INUP<NodeDefn, NodeDefn> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
         NPDefault.parse(parser, ctx, token)
 

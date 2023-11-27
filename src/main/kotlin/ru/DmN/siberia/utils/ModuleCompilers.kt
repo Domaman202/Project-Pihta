@@ -1,6 +1,6 @@
 package ru.DmN.siberia.utils
 
-import ru.DmN.siberia.compiler.java.compilers.INodeCompiler
+import ru.DmN.siberia.compilers.INodeCompiler
 
 abstract class ModuleCompilers(val module: Module) {
     var init = false

@@ -12,14 +12,14 @@ import ru.DmN.pht.std.ast.NodeFMGet
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.nodeClass
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.processors.NRFGetA
 import ru.DmN.pht.std.processors.NRMCall
 import ru.DmN.pht.std.utils.VTDynamic
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.line
 
-object NUPFGetB : INodeUniversalProcessor<Node, NodeFMGet> {
+object NUPFGetB : INUP<Node, NodeFMGet> {
     override fun calc(node: NodeFMGet, processor: Processor, ctx: ProcessingContext): VirtualType? =
         getMethod(node, processor, ctx).third?.rettype ?: NRFGetA.findField(getInstanceType(node, processor, ctx), node.name, node.static)?.type
 

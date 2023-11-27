@@ -4,7 +4,18 @@ import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.utils.indent
 import ru.DmN.pht.std.utils.text
 
-open class NodeUse(tkOperation: Token, val names: List<String>, nodes: MutableList<Node>) : NodeNodesList(tkOperation, nodes) {
+/**
+ * Нода использования модулей.
+ */
+open class NodeUse(
+    tkOperation: Token,
+    /**
+     * Модули для использования.
+     */
+    val names: List<String>,
+    nodes: MutableList<Node>
+) : NodeNodesList(tkOperation, nodes) {
+
     override fun copy(): NodeUse =
         NodeUse(token, names, copyNodes())
 

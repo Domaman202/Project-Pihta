@@ -10,13 +10,13 @@ import ru.DmN.siberia.parsers.NPDefault
 import ru.DmN.siberia.processor.utils.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.unparser.UnparsingContext
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.ast.NodeLazySymbol
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processors.IStdNodeProcessor
 import ru.DmN.pht.std.processors.NRSymbol
 
-object NUPLazySymbol : INodeUniversalProcessor<NodeLazySymbol, NodeLazySymbol>, IStdNodeProcessor<NodeLazySymbol> {
+object NUPLazySymbol : INUP<NodeLazySymbol, NodeLazySymbol>, IStdNodeProcessor<NodeLazySymbol> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
         NPDefault.parse(parser, ctx) { NodeLazySymbol(token, it, null) }
 

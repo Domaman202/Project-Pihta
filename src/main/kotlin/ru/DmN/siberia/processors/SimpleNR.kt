@@ -6,6 +6,9 @@ import ru.DmN.siberia.processor.utils.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.utils.VirtualType
 
+/**
+ * Обработчик-база для обработки нод с под-нодами.
+ */
 abstract class SimpleNR<T : NodeNodesList> : INodeProcessor<T> {
     override fun calc(node: T, processor: Processor, ctx: ProcessingContext): VirtualType? =
         processor.calc(node.nodes.last(), ctx)
@@ -23,6 +26,9 @@ abstract class SimpleNR<T : NodeNodesList> : INodeProcessor<T> {
         return node
     }
 
+    /**
+     * Обрабатывает все под-ноды в режиме "VALUE".
+     */
     fun processValue(node: T, processor: Processor, ctx: ProcessingContext): T {
         for (i in 0 until node.nodes.size)
             node.nodes[i] = processor.process(node.nodes[i], ctx, ValType.VALUE)!!

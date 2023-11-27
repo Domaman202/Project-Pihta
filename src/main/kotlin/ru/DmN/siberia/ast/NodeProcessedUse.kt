@@ -2,10 +2,16 @@ package ru.DmN.siberia.ast
 
 import ru.DmN.siberia.lexer.Token
 
+/**
+ * Обработанная нода использования модулей.
+ */
 class NodeProcessedUse(
     tkOperation: Token,
     names: List<String>,
     nodes: MutableList<Node>,
-    val processed: MutableList<Node>,
-    val exports: MutableList<NodeNodesList>
-) : NodeUse(tkOperation, names, nodes)
+    exports: MutableList<NodeNodesList>,
+    /**
+     * Обработанные ноды используемых нод.
+     */
+    val processed: MutableList<Node>
+) : NodeParsedUse(tkOperation, names, nodes, exports)

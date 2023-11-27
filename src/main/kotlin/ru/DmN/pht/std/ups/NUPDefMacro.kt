@@ -14,7 +14,7 @@ import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.pht.std.compiler.java.utils.MacroDefine
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.macros
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.ast.NodeDefMacro
@@ -22,7 +22,7 @@ import ru.DmN.pht.std.parser.macros
 import java.util.*
 import kotlin.collections.ArrayList
 
-object NUPDefMacro : INodeUniversalProcessor<NodeDefMacro, NodeDefMacro> {
+object NUPDefMacro : INUP<NodeDefMacro, NodeDefMacro> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val uuid = UUID.randomUUID()
         ctx.macros.push(uuid)

@@ -6,6 +6,6 @@ import ru.DmN.pht.std.module.parsers.NPModule
 
 object StdModule : StdModule("pht/module", true) {
     init {
-        add("module", NUPDefault, NPModule)
+        adda("module", NUPDefault, NPModule)
     }
 }

@@ -12,11 +12,11 @@ import ru.DmN.siberia.processor.utils.ProcessingContext
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeIncDec
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.processors.NRMath
 import ru.DmN.pht.std.unparsers.NUDefaultX
 
-object NUPIncDec : INodeUniversalProcessor<NodeIncDec, NodeNodesList> {
+object NUPIncDec : INUP<NodeIncDec, NodeNodesList> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
         NPDefault.parse(parser, ctx, token)
 

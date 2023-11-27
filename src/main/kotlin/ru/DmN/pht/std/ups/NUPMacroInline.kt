@@ -14,14 +14,14 @@ import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.pht.std.processor.utils.nodeProgn
 import ru.DmN.pht.std.processor.utils.sliceInsert
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.ast.NodeMacroArg
 import ru.DmN.pht.std.ast.NodeMacroInline
 import ru.DmN.pht.std.parser.macros
 
-object NUPMacroInline : INodeUniversalProcessor<NodeMacroInline, NodeMacroInline> {
+object NUPMacroInline : INUP<NodeMacroInline, NodeMacroInline> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
         NPDefault.parse(parser, ctx) {
             NodeMacroInline(token, it.toMutableList(), ctx.macros.reversed())

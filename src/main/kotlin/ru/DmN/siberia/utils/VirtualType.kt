@@ -4,33 +4,95 @@ import java.lang.reflect.Modifier
 import java.util.*
 import kotlin.collections.ArrayList
 
+/**
+ * Абстрактный виртуальный тип.
+ */
 abstract class VirtualType {
+    /**
+     * Имя.
+     */
     abstract val name: String
-    //
+
+    /**
+     * Предки.
+     */
     abstract val parents: List<VirtualType>
+
+    /**
+     * Поля.
+     */
     abstract val fields: List<VirtualField>
+
+    /**
+     * Методы
+     */
     abstract val methods: List<VirtualMethod>
-    //
+
+    /**
+     * Тип элементов массива, если это массив, в противном случае null.
+     */
     abstract val componentType: VirtualType?
-    //
+
+    /**
+     * Тип это интерфейс?
+     */
     abstract val isInterface: Boolean
+
+    /**
+     * Тип абстрактный?
+     */
     abstract val isAbstract: Boolean
+
+    /**
+     * Тип конечный?
+     */
     abstract val isFinal: Boolean
 
+    /**
+     * Имя без пакета.
+     */
     open val simpleName: String
         get() = name.substring(name.lastIndexOf('.') + 1)
+
+    /**
+     * Имя класса.
+     */
     open val className: String
         get() = name.replace('.', '/')
+
+    /**
+     * Родительский класс, в случае класса, иначе null.
+     */
     open val superclass: VirtualType?
         get() = if (isInterface) null else parents.find { !it.isInterface }
+
+    /**
+     * Реализуемые интерфейсы.
+     */
     open val interfaces: List<VirtualType>
         get() = if (isInterface) parents else parents.drop(1)
+
+    /**
+     * Тип массива из элементов данного типа.
+     */
     open val arrayType: VirtualType
         get() = VirtualTypeImpl("[${desc.replace('/', '.')}", componentType = this)
+
+    /**
+     * Тип является примитивом?
+     */
     open val isPrimitive
         get() = name.isPrimitive()
+
+    /**
+     * Тип является массивом?
+     */
     open val isArray
         get() = componentType != null
+
+    /**
+     * Дескриптор.
+     */
     open val desc: String
         get() = if (this.isArray)
             "[${componentType!!.desc}"
@@ -47,6 +109,9 @@ abstract class VirtualType {
             else -> "L$className;"
         }
 
+    /**
+     * Тип можно получить из целевого?
+     */
     open fun isAssignableFrom(target: VirtualType): Boolean =
         if (target.name == this.name || parents.any { it.isAssignableFrom(target) })
             true
@@ -78,12 +143,21 @@ abstract class VirtualType {
         val FLOAT   = ofKlass(Float::class.javaPrimitiveType!!)
         val DOUBLE  = ofKlass(Double::class.javaPrimitiveType!!)
 
+        /**
+         * Создаёт тип.
+         */
         fun ofKlass(name: String) =
             ofKlass(klassOf(name))
 
+        /**
+         * Создаёт тип.
+         */
         fun ofKlass(klass: Klass): VirtualType =
             TYPES[klass.name] ?: createOfKlass(klass)
 
+        /**
+         * Создаёт тип.
+         */
         private fun createOfKlass(klass: Klass): VirtualType =
             VirtualTypeImpl(klass.name).apply {
                 TYPES[klass.name] = this
@@ -99,6 +173,9 @@ abstract class VirtualType {
             }
     }
 
+    /**
+     * Простая реализация виртуального типа.
+     */
     class VirtualTypeImpl(
         override var name: String,
         //

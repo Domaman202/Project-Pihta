@@ -12,9 +12,9 @@ import ru.DmN.siberia.processor.utils.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.unparsers.NUDefault
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 
-object NUPDebug : INodeUniversalProcessor<NodeNodesList, NodeNodesList> {
+object NUPDebug : INUP<NodeNodesList, NodeNodesList> {
     override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
         NPDefault.parse(parser, ctx, operationToken)
 

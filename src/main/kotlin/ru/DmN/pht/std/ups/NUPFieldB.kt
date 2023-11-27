@@ -8,10 +8,10 @@ import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.NPDefault
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.pht.std.ast.NodeFieldB
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.unparsers.NUDefaultX
 
-object NUPFieldB : INodeUniversalProcessor<NodeFieldB, NodeFieldB> {
+object NUPFieldB : INUP<NodeFieldB, NodeFieldB> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
         NPDefault.parse(parser, ctx, token)
 

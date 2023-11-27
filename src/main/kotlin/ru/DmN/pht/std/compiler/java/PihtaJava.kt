@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.compiler.java
 
-import ru.DmN.siberia.compiler.java.compilers.NCDefault
+import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.ModuleCompilers
 import ru.DmN.pht.std.Pihta
 import ru.DmN.pht.std.compiler.java.compilers.*

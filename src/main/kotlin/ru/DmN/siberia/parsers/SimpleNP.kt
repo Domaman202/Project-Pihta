@@ -7,11 +7,14 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.pht.std.parser.parseValue
 
-open class SimpleNP : INodeParser {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node? =
-        parse(parser, ctx) { NodeNodesList(operationToken, it) }
+/**
+ * Парсер-база для парсинга нод с под-нодами.
+ */
+abstract class SimpleNP : INodeParser {
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
+        parse(parser, ctx) { NodeNodesList(token, it) }
 
-    override fun skip(parser: Parser, ctx: ParsingContext, operationToken: Token) {
+    override fun skip(parser: Parser, ctx: ParsingContext, token: Token) {
         var i = 1
         var tk = parser.nextToken()!!
         while (i > 0) {
@@ -25,6 +28,10 @@ open class SimpleNP : INodeParser {
         parser.tokens.push(tk)
     }
 
+    /**
+     * Парсит ноду с под-нодами.
+     * Принимает конструктор ноды, в который передаёт под-ноды.
+     */
     fun parse(parser: Parser, ctx: ParsingContext, constructor: (nodes: MutableList<Node>) -> Node): Node {
         val nodes = ArrayList<Node>()
         var tk = parser.nextToken()

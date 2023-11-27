@@ -1,14 +1,39 @@
 package ru.DmN.siberia.lexer
 
-data class Token(val line: Int, val type: Type, val text: String? = null) {
+/**
+ * Токен
+ */
+data class Token(
+    /**
+     * Строка токена
+     */
+    val line: Int,
+    /**
+     * Тип токена
+     */
+    val type: Type,
+    /**
+     * Текст токена
+     */
+    val text: String? = null
+) {
+    /**
+     * Создаёт "обработанную" версию токена
+     */
     fun processed() =
         Token(line, type, "!$text")
 
     companion object {
+        /**
+         * Создаёт токен операции
+         */
         fun operation(line: Int, text: String) =
             Token(line, Type.OPERATION, text)
     }
 
+    /**
+     * Тип токена
+     */
     enum class Type {
         OPEN_BRACKET,
         CLOSE_BRACKET,

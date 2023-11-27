@@ -12,10 +12,10 @@ import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.processors.IStdNodeProcessor
 
-object NUPValueA : INodeUniversalProcessor<NodeValue, NodeValue>, IStdNodeProcessor<NodeValue> {
+object NUPValueA : INUP<NodeValue, NodeValue>, IStdNodeProcessor<NodeValue> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): NodeValue {
         val value = parser.nextToken()!!
         return NodeValue(

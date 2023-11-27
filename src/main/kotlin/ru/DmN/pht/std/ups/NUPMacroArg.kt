@@ -13,12 +13,12 @@ import ru.DmN.pht.std.ast.NodeMacroArg
 import ru.DmN.pht.std.parser.macros
 import ru.DmN.pht.std.processor.ctx.MacroContext
 import ru.DmN.pht.std.processor.utils.macro
-import ru.DmN.pht.std.processors.IStdNodeUniversalProcessor
+import ru.DmN.pht.std.utils.IStdNUP
 import ru.DmN.pht.std.utils.compute
 import ru.DmN.pht.std.utils.computeString
 import java.util.*
 
-object NUPMacroArg : IStdNodeUniversalProcessor<NodeMacroArg, NodeMacroArg> {
+object NUPMacroArg : IStdNUP<NodeMacroArg, NodeMacroArg> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
         NPDefault.parse(parser, ctx) { NodeMacroArg(token, it, ctx.macros.reversed()) }
 

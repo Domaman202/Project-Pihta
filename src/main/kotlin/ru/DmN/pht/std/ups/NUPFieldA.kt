@@ -19,12 +19,12 @@ import ru.DmN.pht.std.ast.NodeFieldA
 import ru.DmN.pht.std.ast.NodeFieldB
 import ru.DmN.pht.std.ast.NodeFieldSet
 import ru.DmN.pht.std.processor.utils.*
-import ru.DmN.pht.std.processors.INodeUniversalProcessor
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.line
 
-object NUPFieldA : INodeUniversalProcessor<NodeFieldA, NodeFieldA> {
+object NUPFieldA : INUP<NodeFieldA, NodeFieldA> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
         NPDefault.parse(parser, ctx) { NodeFieldA(token, it) }
 

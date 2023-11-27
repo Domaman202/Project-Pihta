@@ -2,19 +2,19 @@ package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
-import ru.DmN.siberia.compiler.java.Compiler
-import ru.DmN.siberia.compiler.java.compilers.INodeCompiler
-import ru.DmN.siberia.compiler.java.compilers.NCDefault
-import ru.DmN.siberia.compiler.java.utils.CompilationContext
-import ru.DmN.siberia.compiler.java.utils.CompilingStage
-import ru.DmN.siberia.processor.utils.javaClassVersion
-import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.desc
 import ru.DmN.pht.std.ast.NodeType
 import ru.DmN.pht.std.compiler.java.ctx.ClassContext
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.compiler.java.utils.with
 import ru.DmN.pht.std.utils.text
+import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.compiler.utils.CompilingStage
+import ru.DmN.siberia.compiler.utils.javaClassVersion
+import ru.DmN.siberia.compilers.INodeCompiler
+import ru.DmN.siberia.compilers.NCDefault
+import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.desc
 
 object NCClass : INodeCompiler<NodeType> {
     override fun compile(node: NodeType, compiler: Compiler, ctx: CompilationContext) {

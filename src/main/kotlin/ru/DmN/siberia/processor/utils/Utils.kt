@@ -4,12 +4,10 @@ import ru.DmN.siberia.utils.IContextCollection
 
 fun <T : IContextCollection<T>> T.with(ctx: Platform) =
     this.with("siberia/platform", ctx)
-fun <T : IContextCollection<T>> T.withJCV(ctx: Int) =
-    this.with("siberia/jcv", ctx)
 
+/**
+ * Платформа
+ */
 var IContextCollection<*>.platform
     set(value) { this.contexts["siberia/platform"] = value }
     get() = this.contexts["siberia/platform"] as Platform
-var IContextCollection<*>.javaClassVersion
-    set(value) { this.contexts["siberia/jcv"] = value }
-    get() = this.contexts["siberia/jcv"] as Int
