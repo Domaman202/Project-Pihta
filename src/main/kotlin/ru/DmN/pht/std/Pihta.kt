@@ -142,6 +142,7 @@ object Pihta : Module("pht") {
         adda("rem",          NUPMath,    NRMath)
         adda("!rem",         NUPMath)
         adda("ret",          NUPDefault, NRRet)
+        adda("!ret",         NUPRet)
         // s
         adda("set",          NUPSetA)
         adda("set!",         NUPSetB)

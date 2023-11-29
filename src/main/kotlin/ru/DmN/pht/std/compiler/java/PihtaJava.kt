@@ -63,7 +63,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!or",          NCMath)
         // r
         add("!rem",         NCMath)
-        add("ret",          NCRet)
+        add("!ret",         NCRet)
         // s
         add("set!",         NCSet)
         add("!shift-left",  NCMath)

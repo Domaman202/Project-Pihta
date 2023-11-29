@@ -13,22 +13,26 @@ import ru.DmN.pht.std.compiler.java.utils.method
 object NCRet : INodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext) {
         ctx.method.node.run {
-            val result = compiler.compileVal(node.nodes[0], ctx)
-            load(result, this)
-            visitInsn(
-                when (result.type!!) {
-                    VirtualType.BOOLEAN,
-                    VirtualType.BYTE,
-                    VirtualType.SHORT,
-                    VirtualType.CHAR,
-                    VirtualType.INT -> Opcodes.IRETURN
+            if (node.nodes.isEmpty())
+                visitInsn(Opcodes.RETURN)
+            else {
+                val result = compiler.compileVal(node.nodes[0], ctx)
+                load(result, this)
+                visitInsn(
+                    when (result.type!!) {
+                        VirtualType.BOOLEAN,
+                        VirtualType.BYTE,
+                        VirtualType.SHORT,
+                        VirtualType.CHAR,
+                        VirtualType.INT -> Opcodes.IRETURN
 
-                    VirtualType.LONG -> Opcodes.LRETURN
-                    VirtualType.FLOAT -> Opcodes.FRETURN
-                    VirtualType.DOUBLE -> Opcodes.DRETURN
-                    else -> Opcodes.ARETURN
-                }
-            )
+                        VirtualType.LONG -> Opcodes.LRETURN
+                        VirtualType.FLOAT -> Opcodes.FRETURN
+                        VirtualType.DOUBLE -> Opcodes.DRETURN
+                        else -> Opcodes.ARETURN
+                    }
+                )
+            }
         }
     }
 

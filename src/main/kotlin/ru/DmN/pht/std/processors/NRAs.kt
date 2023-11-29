@@ -17,9 +17,9 @@ object NRAs : INodeProcessor<NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
         if (mode == ValType.VALUE) {
-            val from = processor.calc(node.nodes[1], ctx)!!
+            val from = processor.calc(node.nodes[1], ctx)
             val to = calc(node, processor, ctx)
-            if (from.isAssignableFrom(to))
+            if (from?.isAssignableFrom(to) == true)
                 processor.process(node.nodes[1], ctx, ValType.VALUE)
             else NodeAs(node.token.processed(), mutableListOf(processor.process(node.nodes[1], ctx, ValType.VALUE)!!), to)
         } else null

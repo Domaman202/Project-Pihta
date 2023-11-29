@@ -38,6 +38,9 @@ object StdOut {
     fun print(vararg msg: Any?) =
         kprint(msg.contentToString())
     @JvmStatic
+    fun print(msg: CharArray) =
+        kprint(msg)
+    @JvmStatic
     fun println() =
         kprintln()
     @JvmStatic
@@ -66,6 +69,9 @@ object StdOut {
         kprintln(msg)
     @JvmStatic
     fun println(msg: Any?) =
+        kprintln(msg)
+    @JvmStatic
+    fun println(msg: CharArray) =
         kprintln(msg)
     @JvmStatic
     fun println(vararg msg: Any?) =

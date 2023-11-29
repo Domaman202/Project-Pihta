@@ -1,17 +1,24 @@
 (use-ctx pht
-    (enum Colors [^Object]
-        (ector [[r ^int] [g ^int] [b ^int]]
-            (ccall)
-            (set this/red r)
-            (set this/green g)
-            (set this/blue b))
-        (fld [
-            [red    ^int]
-            [green  ^int]
-            [blue   ^int]])
-        (efld [
-            [RED    255 0 0]
-            [GREEN  0 255 0]
-            [BLUE   0 0 255]]))
-    (app-fn
-        (println ^Colors/RED)))
+    (import java
+        (types java.lang.Math)
+        (types java.util.Arrays))
+    (app
+        (defn draw ^void [[n ^int][black ^char][white ^char]]
+            (if (<= n 0) (ret))
+            (def [
+                [width (- (* 5 n) 2)]
+                [buf (new-array ^char width)]
+                [i (- 1 n)]])
+            (cycle (< i (/ (+ width 1) 2))
+                (def [
+                    [outer (#abs ^Math i)]
+                    [center (- 2 n (* 2 i))]])
+                (#fill ^Arrays buf black)
+                (#fill ^Arrays buf 0 outer white)
+                (#fill ^Arrays buf (- width outer) width white)
+                (if (> center 0)
+                    (#fill ^Arrays buf (/ (- width center) 2) (/ (+ width center) 2) white))
+                (println buf)
+                (++ i)))
+        (app-fn
+            (#draw . 5 'X' ' '))))
