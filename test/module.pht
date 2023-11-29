@@ -3,4 +3,5 @@
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["pht" "phtx/pxx"])
+    (uses ["pht"])
     (files ["src.pht"]))
