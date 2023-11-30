@@ -1,7 +1,5 @@
-(app-fn
-    (println """
-             Слава
-             Великой
-             России
-             !
-             """))
+(app
+    (defn foo ^void [[arg ^String]]
+        (println arg))
+    (app-fn
+        (#foo ^App "Hi!")))

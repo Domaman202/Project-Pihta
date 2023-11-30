@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation(files("Project-Siberia-1.1.0.jar"))
+    implementation(files("Project-Siberia-1.1.1.jar"))
     implementation(kotlin("reflect"))
     implementation("org.ow2.asm:asm:9.5")
     implementation("org.ow2.asm:asm-tree:9.5")
