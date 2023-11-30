@@ -12,6 +12,7 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.NPDefault
+import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.*
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.utils.INUP
@@ -44,7 +45,7 @@ object NUPImport : INUP<NodeImport, NodeImport> {
     override fun process(node: NodeImport, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeImport? {
         val gctx = ctx.global
 
-        processor.pushTask(ctx, ProcessingStage.MACROS_IMPORT) {
+        processor.stageManager.pushTask(ProcessingStage.MACROS_IMPORT) {
             node.data["macros"]?.run {
                 val cmacros = gctx.macros
                 val pmacros = processor.contexts.macros
@@ -57,7 +58,7 @@ object NUPImport : INUP<NodeImport, NodeImport> {
             }
         }
 
-        processor.pushTask(ctx, ProcessingStage.TYPES_IMPORT) {
+        processor.stageManager.pushTask(ProcessingStage.TYPES_IMPORT) {
             node.data["types"]?.run {
                 val imports = gctx.imports
                 forEach {
@@ -67,7 +68,7 @@ object NUPImport : INUP<NodeImport, NodeImport> {
             }
         }
 
-        processor.pushTask(ctx, ProcessingStage.EXTENDS_IMPORT) {
+        processor.stageManager.pushTask(ProcessingStage.EXTENDS_IMPORT) {
             node.data["extends"]?.forEach { it ->
                 it as String
                 gctx.getType(it, processor.tp).methods

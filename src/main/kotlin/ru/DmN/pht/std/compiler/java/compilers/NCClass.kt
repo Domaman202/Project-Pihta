@@ -18,7 +18,7 @@ import ru.DmN.siberia.utils.text
 
 object NCClass : INodeCompiler<NodeType> {
     override fun compile(node: NodeType, compiler: Compiler, ctx: CompilationContext) {
-        compiler.pushTask(ctx, CompilingStage.TYPES_PREDEFINE) {
+        compiler.stageManager.pushTask(CompilingStage.TYPES_PREDEFINE) {
             val cn = ClassNode().apply {
                 compiler.classes[node.type.name] = this
                 visit(
@@ -39,7 +39,7 @@ object NCClass : INodeCompiler<NodeType> {
                     node.type.interfaces.map { it.className }.toTypedArray()
                 )
             }
-            compiler.pushTask(ctx, CompilingStage.TYPES_DEFINE) {
+            compiler.stageManager.pushTask(CompilingStage.TYPES_DEFINE) {
                 if (node.token.text == "!obj") {
                     cn.visitField(
                         Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC + Opcodes.ACC_FINAL,
@@ -80,7 +80,7 @@ object NCClass : INodeCompiler<NodeType> {
 
     override fun compileVal(node: NodeType, compiler: Compiler, ctx: CompilationContext): Variable {
         compile(node, compiler, ctx)
-        compiler.pushTask(ctx, CompilingStage.METHODS_BODY) {
+        compiler.stageManager.pushTask(CompilingStage.METHODS_BODY) {
             ctx.method.node.visitFieldInsn(Opcodes.GETSTATIC, node.type.className, "INSTANCE", node.type.desc)
         }
         return Variable.tmp(node, node.type)

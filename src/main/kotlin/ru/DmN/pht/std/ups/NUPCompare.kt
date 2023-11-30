@@ -7,7 +7,7 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.NPDefault
-import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeCompare

@@ -16,7 +16,7 @@ import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parser.utils.parsersPool
-import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.ups.NUPDefault
 import ru.DmN.siberia.utils.Module

@@ -2,7 +2,7 @@ package ru.DmN.pht.std.processors
 
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
@@ -15,7 +15,7 @@ object NRAliasType : INodeProcessor<NodeNodesList> { // todo: remake to multi al
         val nodes = processor.computeStringNodes(node, ctx)
         val type = nodes[0]
         val new = nodes[1]
-        processor.pushTask(ctx, ProcessingStage.TYPES_IMPORT) {
+        processor.stageManager.pushTask(ProcessingStage.TYPES_IMPORT) {
             val gctx = ctx.global
             gctx.imports[new] = gctx.getTypeName(type) ?: type
         }

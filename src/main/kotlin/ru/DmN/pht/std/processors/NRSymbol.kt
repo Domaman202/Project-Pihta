@@ -3,7 +3,7 @@ package ru.DmN.pht.std.processors
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.utils.computeString

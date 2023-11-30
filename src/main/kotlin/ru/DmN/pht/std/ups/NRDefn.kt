@@ -12,7 +12,7 @@ import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
@@ -50,7 +50,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
             method
         )
         if (node.nodes.size > 3) {
-            processor.pushTask(ctx, ProcessingStage.METHODS_BODY) {
+            processor.stageManager.pushTask(ProcessingStage.METHODS_BODY) {
                 processNodes(method, new, processor, ctx.with(method).with(BodyContext.of(method)))
             }
         }

@@ -8,7 +8,7 @@ import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.parsers.NPDefault
-import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.pht.std.compiler.java.utils.MacroDefine
@@ -37,7 +37,7 @@ object NUPDefMacro : INUP<NodeDefMacro, NodeDefMacro> {
         NUPDefault.unparse(node, unparser, ctx, indent)
 
     override fun process(node: NodeDefMacro, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
-        processor.pushTask(ctx, ProcessingStage.MACROS_DEFINE) {
+        processor.stageManager.pushTask(ProcessingStage.MACROS_DEFINE) {
             val name = processor.computeString(node.nodes[0], ctx)
             val args = processor.computeList(node.nodes[1], ctx).map { processor.computeString(it, ctx) }
             val nodes = node.nodes.drop(2).toMutableList()

@@ -15,7 +15,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.NPDefault
-import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.unparsers.NUDefault

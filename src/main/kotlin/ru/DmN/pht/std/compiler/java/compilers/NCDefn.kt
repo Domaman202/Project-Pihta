@@ -34,7 +34,7 @@ object NCDefn : INodeCompiler<NodeDefn> {
             null
         ) as MethodNode
         if (!node.abstract) {
-            compiler.pushTask(ctx, CompilingStage.METHODS_BODY) {
+            compiler.stageManager.pushTask(CompilingStage.METHODS_BODY) {
                 method.visit(node, node.method, compiler, ctx)
             }
         }

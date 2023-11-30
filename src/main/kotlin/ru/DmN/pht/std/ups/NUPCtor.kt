@@ -13,7 +13,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.NPDefault
-import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.NRDefault
@@ -72,7 +72,7 @@ object NUPCtor : INUP<NodeDefn, NodeNodesList> {
         type.methods += method
         //
         val new = NodeDefn(Token.operation(node.line, "ctor"), node.nodes.drop(1).toMutableList(), method)
-        processor.pushTask(ctx, ProcessingStage.METHODS_BODY) {
+        processor.stageManager.pushTask(ProcessingStage.METHODS_BODY) {
             NRDefault.process(
                 new,
                 processor,

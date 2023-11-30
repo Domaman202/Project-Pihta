@@ -14,7 +14,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.NPDefault
-import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.nodeProgn
@@ -39,11 +39,11 @@ object NUPEnum : INUP<NodeType, NodeNodesList> {
         //
         val line = node.line
         val new = NodeType(Token.operation(line, "!enum"), node.nodes.drop(2).toMutableList(), type)
-        processor.pushTask(ctx, ProcessingStage.TYPES_PREDEFINE) {
+        processor.stageManager.pushTask(ProcessingStage.TYPES_PREDEFINE) {
             type.parents = processor.computeList(processor.process(node.nodes[1], ctx, ValType.VALUE)!!, ctx)
                 .map { gctx.getType(processor.computeString(it, ctx), processor.tp) }
                 .toMutableList()
-            processor.pushTask(ctx, ProcessingStage.TYPES_DEFINE) {
+            processor.stageManager.pushTask(ProcessingStage.TYPES_DEFINE) {
                 val ectx = EnumContext(type)
                 val context = ctx.with(ectx)
                 NRDefault.process(new, processor, context, ValType.NO_VALUE)

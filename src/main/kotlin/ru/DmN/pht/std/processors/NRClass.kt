@@ -7,7 +7,7 @@ import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.processor.utils.ProcessingContext
+import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
@@ -34,12 +34,12 @@ object NRClass : INodeProcessor<NodeNodesList> {
         processor.tp.types += type
         //
         val new = NodeType(node.token.processed(), node.nodes.drop(2).toMutableList(), type)
-        processor.pushTask(ctx, ProcessingStage.TYPES_PREDEFINE) {
+        processor.stageManager.pushTask(ProcessingStage.TYPES_PREDEFINE) {
             val context = ctx.with(type)
             type.parents = processor.computeList(processor.process(node.nodes[1], context, ValType.VALUE)!!, context)
                 .map { gctx.getType(processor.computeString(it, context), processor.tp) }
                 .toMutableList()
-            processor.pushTask(context, ProcessingStage.TYPES_DEFINE) {
+            processor.stageManager.pushTask(ProcessingStage.TYPES_DEFINE) {
                 NRDefault.process(new, processor, context, mode)
             }
         }
