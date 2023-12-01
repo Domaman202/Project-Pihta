@@ -17,7 +17,7 @@ interface ICastable {
     companion object {
         fun of(type: VirtualType): ICastable =
             if (type == VTDynamic)
-                CastableDynamicImpl()
+                CastableDynamicImpl
             else CastableImpl(type)
 
         fun of(node: IAdaptableNode): ICastable =

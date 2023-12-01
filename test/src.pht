@@ -5,4 +5,5 @@
     (app-fn
         (def [[^dynamic test (new ^Test)]])
         (set test/i "Hi!")
+        (println test)
         (println test/i)))
