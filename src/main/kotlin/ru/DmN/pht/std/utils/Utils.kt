@@ -34,7 +34,7 @@ fun lenArgs(from: List<VirtualType>, to: List<ICastable>, varargs: Boolean): Int
     else lenArgs(to) { from[it] }
 
 fun lenArgs(to: List<ICastable>, getter: (index: Int) -> VirtualType): Int {
-    var j = 0
+    var j = 1
     for (i in to.indices) {
         val k = to[i].castableTo(getter(i))
         if (k == -1)
