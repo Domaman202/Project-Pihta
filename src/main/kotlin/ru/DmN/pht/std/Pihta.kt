@@ -37,6 +37,7 @@ object Pihta : Module("pht") {
         adda("app",          NUPDefault, NRApp)
         adda("app-fn",       NUPDefault, NRAppFn)
         adda("array-of",     NUPDefault, NRArrayOf)
+        adda("array-of-type",NUPDefault, NRArrayOfType)
         adda("array-size",   NUPDefault, NRArraySize)
         adda("array-type",   NUPDefault, NRArrayType)
         adda("as",           NUPDefault, NRAs)

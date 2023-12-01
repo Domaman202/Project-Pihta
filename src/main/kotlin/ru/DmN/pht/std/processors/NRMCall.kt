@@ -71,9 +71,10 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             val overflow = args.size.let { if (it > 0) it + 1 else 0 } - method.argsc.size
             if (overflow > 0)
                 args.dropLast(overflow).toMutableList().apply {
+                    val type = method.argsc.last().componentType!!.name
                     add(
-                        NRArrayOf.process(
-                            nodeArray(line, args.drop(args.size - overflow).toMutableList()),
+                        NRArrayOfType.process(
+                            nodeArrayType(line, type, args.asSequence().drop(args.size - overflow).map { nodeAs(line, it, type) }.toMutableList()),
                             processor,
                             ctx,
                             ValType.VALUE

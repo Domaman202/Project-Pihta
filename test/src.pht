@@ -1,9 +1,8 @@
 (app
     (cls Test [^Object]
         (ctor [] (ccall))
-        (def [[i ^dynamic]]))
+        (def [[i ^int]]))
     (app-fn
         (def [[^dynamic test (new ^Test)]])
-        (set test/i "Hi!")
-        (println test)
+        (set test/i 123)
         (println test/i)))

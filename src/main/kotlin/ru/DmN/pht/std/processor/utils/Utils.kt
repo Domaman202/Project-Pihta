@@ -59,6 +59,8 @@ fun nodeNewArray(line: Int, type: String, size: Int) =
         mutableListOf(nodeClass(line, type), nodeValueOf(line, size)))
 fun nodeArray(line: Int, nodes: MutableList<Node>) =
     NodeNodesList(Token.operation(line, "array-of"), nodes)
+fun nodeArrayType(line: Int, type: String, nodes: MutableList<Node>) =
+    NodeNodesList(Token.operation(line, "array-of-type"), nodes.apply { add(0, nodeClass(line, type)) })
 fun nodeNew(line: Int, type: String, args: List<Node>) =
     NodeNodesList(Token.operation(line, "new"),
         mutableListOf<Node>(nodeClass(line, type)).apply { addAll(args) })

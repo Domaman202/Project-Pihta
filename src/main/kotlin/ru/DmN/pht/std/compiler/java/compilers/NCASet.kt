@@ -17,8 +17,9 @@ object NCASet : INodeCompiler<NodeASet> {
             val arr = compiler.compileVal(node.arr, ctx)
             load(arr, this)
             load(compiler.compileVal(node.index, ctx), this)
-            load(compiler.compileVal(node.value, ctx), this)
-            visitAStore(arr)
+            val value = compiler.compileVal(node.value, ctx)
+            load(value, this)
+            visitAStore(arr, value)
         }
     }
 
@@ -30,9 +31,16 @@ object NCASet : INodeCompiler<NodeASet> {
             val value = compiler.compileVal(node.value, ctx)
             load(value, this)
             visitInsn(Opcodes.DUP_X2)
-            visitAStore(arr)
+            visitAStore(arr, value)
             Variable.tmp(node, value.type)
         }
+
+    private fun MethodVisitor.visitAStore(arr: Variable, value: Variable) {
+        if (!value.type().isPrimitive) {
+            visitTypeInsn(Opcodes.CHECKCAST, arr.type!!.componentType!!.className)
+            visitAStore(arr)
+        }
+    }
 
     private fun MethodVisitor.visitAStore(arr: Variable) {
         visitInsn(
