@@ -121,7 +121,14 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 UNKNOWN
             }
         }
-        val result = if (clazz == VTDynamic)
+        val name = processor.computeString(node.nodes[1], ctx)
+        val result = findMethodOrNull(
+            clazz,
+            name,
+            node.nodes.asSequence().drop(2).map { processor.process(it, ctx, ValType.VALUE)!! }.toList(),
+            processor,
+            ctx
+        ) ?: if (clazz == VTDynamic)
             findMethod(
                 ctx.global.getType("ru.DmN.pht.std.utils.DynamicUtils", processor.tp),
                 "invokeMethod",
@@ -129,13 +136,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 processor,
                 ctx
             )
-        else findMethod(
-            clazz,
-            processor.computeString(node.nodes[1], ctx),
-            node.nodes.drop(2).map { processor.process(it, ctx, ValType.VALUE)!! },
-            processor,
-            ctx
-        )
+        else throw RuntimeException("Method '$name' not founded!")
         return Triple(
             if (type == STATIC)
                 if (result.second.modifiers.static)

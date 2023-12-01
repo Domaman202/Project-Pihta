@@ -1,8 +1,6 @@
 (app
-    (cls Test [^Object]
-        (ctor [] (ccall))
-        (def [[i ^int]]))
+    (efn ^dynamic log ^void []
+        (println this))
     (app-fn
-        (def [[^dynamic test (new ^Test)]])
-        (set test/i 123)
-        (println test/i)))
+        (def [[^dynamic test "Слава России!"]])
+        (#log test)))
