@@ -11,12 +11,28 @@ object DynamicUtils {
     }
 
     @JvmStatic
-    fun invokeGetter(instance: Any?, vararg args: Any?): Any? {
-        TODO()
+    fun invokeGetter(instance: Any?, name: String, vararg args: Any?): Any? {
+        if (instance == null)
+            throw NullPointerException()
+        return try {
+            invokeMethod(instance, "get${name.let { it[0].toUpperCase() + it.substring(1) }}", args)
+        } catch (ignored: NoSuchMethodException) {
+            val field = instance.javaClass.getDeclaredField(name)
+            field.isAccessible = true
+            field.get(instance)
+        }
     }
 
     @JvmStatic
-    fun invokeSetter(instance: Any?, vararg args: Any?): Any? {
-        TODO()
+    fun invokeSetter(instance: Any?, name: String, vararg args: Any?): Any? {
+        if (instance == null)
+            throw NullPointerException()
+        return try {
+            invokeMethod(instance, "set${name.let { it[0].toUpperCase() + it.substring(1) }}", args)
+        } catch (ignored: NoSuchMethodException) {
+            val field = instance.javaClass.getDeclaredField(name)
+            field.isAccessible = true
+            field.set(instance, args)
+        }
     }
 }

@@ -5,6 +5,7 @@ import ru.DmN.pht.std.ast.NodeFMGet
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.nodeClass
+import ru.DmN.pht.std.processor.utils.nodeValueOf
 import ru.DmN.pht.std.processors.NRFGetA
 import ru.DmN.pht.std.processors.NRMCall
 import ru.DmN.pht.std.utils.computeString
@@ -21,11 +22,12 @@ object NUPFGetB : INUP<Node, NodeFMGet> {
 
     override fun process(node: NodeFMGet, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
         if (mode == ValType.VALUE) {
+            val line = node.line
             val instance = processor.process(node.instance, ctx, ValType.VALUE)!!
             val result = getMethod(node, processor, ctx)
             if (result.second == null)
                 NodeFGet(
-                    Token(node.token.line, Token.Type.OPERATION, "!fget"),
+                    Token(line, Token.Type.OPERATION, "!fget"),
                     mutableListOf(instance),
                     node.name,
                     result.first.let {
@@ -40,15 +42,15 @@ object NUPFGetB : INUP<Node, NodeFMGet> {
                 )
             else if (result.first == VTDynamic)
                 NodeMCall(
-                    Token.operation(node.line, "!mcall"),
-                    NRMCall.processArguments(node.line, processor, ctx, result.third!!, listOf(instance) + node.nodes),
-                    nodeClass(node.line, result.third!!.declaringClass!!.name),
+                    Token.operation(line, "!mcall"),
+                    NRMCall.processArguments(line, processor, ctx, result.third!!, listOf(instance, nodeValueOf(line, node.name)) + node.nodes),
+                    nodeClass(line, result.third!!.declaringClass!!.name),
                     result.third!!,
                     NodeMCall.Type.VIRTUAL
                 )
             else NodeMCall(
-                Token.operation(node.line, "!mcall"),
-                NRMCall.processArguments(node.line, processor, ctx, result.third!!, node.nodes),
+                Token.operation(line, "!mcall"),
+                NRMCall.processArguments(line, processor, ctx, result.third!!, node.nodes),
                 instance,
                 result.third!!,
                 NodeMCall.Type.VIRTUAL

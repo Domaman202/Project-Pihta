@@ -1,14 +1,8 @@
 (app
-    (import java
-        (types java.lang.System))
-    (defn foo ^void [[arg ^dynamic]]
-        (println (#toString arg)))
+    (cls Test [^Object]
+        (ctor [] (ccall))
+        (def [[i ^dynamic]]))
     (app-fn
-        (def [
-            [i 0]
-            [start-time (#nanoTime ^System)]])
-        (cycle (< i 1000)
-            (#foo . "Hi!")
-            (++ i))
-        (println (- (#nanoTime ^System) start-time))))
-
+        (def [[^dynamic test (new ^Test)]])
+        (set test/i "Hi!")
+        (println test/i)))

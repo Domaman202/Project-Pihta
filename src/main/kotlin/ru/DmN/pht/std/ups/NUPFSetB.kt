@@ -6,6 +6,7 @@ import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.nodeClass
+import ru.DmN.pht.std.processor.utils.nodeValueOf
 import ru.DmN.pht.std.processors.NRMCall
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.isConstClass
@@ -20,8 +21,9 @@ import ru.DmN.siberia.utils.line
 
 object NUPFSetB : INUP<Node, NodeFieldSet> {
     override fun process(node: NodeFieldSet, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
+        val line = node.line
         val instance = processor.process(node.instance, ctx, ValType.VALUE)!!
-            .let { if (node.static) nodeClass(node.line, processor.computeString(it, ctx)) else it }
+            .let { if (node.static) nodeClass(line, processor.computeString(it, ctx)) else it }
         val type =
             if (node.static)
                 ctx.global.getType((instance as NodeValue).value, processor.tp)
@@ -29,7 +31,7 @@ object NUPFSetB : INUP<Node, NodeFieldSet> {
         val result =
             if (node.native)
                 null
-            else if (type == VTDynamic) {
+            else if (type == VTDynamic)
                 NRMCall.findMethodOrNull(
                     ctx.global.getType("ru.DmN.pht.std.utils.DynamicUtils", processor.tp),
                     "invokeSetter",
@@ -38,14 +40,14 @@ object NUPFSetB : INUP<Node, NodeFieldSet> {
                     ctx
                 )?.let {
                     return NodeMCall(
-                        Token.operation(node.line, "!mcall"),
-                        NRMCall.processArguments(node.line, processor, ctx, it.second, listOf(instance) + node.nodes),
-                        nodeClass(node.line, it.second.declaringClass!!.name),
+                        Token.operation(line, "!mcall"),
+                        NRMCall.processArguments(line, processor, ctx, it.second, listOf(instance, nodeValueOf(line, node.name)) + node.nodes),
+                        nodeClass(line, it.second.declaringClass!!.name),
                         it.second,
                         NodeMCall.Type.VIRTUAL
                     )
                 }
-            } else NRMCall.findMethodOrNull(
+            else NRMCall.findMethodOrNull(
                 type,
                 "set${node.name.let { it[0].toUpperCase() + it.substring(1) }}",
                 node.nodes,
@@ -54,7 +56,7 @@ object NUPFSetB : INUP<Node, NodeFieldSet> {
             )
         return if (result == null)
             NodeFSet(
-                Token(node.line, Token.Type.OPERATION, "fset"),
+                Token(line, Token.Type.OPERATION, "fset"),
                 mutableListOf(instance, processor.process(node.nodes.first(), ctx, ValType.VALUE)!!),
                 node.name,
                 if (instance.isConstClass)
@@ -63,8 +65,8 @@ object NUPFSetB : INUP<Node, NodeFieldSet> {
                 type
             )
         else NodeMCall(
-            Token.operation(node.line, "!mcall"),
-            NRMCall.processArguments(node.line, processor, ctx, result.second, node.nodes),
+            Token.operation(line, "!mcall"),
+            NRMCall.processArguments(line, processor, ctx, result.second, node.nodes),
             instance,
             result.second,
             NodeMCall.Type.VIRTUAL
