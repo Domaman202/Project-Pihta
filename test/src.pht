@@ -1,5 +1,14 @@
 (app
-    (defn foo ^void [[arg ^String]]
-        (println arg))
+    (import java
+        (types java.lang.System))
+    (defn foo ^void [[arg ^dynamic]]
+        (println (#toString arg)))
     (app-fn
-        (#foo ^App "Hi!")))
+        (def [
+            [i 0]
+            [start-time (#nanoTime ^System)]])
+        (cycle (< i 1000)
+            (#foo . "Hi!")
+            (++ i))
+        (println (- (#nanoTime ^System) start-time))))
+
