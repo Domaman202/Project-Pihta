@@ -68,13 +68,13 @@ object NUPImport : INUP<NodeImport, NodeImport> {
             }
         }
 
-        processor.stageManager.pushTask(ProcessingStage.EXTENDS_IMPORT) {
-            node.data["extends"]?.forEach { it ->
+        processor.stageManager.pushTask(ProcessingStage.EXTENSIONS_IMPORT) {
+            node.data["extensions"]?.forEach { it ->
                 it as String
                 gctx.getType(it, processor.tp).methods
                     .stream()
-                    .filter { it.modifiers.extend }
-                    .forEach { ctx.global.getExtends(it.extend!!) += it }
+                    .filter { it.modifiers.extension }
+                    .forEach { ctx.global.getExtensions(it.extension!!) += it }
             }
         }
 

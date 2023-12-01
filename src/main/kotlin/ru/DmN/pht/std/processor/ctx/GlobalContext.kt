@@ -8,14 +8,14 @@ import ru.DmN.siberia.utils.*
 class GlobalContext(
     val namespace: String = "",
     val imports: MutableMap<String, String> = HashMap(),
-    val extends: MutableList<Pair<String, MutableList<VirtualMethod>>> = ArrayList(),
+    val extensions: MutableList<Pair<String, MutableList<VirtualMethod>>> = ArrayList(),
     val macros: MutableList<MacroDefine> = ArrayList(),
 ) {
     fun with(namespace: String) =
         GlobalContext(
             namespace,
             SubMap(imports),
-            SubList(extends),
+            SubList(extensions),
             SubList(macros)
         )
 
@@ -23,7 +23,7 @@ class GlobalContext(
         GlobalContext(
             namespace,
             SubMap(imports, context.imports),
-            SubList(extends, context.extends),
+            SubList(extensions, context.extensions),
             SubList(macros, context.macros)
         )
 
@@ -33,7 +33,7 @@ class GlobalContext(
     fun getMethodVariants(type: VirtualType, name: String, args: List<ICastable>): List<VirtualMethod> =
         getAllMethods(type)
             .filter { it.name == name }
-            .map { Pair(it, if (it.modifiers.extend) listOf(ICastable.of(it.extend!!)) + args else args) }
+            .map { Pair(it, if (it.modifiers.extension) listOf(ICastable.of(it.extension!!)) + args else args) }
             .filter { it.first.argsc.size == it.second.size || it.first.modifiers.varargs }
             .map { Pair(it.first, lenArgs(it.first.argsc, it.second, it.first.modifiers.varargs)) }
             .filter { it.second > -1 }
@@ -42,14 +42,14 @@ class GlobalContext(
             .toList()
 
     private fun getAllMethods(type: VirtualType): Sequence<VirtualMethod> {
-        var seq = type.methods.asSequence() + getExtends(type).asSequence()
+        var seq = type.methods.asSequence() + getExtensions(type).asSequence()
         type.parents.forEach { seq += getAllMethods(it) }
         return seq
     }
 
-    fun getExtends(type: VirtualType): MutableList<VirtualMethod> {
-        extends.find { it.first == type.name }?.let { return it.second }
-        return ArrayList<VirtualMethod>().apply { extends.add(Pair(type.name, this)) }
+    fun getExtensions(type: VirtualType): MutableList<VirtualMethod> {
+        extensions.find { it.first == type.name }?.let { return it.second }
+        return ArrayList<VirtualMethod>().apply { extensions.add(Pair(type.name, this)) }
     }
 
     fun getTypeName(name: String): String? =

@@ -29,7 +29,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             if (triple.first == SUPER)
                 nodeGetOrName(node.line, "this")
             else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
-        return if (triple.third.extend == null)
+        return if (triple.third.extension == null)
             NodeMCall(
                 node.token.processed(),
                 processArguments(node.line, processor, ctx, triple.third, triple.second),
@@ -60,7 +60,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 triple.third,
                 listOf(instance) + triple.second
             ),
-            NodeValue.of(node.token.line, NodeValue.Type.CLASS, triple.third.extend!!.name),
+            NodeValue.of(node.token.line, NodeValue.Type.CLASS, triple.third.extension!!.name),
             triple.third,
             NodeMCall.Type.EXTEND
         )

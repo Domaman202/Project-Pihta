@@ -1,5 +1,5 @@
 (app
-    (efn ^dynamic log ^void []
+    (efn ^String log ^void []
         (println this))
     (app-fn
         (def [[^dynamic test "Слава России!"]])

@@ -110,6 +110,6 @@
             (types java.lang.String))
         (alias-type Object Any)
         (import pht
-            (extends ru.DmN.pht.ArrayExtends)
-            (extends ru.DmN.pht.StringExtends)
-            (extends ru.DmN.pht.MathExtends))))
+            (extensions ru.DmN.pht.ArrayExtends)
+            (extensions ru.DmN.pht.StringExtends)
+            (extensions ru.DmN.pht.MathExtends))))

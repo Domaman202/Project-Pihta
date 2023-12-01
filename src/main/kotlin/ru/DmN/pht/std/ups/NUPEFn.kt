@@ -33,7 +33,7 @@ object NUPEFn : INUP<NodeDefn, NodeNodesList> {
         unparser.out.apply {
             node.method.apply {
                 append('(').append(node.token.text)
-                    .append(" ^").append(NUPValueA.unparseType(node.method.extend!!.name))
+                    .append(" ^").append(NUPValueA.unparseType(node.method.extension!!.name))
                     .append(' ').append(name)
                     .append(" ^").append(rettype.name)
                     .append(" [")
@@ -77,11 +77,11 @@ object NUPEFn : INUP<NodeDefn, NodeNodesList> {
             returnType,
             args.first.map { gctx.getType(it, processor.tp) },
             args.second,
-            MethodModifiers(static = true, extend = true),
+            MethodModifiers(static = true, extension = true),
             extend
         )
         type.methods += method
-        gctx.getExtends(extend) += method
+        gctx.getExtensions(extend) += method
         //
         val new = NodeDefn(node.token, node.nodes.drop(4).toMutableList(), method)
         processor.stageManager.pushTask(ProcessingStage.METHODS_BODY) {

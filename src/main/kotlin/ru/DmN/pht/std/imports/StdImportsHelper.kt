@@ -7,7 +7,7 @@ import ru.DmN.pht.std.imports.parsers.NPValueList
 
 object StdImportsHelper : Module("pht/imports/helper") {
     init {
-        add("types|extends|macros".toRegex(), NPArgument)
+        add("types|extensions|macros".toRegex(), NPArgument)
         add("valn!",    NPValueList)
         add("value!",   NPValue)
     }
