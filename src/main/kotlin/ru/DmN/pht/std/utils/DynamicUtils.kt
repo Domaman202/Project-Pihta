@@ -32,7 +32,7 @@ object DynamicUtils {
         } catch (ignored: NoSuchMethodException) {
             val field = instance.javaClass.getDeclaredField(name)
             field.isAccessible = true
-            field.set(instance, args)
+            field.set(instance, args[0])
         }
     }
 }
