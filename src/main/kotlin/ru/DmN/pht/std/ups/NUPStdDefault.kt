@@ -29,9 +29,6 @@ object NUPStdDefault : IStdNUP<NodeNodesList, NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
         NRDefault.process(node, processor, ctx, mode)
 
-    override val isComputeList: Boolean
-        get() = true
-
     override fun computeList(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): List<Node> =
         node.nodes
 }

@@ -49,7 +49,7 @@ fun Processor.processNodes(node: INodesList, ctx: ProcessingContext, mode: ValTy
     node.nodes.map { process(it, ctx, mode)!! }
 
 fun Processor.computeStringNodes(node: INodesList, ctx: ProcessingContext): List<String> =
-    node.nodes.map { computeString(it, ctx) }
+    node.nodes.map { computeString(it, ctx)!! }
 
 fun Processor.compute(node: Node, ctx: ProcessingContext): Node =
     this.get(node, ctx).let {
@@ -58,14 +58,20 @@ fun Processor.compute(node: Node, ctx: ProcessingContext): Node =
         else node
     }
 
-fun Processor.computeGenerics(node: Node, ctx: ProcessingContext): List<VirtualType>? =
+fun Processor.computeGenerics(node: Node, ctx: ProcessingContext): List<VirtualType> =
+    this.computeGenericsOr(node, ctx)!!
+
+fun Processor.computeGenericsOr(node: Node, ctx: ProcessingContext): List<VirtualType>? =
     this.get(node, ctx).let {
-        if (it is IStdNodeProcessor<Node> && it.isComputeGenerics)
+        if (it is IStdNodeProcessor<Node>)
             it.computeGenerics(node, this, ctx)
         else null
     }
 
 fun Processor.computeList(node: Node, ctx: ProcessingContext): List<Node> =
+    this.computeListOr(node, ctx)!!
+
+fun Processor.computeListOr(node: Node, ctx: ProcessingContext): List<Node>? =
     this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeList(node, this, ctx)
@@ -73,6 +79,9 @@ fun Processor.computeList(node: Node, ctx: ProcessingContext): List<Node> =
     }
 
 fun Processor.computeString(node: Node, ctx: ProcessingContext): String =
+    this.computeStringOr(node, ctx)!!
+
+fun Processor.computeStringOr(node: Node, ctx: ProcessingContext): String? =
     this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeString(node, this, ctx)
@@ -80,10 +89,12 @@ fun Processor.computeString(node: Node, ctx: ProcessingContext): String =
     }
 
 fun Processor.computeInt(node: Node, ctx: ProcessingContext): Int =
+    this.computeIntOr(node, ctx)!!
+
+fun Processor.computeIntOr(node: Node, ctx: ProcessingContext): Int? =
     this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeInt(node, this, ctx)
-//        else node.getValueAsString().toInt()
         else throw UnsupportedOperationException()
     }
 

@@ -5,7 +5,6 @@ import ru.DmN.siberia.ConsoleOld.initCompileAndRunModule
 import ru.DmN.siberia.ConsoleOld.initCompileModule
 import ru.DmN.siberia.ConsoleOld.initHelp
 import ru.DmN.siberia.ConsoleOld.initModuleInfo
-import ru.DmN.siberia.ConsoleOld.initProgramInfo
 
 object Console : Console() {
     @JvmStatic

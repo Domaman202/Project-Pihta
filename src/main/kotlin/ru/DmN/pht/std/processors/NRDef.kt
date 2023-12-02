@@ -12,9 +12,11 @@ import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeDef
 import ru.DmN.pht.std.ast.NodeDef.VariableOrField
 import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.utils.computeGenericsOr
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.isConstClass
+import ru.DmN.siberia.utils.text
 
 object NRDef : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeDef {
@@ -36,13 +38,14 @@ object NRDef : INodeProcessor<NodeNodesList> {
                         name = processor.computeString(it[0], ctx)
                         it[1]
                     }?.let { processor.process(it, ctx, ValType.VALUE) }
+                val generics = value?.let { processor.computeGenericsOr(value, ctx) }
                 list.add(VariableOrField.of(Variable(
                     name,
                     type,
                     value,
-                    if (value is IGenericsNode<*>)
-                        bctx.addVariable(name, type, false, value.generics).id
-                    else bctx.addVariable(name, type).id
+                    if (generics == null)
+                        bctx.addVariable(name, type).id
+                    else bctx.addVariable(name, type, false, generics).id
                 )))
             }
         } else {

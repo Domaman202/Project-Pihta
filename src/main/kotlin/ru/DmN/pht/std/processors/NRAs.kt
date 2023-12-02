@@ -23,9 +23,6 @@ object NRAs : IStdNodeProcessor<NodeGensNodesList> {
             else NodeAs(node.token.processed(), mutableListOf(processor.process(node.nodes[1], ctx, ValType.VALUE)!!), node.generics, to)
         } else null
 
-    override val isComputeGenerics: Boolean
-        get() = true
-
     override fun computeGenerics(node: NodeGensNodesList, processor: Processor, ctx: ProcessingContext): List<VirtualType> =
         node.generics
 }

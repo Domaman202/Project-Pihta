@@ -6,6 +6,9 @@ import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.isMacro
 import ru.DmN.pht.std.processor.utils.macro
 import ru.DmN.pht.std.processor.utils.with
+import ru.DmN.pht.std.utils.IStdNUP
+import ru.DmN.pht.std.utils.compute
+import ru.DmN.pht.std.utils.computeGenericsOr
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.Unparser
@@ -23,7 +26,7 @@ import ru.DmN.siberia.unparsers.NUDefault
 import ru.DmN.siberia.utils.*
 import java.util.*
 
-object NUPMacro : INUP<NodeMacro, NodeMacro> {
+object NUPMacro : IStdNUP<NodeMacro, NodeMacro> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val name = parser.nextOperation().text!!
         return NPDefault.parse(parser, ctx) { NodeMacro(token, it, name) }
@@ -45,6 +48,16 @@ object NUPMacro : INUP<NodeMacro, NodeMacro> {
     override fun process(node: NodeMacro, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
         val result = macroCalc(node, ctx)
         return NRDefault.process(result.first.copy(), processor, result.second, mode)
+    }
+
+    override fun compute(node: NodeMacro, processor: Processor, ctx: ProcessingContext): Node {
+        val result = macroCalc(node, ctx)
+        return processor.compute(result.first.copy(), result.second)
+    }
+
+    override fun computeGenerics(node: NodeMacro, processor: Processor, ctx: ProcessingContext): List<VirtualType>? {
+        val result = macroCalc(node, ctx)
+        return processor.computeGenericsOr(result.first.copy(), result.second)
     }
 
     private fun macroCalc(node: NodeMacro, ctx: ProcessingContext): Pair<NodeNodesList, ProcessingContext> {

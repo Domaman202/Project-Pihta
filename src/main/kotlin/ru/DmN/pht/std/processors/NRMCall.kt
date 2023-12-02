@@ -26,7 +26,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             if (triple.first == SUPER)
                 nodeGetOrName(node.line, "this")
             else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
-        return processor.computeGenerics(instance, ctx)?.getOrNull(0) ?: triple.third.rettype
+        return processor.computeGenericsOr(instance, ctx)?.getOrNull(0) ?: triple.third.rettype
     }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeMCall {
@@ -35,7 +35,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             if (triple.first == SUPER)
                 nodeGetOrName(node.line, "this")
             else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
-        val generics = processor.computeGenerics(instance, ctx) ?: emptyList()
+        val generics = processor.computeGenericsOr(instance, ctx) ?: emptyList()
         return if (triple.third.extension == null)
             NodeMCall(
                 node.token.processed(),

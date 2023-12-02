@@ -1,7 +1,6 @@
 package ru.DmN.pht.std.ups
 
 import ru.DmN.pht.std.ast.NodeAs
-import ru.DmN.pht.std.ast.NodeGensNodesList
 import ru.DmN.pht.std.unparsers.NUDefaultX
 import ru.DmN.pht.std.utils.IStdNUP
 import ru.DmN.siberia.Processor
@@ -21,9 +20,6 @@ object NUPAs : IStdNUP<NodeAs, NodeAs> {
 
     override fun calc(node: NodeAs, processor: Processor, ctx: ProcessingContext): VirtualType =
         node.type
-
-    override val isComputeGenerics: Boolean
-        get() = true
 
     override fun computeGenerics(node: NodeAs, processor: Processor, ctx: ProcessingContext): List<VirtualType> =
         node.generics
