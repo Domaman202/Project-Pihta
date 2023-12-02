@@ -67,7 +67,9 @@ object NUPCtor : INUP<NodeDefn, NodeNodesList> {
             VirtualType.VOID,
             args.first.map { gctx.getType(it, processor.tp) },
             args.second,
-            MethodModifiers(ctor = true)
+            MethodModifiers(ctor = true),
+            null,
+            false
         )
         type.methods += method
         //

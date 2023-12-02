@@ -1,6 +1,4 @@
-(app
-    (efn ^String log ^void []
-        (println this))
-    (app-fn
-        (def [[^dynamic test "Слава России!"]])
-        (#log test)))
+(app-fn
+    (def [[list (with-gens (new ^java.util.ArrayList) ^String)]])
+    (#add list "Hi!")
+    (println (typeof (#get list 0))))

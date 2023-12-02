@@ -21,6 +21,7 @@ import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.ups.NUPDefault
 import ru.DmN.siberia.utils.Module
 import ru.DmN.siberia.utils.adda
+import ru.DmN.siberia.utils.addb
 import java.util.*
 
 object Pihta : Module("pht") {
@@ -119,7 +120,7 @@ object Pihta : Module("pht") {
         // n
         adda("neg",          NUPMath,    NRMath)
         adda("!neg",         NUPMath)
-        adda("new",          NUPDefault, NRNew)
+        adda("new",          NUPGensDefault, NRNew)
         adda("!new",         NUPNew)
         adda("new-array",    NUPDefault, NRNewArray)
         adda("!new-array",   NUPNewArrayX)
@@ -165,11 +166,14 @@ object Pihta : Module("pht") {
         adda("valn-repeat",  NUPStdDefault, NRValnRepeat)
         adda("value",        NUPValueA)
         adda("value!",       NUPValueB)
+        //
+        adda("with-gens",    NUPDefault,    NRWithGens)
+        addb("!with-gens",   NUPWithGens)
         // x
-        adda("xor",          NUPMath,    NRMath)
+        adda("xor",          NUPMath,       NRMath)
         adda("!xor",         NUPMath)
         // y
-        adda("yield",        NUPDefault, NRYield)
+        adda("yield",        NUPDefault,    NRYield)
 
         // Аннотации
         adda("@abstract",NUPDefault, NRSA { it, _, _ -> if (it is IAbstractlyNode)   it.abstract = true })

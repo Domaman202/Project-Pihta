@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.std.ast.IGenericsNode
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -35,7 +36,14 @@ object NRDef : INodeProcessor<NodeNodesList> {
                         name = processor.computeString(it[0], ctx)
                         it[1]
                     }?.let { processor.process(it, ctx, ValType.VALUE) }
-                list.add(VariableOrField.of(Variable(name, type, value, bctx.addVariable(name, type).id)))
+                list.add(VariableOrField.of(Variable(
+                    name,
+                    type,
+                    value,
+                    if (value is IGenericsNode<*>)
+                        bctx.addVariable(name, type, false, value.generics).id
+                    else bctx.addVariable(name, type).id
+                )))
             }
         } else {
             val clazz = ctx.clazz as VirtualType.VirtualTypeImpl

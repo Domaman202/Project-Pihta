@@ -28,7 +28,7 @@ abstract class NVC {
             get() = variable.type()
 
         override fun load(node: MethodNode, i: Int) {
-            load(if (i == -1) variable else variable.copy(id = i), node)
+            load(if (i == -1) variable else Variable(variable.name, variable.type, i, false), node)
         }
     }
 

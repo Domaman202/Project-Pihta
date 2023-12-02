@@ -1,9 +1,6 @@
 package ru.DmN.pht.std.processor.ctx
 
-import ru.DmN.siberia.utils.SubList
-import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.*
 import java.util.concurrent.atomic.AtomicInteger
 
 class BodyContext(
@@ -19,6 +16,9 @@ class BodyContext(
 
     fun addVariable(name: String, type: VirtualType?, tmp: Boolean = false): Variable =
         Variable(name, type, nvi.getAndIncrement(), tmp).apply { variables += this }
+
+    fun addVariable(name: String, type: VirtualType?, tmp: Boolean = false, generics: List<VirtualType>): Variable =
+        VariableWithGenerics(name, type, nvi.getAndIncrement(), tmp, generics).apply { variables += this }
 
     companion object {
         fun of(ctx: BodyContext?): BodyContext =

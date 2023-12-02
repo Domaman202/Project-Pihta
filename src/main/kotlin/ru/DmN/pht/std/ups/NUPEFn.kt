@@ -78,7 +78,8 @@ object NUPEFn : INUP<NodeDefn, NodeNodesList> {
             args.first.map { gctx.getType(it, processor.tp) },
             args.second,
             MethodModifiers(static = true, extension = true),
-            extend
+            extend,
+            false
         )
         type.methods += method
         gctx.getExtensions(extend) += method

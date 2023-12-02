@@ -44,6 +44,7 @@ object NUPFGetB : INUP<Node, NodeFMGet> {
                 NodeMCall(
                     Token.operation(line, "!mcall"),
                     NRMCall.processArguments(line, processor, ctx, result.third!!, listOf(instance, nodeValueOf(line, node.name)) + node.nodes),
+                    emptyList(),
                     nodeClass(line, result.third!!.declaringClass!!.name),
                     result.third!!,
                     NodeMCall.Type.VIRTUAL
@@ -51,6 +52,7 @@ object NUPFGetB : INUP<Node, NodeFMGet> {
             else NodeMCall(
                 Token.operation(line, "!mcall"),
                 NRMCall.processArguments(line, processor, ctx, result.third!!, node.nodes),
+                emptyList(),
                 instance,
                 result.third!!,
                 NodeMCall.Type.VIRTUAL

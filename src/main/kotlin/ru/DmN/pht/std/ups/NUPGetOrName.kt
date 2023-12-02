@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.ups
 
+import ru.DmN.pht.std.ast.IGenericsNode
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.Unparser
@@ -13,9 +14,11 @@ import ru.DmN.siberia.utils.nextOperation
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.processor.utils.body
 import ru.DmN.pht.std.processor.utils.clazz
+import ru.DmN.pht.std.processor.utils.isBody
 import ru.DmN.pht.std.processor.utils.isClass
 import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.processors.IStdNodeProcessor
+import ru.DmN.siberia.utils.VariableWithGenerics
 
 object NUPGetOrName : INUP<NodeGetOrName, NodeGetOrName>, IStdNodeProcessor<NodeGetOrName> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? {
@@ -38,8 +41,27 @@ object NUPGetOrName : INUP<NodeGetOrName, NodeGetOrName>, IStdNodeProcessor<Node
             variable?.type() ?: if (ctx.isClass()) ctx.clazz.fields.find { it.name == node.name }!!.type else throw RuntimeException()
         }
 
+    override val isComputeGenerics: Boolean
+        get() = true
+
+    override fun computeGenerics(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): List<VirtualType> =
+        if (node.name == "super")
+            ctx.body["this"]!!.let { if (it is IGenericsNode<*>) it.generics else emptyList() }
+        else {
+            val variable = ctx.body[node.name]
+            if (variable is VariableWithGenerics)
+                variable.generics
+            else emptyList() // todo:
+        }
+
+    override val isComputeString: Boolean
+        get() = true
+
     override fun computeString(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): String =
         node.getValueAsString()
+
+    override val isComputeInt: Boolean
+        get() = true
 
     override fun computeInt(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Int =
         node.getValueAsString().toInt()

@@ -20,8 +20,14 @@ import ru.DmN.siberia.utils.VTDynamic
 import ru.DmN.siberia.utils.line
 
 object NRMCall : INodeProcessor<NodeNodesList> {
-    override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        if (node is NodeMCall) node.method.rettype else findMethod(node, processor, ctx).third.rettype
+    override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
+        val triple = findMethod(node, processor, ctx)
+        val instance =
+            if (triple.first == SUPER)
+                nodeGetOrName(node.line, "this")
+            else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
+        return processor.computeGenerics(instance, ctx)?.getOrNull(0) ?: triple.third.rettype
+    }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeMCall {
         val triple = findMethod(node, processor, ctx)
@@ -29,10 +35,12 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             if (triple.first == SUPER)
                 nodeGetOrName(node.line, "this")
             else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
+        val generics = processor.computeGenerics(instance, ctx) ?: emptyList()
         return if (triple.third.extension == null)
             NodeMCall(
                 node.token.processed(),
                 processArguments(node.line, processor, ctx, triple.third, triple.second),
+                generics,
                 if (triple.first == VIRTUAL)
                     NodeFGet(
                         Token.operation(node.line, "!fget"),
@@ -60,6 +68,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 triple.third,
                 listOf(instance) + triple.second
             ),
+            generics,
             NodeValue.of(node.token.line, NodeValue.Type.CLASS, triple.third.extension!!.name),
             triple.third,
             NodeMCall.Type.EXTEND

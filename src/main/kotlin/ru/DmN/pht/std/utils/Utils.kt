@@ -11,6 +11,7 @@ import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.klassOf
 import ru.DmN.pht.std.processors.IStdNodeProcessor
 import ru.DmN.pht.std.processor.utils.ICastable
+import ru.DmN.siberia.processors.INodeProcessor
 import java.util.*
 
 val Node.isLiteral
@@ -57,68 +58,34 @@ fun Processor.compute(node: Node, ctx: ProcessingContext): Node =
         else node
     }
 
-val Node.isComputeList: Boolean
-    get() = if (this is IStdNodeProcessor<*>) this.isComputeList else false
+fun Processor.computeGenerics(node: Node, ctx: ProcessingContext): List<VirtualType>? =
+    this.get(node, ctx).let {
+        if (it is IStdNodeProcessor<Node> && it.isComputeGenerics)
+            it.computeGenerics(node, this, ctx)
+        else null
+    }
 
 fun Processor.computeList(node: Node, ctx: ProcessingContext): List<Node> =
     this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeList(node, this, ctx)
-//        else node.nodes
-        else throw RuntimeException()
+        else throw UnsupportedOperationException()
     }
-
-val Node.isComputeString: Boolean
-    get() = if (this is IStdNodeProcessor<*>) this.isComputeString else false
 
 fun Processor.computeString(node: Node, ctx: ProcessingContext): String =
     this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeString(node, this, ctx)
-//        else node.getValueAsString()
-        else throw RuntimeException()
+        else throw UnsupportedOperationException()
     }
-
-
-val Node.isComputeInt: Boolean
-    get() = if (this is IStdNodeProcessor<*>) this.isComputeInt else false
 
 fun Processor.computeInt(node: Node, ctx: ProcessingContext): Int =
     this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeInt(node, this, ctx)
 //        else node.getValueAsString().toInt()
-        else throw RuntimeException()
+        else throw UnsupportedOperationException()
     }
-
-fun findCommonSuperclasses(vararg classes: VirtualType): List<VirtualType> {
-    val commonSuperclasses = mutableListOf<VirtualType>()
-    val firstClass = classes.firstOrNull()
-    if (firstClass != null) {
-        val superClassSet = mutableSetOf<VirtualType>()
-        superClassSet.addAll(firstClass.parents)
-        for (classToCheck in classes.drop(1))
-            superClassSet.retainAll(classToCheck.allSuperclassesAndInterfaces())
-        commonSuperclasses.addAll(superClassSet)
-    }
-    return commonSuperclasses
-}
-
-fun VirtualType.allSuperclassesAndInterfaces(): Set<VirtualType> {
-    val superclasses = mutableSetOf<VirtualType>()
-    val queue = LinkedList<VirtualType>()
-    queue.add(this)
-    while (queue.isNotEmpty()) {
-        val currentClass = queue.poll()
-        superclasses.add(currentClass)
-        queue.addAll(currentClass.parents)
-        val superclass = currentClass.superclass
-        if (superclass != null) {
-            queue.add(superclass)
-        }
-    }
-    return superclasses
-}
 
 fun VirtualType.ofPrimitive(): String = when (name) {
     "void" -> ("java.lang.Void")

@@ -38,7 +38,9 @@ object NRDefn : INodeProcessor<NodeNodesList> {
             gctx.getType(returnType, processor.tp),
             args.first.map { gctx.getType(it, processor.tp) },
             args.second,
-            MethodModifiers()
+            MethodModifiers(),
+            null,
+            false
         )
         type.methods += method
         //
