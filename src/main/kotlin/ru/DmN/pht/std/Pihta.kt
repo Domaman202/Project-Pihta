@@ -41,8 +41,9 @@ object Pihta : Module("pht") {
         adda("array-of-type",NUPDefault, NRArrayOfType)
         adda("array-size",   NUPDefault, NRArraySize)
         adda("array-type",   NUPDefault, NRArrayType)
-        adda("as",           NUPDefault, NRAs)
+        adda("as",           NUPGensDefault, NRAs)
         adda("!as",          NUPAs)
+        adda("as-gens",      NUPDefault, NRAsGens)
         adda("aset",         NUPDefault, NRASet)
         adda("!aset",        NUPASet)
         // b
@@ -168,7 +169,6 @@ object Pihta : Module("pht") {
         adda("value!",       NUPValueB)
         //
         adda("with-gens",    NUPDefault,    NRWithGens)
-        addb("!with-gens",   NUPWithGens)
         // x
         adda("xor",          NUPMath,       NRMath)
         adda("!xor",         NUPMath)

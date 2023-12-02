@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.processor.utils
 
+import ru.DmN.pht.std.ast.NodeGensNodesList
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.compiler.java.utils.MacroDefine
@@ -38,8 +39,9 @@ fun nodeDef(line: Int, name: String, value: Node) =
     NodeNodesList(Token.operation(line, "def"),
         mutableListOf(nodeValn(line, nodeValn(line, mutableListOf(nodeValueOf(line, name), value)))))
 fun nodeAs(line: Int, node: Node, type: String) =
-    NodeNodesList(Token.operation(line, "as"),
-        mutableListOf(nodeClass(line, type), node))
+    NodeGensNodesList(Token.operation(line, "as"),
+        mutableListOf(nodeClass(line, type), node),
+        emptyList())
 fun nodeCycle(line: Int, cond: Node, body: List<Node>) =
     NodeNodesList(Token.operation(line, "cycle"),
         mutableListOf(cond).apply { addAll(body) })

@@ -1,4 +1,4 @@
 (app-fn
-    (def [[list (with-gens (new ^java.util.ArrayList) ^String)]])
+    (def [[list (with-gens (as ^java.util.List (new ^java.util.ArrayList)) ^String)]])
     (#add list "Hi!")
     (println (typeof (#get list 0))))
