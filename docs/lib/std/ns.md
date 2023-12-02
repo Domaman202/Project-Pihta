@@ -9,7 +9,7 @@
 
 ### Примеры
 
-```
+```pihta
 (use-ctx pht
     (ns ru.DmN.pht
         (obj Foo [^Object]

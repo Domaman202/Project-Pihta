@@ -1,7 +1,6 @@
 (use-ctx pht
-    (defmacro new-string-list []
-         (with-gens (new ^java.util.ArrayList) ^String))
     (app-fn
-        (def [[list (new-string-list)]])
+        (def [[list (as-gens ^java.util.List (new ^java.util.ArrayList) ^String)]])
         (#add list "Hi!")
-        (println (typeof (#get list 0)))))
+        (println (typeof list))
+        (println (typeof (#get list 0))))
