@@ -18,7 +18,7 @@ object NRAs : IStdNodeProcessor<NodeGensNodesList> {
         if (mode == ValType.VALUE) {
             val from = processor.calc(node.nodes[1], ctx)
             val to = calc(node, processor, ctx)
-            if (node.generics.isEmpty() && from?.isAssignableFrom(to) == true)
+            if (node.generics.isEmpty() && from?.isAssignableFrom(to) == true || from == VirtualType.VOID || from == null)
                 processor.process(node.nodes[1], ctx, ValType.VALUE)
             else NodeAs(node.token.processed(), mutableListOf(processor.process(node.nodes[1], ctx, ValType.VALUE)!!), node.generics, to)
         } else null

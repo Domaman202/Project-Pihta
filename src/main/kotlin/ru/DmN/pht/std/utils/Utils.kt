@@ -49,7 +49,7 @@ fun Processor.processNodes(node: INodesList, ctx: ProcessingContext, mode: ValTy
     node.nodes.map { process(it, ctx, mode)!! }
 
 fun Processor.computeStringNodes(node: INodesList, ctx: ProcessingContext): List<String> =
-    node.nodes.map { computeString(it, ctx)!! }
+    node.nodes.map { computeString(it, ctx) }
 
 fun Processor.compute(node: Node, ctx: ProcessingContext): Node =
     this.get(node, ctx).let {

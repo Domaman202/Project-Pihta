@@ -106,8 +106,6 @@ fun <T : IContextCollection<T>> T.with(ctx: BodyContext) =
 fun <T : IContextCollection<T>> T.with(ctx: MacroContext) =
     this.with("pht/macro", ctx)
 
-fun IContextCollection<*>.isModule() =
-    contexts.containsKey("pht/module")
 fun IContextCollection<*>.isEnum() =
     contexts.containsKey("pht/enum")
 fun IContextCollection<*>.isClass() =
@@ -119,9 +117,6 @@ fun IContextCollection<*>.isBody() =
 fun IContextCollection<*>.isMacro() =
     contexts.containsKey("pht/macro")
 
-var IContextCollection<*>.module
-    set(value) { contexts["pht/module"] = value }
-    get() = contexts["pht/module"] as Module
 var IContextCollection<*>.global
     set(value) { contexts["pht/global"] = value }
     get() = contexts["pht/global"] as GlobalContext
