@@ -1,0 +1,7 @@
+(progn
+    (test-fn 0 (+ 12 21))
+    (test-fn 1 (- 33 12))
+    (test-fn 2 (- 33 12 21))
+    (test-fn 3 (* 2 2 3))
+    (test-fn 4 (/ 12 3))
+    (test-fn 5 (% 3 2)))

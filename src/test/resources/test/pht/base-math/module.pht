@@ -1,5 +1,5 @@
 (module
-    (name "test/test-fn")
+    (name "test/pht/base-math")
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["pht"])

@@ -19,30 +19,32 @@ import java.io.File
 import java.io.FileOutputStream
 import java.net.URLClassLoader
 
-fun compileModule(dir: String) {
-    val module = (Parser(Module.getModuleFile(dir)).parseNode(ParsingContext.of(StdModule)) as NodeModule).module
-    val processed = ArrayList<Node>()
-    val processor = Processor(TypesProvider.JAVA)
-    val pctx = ProcessingContext.base().with(Platform.JAVA)
-    processed += module.load(processor, pctx, ValType.NO_VALUE)!!
-    processor.stageManager.runAll()
-    val compiler = Compiler(TypesProvider.JAVA)
-    val cctx = CompilationContext.base()
-    processed.forEach { compiler.compile(it, cctx) }
-    compiler.stageManager.runAll()
-    compiler.finalizers.forEach { it.value.run() }
-    File("dump/$dir").mkdirs()
-    compiler.classes.values.forEach {
-        if (it.name.contains('/'))
-            File("dump/$dir/${it.name.substring(0, it.name.lastIndexOf('/'))}").mkdirs()
-        FileOutputStream("dump/$dir/${it.name}.class").use { stream ->
-            val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
-            it.accept(writer)
-            val b = writer.toByteArray()
-            stream.write(b)
+class Module(val dir: String) {
+    fun compileModule() {
+        val module = (Parser(Module.getModuleFile(dir)).parseNode(ParsingContext.of(StdModule)) as NodeModule).module
+        val processed = ArrayList<Node>()
+        val processor = Processor(TypesProvider.JAVA)
+        val pctx = ProcessingContext.base().with(Platform.JAVA)
+        processed += module.load(processor, pctx, ValType.NO_VALUE)!!
+        processor.stageManager.runAll()
+        val compiler = Compiler(TypesProvider.JAVA)
+        val cctx = CompilationContext.base()
+        processed.forEach { compiler.compile(it, cctx) }
+        compiler.stageManager.runAll()
+        compiler.finalizers.forEach { it.value.run() }
+        File("dump/$dir").mkdirs()
+        compiler.classes.values.forEach {
+            if (it.name.contains('/'))
+                File("dump/$dir/${it.name.substring(0, it.name.lastIndexOf('/'))}").mkdirs()
+            FileOutputStream("dump/$dir/${it.name}.class").use { stream ->
+                val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
+                it.accept(writer)
+                val b = writer.toByteArray()
+                stream.write(b)
+            }
         }
     }
-}
 
-fun runModule(dir: String, id: Int): Any? =
-    URLClassLoader(arrayOf(File("dump/$dir").toURL())).loadClass("Test$id").getMethod("test").invoke(null)
+    fun runModule(id: Int): Any? =
+        URLClassLoader(arrayOf(File("dump/$dir").toURL())).loadClass("Test$id").getMethod("test").invoke(null)
+}
