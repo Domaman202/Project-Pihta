@@ -38,7 +38,7 @@ object NCIf : INodeCompiler<NodeNodesList> {
             )
         } else {
             NCCompare.insertIf(
-                "eq",
+                "!eq",
                 mutableListOf(cond, nodeValueOf(node.line, true)),
                 ifInsert,
                 elseInsert,

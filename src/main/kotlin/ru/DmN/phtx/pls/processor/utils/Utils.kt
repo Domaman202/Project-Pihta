@@ -2,6 +2,7 @@ package ru.DmN.phtx.pls.processor.utils
 
 import com.kingmang.lazurite.parser.ast.*
 import ru.DmN.pht.std.ast.NodeModifierNodesList
+import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.nodeDefn
 import ru.DmN.pht.std.processor.utils.nodeGetOrName
 import ru.DmN.pht.std.processor.utils.nodeMCall
@@ -52,7 +53,12 @@ fun convert(line: Int, stmt: com.kingmang.lazurite.parser.ast.Node): Node =
             mutableListOf(convert(line, stmt.target), convert(line, stmt.expression))
         )
 
-        is VariableExpression -> nodeGetOrName(line, stmt.name)
+        is VariableExpression -> when (stmt.name) {
+            "true" -> nodeValueOf(line, true)
+            "false" -> nodeValueOf(line, false)
+            else -> nodeGetOrName(line, stmt.name)
+        }
+
         is FunctionDefineStatement -> nodeDefn(
             line,
             stmt.name,
@@ -70,12 +76,19 @@ fun convert(line: Int, stmt: com.kingmang.lazurite.parser.ast.Node): Node =
             Token.operation(line, "ret"),
             mutableListOf(convert(line, stmt.expression))
         )
-
         is FunctionalExpression -> nodeMCall(
             line,
             nodeGetOrName(line, "."),
             (stmt.functionExpr as VariableExpression).name,
             stmt.arguments.map { convert(line, it) }
+        )
+
+        is IfStatement -> NodeNodesList(
+            Token.operation(line, "if"),
+            sequenceOf(stmt.expression, stmt.ifStatement, stmt.elseStatement)
+                .filterNotNull()
+                .map { convert(line, it) }
+                .toMutableList()
         )
 
         else -> throw UnsupportedOperationException()

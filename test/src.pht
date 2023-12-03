@@ -1,2 +1,2 @@
 (app-fn
-    (lzr print("Мяу!")))
+    (include-lzr src.lzr))
