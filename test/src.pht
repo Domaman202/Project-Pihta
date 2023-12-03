@@ -1,6 +1,5 @@
-(use-ctx pht
-    (app-fn
-        (def [[list (as-gens ^java.util.List (new ^java.util.ArrayList) ^String)]])
-        (#add list "Hi!")
-        (println (typeof list))
-        (println (typeof (#get list 0))))
+(use-ctx pht phtx/pls
+    (app
+        (defn foo ^void [[name ^dynamic]]
+            (println (+ "Foo, " name "!")))
+        (app-fn (include-lzr src.lzr))))

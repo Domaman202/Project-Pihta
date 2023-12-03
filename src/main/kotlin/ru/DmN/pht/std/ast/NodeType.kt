@@ -7,17 +7,13 @@ import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
 import ru.DmN.siberia.utils.indent
 import ru.DmN.siberia.utils.text
 
-class NodeType(tkOperation: Token, nodes: MutableList<Node>, val type: VirtualTypeImpl) : NodeNodesList(tkOperation, nodes),
-    IAbstractlyNode, IFinallyNode, IOpenlyNode {
+class NodeType(tkOperation: Token, nodes: MutableList<Node>, val type: VirtualTypeImpl) : NodeNodesList(tkOperation, nodes), IAbstractlyNode, IFinallyNode {
     override var abstract: Boolean
         get() = type.isAbstract
         set(value) { type.isAbstract = value }
     override var final: Boolean
         get() = type.isFinal
         set(value) { type.isFinal = value }
-    override var open: Boolean
-        get() = !type.isFinal
-        set(value) { type.isFinal = !value }
 
     override fun copy(): NodeType =
         NodeType(token, copyNodes(), type)

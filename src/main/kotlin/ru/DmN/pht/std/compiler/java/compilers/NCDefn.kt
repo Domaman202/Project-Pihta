@@ -17,6 +17,7 @@ import ru.DmN.siberia.compiler.utils.CompilingStage
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.SubList
+import ru.DmN.siberia.utils.VTDynamic
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 
@@ -49,7 +50,10 @@ object NCDefn : INodeCompiler<NodeDefn> {
             NCDefault.compile(node, compiler, context)
             visitInsn(Opcodes.RETURN)
         } else {
-            load(NCDefault.compileVal(node, compiler, context), this)
+            val variable = NCDefault.compileVal(node, compiler, context)
+            if (variable.type == VirtualType.VOID)
+                visitFieldInsn(Opcodes.GETSTATIC, "kotlin/Unit", "INSTANCE", "Lkotlin/Unit;")
+            else load(variable, this)
             visitReturn(this, method.rettype)
         }
         val stop = Label()

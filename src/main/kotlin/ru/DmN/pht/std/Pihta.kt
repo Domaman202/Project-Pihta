@@ -18,9 +18,11 @@ import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parser.utils.parsersPool
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.ups.NUPDefault
 import ru.DmN.siberia.utils.Module
 import ru.DmN.siberia.utils.adda
+import ru.DmN.siberia.utils.addb
 import java.util.*
 
 object Pihta : Module("pht") {
@@ -61,6 +63,7 @@ object Pihta : Module("pht") {
         adda("!dec",         NUPIncDec)
         adda("def",          NUPDefault, NRDef)
         adda("!def",         NUPDef)
+        adda("def-set",      NUPDefault, NRDefSet)
         adda("defmacro",     NUPDefMacro)
         adda("defn",         NUPDefault, NRDefn)
         adda("!defn",        NUPDefn)
@@ -112,7 +115,7 @@ object Pihta : Module("pht") {
         adda("macro-arg",    NUPMacroArg)
         adda("macro-inline", NUPMacroInline)
         adda("macro-unroll", NUPMacroUnroll)
-        adda("mcall",        NUPDefault, NRMCall)
+        adda("mcall",        NUPDefault, NRMCall) // todo: select super
         adda("mcall!",       NUPMCall)
         adda("!mcall",       NUPMCallX)
         adda("mul",          NUPMath,    NRMath)
@@ -138,7 +141,8 @@ object Pihta : Module("pht") {
         // p
         adda("print",        NUPDefault, NRPrint)
         adda("println",      NUPDefault, NRPrint)
-        adda("progn",        NUPDefault, NRStdDefault)
+        adda("progn",        NUPDefault, NRPrognA)
+        addb("progn-",       NUPPrognB)
         // r
         adda("rand-symbol",  NUPDefault, NRRandSymbol)
         adda("rem",          NUPMath,    NRMath)
@@ -159,7 +163,7 @@ object Pihta : Module("pht") {
         // t
         adda("typeof",       NUPDefault, NRTypeof)
         // u
-        adda("unit",         NUPDefault)
+        adda("unit",         NUPUnit)
         // v
         adda("valn",         NUPStdDefault, NPValnA)
         adda("valn!",        NUPValnB)
@@ -177,7 +181,7 @@ object Pihta : Module("pht") {
         // Аннотации
         adda("@abstract",NUPDefault, NRSA { it, _, _ -> if (it is IAbstractlyNode)   it.abstract = true })
         adda("@final",   NUPDefault, NRSA { it, _, _ -> if (it is IFinallyNode)      it.final = true })
-        adda("@open",    NUPDefault, NRSA { it, _, _ -> if (it is IOpenlyNode)       it.open = true })
+        adda("@open",    NUPDefault, NRSA { it, _, _ -> if (it is IFinallyNode)      it.final = false })
         adda("@static",  NUPDefault, NRSA { it, _, _ -> if (it is IStaticallyNode)   it.static = true })
         adda("@varargs", NUPDefault, NRSA { it, _, _ -> if (it is IVarargNode)       it.varargs = true })
 

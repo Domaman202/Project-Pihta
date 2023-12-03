@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation(files("Project-Siberia-1.3.0.jar"))
+    implementation(files("Project-Siberia-1.3.2.jar", "Lazurite-2.7.0.jar"))
     implementation(kotlin("reflect"))
     implementation("org.ow2.asm:asm:9.5")
     implementation("org.ow2.asm:asm-tree:9.5")
@@ -20,8 +20,8 @@ dependencies {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_20
+    targetCompatibility = JavaVersion.VERSION_20
 }
 
 tasks {
