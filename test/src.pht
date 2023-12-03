@@ -1,11 +1,2 @@
-(use-ctx pht phtx/pls
-    (app
-        (defn foo ^void [[name ^dynamic]]
-            (println (+ "Foo, " name "!")))
-        (app-fn
-            (lzr
-                name = "Иван"
-                foo(name))
-            (println name)
-            (set name "Степан")
-            (lzr print(name)))))
+(app-fn
+    (lzr print("Мяу!")))
