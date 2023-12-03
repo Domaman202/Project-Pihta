@@ -163,6 +163,7 @@ object Pihta : Module("pht") {
         adda("!sub",         NUPMath)
         adda("symbol",       NUPDefault, NRSymbol)
         // t
+        adda("test-fn",      NUPDefault, NRTestFn)
         adda("typeof",       NUPDefault, NRTypeof)
         // u
         adda("unit",         NUPUnit)

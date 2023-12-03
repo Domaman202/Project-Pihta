@@ -113,6 +113,8 @@ fun nodeWithGens(line: Int, node: Node, generics: Sequence<Node>) =
 // Аннотации
 fun nodeStatic(line: Int, nodes: MutableList<Node>) =
     NodeNodesList(Token.operation(line, "@static"), nodes)
+fun nodeStatic(line: Int, node: Node) =
+    nodeStatic(line, mutableListOf(node))
 
 fun sliceInsert(list: MutableList<Any?>, index: Int, elements: List<Any?>) {
     val right = list.subList(index + 1, list.size).toList()

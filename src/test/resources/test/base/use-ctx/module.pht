@@ -1,7 +1,6 @@
 (module
-    (name "test")
+    (name "test/base/use-ctx")
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["pht"])
-    (uses ["pht"])
     (files ["src.pht"]))

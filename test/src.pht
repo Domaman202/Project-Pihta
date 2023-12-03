@@ -1,2 +1,1 @@
-(app-fn
-    (include-lzr src.lzr))
+(test-fn "Текст из Сибири")

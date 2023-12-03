@@ -1,9 +1,9 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.processor.utils.clazzOrNull
 import ru.DmN.pht.std.processor.utils.nodeCls
 import ru.DmN.pht.std.processor.utils.nodeDefn
 import ru.DmN.pht.std.processor.utils.nodeStatic
+import ru.DmN.pht.std.utils.computeInt
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -14,33 +14,28 @@ import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
 
-object NRAppFn : INodeProcessor<NodeNodesList> {
+object NRTestFn : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node =
         when (ctx.platform) {
             Platform.UNIVERSAL -> node
             Platform.JAVA -> {
                 val line = node.token.line
-                val fn = nodeStatic(
-                    line,
-                    nodeDefn(
+                NRClass.process(
+                    nodeCls(
                         line,
-                        "main",
-                        "void",
-                        nodeProgn(line, node.nodes)
-                    )
-                )
-                if (ctx.clazzOrNull?.name == "App")
-                    processor.process(fn, ctx, mode)!!
-                else {
-                    NRClass.process(
-                        nodeCls(
+                        "Test${processor.computeInt(node.nodes[0], ctx)}",
+                        "java.lang.Object",
+                        nodeStatic(
                             line,
-                            "App",
-                            "java.lang.Object",
-                            fn
-                        ), processor, ctx, mode
-                    )
-                }
+                            nodeDefn(
+                                line,
+                                "test",
+                                "dynamic",
+                                nodeProgn(line, node.nodes.drop(1).toMutableList())
+                            )
+                        )
+                    ), processor, ctx, mode
+                )
             }
         }
 }

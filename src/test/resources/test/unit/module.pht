@@ -1,5 +1,5 @@
 (module
-    (name "test")
+    (name "test/unit")
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["pht"])
