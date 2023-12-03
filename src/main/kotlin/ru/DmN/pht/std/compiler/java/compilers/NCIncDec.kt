@@ -24,12 +24,16 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
     override fun compileVal(node: NodeIncDec, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.run {
             val id = ctx.body[node.name]!!.id
+            if (node.postfix)
+                visitVarInsn(Opcodes.ILOAD, id)
             visitIincInsn(id, when (node.token.text) {
                 "inc", "++" -> 1
                 "dec", "--" -> -1
                 else -> throw RuntimeException()
             })
-            visitVarInsn(Opcodes.ILOAD, id)
+            if (!node.postfix) {
+                visitVarInsn(Opcodes.ILOAD, id)
+            }
         }
         return Variable.tmp(node, VirtualType.INT)
     }

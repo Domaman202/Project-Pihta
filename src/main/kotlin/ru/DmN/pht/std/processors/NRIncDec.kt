@@ -24,10 +24,16 @@ object NRIncDec : INodeProcessor<NodeNodesList> {
         val nodes = processor.processNodes(node, ctx, ValType.VALUE)
         val firstType = processor.calc(nodes[0], ctx)!!
         val result = NRMath.getExtend(firstType, node.text, nodes.drop(1), processor, ctx)
-        return if (result == null)
-            NodeIncDec(node.token.processed(), processor.computeString(node.nodes[0], ctx))
-        else {
-            val line = node.line
+        val line = node.line
+        return if (result == null) {
+            val text = node.token.text!!
+            val postfix = text.endsWith('-')
+            NodeIncDec(
+                Token.operation(line, "!${text.let { if (postfix) it.substring(0, it.length - 1) else it }}"),
+                processor.computeString(node.nodes[0], ctx),
+                postfix
+            )
+        } else {
             NodeMCall(
                 Token.operation(line, "!mcall"),
                 NRMCall.processArguments(line, processor, ctx, result.second, listOf(nodes[0]) + result.first),

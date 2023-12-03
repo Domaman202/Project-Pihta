@@ -21,7 +21,7 @@ object NUPIncDec : INUP<NodeIncDec, NodeNodesList> {
         NPDefault.parse(parser, ctx, token)
 
     override fun unparse(node: NodeIncDec, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
-        unparser.out.append('(').append(NUDefaultX.text(node.token)).append(' ').append(node.name).append(')')
+        unparser.out.append('(').append(NUDefaultX.text(node.token).let { if (node.postfix) "$it-" else it }).append(' ').append(node.name).append(')')
     }
 
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =

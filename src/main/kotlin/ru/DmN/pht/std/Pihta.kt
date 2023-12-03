@@ -60,6 +60,7 @@ object Pihta : Module("pht") {
         // d
         adda("debug",        NUPDebug)
         adda("dec",          NUPIncDec,  NRIncDec)
+        adda("dec-",         NUPIncDec,  NRIncDec)
         adda("!dec",         NUPIncDec)
         adda("def",          NUPDefault, NRDef)
         adda("!def",         NUPDef)
@@ -99,6 +100,7 @@ object Pihta : Module("pht") {
         adda("if",           NUPDefault, NRIf)
         adda("import",       NUPImport)
         adda("inc",          NUPIncDec,  NRIncDec)
+        adda("inc-",         NUPIncDec,  NRIncDec)
         adda("!inc",         NUPIncDec)
         adda("is",           NUPDefault, NRIs)
         adda("itf",          NUPDefault, NRClass)
