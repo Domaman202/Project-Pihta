@@ -2,4 +2,6 @@
     (app
         (defn foo ^void [[name ^dynamic]]
             (println (+ "Foo, " name "!")))
-        (app-fn (include-lzr src.lzr))))
+        (app-fn
+            (lzr name = "Иван")
+            (lzr foo(name)))))
