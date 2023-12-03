@@ -1,6 +1,12 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.ast.IGenericsNode
+import ru.DmN.pht.std.ast.NodeDef
+import ru.DmN.pht.std.ast.NodeDef.VariableOrField
+import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.utils.computeGenericsOr
+import ru.DmN.pht.std.utils.computeList
+import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.isConstClass
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -9,14 +15,6 @@ import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.siberia.utils.VirtualType
-import ru.DmN.pht.std.ast.NodeDef
-import ru.DmN.pht.std.ast.NodeDef.VariableOrField
-import ru.DmN.pht.std.processor.utils.*
-import ru.DmN.pht.std.utils.computeGenericsOr
-import ru.DmN.pht.std.utils.computeList
-import ru.DmN.pht.std.utils.computeString
-import ru.DmN.pht.std.utils.isConstClass
-import ru.DmN.siberia.utils.text
 
 object NRDef : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeDef {

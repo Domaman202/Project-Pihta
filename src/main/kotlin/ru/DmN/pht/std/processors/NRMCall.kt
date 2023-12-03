@@ -44,7 +44,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 if (triple.first == VIRTUAL)
                     NodeFGet(
                         Token.operation(node.line, "!fget"),
-                        mutableListOf(nodeClass(node.line, triple.third.declaringClass!!.name)),
+                        mutableListOf(nodeValueClass(node.line, triple.third.declaringClass!!.name)),
                         "INSTANCE",
                         NodeFGet.Type.STATIC,
                         ctx.global.getType(processor.computeString(node.nodes[0], ctx), processor.tp)

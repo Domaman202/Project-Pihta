@@ -4,7 +4,7 @@ import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.std.ast.NodeCompare
 import ru.DmN.pht.std.compiler.java.utils.method
-import ru.DmN.pht.std.processor.utils.nodeValueOf
+import ru.DmN.pht.std.processor.utils.nodeValue
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.ctx.CompilationContext
@@ -32,7 +32,7 @@ object NCCycle : INodeCompiler<NodeNodesList> {
             } else {
                 NCCompare.insertIf(
                     "!eq",
-                    mutableListOf(cond, nodeValueOf(node.line, true)),
+                    mutableListOf(cond, nodeValue(node.line, true)),
                     ifInsert,
                     elseInsert,
                     compiler, ctx

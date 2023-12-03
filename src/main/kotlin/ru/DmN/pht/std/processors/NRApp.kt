@@ -1,15 +1,15 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.std.processor.utils.nodeCls
+import ru.DmN.pht.std.processor.utils.nodeStatic
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.lexer.Token
-import ru.DmN.siberia.processor.utils.Platform
 import ru.DmN.siberia.processor.ctx.ProcessingContext
+import ru.DmN.siberia.processor.utils.Platform
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.pht.std.processor.utils.nodeClass
 
 object NRApp : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node =
@@ -18,16 +18,11 @@ object NRApp : INodeProcessor<NodeNodesList> {
             Platform.JAVA -> {
                 val line = node.token.line
                 NRClass.process(
-                    nodeClass(
+                    nodeCls(
                         line,
                         "App",
-                        listOf("java.lang.Object"),
-                        listOf(
-                            NodeNodesList(
-                                Token.operation(line, "@static"),
-                                node.nodes
-                            )
-                        )
+                        "java.lang.Object",
+                        nodeStatic(line, node.nodes)
                     ), processor, ctx, mode
                 )
             }

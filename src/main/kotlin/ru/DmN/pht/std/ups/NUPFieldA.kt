@@ -52,7 +52,7 @@ object NUPFieldA : INUP<NodeFieldA, NodeFieldA> {
                                 NodeFieldSet(
                                     Token.operation(line, "fset!"),
                                     mutableListOf(nodeGetOrName(line, name)),
-                                    nodeClass(line, clazz.name),
+                                    nodeValueClass(line, clazz.name),
                                     name,
                                     static = true,
                                     native = true
@@ -75,7 +75,7 @@ object NUPFieldA : INUP<NodeFieldA, NodeFieldA> {
                         listOf(
                             if (node.static)
                                 NodeFMGet(
-                                    Token.operation(line, "fget!"), nodeClass(line, clazz.name), name,
+                                    Token.operation(line, "fget!"), nodeValueClass(line, clazz.name), name,
                                     static = true,
                                     native = true
                                 )

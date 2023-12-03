@@ -5,8 +5,8 @@ import ru.DmN.pht.std.ast.NodeFieldSet
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.nodeClass
-import ru.DmN.pht.std.processor.utils.nodeValueOf
+import ru.DmN.pht.std.processor.utils.nodeValueClass
+import ru.DmN.pht.std.processor.utils.nodeValue
 import ru.DmN.pht.std.processors.NRMCall
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.isConstClass
@@ -23,7 +23,7 @@ object NUPFSetB : INUP<Node, NodeFieldSet> {
     override fun process(node: NodeFieldSet, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
         val line = node.line
         val instance = processor.process(node.instance, ctx, ValType.VALUE)!!
-            .let { if (node.static) nodeClass(line, processor.computeString(it, ctx)) else it }
+            .let { if (node.static) nodeValueClass(line, processor.computeString(it, ctx)) else it }
         val type =
             if (node.static)
                 ctx.global.getType((instance as NodeValue).value, processor.tp)
@@ -41,9 +41,9 @@ object NUPFSetB : INUP<Node, NodeFieldSet> {
                 )?.let {
                     return NodeMCall(
                         Token.operation(line, "!mcall"),
-                        NRMCall.processArguments(line, processor, ctx, it.second, listOf(instance, nodeValueOf(line, node.name)) + node.nodes),
+                        NRMCall.processArguments(line, processor, ctx, it.second, listOf(instance, nodeValue(line, node.name)) + node.nodes),
                         emptyList(),
-                        nodeClass(line, it.second.declaringClass!!.name),
+                        nodeValueClass(line, it.second.declaringClass!!.name),
                         it.second,
                         NodeMCall.Type.VIRTUAL
                     )

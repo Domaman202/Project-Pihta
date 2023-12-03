@@ -117,7 +117,7 @@ object Pihta : Module("pht") {
         adda("macro-arg",    NUPMacroArg)
         adda("macro-inline", NUPMacroInline)
         adda("macro-unroll", NUPMacroUnroll)
-        adda("mcall",        NUPDefault, NRMCall) // todo: select super
+        adda("mcall",        NUPDefault, NRMCall) // todo: select super & auto new futures for '.'
         adda("mcall!",       NUPMCall)
         adda("!mcall",       NUPMCallX)
         adda("mul",          NUPMath,    NRMath)
@@ -172,7 +172,7 @@ object Pihta : Module("pht") {
         adda("valn-repeat",  NUPStdDefault, NRValnRepeat)
         adda("value",        NUPValueA)
         adda("value!",       NUPValueB)
-        //
+        // w
         adda("with-gens",    NUPDefault,    NRWithGens)
         // x
         adda("xor",          NUPMath,       NRMath)

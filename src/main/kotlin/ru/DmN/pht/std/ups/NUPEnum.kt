@@ -62,7 +62,7 @@ object NUPEnum : INUP<NodeType, NodeNodesList> {
                                             NodeFieldSet(
                                                 Token.operation(line, "fset!"),
                                                 mutableListOf(nodeNew(line, type.name, it.args)),
-                                                nodeClass(line, type.name),
+                                                nodeValueClass(line, type.name),
                                                 it.name,
                                                 true
                                             )

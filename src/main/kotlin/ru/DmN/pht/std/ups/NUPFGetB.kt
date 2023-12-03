@@ -4,8 +4,8 @@ import ru.DmN.pht.std.ast.NodeFGet
 import ru.DmN.pht.std.ast.NodeFMGet
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.nodeClass
-import ru.DmN.pht.std.processor.utils.nodeValueOf
+import ru.DmN.pht.std.processor.utils.nodeValueClass
+import ru.DmN.pht.std.processor.utils.nodeValue
 import ru.DmN.pht.std.processors.NRFGetA
 import ru.DmN.pht.std.processors.NRMCall
 import ru.DmN.pht.std.utils.computeString
@@ -43,9 +43,9 @@ object NUPFGetB : INUP<Node, NodeFMGet> {
             else if (result.first == VTDynamic)
                 NodeMCall(
                     Token.operation(line, "!mcall"),
-                    NRMCall.processArguments(line, processor, ctx, result.third!!, listOf(instance, nodeValueOf(line, node.name)) + node.nodes),
+                    NRMCall.processArguments(line, processor, ctx, result.third!!, listOf(instance, nodeValue(line, node.name)) + node.nodes),
                     emptyList(),
-                    nodeClass(line, result.third!!.declaringClass!!.name),
+                    nodeValueClass(line, result.third!!.declaringClass!!.name),
                     result.third!!,
                     NodeMCall.Type.VIRTUAL
                 )

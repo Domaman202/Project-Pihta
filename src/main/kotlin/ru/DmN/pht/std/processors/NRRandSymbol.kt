@@ -7,7 +7,7 @@ import ru.DmN.siberia.processor.utils.ValType
 import java.util.Random
 import kotlin.math.absoluteValue
 
-object NRRandSymbol : ru.DmN.pht.std.processors.IStdNodeProcessor<Node> {
+object NRRandSymbol : IStdNodeProcessor<Node> {
     override fun process(node: Node, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
         null
 

@@ -2,7 +2,7 @@ package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.ast.NodeIncDec
 import ru.DmN.pht.std.ast.NodeMCall
-import ru.DmN.pht.std.processor.utils.nodeClass
+import ru.DmN.pht.std.processor.utils.nodeValueClass
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.processNodes
 import ru.DmN.siberia.Processor
@@ -38,7 +38,7 @@ object NRIncDec : INodeProcessor<NodeNodesList> {
                 Token.operation(line, "!mcall"),
                 NRMCall.processArguments(line, processor, ctx, result.second, listOf(nodes[0]) + result.first),
                 emptyList(),
-                nodeClass(line, result.second.declaringClass!!.name),
+                nodeValueClass(line, result.second.declaringClass!!.name),
                 result.second,
                 NodeMCall.Type.EXTEND
             )

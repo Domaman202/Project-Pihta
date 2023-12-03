@@ -2,7 +2,7 @@ package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.ast.NodeCompare
 import ru.DmN.pht.std.ast.NodeMCall
-import ru.DmN.pht.std.processor.utils.nodeClass
+import ru.DmN.pht.std.processor.utils.nodeValueClass
 import ru.DmN.pht.std.utils.processNodes
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
@@ -24,17 +24,17 @@ object NRCompare : INodeProcessor<NodeNodesList> {
         val nodes = processor.processNodes(node, ctx, ValType.VALUE)
         val firstType = processor.calc(nodes[0], ctx)!!
         val result = NRMath.getExtend(firstType, node.text, nodes.drop(1), processor, ctx)
-        return if (result == null) {
+        return if (result == null)
             if (mode == ValType.VALUE)
                 NRDefault.processValue(NodeCompare(node.token.processed(), node.nodes), processor, ctx)
             else null
-        } else {
+        else {
             val line = node.line
             NodeMCall(
                 Token.operation(line, "!mcall"),
                 NRMCall.processArguments(line, processor, ctx, result.second, listOf(nodes[0]) + result.first),
                 emptyList(),
-                nodeClass(line, result.second.declaringClass!!.name),
+                nodeValueClass(line, result.second.declaringClass!!.name),
                 result.second,
                 NodeMCall.Type.EXTEND
             )

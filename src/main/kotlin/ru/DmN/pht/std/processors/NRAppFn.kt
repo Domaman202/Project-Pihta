@@ -1,7 +1,7 @@
 package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.processor.utils.clazzOrNull
-import ru.DmN.pht.std.processor.utils.nodeClass
+import ru.DmN.pht.std.processor.utils.nodeCls
 import ru.DmN.pht.std.processor.utils.nodeDefn
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
@@ -23,8 +23,7 @@ object NRAppFn : INodeProcessor<NodeNodesList> {
                             line,
                             "main",
                             "void",
-                            emptyList(),
-                            mutableListOf(nodeProgn(line, node.nodes))
+                            nodeProgn(line, node.nodes)
                         )
                     )
                 )
@@ -32,11 +31,11 @@ object NRAppFn : INodeProcessor<NodeNodesList> {
                     processor.process(fn, ctx, mode)!!
                 else {
                     NRClass.process(
-                        nodeClass(
+                        nodeCls(
                             line,
                             "App",
-                            listOf("java.lang.Object"),
-                            mutableListOf(fn)
+                            "java.lang.Object",
+                            fn
                         ), processor, ctx, mode
                     )
                 }

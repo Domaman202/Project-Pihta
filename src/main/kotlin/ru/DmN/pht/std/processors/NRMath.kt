@@ -5,7 +5,7 @@ import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.processor.utils.ICastable
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.nodeAs
-import ru.DmN.pht.std.processor.utils.nodeClass
+import ru.DmN.pht.std.processor.utils.nodeValueClass
 import ru.DmN.pht.std.unparsers.NUDefaultX
 import ru.DmN.pht.std.utils.processNodes
 import ru.DmN.siberia.Processor
@@ -35,15 +35,16 @@ object NRMath : INodeProcessor<NodeNodesList> {
             if (mode == ValType.VALUE)
                 NodeNodesList(
                     node.token.processed(),
-                    (if (node.text.startsWith("shift")) nodes else nodes.map { NRAs.process(nodeAs(line, it, firstType.name), processor, ctx, ValType.VALUE)!! })
-                        .toMutableList(),
+                    (if (node.text.startsWith("shift"))
+                        nodes
+                    else nodes.map { NRAs.process(nodeAs(line, it, firstType.name), processor, ctx, ValType.VALUE)!! }).toMutableList()
                 )
             else null
         else NodeMCall(
             Token.operation(line, "!mcall"),
             NRMCall.processArguments(line, processor, ctx, result.second, listOf(nodes[0]) + result.first),
             emptyList(),
-            nodeClass(line, result.second.declaringClass!!.name),
+            nodeValueClass(line, result.second.declaringClass!!.name),
             result.second,
             NodeMCall.Type.EXTEND
         )

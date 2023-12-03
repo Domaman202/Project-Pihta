@@ -1,33 +1,24 @@
 package ru.DmN.phtx.pls.processor.utils
 
 import com.kingmang.lazurite.parser.ast.*
-import com.sun.org.apache.xpath.internal.operations.UnaryOperation
-import ru.DmN.pht.std.ast.NodeIncDec
 import ru.DmN.pht.std.ast.NodeModifierNodesList
-import ru.DmN.pht.std.ast.NodeValue
-import ru.DmN.pht.std.processor.utils.nodeDefn
-import ru.DmN.pht.std.processor.utils.nodeGetOrName
-import ru.DmN.pht.std.processor.utils.nodeMCall
-import ru.DmN.pht.std.processor.utils.nodeValueOf
+import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
+import com.kingmang.lazurite.parser.ast.Node as LNode
 
 fun nodePrognB(line: Int, nodes: MutableList<Node>) =
     NodeModifierNodesList(Token.operation(line, "progn-"), nodes)
 
-fun convert(line: Int, stmt: com.kingmang.lazurite.parser.ast.Node): Node =
+fun convert(line: Int, stmt: LNode): Node =
     when (stmt) {
         is MStatement -> nodePrognB(line, stmt.statements.asSequence().map { convert(line, it) }.toMutableList())
         is ExprStatement -> convert(line, stmt.expr)
-        is PrintStatement -> NodeNodesList(
-            Token.operation(line, "println"),
-            mutableListOf(convert(line, stmt.expression))
-        )
-
+        is PrintStatement -> nodePrintln(line, convert(line, stmt.expression))
         is ValueExpression -> when (stmt.value.type()) {
-            1 -> nodeValueOf(line, stmt.value.asInt())
-            2 -> nodeValueOf(line, stmt.value.asString())
+            1 -> nodeValue(line, stmt.value.asInt())
+            2 -> nodeValue(line, stmt.value.asString())
             else -> throw UnsupportedOperationException()
         }
 
@@ -50,14 +41,10 @@ fun convert(line: Int, stmt: com.kingmang.lazurite.parser.ast.Node): Node =
             mutableListOf(convert(line, stmt.expr1), convert(line, stmt.expr2))
         )
 
-        is AssignmentExpression -> NodeNodesList(
-            Token.operation(line, "def-set"),
-            mutableListOf(convert(line, stmt.target), convert(line, stmt.expression))
-        )
-
+        is AssignmentExpression -> nodeDefSet(line, convert(line, stmt.target), convert(line, stmt.expression))
         is VariableExpression -> when (stmt.name) {
-            "true" -> nodeValueOf(line, true)
-            "false" -> nodeValueOf(line, false)
+            "true" -> nodeValue(line, true)
+            "false" -> nodeValue(line, false)
             else -> nodeGetOrName(line, stmt.name)
         }
 
@@ -74,11 +61,7 @@ fun convert(line: Int, stmt: com.kingmang.lazurite.parser.ast.Node): Node =
             mutableListOf(convert(line, stmt.body))
         )
 
-        is ReturnStatement -> NodeNodesList(
-            Token.operation(line, "ret"),
-            mutableListOf(convert(line, stmt.expression))
-        )
-
+        is ReturnStatement -> nodeRet(line, convert(line, stmt.expression))
         is FunctionalExpression -> nodeMCall(
             line,
             nodeGetOrName(line, "."),
@@ -86,19 +69,15 @@ fun convert(line: Int, stmt: com.kingmang.lazurite.parser.ast.Node): Node =
             stmt.arguments.map { convert(line, it) }
         )
 
-        is IfStatement -> NodeNodesList(
-            Token.operation(line, "if"),
+        is IfStatement -> nodeIf(
+            line,
             sequenceOf(stmt.expression, stmt.ifStatement, stmt.elseStatement)
                 .filterNotNull()
                 .map { convert(line, it) }
                 .toMutableList()
         )
 
-        is WhileStatement -> NodeNodesList(
-            Token.operation(line, "cycle"),
-            mutableListOf(convert(line, stmt.condition), convert(line, stmt.statement))
-        )
-
+        is WhileStatement -> nodeCycle(line, convert(line, stmt.condition), convert(line, stmt.statement))
         is ConditionalExpression -> NodeNodesList(
             Token.operation(
                 line,

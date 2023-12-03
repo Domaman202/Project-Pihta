@@ -54,7 +54,7 @@ object NRFor : INodeProcessor<NodeNodesList> {
                         line,
                         mutableListOf(
                             nodeDef(line, arr, nodes[1]),
-                            nodeDef(line, i, nodeValueOf(line, 0)),
+                            nodeDef(line, i, nodeValue(line, 0)),
                             nodeCycle(
                                 line,
                                 NodeNodesList(
@@ -68,7 +68,7 @@ object NRFor : INodeProcessor<NodeNodesList> {
                                         node.nodes.drop(1) +
                                         NodeNodesList(
                                             Token.operation(line, "inc"),
-                                            mutableListOf(nodeValueOf(line, i))
+                                            mutableListOf(nodeValue(line, i))
                                         )
                             )
                         )

@@ -1,10 +1,10 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.ast.NodeGensNodesList
+import ru.DmN.pht.std.processor.utils.nodeAs
+import ru.DmN.pht.std.processor.utils.nodeWithGens
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
@@ -22,15 +22,10 @@ object NRAsGens : INodeProcessor<NodeNodesList> {
 
     private fun create(node: NodeNodesList): Node {
         val line = node.line
-        return NodeNodesList(
-            Token.operation(line, "with-gens"),
-            mutableListOf<Node>(
-                NodeGensNodesList(
-                    Token.operation(line, "as"),
-                    node.nodes.dropLast(node.nodes.size - 2).toMutableList(),
-                    emptyList()
-                )
-            ).apply { this += node.nodes.asSequence().drop(2) }
+        return nodeWithGens(
+            line,
+            nodeAs(line, node.nodes.dropLast(node.nodes.size - 2)),
+            node.nodes.asSequence().drop(2)
         )
     }
 }

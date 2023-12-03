@@ -12,7 +12,7 @@ object NRUnrollB : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
         var expr = processor.process(node.nodes[0], ctx, ValType.VALUE)!!
         for (i in 1 until node.nodes.size)
-            expr = processor.process(node.nodes[node.nodes.size - i].apply { this as INodesList; nodes.add(0, expr) }, ctx, ValType.VALUE)!!
+            expr = processor.process(node.nodes[node.nodes.size - i].apply { this as INodesList; this.nodes.add(0, expr) }, ctx, ValType.VALUE)!!
         return expr
     }
 }

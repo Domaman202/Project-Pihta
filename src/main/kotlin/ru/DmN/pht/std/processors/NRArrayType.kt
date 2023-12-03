@@ -7,7 +7,7 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.nodeClass
+import ru.DmN.pht.std.processor.utils.nodeValueClass
 import ru.DmN.pht.std.utils.compute
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.isConstClass
@@ -24,8 +24,8 @@ object NRArrayType : IStdNodeProcessor<NodeNodesList> {
         if (mode == ValType.VALUE) {
             val type = processor.process(node.nodes[0], ctx, ValType.VALUE)!!
             if (type.isConstClass)
-                nodeClass(node.token.line, ctx.global.getType(processor.computeString(type, ctx), processor.tp).arrayType.name)
-            else processor.calc(type, ctx)?.let { nodeClass(node.token.line, it.arrayType.name) }
+                nodeValueClass(node.token.line, ctx.global.getType(processor.computeString(type, ctx), processor.tp).arrayType.name)
+            else processor.calc(type, ctx)?.let { nodeValueClass(node.token.line, it.arrayType.name) }
         } else null
 
     override fun computeString(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): String =

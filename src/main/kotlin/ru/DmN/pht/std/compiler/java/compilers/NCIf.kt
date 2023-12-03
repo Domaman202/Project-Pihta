@@ -3,7 +3,7 @@ package ru.DmN.pht.std.compiler.java.compilers
 import ru.DmN.pht.std.ast.NodeCompare
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
-import ru.DmN.pht.std.processor.utils.nodeValueOf
+import ru.DmN.pht.std.processor.utils.nodeValue
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -39,7 +39,7 @@ object NCIf : INodeCompiler<NodeNodesList> {
         } else {
             NCCompare.insertIf(
                 "!eq",
-                mutableListOf(cond, nodeValueOf(node.line, true)),
+                mutableListOf(cond, nodeValue(node.line, true)),
                 ifInsert,
                 elseInsert,
                 compiler, ctx
