@@ -4,4 +4,11 @@
     (test-fn 2 (- 33 12 21))
     (test-fn 3 (* 2 2 3))
     (test-fn 4 (/ 12 3))
-    (test-fn 5 (% 3 2)))
+    (test-fn 5 (% 3 2))
+
+    (test-fn 6 (add 12 21))
+    (test-fn 7 (sub 33 12))
+    (test-fn 8 (sub 33 12 21))
+    (test-fn 9 (mul 2 2 3))
+    (test-fn 10 (div 12 3))
+    (test-fn 11 (rem 3 2)))

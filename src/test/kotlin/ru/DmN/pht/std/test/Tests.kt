@@ -20,6 +20,19 @@ class Tests {
     }
 
     @Test
+    fun testBaseCompare() {
+        Module("test/pht/base-compare").run {
+            compileModule()
+            assertEquals(runModule(0), false)
+            assertEquals(runModule(1), true)
+            assertEquals(runModule(2), false)
+            assertEquals(runModule(3), true)
+            assertEquals(runModule(4), false)
+            assertEquals(runModule(5), true)
+        }
+    }
+
+    @Test
     fun testBaseMath() {
         Module("test/pht/base-math").run {
             compileModule()
@@ -29,6 +42,33 @@ class Tests {
             assertEquals(runModule(3), 12)
             assertEquals(runModule(4), 4)
             assertEquals(runModule(5), 1)
+            assertEquals(runModule(6), 33)
+            assertEquals(runModule(7), 21)
+            assertEquals(runModule(8), 0)
+            assertEquals(runModule(9), 12)
+            assertEquals(runModule(10), 4)
+            assertEquals(runModule(11), 1)
+        }
+    }
+
+    @Test
+    fun testClass() {
+        Module("test/pht/class").run {
+            compileModule()
+            assertEquals((runModule(0) as Class<*>).name, "Test")
+        }
+    }
+
+    @Test
+    fun testExtensionCompare() {
+        Module("test/pht/extension-compare").run {
+            compileModule()
+            assertEquals(runModule(0), "great")
+            assertEquals(runModule(1), "great-or-eq")
+            assertEquals(runModule(2), "less")
+            assertEquals(runModule(3), "less-or-eq")
+            assertEquals(runModule(4), "eq")
+            assertEquals(runModule(5), "not-eq")
         }
     }
 
