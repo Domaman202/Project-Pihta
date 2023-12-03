@@ -3,5 +3,9 @@
         (defn foo ^void [[name ^dynamic]]
             (println (+ "Foo, " name "!")))
         (app-fn
-            (lzr name = "Иван")
-            (lzr foo(name)))))
+            (lzr
+                name = "Иван"
+                foo(name))
+            (println name)
+            (set name "Степан")
+            (lzr print(name)))))
