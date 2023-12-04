@@ -87,6 +87,17 @@ class Tests {
     }
 
     @Test
+    fun testDefVar() {
+        Module("test/pht/def-var").run {
+            compileModule()
+            assertEquals(runModule(0), 12)
+            assertEquals(runModule(1), 21L)
+            assertEquals(runModule(2), 0f)
+            assertEquals(runModule(3), 33.44)
+        }
+    }
+
+    @Test
     fun testExtensionCompare() {
         Module("test/pht/extension-compare").run {
             compileModule()

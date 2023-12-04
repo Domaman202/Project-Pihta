@@ -62,7 +62,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
 
     fun processNodes(method: VirtualMethod, new: NodeNodesList, processor: Processor, ctx: ProcessingContext) {
         var i = 0
-        while (i < new.nodes.size - 1) {
+        while (i < new.nodes.size.let { if (method.rettype != VirtualType.VOID) it - 1 else it }) {
             val it = processor.process(new.nodes[i], ctx, ValType.NO_VALUE)
             if (it == null) {
                 new.nodes.removeAt(i)
@@ -70,20 +70,14 @@ object NRDefn : INodeProcessor<NodeNodesList> {
             } else new.nodes[i] = it
             i++
         }
-        if (new.nodes.isNotEmpty()) {
-            if (method.rettype == VirtualType.VOID) {
-                val result = processor.process(new.nodes.last(), ctx, ValType.NO_VALUE)
-                if (result == null)
-                    new.nodes.removeLast()
-                else new.nodes[new.nodes.lastIndex] = result
-            } else {
-                new.nodes[new.nodes.lastIndex] = NRAs.process(
-                    nodeAs(new.line, new.nodes.last(), method.rettype.name),
-                    processor,
-                    ctx,
-                    ValType.VALUE
-                )!!
-            }
+        //
+        if (new.nodes.isNotEmpty() && method.rettype != VirtualType.VOID) {
+            new.nodes[new.nodes.lastIndex] = NRAs.process(
+                nodeAs(new.line, new.nodes.last(), method.rettype.name),
+                processor,
+                ctx,
+                ValType.VALUE
+            )!!
         }
     }
 

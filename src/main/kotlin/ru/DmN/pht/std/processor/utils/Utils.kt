@@ -64,6 +64,8 @@ fun nodeDefn(line: Int, name: String, ret: String, args: List<Pair<String, Strin
     nodeDefn(line, name, ret, args, mutableListOf(node))
 fun nodeDefn(line: Int, name: String, ret: String, node: Node) =
     nodeDefn(line, name, ret, emptyList(), mutableListOf(node))
+fun nodeDefn(line: Int, name: String, ret: String, nodes: MutableList<Node>) =
+    nodeDefn(line, name, ret, emptyList(), nodes)
 // g
 fun nodeGetOrName(line: Int, name: String) =
     NodeGetOrName(Token.operation(line, "get-or-name!"), name, false)

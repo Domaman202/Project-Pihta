@@ -26,7 +26,7 @@ object NRAppFn : INodeProcessor<NodeNodesList> {
                         line,
                         "main",
                         "void",
-                        nodeProgn(line, node.nodes)
+                        node.nodes
                     )
                 )
                 if (ctx.clazzOrNull?.name == "App")

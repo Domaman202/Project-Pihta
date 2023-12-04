@@ -62,6 +62,8 @@ fun storeCast(variable: Variable, from: VirtualType, node: MethodVisitor) {
             objectToPrimitive(tmp, node)
         else
             primitiveToObject(tmp, node)
+    else if (from.isPrimitive && to.isPrimitive)
+        bytecodeCast(tmp.type().name, to.name, node)
     store(variable, node)
 }
 

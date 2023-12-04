@@ -31,7 +31,7 @@ object NRTestFn : INodeProcessor<NodeNodesList> {
                                 line,
                                 "test",
                                 "dynamic",
-                                nodeProgn(line, node.nodes.drop(1).toMutableList())
+                                node.nodes.drop(1).toMutableList()
                             )
                         )
                     ), processor, ctx, mode
