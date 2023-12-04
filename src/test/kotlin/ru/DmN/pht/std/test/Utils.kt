@@ -21,13 +21,14 @@ import java.net.URLClassLoader
 
 class Module(val dir: String) {
     fun compileModule() {
+        val tp = TypesProvider.java()
         val module = (Parser(Module.getModuleFile(dir)).parseNode(ParsingContext.of(StdModule)) as NodeModule).module
         val processed = ArrayList<Node>()
-        val processor = Processor(TypesProvider.JAVA)
+        val processor = Processor(tp)
         val pctx = ProcessingContext.base().with(Platform.JAVA)
         processed += module.load(processor, pctx, ValType.NO_VALUE)!!
         processor.stageManager.runAll()
-        val compiler = Compiler(TypesProvider.JAVA)
+        val compiler = Compiler(tp)
         val cctx = CompilationContext.base()
         processed.forEach { compiler.compile(it, cctx) }
         compiler.stageManager.runAll()

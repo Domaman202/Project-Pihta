@@ -1,0 +1,3 @@
+(progn
+    (itf ITest [])
+    (test-fn 0 ^ITest))

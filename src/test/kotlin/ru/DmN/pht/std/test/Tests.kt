@@ -1,7 +1,7 @@
 package ru.DmN.pht.std.test
 
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import java.lang.reflect.Modifier
+import kotlin.test.*
 
 class Tests {
     @Test
@@ -16,6 +16,29 @@ class Tests {
     fun testBaseUseCtx() {
         Module("test/base/use-ctx").run {
             compileModule()
+        }
+    }
+
+    @Test
+    fun testAbstractClassImpl() {
+        Module("test/pht/abstract-class-impl").run {
+            compileModule()
+            (runModule(0) as Class<*>).let { it ->
+                assertTrue(Modifier.isAbstract(it.modifiers))
+                it.methods.find { it.name == "foo" }.let {
+                    assertNotNull(it)
+                    assertTrue(Modifier.isAbstract(it.modifiers))
+                }
+            }
+            (runModule(1) as Class<*>).let { it ->
+                assertTrue(it.interfaces.isEmpty())
+                it.methods.find { it.name == "foo" }.let {
+                    assertNotNull(it)
+                    assertFalse(Modifier.isAbstract(it.modifiers))
+                }
+            }
+            assertNotNull(runModule(2))
+            assertEquals(runModule(3), "Foo!")
         }
     }
 
@@ -55,7 +78,11 @@ class Tests {
     fun testClass() {
         Module("test/pht/class").run {
             compileModule()
-            assertEquals((runModule(0) as Class<*>).name, "Test")
+            (runModule(0) as Class<*>).let {
+                assertEquals(it.name, "Test")
+                assertEquals(it.superclass, Any::class.java)
+                assertTrue(it.interfaces.isEmpty())
+            }
         }
     }
 
@@ -81,6 +108,40 @@ class Tests {
             assertEquals(runModule(2), "mul")
             assertEquals(runModule(3), "div")
             assertEquals(runModule(4), "rem")
+        }
+    }
+
+    @Test
+    fun testInterface() {
+        Module("test/pht/interface").run {
+            compileModule()
+            (runModule(0) as Class<*>).let {
+                assertEquals(it.name, "ITest")
+                assertNull(it.superclass)
+                assertTrue(Modifier.isInterface(it.modifiers))
+            }
+        }
+    }
+
+    @Test
+    fun testInterfaceImpl() {
+        Module("test/pht/interface-impl").run {
+            compileModule()
+            (runModule(0) as Class<*>).let { it ->
+                it.methods.find { it.name == "foo" }.let {
+                    assertNotNull(it)
+                    assertTrue(Modifier.isAbstract(it.modifiers))
+                }
+            }
+            (runModule(1) as Class<*>).let { it ->
+                assertTrue(it.interfaces.isNotEmpty())
+                it.methods.find { it.name == "foo" }.let {
+                    assertNotNull(it)
+                    assertFalse(Modifier.isAbstract(it.modifiers))
+                }
+            }
+            assertNotNull(runModule(2))
+            assertEquals(runModule(3), "Foo!")
         }
     }
 
