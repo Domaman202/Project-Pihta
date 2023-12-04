@@ -20,7 +20,7 @@ import java.io.FileOutputStream
 import java.net.URLClassLoader
 
 class Module(val dir: String) {
-    fun compileModule() {
+    fun compile() {
         val tp = TypesProvider.java()
         val module = (Parser(Module.getModuleFile(dir)).parseNode(ParsingContext.of(StdModule)) as NodeModule).module
         val processed = ArrayList<Node>()
@@ -46,6 +46,6 @@ class Module(val dir: String) {
         }
     }
 
-    fun runModule(id: Int): Any? =
+    fun test(id: Int): Any? =
         URLClassLoader(arrayOf(File("dump/$dir").toURL())).loadClass("Test$id").getMethod("test").invoke(null)
 }

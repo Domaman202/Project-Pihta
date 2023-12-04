@@ -10,6 +10,7 @@ import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.ast.NodeASet
+import ru.DmN.pht.std.compiler.java.utils.bytecodeCast
 
 object NCASet : INodeCompiler<NodeASet> {
     override fun compile(node: NodeASet, compiler: Compiler, ctx: CompilationContext) {
@@ -36,10 +37,11 @@ object NCASet : INodeCompiler<NodeASet> {
         }
 
     private fun MethodVisitor.visitAStore(arr: Variable, value: Variable) {
-        if (!value.type().isPrimitive) {
-            visitTypeInsn(Opcodes.CHECKCAST, arr.type!!.componentType!!.className)
-            visitAStore(arr)
-        }
+        val componentType = arr.type().componentType!!
+        if (value.type().isPrimitive)
+            bytecodeCast(value.type().name, componentType.name, this)
+        else visitTypeInsn(Opcodes.CHECKCAST, componentType.className)
+        visitAStore(arr)
     }
 
     private fun MethodVisitor.visitAStore(arr: Variable) {

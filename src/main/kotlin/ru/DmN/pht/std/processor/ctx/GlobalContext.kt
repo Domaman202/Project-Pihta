@@ -41,11 +41,16 @@ class GlobalContext(
             .map { it.first }
             .toList()
 
-    private fun getAllMethods(type: VirtualType): Sequence<VirtualMethod> {
-        var seq = type.methods.asSequence() + getExtensions(type).asSequence()
-        type.parents.forEach { seq += getAllMethods(it) }
-        return seq
-    }
+    private fun getAllMethods(type: VirtualType): Sequence<VirtualMethod> =
+        if (type.isArray) {
+            var seq = getExtensions(type).asSequence()
+            type.componentType!!.parents.forEach { seq += getAllMethods(it.arrayType) }
+            seq
+        } else {
+            var seq = type.methods.asSequence() + getExtensions(type).asSequence()
+            type.parents.forEach { seq += getAllMethods(it) }
+            seq
+        }
 
     fun getExtensions(type: VirtualType): MutableList<VirtualMethod> {
         extensions.find { it.first == type.name }?.let { return it.second }

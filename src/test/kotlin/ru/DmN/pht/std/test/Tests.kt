@@ -1,13 +1,14 @@
 package ru.DmN.pht.std.test
 
 import java.lang.reflect.Modifier
+import java.util.*
 import kotlin.test.*
 
 class Tests {
     @Test
     fun testBaseModuleUses() {
         Module("test/base/module-uses").run {
-            compileModule()
+            compile()
         }
     }
 
@@ -15,70 +16,68 @@ class Tests {
     @Test
     fun testBaseUseCtx() {
         Module("test/base/use-ctx").run {
-            compileModule()
+            compile()
         }
     }
 
     @Test
     fun testAbstractClassImpl() {
         Module("test/pht/abstract-class-impl").run {
-            compileModule()
-            (runModule(0) as Class<*>).let { it ->
+            compile()
+            (test(0) as Class<*>).let { it ->
                 assertTrue(Modifier.isAbstract(it.modifiers))
                 it.methods.find { it.name == "foo" }.let {
                     assertNotNull(it)
                     assertTrue(Modifier.isAbstract(it.modifiers))
                 }
             }
-            (runModule(1) as Class<*>).let { it ->
+            (test(1) as Class<*>).let { it ->
                 assertTrue(it.interfaces.isEmpty())
                 it.methods.find { it.name == "foo" }.let {
                     assertNotNull(it)
                     assertFalse(Modifier.isAbstract(it.modifiers))
                 }
             }
-            assertNotNull(runModule(2))
-            assertEquals(runModule(3), "Foo!")
+            assertNotNull(test(2))
+            assertEquals(test(3), "Foo!")
         }
     }
 
     @Test
     fun testBaseCompare() {
         Module("test/pht/base-compare").run {
-            compileModule()
-            assertEquals(runModule(0), false)
-            assertEquals(runModule(1), true)
-            assertEquals(runModule(2), false)
-            assertEquals(runModule(3), true)
-            assertEquals(runModule(4), false)
-            assertEquals(runModule(5), true)
+            compile()
+            assertEquals(test(0), false)
+            assertEquals(test(1), true)
+            assertEquals(test(2), false)
+            assertEquals(test(3), true)
+            assertEquals(test(4), false)
+            assertEquals(test(5), true)
         }
     }
 
     @Test
     fun testBaseMath() {
         Module("test/pht/base-math").run {
-            compileModule()
-            assertEquals(runModule(0), 33)
-            assertEquals(runModule(1), 21)
-            assertEquals(runModule(2), 0)
-            assertEquals(runModule(3), 12)
-            assertEquals(runModule(4), 4)
-            assertEquals(runModule(5), 1)
-            assertEquals(runModule(6), 33)
-            assertEquals(runModule(7), 21)
-            assertEquals(runModule(8), 0)
-            assertEquals(runModule(9), 12)
-            assertEquals(runModule(10), 4)
-            assertEquals(runModule(11), 1)
+            compile()
+            for (i in 0..1) {
+                assertEquals(test(0 + i * 8), 33)
+                assertEquals(test(1 + i * 8), 21)
+                assertEquals(test(2 + i * 8), 0)
+                assertEquals(test(3 + i * 8), 12)
+                assertEquals(test(4 + i * 8), 4)
+                assertEquals(test(5 + i * 8), 1)
+                assertEquals(test(6 + i * 8), 1)
+                assertEquals(test(7 + i * 8), 1024)
+            }
         }
     }
 
     @Test
     fun testClass() {
         Module("test/pht/class").run {
-            compileModule()
-            (runModule(0) as Class<*>).let {
+            compile()
+            (test(0) as Class<*>).let {
                 assertEquals(it.name, "Test")
                 assertEquals(it.superclass, Any::class.java)
                 assertTrue(it.interfaces.isEmpty())
@@ -87,62 +86,79 @@ class Tests {
     }
 
     @Test
+    fun testCollectionOf() {
+        Module("test/pht/collection-of").run {
+            compile()
+            assertTrue((test(0) as IntArray).contentEquals(intArrayOf(12, 21, 33)))
+            assertTrue((test(1) as LongArray).contentEquals(longArrayOf(202L, 203L, 213L)))
+        }
+    }
+
+    @Test
+    fun testCycle() {
+        Module("test/pht/cycle").run {
+            compile()
+            assertEquals(test(0), 45)
+        }
+    }
+
+    @Test
     fun testDefField() {
         Module("test/pht/def-field").run {
-            compileModule()
-            assertEquals(runModule(0), 202)
+            compile()
+            assertEquals(test(0), 202)
         }
     }
 
     @Test
     fun testDefVar() {
         Module("test/pht/def-var").run {
-            compileModule()
-            assertEquals(runModule(0), 12)
-            assertEquals(runModule(1), 21L)
-            assertEquals(runModule(2), 0f)
-            assertEquals(runModule(3), 33.44)
+            compile()
+            assertEquals(test(0), 12)
+            assertEquals(test(1), 21L)
+            assertEquals(test(2), 0f)
+            assertEquals(test(3), 33.44)
         }
     }
 
     @Test
     fun testExtensionCompare() {
         Module("test/pht/extension-compare").run {
-            compileModule()
-            assertEquals(runModule(0), "great")
-            assertEquals(runModule(1), "great-or-eq")
-            assertEquals(runModule(2), "less")
-            assertEquals(runModule(3), "less-or-eq")
-            assertEquals(runModule(4), "eq")
-            assertEquals(runModule(5), "not-eq")
+            compile()
+            assertEquals(test(0), "great")
+            assertEquals(test(1), "great-or-eq")
+            assertEquals(test(2), "less")
+            assertEquals(test(3), "less-or-eq")
+            assertEquals(test(4), "eq")
+            assertEquals(test(5), "not-eq")
         }
     }
 
     @Test
     fun testExtensionMath() {
         Module("test/pht/extension-math").run {
-            compileModule()
-            assertEquals(runModule(0), "Слава России")
-            assertEquals(runModule(1), "ЛолКек")
-            assertEquals(runModule(2), "mul")
-            assertEquals(runModule(3), "div")
-            assertEquals(runModule(4), "rem")
+            compile()
+            assertEquals(test(0), "Слава России")
+            assertEquals(test(1), "ЛолКек")
+            assertEquals(test(2), "mul")
+            assertEquals(test(3), "div")
+            assertEquals(test(4), "rem")
         }
     }
 
     @Test
     fun testField() {
         Module("test/pht/field").run {
-            compileModule()
-            assertEquals(runModule(0), 213)
+            compile()
+            assertEquals(test(0), 213)
         }
     }
 
     @Test
     fun testInterface() {
         Module("test/pht/interface").run {
-            compileModule()
-            (runModule(0) as Class<*>).let {
+            compile()
+            (test(0) as Class<*>).let {
                 assertEquals(it.name, "ITest")
                 assertNull(it.superclass)
                 assertTrue(Modifier.isInterface(it.modifiers))
@@ -153,62 +169,62 @@ class Tests {
     @Test
     fun testInterfaceImpl() {
         Module("test/pht/interface-impl").run {
-            compileModule()
-            (runModule(0) as Class<*>).let { it ->
+            compile()
+            (test(0) as Class<*>).let { it ->
                 it.methods.find { it.name == "foo" }.let {
                     assertNotNull(it)
                     assertTrue(Modifier.isAbstract(it.modifiers))
                 }
             }
-            (runModule(1) as Class<*>).let { it ->
+            (test(1) as Class<*>).let { it ->
                 assertTrue(it.interfaces.isNotEmpty())
                 it.methods.find { it.name == "foo" }.let {
                     assertNotNull(it)
                     assertFalse(Modifier.isAbstract(it.modifiers))
                 }
             }
-            assertNotNull(runModule(2))
-            assertEquals(runModule(3), "Foo!")
+            assertNotNull(test(2))
+            assertEquals(test(3), "Foo!")
         }
     }
 
     @Test
     fun testTestFn() {
         Module("test/pht/test-fn").run {
-            compileModule()
-            assertEquals(runModule(0), "Текст из Сибири.")
-            assertEquals(runModule(1), "Текст из Кавказа.")
-            assertEquals(runModule(2), "Текст из Донбасса.")
+            compile()
+            assertEquals(test(0), "Текст из Сибири.")
+            assertEquals(test(1), "Текст из Кавказа.")
+            assertEquals(test(2), "Текст из Донбасса.")
         }
     }
 
     @Test
     fun testUnit() {
         Module("test/pht/unit").run {
-            compileModule()
+            compile()
         }
     }
 
     @Test
     fun testUnroll() {
         Module("test/pht/unroll").run {
-            compileModule()
-            assertEquals(runModule(0), 5)
-            assertEquals(runModule(1), 8)
+            compile()
+            assertEquals(test(0), 5)
+            assertEquals(test(1), 8)
         }
     }
 
     @Test
     fun testValue() {
         Module("test/pht/value").run {
-            compileModule()
-            assertEquals(runModule(0), null)
-            assertEquals(runModule(1), 12)
-            assertEquals(runModule(2), 21.33)
-            assertEquals(runModule(3), 44f)
-            assertEquals(runModule(4), 202L)
-            assertEquals(runModule(5), "Текст")
-            assertEquals(runModule(6), Any::class.java)
+            compile()
+            assertEquals(test(0), null)
+            assertEquals(test(1), 12)
+            assertEquals(test(2), 21.33)
+            assertEquals(test(3), 44f)
+            assertEquals(test(4), 202L)
+            assertEquals(test(5), "Текст")
+            assertEquals(test(6), Any::class.java)
         }
     }
 }
