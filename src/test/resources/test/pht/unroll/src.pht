@@ -1,0 +1,5 @@
+(progn
+    (test-fn 0
+        (as ^dynamic (<- 1 (+ 1) (* 2) (* 2))))
+    (test-fn 1
+        (as ^dynamic (-> 1 (+ 1) (* 2) (* 2)))))

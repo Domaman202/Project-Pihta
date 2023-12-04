@@ -87,6 +87,14 @@ class Tests {
     }
 
     @Test
+    fun testDefField() {
+        Module("test/pht/def-field").run {
+            compileModule()
+            assertEquals(runModule(0), 202)
+        }
+    }
+
+    @Test
     fun testDefVar() {
         Module("test/pht/def-var").run {
             compileModule()
@@ -119,6 +127,14 @@ class Tests {
             assertEquals(runModule(2), "mul")
             assertEquals(runModule(3), "div")
             assertEquals(runModule(4), "rem")
+        }
+    }
+
+    @Test
+    fun testField() {
+        Module("test/pht/field").run {
+            compileModule()
+            assertEquals(runModule(0), 213)
         }
     }
 
@@ -170,6 +186,15 @@ class Tests {
     fun testUnit() {
         Module("test/pht/unit").run {
             compileModule()
+        }
+    }
+
+    @Test
+    fun testUnroll() {
+        Module("test/pht/unroll").run {
+            compileModule()
+            assertEquals(runModule(0), 5)
+            assertEquals(runModule(1), 8)
         }
     }
 
