@@ -1,3 +1,2 @@
 (app-fn
-    (def [[i 404]])
-    (println i))
+    (println (*module-name*)))

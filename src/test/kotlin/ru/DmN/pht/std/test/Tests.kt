@@ -1,28 +1,13 @@
 package ru.DmN.pht.std.test
 
+import ru.DmN.siberia.test.Module
 import java.lang.reflect.Modifier
-import java.util.*
 import kotlin.test.*
 
 class Tests {
     @Test
-    fun testBaseModuleUses() {
-        Module("test/base/module-uses").run {
-            compile()
-        }
-    }
-
-
-    @Test
-    fun testBaseUseCtx() {
-        Module("test/base/use-ctx").run {
-            compile()
-        }
-    }
-
-    @Test
     fun testAbstractClassImpl() {
-        Module("test/pht/abstract-class-impl").run {
+        Module("test/pht/std/abstract-class-impl").run {
             compile()
             (test(0) as Class<*>).let { it ->
                 assertTrue(Modifier.isAbstract(it.modifiers))
@@ -45,7 +30,7 @@ class Tests {
 
     @Test
     fun testBaseCompare() {
-        Module("test/pht/base-compare").run {
+        Module("test/pht/std/base-compare").run {
             compile()
             assertEquals(test(0), false)
             assertEquals(test(1), true)
@@ -58,7 +43,7 @@ class Tests {
 
     @Test
     fun testBaseMath() {
-        Module("test/pht/base-math").run {
+        Module("test/pht/std/base-math").run {
             compile()
             for (i in 0..1) {
                 assertEquals(test(0 + i * 8), 33)
@@ -75,7 +60,7 @@ class Tests {
 
     @Test
     fun testClass() {
-        Module("test/pht/class").run {
+        Module("test/pht/std/class").run {
             compile()
             (test(0) as Class<*>).let {
                 assertEquals(it.name, "Test")
@@ -87,7 +72,7 @@ class Tests {
 
     @Test
     fun testCollectionOf() {
-        Module("test/pht/collection-of").run {
+        Module("test/pht/std/collection-of").run {
             compile()
             assertTrue((test(0) as IntArray).contentEquals(intArrayOf(12, 21, 33)))
             assertTrue((test(1) as LongArray).contentEquals(longArrayOf(202L, 203L, 213L)))
@@ -96,7 +81,7 @@ class Tests {
 
     @Test
     fun testCycle() {
-        Module("test/pht/cycle").run {
+        Module("test/pht/std/cycle").run {
             compile()
             assertEquals(test(0), 45)
         }
@@ -104,7 +89,7 @@ class Tests {
 
     @Test
     fun testDefField() {
-        Module("test/pht/def-field").run {
+        Module("test/pht/std/def-field").run {
             compile()
             assertEquals(test(0), 202)
         }
@@ -112,7 +97,7 @@ class Tests {
 
     @Test
     fun testDefVar() {
-        Module("test/pht/def-var").run {
+        Module("test/pht/std/def-var").run {
             compile()
             assertEquals(test(0), 12)
             assertEquals(test(1), 21L)
@@ -123,7 +108,7 @@ class Tests {
 
     @Test
     fun testExtensionCompare() {
-        Module("test/pht/extension-compare").run {
+        Module("test/pht/std/extension-compare").run {
             compile()
             assertEquals(test(0), "great")
             assertEquals(test(1), "great-or-eq")
@@ -136,7 +121,7 @@ class Tests {
 
     @Test
     fun testExtensionMath() {
-        Module("test/pht/extension-math").run {
+        Module("test/pht/std/extension-math").run {
             compile()
             assertEquals(test(0), "Слава России")
             assertEquals(test(1), "ЛолКек")
@@ -148,7 +133,7 @@ class Tests {
 
     @Test
     fun testField() {
-        Module("test/pht/field").run {
+        Module("test/pht/std/field").run {
             compile()
             assertEquals(test(0), 213)
         }
@@ -156,7 +141,7 @@ class Tests {
 
     @Test
     fun testInterface() {
-        Module("test/pht/interface").run {
+        Module("test/pht/std/interface").run {
             compile()
             (test(0) as Class<*>).let {
                 assertEquals(it.name, "ITest")
@@ -168,7 +153,7 @@ class Tests {
 
     @Test
     fun testInterfaceImpl() {
-        Module("test/pht/interface-impl").run {
+        Module("test/pht/std/interface-impl").run {
             compile()
             (test(0) as Class<*>).let { it ->
                 it.methods.find { it.name == "foo" }.let {
@@ -190,7 +175,7 @@ class Tests {
 
     @Test
     fun testTestFn() {
-        Module("test/pht/test-fn").run {
+        Module("test/pht/std/test-fn").run {
             compile()
             assertEquals(test(0), "Текст из Сибири.")
             assertEquals(test(1), "Текст из Кавказа.")
@@ -200,14 +185,14 @@ class Tests {
 
     @Test
     fun testUnit() {
-        Module("test/pht/unit").run {
+        Module("test/pht/std/unit").run {
             compile()
         }
     }
 
     @Test
     fun testUnroll() {
-        Module("test/pht/unroll").run {
+        Module("test/pht/std/unroll").run {
             compile()
             assertEquals(test(0), 5)
             assertEquals(test(1), 8)
@@ -216,7 +201,7 @@ class Tests {
 
     @Test
     fun testValue() {
-        Module("test/pht/value").run {
+        Module("test/pht/std/value").run {
             compile()
             assertEquals(test(0), null)
             assertEquals(test(1), 12)

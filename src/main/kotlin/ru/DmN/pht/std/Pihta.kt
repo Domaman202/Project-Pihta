@@ -248,7 +248,7 @@ object Pihta : Module("pht") {
         super.unload(parser, ctx)
     }
 
-    override fun load(processor: Processor, ctx: ProcessingContext, mode: ValType): List<Node>? {
+    override fun load(processor: Processor, ctx: ProcessingContext, mode: ValType): Boolean {
         if (!ctx.loadedModules.contains(this)) {
             processor.contexts.macros = HashMap()
             ctx.global = GlobalContext()

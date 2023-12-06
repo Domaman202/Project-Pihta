@@ -10,6 +10,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.processors.NRDefault
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
@@ -27,6 +28,7 @@ object NRClass : INodeProcessor<NodeNodesList> {
         val gctx = ctx.global
         //
         val type = VirtualTypeImpl(gctx.name(processor.computeString(processor.process(node.nodes[0], ctx, ValType.VALUE)!!, ctx)))
+        //
         when (node.text) {
             "obj" -> type.fields += VirtualFieldImpl(type, "INSTANCE", type, isStatic = true, isEnum = false)
             "itf" -> type.isInterface = true
