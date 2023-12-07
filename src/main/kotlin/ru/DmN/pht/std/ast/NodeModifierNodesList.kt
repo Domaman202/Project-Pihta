@@ -11,4 +11,7 @@ class NodeModifierNodesList(token: Token, nodes: MutableList<Node>) : NodeNodesL
         set(value) { field = value; nodes.filter { it is IFinallyNode }.forEach { (it as IFinallyNode).final = value } }
     override var static: Boolean = false
         set(value) { field = value; nodes.filter { it is IStaticallyNode }.forEach { (it as IStaticallyNode).static = value } }
+
+    override fun copy(): NodeModifierNodesList =
+        NodeModifierNodesList(token, copyNodes())
 }

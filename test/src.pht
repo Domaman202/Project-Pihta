@@ -1,2 +1,3 @@
 (app-fn
-    (println "НЕГР"))
+    (inc-lzr src.lzr)
+    (println (+ "text = '" text "'")))
