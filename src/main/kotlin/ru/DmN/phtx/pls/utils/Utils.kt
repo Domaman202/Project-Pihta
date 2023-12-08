@@ -1,4 +1,4 @@
-package ru.DmN.phtx.pls.processor.utils
+package ru.DmN.phtx.pls.utils
 
 import com.kingmang.lazurite.parser.ast.*
 import ru.DmN.pht.std.ast.NodeModifierNodesList
@@ -82,12 +82,12 @@ fun convert(line: Int, stmt: LNode): Node =
             Token.operation(
                 line,
                 when (stmt.operation) {
-                    ConditionalExpression.Operator.EQUALS -> "eq"
-                    ConditionalExpression.Operator.NOT_EQUALS -> "not-eq"
-                    ConditionalExpression.Operator.LT -> "less"
-                    ConditionalExpression.Operator.LTEQ -> "less-or-eq"
-                    ConditionalExpression.Operator.GT -> "great"
-                    ConditionalExpression.Operator.GTEQ -> "great-or-eq"
+                    ConditionalExpression.Operator.EQUALS       -> "eq"
+                    ConditionalExpression.Operator.NOT_EQUALS   -> "not-eq"
+                    ConditionalExpression.Operator.LT           -> "less"
+                    ConditionalExpression.Operator.LTEQ         -> "less-or-eq"
+                    ConditionalExpression.Operator.GT           -> "great"
+                    ConditionalExpression.Operator.GTEQ         -> "great-or-eq"
                     else -> throw UnsupportedOperationException()
                 }
             ),
@@ -98,15 +98,29 @@ fun convert(line: Int, stmt: LNode): Node =
             Token.operation(
                 line,
                 when (stmt.operation) {
-                    UnaryExpression.Operator.INCREMENT_PREFIX -> "inc"
-                    UnaryExpression.Operator.INCREMENT_POSTFIX -> "inc-"
-                    UnaryExpression.Operator.DECREMENT_PREFIX -> "dec"
-                    UnaryExpression.Operator.DECREMENT_POSTFIX -> "dec-"
+                    UnaryExpression.Operator.INCREMENT_PREFIX   -> "inc"
+                    UnaryExpression.Operator.INCREMENT_POSTFIX  -> "inc-"
+                    UnaryExpression.Operator.DECREMENT_PREFIX   -> "dec"
+                    UnaryExpression.Operator.DECREMENT_POSTFIX  -> "dec-"
                     else -> throw UnsupportedOperationException()
                 }
             ),
             mutableListOf(nodeGetOrName(line, (stmt.expr1 as VariableExpression).name))
         )
+
+        is ClassDeclarationStatement -> {
+            val nodes = ArrayList<Node>()
+            if (stmt.fields.isNotEmpty())
+                nodes += nodeFld(line, stmt.fields.map { Pair((it.target as VariableExpression).name, (it.expression as VariableExpression).name )})
+            stmt.methods.forEach {
+                if (it.name == stmt.name) {
+                    nodes += nodeCtor(line, listOf(nodeCCall(line), convert(line, it.body)))
+                } else {
+                    nodes += convert(line, it)
+                }
+            }
+            nodeCls(line, stmt.name, listOf("Object"), nodes)
+        }
 
         else -> throw UnsupportedOperationException()
     }

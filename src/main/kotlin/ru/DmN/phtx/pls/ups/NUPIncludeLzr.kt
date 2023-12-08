@@ -2,12 +2,11 @@ package ru.DmN.phtx.pls.ups
 
 import com.kingmang.lazurite.parser.pars.FunctionAdder
 import com.kingmang.lazurite.parser.pars.Lexer
-import ru.DmN.phtx.pls.processor.utils.convert
-import ru.DmN.phtx.pls.processor.utils.nodePrognB
+import ru.DmN.phtx.pls.utils.convert
+import ru.DmN.phtx.pls.utils.nodePrognB
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
-import ru.DmN.siberia.lexer.isNaming
 import ru.DmN.siberia.lexer.isOperation
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.processor.utils.module

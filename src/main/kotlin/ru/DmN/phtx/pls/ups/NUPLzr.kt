@@ -1,7 +1,7 @@
 package ru.DmN.phtx.pls.ups
 
 import com.kingmang.lazurite.parser.pars.FunctionAdder
-import ru.DmN.phtx.pls.processor.utils.convert
+import ru.DmN.phtx.pls.utils.convert
 import ru.DmN.phtx.pls.utils.Lexer
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node

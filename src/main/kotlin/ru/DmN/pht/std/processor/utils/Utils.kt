@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.processor.utils
 
+import ru.DmN.pht.std.ast.NodeFieldA
 import ru.DmN.pht.std.ast.NodeGensNodesList
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.ast.NodeValue
@@ -38,16 +39,24 @@ fun nodeASet(line: Int, name: String, index: Int, value: Node) =
 fun nodeBody(line: Int, nodes: MutableList<Node>) =
     NodeNodesList(Token.operation(line, "body"), nodes)
 // c
+fun nodeCCall(line: Int) =
+    NodeNodesList(Token.operation(line, "ccall"))
 fun nodeCls(line: Int, name: String, parents: List<String>, nodes: List<Node>) =
     NodeNodesList(Token.operation(line, "cls"),
         mutableListOf(nodeValue(line, name), nodeValn(line, parents.map { nodeValue(line, it) }.toMutableList())).apply { addAll(nodes) })
 fun nodeCls(line: Int, name: String, parent: String, node: Node) =
     nodeCls(line, name, listOf(parent), listOf(node))
+fun nodeCtor(line: Int, nodes: List<Node>) =
+    NodeNodesList(Token.operation(line, "ctor"),
+        mutableListOf<Node>(nodeValn(line, mutableListOf())).apply { addAll(nodes) })
 fun nodeCycle(line: Int, cond: Node, body: List<Node>) =
     NodeNodesList(Token.operation(line, "cycle"), mutableListOf(cond).apply { addAll(body) })
 fun nodeCycle(line: Int, cond: Node, body: Node) =
     NodeNodesList(Token.operation(line, "cycle"), mutableListOf(cond, body))
 // d
+fun nodeDef(line: Int, name: String, type: String) =
+    NodeNodesList(Token.operation(line, "def"),
+        mutableListOf(nodeValn(line, nodeValn(line, mutableListOf(nodeValueClass(line, type), nodeGetOrName(line, name))))))
 fun nodeDef(line: Int, name: String, value: Node) =
     NodeNodesList(Token.operation(line, "def"),
         mutableListOf(nodeValn(line, nodeValn(line, mutableListOf(nodeGetOrName(line, name), value)))))
@@ -66,6 +75,10 @@ fun nodeDefn(line: Int, name: String, ret: String, node: Node) =
     nodeDefn(line, name, ret, emptyList(), mutableListOf(node))
 fun nodeDefn(line: Int, name: String, ret: String, nodes: MutableList<Node>) =
     nodeDefn(line, name, ret, emptyList(), nodes)
+// f
+fun nodeFld(line: Int, args: List<Pair<String, String>>) =
+    NodeFieldA(Token.operation(line, "fld"),
+        mutableListOf(nodeValn(line, args.map { (nodeValn(line, mutableListOf(nodeGetOrName(line, it.first), nodeValueClass(line, it.second)))) }.toMutableList())))
 // g
 fun nodeGetOrName(line: Int, name: String) =
     NodeGetOrName(Token.operation(line, "get-or-name!"), name, false)

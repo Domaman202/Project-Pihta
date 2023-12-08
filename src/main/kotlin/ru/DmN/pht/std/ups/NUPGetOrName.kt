@@ -33,11 +33,14 @@ object NUPGetOrName : INUP<NodeGetOrName, NodeGetOrName>, IStdNodeProcessor<Node
     }
 
     override fun calc(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): VirtualType =
-        if (node.name == "super")
+        calc(node.name, ctx)
+
+    fun calc(name: String, ctx: ProcessingContext) =
+        if (name == "super")
             ctx.body["this"]!!.type()
         else {
-            val variable = ctx.body[node.name]
-            variable?.type() ?: if (ctx.isClass()) ctx.clazz.fields.find { it.name == node.name }!!.type else throw RuntimeException()
+            val variable = ctx.body[name]
+            variable?.type() ?: if (ctx.isClass()) ctx.clazz.fields.find { it.name == name }!!.type else throw RuntimeException()
         }
 
     override fun computeGenerics(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): List<VirtualType> =

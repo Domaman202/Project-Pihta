@@ -26,7 +26,7 @@ import ru.DmN.siberia.utils.line
 
 object NUPFieldA : INUP<NodeFieldA, NodeFieldA> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
-        NPDefault.parse(parser, ctx) { NodeFieldA(token, it) }
+        NPDefault.parse(parser, ctx) { NodeFieldA(token, it) } // todo: remove nfa and set nl
 
     override fun unparse(node: NodeFieldA, unparser: Unparser, ctx: UnparsingContext, indent: Int) =
         NUDefault.unparse(node, unparser, ctx, indent)

@@ -13,7 +13,6 @@ import ru.DmN.pht.std.processors.*
 import ru.DmN.pht.std.ups.*
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
-import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parser.utils.parsersPool
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -59,9 +58,9 @@ object Pihta : Module("pht") {
         adda("!cycle",       NUPDefaultX)
         // d
         adda("debug",        NUPDebug)
-        adda("dec",          NUPIncDec,  NRIncDec)
-        adda("dec-",         NUPIncDec,  NRIncDec)
-        adda("!dec",         NUPIncDec)
+        adda("dec",          NUPIncDecA,  NRIncDec)
+        adda("dec-",         NUPIncDecA,  NRIncDec)
+        adda("!dec",         NUPIncDecB)
         adda("def",          NUPDefault, NRDef)
         adda("!def",         NUPDef)
         adda("def-set",      NUPDefault, NRDefSet)
@@ -99,9 +98,9 @@ object Pihta : Module("pht") {
         // i
         adda("if",           NUPDefault, NRIf)
         adda("import",       NUPImport)
-        adda("inc",          NUPIncDec,  NRIncDec)
-        adda("inc-",         NUPIncDec,  NRIncDec)
-        adda("!inc",         NUPIncDec)
+        adda("inc",          NUPIncDecA,  NRIncDec)
+        adda("inc-",         NUPIncDecA,  NRIncDec)
+        adda("!inc",         NUPIncDecB)
         adda("is",           NUPDefault, NRIs)
         adda("itf",          NUPDefault, NRClass)
         adda("!itf",         NUPClass)
