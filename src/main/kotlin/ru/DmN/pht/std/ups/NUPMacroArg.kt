@@ -10,7 +10,7 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeMacroArg
-import ru.DmN.pht.std.parser.macros
+import ru.DmN.pht.std.parser.utils.macros
 import ru.DmN.pht.std.processor.ctx.MacroContext
 import ru.DmN.pht.std.processor.utils.macro
 import ru.DmN.pht.std.utils.IStdNUP

@@ -1,5 +1,4 @@
-(progn
-    (inc-lzr src.lzr)
+((inc-lzr src.lzr)
     (app-fn
         (def [[o (new ^Test)]])
         (valn-repeat 5

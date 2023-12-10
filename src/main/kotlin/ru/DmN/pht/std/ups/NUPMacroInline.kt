@@ -2,7 +2,7 @@ package ru.DmN.pht.std.ups
 
 import ru.DmN.pht.std.ast.NodeMacroArg
 import ru.DmN.pht.std.ast.NodeMacroInline
-import ru.DmN.pht.std.parser.macros
+import ru.DmN.pht.std.parser.utils.macros
 import ru.DmN.pht.std.processor.utils.sliceInsert
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString

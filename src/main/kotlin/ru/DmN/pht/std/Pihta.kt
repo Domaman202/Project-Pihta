@@ -2,9 +2,9 @@ package ru.DmN.pht.std
 
 import ru.DmN.pht.std.ast.*
 import ru.DmN.pht.std.compiler.java.PihtaJava
-import ru.DmN.pht.std.parser.clearMacros
-import ru.DmN.pht.std.parser.macros
-import ru.DmN.pht.std.parser.phtParseNode
+import ru.DmN.pht.std.parser.utils.clearMacros
+import ru.DmN.pht.std.parser.utils.macros
+import ru.DmN.pht.std.parser.utils.phtParseNode
 import ru.DmN.pht.std.parsers.NPSkip
 import ru.DmN.pht.std.parsers.NPValnA
 import ru.DmN.pht.std.processor.ctx.GlobalContext
@@ -144,6 +144,7 @@ object Pihta : Module("pht") {
         adda("println",      NUPDefault, NRPrint)
         adda("progn",        NUPDefault, NRPrognA)
         addb("progn-",       NUPPrognB)
+        adda("progn!",       NUPPrognC)
         // r
         adda("rand-symbol",  NUPDefault, NRRandSymbol)
         adda("rem",          NUPMath,    NRMath)
