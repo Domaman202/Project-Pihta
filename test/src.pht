@@ -1,5 +1,4 @@
-((inc-lzr src.lzr)
-    (app-fn
-        (def [[o (new ^Test)]])
-        (valn-repeat 5
-            (#inc o))))
+(app-fn
+    (def [[arr (array-of 12 21 33)]])
+    (lzr for (e : arr)
+        print(e)))

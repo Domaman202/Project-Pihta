@@ -79,6 +79,9 @@ fun nodeDefn(line: Int, name: String, ret: String, nodes: MutableList<Node>) =
 fun nodeFld(line: Int, args: List<Pair<String, String>>) =
     NodeFieldA(Token.operation(line, "fld"),
         mutableListOf(nodeValn(line, args.map { (nodeValn(line, mutableListOf(nodeGetOrName(line, it.first), nodeValueClass(line, it.second)))) }.toMutableList())))
+fun nodeFor(line: Int, variable: String, iterable: Node, body: Node) =
+    NodeNodesList(Token.operation(line, "for"),
+        mutableListOf(nodeValn(line, mutableListOf(nodeGetOrName(line, variable), iterable)), body))
 // g
 fun nodeGetOrName(line: Int, name: String) =
     NodeGetOrName(Token.operation(line, "get-or-name!"), name, false)

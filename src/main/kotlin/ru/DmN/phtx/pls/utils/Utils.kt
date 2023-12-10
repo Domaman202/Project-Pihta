@@ -122,5 +122,6 @@ fun convert(line: Int, stmt: LNode): Node =
             nodeCls(line, stmt.name, listOf("Object"), nodes)
         }
 
+        is ForeachAStatement -> nodeFor(line, stmt.variable, convert(line, stmt.container), convert(line, stmt.body))
         else -> throw UnsupportedOperationException()
     }
