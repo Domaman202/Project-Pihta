@@ -1,0 +1,4 @@
+- users:
+-- name: "Вася"
+-- age: 17
+-- gender: true
