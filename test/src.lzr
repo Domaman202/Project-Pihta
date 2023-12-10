@@ -1,0 +1,12 @@
+class Test {
+    i = int
+
+    func Test() {
+        print("Конструктор!")
+        i = 0
+    }
+
+    func inc() {
+        print(i++)
+    }
+}
