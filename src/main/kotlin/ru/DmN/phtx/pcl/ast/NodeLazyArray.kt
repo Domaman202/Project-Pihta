@@ -6,6 +6,9 @@ import ru.DmN.siberia.lexer.Token
 class NodeLazyArray(token: Token, offset: Int, name: String, laxer: Laxer, size: Int) : NodeLazyElement(token, offset, name, laxer), INodeArray {
     val nodes: Array<NodeElement?> = arrayOfNulls(size)
 
+    override val size: Int
+        get() = nodes.size
+
     override operator fun get(index: Int): NodeElement =
         if (nodes[index] == null) {
             val node = laxer.parse(token.line + index + 1)
@@ -14,6 +17,12 @@ class NodeLazyArray(token: Token, offset: Int, name: String, laxer: Laxer, size:
                 node
             } else throw RuntimeException()
         } else nodes[index]!!
+
+    override fun forEach(consumer: (it: NodeElement) -> Unit) {
+        for (i in nodes.indices) {
+            consumer(get(i))
+        }
+    }
 
     override fun print(builder: StringBuilder, indent: Int): StringBuilder {
         super.print(builder, indent)

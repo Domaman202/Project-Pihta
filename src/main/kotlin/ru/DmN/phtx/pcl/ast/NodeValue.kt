@@ -9,7 +9,7 @@ class NodeValue(token: Token, offset: Int, name: String, val type: Type, val val
             .indent(indent).append('[').append(type).append("] ").append(value)
 
     enum class Type {
-        NUMBER,
+        BOOL_OR_NUM,
         STRING
     }
 }

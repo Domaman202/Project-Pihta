@@ -32,18 +32,18 @@ class Laxer(val text: String) {
             skipSpace()
             return if (text[--i] == '"')
                 parseStringValue(line, offset, name)
-            else parseNumberValue(line, offset, name)
+            else parseBoolOrNumValue(line, offset, name)
         }
 
-        private fun parseNumberValue(line: Int, offset: Int, name: String): NodeValue {
+        private fun parseBoolOrNumValue(line: Int, offset: Int, name: String): NodeValue {
             val value = StringBuilder()
             while (true) {
-                val last = text[++i]
-                if (last != '\n')
+                val last = text[i++]
+                if (last == '\n')
                     break
                 value.append(last)
             }
-            return NodeValue(Token.operation(line, "value"), offset, name, NodeValue.Type.NUMBER, value.toString())
+            return NodeValue(Token.operation(line, "value"), offset, name, NodeValue.Type.BOOL_OR_NUM, value.toString())
         }
 
         private fun parseStringValue(line: Int, offset: Int, name: String): NodeValue {
