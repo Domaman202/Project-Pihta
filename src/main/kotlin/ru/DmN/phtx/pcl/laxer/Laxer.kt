@@ -1,14 +1,17 @@
 package ru.DmN.phtx.pcl.laxer
 
-import ru.DmN.phtx.pcl.ast.NodeLazyArray
-import ru.DmN.phtx.pcl.ast.NodeElement
-import ru.DmN.phtx.pcl.ast.NodeValue
+import ru.DmN.phtx.pcl.ast.*
 import ru.DmN.siberia.lexer.Token
 
 class Laxer(val text: String) {
     fun parse(line: Int): NodeElement {
         val ctx = Context(calcLine(line))
         return ctx.parse(line, ctx.calcOffset())
+    }
+
+    fun parseValue(line: Int): NodeElement {
+        val ctx = Context(calcLine(line))
+        return ctx.parseValue(line, ctx.calcOffset())
     }
 
     private fun calcLine(line: Int): Int {
@@ -24,29 +27,50 @@ class Laxer(val text: String) {
 
     inner class Context(var i: Int) {
         fun parse(line: Int, offset: Int): NodeElement {
-            val name = parseName()
-            return if (checkArray()) parseArray(line, offset, name) else parseValue(line, offset, name)
+            if (text[i] == '\'') {
+                val name = parseName()
+                return NodeNamedElement(
+                    Token.operation(line, "named"),
+                    offset,
+                    name,
+                    if (checkMap())
+                        parseMap(line, offset)
+                    else if (checkArray())
+                        parseArray(line, offset)
+                    else {
+                        i--
+                        parseValue(line, offset)
+                    }
+                )
+            }
+            return parseValue(line, offset)
         }
 
-        private fun parseValue(line: Int, offset: Int, name: String): NodeValue {
+        private fun parseArray(line: Int, offset: Int): NodeElement =
+            NodeLazyArray(Token.operation(line, "array"), offset, this@Laxer, calcArraySize(line, offset))
+
+        private fun parseMap(line: Int, offset: Int): NodeElement =
+            NodeLazyMap(Token.operation(line, "map"), offset, this@Laxer, calcArraySize(line, offset))
+
+        fun parseValue(line: Int, offset: Int): NodeElement {
             skipSpace()
             return if (text[--i] == '"')
-                parseStringValue(line, offset, name)
-            else parseBoolOrNumValue(line, offset, name)
+                parseValueString(line, offset)
+            else parseValueBON(line, offset)
         }
 
-        private fun parseBoolOrNumValue(line: Int, offset: Int, name: String): NodeValue {
+        private fun parseValueBON(line: Int, offset: Int): NodeElement {
             val value = StringBuilder()
-            while (true) {
+            while (text.length > i) {
                 val last = text[i++]
                 if (last == '\n')
                     break
                 value.append(last)
             }
-            return NodeValue(Token.operation(line, "value"), offset, name, NodeValue.Type.BOOL_OR_NUM, value.toString())
+            return NodeValue(Token.operation(line, "value"), offset, NodeValue.Type.BON, value.toString())
         }
 
-        private fun parseStringValue(line: Int, offset: Int, name: String): NodeValue {
+        private fun parseValueString(line: Int, offset: Int): NodeElement {
             val value = StringBuilder()
             var prev: Char?
             var last: Char? = null
@@ -57,11 +81,26 @@ class Laxer(val text: String) {
                     break
                 value.append(last)
             }
-            return NodeValue(Token.operation(line, "value"), offset, name, NodeValue.Type.STRING, value.toString())
+            return NodeValue(Token.operation(line, "value"), offset, NodeValue.Type.STRING, value.toString())
         }
 
-        private fun parseArray(line: Int, offset: Int, name: String) =
-            NodeLazyArray(Token.operation(line, "array"), offset, name, this@Laxer, calcArraySize(line, offset))
+        private fun checkMap(): Boolean {
+            skipSpace()
+            return text[i] == '\n' && text[i - 1] == ':'
+        }
+
+        private fun checkArray(): Boolean {
+            skipSpace()
+            return text[i] == '\n' && text[i - 1] == ':' && text[i - 2] == ':'
+        }
+
+        private fun parseName(): String {
+            i++
+            val name = StringBuilder()
+            while (text[i] != ':')
+                name.append(text[i++])
+            return name.toString()
+        }
 
         private fun calcArraySize(line: Int, offset: Int): Int {
             var k = 0
@@ -71,18 +110,6 @@ class Laxer(val text: String) {
                 else break
             }
             return k
-        }
-
-        private fun checkArray(): Boolean {
-            skipSpace()
-            return text[i] == '\n'
-        }
-
-        private fun parseName(): String {
-            val name = StringBuilder()
-            while (text[i] != ':')
-                name.append(text[i++])
-            return name.toString()
         }
 
         fun calcOffset(): Int {

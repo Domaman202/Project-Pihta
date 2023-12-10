@@ -3,7 +3,7 @@ package ru.DmN.phtx.pcl.ast
 import ru.DmN.phtx.pcl.laxer.Laxer
 import ru.DmN.siberia.lexer.Token
 
-class NodeLazyArray(token: Token, offset: Int, laxer: Laxer, size: Int) : NodeLazyElement(token, offset, laxer), INodeArray {
+class NodeLazyMap(token: Token, offset: Int, laxer: Laxer, size: Int) : NodeLazyElement(token, offset, laxer), INodeArray {
     val nodes: Array<NodeElement?> = arrayOfNulls(size)
 
     override val size: Int
@@ -11,7 +11,7 @@ class NodeLazyArray(token: Token, offset: Int, laxer: Laxer, size: Int) : NodeLa
 
     override operator fun get(index: Int): NodeElement =
         if (nodes[index] == null) {
-            val node = laxer.parseValue(token.line + index + 1)
+            val node = laxer.parse(token.line + index + 1)
             if (node.offset - 1 == offset) {
                 nodes[index] = node
                 node

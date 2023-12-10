@@ -8,12 +8,9 @@ import ru.DmN.siberia.compilers.INodeCompiler
 
 object NCValue : INodeCompiler<NodeValue> {
     override fun compile(node: NodeValue, compiler: Compiler, ctx: CompilationContext) {
-        ctx.out.apply {
-            append('"').append(node.name).append("\": ")
-            when (node.type) {
-                NodeValue.Type.BOOL_OR_NUM -> append(node.value)
-                NodeValue.Type.STRING -> append('"').append(node.value).append('"')
-            }
+        when (node.type) {
+            NodeValue.Type.BON -> ctx.out.append(node.value)
+            NodeValue.Type.STRING -> ctx.out.append('"').append(node.value).append('"')
         }
     }
 }

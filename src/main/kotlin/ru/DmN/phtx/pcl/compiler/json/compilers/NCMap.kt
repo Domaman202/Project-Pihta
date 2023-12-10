@@ -1,18 +1,18 @@
 package ru.DmN.phtx.pcl.compiler.json.compilers
 
-import ru.DmN.phtx.pcl.ast.NodeLazyArray
+import ru.DmN.phtx.pcl.ast.NodeLazyMap
 import ru.DmN.phtx.pcl.compiler.json.utils.indent
 import ru.DmN.phtx.pcl.compiler.json.utils.out
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 
-object NCArray : INodeCompiler<NodeLazyArray> {
-    override fun compile(node: NodeLazyArray, compiler: Compiler, ctx: CompilationContext) {
+object NCMap : INodeCompiler<NodeLazyMap> {
+    override fun compile(node: NodeLazyMap, compiler: Compiler, ctx: CompilationContext) {
         val out = ctx.out
         val indent = ctx.indent
         //
-        out.append('[')
+        out.append('{')
         if (node.size > 0) {
             var i = 0
             node.forEach {
@@ -23,6 +23,6 @@ object NCArray : INodeCompiler<NodeLazyArray> {
                 else out.append("\n\t")
             }
         }
-        out.append(']')
+        out.append('}')
     }
 }
