@@ -6,6 +6,7 @@ import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.processor.utils.nodeProgn
 import com.kingmang.lazurite.parser.ast.Node as LNode
 
 fun nodePrognB(line: Int, nodes: MutableList<Node>) =
@@ -82,12 +83,12 @@ fun convert(line: Int, stmt: LNode): Node =
             Token.operation(
                 line,
                 when (stmt.operation) {
-                    ConditionalExpression.Operator.EQUALS       -> "eq"
-                    ConditionalExpression.Operator.NOT_EQUALS   -> "not-eq"
-                    ConditionalExpression.Operator.LT           -> "less"
-                    ConditionalExpression.Operator.LTEQ         -> "less-or-eq"
-                    ConditionalExpression.Operator.GT           -> "great"
-                    ConditionalExpression.Operator.GTEQ         -> "great-or-eq"
+                    ConditionalExpression.Operator.EQUALS -> "eq"
+                    ConditionalExpression.Operator.NOT_EQUALS -> "not-eq"
+                    ConditionalExpression.Operator.LT -> "less"
+                    ConditionalExpression.Operator.LTEQ -> "less-or-eq"
+                    ConditionalExpression.Operator.GT -> "great"
+                    ConditionalExpression.Operator.GTEQ -> "great-or-eq"
                     else -> throw UnsupportedOperationException()
                 }
             ),
@@ -98,10 +99,10 @@ fun convert(line: Int, stmt: LNode): Node =
             Token.operation(
                 line,
                 when (stmt.operation) {
-                    UnaryExpression.Operator.INCREMENT_PREFIX   -> "inc"
-                    UnaryExpression.Operator.INCREMENT_POSTFIX  -> "inc-"
-                    UnaryExpression.Operator.DECREMENT_PREFIX   -> "dec"
-                    UnaryExpression.Operator.DECREMENT_POSTFIX  -> "dec-"
+                    UnaryExpression.Operator.INCREMENT_PREFIX -> "inc"
+                    UnaryExpression.Operator.INCREMENT_POSTFIX -> "inc-"
+                    UnaryExpression.Operator.DECREMENT_PREFIX -> "dec"
+                    UnaryExpression.Operator.DECREMENT_POSTFIX -> "dec-"
                     else -> throw UnsupportedOperationException()
                 }
             ),
@@ -111,7 +112,14 @@ fun convert(line: Int, stmt: LNode): Node =
         is ClassDeclarationStatement -> {
             val nodes = ArrayList<Node>()
             if (stmt.fields.isNotEmpty())
-                nodes += nodeFld(line, stmt.fields.map { Pair((it.target as VariableExpression).name, (it.expression as VariableExpression).name )})
+                nodes += nodeFld(
+                    line,
+                    stmt.fields.map {
+                        Pair(
+                            (it.target as VariableExpression).name,
+                            (it.expression as VariableExpression).name
+                        )
+                    })
             stmt.methods.forEach {
                 if (it.name == stmt.name) {
                     nodes += nodeCtor(line, listOf(nodeCCall(line), convert(line, it.body)))
@@ -123,5 +131,17 @@ fun convert(line: Int, stmt: LNode): Node =
         }
 
         is ForeachAStatement -> nodeFor(line, stmt.variable, convert(line, stmt.container), convert(line, stmt.body))
+        is ForStatement -> nodeProgn(
+            line,
+            mutableListOf(
+                convert(line, stmt.initialization),
+                nodeCycle(
+                    line,
+                    convert(line, stmt.termination),
+                    mutableListOf(convert(line, stmt.statement), convert(line, stmt.increment))
+                )
+            )
+        )
+
         else -> throw UnsupportedOperationException()
     }

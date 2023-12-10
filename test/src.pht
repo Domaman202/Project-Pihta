@@ -1,4 +1,3 @@
 (app-fn
-    (def [[arr (array-of 12 21 33)]])
-    (lzr for (e : arr)
-        print(e)))
+    (lzr for (i = 1, i < 10, i++)
+        print(i)))
