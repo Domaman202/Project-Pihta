@@ -20,6 +20,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("body",         NCBody)
         add("!break",       NCBreak)
         // c
+        add("!catch",       NCCatch)
         add("!cls",         NCClass)
         add("!continue",    NCContinue)
         add("ctor",         NCDefn)
@@ -74,6 +75,8 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!shift-right", NCMath)
         add("sns",          NCDefault)
         add("!sub",         NCMath)
+        // t
+        add("throw",        NCThrow)
         // u
         add("unit",         NCUnit)
         // v

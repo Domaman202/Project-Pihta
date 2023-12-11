@@ -51,6 +51,8 @@ object Pihta : Module("pht") {
         adda("break",        NUPDefault, NRNamedList)
         adda("!break",       NUPNamedList)
         // c
+        adda("catch",        NUPDefault, NRCatch)
+        adda("!catch",       NUPCatch)
         adda("ccall",        NUPDefault, NRCCall)
         adda("cls",          NUPDefault, NRClass)
         adda("!cls",         NUPClass)
@@ -170,6 +172,7 @@ object Pihta : Module("pht") {
         adda("symbol",       NUPDefault, NRSymbol)
         // t
         adda("test-fn",      NUPDefault, NRTestFn)
+        adda("throw",        NUPDefault)
         adda("typeof",       NUPDefault, NRTypeof)
         // u
         adda("unit",         NUPUnit)
