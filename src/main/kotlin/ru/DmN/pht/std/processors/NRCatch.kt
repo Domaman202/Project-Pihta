@@ -11,9 +11,11 @@ import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.processors.NRDefault
 import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.line
 
 object NRCatch : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
@@ -32,7 +34,7 @@ object NRCatch : INodeProcessor<NodeNodesList> {
                 Triple(
                     variable,
                     type,
-                    processor.process(catcher[2], ctx.with(BodyContext.of(bctx).apply { addVariable(variable, type) }), mode)
+                    processor.process(nodeProgn(node.line, catcher.drop(2).toMutableList()), ctx.with(BodyContext.of(bctx).apply { addVariable(variable, type) }), mode)
                 )
             }
         ).apply { NRDefault.process(this, processor, ctx, mode) }

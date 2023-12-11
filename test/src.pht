@@ -1,8 +1,9 @@
 ((import java
     (types java.lang.Exception)
     (types java.lang.RuntimeException))
-
     (app-fn
-        (catch [[_ ^RuntimeException    (println "Runtime Exception!")]
-                [_ ^Exception           (println "Exception!")]]
-            (throw (new ^Exception)))))
+        (println
+            (catch [[_ ^RuntimeException 12]
+                    [_ ^Exception        21]]
+                (throw (new ^Exception))
+                33))))
