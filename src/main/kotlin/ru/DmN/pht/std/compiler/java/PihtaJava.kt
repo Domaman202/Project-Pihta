@@ -21,6 +21,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!break",       NCBreak)
         // c
         add("!cls",         NCClass)
+        add("!continue",    NCContinue)
         add("ctor",         NCDefn)
         add("!cycle",       NCCycle)
         // d

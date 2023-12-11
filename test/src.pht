@@ -1,8 +1,8 @@
 (app-fn
+    (def [[i 0]])
     (named-block CycleBlock
-        (def [[i 0]])
         (cycle (< i 10)
-            (if (> i 5)
-                (break CycleBlock))
-            (println i)
-            (++ i))))
+            (++ i)
+            (if (< i 5)
+                (continue CycleBlock))
+            (println i))))

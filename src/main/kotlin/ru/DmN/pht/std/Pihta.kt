@@ -55,6 +55,8 @@ object Pihta : Module("pht") {
         adda("cls",          NUPDefault, NRClass)
         adda("!cls",         NUPClass)
         adda("comment",      NUPComment)
+        adda("continue",     NUPDefault, NRNamedList)
+        adda("!continue",    NUPNamedList)
         adda("ctor",         NUPCtor)
         adda("cycle",        NUPDefault, NRCycle)
         adda("!cycle",       NUPDefaultX)
