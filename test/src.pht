@@ -1,3 +1,8 @@
 (app-fn
-    (lzr for (i = 1, i < 10, i++)
-        print(i)))
+    (named-block CycleBlock
+        (def [[i 0]])
+        (cycle (< i 10)
+            (if (> i 5)
+                (break CycleBlock))
+            (println i)
+            (++ i))))

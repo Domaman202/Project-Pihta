@@ -48,6 +48,8 @@ object Pihta : Module("pht") {
         adda("!aset",        NUPASet)
         // b
         adda("body",         NUPDefault, NRBody)
+        adda("break",        NUPDefault, NRNamedList)
+        adda("!break",       NUPNamedList)
         // c
         adda("ccall",        NUPDefault, NRCCall)
         adda("cls",          NUPDefault, NRClass)
@@ -122,17 +124,19 @@ object Pihta : Module("pht") {
         adda("mul",          NUPMath,    NRMath)
         adda("!mul",         NUPMath)
         // n
-        adda("neg",          NUPMath,    NRMath)
+        adda("named-block",  NUPDefault,     NRNamedList)
+        adda("!named-block", NUPNamedList)
+        adda("neg",          NUPMath,        NRMath)
         adda("!neg",         NUPMath)
         adda("new",          NUPGensDefault, NRNew)
         adda("!new",         NUPNew)
-        adda("new-array",    NUPDefault, NRNewArray)
+        adda("new-array",    NUPDefault,     NRNewArray)
         adda("!new-array",   NUPNewArrayX)
-        adda("not",          NUPCompare, NRCompare)
+        adda("not",          NUPCompare,     NRCompare)
         adda("!not",         NUPCompare)
-        adda("not-eq",       NUPCompare, NRCompare)
+        adda("not-eq",       NUPCompare,     NRCompare)
         adda("!not-eq",      NUPCompare)
-        adda("ns",           NUPDefault, NRNs)
+        adda("ns",           NUPDefault,     NRNs)
         adda("!ns",          NUPNs)
         // o
         adda("obj",          NUPDefault, NRClass)

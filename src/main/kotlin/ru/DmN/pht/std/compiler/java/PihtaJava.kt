@@ -4,6 +4,7 @@ import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.ModuleCompilers
 import ru.DmN.pht.std.Pihta
 import ru.DmN.pht.std.compiler.java.compilers.*
+import ru.DmN.phtx.pcl.compiler.json.compilers.NCNamed
 
 object PihtaJava : ModuleCompilers(Pihta) {
     override fun onInitialize() {
@@ -17,6 +18,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!aset",        NCASet)
         // b
         add("body",         NCBody)
+        add("!break",       NCBreak)
         // c
         add("!cls",         NCClass)
         add("ctor",         NCDefn)
@@ -52,6 +54,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!mcall",       NCMCall)
         add("!mul",         NCMath)
         // n
+        add("!named-block", NCNamedBlock)
         add("!neg",         NCMath)
         add("!new",         NCNew)
         add("!new-array",   NCNewArray)

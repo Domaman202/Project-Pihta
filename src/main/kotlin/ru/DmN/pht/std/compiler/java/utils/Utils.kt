@@ -17,6 +17,8 @@ fun <T : IContextCollection<T>> T.with(ctx: MethodContext) =
     this.with("pht/method", ctx)
 fun <T : IContextCollection<T>> T.with(ctx: BodyContext) =
     this.with("pht/body", ctx)
+fun <T : IContextCollection<T>> T.withNamedBlock(name: String, ctx: NamedBlockData) =
+    this.with("pht/named-block/$name", ctx)
 
 fun IContextCollection<*>.isClass() =
     contexts.containsKey("pht/class") || isEnum()
@@ -30,9 +32,11 @@ val IContextCollection<*>.clazz
 val IContextCollection<*>.method
     get() = contexts["pht/method"] as MethodContext
 val IContextCollection<*>.body
-    get() = this.bodyOrNull!!
+    get() = bodyOrNull!!
 val IContextCollection<*>.bodyOrNull
     get() = contexts["pht/body"] as BodyContext?
+fun IContextCollection<*>.getNamedBlock(name: String) =
+    contexts["pht/named-block/$name"] as NamedBlockData
 
 fun load(variable: Variable, node: MethodVisitor) {
     if (!variable.tmp) {
