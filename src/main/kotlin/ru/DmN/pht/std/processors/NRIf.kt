@@ -15,10 +15,9 @@ object NRIf : INodeProcessor<NodeNodesList> {
         else null
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
-        node.nodes[0] = processor.process(node.nodes[0], ctx, ValType.VALUE)!!
-        node.nodes[1] = processor.process(node.nodes[1], ctx, mode)!!
-        if (node.nodes.size == 3)
-            node.nodes[2] = processor.process(node.nodes[2], ctx, mode)!!
-        return node
+        val nodes = mutableListOf(processor.process(node.nodes[0], ctx, ValType.VALUE)!!)
+        for (i in 1 until node.nodes.size)
+            nodes += processor.process(node.nodes[i], ctx, mode)!!
+        return NodeNodesList(node.token.processed(), nodes)
     }
 }

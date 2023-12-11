@@ -46,7 +46,7 @@ object PihtaJava : ModuleCompilers(Pihta) {
         add("!great",       NCCompare)
         add("!great-or-eq", NCCompare)
         // i
-        add("if",           NCIf)
+        add("!if",          NCIf)
         add("!inc",         NCIncDec)
         add("!itf",         NCClass)
         // l
