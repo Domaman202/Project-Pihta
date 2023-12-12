@@ -13,6 +13,7 @@ import ru.DmN.pht.std.utils.isConstClass
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.lexer.Token.DefaultType.OPERATION
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.utils.INUP
@@ -57,7 +58,7 @@ object NUPFSetB : INUP<Node, NodeFieldSet> {
             )
         return if (result == null)
             NodeFSet(
-                Token(line, Token.Type.OPERATION, "fset"),
+                Token.operation(line, "fset"),
                 mutableListOf(instance, processor.process(node.nodes.first(), ctx, ValType.VALUE)!!),
                 node.name,
                 if (instance.isConstClass)

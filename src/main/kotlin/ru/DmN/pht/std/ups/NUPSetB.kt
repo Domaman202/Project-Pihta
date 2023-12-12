@@ -23,11 +23,11 @@ object NUPSetB : INUP<NodeSet, NodeSet> {
         val name = parser.nextToken()!!
         return NPDefault.parse(parser, ctx) {
             parse(
-                Token(token.line, Token.Type.OPERATION, "set!"),
+                Token.operation(token.line, "set!"),
                 name.text!!,
                 when (name.type) {
-                    Token.Type.CLASS -> true
-                    Token.Type.OPERATION -> false
+                    Token.DefaultType.CLASS -> true
+                    Token.DefaultType.OPERATION -> false
                     else -> throw RuntimeException()
                 },
                 it
@@ -39,12 +39,12 @@ object NUPSetB : INUP<NodeSet, NodeSet> {
         val parts = name.split("/")
         return if (parts.size == 1)
             NodeSet(
-                Token(token.line, Token.Type.OPERATION, "set!"),
+                Token.operation(token.line, "set!"),
                 values,
                 parts.last()
             )
         else NodeFieldSet(
-            Token(token.line, Token.Type.OPERATION, "fset!"),
+            Token.operation(token.line, "fset!"),
             values,
             parse(token.line, parts, 1, static),
             parts.last(),
@@ -54,9 +54,9 @@ object NUPSetB : INUP<NodeSet, NodeSet> {
 
     private fun parse(line: Int, parts: List<String>, i: Int, static: Boolean): Node =
         if (i + 1 == parts.size)
-            NodeGetOrName(Token(line, Token.Type.OPERATION, "get-or-name!"), parts[parts.size - i - 1], static)
+            NodeGetOrName(Token.operation(line, "get-or-name!"), parts[parts.size - i - 1], static)
         else NodeFMGet(
-            Token(line, Token.Type.OPERATION, "fget!"),
+            Token.operation(line, "fget!"),
             parse(line, parts, i + 1, static),
             parts[parts.size - i - 1],
             static

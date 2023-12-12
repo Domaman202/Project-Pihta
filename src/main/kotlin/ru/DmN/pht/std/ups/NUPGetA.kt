@@ -9,25 +9,26 @@ import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.pht.std.ast.NodeFMGet
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.ast.NodeValue
+import ru.DmN.siberia.lexer.Token.DefaultType.*
 import ru.DmN.siberia.utils.INUP
 
 object NUPGetA : INUP<Node, Node> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val nameToken = parser.nextToken()!!
         return when (nameToken.type) {
-            Token.Type.CLASS -> parse(
+            CLASS -> parse(
                 token,
                 nameToken.text!!,
                 static = true,
                 klass = true
             )
-            Token.Type.OPERATION -> parse(
+            OPERATION -> parse(
                 token,
                 nameToken.text!!,
                 static = false,
                 klass = false
             )
-            Token.Type.OPEN_BRACKET -> {
+            OPEN_BRACKET -> {
                 parser.tokens.push(nameToken)
                 return NodeFMGet(
                     token,
@@ -51,12 +52,12 @@ object NUPGetA : INUP<Node, Node> {
         val j = i - 1
         return if (j == 0) {
             if (clazz)
-                NodeValue(Token(token.line, Token.Type.OPERATION, "value"), NodeValue.Type.CLASS, parts[0])
-            else NodeGetOrName(Token(token.line, Token.Type.OPERATION, "get-or-name!"), parts[0], static)
+                NodeValue(Token.operation(token.line, "value"), NodeValue.Type.CLASS, parts[0])
+            else NodeGetOrName(Token.operation(token.line, "get-or-name!"), parts[0], static)
         } else {
             val isStatic = static && j == 1
             NodeFMGet(
-                Token(token.line, Token.Type.OPERATION, "fget!",),
+                Token.operation(token.line, "fget!",),
                 parse(token, parts, j, static, clazz),
                 parts[j],
                 isStatic

@@ -11,6 +11,7 @@ import ru.DmN.siberia.Processor
 import ru.DmN.siberia.Unparser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.lexer.Token.DefaultType.OPERATION
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.unparser.UnparsingContext
@@ -24,7 +25,7 @@ object NUPGetOrName : INUP<NodeGetOrName, NodeGetOrName>, IStdNodeProcessor<Node
         val tk = parser.nextOperation()
         return if (tk.text!!.contains("[/#]".toRegex())) {
             parser.tokens.push(tk)
-            parser.get(ctx, "get")!!.parse(parser, ctx, Token(token.line, Token.Type.OPERATION, "get!"))
+            parser.get(ctx, "get")!!.parse(parser, ctx, Token.operation(token.line, "get!"))
         } else NodeGetOrName(token, tk.text!!, false)
     }
 

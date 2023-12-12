@@ -2,6 +2,7 @@ package ru.DmN.pht.std.ast
 
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.lexer.Token.DefaultType.OPERATION
 import ru.DmN.siberia.utils.indent
 import ru.DmN.siberia.utils.text
 
@@ -43,6 +44,6 @@ class NodeValue(tkOperation: Token, val vtype: Type, val value: String) : Node(t
 
     companion object {
         fun of(line: Int, vtype: Type, value: String) =
-            NodeValue(Token(line, Token.Type.OPERATION, "value"), vtype, value)
+            NodeValue(Token(line, OPERATION, "value"), vtype, value)
     }
 }

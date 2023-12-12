@@ -1,8 +1,1 @@
-(app-fn
-    (def [[i -1]])
-    (cycle (<= i 1)
-        (cond [
-            [(< i 0) (println "Меньше!")]
-            [(= i 0) (println "Ноль!")]
-            [(> i 0) (println "Больше!")]])
-        (++ i)))
+(app-fn)

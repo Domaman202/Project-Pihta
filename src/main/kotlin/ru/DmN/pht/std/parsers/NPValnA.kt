@@ -8,6 +8,6 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.parsers.SimpleNP
 
 object NPValnA : SimpleNP() {
-    override fun parse(parser: Parser, ctx: ParsingContext, operationToken: Token): Node =
-        parse(parser, ctx) { NodeNodesList(Token(operationToken.line, Token.Type.OPERATION, "valn"), it) }
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
+        parse(parser, ctx) { NodeNodesList(Token.operation(token.line, "valn"), it) }
 }

@@ -14,22 +14,23 @@ import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.processors.IStdNodeProcessor
+import ru.DmN.siberia.lexer.Token.DefaultType.*
 
 object NUPValueA : INUP<NodeValue, NodeValue>, IStdNodeProcessor<NodeValue> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): NodeValue {
         val value = parser.nextToken()!!
         return NodeValue(
             token, when (value.type) {
-                Token.Type.OPERATION -> if (value.text == "nil") NodeValue.Type.NIL else throw RuntimeException()
-                Token.Type.CLASS -> NodeValue.Type.CLASS
-                Token.Type.NAMING -> NodeValue.Type.NAMING
-                Token.Type.STRING -> NodeValue.Type.STRING
-                Token.Type.NIL -> NodeValue.Type.NIL
-                Token.Type.BOOLEAN -> NodeValue.Type.BOOLEAN
-                Token.Type.INTEGER -> NodeValue.Type.INT
-                Token.Type.LONG -> NodeValue.Type.LONG
-                Token.Type.FLOAT -> NodeValue.Type.FLOAT
-                Token.Type.DOUBLE -> NodeValue.Type.DOUBLE
+                OPERATION -> if (value.text == "nil") NodeValue.Type.NIL else throw RuntimeException()
+                CLASS   -> NodeValue.Type.CLASS
+                NAMING  -> NodeValue.Type.NAMING
+                STRING  -> NodeValue.Type.STRING
+                NIL     -> NodeValue.Type.NIL
+                BOOLEAN -> NodeValue.Type.BOOLEAN
+                INTEGER -> NodeValue.Type.INT
+                LONG    -> NodeValue.Type.LONG
+                FLOAT   -> NodeValue.Type.FLOAT
+                DOUBLE  -> NodeValue.Type.DOUBLE
                 else -> throw RuntimeException()
             }, value.text!!
         )

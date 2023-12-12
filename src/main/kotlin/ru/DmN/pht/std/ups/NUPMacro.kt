@@ -71,7 +71,7 @@ object NUPMacro : IStdNUP<NodeMacro, NodeMacro> {
         else if (macro.args.isNotEmpty()) {
             macro.args.dropLast(1).forEachIndexed { i, it -> args[Pair(macro.uuid, it)] = node.nodes[i] }
             args[Pair(macro.uuid, macro.args.last())] = NodeNodesList(
-                Token(node.token.line, Token.Type.OPERATION, "valn"),
+                Token.operation(node.token.line, "valn"),
                 node.nodes.drop(args.size - 1).toMutableList() // todo:
             )
         }
