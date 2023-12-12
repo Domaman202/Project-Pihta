@@ -4,7 +4,6 @@ import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.ModuleCompilers
 import ru.DmN.pht.std.Pihta
 import ru.DmN.pht.std.compiler.java.compilers.*
-import ru.DmN.phtx.pcl.compiler.json.compilers.NCNamed
 
 object PihtaJava : ModuleCompilers(Pihta) {
     override fun onInitialize() {

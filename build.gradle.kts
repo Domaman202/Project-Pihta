@@ -13,7 +13,6 @@ repositories {
 
 dependencies {
     implementation("ru.DmN.siberia:Project-Siberia:1.5.5")
-    implementation(files("Lazurite-2.7.0.jar", "Project-SCS-1.0.0.jar"))
     implementation(kotlin("reflect"))
     implementation("org.ow2.asm:asm:9.5")
     implementation("org.ow2.asm:asm-tree:9.5")
