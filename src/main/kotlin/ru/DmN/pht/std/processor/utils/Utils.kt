@@ -17,9 +17,13 @@ import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 
 // a
+fun nodeAdd(line: Int, nodes: MutableList<Node>) =
+    NodeNodesList(Token.operation(line, "add"), nodes)
 fun nodeAGet(line: Int, name: String, index: String) =
     NodeNodesList(Token.operation(line, "aget"),
         mutableListOf(nodeGetOrName(line, name), nodeGetOrName(line, index)))
+fun nodeAppFn(line: Int, nodes: MutableList<Node>) =
+    NodeNodesList(Token.operation(line, "app-fn"), nodes)
 fun nodeArrayOf(line: Int, elements: MutableList<Node>) =
     NodeNodesList(Token.operation(line, "array-of"), elements)
 fun nodeArraySize(line: Int, name: String) =
@@ -103,8 +107,10 @@ fun nodeNewArray(line: Int, type: String, size: Int) =
     NodeNodesList(Token.operation(line, "new-array"),
         mutableListOf(nodeValueClass(line, type), nodeValue(line, size)))
 // p
+fun nodePrintln(line: Int, nodes: MutableList<Node>) =
+    NodeNodesList(Token.operation(line, "println"), nodes)
 fun nodePrintln(line: Int, msg: Node) =
-    NodeNodesList(Token.operation(line, "println"), mutableListOf(msg))
+    nodePrintln(line, mutableListOf(msg))
 // r
 fun nodeRet(line: Int, value: Node) =
     NodeNodesList(Token.operation(line, "ret"), mutableListOf(value))
