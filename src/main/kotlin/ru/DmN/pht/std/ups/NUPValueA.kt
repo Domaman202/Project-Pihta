@@ -14,6 +14,7 @@ import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.processors.IStdNodeProcessor
+import ru.DmN.pht.std.utils.VTWG
 import ru.DmN.siberia.lexer.Token.DefaultType.*
 
 object NUPValueA : INUP<NodeValue, NodeValue>, IStdNodeProcessor<NodeValue> {
@@ -74,14 +75,31 @@ object NUPValueA : INUP<NodeValue, NodeValue>, IStdNodeProcessor<NodeValue> {
             }, processor.tp
         )
 
-    override fun process(node: NodeValue, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
+    override fun process(node: NodeValue, processor: Processor, ctx: ProcessingContext, mode: ValType): Node =
         if (node.vtype == NodeValue.Type.CLASS)
-            NodeValue(node.token, NodeValue.Type.CLASS, ctx.global.getType(node.value, processor.tp).name)
+            NodeValue(node.token, NodeValue.Type.CLASS, computeType(node, processor, ctx).name)
         else node
+
+    override fun computeInt(node: NodeValue, processor: Processor, ctx: ProcessingContext): Int =
+        node.getInt()
 
     override fun computeString(node: NodeValue, processor: Processor, ctx: ProcessingContext): String =
         node.getString()
 
-    override fun computeInt(node: NodeValue, processor: Processor, ctx: ProcessingContext): Int =
-        node.getInt()
+    override fun computeType(node: NodeValue, processor: Processor, ctx: ProcessingContext): VirtualType {
+        val gs = node.value.indexOf('<')
+        if (gs == -1)
+            return ctx.global.getType(node.value, processor.tp)
+        val gctx = ctx.global
+        val generics = ArrayList<VirtualType>()
+        var s = node.value.substring(gs)
+        while (true) {
+            val i = s.indexOf(',')
+            generics.add(gctx.getType(s.substring(2, if (i == -1) s.length - 1 else i), processor.tp))
+            if (i == -1)
+                break
+            s = s.substring(i)
+        }
+        return VTWG(gctx.getType(node.value.substring(0, gs), processor.tp), generics)
+    }
 }

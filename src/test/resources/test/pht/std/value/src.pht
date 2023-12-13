@@ -5,4 +5,5 @@
     (test-fn 3 44f)
     (test-fn 4 202l)
     (test-fn 5 "Текст")
-    (test-fn 6 ^Object))
+    (test-fn 6 ^Object)
+    (test-fn 7 ^java.util.List<^Object>))

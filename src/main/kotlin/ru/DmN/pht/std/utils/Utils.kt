@@ -68,6 +68,16 @@ fun Processor.computeListOr(node: Node, ctx: ProcessingContext): List<Node>? =
         else throw UnsupportedOperationException()
     }
 
+fun Processor.computeType(node: Node, ctx: ProcessingContext): VirtualType =
+    this.computeTypeOr(node, ctx)!!
+
+fun Processor.computeTypeOr(node: Node, ctx: ProcessingContext): VirtualType? =
+    this.get(node, ctx).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.computeType(node, this, ctx)
+        else throw UnsupportedOperationException()
+    }
+
 fun Processor.computeString(node: Node, ctx: ProcessingContext): String =
     this.computeStringOr(node, ctx)!!
 

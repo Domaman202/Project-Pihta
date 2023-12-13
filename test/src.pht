@@ -1,1 +1,4 @@
-(inc-rxx src.rxx)
+(app-fn
+    (def [[list (new ^java.util.ArrayList<^String>)]])
+    (#add list "Hi!")
+    (println (typeof (#get list 0)))))

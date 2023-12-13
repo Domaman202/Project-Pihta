@@ -163,6 +163,8 @@ class Tests {
             compile()
             assertEquals(test(0), String::class.java)
             assertEquals(test(1), String::class.java)
+            assertEquals(test(2), String::class.java)
+            assertEquals(test(3), String::class.java)
         }
     }
 
@@ -237,6 +239,7 @@ class Tests {
             assertEquals(test(4), 202L)
             assertEquals(test(5), "Текст")
             assertEquals(test(6), Any::class.java)
+            assertEquals(test(7), List::class.java)
         }
     }
 }

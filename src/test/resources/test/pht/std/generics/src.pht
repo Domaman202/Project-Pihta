@@ -6,4 +6,12 @@
     (test-fn 1
         (def [[list (as-gens ^java.util.List (new ^java.util.ArrayList) ^String)]])
         (#add list "Hi!")
+        (typeof (#get list 0)))
+    (test-fn 2
+        (def [[list (new ^java.util.ArrayList<^String>)]])
+        (#add list "Hi!")
+        (typeof (#get list 0)))
+    (test-fn 3
+        (def [[list (as ^java.util.List<^String> (new ^java.util.ArrayList))]])
+        (#add list "Hi!")
         (typeof (#get list 0))))
