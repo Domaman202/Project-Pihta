@@ -97,8 +97,8 @@ fun nodeMCall(line: Int, type: String, name: String, args: List<Node>) =
         mutableListOf<Node>(nodeValueClass(line, type), nodeValue(line, name)).apply { addAll(args) })
 // n
 fun nodeNew(line: Int, type: String, args: List<Node>) =
-    NodeNodesList(Token.operation(line, "new"),
-        mutableListOf<Node>(nodeValueClass(line, type)).apply { addAll(args) })
+    NodeGensNodesList(Token.operation(line, "new"),
+        mutableListOf<Node>(nodeValueClass(line, type)).apply { addAll(args) }, emptyList())
 fun nodeNewArray(line: Int, type: String, size: Int) =
     NodeNodesList(Token.operation(line, "new-array"),
         mutableListOf(nodeValueClass(line, type), nodeValue(line, size)))
