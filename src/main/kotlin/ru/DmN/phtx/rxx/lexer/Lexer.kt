@@ -3,7 +3,7 @@ package ru.DmN.phtx.rxx.lexer
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.phtx.rxx.lexer.TokenType.*
 import ru.DmN.siberia.lexer.Token
-import ru.DmN.siberia.lexer.Token.DefaultType.STRING
+import ru.DmN.siberia.lexer.Token.DefaultType.*
 
 class Lexer(val input: String) : Iterator<Token?> {
     var ptr = 0
@@ -46,15 +46,40 @@ class Lexer(val input: String) : Iterator<Token?> {
                 Token(line, STRING, sb.toString())
             }
             else -> {
-                val sb = StringBuilder().append(char)
-                while (ptr < input.length) {
-                    val c = input[ptr++]
-                    if (c.isLetter())
-                        sb.append(c)
-                    else break
+                if (char.isDigit() || (char == '-' && input[ptr].isDigit())) {
+                    val str = StringBuilder()
+                    str.append(char)
+                    while (ptr < input.length) {
+                        val c = input[ptr]
+                        if (c.isDigit() || (c == '.' && input[ptr + 1].isDigit())) {
+                            inc()
+                            str.append(c)
+                        } else break
+                    }
+                    val type = when (input[inc()]) {
+                        'i' -> INTEGER
+                        'l' -> LONG
+                        'f' -> FLOAT
+                        'd' -> DOUBLE
+                        else -> {
+                            ptr--
+                            if (str.contains('.'))
+                                DOUBLE
+                            else INTEGER
+                        }
+                    }
+                    Token(line, type, str.toString())
+                } else {
+                    val sb = StringBuilder().append(char)
+                    while (ptr < input.length) {
+                        val c = input[ptr++]
+                        if (c.isLetter())
+                            sb.append(c)
+                        else break
+                    }
+                    ptr--
+                    Token(line, WORD, sb.toString())
                 }
-                ptr--
-                Token(line, WORD, sb.toString())
             }
         }
     }

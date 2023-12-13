@@ -57,19 +57,18 @@ fun nodeCycle(line: Int, cond: Node, body: List<Node>) =
     NodeNodesList(Token.operation(line, "cycle"), mutableListOf(cond).apply { addAll(body) })
 fun nodeCycle(line: Int, cond: Node, body: Node) =
     NodeNodesList(Token.operation(line, "cycle"), mutableListOf(cond, body))
-// d
-fun nodeDef(line: Int, nodes: MutableList<Node>) =
-    NodeNodesList(Token.operation(line, "def"),
-        mutableListOf(nodeValn(line, nodeValn(line, nodes))))
-
 fun nodeDef(line: Int, name: String, type: String) =
     NodeNodesList(Token.operation(line, "def"),
         mutableListOf(nodeValn(line, nodeValn(line, mutableListOf(nodeValueClass(line, type), nodeGetOrName(line, name))))))
+
 fun nodeDef(line: Int, name: String, value: Node) =
     NodeNodesList(Token.operation(line, "def"),
         mutableListOf(nodeValn(line, nodeValn(line, mutableListOf(nodeGetOrName(line, name), value)))))
+// d
+fun nodeDefSet(line: Int, nodes: MutableList<Node>) =
+    NodeNodesList(Token.operation(line, "def-set"), nodes)
 fun nodeDefSet(line: Int, name: Node, value: Node) =
-    NodeNodesList(Token.operation(line, "def-set"), mutableListOf(name, value))
+    nodeDefSet(line, mutableListOf(name, value))
 fun nodeDefn(line: Int, name: String, ret: String, args: List<Pair<String, String>>, nodes: List<Node>) =
     NodeNodesList(Token.operation(line, "defn"),
         mutableListOf(

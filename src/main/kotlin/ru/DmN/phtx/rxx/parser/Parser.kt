@@ -5,7 +5,9 @@ import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.phtx.rxx.lexer.Lexer
 import ru.DmN.phtx.rxx.lexer.TokenType.*
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.lexer.Token.DefaultType.INTEGER
 import ru.DmN.siberia.lexer.Token.DefaultType.STRING
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import java.util.Stack
@@ -29,6 +31,7 @@ class Parser(val lexer: Lexer) {
         var tk = nextToken()!!
         while (true) {
             when (tk.type) {
+                INTEGER -> return nodeValue(tk.line, tk.text!!.toInt())
                 STRING -> return nodeValue(tk.line, tk.text!!)
                 WORD -> sb.append(tk.text!!).append(' ')
                 DOT -> break
@@ -85,7 +88,10 @@ class Parser(val lexer: Lexer) {
         "Начало бытия" command { line, nodes, _, _ -> nodeAppFn(line, nodes) }
         "Молвить" command { line, nodes, _, _ -> nodePrintln(line, nodes) }
         "Сумму" command { line, nodes, _, _ -> nodeAdd(line, nodes) }
-        "Определить переменную" command { line, nodes, _, _ -> nodeDef(line, nodes) }
+        "Определить переменную" command { line, nodes, _, _ -> nodeDefSet(line, nodes) }
         "Значение переменной" command { line, nodes, _, _ -> nodeGetOrName(line, (nodes[0] as NodeValue).value) }
+        "Значение переменной меньше чем" command { line, nodes, _, _ -> NodeNodesList(Token.operation(line, "less"), mutableListOf(nodeGetOrName(line, (nodes[0] as NodeValue).value), nodes[1])) }
+        "Пока" command { line, nodes, _, _ -> nodeCycle(line, nodes[0], nodes.drop(1)) }
+        "Увеличить переменную на" command  { line, nodes, _, _ -> nodeDefSet(line, nodeGetOrName(line, (nodes[0] as NodeValue).value), nodeAdd(line, mutableListOf(nodeGetOrName(line, (nodes[0] as NodeValue).value), nodes[1]))) }
     }
 }

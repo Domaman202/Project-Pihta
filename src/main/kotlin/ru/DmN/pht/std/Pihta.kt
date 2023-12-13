@@ -65,8 +65,8 @@ object Pihta : Module("pht") {
         adda("!cycle",       NUPDefaultX)
         // d
         adda("debug",        NUPDebug)
-        adda("dec",          NUPIncDecA,  NRIncDec)
-        adda("dec-",         NUPIncDecA,  NRIncDec)
+        adda("dec",          NUPIncDecA, NRIncDec)
+        adda("dec-",         NUPIncDecA, NRIncDec)
         adda("!dec",         NUPIncDecB)
         adda("def",          NUPDefault, NRDef)
         adda("!def",         NUPDef)

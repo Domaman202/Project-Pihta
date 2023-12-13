@@ -18,8 +18,9 @@ object NRDefSet : INodeProcessor<NodeNodesList> {
         val bctx = ctx.body
         val name = processor.computeString(node.nodes[0], ctx)
         val variable = bctx[name]
+        val value = processor.process(node.nodes[1], ctx, ValType.VALUE)!!
         return if (variable == null)
-            NRDef.process(nodeDef(node.line, name, node.nodes[1]), processor, ctx, mode)
-        else NodeSet(Token.operation(node.line, "set!"), mutableListOf(node.nodes[1]), name)
+            NRDef.process(nodeDef(node.line, name, value), processor, ctx, mode)
+        else NodeSet(Token.operation(node.line, "set!"), mutableListOf(value), name)
     }
 }
