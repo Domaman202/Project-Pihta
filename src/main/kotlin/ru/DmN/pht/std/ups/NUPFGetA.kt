@@ -11,6 +11,7 @@ import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.siberia.utils.INUP
 import ru.DmN.pht.std.unparsers.NUDefaultX
 import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.computeType
 
 object NUPFGetA : INUP<NodeFGet, NodeFGet> {
     override fun unparse(node: NodeFGet, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
@@ -27,9 +28,8 @@ object NUPFGetA : INUP<NodeFGet, NodeFGet> {
             NodeFGet.Type.STATIC -> { it: VirtualField -> it.isStatic }
             NodeFGet.Type.INSTANCE -> { it: VirtualField -> !it.isStatic }
         }
-        return (if (node.type == NodeFGet.Type.STATIC)
-            ctx.global.getType(processor.computeString(node.nodes[0], ctx), processor.tp)
-        else processor.calc(node.nodes[0], ctx)!!).fields
+        return (if (node.type == NodeFGet.Type.STATIC) processor.computeType(node.nodes[0], ctx) else processor.calc(node.nodes[0], ctx)!!)
+            .fields
             .asSequence()
             .filter { it.name == node.name }
             .filter(filter)

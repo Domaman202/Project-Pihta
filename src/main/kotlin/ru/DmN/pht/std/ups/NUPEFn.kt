@@ -1,5 +1,12 @@
 package ru.DmN.pht.std.ups
 
+import ru.DmN.pht.std.ast.NodeDefn
+import ru.DmN.pht.std.processor.ctx.BodyContext
+import ru.DmN.pht.std.processor.utils.clazz
+import ru.DmN.pht.std.processor.utils.global
+import ru.DmN.pht.std.processor.utils.with
+import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.computeType
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.Unparser
@@ -13,17 +20,11 @@ import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.NRDefault
 import ru.DmN.siberia.unparser.UnparsingContext
+import ru.DmN.siberia.utils.INUP
 import ru.DmN.siberia.utils.MethodModifiers
 import ru.DmN.siberia.utils.VirtualMethod.VirtualMethodImpl
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
-import ru.DmN.pht.std.ast.NodeDefn
-import ru.DmN.pht.std.processor.ctx.BodyContext
-import ru.DmN.pht.std.processor.utils.clazz
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.with
-import ru.DmN.siberia.utils.INUP
-import ru.DmN.pht.std.utils.computeString
 
 object NUPEFn : INUP<NodeDefn, NodeNodesList> {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
@@ -63,9 +64,9 @@ object NUPEFn : INUP<NodeDefn, NodeNodesList> {
         val gctx = ctx.global
         val type = ctx.clazz as VirtualTypeImpl
         //
-        val extend = gctx.getType(processor.computeString(node.nodes[0], ctx), processor.tp)
+        val extend = processor.computeType(node.nodes[0], ctx)
         val name = processor.computeString(node.nodes[1], ctx)
-        val returnType = gctx.getType(processor.computeString(node.nodes[2], ctx), processor.tp)
+        val returnType = processor.computeType(node.nodes[2], ctx)
         val args = NRDefn.parseArguments(node.nodes[3], processor, ctx)
         //
         args.first.add(0, extend.name)

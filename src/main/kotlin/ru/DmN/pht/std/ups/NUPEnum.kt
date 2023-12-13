@@ -6,6 +6,7 @@ import ru.DmN.pht.std.processor.ctx.EnumContext
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.computeType
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.Unparser
@@ -40,9 +41,10 @@ object NUPEnum : INUP<NodeType, NodeNodesList> {
         val line = node.line
         val new = NodeType(Token.operation(line, "!enum"), node.nodes.drop(2).toMutableList(), type)
         processor.stageManager.pushTask(ProcessingStage.TYPES_PREDEFINE) {
-            type.parents = processor.computeList(processor.process(node.nodes[1], ctx, ValType.VALUE)!!, ctx)
-                .map { gctx.getType(processor.computeString(it, ctx), processor.tp) }
-                .toMutableList()
+            type.parents =
+                processor.computeList(processor.process(node.nodes[1], ctx, ValType.VALUE)!!, ctx)
+                    .map { processor.computeType(it, ctx) }
+                    .toMutableList()
             processor.stageManager.pushTask(ProcessingStage.TYPES_DEFINE) {
                 val ectx = EnumContext(type)
                 val context = ctx.with(ectx)

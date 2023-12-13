@@ -5,6 +5,7 @@ import ru.DmN.pht.std.ast.NodeDef.VariableOrField
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.computeType
 import ru.DmN.pht.std.utils.isConstClass
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
@@ -27,7 +28,7 @@ object NRDef : INodeProcessor<NodeNodesList> {
                 lateinit var name: String
                 val value: Node? =
                     if (it[0].isConstClass) {
-                        type = gctx.getType(processor.computeString(it[0], ctx), processor.tp)
+                        type = processor.computeType(it[0], ctx)
                         name = processor.computeString(it[1], ctx)
                         it.getOrNull(2)
                     } else {
@@ -46,7 +47,7 @@ object NRDef : INodeProcessor<NodeNodesList> {
             val clazz = ctx.clazz as VirtualType.VirtualTypeImpl
             processor.computeList(node.nodes[0], ctx).map { processor.computeList(it, ctx) }.forEach {
                 val name = processor.computeString(it[0], ctx)
-                val type = gctx.getType(processor.computeString(it[1], ctx), processor.tp)
+                val type = processor.computeType(it[1], ctx)
                 list.add(VariableOrField.of(VirtualFieldImpl(clazz, name, type, isStatic = false, isEnum = false).apply { clazz.fields += this }))
             }
         }

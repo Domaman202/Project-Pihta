@@ -47,7 +47,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                         mutableListOf(nodeValueClass(node.line, triple.third.declaringClass!!.name)),
                         "INSTANCE",
                         NodeFGet.Type.STATIC,
-                        ctx.global.getType(processor.computeString(node.nodes[0], ctx), processor.tp)
+                        processor.computeType(node.nodes[0], ctx)
                     )
                 else instance,
                 triple.third,

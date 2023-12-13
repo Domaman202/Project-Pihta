@@ -4,11 +4,11 @@ import ru.DmN.pht.std.ast.NodeFGet
 import ru.DmN.pht.std.ast.NodeFMGet
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.nodeValueClass
 import ru.DmN.pht.std.processor.utils.nodeValue
+import ru.DmN.pht.std.processor.utils.nodeValueClass
 import ru.DmN.pht.std.processors.NRFGetA
 import ru.DmN.pht.std.processors.NRMCall
-import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.computeType
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
@@ -87,6 +87,6 @@ object NUPFGetB : INUP<Node, NodeFMGet> {
 
     private fun getInstanceType(node: NodeFMGet, processor: Processor, ctx: ProcessingContext) =
         if (node.static)
-            ctx.global.getType(processor.computeString(node.instance, ctx), processor.tp)
+            processor.computeType(node.instance, ctx)
         else processor.calc(node.instance, ctx)
 }

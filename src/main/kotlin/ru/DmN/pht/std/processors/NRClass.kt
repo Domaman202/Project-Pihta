@@ -5,12 +5,12 @@ import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.with
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.computeType
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.processors.NRDefault
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
@@ -21,7 +21,7 @@ import ru.DmN.siberia.utils.text
 object NRClass : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
         if (node.token.text == "obj")
-            ctx.global.getType(processor.computeString(node.nodes[0], ctx), processor.tp)
+            processor.computeType(node.nodes[0], ctx)
         else null
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeType {
@@ -38,9 +38,10 @@ object NRClass : INodeProcessor<NodeNodesList> {
         val new = NodeType(node.token.processed(), node.nodes.drop(2).toMutableList(), type)
         processor.stageManager.pushTask(ProcessingStage.TYPES_PREDEFINE) {
             val context = ctx.with(type)
-            type.parents = processor.computeList(processor.process(node.nodes[1], context, ValType.VALUE)!!, context)
-                .map { gctx.getType(processor.computeString(it, context), processor.tp) }
-                .toMutableList()
+            type.parents =
+                processor.computeList(processor.process(node.nodes[1], context, ValType.VALUE)!!, context)
+                    .map { processor.computeType(it, context) }
+                    .toMutableList()
             processor.stageManager.pushTask(ProcessingStage.TYPES_DEFINE) {
                 NRDefault.process(new, processor, context, mode)
             }

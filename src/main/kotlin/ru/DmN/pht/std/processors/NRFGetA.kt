@@ -1,5 +1,10 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.std.ast.NodeFGet
+import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.computeType
+import ru.DmN.pht.std.utils.isConstClass
+import ru.DmN.pht.std.utils.processNodes
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -7,11 +12,6 @@ import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VirtualField
 import ru.DmN.siberia.utils.VirtualType
-import ru.DmN.pht.std.ast.NodeFGet
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.utils.computeString
-import ru.DmN.pht.std.utils.isConstClass
-import ru.DmN.pht.std.utils.processNodes
 
 object NRFGetA : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
@@ -23,7 +23,7 @@ object NRFGetA : INodeProcessor<NodeNodesList> {
             val name = processor.computeString(nodes[1], ctx)
             val type =
                 if (nodes[0].isConstClass)
-                    ctx.global.getType(processor.computeString(node.nodes[0], ctx), processor.tp)
+                    processor.computeType(node.nodes[0], ctx)
                 else processor.calc(nodes[0], ctx)!!
             NodeFGet(
                 node.token.processed(),

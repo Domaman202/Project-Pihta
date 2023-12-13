@@ -7,6 +7,7 @@ import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.with
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.computeType
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -30,7 +31,7 @@ object NRCatch : INodeProcessor<NodeNodesList> {
             processor.computeList(node.nodes[0], ctx).map {
                 val catcher = processor.computeList(it, ctx)
                 val variable = processor.computeString(catcher[0], ctx)
-                val type = gctx.getType(processor.computeString(catcher[1], ctx), processor.tp)
+                val type = processor.computeType(catcher[1], ctx)
                 Triple(
                     variable,
                     type,

@@ -9,6 +9,7 @@ import ru.DmN.pht.std.processor.utils.with
 import ru.DmN.pht.std.processors.NRAs
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.computeType
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -29,13 +30,13 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         val type = ctx.clazz as VirtualTypeImpl
         //
         val name = processor.computeString(node.nodes[0], ctx)
-        val returnType = processor.computeString(node.nodes[1], ctx)
+        val returnType = processor.computeType(node.nodes[1], ctx)
         val args = parseArguments(node.nodes[2], processor, ctx)
         //
         val method = VirtualMethodImpl(
             type,
             name,
-            gctx.getType(returnType, processor.tp),
+            returnType,
             args.first.map { gctx.getType(it, processor.tp) },
             args.second,
             MethodModifiers(),
