@@ -20,7 +20,4 @@ object NUPAs : IStdNUP<NodeAs, NodeAs> {
 
     override fun calc(node: NodeAs, processor: Processor, ctx: ProcessingContext): VirtualType =
         node.type
-
-    override fun computeGenerics(node: NodeAs, processor: Processor, ctx: ProcessingContext): List<VirtualType> =
-        node.generics
 }

@@ -1,7 +1,6 @@
 package ru.DmN.pht.std.processor.utils
 
 import ru.DmN.pht.std.ast.NodeFieldA
-import ru.DmN.pht.std.ast.NodeGensNodesList
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.compiler.java.utils.MacroDefine
@@ -32,13 +31,13 @@ fun nodeArraySize(line: Int, name: String) =
 fun nodeArrayType(line: Int, type: String, nodes: MutableList<Node>) =
     NodeNodesList(Token.operation(line, "array-of-type"), nodes.apply { add(0, nodeValueClass(line, type)) })
 fun nodeAs(line: Int, node: Node, type: String) =
-    NodeGensNodesList(Token.operation(line, "as"),
-        mutableListOf(nodeValueClass(line, type), node),
-        emptyList())
+    NodeNodesList(Token.operation(line, "as"),
+        mutableListOf(nodeValueClass(line, type), node),)
 fun nodeAs(line: Int, nodes: List<Node>) =
-    NodeGensNodesList(Token.operation(line, "as"), nodes.toMutableList(), emptyList())
+    NodeNodesList(Token.operation(line, "as"), nodes.toMutableList())
 fun nodeASet(line: Int, name: String, index: Int, value: Node) =
-    NodeNodesList(Token.operation(line, "aset"), mutableListOf(nodeGetOrName(line, name), nodeValue(line, index), value))
+    NodeNodesList(Token.operation(line, "aset"),
+        mutableListOf(nodeGetOrName(line, name), nodeValue(line, index), value))
 // b
 fun nodeBody(line: Int, nodes: MutableList<Node>) =
     NodeNodesList(Token.operation(line, "body"), nodes)
@@ -54,9 +53,11 @@ fun nodeCtor(line: Int, nodes: List<Node>) =
     NodeNodesList(Token.operation(line, "ctor"),
         mutableListOf<Node>(nodeValn(line, mutableListOf())).apply { addAll(nodes) })
 fun nodeCycle(line: Int, cond: Node, body: List<Node>) =
-    NodeNodesList(Token.operation(line, "cycle"), mutableListOf(cond).apply { addAll(body) })
+    NodeNodesList(Token.operation(line, "cycle"),
+        mutableListOf(cond).apply { addAll(body) })
 fun nodeCycle(line: Int, cond: Node, body: Node) =
-    NodeNodesList(Token.operation(line, "cycle"), mutableListOf(cond, body))
+    NodeNodesList(Token.operation(line, "cycle"),
+        mutableListOf(cond, body))
 fun nodeDef(line: Int, name: String, type: String) =
     NodeNodesList(Token.operation(line, "def"),
         mutableListOf(nodeValn(line, nodeValn(line, mutableListOf(nodeValueClass(line, type), nodeGetOrName(line, name))))))
@@ -104,8 +105,8 @@ fun nodeMCall(line: Int, type: String, name: String, args: List<Node>) =
         mutableListOf<Node>(nodeValueClass(line, type), nodeValue(line, name)).apply { addAll(args) })
 // n
 fun nodeNew(line: Int, type: String, args: List<Node>) =
-    NodeGensNodesList(Token.operation(line, "new"),
-        mutableListOf<Node>(nodeValueClass(line, type)).apply { addAll(args) }, emptyList())
+    NodeNodesList(Token.operation(line, "new"),
+        mutableListOf<Node>(nodeValueClass(line, type)).apply { addAll(args) })
 fun nodeNewArray(line: Int, type: String, size: Int) =
     NodeNodesList(Token.operation(line, "new-array"),
         mutableListOf(nodeValueClass(line, type), nodeValue(line, size)))

@@ -8,7 +8,6 @@ import ru.DmN.pht.std.processor.utils.macro
 import ru.DmN.pht.std.processor.utils.with
 import ru.DmN.pht.std.utils.IStdNUP
 import ru.DmN.pht.std.utils.compute
-import ru.DmN.pht.std.utils.computeGenericsOr
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.Unparser
@@ -53,11 +52,6 @@ object NUPMacro : IStdNUP<NodeMacro, NodeMacro> {
     override fun compute(node: NodeMacro, processor: Processor, ctx: ProcessingContext): Node {
         val result = macroCalc(node, ctx)
         return processor.compute(result.first.copy(), result.second)
-    }
-
-    override fun computeGenerics(node: NodeMacro, processor: Processor, ctx: ProcessingContext): List<VirtualType>? {
-        val result = macroCalc(node, ctx)
-        return processor.computeGenericsOr(result.first.copy(), result.second)
     }
 
     private fun macroCalc(node: NodeMacro, ctx: ProcessingContext): Pair<NodeNodesList, ProcessingContext> {

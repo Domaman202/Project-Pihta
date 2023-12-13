@@ -17,9 +17,6 @@ class BodyContext(
     fun addVariable(name: String, type: VirtualType?, tmp: Boolean = false): Variable =
         Variable(name, type, nvi.getAndIncrement(), tmp).apply { variables += this }
 
-    fun addVariable(name: String, type: VirtualType?, tmp: Boolean = false, generics: List<VirtualType>): Variable =
-        VariableWithGenerics(name, type, nvi.getAndIncrement(), tmp, generics).apply { variables += this }
-
     companion object {
         fun of(ctx: BodyContext?): BodyContext =
             if (ctx == null)

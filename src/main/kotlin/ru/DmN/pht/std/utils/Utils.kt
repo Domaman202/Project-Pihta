@@ -58,16 +58,6 @@ fun Processor.compute(node: Node, ctx: ProcessingContext): Node =
         else node
     }
 
-fun Processor.computeGenerics(node: Node, ctx: ProcessingContext): List<VirtualType> =
-    this.computeGenericsOr(node, ctx)!!
-
-fun Processor.computeGenericsOr(node: Node, ctx: ProcessingContext): List<VirtualType>? =
-    this.get(node, ctx).let {
-        if (it is IStdNodeProcessor<Node>)
-            it.computeGenerics(node, this, ctx)
-        else null
-    }
-
 fun Processor.computeList(node: Node, ctx: ProcessingContext): List<Node> =
     this.computeListOr(node, ctx)!!
 
