@@ -158,6 +158,15 @@ class Tests {
     }
 
     @Test
+    fun testGenerics() {
+        Module("test/pht/std/generics").run {
+            compile()
+            assertEquals(test(0), String::class.java)
+            assertEquals(test(1), String::class.java)
+        }
+    }
+
+    @Test
     fun testInterface() {
         Module("test/pht/std/interface").run {
             compile()
