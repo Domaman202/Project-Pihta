@@ -157,6 +157,7 @@ object Pihta : Module("pht") {
         adda("progn!",       NUPPrognC)
         // r
         adda("rand-symbol",  NUPDefault, NRRandSymbol)
+        adda("range",        NUPDefault, NRRange)
         adda("rem",          NUPMath,    NRMath)
         adda("!rem",         NUPMath)
         adda("ret",          NUPDefault, NRRet)

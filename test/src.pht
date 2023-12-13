@@ -1,4 +1,3 @@
 (app-fn
-    (def [[list (new ^java.util.ArrayList<^String>)]])
-    (#add list "Hi!")
-    (println (typeof (#get list 0)))))
+    (for [i (range 0 10)]
+        (println i)))
