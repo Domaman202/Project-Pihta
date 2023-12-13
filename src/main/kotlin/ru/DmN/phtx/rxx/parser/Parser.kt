@@ -1,9 +1,7 @@
 package ru.DmN.phtx.rxx.parser
 
-import ru.DmN.pht.std.processor.utils.nodeAdd
-import ru.DmN.pht.std.processor.utils.nodeAppFn
-import ru.DmN.pht.std.processor.utils.nodePrintln
-import ru.DmN.pht.std.processor.utils.nodeValue
+import ru.DmN.pht.std.ast.NodeValue
+import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.phtx.rxx.lexer.Lexer
 import ru.DmN.phtx.rxx.lexer.TokenType.*
 import ru.DmN.siberia.ast.Node
@@ -26,13 +24,13 @@ class Parser(val lexer: Lexer) {
     }
 
     fun parseNode(ctx: ParsingContext): Node {
-        val words = StringBuilder()
+        val sb = StringBuilder()
         var nodes: MutableList<Node>? = null
         var tk = nextToken()!!
         while (true) {
             when (tk.type) {
                 STRING -> return nodeValue(tk.line, tk.text!!)
-                WORD -> words.append(tk.text!!)
+                WORD -> sb.append(tk.text!!).append(' ')
                 DOT -> break
                 COLON -> {
                     nodes = parseArguments(ctx)
@@ -42,6 +40,7 @@ class Parser(val lexer: Lexer) {
             }
             tk = nextToken()!!
         }
+        val words =  sb.trimEnd()
         return COMMANDS.find { it.first.matches(words) }!!.second(tk.line, nodes ?: mutableListOf(), this, ctx)
     }
 
@@ -78,7 +77,7 @@ class Parser(val lexer: Lexer) {
             ArrayList<Pair<Regex, (line: Int, nodes: MutableList<Node>, parser: Parser, ctx: ParsingContext) -> Node>>()
 
         infix fun String.command(command: (line: Int, nodes: MutableList<Node>, parser: Parser, ctx: ParsingContext) -> Node) {
-            COMMANDS.add(Pair(Regex(this.replace(" ", "")), command))
+            COMMANDS.add(Pair(Regex(this), command))
         }
     }
 
@@ -86,5 +85,7 @@ class Parser(val lexer: Lexer) {
         "Начало бытия" command { line, nodes, _, _ -> nodeAppFn(line, nodes) }
         "Молвить" command { line, nodes, _, _ -> nodePrintln(line, nodes) }
         "Сумму" command { line, nodes, _, _ -> nodeAdd(line, nodes) }
+        "Определить переменную" command { line, nodes, _, _ -> nodeDef(line, nodes) }
+        "Значение переменной" command { line, nodes, _, _ -> nodeGetOrName(line, (nodes[0] as NodeValue).value) }
     }
 }
