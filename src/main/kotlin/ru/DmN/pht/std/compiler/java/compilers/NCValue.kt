@@ -50,8 +50,12 @@ object NCValue : INodeCompiler<NodeValue> {
                         visitLdcInsn(node.getString())
                         VirtualType.ofKlass("java.lang.String")
                     }
-                    PRIMITIVE, CLASS, CLASS_WITH_GEN -> {
+                    PRIMITIVE, CLASS -> {
                         visitLdcInsn(Type.getType(node.value.desc))
+                        VirtualType.ofKlass("java.lang.Class")
+                    }
+                    CLASS_WITH_GEN -> {
+                        visitLdcInsn(Type.getType(node.value.substring(0, node.value.indexOf('<')).desc))
                         VirtualType.ofKlass("java.lang.Class")
                     }
                 }

@@ -161,10 +161,9 @@ class Tests {
     fun testGenerics() {
         Module("test/pht/std/generics").run {
             compile()
-            assertEquals(test(0), String::class.java)
-            assertEquals(test(1), String::class.java)
-            assertEquals(test(2), String::class.java)
-            assertEquals(test(3), String::class.java)
+            for (i in 0..7) {
+                assertEquals(test(i), String::class.java)
+            }
         }
     }
 
