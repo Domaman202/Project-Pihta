@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.compiler.java.compilers
 
-import jdk.internal.org.objectweb.asm.Opcodes
+import org.objectweb.asm.Opcodes
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.siberia.Compiler

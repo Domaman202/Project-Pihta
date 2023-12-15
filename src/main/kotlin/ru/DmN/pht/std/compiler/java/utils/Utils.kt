@@ -137,14 +137,14 @@ fun primitiveToObject(variable: Variable, node: MethodVisitor): VirtualType? {
     node.visitLabel(start)
     load(variable, node)
     return when (variable.type().name) {
-        "boolean" -> primitiveToObject(node, 'Z', VirtualType.ofKlass("java.lang.Boolean"))
-        "byte" -> primitiveToObject(node, 'B', VirtualType.ofKlass("java.lang.Byte"))
-        "short" -> primitiveToObject(node, 'S', VirtualType.ofKlass("java.lang.Short"))
-        "char" -> primitiveToObject(node, 'C', VirtualType.ofKlass("java.lang.Character"))
-        "int" -> primitiveToObject(node, 'I', VirtualType.ofKlass("java.lang.Integer"))
-        "long" -> primitiveToObject(node, 'J', VirtualType.ofKlass("java.lang.Long"))
-        "float" -> primitiveToObject(node, 'F', VirtualType.ofKlass("java.lang.Float"))
-        "double" -> primitiveToObject(node, 'D', VirtualType.ofKlass("java.lang.Double"))
+        "boolean"   -> primitiveToObject(node, 'Z', VirtualType.ofKlass("java.lang.Boolean"))
+        "byte"      -> primitiveToObject(node, 'B', VirtualType.ofKlass("java.lang.Byte"))
+        "short"     -> primitiveToObject(node, 'S', VirtualType.ofKlass("java.lang.Short"))
+        "char"      -> primitiveToObject(node, 'C', VirtualType.ofKlass("java.lang.Character"))
+        "int"       -> primitiveToObject(node, 'I', VirtualType.ofKlass("java.lang.Integer"))
+        "long"      -> primitiveToObject(node, 'J', VirtualType.ofKlass("java.lang.Long"))
+        "float"     -> primitiveToObject(node, 'F', VirtualType.ofKlass("java.lang.Float"))
+        "double"    -> primitiveToObject(node, 'D', VirtualType.ofKlass("java.lang.Double"))
         else -> variable.type
     }
 }
