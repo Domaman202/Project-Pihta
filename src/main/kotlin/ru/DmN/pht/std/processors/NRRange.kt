@@ -24,7 +24,7 @@ object NRRange : INodeProcessor<NodeNodesList> {
                 NodeMCall(
                     Token.operation(line, "!mcall"),
                     node.nodes,
-                    emptyList(),
+                    null,
                     nodeValueClass(line, "ru.DmN.pht.std.utils.IteratorUtils"),
                     ctx.global.getType(
                         "ru.DmN.pht.std.utils.IteratorUtils",

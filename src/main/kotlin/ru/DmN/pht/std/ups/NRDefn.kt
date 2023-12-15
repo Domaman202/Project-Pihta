@@ -8,10 +8,7 @@ import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.nodeAs
 import ru.DmN.pht.std.processor.utils.with
 import ru.DmN.pht.std.processors.NRAs
-import ru.DmN.pht.std.utils.computeGenericType
-import ru.DmN.pht.std.utils.computeList
-import ru.DmN.pht.std.utils.computeString
-import ru.DmN.pht.std.utils.computeType
+import ru.DmN.pht.std.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -31,13 +28,21 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         val gctx = ctx.global
         val type = ctx.clazz as VirtualTypeImpl
         //
-        val name = processor.computeString(node.nodes[0], ctx)
-        val returnGen = processor.computeGenericType(node.nodes[1], ctx)
+        val gens = processor.computeListOr(node.nodes[0], ctx)
+        val offset = if (gens == null) 0 else 1
+        val generics = type.generics.toMutableList()
+        gens?.forEach {
+            val generic = processor.computeList(it, ctx)
+            generics += Pair(processor.computeString(generic[0], ctx), processor.computeType(generic[1], ctx))
+        }
+        //
+        val name = processor.computeString(node.nodes[offset], ctx)
+        val returnGen = processor.computeGenericType(node.nodes[1 + offset], ctx)
         val returnType =
             if (returnGen == null)
-                processor.computeType(node.nodes[1], ctx)
-            else type.generics.find { it.first == returnGen }!!.second
-        val args = parseArguments(node.nodes[2], type.generics, processor, ctx, gctx)
+                processor.computeType(node.nodes[1 + offset], ctx)
+            else generics.find { it.first == returnGen }!!.second
+        val args = parseArguments(node.nodes[2 + offset], generics, processor, ctx, gctx)
         //
         val method = VirtualMethodImpl(
             type,
@@ -49,14 +54,14 @@ object NRDefn : INodeProcessor<NodeNodesList> {
             args.third,
             MethodModifiers(),
             null,
-            type.generics // todo:
+            generics, // todo:
         )
         type.methods += method
         //
         val new = NodeDefn(
             node.token.processed(),
-            if (node.nodes.size > 3)
-                node.nodes.drop(3).toMutableList()
+            if (node.nodes.size > 3 + offset)
+                node.nodes.drop(3 + offset).toMutableList()
             else ArrayList(),
             method
         )

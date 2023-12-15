@@ -37,7 +37,7 @@ object NRIncDec : INodeProcessor<NodeNodesList> {
             NodeMCall(
                 Token.operation(line, "!mcall"),
                 NRMCall.processArguments(line, processor, ctx, result.second, listOf(nodes[0]) + result.first),
-                emptyList(),
+                null,
                 nodeValueClass(line, result.second.declaringClass!!.name),
                 result.second,
                 NodeMCall.Type.EXTEND

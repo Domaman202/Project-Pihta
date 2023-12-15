@@ -7,9 +7,9 @@ import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.indent
 
-class NodeMCall(tkOperation: Token, nodes: MutableList<Node>, val generics: List<VirtualType>, val instance: Node, val method: VirtualMethod, val type: Type) : NodeNodesList(tkOperation, nodes) {
+class NodeMCall(tkOperation: Token, nodes: MutableList<Node>, val generic: VirtualType?, val instance: Node, val method: VirtualMethod, val type: Type) : NodeNodesList(tkOperation, nodes) {
     override fun copy(): NodeMCall =
-        NodeMCall(token, copyNodes(), generics, instance, method, type)
+        NodeMCall(token, copyNodes(), generic, instance, method, type)
 
     override fun print(builder: StringBuilder, indent: Int): StringBuilder {
         builder.indent(indent).append('[').append(token.text).append(" (").append(type).append(") ").append(method.name).append(method.desc).append('\n')

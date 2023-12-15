@@ -21,42 +21,42 @@ import ru.DmN.siberia.utils.line
 
 object NRMCall : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
-        val triple = findMethod(node, processor, ctx)
+        val fourfold = findMethod(node, processor, ctx)
         val instance =
-            if (triple.first == SUPER)
+            if (fourfold.first == SUPER)
                 nodeGetOrName(node.line, "this")
             else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
-        return processor.calc(instance, ctx).let { if (it is VTWG) it.gens[0] else triple.third.rettype }
+        return fourfold.fourth ?: processor.calc(instance, ctx).let { if (it is VTWG) it.gens[0] else fourfold.third.rettype }
     }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeMCall {
-        val triple = findMethod(node, processor, ctx)
+        val fourfold = findMethod(node, processor, ctx)
         val instance =
-            if (triple.first == SUPER)
+            if (fourfold.first == SUPER)
                 nodeGetOrName(node.line, "this")
             else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
-        val generics = processor.calc(instance, ctx).let { if (it is VTWG) it.gens else emptyList() }
-        return if (triple.third.extension == null)
+        val generics = fourfold.fourth ?: processor.calc(instance, ctx).let { if (it is VTWG) it.gens[0] else null }
+        return if (fourfold.third.extension == null)
             NodeMCall(
                 node.token.processed(),
-                processArguments(node.line, processor, ctx, triple.third, triple.second),
+                processArguments(node.line, processor, ctx, fourfold.third, fourfold.second),
                 generics,
-                if (triple.first == VIRTUAL)
+                if (fourfold.first == VIRTUAL)
                     NodeFGet(
                         Token.operation(node.line, "!fget"),
-                        mutableListOf(nodeValueClass(node.line, triple.third.declaringClass!!.name)),
+                        mutableListOf(nodeValueClass(node.line, fourfold.third.declaringClass!!.name)),
                         "INSTANCE",
                         NodeFGet.Type.STATIC,
                         processor.computeType(node.nodes[0], ctx)
                     )
                 else instance,
-                triple.third,
-                when (triple.first) {
+                fourfold.third,
+                when (fourfold.first) {
                     UNKNOWN ->
-                        if (triple.third.modifiers.static)
+                        if (fourfold.third.modifiers.static)
                             STATIC
                         else VIRTUAL
-                    else -> triple.first
+                    else -> fourfold.first
                 }
             )
         else NodeMCall(
@@ -65,12 +65,12 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 node.line,
                 processor,
                 ctx,
-                triple.third,
-                listOf(instance) + triple.second
+                fourfold.third,
+                listOf(instance) + fourfold.second
             ),
             generics,
-            NodeValue.of(node.token.line, NodeValue.Type.CLASS, triple.third.extension!!.name),
-            triple.third,
+            NodeValue.of(node.token.line, NodeValue.Type.CLASS, fourfold.third.extension!!.name),
+            fourfold.third,
             NodeMCall.Type.EXTEND
         )
     }
@@ -100,11 +100,13 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             .mapIndexed { i, it -> NRAs.process(nodeAs(line, it, method.argsc[i].name), processor, ctx, ValType.VALUE)!! }
             .toMutableList()
 
-    private fun findMethod(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): Triple<NodeMCall.Type, List<Node>, VirtualMethod> {
+    private fun findMethod(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): Fourfold<NodeMCall.Type, List<Node>, VirtualMethod, VirtualType?> {
+        val gctx = ctx.global
+        //
         lateinit var clazz: VirtualType
         val type = node.nodes[0].let {
             if (it.isConstClass) {
-                clazz = ctx.global.getType(it.valueAsString, processor.tp)
+                clazz = gctx.getType(it.valueAsString, processor.tp)
                 STATIC
             } else {
                 if (it.isLiteral) {
@@ -130,7 +132,14 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 UNKNOWN
             }
         }
-        val name = processor.computeString(node.nodes[1], ctx)
+        var generic: VirtualType? = null
+        val name = processor.computeString(node.nodes[1], ctx).let {
+            val gs = it.indexOf('<')
+            if (gs < 1)
+                return@let it
+            generic = gctx.getType(it.substring(gs + 2, it.length - 1), processor.tp)
+            it.substring(0, gs)
+        }
         val result = findMethodOrNull(
             clazz,
             name,
@@ -139,21 +148,22 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             ctx
         ) ?: if (clazz == VTDynamic)
             findMethod(
-                ctx.global.getType("ru.DmN.pht.std.utils.DynamicUtils", processor.tp),
+                gctx.getType("ru.DmN.pht.std.utils.DynamicUtils", processor.tp),
                 "invokeMethod",
                 node.nodes.map { processor.process(it, ctx, ValType.VALUE)!! },
                 processor,
                 ctx
             )
         else throw RuntimeException("Method '$name' not founded!")
-        return Triple(
+        return Fourfold(
             if (type == STATIC)
                 if (result.second.modifiers.static)
                     STATIC
                 else VIRTUAL
             else type,
             result.first,
-            result.second
+            result.second,
+            generic
         )
     }
 
