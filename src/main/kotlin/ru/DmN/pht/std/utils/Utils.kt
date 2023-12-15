@@ -1,18 +1,16 @@
 package ru.DmN.pht.std.utils
 
+import ru.DmN.pht.std.ast.IValueNode
+import ru.DmN.pht.std.processor.utils.ICastable
+import ru.DmN.pht.std.processors.IStdNodeProcessor
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.INodesList
-import ru.DmN.pht.std.ast.IValueNode
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.klassOf
-import ru.DmN.pht.std.processors.IStdNodeProcessor
-import ru.DmN.pht.std.processor.utils.ICastable
-import ru.DmN.siberia.processors.INodeProcessor
-import java.util.*
 
 val Node.isLiteral
     get() = if (this is IValueNode) this.isLiteral() else false
@@ -75,6 +73,13 @@ fun Processor.computeTypeOr(node: Node, ctx: ProcessingContext): VirtualType? =
     this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeType(node, this, ctx)
+        else throw UnsupportedOperationException()
+    }
+
+fun Processor.computeGenericType(node: Node, ctx: ProcessingContext): String? =
+    this.get(node, ctx).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.computeGenericType(node, this, ctx)
         else throw UnsupportedOperationException()
     }
 

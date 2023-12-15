@@ -1,3 +1,6 @@
-(app-fn
-    (for [i (range 0 10)]
-        (println i)))
+(progn
+    (cls Test<T> [^Object]
+        (ctor [] (ccall))
+        (defn foo T^ [[o T^]] o))
+    (app-fn
+        (println (typeof (#foo (new ^Test<^String>) "Test!")))))

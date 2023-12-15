@@ -10,7 +10,7 @@ class VTWG(val type: VirtualType, val gens: List<VirtualType>) : VirtualType() {
         get() = type.componentType
     override val fields: List<VirtualField>
         get() = type.fields
-    override val generics: List<String>
+    override val generics: List<Pair<String, VirtualType>>
         get() = type.generics
     override val isAbstract: Boolean
         get() = type.isAbstract

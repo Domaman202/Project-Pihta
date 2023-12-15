@@ -22,5 +22,5 @@ object NUPMCallX : INUP<NodeMCall, NodeMCall> {
     }
 
     override fun calc(node: NodeMCall, processor: Processor, ctx: ProcessingContext): VirtualType =
-        (if (node.method.genericRettype) node.generics.getOrNull(0) else null) ?: node.method.rettype
+        (if (node.method.retgen == null) null else node.generics.getOrNull(0)) ?: node.method.rettype
 }

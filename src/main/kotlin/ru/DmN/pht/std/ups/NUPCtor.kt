@@ -59,17 +59,19 @@ object NUPCtor : INUP<NodeDefn, NodeNodesList> {
         val gctx = ctx.global
         val type = ctx.clazz as VirtualTypeImpl
         //
-        val args = NRDefn.parseArguments(node.nodes[0], processor, ctx)
+        val args = NRDefn.parseArguments(node.nodes[0], type.generics, processor, ctx, gctx)
         //
         val method = VirtualMethodImpl(
             type,
             "<init>",
             VirtualType.VOID,
-            args.first.map { gctx.getType(it, processor.tp) },
+            null,
+            args.first,
             args.second,
+            args.third,
             MethodModifiers(ctor = true),
             null,
-            false
+            type.generics
         )
         type.methods += method
         //

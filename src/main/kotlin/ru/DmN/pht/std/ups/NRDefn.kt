@@ -1,12 +1,15 @@
 package ru.DmN.pht.std.ups
 
+import jdk.nashorn.internal.objects.Global
 import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.processor.ctx.BodyContext
+import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.nodeAs
 import ru.DmN.pht.std.processor.utils.with
 import ru.DmN.pht.std.processors.NRAs
+import ru.DmN.pht.std.utils.computeGenericType
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.computeType
@@ -30,18 +33,24 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         val type = ctx.clazz as VirtualTypeImpl
         //
         val name = processor.computeString(node.nodes[0], ctx)
-        val returnType = processor.computeType(node.nodes[1], ctx)
-        val args = parseArguments(node.nodes[2], processor, ctx)
+        val returnGen = processor.computeGenericType(node.nodes[1], ctx)
+        val returnType =
+            if (returnGen == null)
+                processor.computeType(node.nodes[1], ctx)
+            else type.generics.find { it.first == returnGen }!!.second
+        val args = parseArguments(node.nodes[2], type.generics, processor, ctx, gctx)
         //
         val method = VirtualMethodImpl(
             type,
             name,
             returnType,
-            args.first.map { gctx.getType(it, processor.tp) },
+            returnGen,
+            args.first,
             args.second,
+            args.third,
             MethodModifiers(),
             null,
-            false
+            type.generics // todo:
         )
         type.methods += method
         //
@@ -81,16 +90,25 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         }
     }
 
-    fun parseArguments(list: Node, processor: Processor, ctx: ProcessingContext): Pair<MutableList<String>, MutableList<String>> {
+    fun parseArguments(list: Node, generics: List<Pair<String, VirtualType>>, processor: Processor, ctx: ProcessingContext, gctx: GlobalContext): Triple<MutableList<VirtualType>, MutableList<String>, MutableList<String?>> {
+        val argsc = ArrayList<VirtualType>()
         val argsn = ArrayList<String>()
-        val argsc = ArrayList<String>()
+        val argsg = ArrayList<String?>()
         processor.computeList(list, ctx)
             .stream()
             .map { it -> processor.computeList(it, ctx).map { processor.computeString(it, ctx) } }
-            .forEach {
+            .forEach { it ->
                 argsn += it.first()
-                argsc += it.last()
+                val type = it.last()
+                if (type.endsWith('^')) {
+                    val generic = type.substring(0, type.length - 1)
+                    argsc += generics.find { it.first == generic }!!.second
+                    argsg += generic
+                } else {
+                    argsc += gctx.getType(type, processor.tp)
+                    argsg += null
+                }
             }
-        return Pair(argsc, argsn)
+        return Triple(argsc, argsn, argsg)
     }
 }

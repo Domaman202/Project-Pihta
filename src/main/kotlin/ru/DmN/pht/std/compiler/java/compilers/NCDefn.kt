@@ -31,7 +31,7 @@ object NCDefn : INodeCompiler<NodeDefn> {
             },
             node.method.name,
             node.method.desc,
-            null,
+            node.method.signature,
             null
         ) as MethodNode
         if (!node.abstract) {

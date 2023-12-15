@@ -20,5 +20,5 @@ object NUPNew : IStdNUP<NodeNew, NodeNew> {
     }
 
     override fun calc(node: NodeNew, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        node.ctor.declaringClass
+        node.type
 }

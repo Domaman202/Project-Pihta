@@ -39,6 +39,7 @@ class NodeValue(tkOperation: Token, val vtype: Type, val value: String) : Node(t
         STRING,
         PRIMITIVE,
         CLASS,
+        CLASS_WITH_GEN,
         NAMING
     }
 

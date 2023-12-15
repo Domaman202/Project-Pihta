@@ -18,13 +18,14 @@ object NUPValueB : INUP<Node, Node> {
                         return parser.get(ctx, "get-or-name!")!!.parse(parser, ctx, Token.operation(operationToken.line, "get-or-name!"))
                     }
 
-                    PRIMITIVE   -> NodeValue.Type.PRIMITIVE
-                    CLASS       -> {
+                    PRIMITIVE -> NodeValue.Type.PRIMITIVE
+                    CLASS     -> {
                         if (text.contains("[/#]".toRegex())) {
                             parser.tokens.push(operationToken)
                             return parser.get(ctx, "get")!!.parse(parser, ctx, Token.operation(operationToken.line, "get_"))
                         } else NodeValue.Type.CLASS
                     }
+                    CLASS_WITH_GEN -> NodeValue.Type.CLASS_WITH_GEN
 
                     NAMING  -> NodeValue.Type.NAMING
                     NIL     -> NodeValue.Type.NIL

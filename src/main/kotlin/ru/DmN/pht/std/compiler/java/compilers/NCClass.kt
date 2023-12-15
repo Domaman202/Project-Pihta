@@ -34,7 +34,7 @@ object NCClass : INodeCompiler<NodeType> {
                         }
                     },
                     node.type.className,
-                    null,
+                    node.type.signature,
                     node.type.superclass?.className ?: "java/lang/Object",
                     node.type.interfaces.map { it.className }.toTypedArray()
                 )

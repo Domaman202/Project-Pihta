@@ -9,6 +9,7 @@ import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.desc
 import ru.DmN.pht.std.ast.NodeValue
+import ru.DmN.pht.std.ast.NodeValue.Type.*
 import ru.DmN.pht.std.compiler.java.utils.method
 
 object NCValue : INodeCompiler<NodeValue> {
@@ -17,39 +18,39 @@ object NCValue : INodeCompiler<NodeValue> {
             node,
             ctx.method.node.run {
                 when (node.vtype) {
-                    NodeValue.Type.NIL -> {
+                    NIL -> {
                         visitInsn(Opcodes.ACONST_NULL)
                         VirtualType.ofKlass("java.lang.Object")
                     }
-                    NodeValue.Type.BOOLEAN -> {
+                    BOOLEAN -> {
                         visitLdcInsn(node.getBoolean())
                         VirtualType.BOOLEAN
                     }
-                    NodeValue.Type.CHAR -> {
+                    CHAR -> {
                         visitLdcInsn(node.getChar())
                         VirtualType.CHAR
                     }
-                    NodeValue.Type.INT -> {
+                    INT -> {
                         visitLdcInsn(node.getInt())
                         VirtualType.INT
                     }
-                    NodeValue.Type.LONG -> {
+                    LONG -> {
                         visitLdcInsn(node.getLong())
                         VirtualType.LONG
                     }
-                    NodeValue.Type.FLOAT -> {
+                    FLOAT -> {
                         visitLdcInsn(node.getFloat())
                         VirtualType.FLOAT
                     }
-                    NodeValue.Type.DOUBLE -> {
+                    DOUBLE -> {
                         visitLdcInsn(node.getDouble())
                         VirtualType.DOUBLE
                     }
-                    NodeValue.Type.STRING, NodeValue.Type.NAMING -> {
+                    STRING, NAMING -> {
                         visitLdcInsn(node.getString())
                         VirtualType.ofKlass("java.lang.String")
                     }
-                    NodeValue.Type.PRIMITIVE, NodeValue.Type.CLASS -> {
+                    PRIMITIVE, CLASS, CLASS_WITH_GEN -> {
                         visitLdcInsn(Type.getType(node.value.desc))
                         VirtualType.ofKlass("java.lang.Class")
                     }

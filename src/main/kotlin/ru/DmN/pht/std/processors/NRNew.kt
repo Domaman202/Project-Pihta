@@ -2,6 +2,7 @@ package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.ast.NodeNew
 import ru.DmN.pht.std.processor.utils.global
+import ru.DmN.pht.std.utils.VTWG
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.computeType
 import ru.DmN.pht.std.utils.processNodes
@@ -19,8 +20,9 @@ object NRNew : INodeProcessor<NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeNew {
         val nodes = processor.processNodes(node, ctx, ValType.VALUE)
+        val type = calc(node, processor, ctx)
         val ctor = NRMCall.findMethod(
-            calc(node, processor, ctx),
+            type,
             "<init>",
             nodes.drop(1),
             processor,
@@ -29,6 +31,7 @@ object NRNew : INodeProcessor<NodeNodesList> {
         return NodeNew(
             node.token.processed(),
             NRMCall.processArguments(node.line, processor, ctx, ctor.second, ctor.first),
+            type,
             ctor.second
         )
     }

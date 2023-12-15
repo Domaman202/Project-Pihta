@@ -15,6 +15,7 @@ import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.processors.NRDefault
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.VirtualType.Companion.ofKlass
 import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
 import ru.DmN.siberia.utils.text
 
@@ -27,7 +28,7 @@ object NRClass : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeType {
         val gctx = ctx.global
         //
-        val type = VirtualTypeImpl(gctx.name(processor.computeString(processor.process(node.nodes[0], ctx, ValType.VALUE)!!, ctx)))
+        val type = createVirtualType(gctx.name(processor.computeString(processor.process(node.nodes[0], ctx, ValType.VALUE)!!, ctx)))
         //
         when (node.text) {
             "obj" -> type.fields += VirtualFieldImpl(type, "INSTANCE", type, isStatic = true, isEnum = false)
@@ -47,5 +48,21 @@ object NRClass : INodeProcessor<NodeNodesList> {
             }
         }
         return new
+    }
+
+    private fun createVirtualType(name: String): VirtualTypeImpl {
+        val gs = name.indexOf('<')
+        if (gs == -1)
+            return VirtualTypeImpl(name)
+        val generics = ArrayList<String>()
+        var s = name.substring(gs)
+        while (true) {
+            val i = s.indexOf(',')
+            generics.add(s.substring(1, if (i == -1) s.length - 1 else i))
+            if (i == -1)
+                break
+            s = s.substring(i)
+        }
+        return VirtualTypeImpl(name.substring(0, gs), generics = generics.map { Pair(it, ofKlass(Any::class.java)) }) // todo
     }
 }

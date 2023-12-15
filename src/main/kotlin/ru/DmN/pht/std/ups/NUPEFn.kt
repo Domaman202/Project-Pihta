@@ -5,6 +5,7 @@ import ru.DmN.pht.std.processor.ctx.BodyContext
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.with
+import ru.DmN.pht.std.utils.computeGenericType
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.computeType
 import ru.DmN.siberia.Parser
@@ -66,21 +67,28 @@ object NUPEFn : INUP<NodeDefn, NodeNodesList> {
         //
         val extend = processor.computeType(node.nodes[0], ctx)
         val name = processor.computeString(node.nodes[1], ctx)
-        val returnType = processor.computeType(node.nodes[2], ctx)
-        val args = NRDefn.parseArguments(node.nodes[3], processor, ctx)
+        val returnGen = processor.computeGenericType(node.nodes[2], ctx)
+        val returnType =
+            if (returnGen == null)
+                processor.computeType(node.nodes[2], ctx)
+            else type.generics.find { it.first == returnGen }!!.second
+        val args = NRDefn.parseArguments(node.nodes[3], type.generics, processor, ctx, gctx)
         //
-        args.first.add(0, extend.name)
+        args.first.add(0, extend)
         args.second.add(0, "this")
+        args.third.add(0, null)
         //
         val method = VirtualMethodImpl(
             type,
             name,
             returnType,
-            args.first.map { gctx.getType(it, processor.tp) },
+            null, // todo:
+            args.first,
             args.second,
+            args.third,
             MethodModifiers(static = true, extension = true),
             extend,
-            false
+            emptyList() // todo:
         )
         type.methods += method
         gctx.getExtensions(extend) += method

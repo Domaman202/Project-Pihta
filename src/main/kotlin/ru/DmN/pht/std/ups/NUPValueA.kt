@@ -49,7 +49,8 @@ object NUPValueA : INUP<NodeValue, NodeValue>, IStdNodeProcessor<NodeValue> {
                 NodeValue.Type.DOUBLE -> node.value
                 NodeValue.Type.STRING -> "\"${node.value.replace("\"", "\\\"").replace("\n", "\\n").replace("\t", "\\t")}\""
                 NodeValue.Type.PRIMITIVE,
-                NodeValue.Type.CLASS -> unparseType(node.value)
+                NodeValue.Type.CLASS,
+                NodeValue.Type.CLASS_WITH_GEN -> unparseType(node.value)
                 NodeValue.Type.NAMING -> "#${node.value}"
             }
         )
@@ -63,15 +64,18 @@ object NUPValueA : INUP<NodeValue, NodeValue>, IStdNodeProcessor<NodeValue> {
     override fun calc(node: NodeValue, processor: Processor, ctx: ProcessingContext): VirtualType =
         ctx.global.getType(
             when (node.vtype) {
-                NodeValue.Type.NIL -> "Any"
-                NodeValue.Type.BOOLEAN -> "boolean"
-                NodeValue.Type.CHAR -> "char"
-                NodeValue.Type.INT -> "int"
-                NodeValue.Type.LONG -> "long"
-                NodeValue.Type.FLOAT -> "float"
+                NodeValue.Type.NIL    -> "Any"
+                NodeValue.Type.BOOLEAN-> "boolean"
+                NodeValue.Type.CHAR   -> "char"
+                NodeValue.Type.INT    -> "int"
+                NodeValue.Type.LONG   -> "long"
+                NodeValue.Type.FLOAT  -> "float"
                 NodeValue.Type.DOUBLE -> "double"
-                NodeValue.Type.STRING, NodeValue.Type.NAMING -> "String"
-                NodeValue.Type.PRIMITIVE, NodeValue.Type.CLASS -> "Class"
+                NodeValue.Type.STRING,
+                NodeValue.Type.NAMING -> "String"
+                NodeValue.Type.PRIMITIVE,
+                NodeValue.Type.CLASS,
+                NodeValue.Type.CLASS_WITH_GEN -> "Class"
             }, processor.tp
         )
 
@@ -98,8 +102,13 @@ object NUPValueA : INUP<NodeValue, NodeValue>, IStdNodeProcessor<NodeValue> {
             generics.add(gctx.getType(s.substring(2, if (i == -1) s.length - 1 else i), processor.tp))
             if (i == -1)
                 break
-            s = s.substring(i)
+            s = s.substring(i + 1)
         }
         return VTWG(gctx.getType(node.value.substring(0, gs), processor.tp), generics)
     }
+
+    override fun computeGenericType(node: NodeValue, processor: Processor, ctx: ProcessingContext): String? =
+        if (node.value.endsWith('^'))
+            node.value.substring(0, node.value.length - 1)
+        else null
 }
