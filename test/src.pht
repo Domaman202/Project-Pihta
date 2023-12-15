@@ -1,6 +1,16 @@
 (progn
-    (cls Test [^Object]
+    (cls [[T ^TestA]] TestA [^Object]
         (ctor [] (ccall))
-        (defn [[T ^Object]] foo T^ [[o T^]] o))
+        (defn foo T^ [[o T^]]
+            (println "Foo A!")
+            o))
+    (cls [[T ^TestB]] TestB [^TestA]
+        (ctor [] (ccall))
+        (defn foo T^ [[o T^]]
+            (println "Foo B!")
+            o))
     (app-fn
-        (println (typeof (#foo<^String> (new ^Test) "Test!")))))
+        (def [[a (new ^TestA)][b (new ^TestB)]])
+        (#foo a a)
+        (#foo a b)
+        (#foo b b)))

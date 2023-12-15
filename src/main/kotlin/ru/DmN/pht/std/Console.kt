@@ -12,7 +12,7 @@ object Console : Console() {
         this.actions.add(Triple("О программе", "Выводит информацию о программе.", Runnable {
             println("""
                 Проект: Пихта
-                Версия: 1.4.1
+                Версия: 1.7.1
                 Авторы: DomamaN202, Wannebetheshy
             """.trimIndent())
         }))
