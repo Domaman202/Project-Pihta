@@ -1,6 +1,5 @@
 package ru.DmN.pht.std.ups
 
-import jdk.nashorn.internal.objects.Global
 import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.processor.ctx.BodyContext
 import ru.DmN.pht.std.processor.ctx.GlobalContext

@@ -1,5 +1,5 @@
 (progn
-    (cls Test<T> [^Object]
+    (cls [[T ^String]] Test [^Object]
         (ctor [] (ccall))
         (defn foo T^ [[o T^]] o))
     (app-fn

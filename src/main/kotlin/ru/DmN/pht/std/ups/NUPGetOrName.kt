@@ -38,12 +38,18 @@ object NUPGetOrName : INUP<NodeGetOrName, NodeGetOrName>, IStdNodeProcessor<Node
             ctx.body["this"]!!.type()
         else {
             val variable = ctx.body[name]
-            variable?.type() ?: if (ctx.isClass()) ctx.clazz.fields.find { it.name == name }!!.type else throw RuntimeException()
+            variable?.type()
+                ?: if (ctx.isClass()) ctx.clazz.fields.find { it.name == name }!!.type else throw RuntimeException()
         }
+
+    override fun computeInt(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Int =
+        node.getValueAsString().toInt()
 
     override fun computeString(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): String =
         node.getValueAsString()
 
-    override fun computeInt(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Int =
-        node.getValueAsString().toInt()
+    override fun computeGenericType(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): String? =
+        if (node.name.endsWith('^'))
+            node.name.substring(0, node.name.length - 1)
+        else null
 }

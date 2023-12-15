@@ -4,6 +4,7 @@ import ru.DmN.pht.std.ast.NodeType
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.with
 import ru.DmN.pht.std.utils.computeList
+import ru.DmN.pht.std.utils.computeListOr
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.computeType
 import ru.DmN.siberia.Processor
@@ -28,7 +29,9 @@ object NRClass : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeType {
         val gctx = ctx.global
         //
-        val type = createVirtualType(gctx.name(processor.computeString(processor.process(node.nodes[0], ctx, ValType.VALUE)!!, ctx)))
+        val generics = processor.computeListOr(node.nodes[0], ctx)
+        val offset = if (generics == null) 0 else 1
+        val type = VirtualTypeImpl(gctx.name(processor.computeString(node.nodes[offset], ctx)))
         //
         when (node.text) {
             "obj" -> type.fields += VirtualFieldImpl(type, "INSTANCE", type, isStatic = true, isEnum = false)
@@ -36,33 +39,20 @@ object NRClass : INodeProcessor<NodeNodesList> {
         }
         processor.tp.types += type
         //
-        val new = NodeType(node.token.processed(), node.nodes.drop(2).toMutableList(), type)
+        val new = NodeType(node.token.processed(), node.nodes.drop(2 + offset).toMutableList(), type)
         processor.stageManager.pushTask(ProcessingStage.TYPES_PREDEFINE) {
             val context = ctx.with(type)
-            type.parents =
-                processor.computeList(processor.process(node.nodes[1], context, ValType.VALUE)!!, context)
-                    .map { processor.computeType(it, context) }
-                    .toMutableList()
+            processor.computeList(processor.process(node.nodes[1 + offset], context, ValType.VALUE)!!, context)
+                .map { processor.computeType(it, context) }
+                .forEach { type.parents += it }
+            generics?.forEach {
+                val generic = processor.computeList(it, ctx)
+                type.generics += Pair(processor.computeString(generic[0], ctx), processor.computeType(generic[1], ctx))
+            }
             processor.stageManager.pushTask(ProcessingStage.TYPES_DEFINE) {
                 NRDefault.process(new, processor, context, mode)
             }
         }
         return new
-    }
-
-    private fun createVirtualType(name: String): VirtualTypeImpl {
-        val gs = name.indexOf('<')
-        if (gs == -1)
-            return VirtualTypeImpl(name)
-        val generics = ArrayList<String>()
-        var s = name.substring(gs)
-        while (true) {
-            val i = s.indexOf(',')
-            generics.add(s.substring(1, if (i == -1) s.length - 1 else i))
-            if (i == -1)
-                break
-            s = s.substring(i)
-        }
-        return VirtualTypeImpl(name.substring(0, gs), generics = generics.map { Pair(it, ofKlass(Any::class.java)) }) // todo
     }
 }
