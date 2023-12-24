@@ -20,7 +20,8 @@ object NRWithGens : INodeProcessor<NodeNodesList> {
 
     private fun NodeNodesList.generics(processor: Processor, ctx: ProcessingContext): List<VirtualType> {
         val gctx = ctx.global
-        return this.nodes.asSequence()
+        return this.nodes
+            .asSequence()
             .drop(1)
             .map { processor.computeString(it, ctx) }
             .map { gctx.getType(it, processor.tp) }

@@ -19,6 +19,7 @@ dependencies {
     implementation("org.ow2.asm:asm-util:9.5")
     implementation("org.ow2.asm:asm-commons:9.5")
     testImplementation(kotlin("test"))
+    testImplementation("org.apache.commons:commons-lang3:3.14.0")
 }
 
 java {

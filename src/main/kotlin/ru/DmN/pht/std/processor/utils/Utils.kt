@@ -9,6 +9,7 @@ import ru.DmN.pht.std.processor.ctx.BodyContext
 import ru.DmN.pht.std.processor.ctx.EnumContext
 import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.ctx.MacroContext
+import ru.DmN.pht.std.utils.mapMutable
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -62,7 +63,7 @@ fun nodeBody(info: INodeInfo, nodes: MutableList<Node>) =
 // c
 fun nodeCls(info: INodeInfo, name: String, parents: List<String>, nodes: List<Node>) =
     NodeNodesList(info.withType(NodeParsedTypes.CLS),
-        mutableListOf(nodeValue(info, name), nodeValn(info, parents.map { nodeValue(info, it) }.toMutableList())).apply { addAll(nodes) })
+        mutableListOf(nodeValue(info, name), nodeValn(info, parents.mapMutable { nodeValue(info, it) })).apply { addAll(nodes) })
 fun nodeCls(info: INodeInfo, name: String, parent: String, node: Node) =
     nodeCls(info, name, listOf(parent), listOf(node))
 fun nodeCycle(info: INodeInfo, cond: Node, body: List<Node>) =
@@ -77,7 +78,7 @@ fun nodeDefn(info: INodeInfo, name: String, ret: String, args: List<Pair<String,
         mutableListOf(
             nodeValue(info, name),
             nodeValue(info, ret),
-            nodeValn(info, args.map { nodeValn(info, mutableListOf(nodeValue(info, it.first), nodeValueClass(info, it.second))) }.toMutableList()))
+            nodeValn(info, args.mapMutable { nodeValn(info, mutableListOf(nodeValue(info, it.first), nodeValueClass(info, it.second))) }))
             .apply { addAll(nodes) })
 fun nodeDefn(info: INodeInfo, name: String, ret: String, args: List<Pair<String, String>>, node: Node) =
     nodeDefn(info, name, ret, args, mutableListOf(node))
