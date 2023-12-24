@@ -17,7 +17,7 @@ object NPMacroUnroll : INodeParser {
         val uuid = UUID.randomUUID()
         ctx.macros.push(uuid)
         return NPProgn.parse(parser, ctx) {
-            NodeMacroUnroll(NodeInfoImpl.of(NodeTypes.MACRO_UNROLL, ctx, token), it.toMutableList(), ctx.macros.reversed()).apply {
+            NodeMacroUnroll(NodeInfoImpl.of(NodeTypes.MACRO_UNROLL, ctx, token), it, ctx.macros.reversed()).apply {
                 ctx.macros.pop()
             }
         }

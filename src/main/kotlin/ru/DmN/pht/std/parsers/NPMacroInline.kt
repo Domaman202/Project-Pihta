@@ -13,5 +13,5 @@ import ru.DmN.siberia.parsers.NPProgn
 
 object NPMacroInline : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
-        NPProgn.parse(parser, ctx) { NodeMacroInline(NodeInfoImpl.of(NodeTypes.MACRO_INLINE, ctx, token), it.toMutableList(), ctx.macros.reversed()) }
+        NPProgn.parse(parser, ctx) { NodeMacroInline(NodeInfoImpl.of(NodeTypes.MACRO_INLINE, ctx, token), it, ctx.macros.reversed()) }
 }

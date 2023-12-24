@@ -30,7 +30,7 @@ class GlobalContext(
     fun name(name: String): String =
         if (namespace.isEmpty()) name else "$namespace.$name"
 
-    fun getMethodVariants(type: VirtualType, name: String, args: List<ICastable>): List<VirtualMethod> =
+    fun getMethodVariants(type: VirtualType, name: String, args: List<ICastable>): Sequence<VirtualMethod> =
         getAllMethods(type)
             .filter { it.name == name }
             .map { Pair(it, if (it.modifiers.extension) listOf(ICastable.of(it.extension!!)) + args else args) }
@@ -39,7 +39,6 @@ class GlobalContext(
             .filter { it.second > -1 }
             .sortedBy { it.second }
             .map { it.first }
-            .toList()
 
     private fun getAllMethods(type: VirtualType): Sequence<VirtualMethod> =
         if (type.isArray) {
@@ -62,7 +61,7 @@ class GlobalContext(
 
     fun getType(name: String, tp: TypesProvider): VirtualType =
         getTypeName(name)
-        ?.let { tp.typeOf(it) }
-        ?: tp.typeOfOrNull(name)
-        ?: tp.typeOf(name(name))
+            ?.let { tp.typeOf(it) }
+            ?: tp.typeOfOrNull(name)
+            ?: tp.typeOf(name(name))
 }

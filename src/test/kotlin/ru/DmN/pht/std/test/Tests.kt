@@ -91,7 +91,7 @@ class Tests {
 
     @Test
     fun testCompileSpeedTest() {
-        for (i in 0 until 100) {
+        for (i in 0 until 1000) {
             Module("test/pht/std/compile-speed-test").run {
                 compile()
             }
