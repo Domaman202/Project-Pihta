@@ -1,0 +1,5 @@
+(progn
+    (test-fn 0
+        (if true 12 21))
+    (test-fn 1
+        (if false 12 21)))

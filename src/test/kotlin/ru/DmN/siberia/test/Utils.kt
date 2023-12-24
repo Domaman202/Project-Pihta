@@ -16,12 +16,38 @@ import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processor.utils.with
 import ru.DmN.siberia.utils.Module
 import ru.DmN.siberia.utils.TypesProvider
+import ru.DmN.siberia.utils.readBytes
 import java.io.File
 import java.io.FileOutputStream
+import java.lang.invoke.MethodHandles
+import java.lang.invoke.MethodType
 import java.net.URLClassLoader
 
-class Module(val dir: String) {
+class Module(private val dir: String) {
+    private val compile = MethodHandles.lookup().findStatic(Loader().loadClass(ModuleCompiler::class.java.name), "compile", MethodType.methodType(Void::class.javaPrimitiveType, String::class.java))
+
     fun compile() {
+//        compile(dir)
+        ModuleCompiler.compile(dir)
+    }
+
+    fun test(id: Int): Any? =
+        URLClassLoader(arrayOf(File("dump/$dir").toURL())).loadClass("Test$id").getMethod("test").invoke(null)
+}
+
+class Loader : ClassLoader() {
+    override fun loadClass(name: String?, resolve: Boolean): Class<*> {
+        if (name!!.startsWith("ru.DmN")) {
+            val bytes = super.getResourceAsStream(name.replace('.', '/') + ".class")!!.readBytes()
+            return super.defineClass(name, bytes, 0, bytes.size)
+        }
+        return super.loadClass(name, resolve)
+    }
+}
+
+object ModuleCompiler {
+    @JvmStatic
+    fun compile(dir: String) {
         val tp = TypesProvider.java()
         val module = (Parser(Module.getModuleFile(dir)).parseNode(ParsingContext.of(StdModule)) as NodeModule).module
         module.init()
@@ -52,7 +78,4 @@ class Module(val dir: String) {
             }
         }
     }
-
-    fun test(id: Int): Any? =
-        URLClassLoader(arrayOf(File("dump/$dir").toURL())).loadClass("Test$id").getMethod("test").invoke(null)
 }

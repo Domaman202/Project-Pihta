@@ -1,14 +1,14 @@
 package ru.DmN.pht.std.imports
 
-import ru.DmN.siberia.utils.Module
 import ru.DmN.pht.std.imports.parsers.NPArgument
 import ru.DmN.pht.std.imports.parsers.NPValue
 import ru.DmN.pht.std.imports.parsers.NPValueList
+import ru.DmN.siberia.utils.Module
 
 object StdImportsHelper : Module("pht/imports/helper") {
     init {
-        add("types|extensions|macros".toRegex(), NPArgument)
-        add("valn!",    NPValueList)
-        add("value!",   NPValue)
+        add(Regex("types|extensions|macros"), NPArgument)
+        add(Regex("valn!"),  NPValueList)
+        add(Regex("value!"), NPValue)
     }
 }

@@ -1,13 +1,13 @@
 package ru.DmN.pht.std.ast
 
+import ru.DmN.pht.std.utils.text
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
 import ru.DmN.siberia.utils.indent
-import ru.DmN.siberia.utils.text
 
-class NodeType(tkOperation: Token, nodes: MutableList<Node>, val type: VirtualTypeImpl) : NodeNodesList(tkOperation, nodes), IAbstractlyNode, IFinallyNode {
+class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeImpl) : NodeNodesList(info, nodes), IAbstractlyNode, IFinallyNode {
     override var abstract: Boolean
         get() = type.isAbstract
         set(value) { type.isAbstract = value }
@@ -16,7 +16,7 @@ class NodeType(tkOperation: Token, nodes: MutableList<Node>, val type: VirtualTy
         set(value) { type.isFinal = value }
 
     override fun copy(): NodeType =
-        NodeType(token, copyNodes(), type)
+        NodeType(info, copyNodes(), type)
 
     override fun print(builder: StringBuilder, indent: Int): StringBuilder {
         builder.indent(indent).append('[').append(text).append(' ').append(type.name).append(" (")

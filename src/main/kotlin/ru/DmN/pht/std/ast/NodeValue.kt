@@ -1,12 +1,12 @@
 package ru.DmN.pht.std.ast
 
+import ru.DmN.pht.std.node.NodeTypes
+import ru.DmN.pht.std.utils.text
 import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.lexer.Token
-import ru.DmN.siberia.lexer.Token.DefaultType.OPERATION
+import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.indent
-import ru.DmN.siberia.utils.text
 
-class NodeValue(tkOperation: Token, val vtype: Type, val value: String) : Node(tkOperation), IValueNode {
+class NodeValue(info: INodeInfo, val vtype: Type, val value: String) : Node(info), IValueNode {
     fun getBoolean() =
         value.toBoolean()
     fun getChar() =
@@ -44,7 +44,7 @@ class NodeValue(tkOperation: Token, val vtype: Type, val value: String) : Node(t
     }
 
     companion object {
-        fun of(line: Int, vtype: Type, value: String) =
-            NodeValue(Token(line, OPERATION, "value"), vtype, value)
+        fun of(info: INodeInfo, vtype: Type, value: String) =
+            NodeValue(info.withType(NodeTypes.VALUE), vtype, value)
     }
 }

@@ -1,9 +1,9 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.node.INodeInfo
 
-class NodeGetA(tkOperation: Token, val name: String, val type: Type) : Node(tkOperation) {
+class NodeGetA(info: INodeInfo, val name: String, val type: Type) : Node(info) {
     enum class Type {
         UNKNOWN,
         VARIABLE,

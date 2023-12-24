@@ -6,6 +6,7 @@ import ru.DmN.pht.std.ast.NodeType
 import ru.DmN.pht.std.compiler.java.ctx.ClassContext
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.compiler.java.utils.with
+import ru.DmN.pht.std.node.NodeTypes.*
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.CompilingStage
@@ -14,7 +15,6 @@ import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.desc
-import ru.DmN.siberia.utils.text
 
 object NCClass : INodeCompiler<NodeType> {
     override fun compile(node: NodeType, compiler: Compiler, ctx: CompilationContext) {
@@ -24,9 +24,9 @@ object NCClass : INodeCompiler<NodeType> {
                 visit(
                     ctx.javaClassVersion,
                     Opcodes.ACC_PUBLIC.let {
-                        when (node.text) {
-                            "!enum" -> it + Opcodes.ACC_ENUM
-                            "!itf" -> it + Opcodes.ACC_INTERFACE + Opcodes.ACC_ABSTRACT
+                        when (node.info.type) {
+                            ENUM_ -> it + Opcodes.ACC_ENUM
+                            ITF_ -> it + Opcodes.ACC_INTERFACE + Opcodes.ACC_ABSTRACT
                             else ->
                                 if (node.abstract) it + Opcodes.ACC_ABSTRACT
                                 else if (node.final) it + Opcodes.ACC_FINAL
@@ -40,7 +40,7 @@ object NCClass : INodeCompiler<NodeType> {
                 )
             }
             compiler.stageManager.pushTask(CompilingStage.TYPES_DEFINE) {
-                if (node.token.text == "!obj") {
+                if (node.info.type == OBJ_) {
                     cn.visitField(
                         Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC + Opcodes.ACC_FINAL,
                         "INSTANCE",
@@ -59,7 +59,7 @@ object NCClass : INodeCompiler<NodeType> {
                     }
                 }
                 NCDefault.compile(node, compiler, ctx.with(ClassContext(cn, node.type)))
-                if (node.text == "!obj") {
+                if (node.info.type == OBJ_) {
                     cn.methods.find { it.name == "<init>" && it.desc == "()V" } ?: cn.visitMethod(
                         Opcodes.ACC_PRIVATE,
                         "<init>",

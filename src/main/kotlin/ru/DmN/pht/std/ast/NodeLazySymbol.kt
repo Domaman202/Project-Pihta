@@ -1,10 +1,10 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.node.INodeInfo
 
-class NodeLazySymbol(tkOperation: Token, nodes: MutableList<Node>, var symbol: String?) : NodeNodesList(tkOperation, nodes) {
+class NodeLazySymbol(info: INodeInfo, nodes: MutableList<Node>, var symbol: String?) : NodeNodesList(info, nodes) {
     override fun copy(): NodeLazySymbol =
-        NodeLazySymbol(token, copyNodes(), symbol)
+        NodeLazySymbol(info, copyNodes(), symbol)
 }

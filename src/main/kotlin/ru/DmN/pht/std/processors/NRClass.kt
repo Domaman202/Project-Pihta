@@ -1,28 +1,25 @@
 package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.ast.NodeType
+import ru.DmN.pht.std.node.NodeParsedTypes
+import ru.DmN.pht.std.node.processed
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.with
-import ru.DmN.pht.std.utils.computeList
-import ru.DmN.pht.std.utils.computeListOr
-import ru.DmN.pht.std.utils.computeString
-import ru.DmN.pht.std.utils.computeType
+import ru.DmN.pht.std.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.processors.NRDefault
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.siberia.utils.VirtualType
-import ru.DmN.siberia.utils.VirtualType.Companion.ofKlass
 import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
-import ru.DmN.siberia.utils.text
 
 object NRClass : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        if (node.token.text == "obj")
+        if (node.type == NodeParsedTypes.OBJ)
             processor.computeType(node.nodes[0], ctx)
         else null
 
@@ -33,13 +30,13 @@ object NRClass : INodeProcessor<NodeNodesList> {
         val offset = if (generics == null) 0 else 1
         val type = VirtualTypeImpl(gctx.name(processor.computeString(node.nodes[offset], ctx)))
         //
-        when (node.text) {
-            "obj" -> type.fields += VirtualFieldImpl(type, "INSTANCE", type, isStatic = true, isEnum = false)
-            "itf" -> type.isInterface = true
+        when (node.type) {
+            NodeParsedTypes.OBJ -> type.fields += VirtualFieldImpl(type, "INSTANCE", type, isStatic = true, isEnum = false)
+            NodeParsedTypes.ITF -> type.isInterface = true
         }
-        processor.tp.types += type
+        processor.tp.types[type.name.hashCode()] = type
         //
-        val new = NodeType(node.token.processed(), node.nodes.drop(2 + offset).toMutableList(), type)
+        val new = NodeType(node.info.processed, node.nodes.drop(2 + offset).toMutableList(), type)
         processor.stageManager.pushTask(ProcessingStage.TYPES_PREDEFINE) {
             val context = ctx.with(type)
             processor.computeList(processor.process(node.nodes[1 + offset], context, ValType.VALUE)!!, context)
@@ -50,7 +47,7 @@ object NRClass : INodeProcessor<NodeNodesList> {
                 type.generics += Pair(processor.computeString(generic[0], ctx), processor.computeType(generic[1], ctx))
             }
             processor.stageManager.pushTask(ProcessingStage.TYPES_DEFINE) {
-                NRDefault.process(new, processor, context, mode)
+                processNodesList(new, processor, context, mode)
             }
         }
         return new

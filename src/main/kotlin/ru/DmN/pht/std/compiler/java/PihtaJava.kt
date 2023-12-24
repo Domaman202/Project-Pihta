@@ -1,93 +1,96 @@
 package ru.DmN.pht.std.compiler.java
 
-import ru.DmN.siberia.compilers.NCDefault
-import ru.DmN.siberia.utils.ModuleCompilers
 import ru.DmN.pht.std.Pihta
 import ru.DmN.pht.std.compiler.java.compilers.*
+import ru.DmN.pht.std.node.NodeTypes.*
+import ru.DmN.siberia.compiler.utils.ModuleCompilers
+import ru.DmN.siberia.compilers.NCDefault
+import ru.DmN.siberia.processor.utils.Platform
 
-object PihtaJava : ModuleCompilers(Pihta) {
+class PihtaJava(module: Pihta) : ModuleCompilers(module, Platform.JAVA) {
     override fun onInitialize() {
         // a
-        add("!add",         NCMath)
-        add("!aget",        NCAGet)
-        add("!alias-type",  NCSkip)
-        add("!and",         NCMath)
-        add("array-size",   NCArraySize)
-        add("!as",          NCAs)
-        add("!aset",        NCASet)
+        add(ADD_,         NCMath)
+        add(AGET_,        NCAGet)
+        add(ALIAS_TYPE_,  NCSkip)
+        add(AND_,         NCMath)
+        add(ARRAY_SIZE_,  NCArraySize)
+        add(AS_,          NCAs)
+        add(ASET_,        NCASet)
         // b
-        add("body",         NCBody)
-        add("!break",       NCBreak)
+        add(BODY_,        NCBody)
+        add(BREAK_,       NCBreak)
         // c
-        add("!catch",       NCCatch)
-        add("!cls",         NCClass)
-        add("!continue",    NCContinue)
-        add("ctor",         NCDefn)
-        add("!cycle",       NCCycle)
+        add(CATCH_,       NCCatch)
+        add(CLS_,         NCClass)
+        add(CONTINUE_,    NCContinue)
+        add(CTOR_,        NCDefn)
+        add(CYCLE_,       NCCycle)
         // d
-        add("!dec",         NCIncDec)
-        add("!def",         NCDef)
-        add("!defn",        NCDefn)
-        add("!div",         NCMath)
+        add(DEC_PRE_,     NCIncDec)
+        add(DEC_POST_,    NCIncDec)
+        add(DEF_,         NCDef)
+        add(DEFN_,        NCDefn)
+        add(DIV_,         NCMath)
         // e
-        add("efld",         NCEField)
-        add("efn",          NCDefn)
-        add("!enum",        NCClass)
-        add("!eq",          NCCompare)
+        add(EFLD_,        NCEField)
+        add(EFN_,         NCDefn)
+        add(ENUM_,        NCClass)
+        add(EQ_,          NCCompare)
         // f
-        add("!fget",        NCFGet)
-        add("!fld",         NCField)
-        add("!fn",          NCFn)
-        add("fset",         NCFSet)
+        add(FGET_,        NCFGet)
+        add(FLD_,         NCField)
+        add(FN_,          NCFn)
+        add(FSET_,        NCFSet)
         // g
-        add("get",          NCGetA)
-        add("get-or-name!", NCGetB)
-        add("!great",       NCCompare)
-        add("!great-or-eq", NCCompare)
+        add(GET_,         NCGetA)
+        add(GET_OR_NAME,  NCGetB)
+        add(GREAT_,       NCCompare)
+        add(GREAT_OR_EQ_, NCCompare)
         // i
-        add("!if",          NCIf)
-        add("!inc",         NCIncDec)
-        add("!itf",         NCClass)
+        add(IF_,          NCIf)
+        add(INC_PRE_,     NCIncDec)
+        add(INC_POST_,    NCIncDec)
+        add(ITF_,         NCClass)
         // l
-        add("!less",        NCCompare)
-        add("!less-or-eq",  NCCompare)
+        add(LESS_,        NCCompare)
+        add(LESS_OR_EQ_,  NCCompare)
         // m
-        add("!mcall",       NCMCall)
-        add("!mul",         NCMath)
+        add(MCALL_,       NCMCall)
+        add(MUL_,         NCMath)
         // n
-        add("!named-block", NCNamedBlock)
-        add("!neg",         NCMath)
-        add("!new",         NCNew)
-        add("!new-array",   NCNewArray)
-        add("!not",         NCCompare)
-        add("!not-eq",      NCCompare)
-        add("!ns",          NCDefault)
+        add(NAMED_BLOCK_, NCNamedBlock)
+        add(NEG_,         NCMath)
+        add(NEW_,         NCNew)
+        add(NEW_ARRAY_,   NCNewArray)
+        add(NOT_,         NCCompare)
+        add(NOT_EQ_,      NCCompare)
+        add(NS_,          NCDefault)
         // o
-        add("!obj",         NCClass)
-        add("!or",          NCMath)
+        add(OBJ_,         NCClass)
+        add(OR_,          NCMath)
         // r
-        add("!rem",         NCMath)
-        add("!ret",         NCRet)
+        add(REM_,         NCMath)
+        add(RET_,         NCRet)
         // s
-        add("set!",         NCSet)
-        add("!shift-left",  NCMath)
-        add("!shift-right", NCMath)
-        add("sns",          NCDefault)
-        add("!sub",         NCMath)
+        add(SET_,         NCSet)
+        add(SHIFT_LEFT_,  NCMath)
+        add(SHIFT_RIGHT_, NCMath)
+        add(SUB_,         NCMath)
         // t
-        add("throw",        NCThrow)
+        add(THROW_,       NCThrow)
         // u
-        add("unit",         NCUnit)
+        add(UNIT,         NCUnit)
         // v
-        add("value",        NCValue)
+        add(VALUE,        NCValue)
         // x
-        add("!xor",         NCMath)
+        add(XOR_,         NCMath)
 
-        // Аннотации
-        add("@abstract",    NCDefault)
-        add("@final",       NCDefault)
-        add("@open",        NCDefault)
-        add("@static",      NCDefault)
-        add("@varargs",     NCDefault)
+        // @
+        add(ANN_ABSTRACT_, NCDefault)
+        add(ANN_FINAL_,    NCDefault)
+        add(ANN_OPEN_,     NCDefault)
+        add(ANN_STATIC_,   NCDefault)
+        add(ANN_VARARGS_,  NCDefault)
     }
 }

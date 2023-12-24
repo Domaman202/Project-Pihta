@@ -2,9 +2,9 @@ package ru.DmN.pht.std.ast
 
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.node.INodeInfo
 
-class NodeCompare(token: Token, nodes: MutableList<Node>) : NodeNodesList(token, nodes) {
+class NodeCompare(info: INodeInfo, nodes: MutableList<Node>) : NodeNodesList(info, nodes) {
     override fun copy(): NodeCompare =
-        NodeCompare(token, copyNodes())
+        NodeCompare(info, copyNodes())
 }

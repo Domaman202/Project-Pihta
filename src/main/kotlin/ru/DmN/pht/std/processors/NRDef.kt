@@ -2,7 +2,11 @@ package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.ast.NodeDef
 import ru.DmN.pht.std.ast.NodeDef.VariableOrField
-import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.node.NodeTypes
+import ru.DmN.pht.std.processor.utils.Variable
+import ru.DmN.pht.std.processor.utils.body
+import ru.DmN.pht.std.processor.utils.clazz
+import ru.DmN.pht.std.processor.utils.isBody
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.computeType
@@ -18,7 +22,6 @@ import ru.DmN.siberia.utils.VirtualType
 
 object NRDef : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeDef {
-        val gctx = ctx.global
         val list = ArrayList<VariableOrField>()
         //
         if (ctx.isBody()) {
@@ -52,6 +55,6 @@ object NRDef : INodeProcessor<NodeNodesList> {
             }
         }
         //
-        return NodeDef(node.token.processed(), list)
+        return NodeDef(node.info.withType(NodeTypes.DEF_), list)
     }
 }

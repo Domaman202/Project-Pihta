@@ -3,30 +3,30 @@ package ru.DmN.pht.std.processors
 import ru.DmN.pht.std.processor.utils.nodeCls
 import ru.DmN.pht.std.processor.utils.nodeDefn
 import ru.DmN.pht.std.processor.utils.nodeStatic
-import ru.DmN.pht.std.utils.computeInt
+import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.*
+import ru.DmN.siberia.processor.utils.Platform
+import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
-import java.lang.RuntimeException
 
 object NRTestFn : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node =
         when (ctx.platform) {
-            Platform.UNIVERSAL -> node
             Platform.JAVA -> {
-                val line = node.token.line
+                val info = node.info
                 NRClass.process(
                     nodeCls(
-                        line,
-                        "Test${processor.computeInt(node.nodes[0], ctx)}",
+                        info,
+                        "Test${processor.computeString(node.nodes[0], ctx)}",
                         "java.lang.Object",
                         nodeStatic(
-                            line,
+                            info,
                             nodeDefn(
-                                line,
+                                info,
                                 "test",
                                 "dynamic",
                                 node.nodes.drop(1).toMutableList()
@@ -35,5 +35,7 @@ object NRTestFn : INodeProcessor<NodeNodesList> {
                     ), processor, ctx, mode
                 )
             }
+
+            else -> node
         }
 }

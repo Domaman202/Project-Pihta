@@ -22,7 +22,7 @@ object NRIs : INodeProcessor<NodeNodesList> {
             val type = processor.computeString(node.nodes[0], ctx)
             val value = processor.calc(node.nodes[1], ctx)
             nodeValue(
-                node.token.line,
+                node.info,
                 if (type.isPrimitive()) {
                     if (value?.isPrimitive == true)
                         type == value.name

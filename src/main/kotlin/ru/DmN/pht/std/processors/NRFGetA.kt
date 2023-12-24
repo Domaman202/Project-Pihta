@@ -1,6 +1,7 @@
 package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.ast.NodeFGet
+import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.computeType
 import ru.DmN.pht.std.utils.isConstClass
@@ -26,7 +27,7 @@ object NRFGetA : INodeProcessor<NodeNodesList> {
                     processor.computeType(node.nodes[0], ctx)
                 else processor.calc(nodes[0], ctx)!!
             NodeFGet(
-                node.token.processed(),
+                node.info.withType(NodeTypes.FGET_),
                 mutableListOf(nodes[0]),
                 name,
                 type.let {

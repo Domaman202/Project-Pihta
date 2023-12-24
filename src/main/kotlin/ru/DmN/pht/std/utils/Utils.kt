@@ -12,6 +12,10 @@ import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.klassOf
 
+val Node.text
+    get() = this.type.operation
+val Node.type
+    get() = this.info.type
 val Node.isLiteral
     get() = if (this is IValueNode) this.isLiteral() else false
 val Node.isConstClass

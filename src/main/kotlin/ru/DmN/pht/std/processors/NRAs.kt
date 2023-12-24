@@ -1,6 +1,7 @@
 package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.ast.NodeAs
+import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.utils.VTWG
 import ru.DmN.pht.std.utils.computeType
 import ru.DmN.siberia.Processor
@@ -20,6 +21,6 @@ object NRAs : IStdNodeProcessor<NodeNodesList> {
             val to = calc(node, processor, ctx)
             if (to !is VTWG && from?.isAssignableFrom(to) == true || from == VirtualType.VOID || from == null)
                 processor.process(node.nodes[1], ctx, ValType.VALUE)
-            else NodeAs(node.token.processed(), mutableListOf(processor.process(node.nodes[1], ctx, ValType.VALUE)!!), to)
+            else NodeAs(node.info.withType(NodeTypes.AS_), mutableListOf(processor.process(node.nodes[1], ctx, ValType.VALUE)!!), to)
         } else null
 }

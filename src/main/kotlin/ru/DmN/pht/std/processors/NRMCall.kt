@@ -1,50 +1,52 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.siberia.Processor
-import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.lexer.Token
-import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.ast.IAdaptableNode
 import ru.DmN.pht.std.ast.NodeFGet
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.ast.NodeMCall.Type.*
 import ru.DmN.pht.std.ast.NodeValue
+import ru.DmN.pht.std.node.NodeTypes
+import ru.DmN.pht.std.node.processed
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.*
+import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.node.INodeInfo
+import ru.DmN.siberia.processor.ctx.ProcessingContext
+import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VTDynamic
-import ru.DmN.siberia.utils.line
+import ru.DmN.siberia.utils.VirtualMethod
+import ru.DmN.siberia.utils.VirtualType
 
 object NRMCall : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
         val fourfold = findMethod(node, processor, ctx)
         val instance =
             if (fourfold.first == SUPER)
-                nodeGetOrName(node.line, "this")
+                nodeGetOrName(node.info, "this")
             else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
         return fourfold.fourth ?: processor.calc(instance, ctx).let { if (it is VTWG) it.gens[0] else fourfold.third.rettype }
     }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeMCall {
+        val info = node.info
         val fourfold = findMethod(node, processor, ctx)
         val instance =
             if (fourfold.first == SUPER)
-                nodeGetOrName(node.line, "this")
+                nodeGetOrName(info, "this")
             else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
         val generics = fourfold.fourth ?: processor.calc(instance, ctx).let { if (it is VTWG) it.gens[0] else null }
         return if (fourfold.third.extension == null)
             NodeMCall(
-                node.token.processed(),
-                processArguments(node.line, processor, ctx, fourfold.third, fourfold.second),
+                info.processed,
+                processArguments(info, processor, ctx, fourfold.third, fourfold.second),
                 generics,
                 if (fourfold.first == VIRTUAL)
                     NodeFGet(
-                        Token.operation(node.line, "!fget"),
-                        mutableListOf(nodeValueClass(node.line, fourfold.third.declaringClass!!.name)),
+                        info.withType(NodeTypes.FGET_),
+                        mutableListOf(nodeValueClass(info, fourfold.third.declaringClass!!.name)),
                         "INSTANCE",
                         NodeFGet.Type.STATIC,
                         processor.computeType(node.nodes[0], ctx)
@@ -60,22 +62,22 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 }
             )
         else NodeMCall(
-            node.token.processed(),
+            node.info.processed,
             processArguments(
-                node.line,
+                node.info,
                 processor,
                 ctx,
                 fourfold.third,
                 listOf(instance) + fourfold.second
             ),
             generics,
-            NodeValue.of(node.token.line, NodeValue.Type.CLASS, fourfold.third.extension!!.name),
+            NodeValue.of(node.info, NodeValue.Type.CLASS, fourfold.third.extension!!.name),
             fourfold.third,
             NodeMCall.Type.EXTEND
         )
     }
 
-    fun processArguments(line: Int, processor: Processor, ctx: ProcessingContext, method: VirtualMethod, args: List<Node>): MutableList<Node> =
+    fun processArguments(info: INodeInfo, processor: Processor, ctx: ProcessingContext, method: VirtualMethod, args: List<Node>): MutableList<Node> =
         (if (method.modifiers.varargs) {
             val overflow = args.size.let { if (it > 0) it + 1 else 0 } - method.argsc.size
             if (overflow > 0)
@@ -83,7 +85,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                     val type = method.argsc.last().componentType!!.name
                     add(
                         NRArrayOfType.process(
-                            nodeArrayType(line, type, args.asSequence().drop(args.size - overflow).map { nodeAs(line, it, type) }.toMutableList()),
+                            nodeArrayType(info, type, args.asSequence().drop(args.size - overflow).map { nodeAs(info, it, type) }.toMutableList()),
                             processor,
                             ctx,
                             ValType.VALUE
@@ -91,13 +93,13 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                     )
                 }
             else (args + NRNewArray.process(
-                nodeNewArray(line, method.argsc.last().name.substring(1), 0),
+                nodeNewArray(info, method.argsc.last().name.substring(1), 0),
                 processor,
                 ctx,
                 ValType.VALUE
             )!!).toMutableList()
         } else args)
-            .mapIndexed { i, it -> NRAs.process(nodeAs(line, it, method.argsc[i].name), processor, ctx, ValType.VALUE)!! }
+            .mapIndexed { i, it -> NRAs.process(nodeAs(info, it, method.argsc[i].name), processor, ctx, ValType.VALUE)!! }
             .toMutableList()
 
     private fun findMethod(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): Fourfold<NodeMCall.Type, List<Node>, VirtualMethod, VirtualType?> {

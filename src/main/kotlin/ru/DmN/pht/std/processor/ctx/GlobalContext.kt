@@ -62,7 +62,7 @@ class GlobalContext(
 
     fun getType(name: String, tp: TypesProvider): VirtualType =
         getTypeName(name)
-            ?.let { tp.typeOf(it) }
-            ?: tp.typeOfOrNull(name)
-            ?: tp.typeOf(name(name))
+        ?.let { tp.typeOf(it) }
+        ?: tp.typeOfOrNull(name)
+        ?: tp.typeOf(name(name))
 }

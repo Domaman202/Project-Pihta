@@ -6,13 +6,12 @@ import ru.DmN.pht.std.processor.utils.nodeMCall
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.processor.utils.Platform
 import ru.DmN.siberia.processor.ctx.ProcessingContext
+import ru.DmN.siberia.processor.utils.Platform
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VirtualType
-import ru.DmN.siberia.utils.line
 
 object NRListOf : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
@@ -21,12 +20,12 @@ object NRListOf : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
         if (mode == ValType.VALUE)
             when (ctx.platform) {
-                Platform.UNIVERSAL -> node
                 Platform.JAVA -> {
-                    val line = node.line
-                    NRMCall.process(nodeMCall(line, nodeArrayOf(line, node.nodes), "toList", emptyList()), processor, ctx, ValType.VALUE)
+                    val info = node.info
+                    NRMCall.process(nodeMCall(info, nodeArrayOf(info, node.nodes), "toList", emptyList()), processor, ctx, ValType.VALUE)
                 }
-                else -> throw UnsupportedOperationException()
+
+                else -> node
             }
         else null
 }

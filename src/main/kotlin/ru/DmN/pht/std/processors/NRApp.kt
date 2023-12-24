@@ -14,17 +14,18 @@ import ru.DmN.siberia.processors.INodeProcessor
 object NRApp : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node =
         when (ctx.platform) {
-            Platform.UNIVERSAL -> node
             Platform.JAVA -> {
-                val line = node.token.line
+                val info = node.info
                 NRClass.process(
                     nodeCls(
-                        line,
+                        info,
                         "App",
                         "java.lang.Object",
-                        nodeStatic(line, node.nodes)
+                        nodeStatic(info, node.nodes)
                     ), processor, ctx, mode
                 )
             }
+
+            else -> node
         }
 }

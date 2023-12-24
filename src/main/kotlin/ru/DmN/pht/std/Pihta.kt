@@ -1,240 +1,392 @@
 package ru.DmN.pht.std
 
-import ru.DmN.pht.std.ast.*
+import ru.DmN.pht.std.ast.IAbstractlyNode
+import ru.DmN.pht.std.ast.IFinallyNode
+import ru.DmN.pht.std.ast.IStaticallyNode
+import ru.DmN.pht.std.ast.IVarargNode
 import ru.DmN.pht.std.compiler.java.PihtaJava
+import ru.DmN.pht.std.node.NodeParsedTypes.*
+import ru.DmN.pht.std.node.NodeTypes.*
 import ru.DmN.pht.std.parser.utils.clearMacros
 import ru.DmN.pht.std.parser.utils.macros
 import ru.DmN.pht.std.parser.utils.phtParseNode
-import ru.DmN.pht.std.parsers.NPSkip
-import ru.DmN.pht.std.parsers.NPValnA
+import ru.DmN.pht.std.parsers.*
 import ru.DmN.pht.std.processor.ctx.GlobalContext
-import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.processor.utils.clazz
+import ru.DmN.pht.std.processor.utils.global
+import ru.DmN.pht.std.processor.utils.macros
+import ru.DmN.pht.std.processor.utils.method
 import ru.DmN.pht.std.processors.*
-import ru.DmN.pht.std.ups.*
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
+import ru.DmN.siberia.node.INodeType
+import ru.DmN.siberia.node.NodeTypes.PROGN
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parser.utils.parsersPool
+import ru.DmN.siberia.parsers.INodeParser
+import ru.DmN.siberia.parsers.SimpleNP
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.module
-import ru.DmN.siberia.ups.NUPDefault
+import ru.DmN.siberia.processors.NRProgn
 import ru.DmN.siberia.utils.Module
-import ru.DmN.siberia.utils.adda
-import ru.DmN.siberia.utils.addb
 import java.util.*
+import ru.DmN.pht.std.processors.NRProgn as NRProgn1
 
 object Pihta : Module("pht") {
-    init {
+    override fun initParsers() {
         // a
-        adda("add",          NUPMath,    NRMath)
-        adda("!add",         NUPMath)
-        adda("aget",         NUPDefault, NRAGet)
-        adda("alias-type",   NUPDefault, NRAliasType)
-        adda("!alias-type",  NUPAliasType)
-        adda("and",          NUPMath,    NRMath)
-        adda("!and",         NUPMath)
-        adda("!aget",        NUPAGet)
-        adda("app",          NUPDefault, NRApp)
-        adda("app-fn",       NUPDefault, NRAppFn)
-        adda("array-of",     NUPDefault, NRArrayOf)
-        adda("array-of-type",NUPDefault, NRArrayOfType)
-        adda("array-size",   NUPDefault, NRArraySize)
-        adda("array-type",   NUPDefault, NRArrayType)
-        adda("as",           NUPDefault, NRAs)
-        adda("!as",          NUPAs)
-        adda("as-gens",      NUPDefault, NRAsGens)
-        adda("aset",         NUPDefault, NRASet)
-        adda("!aset",        NUPASet)
+        addSNP(ADD)
+        addSNP(AGET)
+        addSNP(ALIAS_TYPE)
+        addSNP(AND)
+        addSNP(APP)
+        addSNP(APP_FN)
+        addSNP(ARRAY_OF)
+        addSNP(ARRAY_OF_TYPE)
+        addSNP(ARRAY_SIZE)
+        addSNP(ARRAY_TYPE)
+        addSNP(AS)
+        addSNP(AS_GENS)
+        addSNP(ASET)
         // b
-        adda("body",         NUPDefault, NRBody)
-        adda("break",        NUPDefault, NRNamedList)
-        adda("!break",       NUPNamedList)
+        addSNP(BODY)
+        addSNP(BREAK)
         // c
-        adda("catch",        NUPDefault, NRCatch)
-        adda("!catch",       NUPCatch)
-        adda("ccall",        NUPDefault, NRCCall)
-        adda("cls",          NUPDefault, NRClass)
-        adda("!cls",         NUPClass)
-        adda("comment",      NUPComment)
-        adda("cond",         NUPDefault, NRCond)
-        adda("continue",     NUPDefault, NRNamedList)
-        adda("!continue",    NUPNamedList)
-        adda("ctor",         NUPCtor)
-        adda("cycle",        NUPDefault, NRCycle)
-        adda("!cycle",       NUPDefaultX)
+        addSNP(CATCH)
+        addSNP(CCALL)
+        addSNP(CLS)
+        addNP("comment",  NPComment)
+        addSNP(COND)
+        addSNP(CONTINUE)
+        addSNP(CTOR)
+        addSNP(CYCLE)
         // d
-        adda("debug",        NUPDebug)
-        adda("dec",          NUPIncDecA, NRIncDec)
-        adda("dec-",         NUPIncDecA, NRIncDec)
-        adda("!dec",         NUPIncDecB)
-        adda("def",          NUPDefault, NRDef)
-        adda("!def",         NUPDef)
-        adda("def-set",      NUPDefault, NRDefSet)
-        adda("defmacro",     NUPDefMacro)
-        adda("defn",         NUPDefault, NRDefn)
-        adda("!defn",        NUPDefn)
-        adda("div",          NUPMath,    NRMath)
-        adda("!div",         NUPMath)
+        addNP("debug",    NPDebug)
+        addSNP(DEC_PRE)
+        addSNP(DEC_POST)
+        addSNP(DEF)
+        addSNP(DEF_SET)
+        addNP("defmacro", NPDefMacro)
+        addSNP(DEFN)
+        addSNP(DIV)
         // e
-        adda("ector",        NUPCtor)
-        adda("efld",         NUPEField)
-        adda("efn",          NUPEFn)
-        adda("enum",         NUPEnum)
-        adda("eq",           NUPCompare, NRCompare)
-        adda("!eq",          NUPCompare)
+        addSNP(ECTOR)
+        addSNP(EFLD)
+        addSNP(EFN)
+        addSNP(ENUM)
+        addSNP(EQ)
         // f
-        adda("fget",         NUPDefault, NRFGetA)
-        adda("fget!",        NUPFGetB)
-        adda("!fget",        NUPFGetA)
-        adda("fld",          NUPFieldA)
-        adda("!fld",         NUPFieldB)
-        adda("fn",           NUPDefault, NRFn)
-        adda("!fn",          NUPFn)
-        adda("for",          NUPDefault, NRFor)
-        adda("fset",         NUPFSetA)
-        adda("fset!",        NUPFSetB)
+        addSNP(FGET_A)
+        addNP("fld",          NPFld)
+        addSNP(FN)
+        addSNP(FOR)
+        addSNP(FSET_A)
         // g
-        adda("get",          NUPGetA)
-        adda("get!",         NUPGetB)
-        adda("get-or-name!", NUPGetOrName)
-        adda("great",        NUPCompare, NRCompare)
-        adda("!great",       NUPCompare)
-        adda("great-or-eq",  NUPCompare, NRCompare)
-        adda("!great-or-eq", NUPCompare)
+        addNP("get",          NPGet)
+        addSNP(GET_B)
+        addNP("get-or-name!", NPGetOrName)
+        addSNP(GREAT)
+        addSNP(GREAT_OR_EQ)
         // i
-        adda("if",           NUPDefault, NRIf)
-        adda("!if",          NUPDefaultX)
-        adda("import",       NUPImport)
-        adda("inc",          NUPIncDecA, NRIncDec)
-        adda("inc-",         NUPIncDecA, NRIncDec)
-        adda("!inc",         NUPIncDecB)
-        adda("is",           NUPDefault, NRIs)
-        adda("itf",          NUPDefault, NRClass)
-        adda("!itf",         NUPClass)
+        addSNP(IF)
+        addNP("import",       NPImport)
+        addSNP(INC_PRE)
+        addSNP(INC_POST)
+        addSNP(IS)
+        addSNP(ITF)
         // l
-        adda("lazy-symbol",  NUPLazySymbol)
-        adda("less",         NUPCompare, NRCompare)
-        adda("!less",        NUPCompare)
-        adda("less-or-eq",   NUPCompare, NRCompare)
-        adda("!less-or-eq",  NUPCompare)
-        adda("list-of",      NUPDefault, NRListOf)
+        addNP("lazy-symbol",  NPLazySymbol)
+        addSNP(LESS)
+        addSNP(LESS_OR_EQ)
+        addSNP(LIST_OF)
         // m
-        adda("macro",        NUPMacro)
-        adda("macro-arg",    NUPMacroArg)
-        adda("macro-inline", NUPMacroInline)
-        adda("macro-unroll", NUPMacroUnroll)
-        adda("mcall",        NUPDefault, NRMCall) // todo: select super & auto new futures for '.'
-        adda("mcall!",       NUPMCall)
-        adda("!mcall",       NUPMCallX)
-        adda("mul",          NUPMath,    NRMath)
-        adda("!mul",         NUPMath)
+        addNP("macro",        NPMacro)
+        addNP("macro-arg",    NPMacroArg)
+        addNP("macro-inline", NPMacroInline)
+        addNP("macro-unroll", NPMacroUnroll)
+        addSNP(MCALL)
+        addNP("mcall!",       NPMCallB)
+        addSNP(MUL)
         // n
-        adda("named-block",  NUPDefault, NRNamedList)
-        adda("!named-block", NUPNamedList)
-        adda("neg",          NUPMath,    NRMath)
-        adda("!neg",         NUPMath)
-        adda("new",          NUPDefault, NRNew)
-        adda("!new",         NUPNew)
-        adda("new-array",    NUPDefault, NRNewArray)
-        adda("!new-array",   NUPNewArrayX)
-        adda("not",          NUPCompare, NRCompare)
-        adda("!not",         NUPCompare)
-        adda("not-eq",       NUPCompare, NRCompare)
-        adda("!not-eq",      NUPCompare)
-        adda("ns",           NUPDefault, NRNs)
-        adda("!ns",          NUPNs)
+        addSNP(NAMED_BLOCK)
+        addSNP(NEG)
+        addSNP(NEW)
+        addSNP(NEW_ARRAY)
+        addSNP(NOT)
+        addSNP(NOT_EQ)
+        addSNP(NS)
         // o
-        adda("obj",          NUPDefault, NRClass)
-        adda("!obj",         NUPClass)
-        adda("or",           NUPMath,    NRMath)
-        adda("!or",          NUPMath)
+        addSNP(OBJ)
+        addSNP(OR)
         // p
-        adda("print",        NUPDefault, NRPrint)
-        adda("println",      NUPDefault, NRPrint)
-        adda("progn",        NUPDefault, NRPrognA)
-        addb("progn-",       NUPPrognB)
-        adda("progn!",       NUPPrognC)
+        addSNP(PRINT)
+        addSNP(PRINTLN)
+        addNP("progn-", NPPrognB)
         // r
-        adda("rand-symbol",  NUPDefault, NRRandSymbol)
-        adda("range",        NUPDefault, NRRange)
-        adda("rem",          NUPMath,    NRMath)
-        adda("!rem",         NUPMath)
-        adda("ret",          NUPDefault, NRRet)
-        adda("!ret",         NUPRet)
+        addSNP(RAND_SYMBOL)
+        addSNP(RANGE)
+        addSNP(REM)
+        addSNP(RET)
+        addSNP(ROLL_LEFT)
+        addSNP(ROLL_RIGHT)
         // s
-        adda("set",          NUPSetA)
-        adda("set!",         NUPSetB)
-        adda("shift-left",   NUPMath,    NRMath)
-        adda("!shift-left",  NUPMath)
-        adda("shift-right",  NUPMath,    NRMath)
-        adda("!shift-right", NUPMath)
-        adda("skip",         NUPDefault, NPSkip)
-        adda("sub",          NUPMath,    NRMath)
-        adda("!sub",         NUPMath)
-        adda("symbol",       NUPDefault, NRSymbol)
+        addNP("set",  NPSetA)
+        addNP("set!", NPSetB)
+        addSNP(SHIFT_LEFT)
+        addSNP(SHIFT_RIGHT)
+        addNP("skip", NPSkip)
+        addSNP(SUB)
+        addSNP(SYMBOL)
+        addSNP(SYMBOL_CLS)
         // t
-        adda("test-fn",      NUPDefault, NRTestFn)
-        adda("throw",        NUPDefault)
-        adda("typeof",       NUPDefault, NRTypeof)
+        addSNP(TEST_FN)
+        addSNP(THROW)
+        addSNP(TYPEOF)
         // u
-        adda("unit",         NUPUnit)
+        addNP("unit", NPUnit)
         // v
-        adda("valn",         NUPStdDefault, NPValnA)
-        adda("valn!",        NUPValnB)
-        adda("valn-repeat",  NUPStdDefault, NRValnRepeat)
-        adda("value",        NUPValueA)
-        adda("value!",       NUPValueB)
+        addSNP(VALN)
+        addNP("valn!",  NPValnB)
+        addSNP(VALN_REPEAT)
+        addNP("value",  NPValueA)
+        addNP("value!", NPValueB)
         // w
-        adda("with-gens",    NUPDefault,    NRWithGens)
+        addSNP(WITH_GENS)
         // x
-        adda("xor",          NUPMath,       NRMath)
-        adda("!xor",         NUPMath)
+        addSNP(XOR)
         // y
-        adda("yield",        NUPDefault,    NRYield)
+        addSNP(YIELD)
 
-        // Аннотации
-        adda("@abstract",NUPDefault, NRSA { it, _, _ -> if (it is IAbstractlyNode)   it.abstract = true })
-        adda("@final",   NUPDefault, NRSA { it, _, _ -> if (it is IFinallyNode)      it.final = true })
-        adda("@open",    NUPDefault, NRSA { it, _, _ -> if (it is IFinallyNode)      it.final = false })
-        adda("@static",  NUPDefault, NRSA { it, _, _ -> if (it is IStaticallyNode)   it.static = true })
-        adda("@varargs", NUPDefault, NRSA { it, _, _ -> if (it is IVarargNode)       it.varargs = true })
+        // @
+        addSNP(ANN_ABSTRACT)
+        addSNP(ANN_FINAL)
+        addSNP(ANN_OPEN)
+        addSNP(ANN_STATIC)
+        addSNP(ANN_VARARGS)
 
-        // Compile-Type Константы
-        adda("*module-name*",NUPDefault, NRCTSC { _, ctx -> ctx.module.name })
-        adda("*type-name*",  NUPDefault, NRCTSC { _, ctx -> ctx.clazz.name })
-        adda("*fn-name*",    NUPDefault, NRCTSC { _, ctx -> ctx.method.name })
-        adda("*ns-name*",    NUPDefault, NRCTSC { _, ctx -> ctx.global.namespace })
+        // *
+        addSNP(CTC_MODULE_NAME)
+        addSNP(CTC_TYPE_NAME)
+        addSNP(CTC_FN_NAME)
+        addSNP(CTC_NS_NAME)
 
-        // Развёртки
-        adda("->", NUPDefault, NRUnrollA)
-        adda("<-", NUPDefault, NRUnrollB)
+        // Символьные аналоги
 
-        // Мат/Лог операции
-        "++" to "inc"
-        "--" to "dec"
+        // a
         "+"  to "add"
-        "-"  to "sub"
-        "*"  to "mul"
+        // d
+        "--" to "dec"
         "/"  to "div"
-        "%"  to "rem"
-        "!"  to "not"
+        // e
         "="  to "eq"
-        "!=" to "not-eq"
+        // g
         ">"  to "great"
         ">=" to "great-or-eq"
+        // i
+        "++" to "inc"
+        // l
         "<"  to "less"
         "<=" to "less-or-eq"
-        ">>" to "shift-right"
+        // m
+        "*"  to "mul"
+        // n
+        "!"  to "not"
+        "!=" to "not-eq"
+        // r
+        "%"  to "rem"
+        "->" to "roll-left"
+        "<-" to "roll-right"
+        // s
         "<<" to "shift-left"
+        ">>" to "shift-right"
+        "-"  to "sub"
+    }
 
-        ///
+    private fun addNP(pattern: String, parser: INodeParser) {
+        add(pattern.toRegularExpr(), parser)
+    }
 
-        PihtaJava.init()
+    private fun addSNP(type: INodeType) {
+        add(type.operation.toRegularExpr(), SimpleNP(type))
     }
 
     infix fun String.to(alias: String) {
-        add(this, NUPNodeAlias(alias))
+        add(this.toRegularExpr(), NPNodeAlias(alias))
+    }
+
+    override fun initProcessors() {
+        // a
+        add(ADD,           NRMath)
+        add(ADD_,          NRMathB)
+        add(ALIAS_TYPE,    NRAliasType)
+        add(AGET,          NRAGet)
+        add(AGET_,         NRAGetB)
+        add(AND,           NRMath)
+        add(AND_,          NRMathB)
+        add(APP,           NRApp)
+        add(APP_FN,        NRAppFn)
+        add(ARRAY_OF,      NRArrayOf)
+        add(ARRAY_OF_TYPE, NRArrayOfType)
+        add(ARRAY_SIZE,    NRArraySize)
+        add(ARRAY_SIZE_,   NRArraySize)
+        add(ARRAY_TYPE,    NRArrayType)
+        add(AS,            NRAs)
+        add(AS_,           NRAsB)
+        add(AS_GENS,       NRAsGens)
+        add(ASET,          NRASet)
+        add(ASET_,         NRASetB)
+        // b
+        add(BODY,          NRBody)
+        add(BODY_,         NRBody)
+        add(BREAK,         NRBreakContinue)
+        //
+        add(CATCH,         NRCatch)
+        add(CATCH_,        NRCatch)
+        add(CCALL,         NRCCall)
+        add(CLS,           NRClass)
+        add(COND,          NRCond)
+        add(CONTINUE,      NRBreakContinue)
+        add(CTOR,          NRCtor)
+        add(CYCLE,         NRCycle)
+        // d
+        add(DEBUG,         NRDebug)
+        add(DEC_PRE,       NRIncDec)
+        add(DEC_PRE_,      NRIncDecB)
+        add(DEC_POST,      NRIncDec)
+        add(DEC_POST_,     NRIncDecB)
+        add(DEF,           NRDef)
+        add(DEF_SET,       NRDefSet)
+        add(DEFMACRO,      NRDefMacro)
+        add(DEFN,          NRDefn)
+        add(DIV,           NRMath)
+        add(DIV_,          NRMathB)
+        // e
+        add(EFLD,          NREFld)
+        add(EFN,           NREFn)
+        add(ENUM,          NREnum)
+        add(EQ,            NRCompare)
+        add(EQ_,           NRCompareB)
+        // f
+        add(FGET_A,        NRFGetA)
+        add(FGET_B,        NRFGetB)
+        add(FGET_,         NRFGetC)
+        add(FLD,           NRFld)
+        add(FN,            NRFn)
+        add(FN_,           NRFnB)
+        add(FOR,           NRFor)
+        add(FSET_A,        NRFSetA)
+        add(FSET_B,        NRFSetB)
+        // g
+        add(GET_B,         NRGetB)
+        add(GET_OR_NAME,   NRGetOrName)
+        add(GREAT,         NRCompare)
+        add(GREAT_,        NRCompareB)
+        add(GREAT_OR_EQ,   NRCompare)
+        add(GREAT_OR_EQ_,  NRCompareB)
+        // i
+        add(IF,            NRIf)
+        add(IF_,           NRIfB)
+        add(IMPORT,        NRImport)
+        add(INC_PRE,       NRIncDec)
+        add(INC_PRE_,      NRIncDecB)
+        add(INC_POST,      NRIncDec)
+        add(INC_POST_,     NRIncDecB)
+        add(IS,            NRIs)
+        add(ITF,           NRClass)
+        // l
+        add(LAZY_SYMBOL,   NRLazySymbol)
+        add(LESS,          NRCompare)
+        add(LESS_,         NRCompareB)
+        add(LESS_OR_EQ,    NRCompare)
+        add(LESS_OR_EQ_,   NRCompareB)
+        add(LIST_OF,       NRListOf)
+        // m
+        add(MACRO,         NRMacro)
+        add(MACRO_ARG,     NRMacroArg)
+        add(MACRO_INLINE,  NRMacroInline)
+        add(MACRO_UNROLL,  NRMacroUnroll)
+        add(MCALL,         NRMCall)
+        add(MCALL_,        NRMCallB)
+        add(MUL,           NRMath)
+        add(MUL_,          NRMathB)
+        // n
+        add(NAMED_BLOCK,   NRNamedList)
+        add(NAMED_BLOCK_,  NRProgn)
+        add(NEG,           NRMath)
+        add(NEG_,          NRMathB)
+        add(NEW,           NRNew)
+        add(NEW_,          NRNewB)
+        add(NEW_ARRAY,     NRNewArray)
+        add(NEW_ARRAY_,    NRNewArrayB)
+        add(NOT,           NRCompare)
+        add(NOT_,          NRCompareB)
+        add(NOT_EQ,        NRCompare)
+        add(NOT_EQ_,       NRCompareB)
+        add(NS,            NRNs)
+        add(NS_,           NRNs)
+        // o
+        add(OBJ,           NRClass)
+        add(OBJ_,          NRClass)
+        add(OR,            NRMath)
+        add(OR_,           NRMathB)
+        // p
+        add(PRINT,         NRPrint)
+        add(PRINTLN,       NRPrint)
+        add(PROGN,         NRProgn1)
+        // r
+        add(RAND_SYMBOL,   NRRandSymbol)
+        add(RANGE,         NRRange)
+        add(REM,           NRMath)
+        add(REM_,          NRMathB)
+        add(RET,           NRRet)
+        add(ROLL_LEFT,     NRRollLeft)
+        add(ROLL_RIGHT,    NRRollRight)
+        // s
+        add(SET_B,         NRSet)
+        add(SHIFT_LEFT,    NRMath)
+        add(SHIFT_LEFT_,   NRMathB)
+        add(SHIFT_RIGHT,   NRMath)
+        add(SHIFT_RIGHT_,  NRMathB)
+        add(SUB,           NRMath)
+        add(SUB_,          NRMathB)
+        add(SYMBOL,        NRSymbol)
+        add(SYMBOL_CLS,    NRSymbolCls)
+        // t
+        add(TEST_FN,       NRTestFn)
+        add(THROW,         NRThrow)
+        add(TYPEOF,        NRTypeof)
+        // u
+        add(UNIT,          NRUnit)
+        // v
+        add(VALN,          NRValn)
+        add(VALN_,         NRValn)
+        add(VALN_REPEAT,   NRValnRepeat)
+        add(VALUE,         NRValue)
+        // w
+        add(WITH_GENS,     NRWithGens)
+        // x
+        add(XOR,           NRMath)
+        add(XOR_,          NRMathB)
+        // y
+        add(YIELD,         NRYield)
+
+        // @
+        add(ANN_ABSTRACT, NRSA { it, _, _ -> if (it is IAbstractlyNode)   it.abstract = true })
+        add(ANN_FINAL,    NRSA { it, _, _ -> if (it is IFinallyNode)      it.final = true })
+        add(ANN_OPEN,     NRSA { it, _, _ -> if (it is IFinallyNode)      it.final = false })
+        add(ANN_STATIC,   NRSA { it, _, _ -> if (it is IStaticallyNode)   it.static = true })
+        add(ANN_VARARGS,  NRSA { it, _, _ -> if (it is IVarargNode)       it.varargs = true })
+
+        // *
+        add(CTC_MODULE_NAME, NRCTSC { _, ctx -> ctx.module.name })
+        add(CTC_TYPE_NAME,   NRCTSC { _, ctx -> ctx.clazz.name })
+        add(CTC_FN_NAME,     NRCTSC { _, ctx -> ctx.method.name })
+        add(CTC_NS_NAME,     NRCTSC { _, ctx -> ctx.global.namespace })
+    }
+
+    override fun initCompilers() {
+        PihtaJava(this).init()
     }
 
     override fun load(parser: Parser, ctx: ParsingContext) {

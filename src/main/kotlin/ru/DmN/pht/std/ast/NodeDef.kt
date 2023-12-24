@@ -1,19 +1,20 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.siberia.lexer.Token
+import ru.DmN.pht.std.processor.utils.Variable
+import ru.DmN.pht.std.utils.text
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.indent
-import ru.DmN.pht.std.processor.utils.Variable
 
-class NodeDef(tkOperation: Token, val variables: List<VariableOrField>) : Node(tkOperation), IStaticallyNode, IFinallyNode {
+class NodeDef(info: INodeInfo, val variables: List<VariableOrField>) : Node(info), IStaticallyNode, IFinallyNode {
     override var static: Boolean = false
         set(value) { field = value; variables.forEach { it.field?.isStatic = true } }
     override var final: Boolean = false
 
     override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
-        indent(indent).append('[').append(token.text)
+        indent(indent).append('[').append(text)
         if (variables.isNotEmpty()) {
             variables.forEach {
                 append('\n').indent(indent + 1).append("[\n")

@@ -1,5 +1,13 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.std.ast.NodeFn
+import ru.DmN.pht.std.node.NodeTypes
+import ru.DmN.pht.std.processor.ctx.BodyContext
+import ru.DmN.pht.std.processor.utils.body
+import ru.DmN.pht.std.processor.utils.clazz
+import ru.DmN.pht.std.processor.utils.global
+import ru.DmN.pht.std.processor.utils.with
+import ru.DmN.pht.std.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.NodeNodesList
@@ -9,13 +17,6 @@ import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
-import ru.DmN.pht.std.ast.NodeFn
-import ru.DmN.pht.std.processor.ctx.BodyContext
-import ru.DmN.pht.std.processor.utils.body
-import ru.DmN.pht.std.processor.utils.clazz
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.with
-import ru.DmN.pht.std.utils.*
 import kotlin.math.absoluteValue
 
 object NRFn : INodeProcessor<NodeNodesList> {
@@ -36,6 +37,6 @@ object NRFn : INodeProcessor<NodeNodesList> {
         refs.forEach { fakeType.fields += VirtualFieldImpl(fakeType, it.name, it.type, isStatic = false, isEnum = false) }
         val args = processor.computeStringNodes(nodes[offset + 1] as INodesList, context)
         val body = nodes.dropAndProcess(offset + 2).toMutableList()
-        return NodeFn(node.token.processed(), body, type, args, fakeType.name, refs)
+        return NodeFn(node.info.withType(NodeTypes.FN_), body, type, args, fakeType.name, refs)
     }
 }

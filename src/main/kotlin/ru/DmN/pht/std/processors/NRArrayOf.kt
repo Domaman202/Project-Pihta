@@ -16,18 +16,18 @@ object NRArrayOf : INodeProcessor<NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeNodesList? =
         if (mode == ValType.VALUE) {
-            val line = node.token.line
+            val info = node.info
             val tmp = Variable.tmp(node)
-            NRBody.process(nodeBody(line, ArrayList<Node>().apply {
+            NRBody.process(nodeBody(info, ArrayList<Node>().apply {
                 this.add(
                     nodeDef(
-                        line,
+                        info,
                         tmp,
-                        nodeNewArray(line, processor.calc(node.nodes[0], ctx)!!.name, node.nodes.size)
+                        nodeNewArray(info, processor.calc(node.nodes[0], ctx)!!.name, node.nodes.size)
                     )
                 )
-                this.addAll(node.nodes.mapIndexed { i, it -> nodeASet(line, tmp, i, it) })
-                this.add(nodeGetOrName(line, tmp))
+                this.addAll(node.nodes.mapIndexed { i, it -> nodeASet(info, tmp, i, it) })
+                this.add(nodeGetOrName(info, tmp))
             }), processor, ctx, ValType.VALUE)
         } else null
 }

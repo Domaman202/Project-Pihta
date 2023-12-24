@@ -23,8 +23,8 @@ object NRArrayType : IStdNodeProcessor<NodeNodesList> {
         if (mode == ValType.VALUE) {
             val type = processor.process(node.nodes[0], ctx, ValType.VALUE)!!
             if (type.isConstClass)
-                nodeValueClass(node.token.line, processor.computeType(type, ctx).arrayType.name)
-            else processor.calc(type, ctx)?.let { nodeValueClass(node.token.line, it.arrayType.name) }
+                nodeValueClass(node.info, processor.computeType(type, ctx).arrayType.name)
+            else processor.calc(type, ctx)?.let { nodeValueClass(node.info, it.arrayType.name) }
         } else null
 
     override fun computeString(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): String =

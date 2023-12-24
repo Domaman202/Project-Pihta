@@ -1,14 +1,17 @@
 package ru.DmN.pht.std.imports.parsers
 
-import ru.DmN.siberia.Parser
-import ru.DmN.siberia.lexer.Token
-import ru.DmN.siberia.parser.ctx.ParsingContext
-import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.pht.std.imports.ast.IValueNode
 import ru.DmN.pht.std.imports.ast.NodeArgument
+import ru.DmN.pht.std.imports.node.NodeTypes
+import ru.DmN.siberia.Parser
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.node.NodeInfoImpl
+import ru.DmN.siberia.parser.ctx.ParsingContext
+import ru.DmN.siberia.parsers.INodeParser
 
 object NPArgument : INodeParser {
-    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
-        NodeArgument(token, (parser.parseNode(ctx) as IValueNode).value)
+    override fun parse(parser: Parser, ctx: ParsingContext, token: Token): NodeArgument {
+        val text = token.text
+        return NodeArgument(NodeInfoImpl.of(NodeTypes.entries.find { it.operation == text }!!, ctx, token), (parser.parseNode(ctx) as IValueNode).value)
+    }
 }

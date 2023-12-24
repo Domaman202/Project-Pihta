@@ -7,7 +7,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.nodeProgn
-import ru.DmN.siberia.processors.NRDefault
+import ru.DmN.siberia.processors.NRProgn
 import ru.DmN.siberia.utils.VirtualType
 
 object NRValnRepeat : IStdNodeProcessor<NodeNodesList> {
@@ -15,7 +15,7 @@ object NRValnRepeat : IStdNodeProcessor<NodeNodesList> {
         processor.calc(node.nodes.last(), ctx)
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeNodesList =
-        NRDefault.process(nodeProgn(node.token.line, repeat(node, processor, ctx)), processor, ctx, mode)
+        NRProgn.process(nodeProgn(node.info, repeat(node, processor, ctx)), processor, ctx, mode)
 
     override fun computeList(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): List<Node> =
         repeat(node, processor, ctx)

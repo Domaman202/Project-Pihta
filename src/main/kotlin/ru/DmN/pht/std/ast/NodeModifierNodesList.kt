@@ -2,9 +2,9 @@ package ru.DmN.pht.std.ast
 
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.node.INodeInfo
 
-class NodeModifierNodesList(token: Token, nodes: MutableList<Node>) : NodeNodesList(token, nodes), IAbstractlyNode, IFinallyNode, IStaticallyNode {
+class NodeModifierNodesList(info: INodeInfo, nodes: MutableList<Node>) : NodeNodesList(info, nodes), IAbstractlyNode, IFinallyNode, IStaticallyNode {
     override var abstract: Boolean = false
         set(value) { field = value; nodes.filter { it is IAbstractlyNode }.forEach { (it as IAbstractlyNode).abstract = value } }
     override var final: Boolean = false
@@ -13,5 +13,5 @@ class NodeModifierNodesList(token: Token, nodes: MutableList<Node>) : NodeNodesL
         set(value) { field = value; nodes.filter { it is IStaticallyNode }.forEach { (it as IStaticallyNode).static = value } }
 
     override fun copy(): NodeModifierNodesList =
-        NodeModifierNodesList(token, copyNodes())
+        NodeModifierNodesList(info, copyNodes())
 }

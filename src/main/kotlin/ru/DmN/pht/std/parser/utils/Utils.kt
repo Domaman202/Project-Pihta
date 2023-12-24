@@ -56,7 +56,7 @@ fun Parser.phtParseNode(ctx: ParsingContext): Node? {
 }
 
 fun Parser.parseProgn(ctx: ParsingContext, token: Token) =
-    get(ctx, "progn!")!!.parse(this, ctx, token)
+    get(ctx, "progn")!!.parse(this, ctx, token)
 
 fun IContextCollection<*>.clearMacros() {
     this.contexts.remove("pht/macro")

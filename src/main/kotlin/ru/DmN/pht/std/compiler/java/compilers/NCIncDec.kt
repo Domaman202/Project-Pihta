@@ -1,19 +1,22 @@
 package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
-import ru.DmN.siberia.Compiler
-import ru.DmN.siberia.compilers.INodeCompiler
-import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.ast.NodeIncDec
 import ru.DmN.pht.std.compiler.java.utils.body
 import ru.DmN.pht.std.compiler.java.utils.clazz
 import ru.DmN.pht.std.compiler.java.utils.method
+import ru.DmN.pht.std.node.NodeTypes.*
+import ru.DmN.pht.std.utils.type
+import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.compilers.INodeCompiler
+import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.VirtualType
 
 object NCIncDec : INodeCompiler<NodeIncDec> {
     override fun compile(node: NodeIncDec, compiler: Compiler, ctx: CompilationContext) {
         ctx.method.node.run {
+            val operation = node.type
             val variable = ctx.body[node.name]
             if (variable == null) {
                 val clazz = ctx.clazz.clazz
@@ -24,7 +27,6 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
                     visitVarInsn(Opcodes.ALOAD, 0)
                     visitFieldInsn(Opcodes.GETFIELD, clazz.className, field.name, field.desc)
                 }
-                val operation = node.token.text!!
                 when (field.type) {
                     VirtualType.BOOLEAN,
                     VirtualType.BYTE,
@@ -32,32 +34,32 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
                     VirtualType.CHAR,
                     VirtualType.INT -> {
                         visitLdcInsn(when (operation) {
-                            "!inc" -> 1
-                            "!dec" -> -1
+                            INC_PRE_, INC_POST_ -> 1
+                            DEC_PRE_, DEC_POST_ -> -1
                             else -> throw RuntimeException()
                         })
                         visitInsn(Opcodes.IADD)
                     }
                     VirtualType.LONG -> {
                         visitLdcInsn(when (operation) {
-                            "!inc" -> 1L
-                            "!dec" -> -1L
+                            INC_PRE_, INC_POST_ -> 1L
+                            DEC_PRE_, DEC_POST_ -> -1L
                             else -> throw RuntimeException()
                         })
                         visitInsn(Opcodes.LADD)
                     }
                     VirtualType.FLOAT -> {
                         visitLdcInsn(when (operation) {
-                            "!inc" -> 1f
-                            "!dec" -> -1f
+                            INC_PRE_, INC_POST_ -> 1f
+                            DEC_PRE_, DEC_POST_ -> -1f
                             else -> throw RuntimeException()
                         })
                         visitInsn(Opcodes.FADD)
                     }
                     VirtualType.DOUBLE -> {
                         visitLdcInsn(when (operation) {
-                            "!inc" -> 1.0
-                            "!dec" -> -1.0
+                            INC_PRE_, INC_POST_ -> 1.0
+                            DEC_PRE_, DEC_POST_ -> -1.0
                             else -> throw RuntimeException()
                         })
                         visitInsn(Opcodes.DADD)
@@ -72,9 +74,11 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
                     visitFieldInsn(Opcodes.PUTFIELD, clazz.className, field.name, field.desc)
                 }
             } else {
-                visitIincInsn(variable.id, when (node.token.text) {
-                        "!inc" -> 1
-                        "!dec" -> -1
+                visitIincInsn(
+                    variable.id,
+                    when (operation) {
+                        INC_PRE_, INC_POST_ -> 1
+                        DEC_PRE_, DEC_POST_ -> -1
                         else -> throw RuntimeException()
                     }
                 )
@@ -84,6 +88,7 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
 
     override fun compileVal(node: NodeIncDec, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.run {
+            val operation = node.type
             val variable = ctx.body[node.name]
             if (variable == null) {
                 val clazz = ctx.clazz.clazz
@@ -94,8 +99,7 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
                     visitVarInsn(Opcodes.ALOAD, 0)
                     visitFieldInsn(Opcodes.GETFIELD, clazz.className, field.name, field.desc)
                 }
-                val operation = node.token.text!!
-                if (node.postfix)
+                if (operation == INC_POST_ || operation == DEC_POST_)
                     visitInsn(Opcodes.DUP)
                 when (field.type) {
                     VirtualType.BOOLEAN,
@@ -104,39 +108,39 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
                     VirtualType.CHAR,
                     VirtualType.INT -> {
                         visitLdcInsn(when (operation) {
-                            "!inc" -> 1
-                            "!dec" -> -1
+                            INC_PRE_, INC_POST_ -> 1
+                            DEC_PRE_, DEC_POST_ -> -1
                             else -> throw RuntimeException()
                         })
                         visitInsn(Opcodes.IADD)
                     }
                     VirtualType.LONG -> {
                         visitLdcInsn(when (operation) {
-                            "!inc" -> 1L
-                            "!dec" -> -1L
+                            INC_PRE_, INC_POST_ -> 1L
+                            DEC_PRE_, DEC_POST_ -> -1L
                             else -> throw RuntimeException()
                         })
                         visitInsn(Opcodes.LADD)
                     }
                     VirtualType.FLOAT -> {
                         visitLdcInsn(when (operation) {
-                            "!inc" -> 1f
-                            "!dec" -> -1f
+                            INC_PRE_, INC_POST_ -> 1f
+                            DEC_PRE_, DEC_POST_ -> -1f
                             else -> throw RuntimeException()
                         })
                         visitInsn(Opcodes.FADD)
                     }
                     VirtualType.DOUBLE -> {
                         visitLdcInsn(when (operation) {
-                            "!inc" -> 1.0
-                            "!dec" -> -1.0
+                            INC_PRE_, INC_POST_ -> 1.0
+                            DEC_PRE_, DEC_POST_ -> -1.0
                             else -> throw RuntimeException()
                         })
                         visitInsn(Opcodes.DADD)
                     }
                     else -> throw UnsupportedOperationException()
                 }
-                if (!node.postfix)
+                if (operation == INC_PRE_ || operation == DEC_PRE_)
                     visitInsn(Opcodes.DUP)
                 if (field.isStatic)
                     visitFieldInsn(Opcodes.PUTSTATIC, clazz.className, field.name, field.desc)
@@ -147,15 +151,17 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
                 }
             } else {
                 val id = variable.id
-                if (node.postfix)
+                if (operation == INC_POST_ || operation == DEC_POST_)
                     visitVarInsn(Opcodes.ILOAD, id)
-                visitIincInsn(id, when (node.token.text) {
-                        "inc" -> 1
-                        "dec" -> -1
+                visitIincInsn(
+                    id,
+                    when (operation) {
+                        INC_PRE_, INC_POST_ -> 1
+                        DEC_PRE_, DEC_POST_ -> -1
                         else -> throw RuntimeException()
                     }
                 )
-                if (!node.postfix) {
+                if (operation == INC_PRE_ || operation == DEC_PRE_) {
                     visitVarInsn(Opcodes.ILOAD, id)
                 }
             }

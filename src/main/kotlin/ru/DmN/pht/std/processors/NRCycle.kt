@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -11,6 +12,6 @@ object NRCycle : INodeProcessor<NodeNodesList> {
         node.nodes[0] = processor.process(node.nodes[0], ctx, ValType.VALUE)!!
         for (i in 1 until node.nodes.size)
             node.nodes[i] = processor.process(node.nodes[i], ctx, ValType.NO_VALUE)!!
-        return NodeNodesList(node.token.processed(), node.nodes)
+        return NodeNodesList(node.info.withType(NodeTypes.CYCLE_), node.nodes)
     }
 }

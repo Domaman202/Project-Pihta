@@ -2,9 +2,9 @@ package ru.DmN.pht.std.ast
 
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.node.INodeInfo
 
-class NodeFieldA(token: Token, nodes: MutableList<Node>, override var static: Boolean = false) : NodeNodesList(token, nodes), IStaticallyNode {
+class NodeFieldA(info: INodeInfo, nodes: MutableList<Node>, override var static: Boolean = false) : NodeNodesList(info, nodes), IStaticallyNode {
     override fun copy(): NodeNodesList =
-        NodeFieldA(token, copyNodes(), static)
+        NodeFieldA(info, copyNodes(), static)
 }

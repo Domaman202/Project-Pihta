@@ -10,20 +10,18 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.Platform
 import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
 
 object NRAppFn : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node =
         when (ctx.platform) {
-            Platform.UNIVERSAL -> node
             Platform.JAVA -> {
-                val line = node.token.line
+                val info = node.info
                 val fn = nodeStatic(
-                    line,
+                    info,
                     nodeDefn(
-                        line,
+                        info,
                         "main",
                         "void",
                         node.nodes
@@ -34,7 +32,7 @@ object NRAppFn : INodeProcessor<NodeNodesList> {
                 else {
                     NRClass.process(
                         nodeCls(
-                            line,
+                            info,
                             "App",
                             "java.lang.Object",
                             fn
@@ -42,5 +40,7 @@ object NRAppFn : INodeProcessor<NodeNodesList> {
                     )
                 }
             }
+
+            else -> node
         }
 }

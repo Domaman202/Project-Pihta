@@ -1,7 +1,6 @@
 package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.processor.utils.*
-import ru.DmN.pht.std.utils.compute
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
@@ -18,18 +17,18 @@ object NRArrayOfType : INodeProcessor<NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
         if (mode == ValType.VALUE) {
-            val line = node.token.line
+            val info = node.info
             val tmp = Variable.tmp(node)
-            NRBody.process(nodeBody(line, ArrayList<Node>().apply {
+            NRBody.process(nodeBody(info, ArrayList<Node>().apply {
                 this.add(
                     nodeDef(
-                        line,
+                        info,
                         tmp,
-                        nodeNewArray(line, processor.computeString(node.nodes[0], ctx), node.nodes.size - 1)
+                        nodeNewArray(info, processor.computeString(node.nodes[0], ctx), node.nodes.size - 1)
                     )
                 )
-                this.addAll(node.nodes.asSequence().drop(1).mapIndexed { i, it -> nodeASet(line, tmp, i, it) })
-                this.add(nodeGetOrName(line, tmp))
+                this.addAll(node.nodes.asSequence().drop(1).mapIndexed { i, it -> nodeASet(info, tmp, i, it) })
+                this.add(nodeGetOrName(info, tmp))
             }), processor, ctx, ValType.VALUE)
         } else null
 }

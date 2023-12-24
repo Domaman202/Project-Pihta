@@ -1,12 +1,11 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.utils.indent
+import ru.DmN.siberia.node.INodeInfo
 
-class NodeFieldSet(token: Token, nodes: MutableList<Node>, val instance: Node, name: String, val static: Boolean, val native: Boolean = false) : NodeSet(token, nodes, name) {
+class NodeFieldSet(info: INodeInfo, nodes: MutableList<Node>, val instance: Node, name: String, val static: Boolean, val native: Boolean = false) : NodeSet(info, nodes, name) {
     override fun copy(): NodeFieldSet =
-        NodeFieldSet(token, copyNodes(), instance, name, static)
+        NodeFieldSet(info, copyNodes(), instance, name, static)
 
     // todo:
 //    override fun print(builder: StringBuilder, indent: Int): StringBuilder =

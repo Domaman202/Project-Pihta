@@ -1,15 +1,17 @@
 package ru.DmN.pht.std.imports.parsers
 
-import ru.DmN.siberia.Parser
-import ru.DmN.siberia.lexer.Token
-import ru.DmN.siberia.parser.ctx.ParsingContext
-import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.pht.std.imports.ast.IValueNode
 import ru.DmN.pht.std.imports.ast.NodeValueList
-import ru.DmN.pht.std.ups.NUPValnB
+import ru.DmN.pht.std.node.NodeParsedTypes
+import ru.DmN.pht.std.parsers.NPValnB
+import ru.DmN.siberia.Parser
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.node.NodeInfoImpl
+import ru.DmN.siberia.parser.ctx.ParsingContext
+import ru.DmN.siberia.parsers.INodeParser
 
 object NPValueList : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
-        NUPValnB.parse(parser, ctx) { it -> NodeValueList(token, it.map { (it as IValueNode).value }) }
+        NPValnB.parse(parser, ctx) { it -> NodeValueList(NodeInfoImpl.of(NodeParsedTypes.VALN), it.map { (it as IValueNode).value }) }
 }

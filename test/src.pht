@@ -1,6 +1,9 @@
-(progn
-    (cls [[T ^Object]] Test [^Object]
-        (ctor [] (ccall))
-        (defn foo T^ [[o T^]] o))
-    (app-fn
-        (println (typeof (#foo<^String> (new ^Test) "Test!")))))
+(app-fn
+    (def [[out (new ^java.lang.StringBuilder)][i -1]])
+    (cycle (<= i 1)
+        (cond [
+            [(< i 0) (#append out "М")]
+            [(= i 0) (#append out "Р")]
+            [(> i 0) (#append out "Б")]])
+        (++ i))
+    (#toString out))

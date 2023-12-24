@@ -3,18 +3,19 @@ package ru.DmN.pht.std.compiler.java.compilers
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
+import ru.DmN.pht.std.node.NodeTypes.*
+import ru.DmN.pht.std.utils.type
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.text
 
 object NCMath : INodeCompiler<NodeNodesList> {
     override fun compileVal(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.run {
             val type = compiler.compileVal(node.nodes[0], ctx).apply { load(this, this@run) }.type()
-            if (node.text == "!neg")
+            if (node.type == NEG_)
                 visitInsn(calcOperation(node, type.name))
             else {
                 val operation = calcOperation(node, type.name)
@@ -28,18 +29,18 @@ object NCMath : INodeCompiler<NodeNodesList> {
     }
 
     private fun calcOperation(node: NodeNodesList, type: String) =
-        when (node.token.text) {
-            "!add" -> Opcodes.IADD + calcOffsetMath(type)
-            "!sub" -> Opcodes.ISUB + calcOffsetMath(type)
-            "!mul" -> Opcodes.IMUL + calcOffsetMath(type)
-            "!div" -> Opcodes.IDIV + calcOffsetMath(type)
-            "!rem" -> Opcodes.IREM + calcOffsetMath(type)
-            "!neg" -> Opcodes.INEG + calcOffsetMath(type)
-            "!and" -> Opcodes.IAND + calcOffsetAndOr(type)
-            "!or"  -> Opcodes.IOR  + calcOffsetAndOr(type)
-            "!xor" -> Opcodes.IXOR + calcOffsetXorShift(type)
-            "!shift-left"  -> Opcodes.ISHL + calcOffsetAndOr(type)
-            "!shift-right" -> Opcodes.ISHR + calcOffsetAndOr(type)
+        when (node.type) {
+            ADD_ -> Opcodes.IADD + calcOffsetMath(type)
+            SUB_ -> Opcodes.ISUB + calcOffsetMath(type)
+            MUL_ -> Opcodes.IMUL + calcOffsetMath(type)
+            DIV_ -> Opcodes.IDIV + calcOffsetMath(type)
+            REM_ -> Opcodes.IREM + calcOffsetMath(type)
+            NEG_ -> Opcodes.INEG + calcOffsetMath(type)
+            AND_ -> Opcodes.IAND + calcOffsetAndOr(type)
+            OR_  -> Opcodes.IOR  + calcOffsetAndOr(type)
+            XOR_ -> Opcodes.IXOR + calcOffsetXorShift(type)
+            SHIFT_LEFT_  -> Opcodes.ISHL + calcOffsetAndOr(type)
+            SHIFT_RIGHT_ -> Opcodes.ISHR + calcOffsetAndOr(type)
             else  -> throw RuntimeException()
         }
 

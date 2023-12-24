@@ -1,10 +1,11 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.siberia.lexer.Token
+import ru.DmN.pht.std.utils.text
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.indent
 
-open class NodeGetOrName(token: Token, val name: String, val static: Boolean) : Node(token), IValueNode {
+open class NodeGetOrName(info: INodeInfo, val name: String, val static: Boolean) : Node(info), IValueNode {
     override fun isLiteral(): Boolean =
         true
 
@@ -12,5 +13,5 @@ open class NodeGetOrName(token: Token, val name: String, val static: Boolean) : 
         name
 
     override fun print(builder: StringBuilder, indent: Int): StringBuilder =
-        builder.indent(indent).append('[').append(token.text).append(']').append(if (static) " (static) " else " (nostatic) ").append(name)
+        builder.indent(indent).append('[').append(text).append(']').append(if (static) " (static) " else " (nostatic) ").append(name)
 }

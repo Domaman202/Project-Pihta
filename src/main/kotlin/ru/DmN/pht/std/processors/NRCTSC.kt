@@ -17,5 +17,5 @@ class NRCTSC(val const: (processor: Processor, ctx: ProcessingContext) -> String
         ctx.global.getType("String", processor.tp)
 
     override fun process(node: Node, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeValue =
-        NodeValue.of(node.token.line, NodeValue.Type.STRING, const(processor, ctx))
+        NodeValue.of(node.info, NodeValue.Type.STRING, const(processor, ctx))
 }

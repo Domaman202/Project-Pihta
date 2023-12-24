@@ -79,7 +79,7 @@ object NCFn : INodeCompiler<NodeFn> {
             return Variable.tmp(node, node.type)
         } else {
             val type = VirtualTypeImpl(node.name, mutableListOf(node.type!!))
-            compiler.tp.types += type
+            compiler.tp.types[type.name.hashCode()] = type
             val clazz = ClassNode()
             compiler.classes[node.name] = clazz
             clazz.visit(

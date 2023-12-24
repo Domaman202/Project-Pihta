@@ -90,6 +90,15 @@ class Tests {
     }
 
     @Test
+    fun testCompileSpeedTest() {
+        for (i in 0 until 100) {
+            Module("test/pht/std/compile-speed-test").run {
+                compile()
+            }
+        }
+    }
+
+    @Test
     fun testCond() {
         Module("test/pht/std/cond").run {
             compile()
@@ -164,6 +173,15 @@ class Tests {
             for (i in 0..7) {
                 assertEquals(test(i), String::class.java)
             }
+        }
+    }
+
+    @Test
+    fun testIf() {
+        Module("test/pht/std/if").run {
+            compile()
+            assertEquals(test(0), 12)
+            assertEquals(test(1), 21)
         }
     }
 
