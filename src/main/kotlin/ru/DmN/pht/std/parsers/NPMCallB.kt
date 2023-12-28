@@ -5,7 +5,7 @@ import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
-import ru.DmN.siberia.node.NodeInfoImpl
+import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.siberia.parsers.NPProgn
@@ -17,7 +17,7 @@ object NPMCallB : INodeParser {
             val list = mutableListOf(it.first())
             list += name
             list += it.drop(1)
-            NodeNodesList(NodeInfoImpl.of(NodeParsedTypes.MCALL, ctx, token), list)
+            NodeNodesList(INodeInfo.of(NodeParsedTypes.MCALL, ctx, token), list)
         }
     }
 }

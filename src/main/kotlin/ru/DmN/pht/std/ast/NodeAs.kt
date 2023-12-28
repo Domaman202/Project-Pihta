@@ -1,6 +1,5 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.std.utils.text
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.node.INodeInfo
@@ -11,6 +10,6 @@ class NodeAs(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualType) :
     override fun copy(): NodeAs =
         NodeAs(info, copyNodes(), type)
 
-    override fun print(builder: StringBuilder, indent: Int): StringBuilder =
-        printNodes(builder.indent(indent).append('[').append(text).append('\n').indent(indent + 1).append("type = ").append(type.name), indent).append(']')
+    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder =
+        printNodes(builder.indent(indent).append('[').append(info.type).append('\n').indent(indent + 1).append("(type = ").append(type).append(')'), indent, short).append(']')
 }

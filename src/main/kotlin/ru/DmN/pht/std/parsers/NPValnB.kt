@@ -5,14 +5,14 @@ import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
-import ru.DmN.siberia.node.NodeInfoImpl
+import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parser.utils.parseValue
 import ru.DmN.siberia.parsers.INodeParser
 
 object NPValnB : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
-        parse(parser, ctx) { NodeNodesList(NodeInfoImpl.of(NodeParsedTypes.VALN, ctx, token), it) }
+        parse(parser, ctx) { NodeNodesList(INodeInfo.of(NodeParsedTypes.VALN, ctx, token), it) }
 
     fun parse(parser: Parser, ctx: ParsingContext, constructor: (it: MutableList<Node>) -> Node): Node {
         val nodes = ArrayList<Node>()

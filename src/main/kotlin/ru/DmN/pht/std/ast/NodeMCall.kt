@@ -1,6 +1,5 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.std.utils.text
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.node.INodeInfo
@@ -12,12 +11,24 @@ class NodeMCall(info: INodeInfo, nodes: MutableList<Node>, val generic: VirtualT
     override fun copy(): NodeMCall =
         NodeMCall(info, copyNodes(), generic, instance, method, type)
 
-    override fun print(builder: StringBuilder, indent: Int): StringBuilder {
-        builder.indent(indent).append('[').append(text).append(" (").append(type).append(") ").append(method.name).append(method.desc).append('\n')
-        instance.print(builder, indent + 1)
-        if (nodes.isEmpty())
-            builder.append('\n').indent(indent)
-        return printNodes(builder, indent).append(']')
+//    override fun print(builder: StringBuilder, indent: Int): StringBuilder {
+//        builder.indent(indent).append('[').append(text).append(" (").append(type).append(") ").append(method.name).append(method.desc).append('\n')
+//        instance.print(builder, indent + 1)
+//        if (nodes.isEmpty())
+//            builder.append('\n').indent(indent)
+//        return printNodes(builder, indent).append(']')
+//    }
+
+    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+        indent(indent).append('[').append(info.type).append('\n')
+            .indent(indent + 1).append("(method = ").append(method.name).append(method.desc).append(")\n")
+            .indent(indent + 1).append("(instance:\n")
+        instance.print(builder, indent + 2, short).append('\n').indent(indent + 1).append(')')
+        if (!short) {
+            append('\n').indent(indent + 1).append("(generic = ").append(generic).append(")\n")
+                .indent(indent + 1).append("(type = ").append(type).append(')')
+        }
+        printNodes(builder, indent, short).append(']')
     }
 
     enum class Type {

@@ -8,7 +8,7 @@ import ru.DmN.pht.std.utils.text
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
-import ru.DmN.siberia.node.NodeInfoImpl
+import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.siberia.parsers.NPProgn
@@ -22,7 +22,7 @@ object NPImport : INodeParser {
         return NPProgn.parse(parser, context) { it ->
             val map = HashMap<String, MutableList<Any?>>()
             it.forEach { map.getOrPut(it.text) { ArrayList() } += (it as IValueNode).value }
-            NodeImport(NodeInfoImpl.of(NodeParsedTypes.IMPORT, ctx, token), module, map)
+            NodeImport(INodeInfo.of(NodeParsedTypes.IMPORT, ctx, token), module, map)
         }
     }
 }

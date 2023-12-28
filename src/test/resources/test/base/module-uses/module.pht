@@ -1,7 +1,0 @@
-(module
-    (name "test/base/module-uses")
-    (version "1.0.0")
-    (author "DomamaN202")
-    (deps ["pht"])
-    (uses ["pht"])
-    (files ["src.pht"]))

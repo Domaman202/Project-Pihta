@@ -1,7 +1,6 @@
 package ru.DmN.pht.std.ast
 
 import ru.DmN.pht.std.processor.utils.Variable
-import ru.DmN.pht.std.utils.text
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
@@ -13,14 +12,14 @@ class NodeDef(info: INodeInfo, val variables: List<VariableOrField>) : Node(info
         set(value) { field = value; variables.forEach { it.field?.isStatic = true } }
     override var final: Boolean = false
 
-    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
-        indent(indent).append('[').append(text)
+    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+        indent(indent).append('[').append(info.type)
         if (variables.isNotEmpty()) {
             variables.forEach {
                 append('\n').indent(indent + 1).append("[\n")
-                    .indent(indent + 2).append("name = ").append(it.name)
-                    .append('\n').indent(indent + 2).append("type = ").append(it.type.name)
-                it.value?.print(append('\n'), indent + 2)
+                    .indent(indent + 2).append("(name = ").append(it.name).append(")\n")
+                    .indent(indent + 2).append("(type = ").append(it.type.name).append(')')
+                it.value?.print(append('\n'), indent + 2, short)
                 append('\n').indent(indent + 1).append(']')
             }
             append('\n').indent(indent)

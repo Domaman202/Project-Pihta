@@ -11,13 +11,13 @@ import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.lexer.isNaming
 import ru.DmN.siberia.lexer.isOperation
 import ru.DmN.siberia.node.INodeInfo
-import ru.DmN.siberia.node.NodeInfoImpl
+import ru.DmN.siberia.node.INodeType
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
 
 object NPGet : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
-        val info = NodeInfoImpl.of(NodeTypes.GET_A, ctx, token)
+        val info = INodeInfo.of(NodeTypes.GET_A, ctx, token)
         val nameToken = parser.nextToken()!!
         return when (nameToken.type) {
             Token.DefaultType.CLASS -> parse(

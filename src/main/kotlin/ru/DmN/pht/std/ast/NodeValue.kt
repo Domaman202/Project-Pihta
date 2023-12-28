@@ -1,7 +1,6 @@
 package ru.DmN.pht.std.ast
 
 import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.utils.text
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.indent
@@ -22,8 +21,12 @@ class NodeValue(info: INodeInfo, val vtype: Type, val value: String) : Node(info
     fun getString() =
         value
 
-    override fun print(builder: StringBuilder, indent: Int): StringBuilder =
-        builder.indent(indent).append("[${text} ($vtype) $value]")
+    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+        indent(indent).append('[').append(info.type).append('\n')
+            .indent(indent + 1).append("(type = ").append(vtype).append(")\n")
+            .indent(indent + 1).append("(value = '").append(value).append("')\n")
+            .indent(indent).append(']')
+    }
 
     override fun isConstClass(): Boolean = vtype == Type.PRIMITIVE || vtype == Type.CLASS
     override fun getValueAsString(): String = value

@@ -1,6 +1,5 @@
 package ru.DmN.pht.std.ast
 
-import ru.DmN.pht.std.utils.text
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.node.INodeInfo
@@ -21,8 +20,25 @@ class NodeDefn(info: INodeInfo, nodes: MutableList<Node>, val method: VirtualMet
     override fun copy(): NodeDefn =
         NodeDefn(info, copyNodes(), method).apply { static = this@NodeDefn.static }
 
-    override fun print(builder: StringBuilder, indent: Int): StringBuilder {
-        builder.indent(indent).append('[').append(text).append(' ')
-        return printNodes(if (method.modifiers.ctor) builder.append('(').append(method.argsDesc).append(')') else builder.append(method.name).append(method.desc), indent).append(']')
+    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+        indent(indent).append('[').append(info.type).append('\n')
+            .indent(indent + 1).append("(type = ")
+        if (method.modifiers.varargs)
+            append("varargs ")
+        append(
+            if (method.modifiers.ctor)
+                "constructor"
+            else if (method.modifiers.abstract)
+                "abstract method"
+            else if (method.modifiers.extension)
+                "extension method"
+            else "method"
+        ).append(")\n")
+        if (short)
+            indent(indent + 1).append("(desc = ").append(method.name).append(method.desc).append(')')
+        else indent(indent + 1).append("(name = ").append(method.name).append(")\n")
+            .indent(indent + 1).append("(desc = ").append(method.desc).append(")\n")
+            .indent(indent + 1).append("(sign = ").append(method.signature).append(')')
+        printNodes(this, indent, short).append(']')
     }
 }
