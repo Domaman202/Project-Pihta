@@ -1,9 +1,1 @@
-(app-fn
-    (def [[out (new ^java.lang.StringBuilder)][i -1]])
-    (cycle (<= i 1)
-        (cond [
-            [(< i 0) (#append out "М")]
-            [(= i 0) (#append out "Р")]
-            [(> i 0) (#append out "Б")]])
-        (++ i))
-    (#toString out))
+(app-fn (println "Мяу!"))

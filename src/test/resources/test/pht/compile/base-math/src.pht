@@ -1,0 +1,18 @@
+(progn
+    (test-fn 0 (+ 12 21))
+    (test-fn 1 (- 33 12))
+    (test-fn 2 (- 33 12 21))
+    (test-fn 3 (* 2 2 3))
+    (test-fn 4 (/ 12 3))
+    (test-fn 5 (% 3 2))
+    (test-fn 6 (>> 1024 10))
+    (test-fn 7 (<< 1 10))
+
+    (test-fn 8 (add 12 21))
+    (test-fn 9 (sub 33 12))
+    (test-fn 10 (sub 33 12 21))
+    (test-fn 11 (mul 2 2 3))
+    (test-fn 12 (div 12 3))
+    (test-fn 13 (rem 3 2))
+    (test-fn 14 (shift-right 1024 10))
+    (test-fn 15 (shift-left 1 10)))

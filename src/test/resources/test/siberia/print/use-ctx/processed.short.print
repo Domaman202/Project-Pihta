@@ -1,8 +1,8 @@
 [USE_CTX_
-|	(modules = 
+|	(modules =)
 |	(NODES:
 |	|	[USE_CTX_
-|	|	|	(modules =  pht
+|	|	|	(modules = pht)
 |	|	|	(NODES:
 |	|	|	|	[CLS_
 |	|	|	|	|	(type = open class)
@@ -10,7 +10,8 @@
 |	|	|	|	|	[ANN_STATIC_
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(desc = main()V)]
+|	|	|	|	|	|	|	(desc = main()V)
+|	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	)

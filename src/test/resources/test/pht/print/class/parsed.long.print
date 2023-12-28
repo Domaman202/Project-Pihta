@@ -1,0 +1,27 @@
+[USE_CTX
+|	(modules = pht)
+|	[PROGN
+|	|	[CLS
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'Test')
+|	|	|	]
+|	|	|	[VALN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'Object')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[VALUE
+|	|	|	|	(type = CLASS)
+|	|	|	|	(value = 'Test')
+|	|	|	]
+|	|	]
+|	]
+]

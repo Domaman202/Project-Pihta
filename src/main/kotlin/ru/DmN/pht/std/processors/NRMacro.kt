@@ -14,8 +14,6 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.nodeProgn
-import ru.DmN.siberia.processor.utils.processNodesList
-import ru.DmN.siberia.processors.NRProgn
 import ru.DmN.siberia.utils.SubMap
 import ru.DmN.siberia.utils.VirtualType
 import java.util.*
@@ -23,21 +21,27 @@ import java.util.*
 object NRMacro : IStdNodeProcessor<NodeMacro> {
     override fun calc(node: NodeMacro, processor: Processor, ctx: ProcessingContext): VirtualType? {
         val result = macroCalc(node, ctx)
-        return NRProgn.calc(result.first, processor, result.second)
+        return macroBodyNode(node, result)?.let { processor.calc(it, result.second) }
     }
 
-    override fun process(node: NodeMacro, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
+    override fun process(node: NodeMacro, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
         val result = macroCalc(node, ctx)
-        processNodesList(result.first.copy(), processor, result.second, mode)
-        return node
+        return macroBodyNode(node, result)?.let { processor.process(it.copy(), result.second, mode) }
     }
 
     override fun compute(node: NodeMacro, processor: Processor, ctx: ProcessingContext): Node {
         val result = macroCalc(node, ctx)
-        return processor.compute(result.first.copy(), result.second)
+        return macroBodyNode(node, result)?.let { processor.compute(it, result.second) } ?: node
     }
 
-    private fun macroCalc(node: NodeMacro, ctx: ProcessingContext): Pair<NodeNodesList, ProcessingContext> {
+    private fun macroBodyNode(node: NodeMacro, result: Pair<List<Node>, ProcessingContext>): Node? =
+        when (result.first.size) {
+            0 -> null
+            1 -> result.first[0]
+            else -> nodeProgn(node.info, result.first.toMutableList())
+        }
+
+    private fun macroCalc(node: NodeMacro, ctx: ProcessingContext): Pair<List<Node>, ProcessingContext> {
         val gctx = ctx.global
         //
         val macro = gctx.macros.find { it.name == node.name } ?: throw RuntimeException("Macro '${node.name}' not founded!")
@@ -54,7 +58,7 @@ object NRMacro : IStdNodeProcessor<NodeMacro> {
         }
         //
         return Pair(
-            nodeProgn(node.info, macro.body.toMutableList()),
+            macro.body,
             ctx.with(macro.ctx.combineWith(gctx)).with(macroCtxOf(ctx, args))
         )
     }

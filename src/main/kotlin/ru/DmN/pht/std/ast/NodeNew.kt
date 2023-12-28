@@ -16,9 +16,9 @@ class NodeNew(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualType, 
             .indent(indent + 1).append("(type = ").append(type).append(')')
         if (!short)
             append('\n').indent(indent + 1).append("(ctor = ").append(ctor.desc).append(')')
-        printNodes(builder, indent, short).append(']')
+        if (nodes.isEmpty())
+            append('\n').indent(indent)
+        else printNodes(builder, indent, short)
+        append(']')
     }
-
-//    override fun print(builder: StringBuilder, indent: Int): StringBuilder = // todo: generics
-//        printNodes(builder.indent(indent).append('[').append(text).append('\n').indent(indent + 1).append("type = ").append(ctor.declaringClass!!.name), indent).append(']')
 }

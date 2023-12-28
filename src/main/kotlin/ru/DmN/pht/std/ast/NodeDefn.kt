@@ -39,6 +39,9 @@ class NodeDefn(info: INodeInfo, nodes: MutableList<Node>, val method: VirtualMet
         else indent(indent + 1).append("(name = ").append(method.name).append(")\n")
             .indent(indent + 1).append("(desc = ").append(method.desc).append(")\n")
             .indent(indent + 1).append("(sign = ").append(method.signature).append(')')
-        printNodes(this, indent, short).append(']')
+        if (nodes.isEmpty())
+            append('\n').indent(indent)
+        else printNodes(this, indent, short)
+        append(']')
     }
 }

@@ -7,11 +7,11 @@ import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.node.NodeTypes
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.processors.NRProgn
 import java.util.*
 import kotlin.math.min
 
@@ -22,6 +22,7 @@ object NRMacroUnroll : INodeProcessor<NodeMacroUnroll> { // todo: calc
         val names = ArrayList<Triple<List<Node>, String, UUID>>()
         val macro = ctx.macro
         processor.computeList(node.nodes[0], ctx)
+            .stream()
             .map { it -> processor.computeList(it, ctx).map { processor.computeString(it, ctx) } }
             .forEach {
                 names += Triple(
@@ -37,14 +38,12 @@ object NRMacroUnroll : INodeProcessor<NodeMacroUnroll> { // todo: calc
                 names.forEach {
                     args[Pair(it.third, it.second)] = it.first[i]
                 }
-                nodes += NRProgn.process(
-                    nodeProgn(info, node.nodes.drop(1).map { it.copy() }.toMutableList()),
-                    processor,
-                    ctx.with(NRMacro.macroCtxOf(ctx, args)),
-                    mode
-                )
+                val context = ctx.with(NRMacro.macroCtxOf(ctx, args))
+                node.nodes.stream().skip(1).forEach {
+                    nodes += processor.process(it, context, mode)!!
+                }
             }
         }
-        return nodeProgn(info, nodes)
+        return NodeNodesList(info.withType(NodeTypes.PROGN_), nodes)
     }
 }

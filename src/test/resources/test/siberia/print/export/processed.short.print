@@ -1,8 +1,8 @@
 [USE_CTX_
-|	(modules =  pht
+|	(modules = pht)
 |	(NODES:
 |	|	[USE_CTX_
-|	|	|	(modules =  test/siberia/compile/export/helper
+|	|	|	(modules = test/siberia/compile/export/helper)
 |	|	|	(NODES:
 |	|	|	|	[CLS_
 |	|	|	|	|	(type = open class)
