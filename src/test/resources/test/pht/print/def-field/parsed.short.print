@@ -1,0 +1,67 @@
+[USE_CTX
+|	(modules = pht)
+|	[PROGN
+|	|	[CLS
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'Test')
+|	|	|	]
+|	|	|	[VALN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'Object')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[DEF
+|	|	|	|	[VALN
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CTOR
+|	|	|	|	[VALN]
+|	|	|	|	[CCALL]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[DEF
+|	|	|	|	[VALN
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'test')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[NEW
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	(value = 'Test')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[FSET_B
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '202')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[FGET_B
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'i')
+|	|	|	]
+|	|	]
+|	]
+]

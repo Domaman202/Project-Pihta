@@ -1,0 +1,67 @@
+[USE_CTX_
+|	(modules = pht)
+|	(NODES:
+|	|	[PROGN_
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = Test)
+|	|	|	|	[DEF_
+|	|	|	|	|	[
+|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	(type = int)
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[CTOR_
+|	|	|	|	|	(type = constructor)
+|	|	|	|	|	(desc = <init>()V)
+|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	(method = <init>()V)
+|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	)]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = Test0)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	(type = Test)
+|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	(type = VT(Test))
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[FSET_
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'test')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '202')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[FGET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'test')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	)
+]

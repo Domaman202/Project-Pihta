@@ -1,0 +1,8 @@
+(progn
+    (cls Test [^Object]
+        (fld [[i ^int]])
+        (ctor [] (ccall)))
+    (test-fn 0
+        (def [[test (new ^Test)]])
+        (set test/i 213)
+        (get test/i)))

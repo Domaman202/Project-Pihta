@@ -1,0 +1,65 @@
+[USE_CTX_
+|	(modules = pht)
+|	(NODES:
+|	|	[CLS_
+|	|	|	(type = open class)
+|	|	|	(name = Test0)
+|	|	|	[ANN_STATIC_
+|	|	|	|	[DEFN_
+|	|	|	|	|	(type = method)
+|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	[DEF_
+|	|	|	|	|	|	[
+|	|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	|	(type = int)
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '0')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[
+|	|	|	|	|	|	|	(name = j)
+|	|	|	|	|	|	|	(type = int)
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '0')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[CYCLE_
+|	|	|	|	|	|	[LESS_
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '10')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[SET_
+|	|	|	|	|	|	|	[ADD_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'j')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[INC_PRE_]
+|	|	|	|	|	]
+|	|	|	|	|	[AS_
+|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'j')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	)
+]

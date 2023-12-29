@@ -1,0 +1,143 @@
+[USE_CTX_
+|	(modules = pht)
+|	(NODES:
+|	|	[PROGN_
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = Test0)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = NIL)
+|	|	|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = Test1)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = Test2)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = DOUBLE)
+|	|	|	|	|	|	|	|	(value = '21.33')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = Test3)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = FLOAT)
+|	|	|	|	|	|	|	|	(value = '44')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = Test4)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = LONG)
+|	|	|	|	|	|	|	|	(value = '202')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = Test5)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	(value = 'Текст')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = Test6)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	(value = 'java.lang.Object')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = Test7)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = CLASS_WITH_GEN)
+|	|	|	|	|	|	|	|	(value = 'java.util.List<^Object>')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	)
+]
