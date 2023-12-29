@@ -1,5 +1,6 @@
 package ru.DmN.pht.std
 
+import ru.DmN.pht.processors.NRPrognB
 import ru.DmN.pht.std.ast.IAbstractlyNode
 import ru.DmN.pht.std.ast.IFinallyNode
 import ru.DmN.pht.std.ast.IStaticallyNode
@@ -17,6 +18,7 @@ import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.macros
 import ru.DmN.pht.std.processor.utils.method
 import ru.DmN.pht.std.processors.*
+import ru.DmN.pht.unparsers.*
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.node.INodeType
@@ -29,9 +31,10 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processors.NRProgn
+import ru.DmN.siberia.unparsers.NUDefault
 import ru.DmN.siberia.utils.Module
 import java.util.*
-import ru.DmN.pht.std.processors.NRProgn as NRProgn1
+import ru.DmN.pht.std.processors.NRProgn as NRPrognA
 
 object Pihta : Module("pht") {
     override fun initParsers() {
@@ -215,6 +218,189 @@ object Pihta : Module("pht") {
         add(this.toRegularExpr(), NPNodeAlias(alias))
     }
 
+    override fun initUnparsers() {
+        // a
+        addSNU(ADD)
+        addSNU(ADD_)
+        addSNU(AGET)
+        addSNU(ALIAS_TYPE)
+        // ALIAS_TYPE_
+        addSNU(AND)
+        addSNU(AND_)
+        addSNU(APP)
+        addSNU(APP_FN)
+        addSNU(ARRAY_OF)
+        addSNU(ARRAY_OF_TYPE)
+        addSNU(ARRAY_SIZE)
+        addSNU(ARRAY_SIZE_)
+        addSNU(AS)
+        add(AS_, NUAs)
+        addSNU(AS_GENS)
+        addSNU(ASET)
+        // ASET_
+        // b
+        addSNU(BODY)
+        addSNU(BODY_)
+        addSNU(BREAK)
+        add(BREAK_, NUNamedBlock)
+        // c
+        addSNU(CATCH)
+        // CATCH_
+        addSNU(CLS)
+        add(CLS_, NUClass)
+        addSNU(COND)
+        addSNU(CONTINUE)
+        add(CONTINUE_, NUNamedBlock)
+        addSNU(CTOR)
+        // CTOR_
+        addSNU(CYCLE)
+        addSNU(CYCLE_)
+        // d
+        add(DEBUG, NUDebug)
+        addSNU(DEC_PRE)
+        // DEC_PRE_
+        addSNU(DEC_POST)
+        // DEC_POST_
+        addSNU(DEF)
+        // DEF_
+        addSNU(DEF_SET)
+        // DEFMACRO
+        addSNU(DEFN)
+        add(DEFN_, NUDefn)
+        addSNU(DIV)
+        addSNU(DIV_)
+        // e
+        addSNU(ECTOR)
+        addSNU(EFLD)
+        // EFLD_
+        addSNU(EFN)
+        // EFN_
+        addSNU(ENUM)
+        add(ENUM_, NUClass)
+        addSNU(EQ)
+        addSNU(EQ_)
+        // f
+        addSNU(FGET_A)
+        // FGET_B
+        // FGET_
+        addSNU(FN)
+        // FN_
+        addSNU(FOR)
+        addSNU(FSET_A)
+        // FSET_B
+        // FSET_
+        // g
+        // GET_A
+        addSNU(GET_B)
+        // GET_
+        add(GET_OR_NAME, NUGetOrName)
+        addSNU(GREAT)
+        addSNU(GREAT_)
+        addSNU(GREAT_OR_EQ)
+        addSNU(GREAT_OR_EQ_)
+        // i
+        addSNU(IF)
+        addSNU(IF_)
+        // IMPORT
+        addSNU(INC_PRE)
+        // INC_PRE_
+        addSNU(INC_POST)
+        // INC_POST_
+        addSNU(IS)
+        addSNU(IS_)
+        addSNU(ITF)
+        add(ITF_, NUClass)
+        // l
+        // LAZY_SYMBOL
+        addSNU(LESS)
+        addSNU(LESS_)
+        addSNU(LESS_OR_EQ)
+        addSNU(LESS_OR_EQ_)
+        addSNU(LIST_OF)
+        // m
+        // MACRO
+        // MACRO_ARG
+        // MACRO_INLINE
+        // MACRO_UNROLL
+        addSNU(MCALL)
+        // MCALL_
+        addSNU(MUL)
+        addSNU(MUL_)
+        // n
+        addSNU(NAMED_BLOCK)
+        add(NAMED_BLOCK_, NUNamedBlock)
+        addSNU(NEG)
+        addSNU(NEG_)
+        addSNU(NEW)
+        // NEW_
+        addSNU(NEW_ARRAY)
+        // NEW_ARRAY_
+        addSNU(NOT)
+        addSNU(NOT_)
+        addSNU(NOT_EQ)
+        addSNU(NOT_EQ_)
+        addSNU(NS)
+        // NS_
+        // o
+        addSNU(OBJ)
+        // OBJ_
+        addSNU(OR)
+        addSNU(OR_)
+        // p
+        addSNU(PRINT)
+        addSNU(PRINTLN)
+        // PROGN_B
+        // PROGN_B_
+        // r
+        addSNU(RAND_SYMBOL)
+        addSNU(RANGE)
+        addSNU(REM)
+        addSNU(RET)
+        addSNU(ROLL_LEFT)
+        addSNU(ROLL_RIGHT)
+        addSNU(SUB)
+        addSNU(SUB_)
+        addSNU(SYMBOL)
+        addSNU(SYMBOL_CLS)
+        // t
+        addSNU(TEST_FN)
+        addSNU(THROW)
+        addSNU(THROW_)
+        addSNU(TYPEOF)
+        // u
+        // UNIT
+        // v
+        // VALN
+        addSNU(VALN_REPEAT)
+        add(VALUE, NUValue)
+        // w
+        addSNU(WITH_GENS)
+        addSNU(XOR)
+        addSNU(YIELD)
+
+        // @
+        addSNU(ANN_ABSTRACT)
+        addSNU(ANN_ABSTRACT_)
+        addSNU(ANN_FINAL)
+        addSNU(ANN_FINAL_)
+        addSNU(ANN_OPEN)
+        addSNU(ANN_OPEN_)
+        addSNU(ANN_STATIC)
+        addSNU(ANN_STATIC_)
+        addSNU(ANN_VARARGS)
+        addSNU(ANN_VARARGS_)
+
+        // *
+        addSNU(CTC_MODULE_NAME)
+        addSNU(CTC_TYPE_NAME)
+        addSNU(CTC_FN_NAME)
+        addSNU(CTC_NS_NAME)
+    }
+
+    private fun addSNU(type: INodeType) {
+        add(type, NUDefault)
+    }
+
     override fun initProcessors() {
         // a
         add(ADD,           NRMath)
@@ -333,7 +519,8 @@ object Pihta : Module("pht") {
         // p
         add(PRINT,         NRPrint)
         add(PRINTLN,       NRPrint)
-        add(PROGN,         NRProgn1)
+        add(PROGN,         NRPrognA)
+        add(PROGN_B,       NRPrognB)
         // r
         add(RAND_SYMBOL,   NRRandSymbol)
         add(RANGE,         NRRange)

@@ -1,0 +1,7 @@
+(use-ctx pht
+	(use-ctx test/siberia/unparse/export/helper
+		(cls Test0 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(as ^dynamic
+						"test/siberia/unparse/export"))))))

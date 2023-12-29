@@ -2,7 +2,7 @@
 |	(modules = pht)
 |	(NODES:
 |	|	[USE_CTX_
-|	|	|	(modules = test/siberia/compile/export/helper)
+|	|	|	(modules = test/siberia/print/export/helper)
 |	|	|	(NODES:
 |	|	|	|	[CLS_
 |	|	|	|	|	(type = open class)

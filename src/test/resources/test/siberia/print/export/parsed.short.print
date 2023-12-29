@@ -1,7 +1,7 @@
 [USE_CTX
 |	(modules = pht)
 |	[USE_CTX
-|	|	(modules = test/siberia/compile/export/helper)
+|	|	(modules = test/siberia/print/export/helper)
 |	|	[TEST_FN
 |	|	|	[VALUE
 |	|	|	|	(type = INT)

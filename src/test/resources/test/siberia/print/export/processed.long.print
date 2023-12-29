@@ -2,7 +2,7 @@
 |	(modules = pht)
 |	(NODES:
 |	|	[USE_CTX_
-|	|	|	(modules = test/siberia/compile/export/helper)
+|	|	|	(modules = test/siberia/print/export/helper)
 |	|	|	(NODES:
 |	|	|	|	[CLS_
 |	|	|	|	|	(type = open class)
@@ -68,7 +68,7 @@
 |	|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	|	|	|	(value = 'test/siberia/compile/export/helper')
+|	|	|	|	|	|	|	|	|	|	|	|	(value = 'test/siberia/print/export/helper')
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
@@ -89,7 +89,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'test/siberia/compile/export/helper')
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'test/siberia/print/export/helper')
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]

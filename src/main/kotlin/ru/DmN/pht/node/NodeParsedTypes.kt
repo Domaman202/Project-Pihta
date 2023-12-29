@@ -62,8 +62,6 @@ enum class NodeParsedTypes(override val operation: String, override val processe
     // r
     REM("rem", REM_),
     RET("ret", RET_),
-    ROLL_LEFT("roll-left", ROLL_LEFT_),
-    ROLL_RIGHT("roll-right", ROLL_RIGHT_),
     // s
     SET_B("set!", SET_),
     SHIFT_LEFT("shift-left", SHIFT_LEFT_),
@@ -79,13 +77,7 @@ enum class NodeParsedTypes(override val operation: String, override val processe
     ANN_FINAL("@final", ANN_FINAL_),
     ANN_OPEN("@open", ANN_OPEN_),
     ANN_STATIC("@static", ANN_STATIC_),
-    ANN_VARARGS("@varargs", ANN_VARARGS_),
-
-    // *
-    CTC_MODULE_NAME("*module-name*", CTC_MODULE_NAME_),
-    CTC_TYPE_NAME("*type-name*", CTC_TYPE_NAME_),
-    CTC_FN_NAME("*fn-name*", CTC_FN_NAME_),
-    CTC_NS_NAME("*ns-name*", CTC_NS_NAME_);
+    ANN_VARARGS("@varargs", ANN_VARARGS_);
 
     override val processable: Boolean
         get() = true

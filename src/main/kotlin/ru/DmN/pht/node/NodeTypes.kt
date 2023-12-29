@@ -98,13 +98,15 @@ enum class NodeTypes : INodeType {
     // p
     PRINT("print", PARSED),
     PRINTLN("println", PARSED),
+    PROGN_B("progn-", PARSED),
+    PROGN_B_("progn-", PROCESSED),
     // r
     RAND_SYMBOL("rand-symbol", PARSED),
     RANGE("range", PARSED),
     REM_("rem", PROCESSED),
     RET_("ret", PROCESSED),
-    ROLL_LEFT_("roll-left", PROCESSED),
-    ROLL_RIGHT_("roll-left", PROCESSED),
+    ROLL_LEFT("roll-left", PARSED),
+    ROLL_RIGHT("roll-right", PARSED),
     // s
     SET_A("set", PARSED),
     SET_("set!", PROCESSED),
@@ -115,7 +117,6 @@ enum class NodeTypes : INodeType {
     SYMBOL_CLS("symbol-cls", PARSED),
     // t
     TEST_FN("test-fn", PARSED),
-    TEST_FN_("test-fn", PROCESSED),
     THROW("throw", PARSED),
     THROW_("throw", PROCESSED),
     TYPEOF("typeof", PARSED),
@@ -140,10 +141,10 @@ enum class NodeTypes : INodeType {
     ANN_VARARGS_("@varargs", PROCESSED),
 
     // *
-    CTC_MODULE_NAME_("*module-name*", PROCESSED),
-    CTC_TYPE_NAME_("*type-name*", PROCESSED),
-    CTC_FN_NAME_("*fn-name*", PROCESSED),
-    CTC_NS_NAME_("*ns-name*", PROCESSED);
+    CTC_MODULE_NAME("*module-name*", PARSED),
+    CTC_TYPE_NAME("*type-name*", PARSED),
+    CTC_FN_NAME("*fn-name*", PARSED),
+    CTC_NS_NAME("*ns-name*", PARSED);
 
     override val operation: String
     override val processable: Boolean

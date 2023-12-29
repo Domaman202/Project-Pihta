@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.processor.utils.nodeValue
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Processor
@@ -18,19 +19,23 @@ object NRIs : INodeProcessor<NodeNodesList> {
         VirtualType.BOOLEAN
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
-        return if (ctx.platform == Platform.JAVA) {
-            val type = processor.computeString(node.nodes[0], ctx)
-            val value = processor.calc(node.nodes[1], ctx)
-            nodeValue(
-                node.info,
-                if (type.isPrimitive()) {
-                    if (value?.isPrimitive == true)
-                        type == value.name
-                    else false
-                } else if (value?.isPrimitive == true)
-                    false
-                else return node
-            )
-        } else node
+        return when (ctx.platform) {
+            Platform.JAVA -> {
+                val type = processor.computeString(node.nodes[0], ctx)
+                val value = processor.calc(node.nodes[1], ctx)
+                nodeValue(
+                    node.info,
+                    if (type.isPrimitive()) {
+                        if (value?.isPrimitive == true)
+                            type == value.name
+                        else false
+                    } else if (value?.isPrimitive == true)
+                        false
+                    else return NodeNodesList(node.info.withType(NodeTypes.IS_), node.nodes.asSequence().map { processor.process(it, ctx, ValType.VALUE)!! }.toMutableList())
+                )
+            }
+
+            else -> node
+        }
     }
 }

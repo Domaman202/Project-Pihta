@@ -6,6 +6,7 @@ import ru.DmN.pht.std.module.ast.NodeModule
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
+import ru.DmN.siberia.Unparser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.parser.ctx.ParsingContext
@@ -14,6 +15,7 @@ import ru.DmN.siberia.processor.utils.Platform
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processor.utils.with
+import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.utils.Module
 import ru.DmN.siberia.utils.TypesProvider
 import java.io.File
@@ -23,6 +25,40 @@ import kotlin.test.assertTrue
 
 class Module(private val dir: String) {
     val module = (Parser(Module.getModuleFile(dir)).parseNode(ParsingContext.of(StdModule)) as NodeModule).module
+
+    fun unparse() {
+        val tp = TypesProvider.java()
+        module.init()
+        File("dump/$dir").mkdirs()
+        FileOutputStream("dump/$dir/parsed.unparse.pht").use { out ->
+            val unparser = Unparser()
+            val uctx = UnparsingContext.base()
+            module.nodes.forEach { unparser.unparse(it, uctx, 0) }
+            out.write(unparser.out.toString().toByteArray())
+        }
+        val processed = ArrayList<Node>()
+        val processor = Processor(tp)
+        val pctx = ProcessingContext.base().with(Platform.JAVA).apply { this.module = this@Module.module }
+        module.load(processor, pctx, ValType.NO_VALUE)
+        module.nodes.forEach { it ->
+            processor.process(it, pctx, ValType.NO_VALUE)?.let {
+                processed += it
+            }
+        }
+        processor.stageManager.runAll()
+        FileOutputStream("dump/$dir/processed.unparse.pht").use { out ->
+            val unparser = Unparser()
+            val uctx = UnparsingContext.base()
+            processed.forEach { unparser.unparse(it, uctx, 0) }
+            out.write(unparser.out.toString().toByteArray())
+        }
+    }
+
+    fun unparseCheck() {
+        assertTrue(String(File("dump/$dir/parsed.unparse.pht").readBytes()) ==  module.getModuleFile("parsed.unparse.pht"))
+        assertTrue(String(File("dump/$dir/processed.unparse.pht").readBytes()) == module.getModuleFile("processed.unparse.pht"))
+    }
+
 
     fun log() {
         val tp = TypesProvider.java()

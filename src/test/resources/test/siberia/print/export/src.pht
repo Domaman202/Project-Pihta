@@ -1,2 +1,2 @@
-(use-ctx test/siberia/compile/export/helper
+(use-ctx test/siberia/print/export/helper
     (test-fn 0 (*module-name*)))

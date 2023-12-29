@@ -4,7 +4,7 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.indent
 
-open class NodeGetOrName(info: INodeInfo, val name: String, val static: Boolean) : Node(info), IValueNode {
+open class NodeGetOrName(info: INodeInfo, val name: String, val static: Boolean) : Node(info), IValueNode { // todo: А зачем тут static?
     override fun isLiteral(): Boolean =
         true
 

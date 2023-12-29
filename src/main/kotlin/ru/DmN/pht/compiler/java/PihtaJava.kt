@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.compiler.java
 
+import ru.DmN.pht.compiler.java.compilers.NCIs
 import ru.DmN.pht.std.Pihta
 import ru.DmN.pht.std.compiler.java.compilers.*
 import ru.DmN.pht.std.node.NodeTypes.*
@@ -51,6 +52,7 @@ class PihtaJava(module: Pihta) : ModuleCompilers(module, Platform.JAVA) {
         add(IF_,          NCIf)
         add(INC_PRE_,     NCIncDec)
         add(INC_POST_,    NCIncDec)
+        add(IS_,          NCIs)
         add(ITF_,         NCClass)
         // l
         add(LESS_,        NCCompare)
