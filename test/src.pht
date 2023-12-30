@@ -1,1 +1,1 @@
-(app-fn (println "Мяу!"))
+(app-fn)

@@ -323,7 +323,7 @@ object Pihta : Module("pht") {
         // MACRO_INLINE
         // MACRO_UNROLL
         addSNU(MCALL)
-        // MCALL_
+        add(MCALL_, NUMCall)
         addSNU(MUL)
         addSNU(MUL_)
         // n
