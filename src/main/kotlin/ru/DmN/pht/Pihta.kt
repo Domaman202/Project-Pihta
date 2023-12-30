@@ -355,6 +355,7 @@ object Pihta : Module("pht") {
         addSNU(RAND_SYMBOL)
         addSNU(RANGE)
         addSNU(REM)
+        addSNU(REM_)
         addSNU(RET)
         addSNU(ROLL_LEFT)
         addSNU(ROLL_RIGHT)
@@ -364,7 +365,9 @@ object Pihta : Module("pht") {
         add(SET_,  NUSetB)
         // SET_
         addSNU(SHIFT_LEFT)
+        addSNU(SHIFT_LEFT_)
         addSNU(SHIFT_RIGHT)
+        addSNU(SHIFT_RIGHT_)
         addSNU(SUB)
         addSNU(SUB_)
         addSNU(SYMBOL)
