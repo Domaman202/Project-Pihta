@@ -1,1 +1,22 @@
-(app-fn)
+(use-ctx pht
+	(use-ctx pht
+		(cls App [^java.lang.Object]
+			(@static
+				(defn main ^void []
+					(def [
+						[^int i 0]
+						[^int j 0]])
+					(cycle
+						(less
+							i
+							10)
+						(set! j
+
+							(add
+								j
+								i))
+						(inc i))
+					(mcall
+						^ru.DmN.pht.std.utils.StdOut
+						println
+						j))))))

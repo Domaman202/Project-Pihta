@@ -262,7 +262,7 @@ object Pihta : Module("pht") {
         addSNU(DEC_POST)
         // DEC_POST_
         addSNU(DEF)
-        // DEF_
+        add(DEF_, NUDef)
         addSNU(DEF_SET)
         // DEFMACRO
         addSNU(DEFN)
@@ -303,9 +303,9 @@ object Pihta : Module("pht") {
         addSNU(IF_)
         // IMPORT
         addSNU(INC_PRE)
-        // INC_PRE_
+        add(INC_PRE_,  NUIncDec)
         addSNU(INC_POST)
-        // INC_POST_
+        add(INC_POST_, NUIncDec)
         addSNU(IS)
         addSNU(IS_)
         addSNU(ITF)
@@ -358,6 +358,13 @@ object Pihta : Module("pht") {
         addSNU(RET)
         addSNU(ROLL_LEFT)
         addSNU(ROLL_RIGHT)
+        // s
+        addSNU(SET_A)
+        add(SET_B, NUSetB)
+        add(SET_,  NUSetB)
+        // SET_
+        addSNU(SHIFT_LEFT)
+        addSNU(SHIFT_RIGHT)
         addSNU(SUB)
         addSNU(SUB_)
         addSNU(SYMBOL)
@@ -368,9 +375,10 @@ object Pihta : Module("pht") {
         addSNU(THROW_)
         addSNU(TYPEOF)
         // u
-        // UNIT
+        add(UNIT,  NUUnit)
         // v
-        // VALN
+        add(VALN,  NUValn)
+        add(VALN_, NUValn)
         addSNU(VALN_REPEAT)
         add(VALUE, NUValue)
         // w

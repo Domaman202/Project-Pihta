@@ -16,11 +16,12 @@ import ru.DmN.siberia.processors.INodeProcessor
 object NRGetB : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeGetA {
         val name = processor.computeString(processor.process(node.nodes[0], ctx, mode)!!, ctx)
-        var type = NodeGetA.Type.UNKNOWN
-        if (ctx.isBody() && ctx.body[name] != null)
-            type = NodeGetA.Type.VARIABLE
-        else if (ctx.isClass() && ctx.clazz.fields.find { it.name == name } != null)
-            type = NodeGetA.Type.THIS_FIELD
+        val type =
+            if (ctx.isBody() && ctx.body[name] != null)
+                NodeGetA.Type.VARIABLE
+            else if (ctx.isClass() && ctx.clazz.fields.find { it.name == name } != null)
+                NodeGetA.Type.THIS_FIELD
+            else NodeGetA.Type.UNKNOWN
         return NodeGetA(node.info.withType(NodeTypes.GET_), name, type)
     }
 }

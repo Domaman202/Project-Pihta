@@ -1,2 +1,0 @@
-(progn
-    (test-fn 1 (*module-name*)))

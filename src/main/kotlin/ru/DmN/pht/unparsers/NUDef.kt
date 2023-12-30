@@ -1,0 +1,24 @@
+package ru.DmN.pht.unparsers
+
+import ru.DmN.pht.std.ast.NodeDef
+import ru.DmN.siberia.Unparser
+import ru.DmN.siberia.unparser.UnparsingContext
+import ru.DmN.siberia.unparsers.INodeUnparser
+import ru.DmN.siberia.utils.operation
+
+object NUDef : INodeUnparser<NodeDef> {
+    override fun unparse(node: NodeDef, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
+        unparser.out.apply {
+            append('(').append(node.operation).append(" [")
+            node.variables.forEach { it ->
+                append('\n').append("\t".repeat(indent + 1)).append("[^").append(it.type.name).append(' ').append(it.name)
+                it.value?.let {
+                    append(' ')
+                    unparser.unparse(it, ctx, indent + 2)
+                }
+                append(']')
+            }
+            append("])")
+        }
+    }
+}

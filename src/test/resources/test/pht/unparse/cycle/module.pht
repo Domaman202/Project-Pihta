@@ -1,5 +1,5 @@
 (module
-    (name "test/helper")
+    (name "test/pht/unparse/cycle")
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["pht"])

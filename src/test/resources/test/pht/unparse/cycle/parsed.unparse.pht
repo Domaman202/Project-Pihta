@@ -1,0 +1,25 @@
+(use-ctx pht
+	(test-fn
+		0
+		(def
+			[
+				[
+					i
+					0
+				]
+				[
+					j
+					0
+				]
+			])
+		(cycle
+			(less
+				i
+				10)
+			(set! j
+				(add
+					j
+					i))
+			(inc
+				i))
+		j))
