@@ -332,7 +332,7 @@ object Pihta : Module("pht") {
         addSNU(NEG)
         addSNU(NEG_)
         addSNU(NEW)
-        // NEW_
+        add(NEW_, NUNew)
         addSNU(NEW_ARRAY)
         // NEW_ARRAY_
         addSNU(NOT)
