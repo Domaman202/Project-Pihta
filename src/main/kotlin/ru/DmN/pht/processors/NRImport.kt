@@ -47,7 +47,17 @@ object NRImport : INodeProcessor<NodeImport> {
                 gctx.getType(it, processor.tp).methods
                     .stream()
                     .filter { it.modifiers.extension }
-                    .forEach { ctx.global.getExtensions(it.extension!!) += it }
+                    .forEach { gctx.getExtensions(it.extension!!) += it }
+            }
+            node.data["methods"]?.forEach { it ->
+                it as String
+                val i = it.lastIndexOf('.')
+                val name = it.substring(i + 1)
+                val methods = gctx.methods.getOrPut(name) { ArrayList() }
+                gctx.getType(it.substring(0, i), processor.tp).methods
+                    .stream()
+                    .filter { it.name == name }
+                    .forEach { methods.add(it) }
             }
         }
 

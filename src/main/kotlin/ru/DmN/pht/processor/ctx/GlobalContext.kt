@@ -9,6 +9,7 @@ class GlobalContext(
     val namespace: String = "",
     val aliases: MutableMap<String, String> = HashMap(),
     val imports: MutableList<String> = ArrayList(),
+    val methods: MutableMap<String, MutableList<VirtualMethod>> = HashMap(),
     val extensions: MutableList<Pair<String, MutableList<VirtualMethod>>> = ArrayList(),
     val macros: MutableList<MacroDefine> = ArrayList(),
 ) {
@@ -17,6 +18,7 @@ class GlobalContext(
             namespace,
             SubMap(aliases),
             SubList(imports),
+            SubMap(methods),
             SubList(extensions),
             SubList(macros)
         )
@@ -26,6 +28,7 @@ class GlobalContext(
             namespace,
             SubMap(aliases, context.aliases),
             SubList(imports, context.imports),
+            SubMap(methods, context.methods),
             SubList(extensions, context.extensions),
             SubList(macros, context.macros)
         )
@@ -34,8 +37,10 @@ class GlobalContext(
         if (namespace.isEmpty()) name else "$namespace.$name"
 
     fun getMethodVariants(type: VirtualType, name: String, args: List<ICastable>): Sequence<VirtualMethod> =
-        getAllMethods(type)
-            .filter { it.name == name }
+        getMethodVariants(getAllMethods(type).filter { it.name == name }, args)
+
+    fun getMethodVariants(variants: Sequence<VirtualMethod>, args: List<ICastable>): Sequence<VirtualMethod> =
+        variants
             .map { Pair(it, if (it.modifiers.extension) listOf(ICastable.of(it.extension!!)) + args else args) }
             .filter { it.first.argsc.size == it.second.size || it.first.modifiers.varargs }
             .map { Pair(it.first, lenArgs(it.first.argsc, it.second, it.first.modifiers.varargs)) }

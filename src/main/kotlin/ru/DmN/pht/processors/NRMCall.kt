@@ -37,7 +37,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             if (fourfold.first == SUPER)
                 nodeGetOrName(info, "this")
             else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
-        val generics = fourfold.fourth ?: processor.calc(instance, ctx).let { if (it is VTWG) it.gens[0] else null }
+        val generics = fourfold.fourth ?: if (fourfold.first == UNKNOWN) null else processor.calc(instance, ctx).let { if (it is VTWG) it.gens[0] else null }
         return if (fourfold.third.extension == null)
             NodeMCall(
                 info.processed,
@@ -77,6 +77,16 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         )
     }
 
+    /**
+     * Преобразует исходные аргументы "args" в список нод для передачи в NodeMCall.
+     *
+     * @param info Информация о родительской ноде.
+     * @param processor Обработчик.
+     * @param ctx Контекст обработки.
+     * @param method Метод для которого ведётся преобразование аргументов.
+     * @param args Преобразуемые аргументы.
+     * @return Преобразованные аргументы.
+     */
     fun processArguments(info: INodeInfo, processor: Processor, ctx: ProcessingContext, method: VirtualMethod, args: List<Node>): MutableList<Node> =
         (if (method.modifiers.varargs) {
             val overflow = args.size.let { if (it > 0) it + 1 else 0 } - method.argsc.size
@@ -106,7 +116,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         val gctx = ctx.global
         //
         lateinit var clazz: VirtualType
-        val type = node.nodes[0].let {
+        var type = node.nodes[0].let {
             if (it.isConstClass) {
                 clazz = gctx.getType(it.valueAsString, processor.tp)
                 STATIC
@@ -142,10 +152,11 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             generic = gctx.getType(it.substring(gs + 2, it.length - 1), processor.tp)
             it.substring(0, gs)
         }
+        val args = node.nodes.asSequence().drop(2).map { processor.process(it, ctx, ValType.VALUE)!! }
         val result = findMethodOrNull(
             clazz,
             name,
-            node.nodes.asSequence().drop(2).map { processor.process(it, ctx, ValType.VALUE)!! }.toList(),
+            args.toList(),
             processor,
             ctx
         ) ?: if (clazz == VTDynamic)
@@ -156,7 +167,10 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 processor,
                 ctx
             )
-        else throw RuntimeException("Method '$name' not founded!")
+        else {
+            val method = gctx.getMethodVariants((gctx.methods[name] ?: nothing(name)).asSequence(), args.map { ICastable.of(it, processor, ctx) }.toList()).firstOrNull() ?: nothing(name)
+            Pair(args.mapIndexed { i, it -> if (it is IAdaptableNode) it.adaptTo(method.argsc[i]); it }.toList(), method)
+        }
         return Fourfold(
             if (type == STATIC)
                 if (result.second.modifiers.static)
@@ -167,6 +181,10 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             result.second,
             generic
         )
+    }
+
+    private fun nothing(name: String): Nothing {
+        throw RuntimeException("Method '$name' not founded!")
     }
 
     fun findMethod(clazz: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Pair<List<Node>, VirtualMethod> =

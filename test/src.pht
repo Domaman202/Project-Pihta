@@ -1,5 +1,5 @@
 (progn
     (import java
-        (types java.awt.*))
+        (methods java.util.Objects.toString))
     (app-fn
-        (println ^Frame)))
+        (println (#toString . 12.21))))

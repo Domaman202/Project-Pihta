@@ -5,7 +5,8 @@ import ru.DmN.siberia.node.INodeType
 enum class NodeTypes(override val operation: String) : INodeType {
     TYPES("types"),
     EXTENSIONS("extensions"),
-    MACROS("macros");
+    MACROS("macros"),
+    METHODS("methods");
 
     override val processable: Boolean
         get() = false

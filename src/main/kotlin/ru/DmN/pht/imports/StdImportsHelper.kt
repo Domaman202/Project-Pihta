@@ -7,7 +7,7 @@ import ru.DmN.siberia.utils.Module
 
 object StdImportsHelper : Module("pht/imports/helper") {
     init {
-        add(Regex("types|extensions|macros"), NPArgument)
+        add(Regex("types|extensions|macros|methods"), NPArgument)
         add(Regex("valn!"),  NPValueList)
         add(Regex("value!"), NPValue)
     }
