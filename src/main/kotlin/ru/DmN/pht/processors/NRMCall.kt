@@ -168,7 +168,11 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 ctx
             )
         else {
-            val method = gctx.getMethodVariants((gctx.methods[name] ?: nothing(name)).asSequence(), args.map { ICastable.of(it, processor, ctx) }.toList()).firstOrNull() ?: nothing(name)
+            val method = gctx.getMethodVariants(
+                (gctx.methods[name]?.asSequence() ?: gctx.methods["*"]?.asSequence()?.filter { it.name == name }
+                ?: nothing(name)),
+                args.map { ICastable.of(it, processor, ctx) }.toList()
+            ).firstOrNull() ?: nothing(name)
             Pair(args.mapIndexed { i, it -> if (it is IAdaptableNode) it.adaptTo(method.argsc[i]); it }.toList(), method)
         }
         return Fourfold(

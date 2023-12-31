@@ -54,10 +54,10 @@ object NRImport : INodeProcessor<NodeImport> {
                 val i = it.lastIndexOf('.')
                 val name = it.substring(i + 1)
                 val methods = gctx.methods.getOrPut(name) { ArrayList() }
-                gctx.getType(it.substring(0, i), processor.tp).methods
-                    .stream()
-                    .filter { it.name == name }
-                    .forEach { methods.add(it) }
+                val list = gctx.getType(it.substring(0, i), processor.tp).methods
+                if (name == "*")
+                    methods.addAll(list)
+                else list.stream().filter { it.name == name }.forEach { methods.add(it) }
             }
         }
 

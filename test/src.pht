@@ -1,5 +1,5 @@
 (progn
     (import java
-        (methods java.util.Objects.toString))
+        (methods java.util.Objects.*))
     (app-fn
         (println (#toString . 12.21))))
