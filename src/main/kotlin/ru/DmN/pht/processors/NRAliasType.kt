@@ -20,7 +20,7 @@ object NRAliasType : INodeProcessor<NodeNodesList> { // todo: remake to multi al
         val new = nodes[1]
         processor.stageManager.pushTask(ProcessingStage.TYPES_IMPORT) {
             val gctx = ctx.global
-            gctx.imports[new] = gctx.getTypeName(type) ?: type
+            gctx.aliases[new] = gctx.getTypeName(type) ?: type
         }
         return when (ctx.platform) {
             Platform.JAVA -> null

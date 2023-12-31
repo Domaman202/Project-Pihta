@@ -7,14 +7,16 @@ import ru.DmN.siberia.utils.*
 
 class GlobalContext(
     val namespace: String = "",
-    val imports: MutableMap<String, String> = HashMap(),
+    val aliases: MutableMap<String, String> = HashMap(),
+    val imports: MutableList<String> = ArrayList(),
     val extensions: MutableList<Pair<String, MutableList<VirtualMethod>>> = ArrayList(),
     val macros: MutableList<MacroDefine> = ArrayList(),
 ) {
     fun with(namespace: String) =
         GlobalContext(
             namespace,
-            SubMap(imports),
+            SubMap(aliases),
+            SubList(imports),
             SubList(extensions),
             SubList(macros)
         )
@@ -22,7 +24,8 @@ class GlobalContext(
     fun combineWith(context: GlobalContext) =
         GlobalContext(
             namespace,
-            SubMap(imports, context.imports),
+            SubMap(aliases, context.aliases),
+            SubList(imports, context.imports),
             SubList(extensions, context.extensions),
             SubList(macros, context.macros)
         )
@@ -57,11 +60,20 @@ class GlobalContext(
     }
 
     fun getTypeName(name: String): String? =
-        name.let { if (name.contains('.')) name else imports[name] }
+        name.let { if (name.contains('.')) name else aliases[name] }
 
-    fun getType(name: String, tp: TypesProvider): VirtualType =
-        getTypeName(name)
-            ?.let { tp.typeOf(it) }
-            ?: tp.typeOfOrNull(name)
-            ?: tp.typeOf(name(name))
+    fun getType(name: String, tp: TypesProvider): VirtualType {
+        if (name.contains('.'))
+            return tp.typeOf(name)
+        tp.typeOfOrNull(name)?.let { return it }
+        aliases[name]?.let { return tp.typeOf(it) }
+        return getTypeWithImport(name, tp, 0)
+    }
+
+    private fun getTypeWithImport(name: String, tp: TypesProvider, i: Int): VirtualType {
+        if (imports.size == i)
+            throw ClassNotFoundException(name)
+        tp.typeOfOrNull("${imports[i]}.$name")?.let { return it }
+        return getTypeWithImport(name, tp, i + 1)
+    }
 }

@@ -30,10 +30,13 @@ object NRImport : INodeProcessor<NodeImport> {
 
         processor.stageManager.pushTask(ProcessingStage.TYPES_IMPORT) {
             node.data["types"]?.run {
+                val aliases = gctx.aliases
                 val imports = gctx.imports
                 forEach {
                     it as String
-                    imports[it.substring(it.lastIndexOf('.') + 1)] = it
+                    if (it.endsWith('*'))
+                        imports += it.substring(0, it.length - 2)
+                    else aliases[it.substring(it.lastIndexOf('.') + 1)] = it
                 }
             }
         }
