@@ -26,7 +26,6 @@ class NodeMCall(info: INodeInfo, nodes: MutableList<Node>, val generic: VirtualT
     }
 
     enum class Type {
-        // for compiler
         UNKNOWN,
         EXTEND,
         STATIC,

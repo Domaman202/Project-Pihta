@@ -27,6 +27,13 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName> {
     override fun computeString(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): String =
         node.getValueAsString()
 
+    override fun computeTypes(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): List<VirtualType> =
+        ctx.body.variables
+            .asSequence()
+            .filter { it.name == node.name }
+            .map { it.type() }
+            .toList()
+
     override fun computeGenericType(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): String? =
         if (node.name.endsWith('^'))
             node.name.substring(0, node.name.length - 1)

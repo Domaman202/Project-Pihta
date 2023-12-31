@@ -119,6 +119,7 @@ enum class NodeTypes : INodeType {
     TEST_FN("test-fn", PARSED),
     THROW("throw", PARSED),
     THROW_("throw", PROCESSED),
+    TYPED_GET("get-or-name!", PROCESSED),
     TYPEOF("typeof", PARSED),
     // u
     UNIT("unit", PROCESSED),

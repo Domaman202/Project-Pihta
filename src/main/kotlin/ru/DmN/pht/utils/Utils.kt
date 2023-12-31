@@ -101,6 +101,13 @@ fun Processor.computeTypeOr(node: Node, ctx: ProcessingContext): VirtualType? =
         else throw UnsupportedOperationException()
     }
 
+fun Processor.computeTypesOr(node: Node, ctx: ProcessingContext): List<VirtualType>? =
+    this.get(node, ctx).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.computeTypes(node, this, ctx)
+        else null
+    }
+
 fun Processor.computeGenericType(node: Node, ctx: ProcessingContext): String? =
     this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)

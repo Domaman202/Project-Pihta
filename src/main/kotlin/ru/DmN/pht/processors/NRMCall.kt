@@ -1,12 +1,12 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.ast.IAdaptableNode
-import ru.DmN.pht.std.ast.NodeFGet
-import ru.DmN.pht.std.ast.NodeMCall
+import ru.DmN.pht.ast.NodeTypedGet
+import ru.DmN.pht.processor.utils.MethodFindResult
+import ru.DmN.pht.std.ast.*
 import ru.DmN.pht.std.ast.NodeMCall.Type.*
-import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.node.processed
+import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.*
 import ru.DmN.siberia.Processor
@@ -22,43 +22,36 @@ import ru.DmN.siberia.utils.VirtualType
 
 object NRMCall : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
-        val fourfold = findMethod(node, processor, ctx)
-        val instance =
-            if (fourfold.first == SUPER)
-                nodeGetOrName(node.info, "this")
-            else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
-        return fourfold.fourth ?: processor.calc(instance, ctx).let { if (it is VTWG) it.gens[0] else fourfold.third.rettype }
+        val result = findMethod(node, processor, ctx)
+        return result.generics ?: processor.calc(getInstance(result, node, processor, ctx), ctx).let { if (it is VTWG) it.gens[0] else result.method.rettype }
     }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeMCall {
         val info = node.info
-        val fourfold = findMethod(node, processor, ctx)
-        val instance =
-            if (fourfold.first == SUPER)
-                nodeGetOrName(info, "this")
-            else processor.process(node.nodes[0], ctx, ValType.VALUE)!!
-        val generics = fourfold.fourth ?: if (fourfold.first == UNKNOWN) null else processor.calc(instance, ctx).let { if (it is VTWG) it.gens[0] else null }
-        return if (fourfold.third.extension == null)
+        val result = findMethod(node, processor, ctx)
+        val instance = getInstance(result, node, processor, ctx)
+        val generics = result.generics ?: if (result.type == UNKNOWN) null else processor.calc(instance, ctx).let { if (it is VTWG) it.gens[0] else null }
+        return if (result.method.extension == null)
             NodeMCall(
                 info.processed,
-                processArguments(info, processor, ctx, fourfold.third, fourfold.second),
+                processArguments(info, processor, ctx, result.method, result.args),
                 generics,
-                if (fourfold.first == VIRTUAL)
+                if (result.type == VIRTUAL)
                     NodeFGet(
                         info.withType(NodeTypes.FGET_),
-                        mutableListOf(nodeValueClass(info, fourfold.third.declaringClass!!.name)),
+                        mutableListOf(nodeValueClass(info, result.method.declaringClass!!.name)),
                         "INSTANCE",
                         NodeFGet.Type.STATIC,
                         processor.computeType(node.nodes[0], ctx)
                     )
                 else instance,
-                fourfold.third,
-                when (fourfold.first) {
+                result.method,
+                when (result.type) {
                     UNKNOWN ->
-                        if (fourfold.third.modifiers.static)
+                        if (result.method.modifiers.static)
                             STATIC
                         else VIRTUAL
-                    else -> fourfold.first
+                    else -> result.type
                 }
             )
         else NodeMCall(
@@ -67,15 +60,34 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 node.info,
                 processor,
                 ctx,
-                fourfold.third,
-                listOf(instance) + fourfold.second
+                result.method,
+                listOf(instance) + result.args
             ),
             generics,
-            NodeValue.of(node.info, NodeValue.Type.CLASS, fourfold.third.extension!!.name),
-            fourfold.third,
+            NodeValue.of(node.info, NodeValue.Type.CLASS, result.method.extension!!.name),
+            result.method,
             NodeMCall.Type.EXTEND
         )
     }
+
+    /**
+     * Создаёт ноду объекта метод которого будут вызывать.
+     *
+     * @param result Результат поиска метода.
+     * @param node Необработанная нода MCALL.
+     * @param processor Обработчик.
+     * @param ctx Контекст обработки.
+     * @return Нода.
+     */
+    private fun getInstance(result: MethodFindResult, node: NodeNodesList, processor: Processor, ctx: ProcessingContext) =
+        if (result.type == SUPER)
+            nodeGetOrName(node.info, "this")
+        else {
+            val instance = processor.process(node.nodes[0], ctx, ValType.VALUE)
+            if (result.strict && instance is NodeGetOrName)
+                NodeTypedGet.of(instance, result.method.declaringClass!!)
+            else instance!!
+        }
 
     /**
      * Преобразует исходные аргументы "args" в список нод для передачи в NodeMCall.
@@ -112,38 +124,17 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             .mapIndexed { i, it -> NRAs.process(nodeAs(info, it, method.argsc[i].name), processor, ctx, ValType.VALUE)!! }
             .toMutableList()
 
-    private fun findMethod(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): Fourfold<NodeMCall.Type, List<Node>, VirtualMethod, VirtualType?> {
+    /**
+     * Выполняет поиск метода.
+     *
+     * @param node Необработанная нода MCALL.
+     * @param processor Обработчик.
+     * @param ctx Контекст обработки.
+     */
+    private fun findMethod(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): MethodFindResult {
         val gctx = ctx.global
         //
-        lateinit var clazz: VirtualType
-        var type = node.nodes[0].let {
-            if (it.isConstClass) {
-                clazz = gctx.getType(it.valueAsString, processor.tp)
-                STATIC
-            } else {
-                if (it.isLiteral) {
-                    when (processor.computeString(it, ctx)) {
-                        "." -> {
-                            clazz = ctx.clazz
-                            return@let UNKNOWN
-                        }
-
-                        "this" -> {
-                            clazz = processor.calc(it, ctx)!!
-                            return@let VIRTUAL
-                        }
-
-                        "super" -> {
-                            clazz = ctx.clazz.superclass!!
-                            return@let SUPER
-                        }
-                    }
-                }
-
-                clazz = processor.calc(it, ctx)!!
-                UNKNOWN
-            }
-        }
+        val pair = getCallTypeAndType(node, processor, ctx, gctx)
         var generic: VirtualType? = null
         val name = processor.computeString(node.nodes[1], ctx).let {
             val gs = it.indexOf('<')
@@ -153,7 +144,47 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             it.substring(0, gs)
         }
         val args = node.nodes.asSequence().drop(2).map { processor.process(it, ctx, ValType.VALUE)!! }
-        val result = findMethodOrNull(
+        //
+        var strict = false
+        var result = findMethodOrNull(pair.second, name, args, node, processor, ctx, gctx)
+        if (result == null) {
+            val types = processor.computeTypesOr(node.nodes[0], ctx) ?: throw RuntimeException("Method '$name' not founded!")
+            for (type in types) {
+                result = findMethodOrNull(type, name, args, node, processor, ctx, gctx)
+                if (result != null) {
+                    strict = true
+                    break
+                }
+            }
+            result ?: throw RuntimeException("Method '$name' not founded!")
+        }
+        //
+        return MethodFindResult(
+            if (pair.first == STATIC)
+                if (result.second.modifiers.static)
+                    STATIC
+                else VIRTUAL
+            else pair.first,
+            result.first,
+            result.second,
+            generic,
+            strict
+        )
+    }
+
+    /**
+     * Ищет метод подходящий по имени и аргументам, иначе возвращает null.
+     *
+     * @param clazz Класс для поиска метода.
+     * @param name Имя метода.
+     * @param args Аргументы.
+     * @param node Необработанная нода MCALL.
+     * @param processor Обработчик.
+     * @param ctx Контекст обработки.
+     * @param gctx GlobalContext.
+     */
+    private fun findMethodOrNull(clazz: VirtualType, name: String, args: Sequence<Node>, node: NodeNodesList, processor: Processor, ctx: ProcessingContext, gctx: GlobalContext): Pair<List<Node>, VirtualMethod>? {
+        return findMethodOrNull(
             clazz,
             name,
             args.toList(),
@@ -169,31 +200,59 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             )
         else {
             val method = gctx.getMethodVariants(
-                (gctx.methods[name]?.asSequence() ?: gctx.methods["*"]?.asSequence()?.filter { it.name == name }
-                ?: nothing(name)),
+                (gctx.methods[name]?.asSequence() ?: gctx.methods["*"]?.asSequence()?.filter { it.name == name } ?: return null),
                 args.map { ICastable.of(it, processor, ctx) }.toList()
-            ).firstOrNull() ?: nothing(name)
+            ).firstOrNull() ?: return null
             Pair(args.mapIndexed { i, it -> if (it is IAdaptableNode) it.adaptTo(method.argsc[i]); it }.toList(), method)
         }
-        return Fourfold(
-            if (type == STATIC)
-                if (result.second.modifiers.static)
-                    STATIC
-                else VIRTUAL
-            else type,
-            result.first,
-            result.second,
-            generic
-        )
     }
 
-    private fun nothing(name: String): Nothing {
-        throw RuntimeException("Method '$name' not founded!")
-    }
+    /**
+     * Определяет тип вызова и класс в котором определён метод.
+     *
+     * @param node Необработанная нода MCALL.
+     * @param processor Обработчик.
+     * @param ctx Контекст обработки.
+     * @param gctx GlobalContext.
+     * @param (Тип Вызова; Класс Метода)
+     */
+    private fun getCallTypeAndType(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, gctx: GlobalContext): Pair<NodeMCall.Type, VirtualType> =
+        node.nodes[0].let {
+            if (it.isConstClass)
+                Pair(STATIC, gctx.getType(it.valueAsString, processor.tp))
+            else if (it.isLiteral) {
+                when (processor.computeString(it, ctx)) {
+                    "." -> Pair(UNKNOWN, ctx.clazz)
+                    "this" -> Pair(VIRTUAL, processor.calc(it, ctx)!!)
+                    "super" -> Pair(SUPER, ctx.clazz.superclass!!)
+                    else -> Pair(UNKNOWN, processor.calc(it, ctx)!!)
+                }
+            } else Pair(UNKNOWN, processor.calc(it, ctx)!!)
+        }
 
+    /**
+     * Ищет метод, подстраивает ноды аргументов, иначе кидает исключение.
+     *
+     * @param clazz Класс в котором определён метод.
+     * @param name Имя метода.
+     * @param args Аргументы.
+     * @param processor Обработчик.
+     * @param ctx Контекст обработки.
+     * @return (Аргументы; Метод)
+     */
     fun findMethod(clazz: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Pair<List<Node>, VirtualMethod> =
         findMethodOrNull(clazz, name, args, processor, ctx) ?: throw RuntimeException("Method '$name' not founded!")
 
+    /**
+     * Ищет метод, подстраивает ноды аргументов, иначе возвращает null.
+     *
+     * @param clazz Класс в котором определён метод.
+     * @param name Имя метода.
+     * @param args Аргументы.
+     * @param processor Обработчик.
+     * @param ctx Контекст обработки.
+     * @return (Аргументы; Метод)
+     */
     fun findMethodOrNull(clazz: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Pair<List<Node>, VirtualMethod>? {
         val method = ctx.global.getMethodVariants(clazz, name, args.map { ICastable.of(it, processor, ctx) }.toList()).firstOrNull() ?: return null
         return Pair(args.mapIndexed { i, it -> if (it is IAdaptableNode) it.adaptTo(method.argsc[i]); it }.toList(), method)

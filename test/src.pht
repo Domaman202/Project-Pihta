@@ -1,5 +1,11 @@
 (progn
-    (import java
-        (methods java.util.Objects.*))
+    (cls TestA [^Object]
+        (ctor [] (ccall))
+        (defn fooA ^void [] (println "FooA!")))
+    (cls TestB [^Object]
+        (ctor [] (ccall))
+        (defn fooB ^void [] (println "FooB!")))
     (app-fn
-        (println (#toString . 12.21))))
+        (def [[o (new ^TestA)][o (new ^TestB)]])
+        (#fooA o)
+        (#fooB o)))

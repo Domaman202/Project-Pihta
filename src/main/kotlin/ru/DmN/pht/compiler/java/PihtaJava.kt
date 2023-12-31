@@ -1,6 +1,7 @@
 package ru.DmN.pht.std.compiler.java
 
 import ru.DmN.pht.compiler.java.compilers.NCIs
+import ru.DmN.pht.compiler.java.compilers.NCTypedGet
 import ru.DmN.pht.std.Pihta
 import ru.DmN.pht.std.compiler.java.compilers.*
 import ru.DmN.pht.std.node.NodeTypes.*
@@ -81,6 +82,7 @@ class PihtaJava(module: Pihta) : ModuleCompilers(module, Platform.JAVA) {
         add(SUB_,         NCMath)
         // t
         add(THROW_,       NCThrow)
+        add(TYPED_GET,    NCTypedGet)
         // u
         add(UNIT,         NCUnit)
         // v

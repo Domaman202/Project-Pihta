@@ -1,6 +1,7 @@
 package ru.DmN.pht.std
 
 import ru.DmN.pht.processors.NRPrognB
+import ru.DmN.pht.processors.NRTypedGet
 import ru.DmN.pht.std.ast.IAbstractlyNode
 import ru.DmN.pht.std.ast.IFinallyNode
 import ru.DmN.pht.std.ast.IStaticallyNode
@@ -553,6 +554,7 @@ object Pihta : Module("pht") {
         // t
         add(TEST_FN,       NRTestFn)
         add(THROW,         NRThrow)
+        add(TYPED_GET,     NRTypedGet)
         add(TYPEOF,        NRTypeof)
         // u
         add(UNIT,          NRUnit)
