@@ -6,6 +6,8 @@
         (ctor [] (ccall))
         (defn fooB ^void [] (println "FooB!")))
     (app-fn
-        (def [[o (new ^TestA)][o (new ^TestB)]])
-        (#fooA o)
-        (#fooB o)))
+        (def [
+            [o (new ^TestA)]
+            [o (new ^TestB)]])
+        (println (typed-get ^TestA o))
+        (println (typed-get ^TestB o))))

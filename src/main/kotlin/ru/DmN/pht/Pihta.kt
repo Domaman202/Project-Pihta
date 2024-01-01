@@ -2,6 +2,7 @@ package ru.DmN.pht.std
 
 import ru.DmN.pht.processors.NRPrognB
 import ru.DmN.pht.processors.NRTypedGet
+import ru.DmN.pht.processors.NRTypedGetB
 import ru.DmN.pht.std.ast.IAbstractlyNode
 import ru.DmN.pht.std.ast.IFinallyNode
 import ru.DmN.pht.std.ast.IStaticallyNode
@@ -146,6 +147,7 @@ object Pihta : Module("pht") {
         // t
         addSNP(TEST_FN)
         addSNP(THROW)
+        addSNP(TYPED_GET)
         addSNP(TYPEOF)
         // u
         addNP("unit", NPUnit)
@@ -377,6 +379,8 @@ object Pihta : Module("pht") {
         addSNU(TEST_FN)
         addSNU(THROW)
         addSNU(THROW_)
+        addSNU(TYPED_GET)
+        add(TYPED_GET, NUTypedGet)
         addSNU(TYPEOF)
         // u
         add(UNIT,  NUUnit)
@@ -555,6 +559,7 @@ object Pihta : Module("pht") {
         add(TEST_FN,       NRTestFn)
         add(THROW,         NRThrow)
         add(TYPED_GET,     NRTypedGet)
+        add(TYPED_GET_,    NRTypedGetB)
         add(TYPEOF,        NRTypeof)
         // u
         add(UNIT,          NRUnit)

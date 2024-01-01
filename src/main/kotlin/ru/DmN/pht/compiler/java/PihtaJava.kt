@@ -82,7 +82,7 @@ class PihtaJava(module: Pihta) : ModuleCompilers(module, Platform.JAVA) {
         add(SUB_,         NCMath)
         // t
         add(THROW_,       NCThrow)
-        add(TYPED_GET,    NCTypedGet)
+        add(TYPED_GET_,   NCTypedGet)
         // u
         add(UNIT,         NCUnit)
         // v
