@@ -249,13 +249,14 @@ object Pihta : Module("pht") {
         // c
         addSNU(CATCH)
         // CATCH_
+        addSNU(CCALL)
         addSNU(CLS)
         add(CLS_, NUClass)
         addSNU(COND)
         addSNU(CONTINUE)
         add(CONTINUE_, NUNamedBlock)
         addSNU(CTOR)
-        // CTOR_
+        add(CTOR_, NUCtor)
         addSNU(CYCLE)
         addSNU(CYCLE_)
         // d

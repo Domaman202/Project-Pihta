@@ -1,0 +1,10 @@
+(use-ctx pht
+	(progn
+		(cls
+			Test
+			[
+				^Object
+			])
+		(test-fn
+			0
+			^Test)))
