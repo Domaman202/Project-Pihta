@@ -1,14 +1,18 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.ast.NodeTypedGet
+import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.pht.std.ast.NodeGetOrName
+import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.processor.utils.body
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.isClass
+import ru.DmN.pht.std.utils.lenArgs
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.VirtualType
 
-object NRGetOrName : IStdNodeProcessor<NodeGetOrName> {
+object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeGetOrName> {
     override fun calc(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): VirtualType =
         calc(node.name, ctx)
 
@@ -39,4 +43,11 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName> {
             node.name.substring(0, node.name.length - 1)
         else null
 
+    override fun isAdaptableToType(type: VirtualType, node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Boolean =
+        ctx.body.variables.any { lenArgs(it.type, type) >= 0 && it.name == node.name }
+
+    override fun adaptToType(type: VirtualType, node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): NodeGetOrName =
+        if (ctx.body.variables.count { it.name == node.name } == 1)
+            node
+        else NodeTypedGet(node.info.withType(NodeTypes.TYPED_GET_), node.name, type)
 }

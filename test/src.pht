@@ -5,9 +5,14 @@
     (cls TestB [^Object]
         (ctor [] (ccall))
         (defn fooB ^void [] (println "FooB!")))
-    (app-fn
-        (def [
-            [o (new ^TestA)]
-            [o (new ^TestB)]])
-        (println (typed-get ^TestA o))
-        (println (typed-get ^TestB o))))
+    (app
+        (defn testA ^void [[a ^TestA]]
+            (println a))
+        (defn testB ^void [[b ^TestB]]
+            (println b))
+        (app-fn
+            (def [
+                [o (new ^TestA)]
+                [o (new ^TestB)]])
+            (#testA . o)
+            (#testB . o))))

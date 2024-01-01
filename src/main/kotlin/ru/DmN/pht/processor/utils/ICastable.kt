@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.processor.utils
 
-import ru.DmN.pht.std.ast.IAdaptableNode
+import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -20,12 +20,11 @@ interface ICastable {
                 CastableDynamicImpl
             else CastableImpl(type)
 
-        fun of(node: IAdaptableNode): ICastable =
-            CastableAdaptImpl(node)
-
         fun of(node: Node, processor: Processor, ctx: ProcessingContext): ICastable =
-            if (node is IAdaptableNode)
-                of(node)
-            else of(processor.tp.typeOf(processor.calc(node, ctx)!!.name))
+            processor.get(node, ctx).let {
+                if (it is IAdaptableProcessor<*>)
+                    CastableAdaptImpl(node, it as IAdaptableProcessor<Node>, processor, ctx)
+                else of(processor.tp.typeOf(processor.calc(node, ctx)!!.name))
+            }
     }
 }

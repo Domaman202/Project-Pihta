@@ -9,5 +9,5 @@ import ru.DmN.siberia.utils.Variable
 
 object NCTypedGet : INodeCompiler<NodeTypedGet> {
     override fun compileVal(node: NodeTypedGet, compiler: Compiler, ctx: CompilationContext): Variable =
-        ctx.body.variables.find { it.type() == node.type }!!
+        ctx.body.variables.find { it.type() == node.type && it.name == node.name }!!
 }

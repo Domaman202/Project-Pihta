@@ -1,9 +1,12 @@
 package ru.DmN.pht.std.processor.utils
 
+import ru.DmN.pht.processors.IAdaptableProcessor
+import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.VirtualType
-import ru.DmN.pht.std.ast.IAdaptableNode
 
-data class CastableAdaptImpl(val node: IAdaptableNode) : ICastable {
+data class CastableAdaptImpl(val node: Node, val np: IAdaptableProcessor<Node>, val processor: Processor, val ctx: ProcessingContext) : ICastable {
     override fun castableTo(to: VirtualType): Int =
-        if (node.isAdaptableTo(to)) 0 else -1
+        if (np.isAdaptableToType(to, node, processor, ctx)) 0 else -1
 }

@@ -2,8 +2,11 @@ package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.ast.NodeTypedGet
 import ru.DmN.pht.processor.utils.MethodFindResult
-import ru.DmN.pht.std.ast.*
+import ru.DmN.pht.std.ast.NodeFGet
+import ru.DmN.pht.std.ast.NodeGetOrName
+import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.ast.NodeMCall.Type.*
+import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.node.processed
 import ru.DmN.pht.std.processor.ctx.GlobalContext
@@ -203,7 +206,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 (gctx.methods[name]?.asSequence() ?: gctx.methods["*"]?.asSequence()?.filter { it.name == name } ?: return null),
                 args.map { ICastable.of(it, processor, ctx) }.toList()
             ).firstOrNull() ?: return null
-            Pair(args.mapIndexed { i, it -> if (it is IAdaptableNode) it.adaptTo(method.argsc[i]); it }.toList(), method)
+            Pair(args.mapIndexed { i, it -> processor.adaptToType(method.argsc[i], it, ctx) }.toList(), method)
         }
     }
 
@@ -255,6 +258,6 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      */
     fun findMethodOrNull(clazz: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Pair<List<Node>, VirtualMethod>? {
         val method = ctx.global.getMethodVariants(clazz, name, args.map { ICastable.of(it, processor, ctx) }.toList()).firstOrNull() ?: return null
-        return Pair(args.mapIndexed { i, it -> if (it is IAdaptableNode) it.adaptTo(method.argsc[i]); it }.toList(), method)
+        return Pair(args.mapIndexed { i, it -> processor.adaptToType(method.argsc[i], it, ctx) }.toList(), method)
     }
 }

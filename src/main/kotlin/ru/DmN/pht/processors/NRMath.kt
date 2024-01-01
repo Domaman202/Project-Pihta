@@ -1,6 +1,5 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.ast.IAdaptableNode
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.node.NodeParsedTypes
 import ru.DmN.pht.std.node.NodeTypes
@@ -9,6 +8,7 @@ import ru.DmN.pht.std.processor.utils.ICastable
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.nodeAs
 import ru.DmN.pht.std.processor.utils.nodeValueClass
+import ru.DmN.pht.std.utils.adaptToType
 import ru.DmN.pht.std.utils.processNodes
 import ru.DmN.pht.std.utils.text
 import ru.DmN.siberia.Processor
@@ -54,7 +54,7 @@ object NRMath : INodeProcessor<NodeNodesList> {
 
     fun getExtend(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Pair<List<Node>, VirtualMethod>? {
         val method = findExtend(type, name, args, processor, ctx) ?: return null
-        return Pair(args.mapIndexed { i, it -> if (it is IAdaptableNode) it.adaptTo(method.argsc[i]); it }.toList(), method)
+        return Pair(args.mapIndexed { i, it -> processor.adaptToType(method.argsc[i], it, ctx) }.toList(), method)
     }
 
     fun findExtend(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): VirtualMethod? =

@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.utils
 
+import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.pht.std.ast.IValueNode
 import ru.DmN.pht.std.processor.utils.ICastable
 import ru.DmN.pht.std.processors.IStdNodeProcessor
@@ -133,6 +134,13 @@ fun Processor.computeIntOr(node: Node, ctx: ProcessingContext): Int? =
         if (it is IStdNodeProcessor<Node>)
             it.computeInt(node, this, ctx)
         else throw UnsupportedOperationException()
+    }
+
+fun Processor.adaptToType(type: VirtualType, node: Node, ctx: ProcessingContext): Node =
+    this.get(node, ctx).let {
+        if (it is IAdaptableProcessor<*>)
+            (it as IAdaptableProcessor<Node>).adaptToType(type, node, this, ctx)
+        else node
     }
 
 fun VirtualType.ofPrimitive(): String = when (name) {

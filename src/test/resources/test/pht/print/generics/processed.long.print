@@ -30,7 +30,7 @@
 |	|	|	|	|	|	|	|	|	(text = 'glist')
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	(generic = VT(java.lang.String))
+|	|	|	|	|	|	|	(generic = null)
 |	|	|	|	|	|	|	(type = VIRTUAL)
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = STRING)
@@ -72,7 +72,7 @@
 |	|	|	|	|	|	|	|	|	(text = 'list')
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	(generic = VT(java.lang.String))
+|	|	|	|	|	|	|	(generic = null)
 |	|	|	|	|	|	|	(type = VIRTUAL)
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = STRING)
@@ -114,7 +114,7 @@
 |	|	|	|	|	|	|	|	|	(text = 'list')
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	(generic = VT(java.lang.String))
+|	|	|	|	|	|	|	(generic = null)
 |	|	|	|	|	|	|	(type = VIRTUAL)
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = STRING)
@@ -159,7 +159,7 @@
 |	|	|	|	|	|	|	|	|	(text = 'list')
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	(generic = VT(java.lang.String))
+|	|	|	|	|	|	|	(generic = null)
 |	|	|	|	|	|	|	(type = VIRTUAL)
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = STRING)
