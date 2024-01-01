@@ -24,7 +24,8 @@ object NRDef : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeDef {
         val list = ArrayList<VariableOrField>()
         //
-        if (ctx.isBody()) {
+        val isVariable = ctx.isBody()
+        if (isVariable) {
             val bctx = ctx.body
             processor.computeList(node.nodes[0], ctx).map { processor.computeList(it, ctx) }.forEach { it ->
                 lateinit var type: VirtualType
@@ -55,6 +56,6 @@ object NRDef : INodeProcessor<NodeNodesList> {
             }
         }
         //
-        return NodeDef(node.info.withType(NodeTypes.DEF_), list)
+        return NodeDef(node.info.withType(NodeTypes.DEF_), list, isVariable)
     }
 }

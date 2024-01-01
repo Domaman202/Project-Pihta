@@ -9,7 +9,7 @@ import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VirtualField
 import ru.DmN.siberia.utils.VirtualType
 
-object NRFGetC : INodeProcessor<NodeFGet> {
+object NRFGet : INodeProcessor<NodeFGet> {
     override fun calc(node: NodeFGet, processor: Processor, ctx: ProcessingContext): VirtualType {
         val filter = when (node.type) {
             UNKNOWN  -> { _: VirtualField  -> true }

@@ -94,5 +94,5 @@ object NRFld : INodeProcessor<NodeFieldA> {
             ctx,
             mode
         )!!
-    } // todo: remake по аналогии с def
+    }
 }

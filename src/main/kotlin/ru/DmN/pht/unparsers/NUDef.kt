@@ -10,13 +10,19 @@ object NUDef : INodeUnparser<NodeDef> {
     override fun unparse(node: NodeDef, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
             append('(').append(node.operation).append(" [")
-            node.variables.forEach { it ->
-                append('\n').append("\t".repeat(indent + 1)).append("[^").append(it.type.name).append(' ').append(it.name)
-                it.value?.let {
-                    append(' ')
-                    unparser.unparse(it, ctx, indent + 2)
+            if (node.isVariable) {
+                node.variables.forEach { it ->
+                    append('\n').append("\t".repeat(indent + 1)).append("[^").append(it.type.name).append(' ').append(it.name)
+                    it.value?.let {
+                        append(' ')
+                        unparser.unparse(it, ctx, indent + 2)
+                    }
+                    append(']')
                 }
-                append(']')
+            } else {
+                node.variables.forEach {
+                    append('\n').append("\t".repeat(indent + 1)).append('[').append(it.name).append(" ^").append(it.type.name).append(']')
+                }
             }
             append("])")
         }

@@ -2,7 +2,7 @@
     (cls Test [^Object]
         (fld [[i ^int]])
         (ctor [] (ccall)))
-    (app-fn
+    (test-fn 0
         (def [[test (new ^Test)]])
         (set test/i 213)
-        (println (get test/i))))
+        (get test/i)))

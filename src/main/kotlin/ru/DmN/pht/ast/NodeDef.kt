@@ -7,7 +7,7 @@ import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.indent
 
-class NodeDef(info: INodeInfo, val variables: List<VariableOrField>) : Node(info), IStaticallyNode, IFinallyNode {
+class NodeDef(info: INodeInfo, val variables: List<VariableOrField>, val isVariable: Boolean) : Node(info), IStaticallyNode, IFinallyNode {
     override var static: Boolean = false
         set(value) { field = value; variables.forEach { it.field?.isStatic = true } }
     override var final: Boolean = false
