@@ -248,15 +248,15 @@ object Pihta : Module("pht") {
         add(BREAK_, NUNamedBlock)
         // c
         addSNU(CATCH)
-        // CATCH_
+        add(CATCH_, NUCatch)
         addSNU(CCALL)
         addSNU(CLS)
-        add(CLS_, NUClass)
+        add(CLS_,   NUClass)
         addSNU(COND)
         addSNU(CONTINUE)
         add(CONTINUE_, NUNamedBlock)
         addSNU(CTOR)
-        add(CTOR_, NUCtor)
+        add(CTOR_,   NUCtor)
         addSNU(CYCLE)
         addSNU(CYCLE_)
         // d
@@ -266,7 +266,7 @@ object Pihta : Module("pht") {
         addSNU(DEC_POST)
         // DEC_POST_
         addSNU(DEF)
-        add(DEF_, NUDef)
+        add(DEF_,  NUDef)
         addSNU(DEF_SET)
         // DEFMACRO
         addSNU(DEFN)
@@ -305,7 +305,8 @@ object Pihta : Module("pht") {
         // i
         addSNU(IF)
         addSNU(IF_)
-        // IMPORT
+        add(IMPORT,    NUImport)
+        add(IMPORT_,   NUImport)
         addSNU(INC_PRE)
         add(INC_PRE_,  NUIncDec)
         addSNU(INC_POST)

@@ -1,6 +1,7 @@
 package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.ast.NodeImport
+import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.macros
 import ru.DmN.siberia.Processor
@@ -63,7 +64,7 @@ object NRImport : INodeProcessor<NodeImport> {
 
         return when (ctx.platform) {
             Platform.JAVA -> null
-            else -> node
+            else -> NodeImport(node.info.withType(NodeTypes.IMPORT_), node.module, node.data)
         }
     }
 }

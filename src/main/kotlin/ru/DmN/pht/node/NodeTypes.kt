@@ -67,6 +67,7 @@ enum class NodeTypes : INodeType {
     // i
     IF("if", PARSED),
     IF_("if", PROCESSED),
+    IMPORT("import", PARSED),
     IMPORT_("import", PROCESSED),
     INC_PRE_("inc", PROCESSED),
     INC_POST_("inc-", PROCESSED),

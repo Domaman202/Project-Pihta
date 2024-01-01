@@ -37,7 +37,6 @@ enum class NodeParsedTypes(override val operation: String, override val processe
     GREAT("great", GREAT_),
     GREAT_OR_EQ("great-or-eq", GREAT_OR_EQ_),
     // i
-    IMPORT("import", IMPORT_),
     INC_PRE("inc", INC_PRE_),
     INC_POST("inc-", INC_POST_),
     IS("is", IS_),

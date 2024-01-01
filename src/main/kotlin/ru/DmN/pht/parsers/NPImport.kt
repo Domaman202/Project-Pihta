@@ -3,7 +3,7 @@ package ru.DmN.pht.std.parsers
 import ru.DmN.pht.std.ast.NodeImport
 import ru.DmN.pht.std.imports.StdImportsHelper
 import ru.DmN.pht.std.imports.ast.IValueNode
-import ru.DmN.pht.std.node.NodeParsedTypes
+import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.utils.text
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
@@ -22,7 +22,7 @@ object NPImport : INodeParser {
         return NPProgn.parse(parser, context) { it ->
             val map = HashMap<String, MutableList<Any?>>()
             it.forEach { map.getOrPut(it.text) { ArrayList() } += (it as IValueNode).value }
-            NodeImport(INodeInfo.of(NodeParsedTypes.IMPORT, ctx, token), module, map)
+            NodeImport(INodeInfo.of(NodeTypes.IMPORT, ctx, token), module, map)
         }
     }
 }

@@ -1,38 +1,21 @@
-(use-ctx pht
-	(progn
-		(@abstract
-			(cls Test [^java.lang.Object]
-				(ctor []
-					(mcall
-						super
-						<init>))
-				(@abstract
-					(defn foo ^java.lang.String []))))
-		(cls TestImpl [^Test]
-			(ctor []
-				(mcall
-					super
-					<init>))
-			(defn foo ^java.lang.String []
-				"Foo!"))
-		(cls App [^java.lang.Object]
-			(@static
-				(defn main ^void []
-					(mcall
-						^ru.DmN.pht.std.utils.StdOut
-						println
-						^Test)
-					(mcall
-						^ru.DmN.pht.std.utils.StdOut
-						println
-						^TestImpl)
-					(mcall
-						^ru.DmN.pht.std.utils.StdOut
-						println
-						(new ^TestImpl))
-					(mcall
-						^ru.DmN.pht.std.utils.StdOut
-						println
-						(mcall
-							(new ^TestImpl)
-							foo)))))))
+(progn
+    (import java
+        (types java.lang.Exception)
+        (types java.lang.RuntimeException)
+        (types java.lang.Error))
+    (app-fn
+        (println
+            (catch [[_ ^RuntimeException 12]
+                    [_ ^Exception        21]]
+                (throw (new ^Exception))
+                33))
+        (println
+            (catch [[_ ^RuntimeException 12]
+                    [_ ^Exception        21]]
+                (throw (new ^RuntimeException))
+                33))
+        (println
+            (catch [[_ ^RuntimeException 12]
+                    [_ ^Exception        21]]
+                (throw (new ^Error))
+                33))))
