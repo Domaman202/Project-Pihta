@@ -13,7 +13,7 @@ object NUCatch : INodeUnparser<NodeCatch> {
         unparser.out.apply {
             append('(').append(node.operation).append(" [")
                 node.catchers.forEach { it ->
-                    append('\n').append("\t".repeat(indent + 1)).append('[').append(it.first).append(" ^")
+                    append('\n').append("\t".repeat(indent + 1)).append('[').append(it.first).append(' ')
                         .append(it.second.nameWithGenerics)
                     it.third?.let {
                         append('\n').append("\t".repeat(indent + 2))

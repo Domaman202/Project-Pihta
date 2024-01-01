@@ -1,0 +1,34 @@
+(use-ctx pht
+	(use-ctx pht
+		(progn
+			(itf ITest []
+				(@abstract
+					(defn foo ^java.lang.String [])))
+			(cls TestImpl [^java.lang.Object ^ITest]
+				(ctor []
+					(mcall
+						super
+						<init>))
+				(defn foo ^java.lang.String []
+					"Foo!"))
+			(cls App [^java.lang.Object]
+				(@static
+					(defn main ^void []
+						(mcall
+							^ru.DmN.pht.std.utils.StdOut
+							println
+							^ITest)
+						(mcall
+							^ru.DmN.pht.std.utils.StdOut
+							println
+							^TestImpl)
+						(mcall
+							^ru.DmN.pht.std.utils.StdOut
+							println
+							(new ^TestImpl))
+						(mcall
+							^ru.DmN.pht.std.utils.StdOut
+							println
+							(mcall
+								(new ^TestImpl)
+								foo))))))))

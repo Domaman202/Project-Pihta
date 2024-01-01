@@ -86,7 +86,7 @@
 |	|	|	|	|	|	|	|	(name = list)
 |	|	|	|	|	|	|	|	(type = java.util.ArrayList)
 |	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	(type = VTWG(java.util.ArrayList<java.lang.Object>))
+|	|	|	|	|	|	|	|	|	(type = VTWG(^java.util.ArrayList<^java.lang.Object>))
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
@@ -122,7 +122,7 @@
 |	|	|	|	|	|	|	|	(name = list)
 |	|	|	|	|	|	|	|	(type = java.util.List)
 |	|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	|	(type = VTWG(java.util.List<java.lang.Object>))
+|	|	|	|	|	|	|	|	|	(type = VTWG(^java.util.List<^java.lang.Object>))
 |	|	|	|	|	|	|	|	|	[NEW_
 |	|	|	|	|	|	|	|	|	|	(type = VT(java.util.ArrayList))
 |	|	|	|	|	|	|	|	|	]

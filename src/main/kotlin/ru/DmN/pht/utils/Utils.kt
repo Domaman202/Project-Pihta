@@ -16,15 +16,15 @@ import ru.DmN.siberia.utils.klassOf
 val VirtualType.nameWithGenerics: String
     get() {
         if (generics.isEmpty())
-            return name
+            return "^$name"
         val sb = StringBuilder()
         generics.forEachIndexed { i, it ->
-            sb.append(it.second.name)
+            sb.append('^').append(it.second.name)
             if (i != generics.size - 1) {
                 sb.append(", ")
             }
         }
-        return "$name<$sb>"
+        return "^$name<$sb>"
     }
 
 inline fun <T, R> List<T>.mapMutable(transform: (T) -> R): MutableList<R> {

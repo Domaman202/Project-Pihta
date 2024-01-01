@@ -11,7 +11,7 @@ import ru.DmN.siberia.utils.operation
 object NUAs : INodeUnparser<NodeAs> {
     override fun unparse(node: NodeAs, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
-            append('(').append(node.operation).append(" ^").append(node.type.nameWithGenerics)
+            append('(').append(node.operation).append(' ').append(node.type.nameWithGenerics)
             NUDefault.unparseNodes(node, unparser, ctx, indent)
             append(')')
         }

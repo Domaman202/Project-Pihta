@@ -1,8 +1,31 @@
-(progn
-    (cls Test [^Object]
-        (fld [[i ^int]])
-        (ctor [] (ccall)))
-    (app-fn
-        (def [[test (new ^Test)]])
-        (set test/i 213)
-        (println (get test/i))))
+(app-fn
+    (println
+        ((def [[glist (with-gens (new ^java.util.ArrayList) ^String)]])
+        (#add glist "Hi!")
+        (typeof (#get glist 0))))
+    (println
+        ((def [[list (as-gens ^java.util.List (new ^java.util.ArrayList) ^String)]])
+        (#add list "Hi!")
+        (typeof (#get list 0))))
+    (println
+        ((def [[list (new ^java.util.ArrayList<^String>)]])
+        (#add list "Hi!")
+        (typeof (#get list 0))))
+    (println
+        ((def [[list (as ^java.util.List<^String> (new ^java.util.ArrayList))]])
+        (#add list "Hi!")
+        (typeof (#get list 0))))
+    (cls TestA [^Object]
+        (ctor [] (ccall))
+        (defn [[T ^Object]] foo T^ [[o T^]] o))
+    (println
+        (typeof (#foo (new ^TestA<^String>) "Test!")))
+    (println
+        (typeof (#foo<^String> (new ^TestA) "Test!")))
+    (cls [[T ^Object]] TestB [^Object]
+        (ctor [] (ccall))
+        (defn foo T^ [[o T^]] o))
+    (println
+        (typeof (#foo (new ^TestB<^String>) "Test!")))
+    (println
+        (typeof (#foo<^String> (new ^TestB) "Test!"))))
