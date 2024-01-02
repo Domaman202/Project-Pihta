@@ -4,7 +4,7 @@ import ru.DmN.test.Module
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-object Export : Module("test/siberia/all/export") {
+class Export : Module("test/siberia/all/export") {
     @Test
     fun testPrint() {
         print()
