@@ -1,31 +1,15 @@
 (app-fn
     (println
-        ((def [[glist (with-gens (new ^java.util.ArrayList) ^String)]])
-        (#add glist "Hi!")
-        (typeof (#get glist 0))))
+        ((def [[i 12]])
+        (get i)))
     (println
-        ((def [[list (as-gens ^java.util.List (new ^java.util.ArrayList) ^String)]])
-        (#add list "Hi!")
-        (typeof (#get list 0))))
+        ((def [[^long l 21]])
+        (get l)))
     (println
-        ((def [[list (new ^java.util.ArrayList<^String>)]])
-        (#add list "Hi!")
-        (typeof (#get list 0))))
+        ((def [[^float f]])
+        (set f 0)
+        (get f)))
     (println
-        ((def [[list (as ^java.util.List<^String> (new ^java.util.ArrayList))]])
-        (#add list "Hi!")
-        (typeof (#get list 0))))
-    (cls TestA [^Object]
-        (ctor [] (ccall))
-        (defn [[T ^Object]] foo T^ [[o T^]] o))
-    (println
-        (typeof (#foo (new ^TestA<^String>) "Test!")))
-    (println
-        (typeof (#foo<^String> (new ^TestA) "Test!")))
-    (cls [[T ^Object]] TestB [^Object]
-        (ctor [] (ccall))
-        (defn foo T^ [[o T^]] o))
-    (println
-        (typeof (#foo (new ^TestB<^String>) "Test!")))
-    (println
-        (typeof (#foo<^String> (new ^TestB) "Test!"))))
+        ((def-set d 12.21)
+        (def-set d 33.44)
+        (get d))))

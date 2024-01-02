@@ -1,0 +1,14 @@
+(progn
+    (app
+        (efn ^String great       ^String [] "great")
+        (efn ^String great-or-eq ^String [] "great-or-eq")
+        (efn ^String less        ^String [] "less")
+        (efn ^String less-or-eq  ^String [] "less-or-eq")
+        (efn ^String eq          ^String [] "eq")
+        (efn ^String not-eq      ^String [] "not-eq"))
+    (test-fn 0 (>  ""))
+    (test-fn 1 (>= ""))
+    (test-fn 2 (<  ""))
+    (test-fn 3 (<= ""))
+    (test-fn 4 (=  ""))
+    (test-fn 5 (!= "")))

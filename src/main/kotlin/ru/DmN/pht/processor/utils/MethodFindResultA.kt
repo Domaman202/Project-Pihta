@@ -5,10 +5,11 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 
-data class MethodFindResult(
+data class MethodFindResultA(
     val type: NodeMCall.Type,
     val args: List<Node>,
     val method: VirtualMethod,
     val generics: VirtualType?,
-    val strict: Boolean
+    val strict: Boolean,
+    val compression: Boolean
 )

@@ -2,34 +2,34 @@ package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
-import ru.DmN.siberia.Compiler
-import ru.DmN.siberia.compilers.INodeCompiler
-import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.pht.std.compiler.java.utils.bytecodeCast
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
-import ru.DmN.pht.std.ast.NodeASet
-import ru.DmN.pht.std.compiler.java.utils.bytecodeCast
+import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.compilers.INodeCompiler
+import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.VirtualType
 
-object NCASet : INodeCompiler<NodeASet> {
-    override fun compile(node: NodeASet, compiler: Compiler, ctx: CompilationContext) {
+object NCASet : INodeCompiler<NodeNodesList> {
+    override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext) {
         ctx.method.node.run {
-            val arr = compiler.compileVal(node.arr, ctx)
+            val arr = compiler.compileVal(node.nodes[0], ctx)
             load(arr, this)
-            load(compiler.compileVal(node.index, ctx), this)
-            val value = compiler.compileVal(node.value, ctx)
+            load(compiler.compileVal(node.nodes[1], ctx), this)
+            val value = compiler.compileVal(node.nodes[2], ctx)
             load(value, this)
             visitAStore(arr, value)
         }
     }
 
-    override fun compileVal(node: NodeASet, compiler: Compiler, ctx: CompilationContext): Variable =
+    override fun compileVal(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Variable =
         ctx.method.node.run {
-            val arr = compiler.compileVal(node.arr, ctx)
+            val arr = compiler.compileVal(node.nodes[0], ctx)
             load(arr, this)
-            load(compiler.compileVal(node.index, ctx), this)
-            val value = compiler.compileVal(node.value, ctx)
+            load(compiler.compileVal(node.nodes[1], ctx), this)
+            val value = compiler.compileVal(node.nodes[2], ctx)
             load(value, this)
             visitInsn(Opcodes.DUP_X2)
             visitAStore(arr, value)

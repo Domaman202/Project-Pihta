@@ -1,0 +1,58 @@
+(use-ctx pht
+	(progn
+		(cls App [^java.lang.Object]
+			(@static
+				(efn ^java.lang.String great ^java.lang.String []
+					"great")
+				(efn ^java.lang.String great-or-eq ^java.lang.String []
+					"great-or-eq")
+				(efn ^java.lang.String less ^java.lang.String []
+					"less")
+				(efn ^java.lang.String less-or-eq ^java.lang.String []
+					"less-or-eq")
+				(efn ^java.lang.String eq ^java.lang.String []
+					"eq")
+				(efn ^java.lang.String not-eq ^java.lang.String []
+					"not-eq")))
+		(cls Test0 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(as ^dynamic
+						(mcall
+							""
+							great)))))
+		(cls Test1 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(as ^dynamic
+						(mcall
+							""
+							great-or-eq)))))
+		(cls Test2 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(as ^dynamic
+						(mcall
+							""
+							less)))))
+		(cls Test3 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(as ^dynamic
+						(mcall
+							""
+							less-or-eq)))))
+		(cls Test4 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(as ^dynamic
+						(mcall
+							""
+							eq)))))
+		(cls Test5 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(as ^dynamic
+						(mcall
+							""
+							not-eq)))))))

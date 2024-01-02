@@ -15,6 +15,8 @@ import ru.DmN.siberia.utils.klassOf
 
 val VirtualType.nameWithGenerics: String
     get() {
+        if (isArray)
+            return "(array-type ${componentType!!.nameWithGenerics})"
         if (generics.isEmpty())
             return "^$name"
         val sb = StringBuilder()
@@ -48,15 +50,16 @@ val Node.valueAsString
 fun findLambdaMethod(type: VirtualType): VirtualMethod =
     type.methods.first { it.declaringClass == type && it.modifiers.abstract }
 
-fun lenArgs(from: List<VirtualType>, to: List<ICastable>, varargs: Boolean): Int =
-    if (varargs)
-        lenArgs(to) {
-            val i = it.coerceAtMost(from.size - 1)
-            from[i].run { if (i == from.size - 1) componentType!! else this }
-        } * 100
-    else if (from.size != to.size)
-        -1
-    else lenArgs(to) { from[it] }
+fun lenArgs(from: List<VirtualType>, to: List<ICastable>, varargs: Boolean): Pair<Int, Boolean> =
+    if (varargs) {
+        val i = lenArgs(to) { val i = it.coerceAtMost(from.size - 1); from[i].run { if (i == from.size - 1) componentType!! else this } } * 100
+        val j = lenArgs(to) { from[it] }
+        if (i < j)
+            Pair(j, false)
+        else Pair(i, false)
+    } else if (from.size != to.size)
+        Pair(-1, false)
+    else Pair(lenArgs(to) { from[it] }, false)
 
 fun lenArgs(to: List<ICastable>, getter: (index: Int) -> VirtualType): Int {
     var j = 1
@@ -69,8 +72,8 @@ fun lenArgs(to: List<ICastable>, getter: (index: Int) -> VirtualType): Int {
     return j
 }
 
-fun Processor.processNodes(node: INodesList, ctx: ProcessingContext, mode: ValType): List<Node> =
-    node.nodes.map { process(it, ctx, mode)!! }
+fun Processor.processNodes(node: INodesList, ctx: ProcessingContext, mode: ValType): MutableList<Node> =
+    node.nodes.mapMutable { process(it, ctx, mode)!! }
 
 fun Processor.computeStringNodes(node: INodesList, ctx: ProcessingContext): List<String> =
     node.nodes.map { computeString(it, ctx) }

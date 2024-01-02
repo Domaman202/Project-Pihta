@@ -22,7 +22,9 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
         else {
             val variable = ctx.body[name]
             variable?.type()
-                ?: if (ctx.isClass()) ctx.clazz.fields.find { it.name == name }!!.type else throw RuntimeException()
+                ?: if (ctx.isClass())
+                    ctx.clazz.fields.find { it.name == name }!!.type
+                else throw RuntimeException()
         }
 
     override fun computeInt(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Int =

@@ -7,10 +7,7 @@ import ru.DmN.pht.std.processor.utils.Variable
 import ru.DmN.pht.std.processor.utils.body
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.isBody
-import ru.DmN.pht.std.utils.computeList
-import ru.DmN.pht.std.utils.computeString
-import ru.DmN.pht.std.utils.computeType
-import ru.DmN.pht.std.utils.isConstClass
+import ru.DmN.pht.std.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -31,7 +28,7 @@ object NRDef : INodeProcessor<NodeNodesList> {
                 lateinit var type: VirtualType
                 lateinit var name: String
                 val value: Node? =
-                    if (it[0].isConstClass) {
+                    if (it[0].isConstClass && it[1].isLiteral || it.size != 2) {
                         type = processor.computeType(it[0], ctx)
                         name = processor.computeString(it[1], ctx)
                         it.getOrNull(2)

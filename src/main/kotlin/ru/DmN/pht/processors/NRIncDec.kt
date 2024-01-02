@@ -31,10 +31,10 @@ object NRIncDec : INodeProcessor<NodeNodesList> {
             )
         else NodeMCall(
             info.withType(NodeTypes.MCALL_),
-            NRMCall.processArguments(info, processor, ctx, result.second, listOf(nodes[0]) + result.first),
+            NRMath.processArguments(info, processor, ctx, listOf(nodes[0]) + result.args, result),
             null,
-            nodeValueClass(info, result.second.declaringClass!!.name),
-            result.second,
+            nodeValueClass(info, result.method.declaringClass!!.name),
+            result.method,
             NodeMCall.Type.EXTEND
         )
     }

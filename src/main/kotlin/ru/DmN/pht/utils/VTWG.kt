@@ -25,6 +25,16 @@ class VTWG(val type: VirtualType, val gens: List<VirtualType>) : VirtualType() {
     override val parents: List<VirtualType>
         get() = type.parents
 
-    override fun toString(): String =
-        "VTWG(${type.nameWithGenerics})"
+    override fun toString(): String {
+            if (generics.isEmpty())
+                return "VTWG($name)"
+            val sb = StringBuilder()
+            generics.forEachIndexed { i, it ->
+                sb.append(it.second.name)
+                if (i != generics.size - 1) {
+                    sb.append(", ")
+                }
+            }
+            return "VTWG($name<$sb>)"
+    }
 }

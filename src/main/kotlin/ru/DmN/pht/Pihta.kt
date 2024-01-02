@@ -240,37 +240,38 @@ object Pihta : Module("pht") {
         add(AS_, NUAs)
         addSNU(AS_GENS)
         addSNU(ASET)
+        addSNU(ASET_)
         // ASET_
         // b
         addSNU(BODY)
         addSNU(BODY_)
         addSNU(BREAK)
-        add(BREAK_, NUNamedBlock)
+        add(BREAK_,         NUNamedBlock)
         // c
         addSNU(CATCH)
-        add(CATCH_, NUCatch)
+        add(CATCH_,         NUCatch)
         addSNU(CCALL)
         addSNU(CLS)
-        add(CLS_,   NUClass)
+        add(CLS_,           NUClass)
         addSNU(COND)
         addSNU(CONTINUE)
-        add(CONTINUE_, NUNamedBlock)
+        add(CONTINUE_,      NUNamedBlock)
         addSNU(CTOR)
-        add(CTOR_,   NUCtor)
+        add(CTOR_,          NUCtor)
         addSNU(CYCLE)
         addSNU(CYCLE_)
         // d
-        add(DEBUG, NUDebug)
+        add(DEBUG,          NUDebug)
         addSNU(DEC_PRE)
         // DEC_PRE_
         addSNU(DEC_POST)
         // DEC_POST_
         addSNU(DEF)
-        add(DEF_,  NUDef)
+        add(DEF_,           NUDef)
         addSNU(DEF_SET)
         // DEFMACRO
         addSNU(DEFN)
-        add(DEFN_, NUDefn)
+        add(DEFN_,          NUDefn)
         addSNU(DIV)
         addSNU(DIV_)
         // e
@@ -278,28 +279,28 @@ object Pihta : Module("pht") {
         addSNU(EFLD)
         // EFLD_
         addSNU(EFN)
-        // EFN_
+        add(EFN_,           NUEFn)
         addSNU(ENUM)
-        add(ENUM_, NUClass)
+        add(ENUM_,          NUClass)
         addSNU(EQ)
         addSNU(EQ_)
         // f
         addSNU(FGET_A)
-        add(FGET_B, NUFGetA)
-        add(FGET_,  NUFGetB)
+        add(FGET_B,         NUFGetA)
+        add(FGET_,          NUFGetB)
         addSNU(FLD)
-        add(FLD_,   NUFld)
+        add(FLD_,           NUFld)
         addSNU(FN)
         // FN_
         addSNU(FOR)
         addSNU(FSET_A)
-        add(FSET_B, NUFSetA)
-        add(FSET_,  NUFSetB)
+        add(FSET_B,         NUFSetA)
+        add(FSET_,          NUFSetB)
         // g
         // GET_A
         addSNU(GET_B)
         // GET_
-        add(GET_OR_NAME, NUGetOrName)
+        add(GET_OR_NAME,    NUGetOrName)
         addSNU(GREAT)
         addSNU(GREAT_)
         addSNU(GREAT_OR_EQ)
@@ -307,16 +308,16 @@ object Pihta : Module("pht") {
         // i
         addSNU(IF)
         addSNU(IF_)
-        add(IMPORT,    NUImport)
-        add(IMPORT_,   NUImport)
+        add(IMPORT,         NUImport)
+        add(IMPORT_,        NUImport)
         addSNU(INC_PRE)
-        add(INC_PRE_,  NUIncDec)
+        add(INC_PRE_,       NUIncDec)
         addSNU(INC_POST)
-        add(INC_POST_, NUIncDec)
+        add(INC_POST_,      NUIncDec)
         addSNU(IS)
         addSNU(IS_)
         addSNU(ITF)
-        add(ITF_, NUClass)
+        add(ITF_,           NUClass)
         // l
         // LAZY_SYMBOL
         addSNU(LESS)
@@ -330,18 +331,18 @@ object Pihta : Module("pht") {
         // MACRO_INLINE
         // MACRO_UNROLL
         addSNU(MCALL)
-        add(MCALL_, NUMCall)
+        add(MCALL_,         NUMCall)
         addSNU(MUL)
         addSNU(MUL_)
         // n
         addSNU(NAMED_BLOCK)
-        add(NAMED_BLOCK_, NUNamedBlock)
+        add(NAMED_BLOCK_,   NUNamedBlock)
         addSNU(NEG)
         addSNU(NEG_)
         addSNU(NEW)
-        add(NEW_, NUNew)
+        add(NEW_,           NUNew)
         addSNU(NEW_ARRAY)
-        // NEW_ARRAY_
+        add(NEW_ARRAY_,     NUNewArray)
         addSNU(NOT)
         addSNU(NOT_)
         addSNU(NOT_EQ)
@@ -368,8 +369,8 @@ object Pihta : Module("pht") {
         addSNU(ROLL_RIGHT)
         // s
         addSNU(SET_A)
-        add(SET_B, NUSetB)
-        add(SET_,  NUSetB)
+        add(SET_B,          NUSetB)
+        add(SET_,           NUSetB)
         // SET_
         addSNU(SHIFT_LEFT)
         addSNU(SHIFT_LEFT_)
@@ -384,15 +385,15 @@ object Pihta : Module("pht") {
         addSNU(THROW)
         addSNU(THROW_)
         addSNU(TYPED_GET)
-        add(TYPED_GET, NUTypedGet)
+        add(TYPED_GET,      NUTypedGet)
         addSNU(TYPEOF)
         // u
-        add(UNIT,  NUUnit)
+        add(UNIT,           NUUnit)
         // v
-        add(VALN,  NUValn)
-        add(VALN_, NUValn)
+        add(VALN,           NUValn)
+        add(VALN_,          NUValn)
         addSNU(VALN_REPEAT)
-        add(VALUE, NUValue)
+        add(VALUE,          NUValue)
         // w
         addSNU(WITH_GENS)
         addSNU(XOR)
@@ -441,7 +442,7 @@ object Pihta : Module("pht") {
         add(AS_,           NRAsB)
         add(AS_GENS,       NRAsGens)
         add(ASET,          NRASet)
-        add(ASET_,         NRASetB)
+        add(ASET_,         NRASet)
         // b
         add(BODY,          NRBody)
         add(BODY_,         NRBody)

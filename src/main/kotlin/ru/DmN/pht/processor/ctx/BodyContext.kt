@@ -1,6 +1,9 @@
 package ru.DmN.pht.std.processor.ctx
 
-import ru.DmN.siberia.utils.*
+import ru.DmN.siberia.utils.SubList
+import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.VirtualMethod
+import ru.DmN.siberia.utils.VirtualType
 import java.util.concurrent.atomic.AtomicInteger
 
 class BodyContext(
@@ -9,7 +12,7 @@ class BodyContext(
     val nvi: AtomicInteger
 ) {
     fun copy(): BodyContext =
-        TODO()
+        BodyContext(ArrayList(children), ArrayList(variables), AtomicInteger(nvi.get()))
 
     operator fun get(name: String) =
         variables.find { it.name == name }

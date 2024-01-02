@@ -39,10 +39,10 @@ object NRFSetB : INodeProcessor<NodeFieldSet> { // todo: calc
                 )?.let {
                     return NodeMCall(
                         info.withType(NodeTypes.MCALL_),
-                        NRMCall.processArguments(info, processor, ctx, it.second, listOf(instance, nodeValue(info, node.name)) + node.nodes),
+                        NRMCall.processArguments(info, processor, ctx, it.method, listOf(instance, nodeValue(info, node.name)) + node.nodes, it.compression),
                         null,
-                        nodeValueClass(info, it.second.declaringClass!!.name),
-                        it.second,
+                        nodeValueClass(info, it.method.declaringClass!!.name),
+                        it.method,
                         NodeMCall.Type.VIRTUAL
                     )
                 }
@@ -65,10 +65,10 @@ object NRFSetB : INodeProcessor<NodeFieldSet> { // todo: calc
             )
         else NodeMCall(
             info.withType(NodeTypes.MCALL_),
-            NRMCall.processArguments(info, processor, ctx, result.second, node.nodes),
+            NRMCall.processArguments(info, processor, ctx, result.method, node.nodes, result.compression),
             null,
             instance,
-            result.second,
+            result.method,
             NodeMCall.Type.VIRTUAL
         )
     }

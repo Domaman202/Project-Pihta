@@ -28,9 +28,9 @@ object NRNew : INodeProcessor<NodeNodesList> {
         val info = node.info
         return NodeNew(
             info.withType(NodeTypes.NEW_),
-            NRMCall.processArguments(info, processor, ctx, ctor.second, ctor.first),
+            NRMCall.processArguments(info, processor, ctx, ctor.method, ctor.args, ctor.compression),
             type,
-            ctor.second
+            ctor.method
         )
     }
 }

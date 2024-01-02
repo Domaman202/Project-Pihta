@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.processor.utils.MethodFindResultB
 import ru.DmN.pht.std.ast.NodeFGet
 import ru.DmN.pht.std.ast.NodeFMGet
 import ru.DmN.pht.std.ast.NodeMCall
@@ -14,12 +15,11 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VTDynamic
-import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 
 object NRFGetB : INodeProcessor<NodeFMGet> {
     override fun calc(node: NodeFMGet, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        getMethod(node, processor, ctx).third?.rettype ?: NRFGetA.findField(getInstanceType(node, processor, ctx), node.name, node.static)?.type
+        getMethod(node, processor, ctx).second?.method?.rettype ?: NRFGetA.findField(getInstanceType(node, processor, ctx), node.name, node.static)?.type
 
     override fun process(node: NodeFMGet, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
         if (mode == ValType.VALUE) {
@@ -41,29 +41,39 @@ object NRFGetB : INodeProcessor<NodeFMGet> {
                     },
                     result.first
                 )
-            else if (result.first == VTDynamic)
-                NodeMCall(
+            else {
+                val method = result.second!!.method
+                if (result.first == VTDynamic)
+                    NodeMCall(
+                        info.withType(NodeTypes.MCALL_),
+                        NRMCall.processArguments(
+                            info,
+                            processor,
+                            ctx,
+                            method,
+                            listOf(instance, nodeValue(info, node.name)) + node.nodes,
+                            result.second!!.compression
+                        ),
+                        null,
+                        nodeValueClass(info, method.declaringClass!!.name),
+                        method,
+                        NodeMCall.Type.VIRTUAL
+                    )
+                else NodeMCall(
                     info.withType(NodeTypes.MCALL_),
-                    NRMCall.processArguments(info, processor, ctx, result.third!!, listOf(instance, nodeValue(info, node.name)) + node.nodes),
+                    NRMCall.processArguments(info, processor, ctx, method, node.nodes, result.second!!.compression),
                     null,
-                    nodeValueClass(info, result.third!!.declaringClass!!.name),
-                    result.third!!,
+                    instance,
+                    method,
                     NodeMCall.Type.VIRTUAL
                 )
-            else NodeMCall(
-                info.withType(NodeTypes.MCALL_),
-                NRMCall.processArguments(info, processor, ctx, result.third!!, node.nodes),
-                null,
-                instance,
-                result.third!!,
-                NodeMCall.Type.VIRTUAL
-            )
+            }
         } else null
 
-    private fun getMethod(node: NodeFMGet, processor: Processor, ctx: ProcessingContext): Triple<VirtualType, List<Node>?, VirtualMethod?> {
+    private fun getMethod(node: NodeFMGet, processor: Processor, ctx: ProcessingContext): Pair<VirtualType, MethodFindResultB?> {
         val type = getInstanceType(node, processor, ctx)!!
         return if (node.native)
-            Triple(type, null, null)
+            Pair(type, null)
         else {
             val result =
                 if (type == VTDynamic)
@@ -81,7 +91,7 @@ object NRFGetB : INodeProcessor<NodeFMGet> {
                     processor,
                     ctx
                 )
-            Triple(type, result?.first, result?.second)
+            Pair(type, result)
         }
     }
 

@@ -1,7 +1,8 @@
 package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.ast.NodeTypedGet
-import ru.DmN.pht.processor.utils.MethodFindResult
+import ru.DmN.pht.processor.utils.MethodFindResultA
+import ru.DmN.pht.processor.utils.MethodFindResultB
 import ru.DmN.pht.std.ast.NodeFGet
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.ast.NodeMCall
@@ -22,6 +23,7 @@ import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VTDynamic
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
+import kotlin.streams.toList
 
 object NRMCall : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
@@ -37,7 +39,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         return if (result.method.extension == null)
             NodeMCall(
                 info.processed,
-                processArguments(info, processor, ctx, result.method, result.args),
+                processArguments(info, processor, ctx, result.method, result.args, result.compression),
                 generics,
                 if (result.type == VIRTUAL)
                     NodeFGet(
@@ -64,7 +66,8 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 processor,
                 ctx,
                 result.method,
-                listOf(instance) + result.args
+                listOf(instance) + result.args,
+                result.compression
             ),
             generics,
             NodeValue.of(node.info, NodeValue.Type.CLASS, result.method.extension!!.name),
@@ -82,7 +85,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * @param ctx Контекст обработки.
      * @return Нода.
      */
-    private fun getInstance(result: MethodFindResult, node: NodeNodesList, processor: Processor, ctx: ProcessingContext) =
+    private fun getInstance(result: MethodFindResultA, node: NodeNodesList, processor: Processor, ctx: ProcessingContext) =
         if (result.type == SUPER)
             nodeGetOrName(node.info, "this")
         else {
@@ -102,8 +105,8 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * @param args Преобразуемые аргументы.
      * @return Преобразованные аргументы.
      */
-    fun processArguments(info: INodeInfo, processor: Processor, ctx: ProcessingContext, method: VirtualMethod, args: List<Node>): MutableList<Node> =
-        (if (method.modifiers.varargs) {
+    fun processArguments(info: INodeInfo, processor: Processor, ctx: ProcessingContext, method: VirtualMethod, args: List<Node>, compression: Boolean = method.modifiers.varargs): MutableList<Node> =
+        (if (compression) {
             val overflow = args.size.let { if (it > 0) it + 1 else 0 } - method.argsc.size
             if (overflow > 0)
                 args.dropLast(overflow).toMutableList().apply {
@@ -134,7 +137,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
      */
-    private fun findMethod(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): MethodFindResult {
+    private fun findMethod(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): MethodFindResultA {
         val gctx = ctx.global
         //
         val pair = getCallTypeAndType(node, processor, ctx, gctx)
@@ -146,7 +149,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             generic = gctx.getType(it.substring(gs + 2, it.length - 1), processor.tp)
             it.substring(0, gs)
         }
-        val args = node.nodes.asSequence().drop(2).map { processor.process(it, ctx, ValType.VALUE)!! }
+        val args = node.nodes.stream().skip(2).map { processor.process(it, ctx, ValType.VALUE)!! }.toList()
         //
         var strict = false
         var result = findMethodOrNull(pair.second, name, args, node, processor, ctx, gctx)
@@ -162,16 +165,17 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             result ?: throw RuntimeException("Method '$name' not founded!")
         }
         //
-        return MethodFindResult(
+        return MethodFindResultA(
             if (pair.first == STATIC)
-                if (result.second.modifiers.static)
+                if (result.method.modifiers.static)
                     STATIC
                 else VIRTUAL
             else pair.first,
-            result.first,
-            result.second,
+            result.args,
+            result.method,
             generic,
-            strict
+            strict,
+            result.compression
         )
     }
 
@@ -186,11 +190,11 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * @param ctx Контекст обработки.
      * @param gctx GlobalContext.
      */
-    private fun findMethodOrNull(clazz: VirtualType, name: String, args: Sequence<Node>, node: NodeNodesList, processor: Processor, ctx: ProcessingContext, gctx: GlobalContext): Pair<List<Node>, VirtualMethod>? {
+    private fun findMethodOrNull(clazz: VirtualType, name: String, args: List<Node>, node: NodeNodesList, processor: Processor, ctx: ProcessingContext, gctx: GlobalContext): MethodFindResultB? {
         return findMethodOrNull(
             clazz,
             name,
-            args.toList(),
+            args,
             processor,
             ctx
         ) ?: if (clazz == VTDynamic)
@@ -202,11 +206,12 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 ctx
             )
         else {
-            val method = gctx.getMethodVariants(
-                (gctx.methods[name]?.asSequence() ?: gctx.methods["*"]?.asSequence()?.filter { it.name == name } ?: return null),
+            val result = gctx.getMethodVariants(
+                (gctx.methods[name]?.asSequence() ?: gctx.methods["*"]?.asSequence()?.filter { it.name == name }
+                ?: return null),
                 args.map { ICastable.of(it, processor, ctx) }.toList()
             ).firstOrNull() ?: return null
-            Pair(args.mapIndexed { i, it -> processor.adaptToType(method.argsc[i], it, ctx) }.toList(), method)
+            MethodFindResultB(args.mapIndexed { i, it -> processor.adaptToType(result.first.argsc[i], it, ctx) }.toList(), result.first, result.second)
         }
     }
 
@@ -241,9 +246,8 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * @param args Аргументы.
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
-     * @return (Аргументы; Метод)
      */
-    fun findMethod(clazz: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Pair<List<Node>, VirtualMethod> =
+    fun findMethod(clazz: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): MethodFindResultB =
         findMethodOrNull(clazz, name, args, processor, ctx) ?: throw RuntimeException("Method '$name' not founded!")
 
     /**
@@ -254,10 +258,9 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * @param args Аргументы.
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
-     * @return (Аргументы; Метод)
      */
-    fun findMethodOrNull(clazz: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Pair<List<Node>, VirtualMethod>? {
-        val method = ctx.global.getMethodVariants(clazz, name, args.map { ICastable.of(it, processor, ctx) }.toList()).firstOrNull() ?: return null
-        return Pair(args.mapIndexed { i, it -> processor.adaptToType(method.argsc[i], it, ctx) }.toList(), method)
+    fun findMethodOrNull(clazz: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): MethodFindResultB? {
+        val result = ctx.global.getMethodVariants(clazz, name, args.map { ICastable.of(it, processor, ctx) }).firstOrNull() ?: return null
+        return MethodFindResultB(args.mapIndexed { i, it -> processor.adaptToType(result.first.argsc[i], it, ctx) }.toList(), result.first, result.second)
     }
 }
