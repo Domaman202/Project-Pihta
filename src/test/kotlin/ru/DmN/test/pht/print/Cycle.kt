@@ -7,8 +7,8 @@ class Cycle {
     @Test
     fun test() {
         Module("test/pht/print/cycle").run {
-            log()
-            logCheck()
+            print()
+            printCheck()
         }
     }
 }

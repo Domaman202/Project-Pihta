@@ -7,8 +7,8 @@ class BaseMath {
     @Test
     fun test() {
         Module("test/pht/print/base-math").run {
-            log()
-            logCheck()
+            print()
+            printCheck()
         }
     }
 }

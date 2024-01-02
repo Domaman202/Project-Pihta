@@ -7,8 +7,8 @@ class AbstractClassImpl {
     @Test
     fun test() {
         Module("test/pht/print/abstract-class-impl").run {
-            log()
-            logCheck()
+            print()
+            printCheck()
         }
     }
 }

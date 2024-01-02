@@ -7,8 +7,8 @@ class BaseCompare {
     @Test
     fun test() {
         Module("test/pht/print/base-compare").run {
-            log()
-            logCheck()
+            print()
+            printCheck()
         }
     }
 }

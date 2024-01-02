@@ -7,8 +7,8 @@ class Unroll {
     @Test
     fun test() {
         Module("test/pht/print/unroll").run {
-            log()
-            logCheck()
+            print()
+            printCheck()
         }
     }
 }

@@ -7,8 +7,8 @@ class DefField {
     @Test
     fun test() {
         Module("test/pht/print/def-field").run {
-            log()
-            logCheck()
+            print()
+            printCheck()
         }
     }
 }

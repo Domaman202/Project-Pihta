@@ -7,8 +7,8 @@ class Unit {
     @Test
     fun test() {
         Module("test/pht/print/unit").run {
-            log()
-            logCheck()
+            print()
+            printCheck()
         }
     }
 }

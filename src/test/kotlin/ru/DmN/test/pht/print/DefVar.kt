@@ -7,8 +7,8 @@ class DefVar {
     @Test
     fun test() {
         Module("test/pht/print/def-var").run {
-            log()
-            logCheck()
+            print()
+            printCheck()
         }
     }
 }

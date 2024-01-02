@@ -7,8 +7,8 @@ class Catch {
     @Test
     fun test() {
         Module("test/pht/print/catch").run {
-            log()
-            logCheck()
+            print()
+            printCheck()
         }
     }
 }

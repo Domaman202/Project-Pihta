@@ -7,8 +7,8 @@ class Value {
     @Test
     fun test() {
         Module("test/pht/print/value").run {
-            log()
-            logCheck()
+            print()
+            printCheck()
         }
     }
 }

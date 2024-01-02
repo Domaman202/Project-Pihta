@@ -7,8 +7,8 @@ class Interface {
     @Test
     fun test() {
         Module("test/pht/print/interface").run {
-            log()
-            logCheck()
+            print()
+            printCheck()
         }
     }
 }

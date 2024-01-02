@@ -23,7 +23,7 @@ import java.io.FileOutputStream
 import java.net.URLClassLoader
 import kotlin.test.assertTrue
 
-class Module(private val dir: String) {
+open class Module(private val dir: String) {
     val module = (Parser(Module.getModuleFile(dir)).parseNode(ParsingContext.of(StdModule)) as NodeModule).module
 
     fun unparse() {
@@ -60,7 +60,7 @@ class Module(private val dir: String) {
     }
 
 
-    fun log() {
+    fun print() {
         val tp = TypesProvider.java()
         module.init()
         File("dump/$dir").mkdirs()
@@ -96,7 +96,7 @@ class Module(private val dir: String) {
         }
     }
 
-    fun logCheck() {
+    fun printCheck() {
         assertTrue(String(File("dump/$dir/parsed.short.print").readBytes()) ==  module.getModuleFile("parsed.short.print"))
         assertTrue(String(File("dump/$dir/processed.short.print").readBytes()) == module.getModuleFile("processed.short.print"))
         assertTrue(String(File("dump/$dir/parsed.long.print").readBytes()) == module.getModuleFile("parsed.long.print"))

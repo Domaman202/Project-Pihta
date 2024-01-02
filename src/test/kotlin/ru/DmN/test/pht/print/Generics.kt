@@ -7,8 +7,8 @@ class Generics {
     @Test
     fun test() {
         Module("test/pht/print/generics").run {
-            log()
-            logCheck()
+            print()
+            printCheck()
         }
     }
 }

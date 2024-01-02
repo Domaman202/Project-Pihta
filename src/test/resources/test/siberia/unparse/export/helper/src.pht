@@ -1,3 +1,0 @@
-(progn
-    (test-fn 1 (*module-name*))
-    (export (test-fn 2 (*module-name*))))

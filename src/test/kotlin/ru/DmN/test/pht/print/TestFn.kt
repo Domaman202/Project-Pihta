@@ -7,8 +7,8 @@ class TestFn {
     @Test
     fun test() {
         Module("test/pht/print/test-fn").run {
-            log()
-            logCheck()
+            print()
+            printCheck()
         }
     }
 }

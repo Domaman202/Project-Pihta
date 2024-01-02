@@ -7,8 +7,8 @@ class Cond {
     @Test
     fun test() {
         Module("test/pht/print/cond").run {
-            log()
-            logCheck()
+            print()
+            printCheck()
         }
     }
 }

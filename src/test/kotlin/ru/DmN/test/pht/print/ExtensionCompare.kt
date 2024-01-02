@@ -7,8 +7,8 @@ class ExtensionCompare {
     @Test
     fun test() {
         Module("test/pht/print/extension-compare").run {
-            log()
-            logCheck()
+            print()
+            printCheck()
         }
     }
 }
