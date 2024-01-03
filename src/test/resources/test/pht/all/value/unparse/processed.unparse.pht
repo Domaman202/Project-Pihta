@@ -19,12 +19,12 @@
 			(@static
 				(defn test ^dynamic []
 					(as ^dynamic
-						44))))
+						44.0f))))
 		(cls Test4 [^java.lang.Object]
 			(@static
 				(defn test ^dynamic []
 					(as ^dynamic
-						202))))
+						202l))))
 		(cls Test5 [^java.lang.Object]
 			(@static
 				(defn test ^dynamic []

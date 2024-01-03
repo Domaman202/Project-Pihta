@@ -6,19 +6,19 @@ import kotlin.test.assertEquals
 
 class Export : Module("test/siberia/all/export") {
     @Test
-    fun testPrint() {
-        print()
-        printCheck()
-    }
-
-    @Test
-    fun testUnparse() {
+    override fun testUnparse() {
         unparse()
         unparseCheck()
+        (object : Module("${module.name}/unparse") { }).run {
+            compile()
+            assertEquals(test(0), "test/siberia/all/export")
+            assertEquals(test(1), "test/siberia/all/export/helper")
+            assertEquals(test(2), "test/siberia/all/export/unparse")
+        }
     }
 
     @Test
-    fun testCompile() {
+    override fun testCompile() {
         compile()
         assertEquals(test(0), "test/siberia/all/export")
         assertEquals(test(1), "test/siberia/all/export/helper")

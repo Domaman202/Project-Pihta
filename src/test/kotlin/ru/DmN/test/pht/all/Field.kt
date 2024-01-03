@@ -5,20 +5,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Field : Module("test/pht/all/field") {
-    @Test
-    fun testPrint() {
-        print()
-        printCheck()
-    }
-
-    @Test
-    fun testUnparse() {
-        unparse()
-        unparseCheck()
-    }
-
-    @Test
-    fun testCompile() {
+    override fun Module.compileTest() {
         compile()
         assertEquals(test(0), 213)
     }

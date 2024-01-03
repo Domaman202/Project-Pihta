@@ -5,20 +5,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ExtensionMath : Module("test/pht/all/extension-math") {
-    @Test
-    fun testPrint() {
-        print()
-        printCheck()
-    }
-
-    @Test
-    fun testUnparse() {
-        unparse()
-        unparseCheck()
-    }
-
-    @Test
-    fun testCompile() {
+    override fun Module.compileTest() {
         compile()
         assertEquals(test(0), "Слава России")
         assertEquals(test(1), "ЛолКек")

@@ -14,6 +14,26 @@ object NUValue : INodeUnparser<NodeValue> {
                 PRIMITIVE,
                 CLASS,
                 CLASS_WITH_GEN -> append('^').append(node.value)
+                LONG -> {
+                    append(node.value)
+                    if (!(node.value.endsWith('l') || node.value.endsWith('L'))) {
+                        append('l')
+                    }
+                }
+                FLOAT -> {
+                    append(node.value)
+                    if (!node.value.contains('.'))
+                        append(".0")
+                    if (!(node.value.endsWith('f') || node.value.endsWith('F'))) {
+                        append('f')
+                    }
+                }
+                DOUBLE -> {
+                    append(node.value)
+                    if (!node.value.contains('.')) {
+                        append(".0")
+                    }
+                }
                 else -> append(node.value)
             }
         }

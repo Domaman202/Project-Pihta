@@ -1,24 +1,10 @@
 package ru.DmN.test.pht.all
 
 import ru.DmN.test.Module
-import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Value : Module("test/pht/all/value") {
-    @Test
-    fun testPrint() {
-        print()
-        printCheck()
-    }
-
-    @Test
-    fun testUnparse() {
-        unparse()
-        unparseCheck()
-    }
-
-    @Test
-    fun testCompile() {
+    override fun Module.compileTest() {
         compile()
         assertEquals(test(0), null)
         assertEquals(test(1), 12)

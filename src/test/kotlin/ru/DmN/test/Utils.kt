@@ -21,10 +21,34 @@ import ru.DmN.siberia.utils.TypesProvider
 import java.io.File
 import java.io.FileOutputStream
 import java.net.URLClassLoader
+import kotlin.test.Test
 import kotlin.test.assertTrue
+import ru.DmN.test.Module as SiberiaModule
 
-open class Module(private val dir: String) {
+abstract class Module(private val dir: String) {
     val module = (Parser(Module.getModuleFile(dir)).parseNode(ParsingContext.of(StdModule)) as NodeModule).module
+
+    //
+    @Test
+    open fun testPrint() {
+        print()
+        printCheck()
+    }
+
+    @Test
+    open fun testUnparse() {
+        unparse()
+        unparseCheck()
+        (object : SiberiaModule("${module.name}/unparse") { }).compileTest()
+    }
+
+    @Test
+    open fun testCompile() {
+        compileTest()
+    }
+
+    open fun SiberiaModule.compileTest() = compile()
+    //
 
     fun unparse() {
         val tp = TypesProvider.java()

@@ -9,20 +9,7 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class Interface : Module("test/pht/all/interface") {
-    @Test
-    fun testPrint() {
-        print()
-        printCheck()
-    }
-
-    @Test
-    fun testUnparse() {
-        unparse()
-        unparseCheck()
-    }
-
-    @Test
-    fun testCompile() {
+    override fun Module.compileTest() {
         compile()
         (test(0) as Klass).let {
             assertEquals(it.name, "ITest")

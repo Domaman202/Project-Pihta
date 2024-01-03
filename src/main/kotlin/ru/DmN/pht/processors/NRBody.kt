@@ -15,7 +15,12 @@ import ru.DmN.siberia.utils.VirtualType
 
 object NRBody : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        processor.calc(node.nodes.last(), ctx(node as NodeBody, ctx)) // todo: not work without process
+        if (node is NodeBody)
+            processor.calc(node.nodes.last(), ctx(node, ctx))
+        else {
+            val context = ctx.with(BodyContext.of(ctx.bodyOrNull?.copy()))
+            processor.calc(process(node, processor, context, ValType.VALUE), context)
+        }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeNodesList =
         NodeBody(node.info.withType(NodeTypes.BODY_), node.copyNodes()).apply { processNodesList(this, processor, ctx(this, ctx), mode) }

@@ -5,20 +5,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Cond : Module("test/pht/all/cond") {
-    @Test
-    fun testPrint() {
-        print()
-        printCheck()
-    }
-
-    @Test
-    fun testUnparse() {
-        unparse()
-        unparseCheck()
-    }
-
-    @Test
-    fun testCompile() {
+    override fun Module.compileTest() {
         compile()
         assertEquals(test(0), "МРБ")
     }
