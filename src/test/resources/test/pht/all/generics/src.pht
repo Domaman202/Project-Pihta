@@ -1,0 +1,31 @@
+(progn
+    (test-fn 0
+        (def [[list (with-gens (new ^java.util.ArrayList) ^String)]])
+        (#add list "Hi!")
+        (typeof (#get list 0)))
+    (test-fn 1
+        (def [[list (as-gens ^java.util.List (new ^java.util.ArrayList) ^String)]])
+        (#add list "Hi!")
+        (typeof (#get list 0)))
+    (test-fn 2
+        (def [[list (new ^java.util.ArrayList<^String>)]])
+        (#add list "Hi!")
+        (typeof (#get list 0)))
+    (test-fn 3
+        (def [[list (as ^java.util.List<^String> (new ^java.util.ArrayList))]])
+        (#add list "Hi!")
+        (typeof (#get list 0)))
+    (cls TestA [^Object]
+        (ctor [] (ccall))
+        (defn [[T ^Object]] foo T^ [[o T^]] o))
+    (test-fn 4
+        (typeof (#foo (new ^TestA<^String>) "Test!")))
+    (test-fn 5
+        (typeof (#foo<^String> (new ^TestA) "Test!")))
+    (cls [[T ^Object]] TestB [^Object]
+        (ctor [] (ccall))
+        (defn foo T^ [[o T^]] o))
+    (test-fn 6
+        (typeof (#foo (new ^TestB<^String>) "Test!")))
+    (test-fn 7
+        (typeof (#foo<^String> (new ^TestB) "Test!"))))

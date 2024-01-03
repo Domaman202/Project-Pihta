@@ -1,6 +1,0 @@
-(test-fn 0
-    (def [[i 0][j 0]])
-    (cycle (< i 10)
-        (set j (+ j i))
-        (++ i))
-    (get j))

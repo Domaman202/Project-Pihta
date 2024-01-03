@@ -1,0 +1,7 @@
+(module
+    (name "test/pht/all/cycle")
+    (version "1.0.0")
+    (author "DomamaN202")
+    (deps ["pht"])
+    (uses ["pht"])
+    (files ["src.pht"]))

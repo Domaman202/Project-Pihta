@@ -29,8 +29,8 @@ open class Module(private val dir: String) {
     fun unparse() {
         val tp = TypesProvider.java()
         module.init()
-        File("dump/$dir").mkdirs()
-        FileOutputStream("dump/$dir/parsed.unparse.pht").use { out ->
+        File("dump/$dir/unparse").mkdirs()
+        FileOutputStream("dump/$dir/unparse/parsed.unparse.pht").use { out ->
             val unparser = Unparser()
             val uctx = UnparsingContext.base()
             module.nodes.forEach { unparser.unparse(it, uctx, 0) }
@@ -46,7 +46,7 @@ open class Module(private val dir: String) {
             }
         }
         processor.stageManager.runAll()
-        FileOutputStream("dump/$dir/processed.unparse.pht").use { out ->
+        FileOutputStream("dump/$dir/unparse/processed.unparse.pht").use { out ->
             val unparser = Unparser()
             val uctx = UnparsingContext.base()
             processed.forEach { unparser.unparse(it, uctx, 0) }
@@ -55,17 +55,17 @@ open class Module(private val dir: String) {
     }
 
     fun unparseCheck() {
-        assertTrue(String(File("dump/$dir/parsed.unparse.pht").readBytes()) ==  module.getModuleFile("parsed.unparse.pht"))
-        assertTrue(String(File("dump/$dir/processed.unparse.pht").readBytes()) == module.getModuleFile("processed.unparse.pht"))
+        assertTrue(String(File("dump/$dir/unparse/parsed.unparse.pht").readBytes()) ==  module.getModuleFile("unparse/parsed.unparse.pht"))
+        assertTrue(String(File("dump/$dir/unparse/processed.unparse.pht").readBytes()) == module.getModuleFile("unparse/processed.unparse.pht"))
     }
 
 
     fun print() {
         val tp = TypesProvider.java()
         module.init()
-        File("dump/$dir").mkdirs()
-        FileOutputStream("dump/$dir/parsed.short.print").use { short ->
-            FileOutputStream("dump/$dir/parsed.long.print").use { long ->
+        File("dump/$dir/print").mkdirs()
+        FileOutputStream("dump/$dir/print/parsed.short.print").use { short ->
+            FileOutputStream("dump/$dir/print/parsed.long.print").use { long ->
                 module.nodes.forEach {
                     short.write(it.print(true).toByteArray())
                     short.write('\n'.code)
@@ -84,8 +84,8 @@ open class Module(private val dir: String) {
             }
         }
         processor.stageManager.runAll()
-        FileOutputStream("dump/$dir/processed.short.print").use { short ->
-            FileOutputStream("dump/$dir/processed.long.print").use { long ->
+        FileOutputStream("dump/$dir/print/processed.short.print").use { short ->
+            FileOutputStream("dump/$dir/print/processed.long.print").use { long ->
                 processed.forEach {
                     short.write(it.print(true).toByteArray())
                     short.write('\n'.code)
@@ -97,10 +97,10 @@ open class Module(private val dir: String) {
     }
 
     fun printCheck() {
-        assertTrue(String(File("dump/$dir/parsed.short.print").readBytes()) ==  module.getModuleFile("parsed.short.print"))
-        assertTrue(String(File("dump/$dir/processed.short.print").readBytes()) == module.getModuleFile("processed.short.print"))
-        assertTrue(String(File("dump/$dir/parsed.long.print").readBytes()) == module.getModuleFile("parsed.long.print"))
-        assertTrue(String(File("dump/$dir/processed.long.print").readBytes()) == module.getModuleFile("processed.long.print"))
+        assertTrue(String(File("dump/$dir/print/parsed.short.print").readBytes()) ==  module.getModuleFile("print/parsed.short.print"))
+        assertTrue(String(File("dump/$dir/print/processed.short.print").readBytes()) == module.getModuleFile("print/processed.short.print"))
+        assertTrue(String(File("dump/$dir/print/parsed.long.print").readBytes()) == module.getModuleFile("print/parsed.long.print"))
+        assertTrue(String(File("dump/$dir/print/processed.long.print").readBytes()) == module.getModuleFile("print/processed.long.print"))
     }
 
     fun compile() {

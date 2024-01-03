@@ -1,0 +1,61 @@
+(use-ctx pht
+	(progn
+		(cls Test0 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(as ^dynamic
+						(body
+							(def [
+								[(array-type ^int) pht$tmp$21134 (new-array ^int 3)]])
+							(aset
+								pht$tmp$21134
+								0
+								12)
+							(aset
+								pht$tmp$21134
+								1
+								21)
+							(aset
+								pht$tmp$21134
+								2
+								33)
+							pht$tmp$21134)))))
+		(cls Test1 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(as ^dynamic
+						(body
+							(def [
+								[(array-type ^long) pht$tmp$11904 (new-array ^long 3)]])
+							(aset
+								pht$tmp$11904
+								0
+								202)
+							(aset
+								pht$tmp$11904
+								1
+								203)
+							(aset
+								pht$tmp$11904
+								2
+								213)
+							pht$tmp$11904)))))
+		(cls Test2 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(as (array-type ^java.lang.Object)
+								(body
+									(def [
+										[(array-type ^java.lang.String) pht$tmp$21136 (new-array ^java.lang.String 2)]])
+									(aset
+										pht$tmp$21136
+										0
+										"Слава")
+									(aset
+										pht$tmp$21136
+										1
+										"России")
+									pht$tmp$21136))
+							toList)))))))

@@ -1,0 +1,65 @@
+[USE_CTX
+|	(modules = pht)
+|	[PROGN
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[ARRAY_OF
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '12')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '21')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '33')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '1')
+|	|	|	]
+|	|	|	[ARRAY_OF_TYPE
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'long')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '202')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '203')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '213')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '2')
+|	|	|	]
+|	|	|	[LIST_OF
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'Слава')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'России')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	]
+]

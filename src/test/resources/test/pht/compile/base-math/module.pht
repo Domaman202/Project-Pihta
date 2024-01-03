@@ -1,7 +1,0 @@
-(module
-    (name "test/pht/compile/base-math")
-    (version "1.0.0")
-    (author "DomamaN202")
-    (deps ["pht"])
-    (uses ["pht"])
-    (files ["src.pht"]))
