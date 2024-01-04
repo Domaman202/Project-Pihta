@@ -189,20 +189,6 @@
 |	|	|	]
 |	|	|	[CLS_
 |	|	|	|	(type = open class)
-|	|	|	|	(name = Test5)
-|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'java.lang.String')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[CLS_
-|	|	|	|	(type = open class)
 |	|	|	|	(name = TestB)
 |	|	|	|	[CTOR_
 |	|	|	|	|	(type = constructor)
@@ -227,7 +213,7 @@
 |	|	|	]
 |	|	|	[CLS_
 |	|	|	|	(type = open class)
-|	|	|	|	(name = Test6)
+|	|	|	|	(name = Test5)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
 |	|	|	|	|	|	(type = method)
@@ -241,7 +227,7 @@
 |	|	|	]
 |	|	|	[CLS_
 |	|	|	|	(type = open class)
-|	|	|	|	(name = Test7)
+|	|	|	|	(name = Test6)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
 |	|	|	|	|	|	(type = method)

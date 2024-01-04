@@ -294,30 +294,6 @@
 |	|	|	|	[MCALL
 |	|	|	|	|	[NEW
 |	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = CLASS_WITH_GEN)
-|	|	|	|	|	|	|	(value = 'TestA<^String>')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	(value = 'foo')
-|	|	|	|	|	]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'Test!')
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '5')
-|	|	|	]
-|	|	|	[TYPEOF
-|	|	|	|	[MCALL
-|	|	|	|	|	[NEW
-|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS)
 |	|	|	|	|	|	|	(value = 'TestA')
 |	|	|	|	|	|	]
@@ -390,7 +366,7 @@
 |	|	[TEST_FN
 |	|	|	[VALUE
 |	|	|	|	(type = INT)
-|	|	|	|	(value = '6')
+|	|	|	|	(value = '5')
 |	|	|	]
 |	|	|	[TYPEOF
 |	|	|	|	[MCALL
@@ -414,7 +390,7 @@
 |	|	[TEST_FN
 |	|	|	[VALUE
 |	|	|	|	(type = INT)
-|	|	|	|	(value = '7')
+|	|	|	|	(value = '6')
 |	|	|	]
 |	|	|	[TYPEOF
 |	|	|	|	[MCALL

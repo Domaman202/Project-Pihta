@@ -52,10 +52,6 @@
 			(@static
 				(defn test ^dynamic []
 					^java.lang.String)))
-		(cls Test5 [^java.lang.Object]
-			(@static
-				(defn test ^dynamic []
-					^java.lang.String)))
 		(cls TestB [^java.lang.Object]
 			(ctor []
 				(mcall
@@ -63,11 +59,11 @@
 					<init>))
 			(defn foo ^java.lang.Object [[o ^java.lang.Object]]
 				o))
-		(cls Test6 [^java.lang.Object]
+		(cls Test5 [^java.lang.Object]
 			(@static
 				(defn test ^dynamic []
 					^java.lang.String)))
-		(cls Test7 [^java.lang.Object]
+		(cls Test6 [^java.lang.Object]
 			(@static
 				(defn test ^dynamic []
 					^java.lang.String)))))

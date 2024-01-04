@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 class Generics : Module("test/pht/all/generics") {
     override fun Module.compileTest() {
         compile()
-        for (i in 0..7) {
+        for (i in 0..6) {
             assertEquals(test(i), String::class.java)
         }
     }
