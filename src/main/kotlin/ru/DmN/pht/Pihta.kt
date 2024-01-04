@@ -1,6 +1,7 @@
 package ru.DmN.pht.std
 
 import ru.DmN.pht.processors.NRPrognB
+import ru.DmN.pht.processors.NRSymbolInt
 import ru.DmN.pht.processors.NRTypedGet
 import ru.DmN.pht.processors.NRTypedGetB
 import ru.DmN.pht.std.ast.IAbstractlyNode
@@ -142,6 +143,7 @@ object Pihta : Module("pht") {
         addNP("skip",   NPSkip)
         addSNP(SUB)
         addSNP(SYMBOL)
+        addSNP(SYMBOL_INT)
         addSNP(SYMBOL_CLS)
         // t
         addSNP(TEST_FN)
@@ -374,6 +376,7 @@ object Pihta : Module("pht") {
         addSNU(SUB)
         addSNU(SUB_)
         addSNU(SYMBOL)
+        addSNU(SYMBOL_INT)
         addSNU(SYMBOL_CLS)
         // t
         addSNU(TEST_FN)
@@ -554,6 +557,7 @@ object Pihta : Module("pht") {
         add(SUB,           NRMath)
         add(SUB_,          NRMathB)
         add(SYMBOL,        NRSymbol)
+        add(SYMBOL_INT,    NRSymbolInt)
         add(SYMBOL_CLS,    NRSymbolCls)
         // t
         add(TEST_FN,       NRTestFn)

@@ -115,6 +115,7 @@ enum class NodeTypes : INodeType {
     SHIFT_RIGHT_("shift-right", PROCESSED),
     SUB_("sub", PROCESSED),
     SYMBOL("symbol", PARSED),
+    SYMBOL_INT("symbol-int", PARSED),
     SYMBOL_CLS("symbol-cls", PARSED),
     // t
     TEST_FN("test-fn", PARSED),
