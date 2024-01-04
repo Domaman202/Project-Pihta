@@ -1,6 +1,8 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.std.ast.NodeIsAs
 import ru.DmN.pht.std.node.NodeTypes
+import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.nodeValue
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Processor
@@ -31,7 +33,7 @@ object NRIs : INodeProcessor<NodeNodesList> {
                         else false
                     } else if (value?.isPrimitive == true)
                         false
-                    else return NodeNodesList(node.info.withType(NodeTypes.IS_), node.nodes.asSequence().map { processor.process(it, ctx, ValType.VALUE)!! }.toMutableList())
+                    else return NodeIsAs(node.info.withType(NodeTypes.IS_), mutableListOf(processor.process(node.nodes[1], ctx, ValType.VALUE)!!), ctx.global.getType(type, processor.tp))
                 )
             }
 

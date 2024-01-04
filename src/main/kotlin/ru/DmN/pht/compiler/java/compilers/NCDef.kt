@@ -15,8 +15,7 @@ object NCDef : INodeCompiler<NodeDef> {
             val body = ctx.body
             ctx.method.node.run {
                 node.variables.forEach { it ->
-                    val variable = Variable(it.name, it.type, it.variable!!.id, false)
-                    body.variables += variable
+                    val variable = body.add(it.name, it.type)
                     it.value?.let {
                         val value = compiler.compileVal(it, ctx)
                         load(value, this)

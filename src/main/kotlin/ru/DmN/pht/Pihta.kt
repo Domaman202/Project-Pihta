@@ -216,7 +216,7 @@ object Pihta : Module("pht") {
         add(type.operation.toRegularExpr(), SimpleNP(type))
     }
 
-    infix fun String.to(alias: String) {
+    private infix fun String.to(alias: String) {
         add(this.toRegularExpr(), NPNodeAlias(alias))
     }
 
@@ -236,7 +236,7 @@ object Pihta : Module("pht") {
         addSNU(ARRAY_SIZE)
         addSNU(ARRAY_SIZE_)
         addSNU(AS)
-        add(AS_, NUAs)
+        add(AS_, NUIsAs)
         addSNU(AS_GENS)
         addSNU(ASET)
         addSNU(ASET_)
@@ -310,7 +310,7 @@ object Pihta : Module("pht") {
         addSNU(INC_POST)
         add(INC_POST_,      NUIncDec)
         addSNU(IS)
-        addSNU(IS_)
+        add(IS_,            NUIsAs)
         addSNU(ITF)
         add(ITF_,           NUClass)
         // l
@@ -494,6 +494,7 @@ object Pihta : Module("pht") {
         add(INC_POST,      NRIncDec)
         add(INC_POST_,     NRIncDecB)
         add(IS,            NRIs)
+        add(IS_,           NRIs)
         add(ITF,           NRClass)
         // l
         add(LAZY_SYMBOL,   NRLazySymbol)

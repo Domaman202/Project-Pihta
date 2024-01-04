@@ -5,11 +5,11 @@ import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.utils.Variable
-import ru.DmN.pht.std.ast.NodeAs
+import ru.DmN.pht.std.ast.NodeIsAs
 import ru.DmN.pht.std.compiler.java.utils.*
 
-object NCAs : INodeCompiler<NodeAs> {
-    override fun compileVal(node: NodeAs, compiler: Compiler, ctx: CompilationContext): Variable {
+object NCAs : INodeCompiler<NodeIsAs> {
+    override fun compileVal(node: NodeIsAs, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.run {
             val value = compiler.compileVal(node.nodes[0], ctx)
             val of = value.type()

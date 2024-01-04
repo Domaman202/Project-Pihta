@@ -15,12 +15,13 @@ class BodyContext(
 ) : Iterable<BodyContext> {
     lateinit var stop: Label
 
-    fun add(name: String, type: VirtualType?) {
-        variables += Variable(name, type, lvi.getAndIncrement(), false)
-        if (type == VirtualType.LONG || type == VirtualType.DOUBLE) {
-            lvi.incrementAndGet()
+    fun add(name: String, type: VirtualType?): Variable =
+        Variable(name, type, lvi.getAndIncrement(), false).apply {
+            variables += this
+            if (type == VirtualType.LONG || type == VirtualType.DOUBLE) {
+                lvi.incrementAndGet()
+            }
         }
-    }
 
     operator fun get(name: String) =
         variables.find { it.name == name }
