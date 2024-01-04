@@ -267,7 +267,7 @@ object Pihta : Module("pht") {
         addSNU(DEF)
         add(DEF_,           NUDef)
         addSNU(DEF_SET)
-        // DEFMACRO
+        addSNU(DEFMACRO)
         addSNU(DEFN)
         add(DEFN_,          NUDefn)
         addSNU(DIV)
@@ -314,15 +314,15 @@ object Pihta : Module("pht") {
         addSNU(ITF)
         add(ITF_,           NUClass)
         // l
-        // LAZY_SYMBOL
+        addSNU(LAZY_SYMBOL)
         addSNU(LESS)
         addSNU(LESS_)
         addSNU(LESS_OR_EQ)
         addSNU(LESS_OR_EQ_)
         addSNU(LIST_OF)
         // m
-        // MACRO
-        // MACRO_ARG
+        add(MACRO,          NUMacro)
+        addSNU(MACRO_ARG)
         // MACRO_INLINE
         // MACRO_UNROLL
         addSNU(MCALL)

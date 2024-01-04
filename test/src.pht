@@ -1,15 +1,9 @@
 (app-fn
-    (def [
-        [i 12]
-        [j 21l]
-        [o (new ^Object)]
-        [s "Слава России"]])
-    (println (is ^int    i))
-    (println (is ^long   i))
-    (println (is ^Object i))
-    (println (as ^long   i))
-    (println (as ^float  j))
-    (println (as ^Object j))
-    (println (is ^Object o))
-    (println (is ^Object s))
-    (println (as ^Object s)))
+    (defmacro test-symbol []
+        (symbol (rand-symbol)))
+    (defmacro test-lazy-symbol []
+        (lazy-symbol (rand-symbol)))
+    (println (test-symbol))
+    (println (test-symbol))
+    (println (test-lazy-symbol))
+    (println (test-lazy-symbol)))

@@ -1,0 +1,9 @@
+(progn
+    (defmacro test-symbol []
+        (symbol (rand-symbol)))
+    (defmacro test-lazy-symbol []
+        (lazy-symbol (rand-symbol)))
+    (test-fn 0 (test-symbol))
+    (test-fn 1 (test-symbol))
+    (test-fn 2 (test-lazy-symbol))
+    (test-fn 3 (test-lazy-symbol)))

@@ -14,7 +14,7 @@ object NRLazySymbol : IStdNodeProcessor<NodeLazySymbol> {
         else null
 
     override fun computeString(node: NodeLazySymbol, processor: Processor, ctx: ProcessingContext): String =
-        if (node.symbol == null)
-            NRSymbol.computeString(node, processor, ctx).apply { node.symbol = this }
-        else node.symbol!!
+        if (node.symbol.get() == null)
+            NRSymbol.computeString(node, processor, ctx).apply { node.symbol.set(this) }
+        else node.symbol.get()!!
 }

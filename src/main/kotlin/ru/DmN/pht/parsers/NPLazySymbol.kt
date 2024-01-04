@@ -9,8 +9,9 @@ import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.siberia.parsers.NPProgn
+import java.util.concurrent.atomic.AtomicReference
 
 object NPLazySymbol : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
-        NPProgn.parse(parser, ctx) { NodeLazySymbol(INodeInfo.of(LAZY_SYMBOL, ctx, token), it, null) }
+        NPProgn.parse(parser, ctx) { NodeLazySymbol(INodeInfo.of(LAZY_SYMBOL, ctx, token), it, AtomicReference()) }
 }
