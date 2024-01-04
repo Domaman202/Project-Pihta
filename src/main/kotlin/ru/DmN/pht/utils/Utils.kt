@@ -20,8 +20,8 @@ val VirtualType.nameWithGenerics: String
         if (generics.isEmpty())
             return "^$name"
         val sb = StringBuilder()
-        generics.forEachIndexed { i, it ->
-            sb.append('^').append(it.second.name)
+        generics.values.forEachIndexed { i, it ->
+            sb.append('^').append(it.name)
             if (i != generics.size - 1) {
                 sb.append(", ")
             }
@@ -102,6 +102,16 @@ fun Processor.computeTypeOr(node: Node, ctx: ProcessingContext): VirtualType? =
     this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeType(node, this, ctx)
+        else throw UnsupportedOperationException()
+    }
+
+fun Processor.computeTypeWithGens(gens: Map<String, VirtualType>, node: Node, ctx: ProcessingContext): VirtualType =
+    this.computeTypeWithGensOr(gens, node, ctx)!!
+
+fun Processor.computeTypeWithGensOr(gens: Map<String, VirtualType>, node: Node, ctx: ProcessingContext): VirtualType? =
+    this.get(node, ctx).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.computeTypeWithGens(gens, node, this, ctx)
         else throw UnsupportedOperationException()
     }
 

@@ -12,7 +12,6 @@ import ru.DmN.siberia.processors.INodeProcessor
 
 object NRTypeof : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
-        val info = node.info
         val type = processor.calc(node.nodes.first(), ctx)
         return if (type == null)
             nodeValueNil(node.info)

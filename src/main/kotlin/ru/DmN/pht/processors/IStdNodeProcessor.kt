@@ -22,6 +22,9 @@ interface IStdNodeProcessor<T : Node> : INodeProcessor<T> {
     fun computeType(node: T, processor: Processor, ctx: ProcessingContext): VirtualType? =
         null
 
+    fun computeTypeWithGens(gens: Map<String, VirtualType>, node: T, processor: Processor, ctx: ProcessingContext): VirtualType? =
+        null
+
     fun computeTypes(node: T, processor: Processor, ctx: ProcessingContext): List<VirtualType>? =
         null
 

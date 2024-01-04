@@ -6,9 +6,7 @@ import ru.DmN.pht.std.processor.ctx.BodyContext
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.with
-import ru.DmN.pht.std.utils.computeGenericType
-import ru.DmN.pht.std.utils.computeString
-import ru.DmN.pht.std.utils.computeType
+import ru.DmN.pht.std.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -25,14 +23,22 @@ object NREFn : INodeProcessor<NodeNodesList> {
         val gctx = ctx.global
         val type = ctx.clazz as VirtualType.VirtualTypeImpl
         //
-        val extend = processor.computeType(node.nodes[0], ctx)
-        val name = processor.computeString(node.nodes[1], ctx)
-        val returnGen = processor.computeGenericType(node.nodes[2], ctx)
+        val gens = processor.computeListOr(node.nodes[0], ctx)
+        val offset = if (gens == null) 0 else 1
+        val generics = type.generics.toMutableMap()
+        gens?.forEach {
+            val generic = processor.computeList(it, ctx)
+            generics[processor.computeString(generic[0], ctx)] = processor.computeType(generic[1], ctx)
+        }
+        //
+        val extend = processor.computeType(node.nodes[offset], ctx)
+        val name = processor.computeString(node.nodes[1 + offset], ctx)
+        val returnGen = processor.computeGenericType(node.nodes[2 + offset], ctx)
         val returnType =
             if (returnGen == null)
-                processor.computeType(node.nodes[2], ctx)
-            else type.generics.find { it.first == returnGen }!!.second
-        val args = NRDefn.parseArguments(node.nodes[3], type.generics, processor, ctx, gctx)
+                processor.computeType(node.nodes[2 + offset], ctx)
+            else type.generics[returnGen]!!
+        val args = NRDefn.parseArguments(node.nodes[3 + offset], type.generics, processor, ctx, gctx)
         //
         args.first.add(0, extend)
         args.second.add(0, "this")
@@ -48,12 +54,12 @@ object NREFn : INodeProcessor<NodeNodesList> {
             args.third,
             MethodModifiers(static = true, extension = true),
             extend,
-            emptyList() // todo:
+            emptyMap() // todo:
         )
         type.methods += method
         gctx.getExtensions(extend) += method
         //
-        val new = NodeDefn(node.info.withType(NodeTypes.EFN_), node.nodes.drop(4).toMutableList(), method)
+        val new = NodeDefn(node.info.withType(NodeTypes.EFN_), node.nodes.drop(4 + offset).toMutableList(), method)
         processor.stageManager.pushTask(ProcessingStage.METHODS_BODY) {
             processNodesList(
                 new,

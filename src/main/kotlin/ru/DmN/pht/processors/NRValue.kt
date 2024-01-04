@@ -3,6 +3,7 @@ package ru.DmN.pht.std.processors
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.utils.VTWG
+import ru.DmN.pht.utils.OrPair
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -44,16 +45,44 @@ object NRValue : IStdNodeProcessor<NodeValue> {
         if (gs == -1)
             return ctx.global.getType(node.value, processor.tp)
         val gctx = ctx.global
-        val generics = ArrayList<VirtualType>()
+        val type = gctx.getType(node.value.substring(0, gs), processor.tp)
+        val iter = type.generics.keys.iterator()
+        val generics = HashMap<String, OrPair<VirtualType, String>>()
         var s = node.value.substring(gs)
         while (true) {
             val i = s.indexOf(',')
-            generics.add(gctx.getType(s.substring(2, if (i == -1) s.length - 1 else i), processor.tp))
+            generics[iter.next()] =
+                if (s[1] == '^')
+                    OrPair.first(gctx.getType(s.substring(2, if (i == -1) s.length - 1 else i), processor.tp))
+                else OrPair.second(s.substring(1, if (i == -1) s.length - 2 else i - 1))
             if (i == -1)
                 break
             s = s.substring(i + 1)
         }
-        return VTWG(gctx.getType(node.value.substring(0, gs), processor.tp), generics)
+        return VTWG(type, generics)
+    }
+
+    override fun computeTypeWithGens(gens: Map<String, VirtualType>, node: NodeValue, processor: Processor, ctx: ProcessingContext): VirtualType {
+        val gs = node.value.indexOf('<')
+        if (gs == -1)
+            return ctx.global.getType(node.value, processor.tp)
+        val gctx = ctx.global
+        val type = gctx.getType(node.value.substring(0, gs), processor.tp)
+        val iter = type.generics.keys.iterator()
+        val generics = HashMap<String, OrPair<VirtualType, String>>()
+        var s = node.value.substring(gs)
+        while (true) {
+            val i = s.indexOf(',')
+            generics[iter.next()] = OrPair.first(
+                if (s.startsWith('^'))
+                    gctx.getType(s.substring(2, if (i == -1) s.length - 1 else i), processor.tp)
+                else gens[s.substring(1, if (i == -1) s.length - 2 else i - 1)]!!
+            )
+            if (i == -1)
+                break
+            s = s.substring(i + 1)
+        }
+        return VTWG(type, generics)
     }
 
     override fun computeGenericType(node: NodeValue, processor: Processor, ctx: ProcessingContext): String? =

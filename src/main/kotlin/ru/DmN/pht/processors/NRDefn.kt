@@ -29,10 +29,10 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         //
         val gens = processor.computeListOr(node.nodes[0], ctx)
         val offset = if (gens == null) 0 else 1
-        val generics = type.generics.toMutableList()
+        val generics = type.generics.toMutableMap()
         gens?.forEach {
             val generic = processor.computeList(it, ctx)
-            generics += Pair(processor.computeString(generic[0], ctx), processor.computeType(generic[1], ctx))
+            generics[processor.computeString(generic[0], ctx)] = processor.computeType(generic[1], ctx)
         }
         //
         val name = processor.computeString(node.nodes[offset], ctx)
@@ -40,7 +40,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         val returnType =
             if (returnGen == null)
                 processor.computeType(node.nodes[1 + offset], ctx)
-            else generics.find { it.first == returnGen }!!.second
+            else generics[returnGen]!!
         val args = parseArguments(node.nodes[2 + offset], generics, processor, ctx, gctx)
         //
         val method = VirtualMethodImpl(
@@ -93,7 +93,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         }
     }
 
-    fun parseArguments(list: Node, generics: List<Pair<String, VirtualType>>, processor: Processor, ctx: ProcessingContext, gctx: GlobalContext): Triple<MutableList<VirtualType>, MutableList<String>, MutableList<String?>> {
+    fun parseArguments(list: Node, generics: Map<String, VirtualType>, processor: Processor, ctx: ProcessingContext, gctx: GlobalContext): Triple<MutableList<VirtualType>, MutableList<String>, MutableList<String?>> {
         val argsc = ArrayList<VirtualType>()
         val argsn = ArrayList<String>()
         val argsg = ArrayList<String?>()
@@ -105,7 +105,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
                 val type = it.last()
                 if (type.endsWith('^')) {
                     val generic = type.substring(0, type.length - 1)
-                    argsc += generics.find { it.first == generic }!!.second
+                    argsc += generics[generic]!!
                     argsg += generic
                 } else {
                     argsc += gctx.getType(type, processor.tp)

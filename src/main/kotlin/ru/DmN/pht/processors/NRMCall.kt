@@ -26,16 +26,34 @@ import ru.DmN.siberia.utils.VirtualType
 import kotlin.streams.toList
 
 object NRMCall : INodeProcessor<NodeNodesList> {
-    override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
-        val result = findMethod(node, processor, ctx)
-        return result.generics ?: processor.calc(getInstance(result, node, processor, ctx), ctx).let { if (it is VTWG) it.gens[0] else result.method.rettype }
+    override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
+        calc(findMethod(node, processor, ctx), node, processor, ctx)
+
+    fun calc(result: MethodFindResultA, node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
+        val instance = lazy { processor.calc(getInstance(result, node, processor, ctx), ctx) }
+        result.method.retgen ?: return result.method.rettype.let { rt ->
+            val iv = instance.value
+            if (rt is VTWG && iv is VTWG)
+                rt.with(iv.gens.filter { it.value.isFirst }.map { Pair(it.key, it.value.first()) }.toMap())
+            else rt
+        }
+        return result.generics
+            ?: getGensFromArgs(result, processor, ctx)[result.method.retgen]
+            ?: instance.value.let {
+                if (it is VTWG) {
+                    val gen = it.gens[result.method.retgen]!!
+                    if (gen.isFirst)
+                        gen.first()
+                    else it.generics[gen.second()]!!
+                } else result.method.rettype
+            }
     }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeMCall {
         val info = node.info
         val result = findMethod(node, processor, ctx)
         val instance = getInstance(result, node, processor, ctx)
-        val generics = result.generics ?: if (result.type == UNKNOWN) null else processor.calc(instance, ctx).let { if (it is VTWG) it.gens[0] else null }
+        val generics = calc(result, node, processor, ctx)
         return if (result.method.extension == null)
             NodeMCall(
                 info.processed,
@@ -74,6 +92,14 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             result.method,
             NodeMCall.Type.EXTEND
         )
+    }
+
+    fun getGensFromArgs(result: MethodFindResultA, processor: Processor, ctx: ProcessingContext): Map<String, VirtualType> {
+        val map = HashMap<String, VirtualType>()
+        val argsg = result.method.argsg
+        for (i in argsg.indices)
+            map[argsg[i] ?: continue] = processor.calc(result.args[i], ctx)!!
+        return map
     }
 
     /**
