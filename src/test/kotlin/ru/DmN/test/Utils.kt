@@ -58,7 +58,7 @@ abstract class Module(private val dir: String) {
         val tp = TypesProvider.java()
         module.init = false
         module.init()
-        File("dump/$dir/unparse").mkdirs()
+        File("dump/$dir/unparse/parsed").mkdirs()
         FileOutputStream("dump/$dir/unparse/parsed/unparse.pht").use { out ->
             val unparser = Unparser()
             val uctx = UnparsingContext.base()
@@ -75,6 +75,7 @@ abstract class Module(private val dir: String) {
             }
         }
         processor.stageManager.runAll()
+        File("dump/$dir/unparse/processed").mkdirs()
         FileOutputStream("dump/$dir/unparse/processed/unparse.pht").use { out ->
             val unparser = Unparser()
             val uctx = UnparsingContext.base()
@@ -84,8 +85,8 @@ abstract class Module(private val dir: String) {
     }
 
     fun unparseCheck() {
-        assertTrue(String(File("dump/$dir/unparse/parsed.unparse.pht").readBytes()) ==  module.getModuleFile("unparse/parsed.unparse.pht"))
-        assertTrue(String(File("dump/$dir/unparse/processed.unparse.pht").readBytes()) == module.getModuleFile("unparse/processed.unparse.pht"))
+        assertTrue(String(File("dump/$dir/unparse/parsed/unparse.pht").readBytes()) ==  module.getModuleFile("unparse/parsed/unparse.pht"))
+        assertTrue(String(File("dump/$dir/unparse/processed/unparse.pht").readBytes()) == module.getModuleFile("unparse/processed/unparse.pht"))
     }
 
 
