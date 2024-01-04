@@ -45,7 +45,6 @@ class PihtaJava(module: Pihta) : ModuleCompilers(module, Platform.JAVA) {
         add(FN_,          NCFn)
         add(FSET_,        NCFSet)
         // g
-        add(GET_,         NCGetA)
         add(GET_OR_NAME,  NCGetB)
         add(GREAT_,       NCCompare)
         add(GREAT_OR_EQ_, NCCompare)

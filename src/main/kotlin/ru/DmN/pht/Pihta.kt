@@ -89,7 +89,6 @@ object Pihta : Module("pht") {
         addSNP(FSET_A)
         // g
         addNP("get",          NPGet)
-        addSNP(GET_B)
         addNP("get-or-name!", NPGetOrName)
         addSNP(GREAT)
         addSNP(GREAT_OR_EQ)
@@ -296,9 +295,6 @@ object Pihta : Module("pht") {
         add(FSET_B,         NUFSetA)
         add(FSET_,          NUFSetB)
         // g
-        // GET_A
-        addSNU(GET_B)
-        // GET_
         add(GET_OR_NAME,    NUGetOrName)
         addSNU(GREAT)
         addSNU(GREAT_)
@@ -484,7 +480,6 @@ object Pihta : Module("pht") {
         add(FSET_A,        NRFSetA)
         add(FSET_B,        NRFSetB)
         // g
-        add(GET_B,         NRGetB)
         add(GET_OR_NAME,   NRGetOrName)
         add(GREAT,         NRCompare)
         add(GREAT_,        NRCompareB)

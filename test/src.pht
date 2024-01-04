@@ -1,9 +1,3 @@
-(progn
-    (cls [[T ^Object]] TestC [^Object]
-        (ctor [] (ccall))
-        (defn foo T^ [] nil))
-    (cls [[T ^Object]] TestD [^Object]
-        (ctor [] (ccall))
-        (defn test ^TestC<T^> [] (new ^TestC)))
-    (app-fn
-        (println (typeof (#foo (#test (new ^TestD<^String>)))))))
+(app-fn
+    (def [[i 0]])
+    (println (get i)))
