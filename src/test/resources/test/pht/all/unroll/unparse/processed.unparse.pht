@@ -21,4 +21,50 @@
 									1
 									1)
 								2)
+							2)))))))(use-ctx pht
+	(progn
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(add
+							(mul
+								(mul
+									1
+									2)
+								2)
+							1)))))
+		(cls [] Test1 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mul
+							(mul
+								(add
+									1
+									1)
+								2)
+							2)))))))(use-ctx pht
+	(progn
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(add
+							(mul
+								(mul
+									1
+									2)
+								2)
+							1)))))
+		(cls [] Test1 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mul
+							(mul
+								(add
+									1
+									1)
+								2)
 							2)))))))

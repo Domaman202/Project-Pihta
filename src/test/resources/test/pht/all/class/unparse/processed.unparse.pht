@@ -5,4 +5,18 @@
 			(@static
 				(defn [] test ^dynamic []
 					(as ^dynamic
+						^Test))))))(use-ctx pht
+	(progn
+		(cls [] Test [^java.lang.Object])
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						^Test))))))(use-ctx pht
+	(progn
+		(cls [] Test [^java.lang.Object])
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
 						^Test))))))

@@ -33,4 +33,74 @@
 				(as ^dynamic
 					(add
 						i
+						j))))))(use-ctx pht
+	(cls [] Test0 [^java.lang.Object]
+		(@static
+			(defn [] test ^dynamic []
+				(def [
+					[^int i 0]
+					[^int j 0]])
+				(progn
+					(set! i
+						(add
+							i
+							222))
+					(set! j
+						(add
+							j
+							333))
+					(set! i
+						(add
+							i
+							-222))
+					(set! j
+						(add
+							j
+							333))
+					(set! i
+						(add
+							i
+							-222))
+					(set! j
+						(add
+							j
+							333)))
+				(as ^dynamic
+					(add
+						i
+						j))))))(use-ctx pht
+	(cls [] Test0 [^java.lang.Object]
+		(@static
+			(defn [] test ^dynamic []
+				(def [
+					[^int i 0]
+					[^int j 0]])
+				(progn
+					(set! i
+						(add
+							i
+							222))
+					(set! j
+						(add
+							j
+							333))
+					(set! i
+						(add
+							i
+							-222))
+					(set! j
+						(add
+							j
+							333))
+					(set! i
+						(add
+							i
+							-222))
+					(set! j
+						(add
+							j
+							333)))
+				(as ^dynamic
+					(add
+						i
 						j))))))

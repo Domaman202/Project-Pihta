@@ -19,4 +19,58 @@
 					(as ^dynamic
 						(fget
 							test
-							i)))))))
+							i)))))))(use-ctx pht
+	(progn
+		(cls [] Test [^java.lang.Object]
+			(def [
+				[i ^int]])
+			(ctor []
+				(mcall
+					super
+					<init>)))
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(def [
+						[^Test test (new ^Test)]])
+					(fset
+						test
+						i
+						202)
+					(as ^dynamic
+						(fget
+							test
+							i)))))))(use-ctx pht
+	(progn
+		(cls
+			Test
+			[
+				^Object
+			]
+			(def
+				[
+					[
+						i
+						^int
+					]
+				])
+			(ctor
+				[]
+				(ccall)))
+		(test-fn
+			0
+			(def
+				[
+					[
+						test
+						(new
+							^Test)
+					]
+				])
+			(fset
+				test
+				i
+				202)
+			(fget
+				test
+				i))))

@@ -9,4 +9,33 @@
 			(@static
 				(defn [] test ^dynamic []
 					(as ^dynamic
-						^java.lang.String))))))
+						^java.lang.String))))))(use-ctx pht
+	(progn
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						^java.lang.Object))))
+		(cls [] Test1 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						^java.lang.String))))))(use-ctx pht
+	(progn
+		(alias-type
+			[
+				[
+					Object
+					obj
+				]
+				[
+					String
+					str
+				]
+			])
+		(test-fn
+			0
+			^obj)
+		(test-fn
+			1
+			^str)))

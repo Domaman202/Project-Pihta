@@ -16,4 +16,53 @@
 							sum
 							1
 							2
-							3)))))))
+							3)))))))(use-ctx pht
+	(progn
+		(cls [] App [^java.lang.Object]
+			(@static
+				(defn [] sum ^int [[a ^int][b ^int][c ^int]]
+					(add
+						a
+						b
+						c))))
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							^App
+							sum
+							1
+							2
+							3)))))))(use-ctx pht
+	(progn
+		(app
+			(defn
+				sum
+				^int
+				[
+					[
+						a
+						^int
+					]
+					[
+						b
+						^int
+					]
+					[
+						c
+						^int
+					]
+				]
+				(add
+					a
+					b
+					c)))
+		(test-fn
+			0
+			(mcall
+				^App
+				sum
+				1
+				2
+				3))))

@@ -3,10 +3,12 @@ package ru.DmN.test
 import org.objectweb.asm.ClassWriter
 import ru.DmN.pht.std.module.StdModule
 import ru.DmN.pht.std.module.ast.NodeModule
+import ru.DmN.pht.std.utils.type
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.Unparser
+import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.parser.ctx.ParsingContext
@@ -18,6 +20,7 @@ import ru.DmN.siberia.processor.utils.with
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.utils.Module
 import ru.DmN.siberia.utils.TypesProvider
+import ru.DmN.siberia.utils.operation
 import java.io.File
 import java.io.FileOutputStream
 import java.net.URLClassLoader
@@ -52,6 +55,7 @@ abstract class Module(private val dir: String) {
 
     fun unparse() {
         val tp = TypesProvider.java()
+        module.init = false
         module.init()
         File("dump/$dir/unparse").mkdirs()
         FileOutputStream("dump/$dir/unparse/parsed.unparse.pht").use { out ->
@@ -86,6 +90,7 @@ abstract class Module(private val dir: String) {
 
     fun print() {
         val tp = TypesProvider.java()
+        module.init = false
         module.init()
         File("dump/$dir/print").mkdirs()
         FileOutputStream("dump/$dir/print/parsed.short.print").use { short ->
@@ -129,11 +134,11 @@ abstract class Module(private val dir: String) {
 
     fun compile() {
         val tp = TypesProvider.java()
-        val module = (Parser(Module.getModuleFile(dir)).parseNode(ParsingContext.of(StdModule)) as NodeModule).module
+        module.init = false
         module.init()
         val processed = ArrayList<Node>()
         val processor = Processor(tp)
-        val pctx = ProcessingContext.base().with(Platform.JAVA).apply { this.module = module }
+        val pctx = ProcessingContext.base().with(Platform.JAVA).apply { this.module = this@Module.module }
         module.load(processor, pctx, ValType.NO_VALUE)
         module.nodes.forEach { it ->
             processor.process(it, pctx, ValType.NO_VALUE)?.let {
