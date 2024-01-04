@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.parsers
 
-import ru.DmN.pht.std.ast.NodeMacroUnroll
+import ru.DmN.pht.std.ast.NodeMacroUtil
 import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.parser.utils.macros
 import ru.DmN.siberia.Parser
@@ -17,7 +17,7 @@ object NPMacroUnroll : INodeParser {
         val uuid = UUID.randomUUID()
         ctx.macros.push(uuid)
         return NPProgn.parse(parser, ctx) {
-            NodeMacroUnroll(INodeInfo.of(NodeTypes.MACRO_UNROLL, ctx, token), it, ctx.macros.reversed()).apply {
+            NodeMacroUtil(INodeInfo.of(NodeTypes.MACRO_UNROLL, ctx, token), it, ctx.macros.reversed()).apply {
                 ctx.macros.pop()
             }
         }

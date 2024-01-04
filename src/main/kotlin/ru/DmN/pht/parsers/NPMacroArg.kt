@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.parsers
 
-import ru.DmN.pht.std.ast.NodeMacroArg
+import ru.DmN.pht.std.ast.NodeMacroUtil
 import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.parser.utils.macros
 import ru.DmN.siberia.Parser
@@ -13,5 +13,5 @@ import ru.DmN.siberia.parsers.NPProgn
 
 object NPMacroArg : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
-        NPProgn.parse(parser, ctx) { NodeMacroArg(INodeInfo.of(NodeTypes.MACRO_ARG, ctx, token), it, ctx.macros.reversed()) }
+        NPProgn.parse(parser, ctx) { NodeMacroUtil(INodeInfo.of(NodeTypes.MACRO_ARG, ctx, token), it, ctx.macros.reversed()) }
 }

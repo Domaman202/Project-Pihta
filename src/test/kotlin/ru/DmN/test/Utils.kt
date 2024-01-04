@@ -42,7 +42,8 @@ abstract class Module(private val dir: String) {
     open fun testUnparse() {
         unparse()
         unparseCheck()
-        (object : SiberiaModule("${module.name}/unparse") { }).compileTest()
+        (object : SiberiaModule("${module.name}/unparse/parsed") { }).compileTest()
+        (object : SiberiaModule("${module.name}/unparse/processed") { }).compileTest()
     }
 
     @Test
@@ -58,7 +59,7 @@ abstract class Module(private val dir: String) {
         module.init = false
         module.init()
         File("dump/$dir/unparse").mkdirs()
-        FileOutputStream("dump/$dir/unparse/parsed.unparse.pht").use { out ->
+        FileOutputStream("dump/$dir/unparse/parsed/unparse.pht").use { out ->
             val unparser = Unparser()
             val uctx = UnparsingContext.base()
             module.nodes.forEach { unparser.unparse(it, uctx, 0) }
@@ -74,7 +75,7 @@ abstract class Module(private val dir: String) {
             }
         }
         processor.stageManager.runAll()
-        FileOutputStream("dump/$dir/unparse/processed.unparse.pht").use { out ->
+        FileOutputStream("dump/$dir/unparse/processed/unparse.pht").use { out ->
             val unparser = Unparser()
             val uctx = UnparsingContext.base()
             processed.forEach { unparser.unparse(it, uctx, 0) }

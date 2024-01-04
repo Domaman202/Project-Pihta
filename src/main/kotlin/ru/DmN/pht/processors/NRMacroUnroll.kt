@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.ast.NodeMacroUnroll
+import ru.DmN.pht.std.ast.NodeMacroUtil
 import ru.DmN.pht.std.processor.utils.macro
 import ru.DmN.pht.std.processor.utils.with
 import ru.DmN.pht.std.utils.computeList
@@ -15,8 +15,8 @@ import ru.DmN.siberia.processors.INodeProcessor
 import java.util.*
 import kotlin.math.min
 
-object NRMacroUnroll : INodeProcessor<NodeMacroUnroll> { // todo: calc
-    override fun process(node: NodeMacroUnroll, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
+object NRMacroUnroll : INodeProcessor<NodeMacroUtil> { // todo: calc
+    override fun process(node: NodeMacroUtil, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
         val nodes = ArrayList<Node>()
         var maxIndex = Int.MAX_VALUE
         val names = ArrayList<Triple<List<Node>, String, UUID>>()
