@@ -136,11 +136,11 @@ object Pihta : Module("pht") {
         addSNP(ROLL_LEFT)
         addSNP(ROLL_RIGHT)
         // s
-        addNP("set",  NPSetA)
-        addNP("set!", NPSetB)
+        addNP("set",    NPSetA)
+        addNP("set!",   NPSetB)
         addSNP(SHIFT_LEFT)
         addSNP(SHIFT_RIGHT)
-        addNP("skip", NPSkip)
+        addNP("skip",   NPSkip)
         addSNP(SUB)
         addSNP(SYMBOL)
         addSNP(SYMBOL_CLS)
@@ -150,7 +150,7 @@ object Pihta : Module("pht") {
         addSNP(TYPED_GET)
         addSNP(TYPEOF)
         // u
-        addNP("unit", NPUnit)
+        addNP("unit",   NPUnit)
         // v
         addSNP(VALN)
         addNP("valn!",  NPValnB)
@@ -241,7 +241,6 @@ object Pihta : Module("pht") {
         addSNU(AS_GENS)
         addSNU(ASET)
         addSNU(ASET_)
-        // ASET_
         // b
         addSNU(BODY)
         addSNU(BODY_)
@@ -263,9 +262,9 @@ object Pihta : Module("pht") {
         // d
         add(DEBUG,          NUDebug)
         addSNU(DEC_PRE)
-        // DEC_PRE_
+        add(DEC_PRE_,       NUIncDec)
         addSNU(DEC_POST)
-        // DEC_POST_
+        add(DEC_POST_,      NUIncDec)
         addSNU(DEF)
         add(DEF_,           NUDef)
         addSNU(DEF_SET)

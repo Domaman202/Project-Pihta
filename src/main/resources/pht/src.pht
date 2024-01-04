@@ -108,7 +108,7 @@
             (types java.lang.Class)
             (types java.lang.Object)
             (types java.lang.String))
-        (alias-type Object Any)
+        (alias-type [[Object Any]])
         (import pht
             (extensions ru.DmN.pht.ArrayExtends)
             (extensions ru.DmN.pht.StringExtends)

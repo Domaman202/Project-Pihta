@@ -16,6 +16,5 @@ class Interface : Module("test/pht/all/interface") {
             assertNull(it.superclass)
             assertTrue(Modifier.isInterface(it.modifiers))
         }
-
     }
 }

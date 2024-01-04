@@ -3,7 +3,7 @@
 
 ### Применение
 
-1. `(alias-type type alias)`<br>
+1. `(alias-type [[type0 alias0][typeN aliasN]])`<br>
 `type` - _тип_.<br>
 `alias` - _псевдоним_.
 
@@ -12,6 +12,6 @@
 ```pihta
 (use-ctx pht
     (app-fn
-        (alias-type java.lang.Integer i32)
+        (alias-type [[java.lang.Integer i32]])
         (println ^i32)))
 ```

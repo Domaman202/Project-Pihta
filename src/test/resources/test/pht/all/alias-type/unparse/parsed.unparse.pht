@@ -1,0 +1,12 @@
+(use-ctx pht
+	(progn
+		(cls Test0 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(as ^dynamic
+						^java.lang.Object))))
+		(cls Test1 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(as ^dynamic
+						^java.lang.String))))))

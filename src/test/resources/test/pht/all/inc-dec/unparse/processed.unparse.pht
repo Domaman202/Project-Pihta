@@ -1,0 +1,44 @@
+(use-ctx pht
+	(progn
+		(cls Test0 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(def [
+						[^int i 0]])
+					(as ^dynamic
+						(inc i)))))
+		(cls Test1 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(def [
+						[^int i 0]])
+					(as ^dynamic
+						(inc i)))))
+		(cls Test2 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(def [
+						[^int i 0]])
+					(as ^dynamic
+						(inc- i)))))
+		(cls Test3 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(def [
+						[^int i 0]])
+					(as ^dynamic
+						(dec i)))))
+		(cls Test4 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(def [
+						[^int i 0]])
+					(as ^dynamic
+						(dec i)))))
+		(cls Test5 [^java.lang.Object]
+			(@static
+				(defn test ^dynamic []
+					(def [
+						[^int i 0]])
+					(as ^dynamic
+						(dec- i)))))))
