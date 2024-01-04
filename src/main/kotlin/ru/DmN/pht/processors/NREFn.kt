@@ -37,8 +37,8 @@ object NREFn : INodeProcessor<NodeNodesList> {
         val returnType =
             if (returnGen == null)
                 processor.computeType(node.nodes[2 + offset], ctx)
-            else type.generics[returnGen]!!
-        val args = NRDefn.parseArguments(node.nodes[3 + offset], type.generics, processor, ctx, gctx)
+            else generics[returnGen]!!
+        val args = NRDefn.parseArguments(node.nodes[3 + offset], generics, processor, ctx, gctx)
         //
         args.first.add(0, extend)
         args.second.add(0, "this")
@@ -48,13 +48,13 @@ object NREFn : INodeProcessor<NodeNodesList> {
             type,
             name,
             returnType,
-            null, // todo:
+            returnGen,
             args.first,
             args.second,
             args.third,
             MethodModifiers(static = true, extension = true),
             extend,
-            emptyMap() // todo:
+            generics
         )
         type.methods += method
         gctx.getExtensions(extend) += method

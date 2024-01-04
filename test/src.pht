@@ -1,9 +1,5 @@
-(progn
-    (cls [[T ^Object]] TestA [^Object]
-        (ctor [] (ccall))
-        (defn foo T^ [] nil))
-    (cls [[T ^Object]] TestB [^Object]
-        (ctor [] (ccall))
-        (defn test ^TestA<T^> [] (new ^TestA)))
-    (app-fn
-        (println (typeof (#foo (#test (new ^TestB<^String>)))))))
+(use-ctx pht
+    (app
+        (efn [[T ^Object]] ^String test T^ [] nil)
+        (app-fn
+            (println (typeof (#test<^String> "Слава России!"))))))
