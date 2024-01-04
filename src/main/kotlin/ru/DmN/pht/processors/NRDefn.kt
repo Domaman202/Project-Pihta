@@ -53,7 +53,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
             args.third,
             MethodModifiers(),
             null,
-            generics, // todo:
+            generics,
         )
         type.methods += method
         //

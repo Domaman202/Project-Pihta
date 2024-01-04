@@ -1,7 +1,7 @@
 (use-ctx pht
-	(cls Test0 [^java.lang.Object]
+	(cls [] Test0 [^java.lang.Object]
 		(@static
-			(defn test ^dynamic []
+			(defn [] test ^dynamic []
 				(def [
 					[^java.lang.StringBuilder out (new ^java.lang.StringBuilder)]
 					[^int i -1]])

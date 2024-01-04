@@ -1,6 +1,8 @@
 package ru.DmN.pht.unparsers
 
 import ru.DmN.pht.std.ast.NodeDefn
+import ru.DmN.pht.std.utils.nameWithGenerics
+import ru.DmN.pht.std.utils.nameWithGens
 import ru.DmN.siberia.Unparser
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.unparsers.INodeUnparser
@@ -11,14 +13,29 @@ object NUDefn : INodeUnparser<NodeDefn> {
     override fun unparse(node: NodeDefn, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
             node.method.apply {
-                append('(').append(node.operation).append(' ').append(name).append(" ^").append(rettype.name).append(" [")
+                append('(').append(node.operation)
+                unparseGenerics(node, unparser)
+                append(name).append(' ')
+                retgen?.let { append(it).append('^') } ?: append(rettype.nameWithGens)
+                append(" [")
                 argsn.forEachIndexed { i, it ->
-                    append('[').append(it).append(" ^").append(argsc[i].name).append(']')
+                    append('[').append(it).append(' ')
+                    argsg[i]?.let { append(it).append('^') } ?: append(argsc[i].nameWithGens)
+                    append(']')
                 }
                 append(']')
                 NUDefault.unparseNodes(node, unparser, ctx, indent)
                 append(')')
             }
+        }
+    }
+
+    fun unparseGenerics(node: NodeDefn, unparser: Unparser) {
+        unparser.out.apply {
+            append(" [")
+            node.method.generics.entries.stream().skip(node.method.declaringClass!!.generics.size.toLong())
+                .forEach { append('[').append(it.key).append(' ').append(it.value.nameWithGenerics).append(']') }
+            append("] ")
         }
     }
 }

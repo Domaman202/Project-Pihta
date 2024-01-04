@@ -26,4 +26,12 @@
     (test-fn 5
         (typeof (#foo (new ^TestB<^String>) "Test!")))
     (test-fn 6
-        (typeof (#foo<^String> (new ^TestB) "Test!"))))
+        (typeof (#foo<^String> (new ^TestB) "Test!")))
+    (cls [[T ^Object]] TestC [^Object]
+        (ctor [] (ccall))
+        (defn foo T^ [] nil))
+    (cls [[T ^Object]] TestD [^Object]
+        (ctor [] (ccall))
+        (defn test ^TestC<T^> [] (new ^TestC)))
+    (test-fn 7
+        (typeof (#foo (#test (new ^TestD<^String>))))))

@@ -29,6 +29,27 @@ val VirtualType.nameWithGenerics: String
         return "^$name<$sb>"
     }
 
+val VirtualType.nameWithGens: String
+    get() = if (this is VTWG) this.nameWithGens else this.nameWithGenerics
+
+val VTWG.nameWithGens: String
+    get() {
+        if (isArray)
+            return "(array-type ${if (componentType is VTWG) (componentType!! as VTWG).nameWithGens else componentType!!.nameWithGenerics})"
+        if (generics.isEmpty())
+            return "^$name"
+        val sb = StringBuilder()
+        gens.values.forEachIndexed { i, it ->
+            if (it.isFirst)
+                sb.append('^').append(it.first())
+            else sb.append(it.second()).append('^')
+            if (i != gens.size - 1) {
+                sb.append(", ")
+            }
+        }
+        return "^$name<$sb>"
+    }
+
 inline fun <T, R> List<T>.mapMutable(transform: (T) -> R): MutableList<R> {
     val list = ArrayList<R>(this.size)
     for (it in this)

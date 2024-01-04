@@ -239,6 +239,67 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = TestC)
+|	|	|	|	[CTOR_
+|	|	|	|	|	(type = constructor)
+|	|	|	|	|	(desc = <init>()V)
+|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	(method = <init>()V)
+|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	)]
+|	|	|	|	]
+|	|	|	|	[DEFN_
+|	|	|	|	|	(type = method)
+|	|	|	|	|	(desc = foo()Ljava/lang/Object;)
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = NIL)
+|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = TestD)
+|	|	|	|	[CTOR_
+|	|	|	|	|	(type = constructor)
+|	|	|	|	|	(desc = <init>()V)
+|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	(method = <init>()V)
+|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	)]
+|	|	|	|	]
+|	|	|	|	[DEFN_
+|	|	|	|	|	(type = method)
+|	|	|	|	|	(desc = test()LTestC;)
+|	|	|	|	|	[NEW_
+|	|	|	|	|	|	(type = VT(TestC))
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = Test7)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'java.lang.String')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
 |	|	]
 |	)
 ]

@@ -1,43 +1,43 @@
 (use-ctx pht
 	(progn
-		(cls Test0 [^java.lang.Object]
+		(cls [] Test0 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(as ^dynamic
 						(great
 							1
 							1)))))
-		(cls Test1 [^java.lang.Object]
+		(cls [] Test1 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(as ^dynamic
 						(great-or-eq
 							1
 							1)))))
-		(cls Test2 [^java.lang.Object]
+		(cls [] Test2 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(as ^dynamic
 						(less
 							2
 							2)))))
-		(cls Test3 [^java.lang.Object]
+		(cls [] Test3 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(as ^dynamic
 						(less-or-eq
 							2
 							2)))))
-		(cls Test4 [^java.lang.Object]
+		(cls [] Test4 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(as ^dynamic
 						(eq
 							3
 							4)))))
-		(cls Test5 [^java.lang.Object]
+		(cls [] Test5 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(as ^dynamic
 						(not-eq
 							3

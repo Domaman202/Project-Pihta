@@ -1,8 +1,8 @@
 (use-ctx pht
 	(progn
-		(cls Test0 [^java.lang.Object]
+		(cls [] Test0 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(as ^dynamic
 						(add
 							(mul
@@ -11,9 +11,9 @@
 									2)
 								2)
 							1)))))
-		(cls Test1 [^java.lang.Object]
+		(cls [] Test1 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mul
 							(mul

@@ -1,8 +1,8 @@
 (use-ctx pht
 	(progn
-		(cls Test0 [^java.lang.Object]
+		(cls [] Test0 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(as ^dynamic
 						(catch [
 							[_ ^java.lang.RuntimeException
@@ -14,9 +14,9 @@
 							(throw
 								(new ^java.lang.Exception))
 							33)))))
-		(cls Test1 [^java.lang.Object]
+		(cls [] Test1 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(as ^dynamic
 						(catch [
 							[_ ^java.lang.RuntimeException
@@ -28,9 +28,9 @@
 							(throw
 								(new ^java.lang.RuntimeException))
 							33)))))
-		(cls Test2 [^java.lang.Object]
+		(cls [] Test2 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(as ^dynamic
 						(catch [
 							[_ ^java.lang.RuntimeException

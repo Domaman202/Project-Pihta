@@ -1,8 +1,8 @@
 (use-ctx pht
 	(progn
-		(cls Test0 [^java.lang.Object]
+		(cls [] Test0 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(as ^dynamic
 						(body
 							(def [
@@ -20,9 +20,9 @@
 								2
 								33)
 							pht$tmp$21134)))))
-		(cls Test1 [^java.lang.Object]
+		(cls [] Test1 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(as ^dynamic
 						(body
 							(def [
@@ -40,9 +40,9 @@
 								2
 								213)
 							pht$tmp$11904)))))
-		(cls Test2 [^java.lang.Object]
+		(cls [] Test2 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mcall
 							(as (array-type ^java.lang.Object)

@@ -1,13 +1,13 @@
 (use-ctx pht
 	(progn
-		(cls Test [^java.lang.Object]
+		(cls [] Test [^java.lang.Object]
 			(progn
-				(defn setI ^void [[i ^int]]
+				(defn [] setI ^void [[i ^int]]
 					(fset
 						this
 						i
 						i))
-				(defn getI ^int []
+				(defn [] getI ^int []
 					(fget
 						this
 						i))
@@ -17,9 +17,9 @@
 				(mcall
 					super
 					<init>)))
-		(cls Test0 [^java.lang.Object]
+		(cls [] Test0 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(def [
 						[^Test test (new ^Test)]])
 					(mcall

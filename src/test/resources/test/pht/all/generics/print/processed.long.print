@@ -288,6 +288,87 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = TestC)
+|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	[CTOR_
+|	|	|	|	|	(type = constructor)
+|	|	|	|	|	(name = <init>)
+|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	(sign = ()V)
+|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	(method = <init>()V)
+|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	)
+|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	(type = SUPER)
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[DEFN_
+|	|	|	|	|	(type = method)
+|	|	|	|	|	(name = foo)
+|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	(sign = ()TT;)
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = NIL)
+|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = TestD)
+|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	[CTOR_
+|	|	|	|	|	(type = constructor)
+|	|	|	|	|	(name = <init>)
+|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	(sign = ()V)
+|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	(method = <init>()V)
+|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	)
+|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	(type = SUPER)
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[DEFN_
+|	|	|	|	|	(type = method)
+|	|	|	|	|	(name = test)
+|	|	|	|	|	(desc = ()LTestC;)
+|	|	|	|	|	(sign = ()LTestC;)
+|	|	|	|	|	[NEW_
+|	|	|	|	|	|	(type = VT(TestC))
+|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = open class)
+|	|	|	|	(name = Test7)
+|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'java.lang.String')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
 |	|	]
 |	)
 |	(EXPORTS:

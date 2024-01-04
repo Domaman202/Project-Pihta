@@ -1,7 +1,7 @@
 (use-ctx pht
 	(use-ctx test/siberia/all/export/helper
-		(cls Test0 [^java.lang.Object]
+		(cls [] Test0 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(as ^dynamic
 						"test/siberia/all/export"))))))

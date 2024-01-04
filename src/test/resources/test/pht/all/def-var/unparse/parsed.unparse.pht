@@ -1,31 +1,31 @@
 (use-ctx pht
 	(progn
-		(cls Test0 [^java.lang.Object]
+		(cls [] Test0 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(def [
 						[^int i 12]])
 					(as ^dynamic
 						i))))
-		(cls Test1 [^java.lang.Object]
+		(cls [] Test1 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(def [
 						[^long l 21]])
 					(as ^dynamic
 						l))))
-		(cls Test2 [^java.lang.Object]
+		(cls [] Test2 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(def [
 						[^float f]])
 					(set! f
 						0)
 					(as ^dynamic
 						f))))
-		(cls Test3 [^java.lang.Object]
+		(cls [] Test3 [^java.lang.Object]
 			(@static
-				(defn test ^dynamic []
+				(defn [] test ^dynamic []
 					(def [
 						[^double d 12.21]])
 					(set! d
