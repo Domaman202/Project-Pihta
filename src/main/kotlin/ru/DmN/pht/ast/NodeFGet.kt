@@ -9,6 +9,11 @@ class NodeFGet(info: INodeInfo, nodes: MutableList<Node>, val name: String, val 
     override fun copy(): NodeFGet =
         NodeFGet(info, copyNodes(), name, type, vtype)
 
+    init {
+        if (name == "INSTANCE")
+            println()
+    }
+
 //    override fun print(builder: StringBuilder, indent: Int): StringBuilder =
 //        printNodes(builder.indent(indent).append('[').append(text).append(" (").append(type).append(")\n").indent(indent + 1).append("name = ").append(name), indent).append(']')
 

@@ -1,9 +1,6 @@
 package ru.DmN.pht.std
 
-import ru.DmN.pht.processors.NRPrognB
-import ru.DmN.pht.processors.NRSymbolInt
-import ru.DmN.pht.processors.NRTypedGet
-import ru.DmN.pht.processors.NRTypedGetB
+import ru.DmN.pht.processors.*
 import ru.DmN.pht.std.ast.IAbstractlyNode
 import ru.DmN.pht.std.ast.IFinallyNode
 import ru.DmN.pht.std.ast.IStaticallyNode
@@ -90,6 +87,7 @@ object Pihta : Module("pht") {
         addSNP(FSET_A)
         // g
         addNP("get",          NPGet)
+        addSNP(GET_B)
         addNP("get-or-name!", NPGetOrName)
         addSNP(GREAT)
         addSNP(GREAT_OR_EQ)
@@ -276,8 +274,9 @@ object Pihta : Module("pht") {
         addSNU(DIV_)
         // e
         addSNU(ECTOR)
+        add(ECTOR_,         NUECtor)
         addSNU(EFLD)
-        // EFLD_
+        add(EFLD_,          NUEFld)
         addSNU(EFN)
         add(EFN_,           NUEFn)
         addSNU(ENUM)
@@ -297,6 +296,9 @@ object Pihta : Module("pht") {
         add(FSET_B,         NUFSetA)
         add(FSET_,          NUFSetB)
         // g
+        // GET_A
+        addSNU(GET_B)
+        // GET_
         add(GET_OR_NAME,    NUGetOrName)
         addSNU(GREAT)
         addSNU(GREAT_)
@@ -345,7 +347,7 @@ object Pihta : Module("pht") {
         addSNU(NOT_EQ)
         addSNU(NOT_EQ_)
         addSNU(NS)
-        // NS_
+        add(NS_,            NUNs)
         // o
         addSNU(OBJ)
         // OBJ_
@@ -354,8 +356,8 @@ object Pihta : Module("pht") {
         // p
         addSNU(PRINT)
         addSNU(PRINTLN)
-        // PROGN_B
-        // PROGN_B_
+        addSNU(PROGN_B)
+        addSNU(PROGN_B_)
         // r
         addSNU(RAND_SYMBOL)
         addSNU(RANGE)
@@ -368,7 +370,6 @@ object Pihta : Module("pht") {
         addSNU(SET_A)
         add(SET_B,          NUSetB)
         add(SET_,           NUSetB)
-        // SET_
         addSNU(SHIFT_LEFT)
         addSNU(SHIFT_LEFT_)
         addSNU(SHIFT_RIGHT)
@@ -467,6 +468,7 @@ object Pihta : Module("pht") {
         add(DIV,           NRMath)
         add(DIV_,          NRMathB)
         // e
+        add(ECTOR,         NRECtor)
         add(EFLD,          NREFld)
         add(EFN,           NREFn)
         add(ENUM,          NREnum)
@@ -483,6 +485,7 @@ object Pihta : Module("pht") {
         add(FSET_A,        NRFSetA)
         add(FSET_B,        NRFSetB)
         // g
+        add(GET_B,         NRGetB)
         add(GET_OR_NAME,   NRGetOrName)
         add(GREAT,         NRCompare)
         add(GREAT_,        NRCompareB)

@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.ast
 
+import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
 

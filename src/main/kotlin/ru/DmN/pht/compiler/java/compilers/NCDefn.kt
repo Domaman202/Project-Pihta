@@ -68,7 +68,7 @@ object NCDefn : INodeCompiler<NodeDefn> {
         }
     }
 
-    fun findOtherMethods(method: VirtualMethod): Sequence<VirtualMethod> {
+    private fun findOtherMethods(method: VirtualMethod): Sequence<VirtualMethod> {
         var seq = emptySequence<VirtualMethod>()
         method.declaringClass!!.parents.forEach { seq += findMethods(it, method.name) }
         return seq

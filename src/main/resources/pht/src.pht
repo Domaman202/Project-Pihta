@@ -4,7 +4,8 @@
         (types java.util.Iterator)
         (types java.lang.StringBuilder)
         (types java.util.List)
-        (types java.util.ArrayList))
+        (types java.util.ArrayList)
+        (types java.lang.Enum))
 
     (ns ru.DmN.pht
         (cls ArrayExtends [^Object]

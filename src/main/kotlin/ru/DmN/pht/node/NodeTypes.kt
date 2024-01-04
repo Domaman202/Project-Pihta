@@ -32,7 +32,6 @@ enum class NodeTypes : INodeType {
     CLS_("cls", PROCESSED),
     COND("cond", PARSED),
     CONTINUE_("continue", PROCESSED),
-    CTOR("ctor", PARSED),
     CTOR_("ctor", PROCESSED),
     CYCLE_("cycle", PROCESSED),
     // d
@@ -46,7 +45,7 @@ enum class NodeTypes : INodeType {
     DEFN_("defn", PROCESSED),
     DIV_("div", PROCESSED),
     // e
-    ECTOR("ector", PARSED),
+    ECTOR_("ector", PROCESSED),
     EFLD_("efld", PROCESSED),
     EFN_("efn", PROCESSED),
     ENUM("enum", PARSED),
@@ -61,6 +60,7 @@ enum class NodeTypes : INodeType {
     FSET_("fset", PROCESSED),
     // g
     GET_A("get", PARSED),
+    GET_("get!", PROCESSED),
     GET_OR_NAME("get-or-name!", true, true),
     GREAT_("great", PROCESSED),
     GREAT_OR_EQ_("great-or-eq", PROCESSED),

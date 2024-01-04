@@ -1,12 +1,12 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.processors
 
 import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.node.NodeParsedTypes
-import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.processor.ctx.BodyContext
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.with
+import ru.DmN.pht.std.processors.NRDefn
 import ru.DmN.pht.std.utils.type
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
@@ -19,12 +19,19 @@ import ru.DmN.siberia.utils.MethodModifiers
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 
-object NRCtor : INodeProcessor<NodeNodesList> {
+object NRECtor : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeDefn {
         val gctx = ctx.global
         val type = ctx.clazz as VirtualType.VirtualTypeImpl
         //
         val args = NRDefn.parseArguments(node.nodes[0], type.generics, processor, ctx, gctx)
+        //
+        args.first.add(0, VirtualType.INT)
+        args.first.add(0, gctx.getType("String", processor.tp))
+        args.second.add(0, "\$order")
+        args.second.add(0, "\$name")
+        args.third.add(0, null)
+        args.third.add(0, null)
         //
         val method = VirtualMethod.VirtualMethodImpl(
             type,

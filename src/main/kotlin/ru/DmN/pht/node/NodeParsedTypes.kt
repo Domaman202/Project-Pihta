@@ -2,6 +2,7 @@ package ru.DmN.pht.std.node
 
 import ru.DmN.pht.std.node.NodeTypes.*
 import ru.DmN.siberia.node.INodeType
+import ru.DmN.siberia.node.NodeTypes
 
 enum class NodeParsedTypes(override val operation: String, override val processed: INodeType) : IParsedNodeType {
     // a
@@ -16,12 +17,14 @@ enum class NodeParsedTypes(override val operation: String, override val processe
     CATCH("catch", CATCH_),
     CLS("cls", CLS_),
     CONTINUE("continue", CONTINUE_),
+    CTOR("ctor", CTOR_),
     CYCLE("cycle", CYCLE_),
     DEC_PRE("dec", DEC_PRE_),
     DEC_POST("dec-", DEC_POST_),
     DEFN("defn", DEFN_),
     DIV("div", DIV_),
     // e
+    ECTOR("ector", ECTOR_),
     EFLD("efld", EFLD_),
     EFN("efn", EFN_),
     EQ("eq", EQ_),
@@ -32,6 +35,7 @@ enum class NodeParsedTypes(override val operation: String, override val processe
     FSET_A("fset", FSET_),
     FSET_B("fset", FSET_),
     // g
+    GET_B("get!", GET_),
     GREAT("great", GREAT_),
     GREAT_OR_EQ("great-or-eq", GREAT_OR_EQ_),
     // i

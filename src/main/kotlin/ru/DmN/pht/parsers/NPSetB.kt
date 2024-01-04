@@ -1,11 +1,9 @@
 package ru.DmN.pht.std.parsers
 
-import ru.DmN.pht.std.ast.NodeFMGet
-import ru.DmN.pht.std.ast.NodeFieldSet
-import ru.DmN.pht.std.ast.NodeGetOrName
-import ru.DmN.pht.std.ast.NodeSet
+import ru.DmN.pht.std.ast.*
 import ru.DmN.pht.std.node.NodeParsedTypes
 import ru.DmN.pht.std.node.NodeTypes
+import ru.DmN.pht.std.processor.utils.nodeValueClass
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
@@ -49,13 +47,17 @@ object NPSetB : INodeParser {
         )
     }
 
-    private fun parse(info: INodeInfo, parts: List<String>, i: Int, static: Boolean): Node =
-        if (i + 1 == parts.size)
-            NodeGetOrName(info.withType(NodeTypes.GET_OR_NAME), parts[parts.size - i - 1], static)
+    private fun parse(info: INodeInfo, parts: List<String>, i: Int, static: Boolean): Node {
+        val name = parts[parts.size - i - 1]
+        return if (i + 1 == parts.size)
+            if (static)
+                nodeValueClass(info, name)
+            else NodeGetOrName(info.withType(NodeTypes.GET_OR_NAME), name, false)
         else NodeFMGet(
             info.withType(NodeParsedTypes.FGET_B),
             parse(info, parts, i + 1, static),
-            parts[parts.size - i - 1],
+            name,
             static
         )
+    }
 }
