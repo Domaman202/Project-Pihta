@@ -74,6 +74,8 @@ class PihtaJava(module: Pihta) : ModuleCompilers(module, Platform.JAVA) {
         // o
         add(OBJ_,         NCClass)
         add(OR_,          NCMath)
+        // p
+        add(PROGN_B_,     NCDefault)
         // r
         add(REM_,         NCMath)
         add(RET_,         NCRet)

@@ -5,7 +5,7 @@
 |	|	|	(modules = test/siberia/all/export/helper)
 |	|	|	(NODES:
 |	|	|	|	[CLS_
-|	|	|	|	|	(type = open class)
+|	|	|	|	|	(type = final class)
 |	|	|	|	|	(name = Test0)
 |	|	|	|	|	[ANN_STATIC_
 |	|	|	|	|	|	[DEFN_
@@ -32,7 +32,7 @@
 |	|	|	(modules = test/siberia/all/export/helper)
 |	|	|	(NODES:
 |	|	|	|	[CLS_
-|	|	|	|	|	(type = open class)
+|	|	|	|	|	(type = final class)
 |	|	|	|	|	(name = Test0)
 |	|	|	|	|	[ANN_STATIC_
 |	|	|	|	|	|	[DEFN_

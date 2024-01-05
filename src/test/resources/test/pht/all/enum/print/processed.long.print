@@ -58,91 +58,93 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[PROGN_
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(name = setRed)
-|	|	|	|	|	|	(desc = (I)V)
-|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'red')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(name = getRed)
-|	|	|	|	|	|	(desc = ()I)
-|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	[PROGN_B_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = setRed)
+|	|	|	|	|	|	|	(desc = (I)V)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[FSET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'red')
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(name = setGreen)
-|	|	|	|	|	|	(desc = (I)V)
-|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'green')
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = getRed)
+|	|	|	|	|	|	|	(desc = ()I)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[FGET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(name = getGreen)
-|	|	|	|	|	|	(desc = ()I)
-|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = setGreen)
+|	|	|	|	|	|	|	(desc = (I)V)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[FSET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'green')
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(name = setBlue)
-|	|	|	|	|	|	(desc = (I)V)
-|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'blue')
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = getGreen)
+|	|	|	|	|	|	|	(desc = ()I)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[FGET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(name = getBlue)
-|	|	|	|	|	|	(desc = ()I)
-|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = setBlue)
+|	|	|	|	|	|	|	(desc = (I)V)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[FSET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'blue')
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = getBlue)
+|	|	|	|	|	|	|	(desc = ()I)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[FGET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[FLD_]
 |	|	|	|	|	]
-|	|	|	|	|	[FLD_]
 |	|	|	|	]
 |	|	|	|	[EFLD_]
 |	|	|	|	[ANN_STATIC_
@@ -247,7 +249,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test0)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -269,7 +271,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test1)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -291,7 +293,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test2)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -325,7 +327,7 @@
 |	|	|	|	|	[NS_
 |	|	|	|	|	|	(namespace = ru.DmN.pht)
 |	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = open class)
+|	|	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	|	(name = ru.DmN.pht.ArrayExtends)
 |	|	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	|	[PROGN_
@@ -2483,7 +2485,7 @@
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = open class)
+|	|	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	|	(name = ru.DmN.pht.StringExtends)
 |	|	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	|	[ANN_VARARGS_
@@ -2582,7 +2584,7 @@
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = open class)
+|	|	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	|	(name = ru.DmN.pht.MathExtends)
 |	|	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	|	[EFN_
@@ -3190,91 +3192,93 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[PROGN_
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(name = setRed)
-|	|	|	|	|	|	(desc = (I)V)
-|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'red')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(name = getRed)
-|	|	|	|	|	|	(desc = ()I)
-|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	[PROGN_B_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = setRed)
+|	|	|	|	|	|	|	(desc = (I)V)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[FSET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'red')
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(name = setGreen)
-|	|	|	|	|	|	(desc = (I)V)
-|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'green')
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = getRed)
+|	|	|	|	|	|	|	(desc = ()I)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[FGET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(name = getGreen)
-|	|	|	|	|	|	(desc = ()I)
-|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = setGreen)
+|	|	|	|	|	|	|	(desc = (I)V)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[FSET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'green')
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(name = setBlue)
-|	|	|	|	|	|	(desc = (I)V)
-|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'blue')
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = getGreen)
+|	|	|	|	|	|	|	(desc = ()I)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[FGET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(name = getBlue)
-|	|	|	|	|	|	(desc = ()I)
-|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = setBlue)
+|	|	|	|	|	|	|	(desc = (I)V)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[FSET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'blue')
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = getBlue)
+|	|	|	|	|	|	|	(desc = ()I)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[FGET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[FLD_]
 |	|	|	|	|	]
-|	|	|	|	|	[FLD_]
 |	|	|	|	]
 |	|	|	|	[EFLD_]
 |	|	|	|	[ANN_STATIC_
@@ -3379,7 +3383,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test0)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -3401,7 +3405,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test1)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -3423,7 +3427,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test2)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -3457,7 +3461,7 @@
 |	|	|	|	|	[NS_
 |	|	|	|	|	|	(namespace = ru.DmN.pht)
 |	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = open class)
+|	|	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	|	(name = ru.DmN.pht.ArrayExtends)
 |	|	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	|	[PROGN_
@@ -5615,7 +5619,7 @@
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = open class)
+|	|	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	|	(name = ru.DmN.pht.StringExtends)
 |	|	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	|	[ANN_VARARGS_
@@ -5714,7 +5718,7 @@
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = open class)
+|	|	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	|	(name = ru.DmN.pht.MathExtends)
 |	|	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	|	[EFN_

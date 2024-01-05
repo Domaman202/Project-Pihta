@@ -15,37 +15,38 @@
 					setBlue
 					b))
 			(progn
-				(defn [] setRed ^void [[red ^int]]
-					(fset
-						this
-						red
-						red))
-				(defn [] getRed ^int []
-					(fget
-						this
-						red))
-				(defn [] setGreen ^void [[green ^int]]
-					(fset
-						this
-						green
-						green))
-				(defn [] getGreen ^int []
-					(fget
-						this
-						green))
-				(defn [] setBlue ^void [[blue ^int]]
-					(fset
-						this
-						blue
-						blue))
-				(defn [] getBlue ^int []
-					(fget
-						this
-						blue))
-				(def [
-					[red ^int]
-					[green ^int]
-					[blue ^int]]))
+				(progn-
+					(defn [] setRed ^void [[red ^int]]
+						(fset
+							this
+							red
+							red))
+					(defn [] getRed ^int []
+						(fget
+							this
+							red))
+					(defn [] setGreen ^void [[green ^int]]
+						(fset
+							this
+							green
+							green))
+					(defn [] getGreen ^int []
+						(fget
+							this
+							green))
+					(defn [] setBlue ^void [[blue ^int]]
+						(fset
+							this
+							blue
+							blue))
+					(defn [] getBlue ^int []
+						(fget
+							this
+							blue))
+					(def [
+						[red ^int]
+						[green ^int]
+						[blue ^int]])))
 			(efld [
 				[RED 255 0 0]
 				[GREEN 0 255 0]
@@ -117,37 +118,38 @@
 					setBlue
 					b))
 			(progn
-				(defn [] setRed ^void [[red ^int]]
-					(fset
-						this
-						red
-						red))
-				(defn [] getRed ^int []
-					(fget
-						this
-						red))
-				(defn [] setGreen ^void [[green ^int]]
-					(fset
-						this
-						green
-						green))
-				(defn [] getGreen ^int []
-					(fget
-						this
-						green))
-				(defn [] setBlue ^void [[blue ^int]]
-					(fset
-						this
-						blue
-						blue))
-				(defn [] getBlue ^int []
-					(fget
-						this
-						blue))
-				(def [
-					[red ^int]
-					[green ^int]
-					[blue ^int]]))
+				(progn-
+					(defn [] setRed ^void [[red ^int]]
+						(fset
+							this
+							red
+							red))
+					(defn [] getRed ^int []
+						(fget
+							this
+							red))
+					(defn [] setGreen ^void [[green ^int]]
+						(fset
+							this
+							green
+							green))
+					(defn [] getGreen ^int []
+						(fget
+							this
+							green))
+					(defn [] setBlue ^void [[blue ^int]]
+						(fset
+							this
+							blue
+							blue))
+					(defn [] getBlue ^int []
+						(fget
+							this
+							blue))
+					(def [
+						[red ^int]
+						[green ^int]
+						[blue ^int]])))
 			(efld [
 				[RED 255 0 0]
 				[GREEN 0 255 0]

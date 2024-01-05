@@ -1,5 +1,6 @@
 (progn
-    (@abstract (cls Test [^Object]
+    (@abstract
+    (cls Test [^Object]
         (ctor [] (ccall))
         (@abstract (defn foo ^String []))))
     (cls TestImpl [^Test]

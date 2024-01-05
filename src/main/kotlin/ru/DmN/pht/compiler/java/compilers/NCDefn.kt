@@ -29,7 +29,8 @@ object NCDefn : INodeCompiler<NodeDefn> {
             Opcodes.ACC_PUBLIC.let {
                 if (node.static) it + Opcodes.ACC_STATIC
                 else if (node.abstract) it + Opcodes.ACC_ABSTRACT
-                else it
+                else if (node.open) it
+                else it + Opcodes.ACC_FINAL
             },
             method.name,
             method.desc,

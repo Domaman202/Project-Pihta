@@ -15,7 +15,9 @@ object NCSet : INodeCompiler<NodeSet> {
             ctx.body[node.name]?.let { storeCast(it, value.type(), this) }
                 ?: ctx.clazz.clazz.fields.find { it.name == node.name }!!.run {
                     visitFieldInsn(
-                        if (isStatic) Opcodes.PUTSTATIC else Opcodes.PUTFIELD,
+                        if (modifiers.isStatic)
+                            Opcodes.PUTSTATIC
+                        else Opcodes.PUTFIELD,
                         declaringClass!!.className,
                         name,
                         desc

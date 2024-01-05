@@ -2,7 +2,7 @@
 |	(modules = pht)
 |	(NODES:
 |	|	[CLS_
-|	|	|	(type = open class)
+|	|	|	(type = final class)
 |	|	|	(name = App)
 |	|	|	[ANN_STATIC_
 |	|	|	|	[ANN_STATIC_
@@ -21,7 +21,7 @@
 |	(modules = pht)
 |	(NODES:
 |	|	[CLS_
-|	|	|	(type = open class)
+|	|	|	(type = final class)
 |	|	|	(name = App)
 |	|	|	[ANN_STATIC_
 |	|	|	|	[ANN_STATIC_

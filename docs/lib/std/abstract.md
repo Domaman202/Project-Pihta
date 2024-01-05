@@ -14,10 +14,10 @@
 ```pihta
 (use-ctx pht
     (@abstract
-        (cls Foo [^Object]
-            (ctor [] (ccall))
-            (defn foo ^void []
-                (println "Foo!"))))
+    (cls Foo [^Object]
+        (ctor [] (ccall))
+        (defn foo ^void []
+            (println "Foo!"))))
     (obj FooImpl [^Foo]
         (ctor [] (ccall)))
     (app-fn

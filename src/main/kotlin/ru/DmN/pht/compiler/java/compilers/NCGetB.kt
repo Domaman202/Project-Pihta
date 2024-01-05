@@ -19,9 +19,9 @@ object NCGetB : INodeCompiler<NodeGetOrName> {
                 clazz = compiler.tp.typeOf(node.name)
                 field = clazz.fields.find { it.name == "INSTANCE" }!!
             }
-            if (field.isStatic) {
+            if (field.modifiers.isStatic)
                 visitFieldInsn(Opcodes.GETSTATIC, clazz.className, field.name, field.desc)
-            } else {
+            else {
                 visitVarInsn(Opcodes.ALOAD, ctx.body["this"]!!.id)
                 visitFieldInsn(Opcodes.GETFIELD, clazz.className, field.name, field.desc)
             }

@@ -3,7 +3,7 @@
 |	(NODES:
 |	|	[PROGN_
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test0)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -30,7 +30,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test1)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -57,7 +57,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test2)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -84,7 +84,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test3)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -111,7 +111,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test4)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -138,7 +138,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test5)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -177,7 +177,7 @@
 |	|	|	|	|	[NS_
 |	|	|	|	|	|	(namespace = ru.DmN.pht)
 |	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = open class)
+|	|	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	|	(name = ru.DmN.pht.ArrayExtends)
 |	|	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	|	[PROGN_
@@ -2335,7 +2335,7 @@
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = open class)
+|	|	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	|	(name = ru.DmN.pht.StringExtends)
 |	|	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	|	[ANN_VARARGS_
@@ -2434,7 +2434,7 @@
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = open class)
+|	|	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	|	(name = ru.DmN.pht.MathExtends)
 |	|	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	|	[EFN_
@@ -2987,7 +2987,7 @@
 |	(NODES:
 |	|	[PROGN_
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test0)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -3014,7 +3014,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test1)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -3041,7 +3041,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test2)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -3068,7 +3068,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test3)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -3095,7 +3095,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test4)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -3122,7 +3122,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test5)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
@@ -3161,7 +3161,7 @@
 |	|	|	|	|	[NS_
 |	|	|	|	|	|	(namespace = ru.DmN.pht)
 |	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = open class)
+|	|	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	|	(name = ru.DmN.pht.ArrayExtends)
 |	|	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	|	[PROGN_
@@ -5319,7 +5319,7 @@
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = open class)
+|	|	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	|	(name = ru.DmN.pht.StringExtends)
 |	|	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	|	[ANN_VARARGS_
@@ -5418,7 +5418,7 @@
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = open class)
+|	|	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	|	(name = ru.DmN.pht.MathExtends)
 |	|	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	|	[EFN_

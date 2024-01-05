@@ -1,10 +1,8 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.ast.NodeFMGet
-import ru.DmN.pht.std.ast.NodeFieldA
-import ru.DmN.pht.std.ast.NodeFieldB
-import ru.DmN.pht.std.ast.NodeFieldSet
+import ru.DmN.pht.std.ast.*
 import ru.DmN.pht.std.node.NodeParsedTypes.*
+import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.node.NodeTypes.FLD_
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeList
@@ -16,6 +14,7 @@ import ru.DmN.siberia.node.NodeTypes.PROGN
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.utils.FieldModifiers
 import ru.DmN.siberia.utils.VirtualField
 import ru.DmN.siberia.utils.VirtualType
 
@@ -32,36 +31,41 @@ object NRFld : INodeProcessor<NodeFieldA> {
                     clazz,
                     it[0],
                     gctx.getType(it[1], processor.tp),
-                    isStatic = node.static,
-                    isEnum = false
+                    FieldModifiers(
+                        isFinal = node.final,
+                        isStatic = node.static,
+                        isEnum = false
+                    )
                 ).run {
                     fields += this
                     clazz.fields += this
-                    body += nodeDefn(
-                        info,
-                        "set${name.let { it[0].toUpperCase() + it.substring(1) }}",
-                        "void",
-                        listOf(Pair(name, type.name)),
-                        listOf(
-                            if (node.static)
-                                NodeFieldSet(
+                    if (!node.final) {
+                        body += nodeDefn(
+                            info,
+                            "set${name.let { it[0].toUpperCase() + it.substring(1) }}",
+                            "void",
+                            listOf(Pair(name, type.name)),
+                            listOf(
+                                if (node.static)
+                                    NodeFieldSet(
+                                        info.withType(FSET_B),
+                                        mutableListOf(nodeGetOrName(info, name)),
+                                        nodeValueClass(info, clazz.name),
+                                        name,
+                                        static = true,
+                                        native = true
+                                    )
+                                else NodeFieldSet(
                                     info.withType(FSET_B),
                                     mutableListOf(nodeGetOrName(info, name)),
-                                    nodeValueClass(info, clazz.name),
+                                    nodeGetOrName(info, "this"),
                                     name,
-                                    static = true,
+                                    static = false,
                                     native = true
                                 )
-                            else NodeFieldSet(
-                                info.withType(FSET_B),
-                                mutableListOf(nodeGetOrName(info, name)),
-                                nodeGetOrName(info, "this"),
-                                name,
-                                static = false,
-                                native = true
                             )
                         )
-                    )
+                    }
                     body += nodeDefn(
                         info,
                         "get${name.let { it[0].toUpperCase() + it.substring(1) }}",
@@ -88,8 +92,13 @@ object NRFld : INodeProcessor<NodeFieldA> {
             }
         return processor.process(
             NodeNodesList(
-                info.withType(if (node.static) ANN_STATIC else PROGN),
-                body.apply { this += NodeFieldB(info.withType(FLD_), fields) }
+                info.withType(if (node.final) ANN_FINAL else PROGN),
+                mutableListOf(
+                    NodeModifierNodesList(
+                        info.withType(if (node.static) ANN_STATIC else NodeTypes.PROGN_B),
+                        body.apply { this += NodeFieldB(info.withType(FLD_), fields) }
+                    )
+                )
             ),
             ctx,
             mode

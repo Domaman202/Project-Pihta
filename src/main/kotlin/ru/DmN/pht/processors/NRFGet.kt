@@ -13,8 +13,8 @@ object NRFGet : INodeProcessor<NodeFGet> {
     override fun calc(node: NodeFGet, processor: Processor, ctx: ProcessingContext): VirtualType {
         val filter = when (node.type) {
             UNKNOWN  -> { _: VirtualField  -> true }
-            STATIC   -> { it: VirtualField -> it.isStatic }
-            INSTANCE -> { it: VirtualField -> !it.isStatic }
+            STATIC   -> { it: VirtualField -> it.modifiers.isStatic }
+            INSTANCE -> { it: VirtualField -> !it.modifiers.isStatic }
         }
         return (if (node.type == STATIC) processor.computeType(node.nodes[0], ctx) else processor.calc(node.nodes[0], ctx)!!)
             .fields

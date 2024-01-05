@@ -1,0 +1,8 @@
+(progn
+    (@open
+    (cls FooOpen [^Object]
+            (ctor [] (ccall))))
+    (cls FooFinal [^Object]
+            (ctor [] (ccall)))
+    (test-fn 0 ^FooOpen)
+    (test-fn 1 ^FooFinal))

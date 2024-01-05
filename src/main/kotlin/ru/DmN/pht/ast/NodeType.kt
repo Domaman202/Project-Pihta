@@ -1,18 +1,19 @@
 package ru.DmN.pht.std.ast
 
+import ru.DmN.pht.ast.IOpenlyNode
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
 import ru.DmN.siberia.utils.indent
 
-class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeImpl) : NodeNodesList(info, nodes), IAbstractlyNode, IFinallyNode {
+class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeImpl) : NodeNodesList(info, nodes), IAbstractlyNode, IOpenlyNode {
     override var abstract: Boolean
         get() = type.isAbstract
         set(value) { type.isAbstract = value }
-    override var final: Boolean
-        get() = type.isFinal
-        set(value) { type.isFinal = value }
+    override var open: Boolean
+        get() = !type.isFinal
+        set(value) { type.isFinal = !value }
 
     override fun copy(): NodeType =
         NodeType(info, copyNodes(), type)

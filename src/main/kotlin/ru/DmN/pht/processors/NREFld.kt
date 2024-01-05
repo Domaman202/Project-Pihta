@@ -13,6 +13,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.utils.FieldModifiers
 import ru.DmN.siberia.utils.VirtualField
 import ru.DmN.siberia.utils.VirtualType
 
@@ -26,7 +27,7 @@ object NREFld : INodeProcessor<NodeNodesList> {
             val name = processor.computeString(it[0], ctx)
             val nodes = it.drop(1)
             list.add(Pair(name, nodes))
-            fields += VirtualField.VirtualFieldImpl(type, name, type, isStatic = true, isEnum = true)
+            fields += VirtualField.VirtualFieldImpl(type, name, type, FieldModifiers(isFinal = true, isStatic = true, isEnum = true))
             enums += EnumConstContext(name, nodes)
         }
         return NodeEField(node.info.withType(NodeTypes.EFLD_), list)

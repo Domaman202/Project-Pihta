@@ -35,7 +35,7 @@ object NRFGetB : INodeProcessor<NodeFMGet> {
                         val field = NRFGetA.findField(it, node.name, node.static)
                         if (field == null)
                             NodeFGet.Type.UNKNOWN
-                        else if (field.isStatic)
+                        else if (field.modifiers.isStatic)
                             NodeFGet.Type.STATIC
                         else NodeFGet.Type.INSTANCE
                     },

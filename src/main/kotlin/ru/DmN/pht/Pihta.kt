@@ -1,5 +1,7 @@
 package ru.DmN.pht.std
 
+import ru.DmN.pht.ast.IOpenlyNode
+import ru.DmN.pht.parsers.NPSA
 import ru.DmN.pht.processors.*
 import ru.DmN.pht.std.ast.IAbstractlyNode
 import ru.DmN.pht.std.ast.IFinallyNode
@@ -164,11 +166,11 @@ object Pihta : Module("pht") {
         addSNP(YIELD)
 
         // @
-        addSNP(ANN_ABSTRACT)
-        addSNP(ANN_FINAL)
-        addSNP(ANN_OPEN)
-        addSNP(ANN_STATIC)
-        addSNP(ANN_VARARGS)
+        addSANP(ANN_ABSTRACT)
+        addSANP(ANN_FINAL)
+        addSANP(ANN_OPEN)
+        addSANP(ANN_STATIC)
+        addSANP(ANN_VARARGS)
 
         // *
         addSNP(CTC_MODULE_NAME)
@@ -214,6 +216,10 @@ object Pihta : Module("pht") {
 
     private fun addSNP(type: INodeType) {
         add(type.operation.toRegularExpr(), SimpleNP(type))
+    }
+
+    private fun addSANP(type: INodeType) {
+        add(type.operation.toRegularExpr(), NPSA(type))
     }
 
     private infix fun String.to(alias: String) {
@@ -584,11 +590,11 @@ object Pihta : Module("pht") {
         add(YIELD,         NRYield)
 
         // @
-        add(ANN_ABSTRACT, NRSA { it, _, _ -> if (it is IAbstractlyNode)   it.abstract = true })
-        add(ANN_FINAL,    NRSA { it, _, _ -> if (it is IFinallyNode)      it.final = true })
-        add(ANN_OPEN,     NRSA { it, _, _ -> if (it is IFinallyNode)      it.final = false })
-        add(ANN_STATIC,   NRSA { it, _, _ -> if (it is IStaticallyNode)   it.static = true })
-        add(ANN_VARARGS,  NRSA { it, _, _ -> if (it is IVarargNode)       it.varargs = true })
+        add(ANN_ABSTRACT, NRSA { it, _, _ -> if (it is IAbstractlyNode) it.abstract = true })
+        add(ANN_FINAL,    NRSA { it, _, _ -> if (it is IFinallyNode)    it.final = true })
+        add(ANN_OPEN,     NRSA { it, _, _ -> if (it is IOpenlyNode)     it.open = true })
+        add(ANN_STATIC,   NRSA { it, _, _ -> if (it is IStaticallyNode) it.static = true })
+        add(ANN_VARARGS,  NRSA { it, _, _ -> if (it is IVarargNode)     it.varargs = true })
 
         // *
         add(CTC_MODULE_NAME, NRCTSC { _, ctx -> ctx.module.name })

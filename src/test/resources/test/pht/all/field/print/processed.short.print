@@ -3,34 +3,36 @@
 |	(NODES:
 |	|	[PROGN_
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test)
 |	|	|	|	[PROGN_
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(desc = setI(I)V)
-|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(desc = getI()I)
-|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	[PROGN_B_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(desc = setI(I)V)
+|	|	|	|	|	|	|	[FSET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(desc = getI()I)
+|	|	|	|	|	|	|	[FGET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[FLD_]
 |	|	|	|	|	]
-|	|	|	|	|	[FLD_]
 |	|	|	|	]
 |	|	|	|	[CTOR_
 |	|	|	|	|	(type = constructor)
@@ -46,7 +48,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test0)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -96,34 +98,36 @@
 |	(NODES:
 |	|	[PROGN_
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test)
 |	|	|	|	[PROGN_
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(desc = setI(I)V)
-|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(desc = getI()I)
-|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	[PROGN_B_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(desc = setI(I)V)
+|	|	|	|	|	|	|	[FSET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(desc = getI()I)
+|	|	|	|	|	|	|	[FGET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[FLD_]
 |	|	|	|	|	]
-|	|	|	|	|	[FLD_]
 |	|	|	|	]
 |	|	|	|	[CTOR_
 |	|	|	|	|	(type = constructor)
@@ -139,7 +143,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test0)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_

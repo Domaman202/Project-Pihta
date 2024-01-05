@@ -2,17 +2,18 @@
 	(progn
 		(cls [] Test [^java.lang.Object]
 			(progn
-				(defn [] setI ^void [[i ^int]]
-					(fset
-						this
-						i
-						i))
-				(defn [] getI ^int []
-					(fget
-						this
-						i))
-				(def [
-					[i ^int]]))
+				(progn-
+					(defn [] setI ^void [[i ^int]]
+						(fset
+							this
+							i
+							i))
+					(defn [] getI ^int []
+						(fget
+							this
+							i))
+					(def [
+						[i ^int]])))
 			(ctor []
 				(mcall
 					super
@@ -33,17 +34,18 @@
 	(progn
 		(cls [] Test [^java.lang.Object]
 			(progn
-				(defn [] setI ^void [[i ^int]]
-					(fset
-						this
-						i
-						i))
-				(defn [] getI ^int []
-					(fget
-						this
-						i))
-				(def [
-					[i ^int]]))
+				(progn-
+					(defn [] setI ^void [[i ^int]]
+						(fset
+							this
+							i
+							i))
+					(defn [] getI ^int []
+						(fget
+							this
+							i))
+					(def [
+						[i ^int]])))
 			(ctor []
 				(mcall
 					super

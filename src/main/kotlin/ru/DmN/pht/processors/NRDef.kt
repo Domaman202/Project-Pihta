@@ -14,6 +14,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.utils.FieldModifiers
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.siberia.utils.VirtualType
 
@@ -49,7 +50,7 @@ object NRDef : INodeProcessor<NodeNodesList> {
             processor.computeList(node.nodes[0], ctx).map { processor.computeList(it, ctx) }.forEach {
                 val name = processor.computeString(it[0], ctx)
                 val type = processor.computeType(it[1], ctx)
-                list.add(VariableOrField.of(VirtualFieldImpl(clazz, name, type, isStatic = false, isEnum = false).apply { clazz.fields += this }))
+                list.add(VariableOrField.of(VirtualFieldImpl(clazz, name, type, FieldModifiers(isFinal = false, isStatic = false, isEnum = false)).apply { clazz.fields += this }))
             }
         }
         //

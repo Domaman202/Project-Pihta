@@ -51,7 +51,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
             args.first,
             args.second,
             args.third,
-            MethodModifiers(),
+            MethodModifiers(final = true),
             null,
             generics,
         )

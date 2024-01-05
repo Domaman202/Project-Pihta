@@ -1,13 +1,16 @@
 package ru.DmN.pht.std.ast
 
+import ru.DmN.pht.ast.IOpenlyNode
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
 
-class NodeFieldB(info: INodeInfo, val fields: List<VirtualFieldImpl>) : Node(info), IStaticallyNode, IFinallyNode {
+class NodeFieldB(info: INodeInfo, val fields: List<VirtualFieldImpl>) : Node(info), IStaticallyNode, IOpenlyNode, IFinallyNode {
     override var static: Boolean = false
-        set(value) { field = value; fields.forEach { it.isStatic = value } }
+        set(value) { field = value; fields.stream().map { it.modifiers }.forEach { it.isStatic = value } }
     override var final: Boolean = false
+        set(value) { field = value; fields.stream().map { it.modifiers }.forEach { it.isFinal = value } }
+    override var open: Boolean = false
 
 //    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
 //        indent(indent).append('[').append(text).append(' ')

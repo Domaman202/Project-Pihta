@@ -3,10 +3,10 @@
 |	(NODES:
 |	|	[PROGN_
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test)]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test0)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -30,10 +30,10 @@
 |	(NODES:
 |	|	[PROGN_
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test)]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test0)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_

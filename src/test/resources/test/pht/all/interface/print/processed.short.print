@@ -6,7 +6,7 @@
 |	|	|	|	(type = interface)
 |	|	|	|	(name = ITest)]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test0)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -33,7 +33,7 @@
 |	|	|	|	(type = interface)
 |	|	|	|	(name = ITest)]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test0)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_

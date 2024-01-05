@@ -31,7 +31,7 @@ class NodeValue(info: INodeInfo, val vtype: Type, val value: String) : Node(info
     override fun isConstClass(): Boolean = vtype == Type.PRIMITIVE || vtype == Type.CLASS
     override fun getValueAsString(): String = value
 
-    enum class Type {
+    enum class Type(val clazz: Boolean = false) {
         NIL,
         BOOLEAN,
         CHAR,
@@ -40,9 +40,9 @@ class NodeValue(info: INodeInfo, val vtype: Type, val value: String) : Node(info
         FLOAT,
         DOUBLE,
         STRING,
-        PRIMITIVE,
-        CLASS,
-        CLASS_WITH_GEN,
+        PRIMITIVE(true),
+        CLASS(true),
+        CLASS_WITH_GEN(true),
         NAMING
     }
 

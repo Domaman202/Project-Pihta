@@ -14,6 +14,7 @@ import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.javaClassVersion
 import ru.DmN.siberia.compilers.INodeCompiler
+import ru.DmN.siberia.utils.FieldModifiers
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
@@ -109,7 +110,16 @@ object NCFn : INodeCompiler<NodeFn> {
                     visitInsn(Opcodes.DUP)
                     load(it.type.name, i + 1, this)
                     visitFieldInsn(Opcodes.PUTFIELD, clazz.name, it.name, it.type.desc)
-                    type.fields += VirtualFieldImpl(type, it.name, it.type, isStatic = false, isEnum = false)
+                    type.fields += VirtualFieldImpl(
+                        type,
+                        it.name,
+                        it.type,
+                        FieldModifiers(
+                            isFinal = false,
+                            isStatic = false,
+                            isEnum = false
+                        )
+                    )
                     clazz.visitField(Opcodes.ACC_PRIVATE, it.name, it.type.desc, null, null)
                 }
                 visitInsn(Opcodes.RETURN)

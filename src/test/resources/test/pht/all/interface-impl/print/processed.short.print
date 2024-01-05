@@ -13,7 +13,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = TestImpl)
 |	|	|	|	[CTOR_
 |	|	|	|	|	(type = constructor)
@@ -37,7 +37,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test0)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -54,7 +54,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test1)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -71,7 +71,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test2)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -87,7 +87,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test3)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -124,7 +124,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = TestImpl)
 |	|	|	|	[CTOR_
 |	|	|	|	|	(type = constructor)
@@ -148,7 +148,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test0)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -165,7 +165,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test1)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -182,7 +182,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test2)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -198,7 +198,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test3)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_

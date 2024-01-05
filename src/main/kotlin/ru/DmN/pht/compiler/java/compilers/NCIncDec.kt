@@ -21,7 +21,7 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
             if (variable == null) {
                 val clazz = ctx.clazz.clazz
                 val field = clazz.fields.find { it.name == node.name }!!
-                if (field.isStatic)
+                if (field.modifiers.isStatic)
                     visitFieldInsn(Opcodes.GETSTATIC, clazz.className, field.name, field.desc)
                 else {
                     visitVarInsn(Opcodes.ALOAD, 0)
@@ -66,7 +66,7 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
                     }
                     else -> throw UnsupportedOperationException()
                 }
-                if (field.isStatic)
+                if (field.modifiers.isStatic)
                     visitFieldInsn(Opcodes.PUTSTATIC, clazz.className, field.name, field.desc)
                 else {
                     visitVarInsn(Opcodes.ALOAD, 0)
@@ -93,7 +93,7 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
             if (variable == null) {
                 val clazz = ctx.clazz.clazz
                 val field = clazz.fields.find { it.name == node.name }!!
-                if (field.isStatic)
+                if (field.modifiers.isStatic)
                     visitFieldInsn(Opcodes.GETSTATIC, clazz.className, field.name, field.desc)
                 else {
                     visitVarInsn(Opcodes.ALOAD, 0)
@@ -142,7 +142,7 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
                 }
                 if (operation == INC_PRE_ || operation == DEC_PRE_)
                     visitInsn(Opcodes.DUP)
-                if (field.isStatic)
+                if (field.modifiers.isStatic)
                     visitFieldInsn(Opcodes.PUTSTATIC, clazz.className, field.name, field.desc)
                 else {
                     visitVarInsn(Opcodes.ALOAD, 0)

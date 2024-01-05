@@ -29,8 +29,8 @@ object NCClass : INodeCompiler<NodeType> {
                             ITF_ -> it + Opcodes.ACC_INTERFACE + Opcodes.ACC_ABSTRACT
                             else ->
                                 if (node.abstract) it + Opcodes.ACC_ABSTRACT
-                                else if (node.final) it + Opcodes.ACC_FINAL
-                                else it
+                                else if (node.open) it
+                                else it + Opcodes.ACC_FINAL
                         }
                     },
                     node.type.className,

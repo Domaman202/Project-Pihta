@@ -59,7 +59,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 info.processed,
                 processArguments(info, processor, ctx, result.method, result.args, result.compression),
                 generics,
-                if (instance is NodeGetOrName && instance.name == ".")
+                if ((result.type == STATIC && instance is NodeGetOrName && instance.name == ".") || (result.type == VIRTUAL && instance is NodeValue && instance.vtype.clazz))
                     NodeFGet(
                         info.withType(NodeTypes.FGET_),
                         mutableListOf(nodeValueClass(info, result.method.declaringClass!!.name)),

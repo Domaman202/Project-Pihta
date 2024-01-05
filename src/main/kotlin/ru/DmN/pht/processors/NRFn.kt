@@ -14,6 +14,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.utils.FieldModifiers
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
@@ -34,7 +35,7 @@ object NRFn : INodeProcessor<NodeNodesList> {
         val type = if (offset == 1) gctx.getType(nodes[0].valueAsString, processor.tp) else null
         val refs = processor.computeStringNodes(nodes[offset] as INodesList, context)
             .map { ref -> bctx[ref]?.let { NVC.of(it) } ?: NVC.of(cctx.fields.find { it.name == ref }!!) }
-        refs.forEach { fakeType.fields += VirtualFieldImpl(fakeType, it.name, it.type, isStatic = false, isEnum = false) }
+        refs.forEach { fakeType.fields += VirtualFieldImpl(fakeType, it.name, it.type, FieldModifiers(isFinal = false, isStatic = false, isEnum = false)) }
         val args = processor.computeStringNodes(nodes[offset + 1] as INodesList, context)
         val body = nodes.dropAndProcess(offset + 2).toMutableList()
         return NodeFn(node.info.withType(NodeTypes.FN_), body, type, args, fakeType.name, refs)

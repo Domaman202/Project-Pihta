@@ -13,6 +13,7 @@ import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.utils.FieldModifiers
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
@@ -28,10 +29,10 @@ object NRClass : INodeProcessor<NodeNodesList> {
         //
         val generics = processor.computeListOr(node.nodes[0], ctx)
         val offset = if (generics == null) 0 else 1
-        val type = VirtualTypeImpl(gctx.name(processor.computeString(node.nodes[offset], ctx)))
+        val type = VirtualTypeImpl(gctx.name(processor.computeString(node.nodes[offset], ctx)), isFinal = true)
         //
         when (node.type) {
-            NodeParsedTypes.OBJ -> type.fields += VirtualFieldImpl(type, "INSTANCE", type, isStatic = true, isEnum = false)
+            NodeParsedTypes.OBJ -> type.fields += VirtualFieldImpl(type, "INSTANCE", type, FieldModifiers(isFinal = true, isStatic = true, isEnum = false))
             NodeParsedTypes.ITF -> type.isInterface = true
         }
         processor.tp.types[type.name.hashCode()] = type

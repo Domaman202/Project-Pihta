@@ -3,7 +3,7 @@
 |	(NODES:
 |	|	[PROGN_
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test0)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -26,7 +26,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test1)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -49,7 +49,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test2)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -76,7 +76,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test3)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -103,7 +103,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test4)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -126,7 +126,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test5)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -149,7 +149,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test6)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -172,7 +172,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test7)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -195,7 +195,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test8)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -218,7 +218,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test9)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -241,7 +241,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test10)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -268,7 +268,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test11)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -295,7 +295,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test12)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -318,7 +318,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test13)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -341,7 +341,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test14)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -364,7 +364,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test15)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -394,7 +394,7 @@
 |	(NODES:
 |	|	[PROGN_
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test0)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -417,7 +417,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test1)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -440,7 +440,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test2)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -467,7 +467,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test3)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -494,7 +494,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test4)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -517,7 +517,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test5)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -540,7 +540,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test6)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -563,7 +563,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test7)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -586,7 +586,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test8)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -609,7 +609,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test9)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -632,7 +632,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test10)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -659,7 +659,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test11)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -686,7 +686,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test12)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -709,7 +709,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test13)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -732,7 +732,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test14)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
@@ -755,7 +755,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
-|	|	|	|	(type = open class)
+|	|	|	|	(type = final class)
 |	|	|	|	(name = Test15)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
