@@ -27,9 +27,9 @@ object NCDef : INodeCompiler<NodeDef> {
             val clazz = ctx.clazz.node
             node.variables.forEach { it ->
                 clazz.visitField(
-                    if (node.static)
-                        Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC
-                    else Opcodes.ACC_PUBLIC,
+                    Opcodes.ACC_PUBLIC
+                        .let { if (node.static) it + Opcodes.ACC_STATIC else it }
+                        .let { if (node.final) it + Opcodes.ACC_FINAL else it },
                     it.name,
                     it.type.desc,
                     null,

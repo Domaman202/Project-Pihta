@@ -1,0 +1,122 @@
+[USE_CTX
+|	(modules = pht)
+|	[USE_CTX
+|	|	(modules = pht)
+|	|	[APP
+|	|	|	[ANN_FINAL
+|	|	|	|	[FLD
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'I')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[DEFN
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = '<clinit>')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'void')
+|	|	|	|	]
+|	|	|	|	[VALN]
+|	|	|	|	[FSET_B
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '333')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[FGET_B
+|	|	|	|	(type = STATIC)
+|	|	|	|	(text = 'I')
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '1')
+|	|	|	]
+|	|	|	[VALUE
+|	|	|	|	(type = CLASS)
+|	|	|	|	(value = 'App')
+|	|	|	]
+|	|	]
+|	]
+]
+[USE_CTX
+|	(modules = pht)
+|	[USE_CTX
+|	|	(modules = pht)
+|	|	[APP
+|	|	|	[ANN_FINAL
+|	|	|	|	[FLD
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'I')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[DEFN
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = '<clinit>')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'void')
+|	|	|	|	]
+|	|	|	|	[VALN]
+|	|	|	|	[FSET_B
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '333')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[FGET_B
+|	|	|	|	(type = STATIC)
+|	|	|	|	(text = 'I')
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '1')
+|	|	|	]
+|	|	|	[VALUE
+|	|	|	|	(type = CLASS)
+|	|	|	|	(value = 'App')
+|	|	|	]
+|	|	]
+|	]
+]

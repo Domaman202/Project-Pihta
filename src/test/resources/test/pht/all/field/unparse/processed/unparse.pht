@@ -1,7 +1,7 @@
 (use-ctx pht
 	(progn
 		(cls [] Test [^java.lang.Object]
-			(progn
+			(progn-
 				(progn-
 					(defn [] setI ^void [[i ^int]]
 						(fset
@@ -33,7 +33,7 @@
 							getI)))))))(use-ctx pht
 	(progn
 		(cls [] Test [^java.lang.Object]
-			(progn
+			(progn-
 				(progn-
 					(defn [] setI ^void [[i ^int]]
 						(fset
@@ -65,7 +65,7 @@
 							getI)))))))(use-ctx pht
 	(progn
 		(cls [] Test [^java.lang.Object]
-			(progn
+			(progn-
 				(progn-
 					(defn [] setI ^void [[i ^int]]
 						(fset

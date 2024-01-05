@@ -1,0 +1,85 @@
+(use-ctx pht
+	(use-ctx pht
+		(cls [] App [^java.lang.Object]
+			(@static
+				(@final
+					(@final
+						(@static
+							(defn [] getI ^int []
+								(fget
+									^App
+									I))
+							(def [
+								[I ^int]]))))
+				(defn [] <clinit> ^void []
+					(fset
+						^App
+						I
+						333))))
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							^App
+							getI)))))
+		(cls [] Test1 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						^App))))))(use-ctx pht
+	(use-ctx pht
+		(cls [] App [^java.lang.Object]
+			(@static
+				(@final
+					(@final
+						(@static
+							(defn [] getI ^int []
+								(fget
+									^App
+									I))
+							(def [
+								[I ^int]]))))
+				(defn [] <clinit> ^void []
+					(fset
+						^App
+						I
+						333))))
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							^App
+							getI)))))
+		(cls [] Test1 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						^App))))))(use-ctx pht
+	(use-ctx pht
+		(app
+			(@final
+				(fld
+					[
+						[
+							I
+							^int
+						]
+					]))
+			(defn
+				<clinit>
+				^void
+				[]
+				(fset
+					^App
+					I
+					333)))
+		(test-fn
+			0
+			(fget
+				^App
+				I))
+		(test-fn
+			1
+			^App)))

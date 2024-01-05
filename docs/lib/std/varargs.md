@@ -12,7 +12,8 @@
 ```pihta
 (use-ctx pht
     (cls StringExtends [^Object]
-        (@varargs (efn ^String sub ^String [[arr (array-type ^String)]] (progn
+        (@varargs 
+        (efn ^String sub ^String [[arr (array-type ^String)]] (progn
             (def [[str (new ^StringBuilder this)]])
             (for [e arr]
                 (#append str e))

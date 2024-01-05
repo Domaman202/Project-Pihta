@@ -91,8 +91,8 @@ object NRFld : INodeProcessor<NodeFieldA> {
                 }
             }
         return processor.process(
-            NodeNodesList(
-                info.withType(if (node.final) ANN_FINAL else PROGN),
+            NodeModifierNodesList(
+                info.withType(if (node.final) ANN_FINAL else NodeTypes.PROGN_B),
                 mutableListOf(
                     NodeModifierNodesList(
                         info.withType(if (node.static) ANN_STATIC else NodeTypes.PROGN_B),

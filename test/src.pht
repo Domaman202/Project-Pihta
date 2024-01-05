@@ -1,8 +1,26 @@
 (use-ctx pht
-    (app
-        (@final
-        (fld [[i ^int]]))
-        (defn <clinit> ^void []
-            (set ^App/i 333))
-        (app-fn
-            (println ^App/i))))
+	(use-ctx pht
+		(cls [] App [^java.lang.Object]
+			(@static
+				(@final
+					(@final
+						(@static
+							(defn [] getI ^int []
+								(fget
+									^App
+									i))
+							(def [
+								[i ^int]]))))
+				(defn [] <clinit> ^void []
+					(fset
+						^App
+						i
+						333))
+				(@static
+					(defn [] main ^void []
+						(mcall
+							^ru.DmN.pht.std.utils.StdOut
+							println
+							(mcall
+								^App
+								getI))))))))

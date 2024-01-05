@@ -14,7 +14,7 @@
 					this
 					setBlue
 					b))
-			(progn
+			(progn-
 				(progn-
 					(defn [] setRed ^void [[red ^int]]
 						(fset
@@ -117,7 +117,7 @@
 					this
 					setBlue
 					b))
-			(progn
+			(progn-
 				(progn-
 					(defn [] setRed ^void [[red ^int]]
 						(fset
@@ -220,7 +220,7 @@
 					this
 					setBlue
 					b))
-			(progn
+			(progn-
 				(progn-
 					(defn [] setRed ^void [[red ^int]]
 						(fset

@@ -1,6 +1,7 @@
 package ru.DmN.pht.std.processor.utils
 
 import ru.DmN.pht.std.ast.NodeGetOrName
+import ru.DmN.pht.std.ast.NodeModifierNodesList
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.compiler.java.utils.MacroDefine
 import ru.DmN.pht.std.node.NodeParsedTypes
@@ -128,7 +129,7 @@ fun nodeWithGens(info: INodeInfo, node: Node, generics: Sequence<Node>) =
 
 // Аннотации
 fun nodeStatic(info: INodeInfo, nodes: MutableList<Node>) =
-    NodeNodesList(info.withType(NodeParsedTypes.ANN_STATIC), nodes)
+    NodeModifierNodesList(info.withType(NodeParsedTypes.ANN_STATIC), nodes)
 fun nodeStatic(info: INodeInfo, node: Node) =
     nodeStatic(info, mutableListOf(node))
 
