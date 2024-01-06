@@ -30,16 +30,16 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         calc(findMethod(node, processor, ctx), node, processor, ctx)
 
     fun calc(result: MethodFindResultA, node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
-        val instance = lazy { processor.calc(getInstance(result, node, processor, ctx), ctx) }
         result.method.retgen ?: return result.method.rettype.let { rt ->
-            val iv = instance.value
-            if (rt is VTWG && iv is VTWG)
-                rt.with(iv.gens.filter { it.value.isFirst }.map { Pair(it.key, it.value.first()) }.toMap())
-            else rt
+            processor.calc(getInstance(result, node, processor, ctx), ctx).let { it ->
+                if (rt is VTWG && it is VTWG)
+                    rt.with(it.gens.filter { it.value.isFirst }.map { Pair(it.key, it.value.first()) }.toMap())
+                else rt
+            }
         }
         return result.generics
             ?: getGensFromArgs(result, processor, ctx)[result.method.retgen]
-            ?: instance.value.let {
+            ?: processor.calc(getInstance(result, node, processor, ctx), ctx).let {
                 if (it is VTWG) {
                     val gen = it.gens[result.method.retgen]!!
                     if (gen.isFirst)
@@ -59,15 +59,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 info.processed,
                 processArguments(info, processor, ctx, result.method, result.args, result.compression),
                 generics,
-                if ((result.type == STATIC && instance is NodeGetOrName && instance.name == ".") || (result.type == VIRTUAL && instance is NodeValue && instance.vtype.clazz))
-                    NodeFGet(
-                        info.withType(NodeTypes.FGET_),
-                        mutableListOf(nodeValueClass(info, result.method.declaringClass!!.name)),
-                        "INSTANCE",
-                        NodeFGet.Type.STATIC,
-                        processor.computeType(node.nodes[0], ctx)
-                    )
-                else instance,
+                instance,
                 result.method,
                 when (result.type) {
                     UNKNOWN ->
@@ -115,11 +107,39 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         if (result.type == SUPER)
             nodeGetOrName(node.info, "this")
         else {
-            val instance = processor.process(node.nodes[0], ctx, ValType.VALUE)
-            if (result.strict && instance is NodeGetOrName)
-                NodeTypedGet.of(instance, result.method.declaringClass!!)
-            else instance!!
+            val instance = processor.process(node.nodes[0], ctx, ValType.VALUE)!!
+            if (result.type == VIRTUAL && instance.isConstClass)
+                nodeGetInstance(result, node, processor, ctx)
+            else if (instance.isLiteral && processor.computeString(instance, ctx) == ".")
+                when (result.type) {
+                    UNKNOWN -> result.method.run {
+                        if (modifiers.static)
+                            nodeValueClass(node.info, declaringClass!!.name)
+                        else throw RuntimeException()
+                    }
+
+                    STATIC -> nodeGetInstance(result, node, processor, ctx)
+                    else -> throw RuntimeException()
+                }
+            else instance
         }
+
+    /**
+     * Создаёт ноду получения INSTANCE от класса в котором определён метод.
+     *
+     * @param result Результат поиска метода.
+     * @param node Необработанная нода MCALL.
+     * @param processor Обработчик.
+     * @param ctx Контекст обработки.
+     */
+    private fun nodeGetInstance(result: MethodFindResultA, node: NodeNodesList, processor: Processor, ctx: ProcessingContext) =
+        NodeFGet(
+            node.info.withType(NodeTypes.FGET_),
+            mutableListOf(nodeValueClass(node.info, result.method.declaringClass!!.name)),
+            "INSTANCE",
+            NodeFGet.Type.STATIC,
+            processor.computeType(node.nodes[0], ctx)
+        )
 
     /**
      * Преобразует исходные аргументы "args" в список нод для передачи в NodeMCall.

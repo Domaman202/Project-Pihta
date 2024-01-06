@@ -1,0 +1,10 @@
+(progn
+    (app
+        (defn foo ^String [] "Foo!"))
+    (cls Test [^Object]
+        (ctor [] (ccall))
+        (defn foo ^String [] "Foo Instance!"))
+    (test-fn 0 (mcall ^App foo))
+    (test-fn 1 (#foo ^App))
+    (test-fn 2 (mcall (new ^Test) foo))
+    (test-fn 3 (#foo (new ^Test))))
