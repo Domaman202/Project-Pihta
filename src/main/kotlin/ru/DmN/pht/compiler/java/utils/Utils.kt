@@ -3,40 +3,45 @@ package ru.DmN.pht.std.compiler.java.utils
 import org.objectweb.asm.Label
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
-import ru.DmN.siberia.utils.IContextCollection
+import ru.DmN.pht.ctx.ContextKeys
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.compiler.java.ctx.BodyContext
 import ru.DmN.pht.std.compiler.java.ctx.ClassContext
 import ru.DmN.pht.std.compiler.java.ctx.MethodContext
 import ru.DmN.pht.std.processor.utils.isEnum
+import ru.DmN.siberia.ctx.IContextCollection
 
 fun <T : IContextCollection<T>> T.with(ctx: ClassContext) =
-    this.with("pht/class", ctx)
+    this.with(ContextKeys.CLASS, ctx)
 fun <T : IContextCollection<T>> T.with(ctx: MethodContext) =
-    this.with("pht/method", ctx)
+    this.with(ContextKeys.METHOD, ctx)
 fun <T : IContextCollection<T>> T.with(ctx: BodyContext) =
-    this.with("pht/body", ctx)
+    this.with(ContextKeys.BODY, ctx)
 fun <T : IContextCollection<T>> T.withNamedBlock(name: String, ctx: NamedBlockData) =
-    this.with("pht/named-block/$name", ctx)
+    this.with(ContextKeys.NAMED_BLOCKS, (this.namedBlocksOrNull?.let { HashMap(it) } ?: HashMap<String, NamedBlockData>()).apply { this[name] = ctx })
 
 fun IContextCollection<*>.isClass() =
-    contexts.containsKey("pht/class") || isEnum()
+    contexts.containsKey(ContextKeys.CLASS) || isEnum()
 fun IContextCollection<*>.isMethod() =
-    contexts.containsKey("pht/method")
+    contexts.containsKey(ContextKeys.METHOD)
 fun IContextCollection<*>.isBody() =
-    contexts.containsKey("pht/body")
+    contexts.containsKey(ContextKeys.BODY)
 
 val IContextCollection<*>.clazz
-    get() = contexts["pht/class"] as ClassContext
+    get() = contexts[ContextKeys.CLASS] as ClassContext
 val IContextCollection<*>.method
-    get() = contexts["pht/method"] as MethodContext
+    get() = contexts[ContextKeys.METHOD] as MethodContext
 val IContextCollection<*>.body
     get() = bodyOrNull!!
 val IContextCollection<*>.bodyOrNull
-    get() = contexts["pht/body"] as BodyContext?
+    get() = contexts[ContextKeys.BODY] as BodyContext?
 fun IContextCollection<*>.getNamedBlock(name: String) =
-    contexts["pht/named-block/$name"] as NamedBlockData
+    this.namedBlocks[name]!!
+val IContextCollection<*>.namedBlocks
+    get() = this.namedBlocksOrNull!!
+val IContextCollection<*>.namedBlocksOrNull
+    get() = contexts[ContextKeys.NAMED_BLOCKS] as MutableMap<String, NamedBlockData>?
 
 fun load(variable: Variable, node: MethodVisitor) {
     if (!variable.tmp) {

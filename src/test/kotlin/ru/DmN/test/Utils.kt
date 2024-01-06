@@ -3,29 +3,26 @@ package ru.DmN.test
 import org.objectweb.asm.ClassWriter
 import ru.DmN.pht.std.module.StdModule
 import ru.DmN.pht.std.module.ast.NodeModule
-import ru.DmN.pht.std.utils.type
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.Unparser
-import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.Platform
+import ru.DmN.siberia.processor.utils.Platforms
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processor.utils.with
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.utils.Module
 import ru.DmN.siberia.utils.TypesProvider
-import ru.DmN.siberia.utils.operation
 import java.io.File
 import java.io.FileOutputStream
 import java.net.URLClassLoader
 import kotlin.test.Test
-import kotlin.test.assertTrue
+import kotlin.test.assertEquals
 import ru.DmN.test.Module as SiberiaModule
 
 abstract class Module(private val dir: String) {
@@ -67,7 +64,7 @@ abstract class Module(private val dir: String) {
         }
         val processed = ArrayList<Node>()
         val processor = Processor(tp)
-        val pctx = ProcessingContext.base().with(Platform.JAVA).apply { this.module = this@Module.module }
+        val pctx = ProcessingContext.base().with(Platforms.JAVA).apply { this.module = this@Module.module }
         module.load(processor, pctx, ValType.NO_VALUE)
         module.nodes.forEach { it ->
             processor.process(it, pctx, ValType.NO_VALUE)?.let {
@@ -84,13 +81,13 @@ abstract class Module(private val dir: String) {
         }
     }
 
-    fun unparseCheck() {
-        assertTrue(String(File("dump/$dir/unparse/parsed/unparse.pht").readBytes()) ==  module.getModuleFile("unparse/parsed/unparse.pht"))
-        assertTrue(String(File("dump/$dir/unparse/processed/unparse.pht").readBytes()) == module.getModuleFile("unparse/processed/unparse.pht"))
+    private fun unparseCheck() {
+        assertEquals(String(File("dump/$dir/unparse/parsed/unparse.pht").readBytes()), module.getModuleFile("unparse/parsed/unparse.pht"), "parsed.unparse.pht")
+        assertEquals(String(File("dump/$dir/unparse/processed/unparse.pht").readBytes()), module.getModuleFile("unparse/processed/unparse.pht"), "processed.unparse.pht")
     }
 
 
-    fun print() {
+    private fun print() {
         val tp = TypesProvider.java()
         module.init = false
         module.init()
@@ -107,7 +104,7 @@ abstract class Module(private val dir: String) {
         }
         val processed = ArrayList<Node>()
         val processor = Processor(tp)
-        val pctx = ProcessingContext.base().with(Platform.JAVA).apply { this.module = this@Module.module }
+        val pctx = ProcessingContext.base().with(Platforms.JAVA).apply { this.module = this@Module.module }
         module.load(processor, pctx, ValType.NO_VALUE)
         module.nodes.forEach { it ->
             processor.process(it, pctx, ValType.NO_VALUE)?.let {
@@ -127,11 +124,11 @@ abstract class Module(private val dir: String) {
         }
     }
 
-    fun printCheck() {
-        assertTrue(String(File("dump/$dir/print/parsed.short.print").readBytes()) ==  module.getModuleFile("print/parsed.short.print"))
-        assertTrue(String(File("dump/$dir/print/processed.short.print").readBytes()) == module.getModuleFile("print/processed.short.print"))
-        assertTrue(String(File("dump/$dir/print/parsed.long.print").readBytes()) == module.getModuleFile("print/parsed.long.print"))
-        assertTrue(String(File("dump/$dir/print/processed.long.print").readBytes()) == module.getModuleFile("print/processed.long.print"))
+    private fun printCheck() {
+        assertEquals(String(File("dump/$dir/print/parsed.short.print").readBytes()), module.getModuleFile("print/parsed.short.print"), "parsed.short.print")
+        assertEquals(String(File("dump/$dir/print/processed.short.print").readBytes()), module.getModuleFile("print/processed.short.print"), "processed.short.print")
+        assertEquals(String(File("dump/$dir/print/parsed.long.print").readBytes()), module.getModuleFile("print/parsed.long.print"), "parsed.long.print")
+        assertEquals(String(File("dump/$dir/print/processed.long.print").readBytes()), module.getModuleFile("print/processed.long.print"), "processed.long.print")
     }
 
     fun compile() {
@@ -140,7 +137,7 @@ abstract class Module(private val dir: String) {
         module.init()
         val processed = ArrayList<Node>()
         val processor = Processor(tp)
-        val pctx = ProcessingContext.base().with(Platform.JAVA).apply { this.module = this@Module.module }
+        val pctx = ProcessingContext.base().with(Platforms.JAVA).apply { this.module = this@Module.module }
         module.load(processor, pctx, ValType.NO_VALUE)
         module.nodes.forEach { it ->
             processor.process(it, pctx, ValType.NO_VALUE)?.let {

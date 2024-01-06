@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.processor.utils
 
+import ru.DmN.pht.ctx.ContextKeys
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.ast.NodeModifierNodesList
 import ru.DmN.pht.std.ast.NodeValue
@@ -14,10 +15,11 @@ import ru.DmN.pht.std.utils.mapMutable
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.ctx.IContextCollection
+import ru.DmN.siberia.ctx.IContextKey
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.utils.IContextCollection
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 
@@ -142,47 +144,47 @@ fun sliceInsert(list: MutableList<Any?>, index: Int, elements: List<Any?>) {
 }
 
 fun <T : IContextCollection<T>> T.with(ctx: GlobalContext) =
-    this.with("pht/global", ctx)
+    this.with(ContextKeys.GLOBAL, ctx)
 fun <T : IContextCollection<T>> T.with(ctx: EnumContext) =
-    this.with("pht/enum", ctx).apply { this.contexts["pht/class"] = ctx.type }
+    this.with(ContextKeys.ENUM, ctx).apply { this.contexts[ContextKeys.CLASS] = ctx.type }
 fun <T : IContextCollection<T>> T.with(ctx: VirtualType?) =
-    this.with("pht/class", ctx)
+    this.with(ContextKeys.CLASS, ctx)
 fun <T : IContextCollection<T>> T.with(ctx: VirtualMethod?) =
-    this.with("pht/method", ctx)
+    this.with(ContextKeys.METHOD, ctx)
 fun <T : IContextCollection<T>> T.with(ctx: BodyContext) =
-    this.with("pht/body", ctx)
+    this.with(ContextKeys.BODY, ctx)
 fun <T : IContextCollection<T>> T.with(ctx: MacroContext) =
-    this.with("pht/macro", ctx)
+    this.with(ContextKeys.MACRO, ctx)
 
 fun IContextCollection<*>.isEnum() =
-    contexts.containsKey("pht/enum")
+    contexts.containsKey(ContextKeys.ENUM)
 fun IContextCollection<*>.isClass() =
-    contexts.containsKey("pht/class") || isEnum()
+    contexts.containsKey(ContextKeys.CLASS) || isEnum()
 fun IContextCollection<*>.isMethod() =
-    contexts.containsKey("pht/method")
+    contexts.containsKey(ContextKeys.METHOD)
 fun IContextCollection<*>.isBody() =
-    contexts.containsKey("pht/body")
+    contexts.containsKey(ContextKeys.BODY)
 fun IContextCollection<*>.isMacro() =
-    contexts.containsKey("pht/macro")
+    contexts.containsKey(ContextKeys.MACRO)
 
-var IContextCollection<*>.global
-    set(value) { contexts["pht/global"] = value }
-    get() = contexts["pht/global"] as GlobalContext
-val IContextCollection<*>.enum
-    get() = contexts["pht/enum"] as EnumContext
-val IContextCollection<*>.clazz
+inline var IContextCollection<*>.global
+    set(value) { contexts[ContextKeys.GLOBAL] = value }
+    get() = contexts[ContextKeys.GLOBAL] as GlobalContext
+inline val IContextCollection<*>.enum
+    get() = contexts[ContextKeys.ENUM] as EnumContext
+inline val IContextCollection<*>.clazz
     get() = this.clazzOrNull!!
-val IContextCollection<*>.clazzOrNull
-    get() = contexts["pht/class"] as VirtualType?
-val IContextCollection<*>.method
-    get() = contexts["pht/method"] as VirtualMethod
-val IContextCollection<*>.body
+inline val IContextCollection<*>.clazzOrNull
+    get() = contexts[ContextKeys.CLASS] as VirtualType?
+inline val IContextCollection<*>.method
+    get() = contexts[ContextKeys.METHOD] as VirtualMethod
+inline val IContextCollection<*>.body
     get() = this.bodyOrNull!!
-val IContextCollection<*>.bodyOrNull
-    get() = contexts["pht/body"] as BodyContext?
-val IContextCollection<*>.macro
-    get() = contexts["pht/macro"] as MacroContext
+inline val IContextCollection<*>.bodyOrNull
+    get() = contexts[ContextKeys.BODY] as BodyContext?
+inline val IContextCollection<*>.macro
+    get() = contexts[ContextKeys.MACRO] as MacroContext
 
-var MutableMap<String, Any?>.macros
-    set(value) { this["pht/macros"] = value }
-    get() = this["pht/macros"] as MutableMap<String, MutableList<MacroDefine>>
+inline var MutableMap<IContextKey, Any?>.macros
+    set(value) { this[ContextKeys.MACROS] = value }
+    get() = this[ContextKeys.MACROS] as MutableMap<String, MutableList<MacroDefine>>

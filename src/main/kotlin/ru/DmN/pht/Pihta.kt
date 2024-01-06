@@ -17,7 +17,7 @@ import ru.DmN.pht.std.parsers.*
 import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.macros
+import ru.DmN.pht.std.processor.utils.macros as macros_list
 import ru.DmN.pht.std.processor.utils.method
 import ru.DmN.pht.std.processors.*
 import ru.DmN.pht.unparsers.*
@@ -632,7 +632,7 @@ object Pihta : Module("pht") {
 
     override fun load(processor: Processor, ctx: ProcessingContext, mode: ValType): Boolean {
         if (!ctx.loadedModules.contains(this)) {
-            processor.contexts.macros = HashMap()
+            processor.contexts.macros_list = HashMap()
             ctx.global = GlobalContext()
         }
         return super.load(processor, ctx, mode)

@@ -11,10 +11,7 @@ import ru.DmN.siberia.ConsoleOld.initModuleInfo
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.Platform
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processor.utils.module
-import ru.DmN.siberia.processor.utils.with
+import ru.DmN.siberia.processor.utils.*
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.utils.Module
 import ru.DmN.siberia.utils.TypesProvider
@@ -36,7 +33,7 @@ object Console : Console() {
                 module.init()
                 val processed = ArrayList<Node>()
                 val processor = Processor(tp)
-                val pctx = ProcessingContext.base().with(Platform.JAVA).apply { this.module = module }
+                val pctx = ProcessingContext.base().with(Platforms.JAVA).apply { this.module = module }
                 module.load(processor, pctx, ValType.NO_VALUE)
                 File("dump").mkdir()
                 FileOutputStream("dump/parsed.unparse.pht").use { out ->

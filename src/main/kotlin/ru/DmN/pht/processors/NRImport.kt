@@ -6,10 +6,7 @@ import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.processor.utils.macros
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.Platform
-import ru.DmN.siberia.processor.utils.ProcessingStage
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processor.utils.platform
+import ru.DmN.siberia.processor.utils.*
 import ru.DmN.siberia.processors.INodeProcessor
 
 object NRImport : INodeProcessor<NodeImport> {
@@ -63,7 +60,7 @@ object NRImport : INodeProcessor<NodeImport> {
         }
 
         return when (ctx.platform) {
-            Platform.JAVA -> null
+            Platforms.JAVA -> null
             else -> NodeImport(node.info.withType(NodeTypes.IMPORT_), node.module, node.data)
         }
     }

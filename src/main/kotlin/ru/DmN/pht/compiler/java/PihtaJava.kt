@@ -8,9 +8,9 @@ import ru.DmN.pht.std.compiler.java.compilers.*
 import ru.DmN.pht.std.node.NodeTypes.*
 import ru.DmN.siberia.compiler.utils.ModuleCompilers
 import ru.DmN.siberia.compilers.NCDefault
-import ru.DmN.siberia.processor.utils.Platform
+import ru.DmN.siberia.processor.utils.Platforms
 
-class PihtaJava(module: Pihta) : ModuleCompilers(module, Platform.JAVA) {
+class PihtaJava(module: Pihta) : ModuleCompilers(module, Platforms.JAVA) {
     override fun onInitialize() {
         // a
         add(ADD_,         NCMath)

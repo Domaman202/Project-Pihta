@@ -1,7 +1,9 @@
 package ru.DmN.pht.std.parser.utils
 
+import ru.DmN.pht.ctx.ContextKeys
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.ctx.IContextCollection
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.lexer.Token.DefaultType.*
 import ru.DmN.siberia.parser.ctx.ParsingContext
@@ -9,7 +11,6 @@ import ru.DmN.siberia.parser.utils.parseMCall
 import ru.DmN.siberia.parser.utils.parseMacro
 import ru.DmN.siberia.parser.utils.parseValn
 import ru.DmN.siberia.parser.utils.parseValue
-import ru.DmN.siberia.utils.IContextCollection
 import java.util.*
 
 fun Parser.phtParseNode(ctx: ParsingContext): Node? {
@@ -59,9 +60,9 @@ fun Parser.parseProgn(ctx: ParsingContext, token: Token) =
     get(ctx, "progn")!!.parse(this, ctx, token)
 
 fun IContextCollection<*>.clearMacros() {
-    this.contexts.remove("pht/macro")
+    this.contexts.remove(ContextKeys.MACROS)
 }
 
 var IContextCollection<*>.macros
-    set(value) { this.contexts["pht/macro"] = value }
-    get() = this.contexts["pht/macro"] as Stack<UUID>
+    set(value) { this.contexts[ContextKeys.MACROS] = value }
+    get() = this.contexts[ContextKeys.MACROS] as Stack<UUID>

@@ -8,12 +8,12 @@
 						add
 						(body
 							(def [
-								[(array-type ^java.lang.String) pht$tmp$11904 (new-array ^java.lang.String 1)]])
+								[(array-type ^java.lang.String) pht$tmp$46968 (new-array ^java.lang.String 1)]])
 							(aset
-								pht$tmp$11904
+								pht$tmp$46968
 								0
 								other)
-							pht$tmp$11904)))
+							pht$tmp$46968)))
 				(efn [] ^java.lang.String mul ^java.lang.String []
 					"mul")
 				(efn [] ^java.lang.String div ^java.lang.String []
@@ -29,16 +29,16 @@
 							add
 							(body
 								(def [
-									[(array-type ^java.lang.String) pht$tmp$11908 (new-array ^java.lang.String 2)]])
+									[(array-type ^java.lang.String) pht$tmp$46972 (new-array ^java.lang.String 2)]])
 								(aset
-									pht$tmp$11908
+									pht$tmp$46972
 									0
 									" ")
 								(aset
-									pht$tmp$11908
+									pht$tmp$46972
 									1
 									"России")
-								pht$tmp$11908))))))
+								pht$tmp$46972))))))
 		(cls [] Test1 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
@@ -77,12 +77,12 @@
 						add
 						(body
 							(def [
-								[(array-type ^java.lang.String) pht$tmp$11904 (new-array ^java.lang.String 1)]])
+								[(array-type ^java.lang.String) pht$tmp$46968 (new-array ^java.lang.String 1)]])
 							(aset
-								pht$tmp$11904
+								pht$tmp$46968
 								0
 								other)
-							pht$tmp$11904)))
+							pht$tmp$46968)))
 				(efn [] ^java.lang.String mul ^java.lang.String []
 					"mul")
 				(efn [] ^java.lang.String div ^java.lang.String []
@@ -98,16 +98,16 @@
 							add
 							(body
 								(def [
-									[(array-type ^java.lang.String) pht$tmp$11908 (new-array ^java.lang.String 2)]])
+									[(array-type ^java.lang.String) pht$tmp$46972 (new-array ^java.lang.String 2)]])
 								(aset
-									pht$tmp$11908
+									pht$tmp$46972
 									0
 									" ")
 								(aset
-									pht$tmp$11908
+									pht$tmp$46972
 									1
 									"России")
-								pht$tmp$11908))))))
+								pht$tmp$46972))))))
 		(cls [] Test1 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []

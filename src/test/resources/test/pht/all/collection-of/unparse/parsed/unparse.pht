@@ -6,40 +6,40 @@
 					(as ^dynamic
 						(body
 							(def [
-								[(array-type ^int) pht$tmp$21134 (new-array ^int 3)]])
+								[(array-type ^int) pht$tmp$56198 (new-array ^int 3)]])
 							(aset
-								pht$tmp$21134
+								pht$tmp$56198
 								0
 								12)
 							(aset
-								pht$tmp$21134
+								pht$tmp$56198
 								1
 								21)
 							(aset
-								pht$tmp$21134
+								pht$tmp$56198
 								2
 								33)
-							pht$tmp$21134)))))
+							pht$tmp$56198)))))
 		(cls [] Test1 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(body
 							(def [
-								[(array-type ^long) pht$tmp$11904 (new-array ^long 3)]])
+								[(array-type ^long) pht$tmp$46968 (new-array ^long 3)]])
 							(aset
-								pht$tmp$11904
+								pht$tmp$46968
 								0
 								202)
 							(aset
-								pht$tmp$11904
+								pht$tmp$46968
 								1
 								203)
 							(aset
-								pht$tmp$11904
+								pht$tmp$46968
 								2
 								213)
-							pht$tmp$11904)))))
+							pht$tmp$46968)))))
 		(cls [] Test2 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
@@ -48,16 +48,16 @@
 							(as (array-type ^java.lang.Object)
 								(body
 									(def [
-										[(array-type ^java.lang.String) pht$tmp$21136 (new-array ^java.lang.String 2)]])
+										[(array-type ^java.lang.String) pht$tmp$56200 (new-array ^java.lang.String 2)]])
 									(aset
-										pht$tmp$21136
+										pht$tmp$56200
 										0
 										"Слава")
 									(aset
-										pht$tmp$21136
+										pht$tmp$56200
 										1
 										"России")
-									pht$tmp$21136))
+									pht$tmp$56200))
 							toList)))))))(use-ctx pht
 	(progn
 		(cls [] Test0 [^java.lang.Object]
@@ -66,40 +66,40 @@
 					(as ^dynamic
 						(body
 							(def [
-								[(array-type ^int) pht$tmp$21134 (new-array ^int 3)]])
+								[(array-type ^int) pht$tmp$56198 (new-array ^int 3)]])
 							(aset
-								pht$tmp$21134
+								pht$tmp$56198
 								0
 								12)
 							(aset
-								pht$tmp$21134
+								pht$tmp$56198
 								1
 								21)
 							(aset
-								pht$tmp$21134
+								pht$tmp$56198
 								2
 								33)
-							pht$tmp$21134)))))
+							pht$tmp$56198)))))
 		(cls [] Test1 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(body
 							(def [
-								[(array-type ^long) pht$tmp$11904 (new-array ^long 3)]])
+								[(array-type ^long) pht$tmp$46968 (new-array ^long 3)]])
 							(aset
-								pht$tmp$11904
+								pht$tmp$46968
 								0
 								202)
 							(aset
-								pht$tmp$11904
+								pht$tmp$46968
 								1
 								203)
 							(aset
-								pht$tmp$11904
+								pht$tmp$46968
 								2
 								213)
-							pht$tmp$11904)))))
+							pht$tmp$46968)))))
 		(cls [] Test2 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
@@ -108,16 +108,16 @@
 							(as (array-type ^java.lang.Object)
 								(body
 									(def [
-										[(array-type ^java.lang.String) pht$tmp$21136 (new-array ^java.lang.String 2)]])
+										[(array-type ^java.lang.String) pht$tmp$56200 (new-array ^java.lang.String 2)]])
 									(aset
-										pht$tmp$21136
+										pht$tmp$56200
 										0
 										"Слава")
 									(aset
-										pht$tmp$21136
+										pht$tmp$56200
 										1
 										"России")
-									pht$tmp$21136))
+									pht$tmp$56200))
 							toList)))))))(use-ctx pht
 	(progn
 		(test-fn
