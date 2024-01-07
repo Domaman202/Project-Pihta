@@ -1,9 +1,9 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.std.node.nodeCls
+import ru.DmN.pht.std.node.nodeDefn
+import ru.DmN.pht.std.node.nodeStatic
 import ru.DmN.pht.std.processor.utils.clazzOrNull
-import ru.DmN.pht.std.processor.utils.nodeCls
-import ru.DmN.pht.std.processor.utils.nodeDefn
-import ru.DmN.pht.std.processor.utils.nodeStatic
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -18,27 +18,10 @@ object NRAppFn : INodeProcessor<NodeNodesList> {
         when (ctx.platform) {
             Platforms.JAVA -> {
                 val info = node.info
-                val fn = nodeStatic(
-                    info,
-                    nodeDefn(
-                        info,
-                        "main",
-                        "void",
-                        node.nodes
-                    )
-                )
+                val fn = nodeStatic(info, nodeDefn(info, "main", "void", node.nodes))
                 if (ctx.clazzOrNull?.name == "App")
                     processor.process(fn, ctx, mode)!!
-                else {
-                    NRClass.process(
-                        nodeCls(
-                            info,
-                            "App",
-                            "java.lang.Object",
-                            fn
-                        ), processor, ctx, mode
-                    )
-                }
+                else NRClass.process(nodeCls(info, "App", "java.lang.Object", fn), processor, ctx, mode)
             }
 
             else -> node

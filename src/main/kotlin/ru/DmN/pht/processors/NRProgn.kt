@@ -12,9 +12,9 @@ object NRProgn : IStdNodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
         NRProgn.calc(node, processor, ctx)
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node =
         NRProgn.process(node, processor, ctx, mode)
 
-    override fun computeList(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): List<Node>? =
+    override fun computeList(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): List<Node> =
         node.nodes
 }

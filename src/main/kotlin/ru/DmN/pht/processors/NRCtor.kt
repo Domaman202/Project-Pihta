@@ -2,7 +2,6 @@ package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.node.NodeParsedTypes
-import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.processor.ctx.BodyContext
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.global
@@ -42,12 +41,7 @@ object NRCtor : INodeProcessor<NodeNodesList> {
         //
         val new = NodeDefn(node.info.withType((node.type as NodeParsedTypes).processed), node.nodes.drop(1).toMutableList(), method)
         processor.stageManager.pushTask(ProcessingStage.METHODS_BODY) {
-            processNodesList(
-                new,
-                processor,
-                ctx.with(method).with(BodyContext.of(method)),
-                mode
-            )
+            processNodesList(new, processor, ctx.with(method).with(BodyContext.of(method)), ValType.NO_VALUE)
         }
         return new
     }

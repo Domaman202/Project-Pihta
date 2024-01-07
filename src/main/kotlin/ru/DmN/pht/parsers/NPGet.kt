@@ -1,12 +1,9 @@
 package ru.DmN.pht.std.parsers
 
 import ru.DmN.pht.std.ast.NodeFMGet
-import ru.DmN.pht.std.ast.NodeGet
-import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.node.NodeParsedTypes
-import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.processor.utils.nodeValue
-import ru.DmN.pht.std.processor.utils.nodeValueClass
+import ru.DmN.pht.std.node.nodeValue
+import ru.DmN.pht.std.node.nodeValueClass
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -14,7 +11,6 @@ import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.lexer.isNaming
 import ru.DmN.siberia.lexer.isOperation
 import ru.DmN.siberia.node.INodeInfo
-import ru.DmN.siberia.node.INodeType
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
 

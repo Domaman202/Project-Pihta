@@ -4,6 +4,8 @@ import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.std.ast.NodeGet
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.node.NodeTypes
+import ru.DmN.pht.std.node.nodeGetOrName
+import ru.DmN.pht.std.node.nodeValueClass
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Processor

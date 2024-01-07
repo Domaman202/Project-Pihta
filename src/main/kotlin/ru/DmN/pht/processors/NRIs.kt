@@ -2,8 +2,8 @@ package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.ast.NodeIsAs
 import ru.DmN.pht.std.node.NodeTypes
+import ru.DmN.pht.std.node.nodeValue
 import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.nodeValue
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node

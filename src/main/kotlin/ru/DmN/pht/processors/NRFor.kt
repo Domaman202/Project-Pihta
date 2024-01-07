@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.node.NodeParsedTypes
+import ru.DmN.pht.std.node.*
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString

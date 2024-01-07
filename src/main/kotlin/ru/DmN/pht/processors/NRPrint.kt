@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.processor.utils.nodeMCall
+import ru.DmN.pht.std.node.nodeMCall
 import ru.DmN.pht.std.utils.text
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList

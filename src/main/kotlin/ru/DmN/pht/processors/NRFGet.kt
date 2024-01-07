@@ -19,8 +19,7 @@ object NRFGet : INodeProcessor<NodeFGet> {
         return (if (node.type == STATIC) processor.computeType(node.nodes[0], ctx) else processor.calc(node.nodes[0], ctx)!!)
             .fields
             .asSequence()
-            .filter { it.name == node.name }
-            .filter(filter)
+            .filter{ it.name == node.name && filter(it) }
             .first()
             .type
     }

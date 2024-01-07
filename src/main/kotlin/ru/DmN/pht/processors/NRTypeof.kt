@@ -1,7 +1,7 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.processor.utils.nodeValueClass
-import ru.DmN.pht.std.processor.utils.nodeValueNil
+import ru.DmN.pht.std.node.nodeValueClass
+import ru.DmN.pht.std.node.nodeValueNil
 import ru.DmN.pht.std.utils.ofPrimitive
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node

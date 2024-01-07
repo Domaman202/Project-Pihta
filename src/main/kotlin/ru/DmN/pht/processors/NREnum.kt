@@ -1,9 +1,8 @@
 package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.ast.NodeFSet
-import ru.DmN.pht.std.ast.NodeFieldSet
 import ru.DmN.pht.std.ast.NodeType
-import ru.DmN.pht.std.node.NodeTypes
+import ru.DmN.pht.std.node.*
 import ru.DmN.pht.std.processor.ctx.EnumContext
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeList
@@ -95,7 +94,9 @@ object NREnum : INodeProcessor<NodeNodesList> {
                                         )
                                     )
                                 )
-                            ), context, ValType.NO_VALUE
+                            ),
+                            context,
+                            ValType.NO_VALUE
                         )!!
                     }
                 }

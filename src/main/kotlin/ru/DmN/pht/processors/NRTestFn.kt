@@ -1,8 +1,8 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.processor.utils.nodeCls
-import ru.DmN.pht.std.processor.utils.nodeDefn
-import ru.DmN.pht.std.processor.utils.nodeStatic
+import ru.DmN.pht.std.node.nodeCls
+import ru.DmN.pht.std.node.nodeDefn
+import ru.DmN.pht.std.node.nodeStatic
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node

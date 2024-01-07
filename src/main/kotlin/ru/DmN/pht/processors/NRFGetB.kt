@@ -6,9 +6,9 @@ import ru.DmN.pht.std.ast.NodeFGet
 import ru.DmN.pht.std.ast.NodeFMGet
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.node.NodeTypes
+import ru.DmN.pht.std.node.nodeValue
+import ru.DmN.pht.std.node.nodeValueClass
 import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.nodeValue
-import ru.DmN.pht.std.processor.utils.nodeValueClass
 import ru.DmN.pht.std.utils.computeType
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node

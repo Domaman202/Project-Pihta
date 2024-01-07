@@ -1,8 +1,8 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.std.node.nodeArrayOf
+import ru.DmN.pht.std.node.nodeMCall
 import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.nodeArrayOf
-import ru.DmN.pht.std.processor.utils.nodeMCall
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList

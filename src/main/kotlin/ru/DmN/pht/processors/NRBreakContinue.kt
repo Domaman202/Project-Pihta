@@ -10,9 +10,6 @@ import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VirtualType
 
 object NRBreakContinue : INodeProcessor<Node> {
-    override fun calc(node: Node, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        null
-
     override fun process(node: Node, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeNamedList =
         NRNamedList.process(node as NodeNodesList, processor, ctx, mode)
 }

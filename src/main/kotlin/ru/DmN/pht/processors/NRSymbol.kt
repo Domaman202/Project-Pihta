@@ -20,5 +20,5 @@ object NRSymbol : IStdNodeProcessor<NodeNodesList> {
         else null
 
     override fun computeString(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): String =
-        node.nodes.map { processor.computeString(it, ctx) }.reduce { acc, s -> acc + s }
+        node.nodes.asSequence().map { processor.computeString(it, ctx) }.reduce { acc, s -> acc + s }
 }

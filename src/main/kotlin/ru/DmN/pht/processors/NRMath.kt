@@ -2,13 +2,9 @@ package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.processor.utils.MethodFindResultB
 import ru.DmN.pht.std.ast.NodeMCall
-import ru.DmN.pht.std.node.NodeParsedTypes
-import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.node.processed
+import ru.DmN.pht.std.node.*
 import ru.DmN.pht.std.processor.utils.ICastable
 import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.nodeAs
-import ru.DmN.pht.std.processor.utils.nodeValueClass
 import ru.DmN.pht.std.utils.adaptToType
 import ru.DmN.pht.std.utils.processNodes
 import ru.DmN.pht.std.utils.text

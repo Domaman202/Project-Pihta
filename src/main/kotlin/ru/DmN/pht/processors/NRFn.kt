@@ -35,7 +35,7 @@ object NRFn : INodeProcessor<NodeNodesList> {
         val type = if (offset == 1) gctx.getType(nodes[0].valueAsString, processor.tp) else null
         val refs = processor.computeStringNodes(nodes[offset] as INodesList, context)
             .map { ref -> bctx[ref]?.let { NVC.of(it) } ?: NVC.of(cctx.fields.find { it.name == ref }!!) }
-        refs.forEach { fakeType.fields += VirtualFieldImpl(fakeType, it.name, it.type, FieldModifiers(isFinal = false, isStatic = false, isEnum = false)) }
+            .onEach { fakeType.fields += VirtualFieldImpl(fakeType, it.name, it.type, FieldModifiers(isFinal = false, isStatic = false, isEnum = false)) }
         val args = processor.computeStringNodes(nodes[offset + 1] as INodesList, context)
         val body = nodes.dropAndProcess(offset + 2).toMutableList()
         return NodeFn(node.info.withType(NodeTypes.FN_), body, type, args, fakeType.name, refs)

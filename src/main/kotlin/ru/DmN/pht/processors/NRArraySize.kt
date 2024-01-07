@@ -14,9 +14,6 @@ object NRArraySize : INodeProcessor<NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeNodesList? =
         if (mode == ValType.VALUE)
-            NodeNodesList(
-                node.info.withType(NodeTypes.ARRAY_SIZE_),
-                mutableListOf(processor.process(node.nodes[0], ctx, ValType.VALUE)!!)
-            )
+            NodeNodesList(node.info.withType(NodeTypes.ARRAY_SIZE_), mutableListOf(processor.process(node.nodes[0], ctx, ValType.VALUE)!!))
         else null
 }

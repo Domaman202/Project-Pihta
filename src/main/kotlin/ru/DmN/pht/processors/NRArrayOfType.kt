@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.node.*
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
@@ -20,13 +20,7 @@ object NRArrayOfType : INodeProcessor<NodeNodesList> {
             val info = node.info
             val tmp = Variable.tmp(node)
             NRBody.process(nodeBody(info, ArrayList<Node>().apply {
-                this.add(
-                    nodeDef(
-                        info,
-                        tmp,
-                        nodeNewArray(info, processor.computeString(node.nodes[0], ctx), node.nodes.size - 1)
-                    )
-                )
+                this.add(nodeDef(info, tmp, nodeNewArray(info, processor.computeString(node.nodes[0], ctx), node.nodes.size - 1)))
                 this.addAll(node.nodes.asSequence().drop(1).mapIndexed { i, it -> nodeASet(info, tmp, i, it) })
                 this.add(nodeGetOrName(info, tmp))
             }), processor, ctx, ValType.VALUE)

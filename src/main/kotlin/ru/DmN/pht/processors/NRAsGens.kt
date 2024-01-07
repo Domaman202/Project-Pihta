@@ -1,7 +1,7 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.processor.utils.nodeAs
-import ru.DmN.pht.std.processor.utils.nodeWithGens
+import ru.DmN.pht.std.node.nodeAs
+import ru.DmN.pht.std.node.nodeWithGens
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -21,10 +21,6 @@ object NRAsGens : INodeProcessor<NodeNodesList> {
 
     private fun create(node: NodeNodesList): Node {
         val info = node.info
-        return nodeWithGens(
-            info,
-            nodeAs(info, node.nodes.dropLast(node.nodes.size - 2)),
-            node.nodes.asSequence().drop(2)
-        )
+        return nodeWithGens(info, nodeAs(info, node.nodes.dropLast(node.nodes.size - 2)), node.nodes.asSequence().drop(2))
     }
 }

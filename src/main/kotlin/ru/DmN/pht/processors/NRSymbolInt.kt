@@ -20,8 +20,8 @@ object NRSymbolInt : IStdNodeProcessor<NodeNodesList> {
         else null
 
     override fun computeInt(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): Int =
-        node.nodes.map { processor.computeString(it, ctx) }.reduce { acc, s -> acc + s }.toInt()
+        computeString(node, processor, ctx).toInt()
 
     override fun computeString(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): String =
-        node.nodes.map { processor.computeString(it, ctx) }.reduce { acc, s -> acc + s }
+        node.nodes.asSequence().map { processor.computeString(it, ctx) }.reduce { acc, s -> acc + s }
 }

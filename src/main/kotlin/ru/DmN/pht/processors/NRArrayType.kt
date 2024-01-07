@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.processor.utils.nodeValueClass
+import ru.DmN.pht.std.node.nodeValueClass
 import ru.DmN.pht.std.utils.compute
 import ru.DmN.pht.std.utils.computeType
 import ru.DmN.pht.std.utils.isConstClass

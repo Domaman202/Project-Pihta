@@ -5,14 +5,17 @@ import ru.DmN.pht.std.ast.NodeFSet
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.ast.NodeSet
 import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.node.nodeGetOrName
+import ru.DmN.pht.std.node.nodeValueClass
+import ru.DmN.pht.std.processor.utils.body
+import ru.DmN.pht.std.processor.utils.clazz
+import ru.DmN.pht.std.processor.utils.method
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.VTDynamic
 import ru.DmN.siberia.utils.VirtualType
 
 object NRSet : INodeProcessor<NodeSet> {

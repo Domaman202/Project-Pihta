@@ -4,7 +4,7 @@ import ru.DmN.pht.std.ast.NodeCompare
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.processor.utils.nodeValue
+import ru.DmN.pht.std.node.nodeValue
 import ru.DmN.pht.std.utils.type
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.ast.Node

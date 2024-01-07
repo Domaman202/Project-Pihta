@@ -9,6 +9,7 @@ import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.pht.std.utils.computeType
 import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
@@ -17,6 +18,7 @@ import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.processors.NRProgn
 import ru.DmN.siberia.utils.VirtualType
+import kotlin.streams.toList
 
 object NRCatch : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
@@ -27,7 +29,7 @@ object NRCatch : INodeProcessor<NodeNodesList> {
         val info = node.info
         return NodeCatch(
             info.withType(NodeTypes.CATCH_),
-            node.nodes.drop(1).toMutableList(),
+            node.nodes.stream().skip(1).toList() as MutableList<Node>,
             processor.computeList(node.nodes[0], ctx).map {
                 val catcher = processor.computeList(it, ctx)
                 val variable = processor.computeString(catcher[0], ctx)

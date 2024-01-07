@@ -1,18 +1,18 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.ast.NodeTypedGet
 import ru.DmN.pht.processor.utils.MethodFindResultA
 import ru.DmN.pht.processor.utils.MethodFindResultB
 import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.std.ast.NodeFGet
-import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.ast.NodeMCall.Type.*
 import ru.DmN.pht.std.ast.NodeValue
-import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.node.processed
+import ru.DmN.pht.std.node.*
 import ru.DmN.pht.std.processor.ctx.GlobalContext
-import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.processor.utils.ICastable
+import ru.DmN.pht.std.processor.utils.classes
+import ru.DmN.pht.std.processor.utils.clazz
+import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node

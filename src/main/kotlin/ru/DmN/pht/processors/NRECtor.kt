@@ -49,12 +49,7 @@ object NRECtor : INodeProcessor<NodeNodesList> {
         //
         val new = NodeDefn(node.info.withType((node.type as NodeParsedTypes).processed), node.nodes.drop(1).toMutableList(), method)
         processor.stageManager.pushTask(ProcessingStage.METHODS_BODY) {
-            processNodesList(
-                new,
-                processor,
-                ctx.with(method).with(BodyContext.of(method)),
-                mode
-            )
+            processNodesList(new, processor, ctx.with(method).with(BodyContext.of(method)), ValType.NO_VALUE)
         }
         return new
     }

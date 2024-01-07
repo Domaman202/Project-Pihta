@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.processor.utils.nodeIf
+import ru.DmN.pht.std.node.nodeIf
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
