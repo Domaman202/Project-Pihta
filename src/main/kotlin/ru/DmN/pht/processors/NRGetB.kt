@@ -40,7 +40,7 @@ object NRGetB : INodeProcessor<NodeNodesList> {
         } else null
     }
 
-    private fun findGetter(info: INodeInfo, type: VirtualType, name: String, allowVirtual: Boolean, processor: Processor, ctx: ProcessingContext): Node? {
+    fun findGetter(info: INodeInfo, type: VirtualType, name: String, allowVirtual: Boolean, processor: Processor, ctx: ProcessingContext): Node? { // todo: static / no static
         if (allowVirtual)
             findGetter(info, type, name, nodeGetOrName(info, "this"), NodeMCall.Type.VIRTUAL, processor, ctx)?.let { return it }
         return findGetter(info, type, name, nodeValueClass(info, type.name), NodeMCall.Type.STATIC, processor, ctx)

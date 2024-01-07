@@ -200,7 +200,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         var strict = false
         var result = findMethodOrNull(pair.second, name, args, node, processor, ctx, gctx)
         if (result == null) {
-            val types = processor.computeTypesOr(node.nodes[0], ctx) ?: throw RuntimeException("Method '$name' not founded!")
+            val types = processor.computeTypesOr(node.nodes[0], ctx) ?: throwMNF(pair.second, name, args, processor, ctx)
             for (type in types) {
                 result = findMethodOrNull(type, name, args, node, processor, ctx, gctx)
                 if (result != null) {
@@ -208,7 +208,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                     break
                 }
             }
-            result ?: throw RuntimeException("Method '$name' not founded!")
+            result ?: throwMNF(pair.second, name, args, processor, ctx)
         }
         //
         return MethodFindResultA(
@@ -287,26 +287,35 @@ object NRMCall : INodeProcessor<NodeNodesList> {
     /**
      * Ищет метод, подстраивает ноды аргументов, иначе кидает исключение.
      *
-     * @param clazz Класс в котором определён метод.
+     * @param type Тип в котором определён метод.
      * @param name Имя метода.
      * @param args Аргументы.
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
      */
-    fun findMethod(clazz: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): MethodFindResultB =
-        findMethodOrNull(clazz, name, args, processor, ctx) ?: throw RuntimeException("Method '$name' not founded!")
+    fun findMethod(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): MethodFindResultB =
+        findMethodOrNull(type, name, args, processor, ctx) ?: throwMNF(type, name, args, processor, ctx)
 
     /**
      * Ищет метод, подстраивает ноды аргументов, иначе возвращает null.
      *
-     * @param clazz Класс в котором определён метод.
+     * @param type Тип в котором определён метод.
      * @param name Имя метода.
      * @param args Аргументы.
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
      */
-    fun findMethodOrNull(clazz: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): MethodFindResultB? {
-        val result = ctx.global.getMethodVariants(clazz, name, args.map { ICastable.of(it, processor, ctx) }).firstOrNull() ?: return null
+    fun findMethodOrNull(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): MethodFindResultB? {
+        val result = ctx.global.getMethodVariants(type, name, args.map { ICastable.of(it, processor, ctx) }).firstOrNull() ?: return null
         return MethodFindResultB(args.mapIndexed { i, it -> processor.adaptToType(result.first.argsc[i], it, ctx) }.toList(), result.first, result.second)
+    }
+
+    private fun throwMNF(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Nothing =
+        throwMNF(type, name, args.map { processor.calc(it, ctx) })
+
+    private fun throwMNF(type: VirtualType, name: String, args: List<VirtualType?>): Nothing {
+        val desc = StringBuilder()
+        args.forEach { desc.append(it?.desc) }
+        throw RuntimeException("Method '$name($desc)${type.desc}' not founded!")
     }
 }

@@ -1,4 +1,8 @@
-(app-fn
-    (def [[^float f]])
-    (set f 0)
-    (println f))
+(app
+    (defn setX ^void [[value ^int]]
+        (println value))
+    (defn getX ^int []
+        202)
+    (app-fn
+        (set x 404)
+        (println x)))
