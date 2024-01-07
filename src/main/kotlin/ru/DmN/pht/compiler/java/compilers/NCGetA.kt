@@ -9,17 +9,17 @@ import ru.DmN.pht.std.compiler.java.utils.body
 import ru.DmN.pht.std.compiler.java.utils.clazz
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.ast.NodeGet
+import ru.DmN.pht.std.processor.utils.classes
 
 object NCGetA : INodeCompiler<NodeGet> {
     override fun compileVal(node: NodeGet, compiler: Compiler, ctx: CompilationContext): Variable =
         when (node.type) {
             NodeGet.Type.VARIABLE -> ctx.body[node.name]!!
             NodeGet.Type.THIS_FIELD, NodeGet.Type.THIS_STATIC_FIELD -> ctx.method.node.run {
-                val clazz = ctx.clazz.clazz
-                val field = clazz.fields.find { it.name == node.name }!!
+                val field = ctx.clazz.clazz.fields.find { it.name == name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first()!!
                 visitFieldInsn(
                     if (node.type == NodeGet.Type.THIS_FIELD) Opcodes.GETFIELD else Opcodes.GETSTATIC,
-                    clazz.className,
+                    field.declaringClass!!.className,
                     node.name,
                     field.desc
                 )

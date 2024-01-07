@@ -22,9 +22,11 @@ import ru.DmN.pht.std.processor.utils.macros as macros_list
 import ru.DmN.pht.std.processor.utils.method
 import ru.DmN.pht.std.processors.*
 import ru.DmN.pht.unparsers.*
-import ru.DmN.pht.utils.LinkedNode
+import ru.DmN.pht.processor.utils.LinkedClassesNode
+import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
+import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.node.INodeType
 import ru.DmN.siberia.node.NodeTypes.PROGN
 import ru.DmN.siberia.parser.ctx.ParsingContext
@@ -37,6 +39,7 @@ import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processors.NRProgn
 import ru.DmN.siberia.unparsers.NUDefault
 import ru.DmN.siberia.utils.Module
+import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.VirtualType
 import java.util.*
 import ru.DmN.pht.std.processors.NRProgn as NRPrognA
@@ -637,8 +640,15 @@ object Pihta : Module("pht") {
         if (!ctx.loadedModules.contains(this)) {
             processor.contexts.macros_list = HashMap()
             ctx.global = GlobalContext()
-            ctx.classes = LinkedNode.LinkedNodeStart as LinkedNode<VirtualType>
+            ctx.classes = LinkedClassesNode.LinkedClassesNodeStart as LinkedClassesNode<VirtualType>
         }
         return super.load(processor, ctx, mode)
+    }
+
+    override fun load(compiler: Compiler, ctx: CompilationContext): Variable? {
+        if (!ctx.loadedModules.contains(this)) {
+            ctx.classes = LinkedClassesNode.LinkedClassesNodeStart as LinkedClassesNode<VirtualType>
+        }
+        return super.load(compiler, ctx)
     }
 }

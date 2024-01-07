@@ -31,16 +31,15 @@ object NRGetB : INodeProcessor<NodeNodesList> {
         ctx.body[name]?.let { return if (mode == ValType.VALUE) NodeGet(info.withType(NodeTypes.GET_), name, NodeGet.Type.VARIABLE) else null }
         val clazz = ctx.clazz
         findGetter(info, clazz, name, !ctx.method.modifiers.static, processor, ctx)?.let { return it }
-        return if (mode == ValType.VALUE) {
-            val field = clazz.fields.find { it.name == name }!!
+        return if (mode == ValType.VALUE)
             NodeGet(
                 info.withType(NodeTypes.GET_),
                 name,
-                if (field.modifiers.isStatic)
+                if ((clazz.fields.find { it.name == name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == name } }.first()!!).modifiers.isStatic)
                     NodeGet.Type.THIS_STATIC_FIELD
                 else NodeGet.Type.THIS_FIELD
             )
-        } else null
+        else null
     }
 
     fun findGetter(info: INodeInfo, type: VirtualType, name: String, allowVirtual: Boolean, processor: Processor, ctx: ProcessingContext): Node? { // todo: static / no static

@@ -1,10 +1,10 @@
-package ru.DmN.pht.utils
+package ru.DmN.pht.processor.utils
 
-open class LinkedNode<T> : Iterable<T> {
-    private val prev: LinkedNode<T>
+open class LinkedClassesNode<T> : Iterable<T> {
+    private val prev: LinkedClassesNode<T>
     val element: T
 
-    constructor(prev: LinkedNode<T>, element: T) {
+    constructor(prev: LinkedClassesNode<T>, element: T) {
         this.prev = prev
         this.element = element
     }
@@ -16,17 +16,17 @@ open class LinkedNode<T> : Iterable<T> {
 
     override fun iterator(): Iterator<T> =
         object : Iterator<T> {
-            var node = this@LinkedNode
+            var node = this@LinkedClassesNode
 
             override fun next(): T {
-                val value = node.element
                 node = node.prev
+                val value = node.element
                 return value
             }
 
             override fun hasNext(): Boolean =
-                node != LinkedNodeStart
+                node.prev != LinkedClassesNodeStart
         }
 
-    object LinkedNodeStart : LinkedNode<Unit>(Unit)
+    object LinkedClassesNodeStart : LinkedClassesNode<Unit>(Unit)
 }

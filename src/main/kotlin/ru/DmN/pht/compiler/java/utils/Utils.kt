@@ -4,16 +4,18 @@ import org.objectweb.asm.Label
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.ctx.ContextKeys
+import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.compiler.java.ctx.BodyContext
 import ru.DmN.pht.std.compiler.java.ctx.ClassContext
 import ru.DmN.pht.std.compiler.java.ctx.MethodContext
+import ru.DmN.pht.std.processor.utils.classes
 import ru.DmN.pht.std.processor.utils.isEnum
 import ru.DmN.siberia.ctx.IContextCollection
 
 fun <T : IContextCollection<T>> T.with(ctx: ClassContext) =
-    this.with(ContextKeys.CLASS, ctx)
+    this.with(ContextKeys.CLASS, ctx).apply { this.classes = LinkedClassesNode(this.classes, ctx.clazz) }
 fun <T : IContextCollection<T>> T.with(ctx: MethodContext) =
     this.with(ContextKeys.METHOD, ctx)
 fun <T : IContextCollection<T>> T.with(ctx: BodyContext) =

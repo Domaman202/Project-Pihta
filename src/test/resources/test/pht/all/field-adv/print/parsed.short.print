@@ -1,0 +1,88 @@
+[USE_CTX
+|	(modules = pht)
+|	[CLS
+|	|	[GET_OR_NAME
+|	|	|	(type = NO-STATIC)
+|	|	|	(text = 'Test')
+|	|	]
+|	|	[VALN
+|	|	|	[VALUE
+|	|	|	|	(type = CLASS)
+|	|	|	|	(value = 'Object')
+|	|	|	]
+|	|	]
+|	|	[ANN_STATIC
+|	|	|	[FLD
+|	|	|	|	[VALN
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[SET_B]
+|	|	|	[GET
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'i')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	]
+]
+[USE_CTX
+|	(modules = pht)
+|	[CLS
+|	|	[GET_OR_NAME
+|	|	|	(type = NO-STATIC)
+|	|	|	(text = 'Test')
+|	|	]
+|	|	[VALN
+|	|	|	[VALUE
+|	|	|	|	(type = CLASS)
+|	|	|	|	(value = 'Object')
+|	|	|	]
+|	|	]
+|	|	[ANN_STATIC
+|	|	|	[FLD
+|	|	|	|	[VALN
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[SET_B]
+|	|	|	[GET
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'i')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	]
+]

@@ -1,0 +1,5 @@
+(cls Test [^Object] (@static
+    (fld [[i ^int]]))
+    (test-fn 0
+        (set i 333)
+        (get i)))

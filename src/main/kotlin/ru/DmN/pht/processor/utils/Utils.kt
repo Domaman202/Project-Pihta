@@ -2,24 +2,16 @@
 package ru.DmN.pht.std.processor.utils
 
 import ru.DmN.pht.ctx.ContextKeys
-import ru.DmN.pht.std.ast.NodeGetOrName
-import ru.DmN.pht.std.ast.NodeModifierNodesList
-import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.compiler.java.utils.MacroDefine
-import ru.DmN.pht.std.node.NodeParsedTypes
-import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.processor.ctx.BodyContext
 import ru.DmN.pht.std.processor.ctx.EnumContext
 import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.ctx.MacroContext
-import ru.DmN.pht.std.utils.mapMutable
-import ru.DmN.pht.utils.LinkedNode
+import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.siberia.Processor
-import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.ctx.IContextCollection
 import ru.DmN.siberia.ctx.IContextKey
-import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.utils.VirtualMethod
@@ -54,9 +46,9 @@ inline fun sliceInsert(list: MutableList<Any?>, index: Int, elements: List<Any?>
 inline fun <T : IContextCollection<T>> T.with(ctx: GlobalContext) =
     this.with(ContextKeys.GLOBAL, ctx)
 inline fun <T : IContextCollection<T>> T.with(ctx: EnumContext) =
-    this.with(ContextKeys.ENUM, ctx).apply { this.clazz = ctx.type; this.classes = LinkedNode(this.classes, ctx.type) }
+    this.with(ContextKeys.ENUM, ctx).apply { this.clazz = ctx.type; this.classes = LinkedClassesNode(this.classes, ctx.type) }
 inline fun <T : IContextCollection<T>> T.with(ctx: VirtualType) =
-    this.with(ContextKeys.CLASS, ctx).apply { this.classes = LinkedNode(this.classes, ctx) }
+    this.with(ContextKeys.CLASS, ctx).apply { this.classes = LinkedClassesNode(this.classes, ctx) }
 inline fun <T : IContextCollection<T>> T.with(ctx: VirtualMethod?) =
     this.with(ContextKeys.METHOD, ctx)
 inline fun <T : IContextCollection<T>> T.with(ctx: BodyContext) =
@@ -85,7 +77,7 @@ inline var IContextCollection<*>.clazz
     get() = this.clazzOrNull!!
 inline var IContextCollection<*>.classes
     set(value) { contexts[ContextKeys.CLASSES] = value }
-    get() = contexts[ContextKeys.CLASSES] as LinkedNode<VirtualType>
+    get() = contexts[ContextKeys.CLASSES] as LinkedClassesNode<VirtualType>
 inline val IContextCollection<*>.clazzOrNull
     get() = contexts[ContextKeys.CLASS] as VirtualType?
 inline val IContextCollection<*>.method

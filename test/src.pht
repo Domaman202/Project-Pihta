@@ -1,4 +1,27 @@
-(cls TestC [^Object] (@static
-        (defn foo ^String [] "Foo outer outer!")
-        (cls TestD [^Object]
-            (app-fn (println (#foo .))))))
+(use-ctx pht
+	(cls [] Test [^java.lang.Object]
+		(@static
+			(progn-
+				(@static
+					(defn [] setI ^void [[i ^int]]
+						(fset
+							^Test
+							i
+							i))
+					(defn [] getI ^int []
+						(fget
+							^Test
+							i))
+					(def [
+						[i ^int]]))))
+		(cls [] App [^java.lang.Object]
+			(@static
+				(defn [] main ^void []
+					(fset
+						^Test
+						i
+						333)
+					(mcall
+						^ru.DmN.pht.std.utils.StdOut
+						println
+						(get i)))))))

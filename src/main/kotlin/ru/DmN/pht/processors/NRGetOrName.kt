@@ -7,6 +7,7 @@ import ru.DmN.pht.std.ast.NodeGet
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.processor.utils.body
+import ru.DmN.pht.std.processor.utils.classes
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.method
 import ru.DmN.pht.std.utils.lenArgs
@@ -59,7 +60,7 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
         if (node.name == "super")
             return lenArgs(ctx.body["this"]!!.type(), type)
         NRFGetB.findGetter(ctx.clazz, node.name, if (ctx.method.modifiers.static) Static.STATIC else Static.ANY, processor, ctx)?.let { return lenArgs(it.method.rettype, type) }
-        return lenArgs((ctx.clazz.fields.find { it.name == node.name } ?: return -1).type, type)
+        return lenArgs((ctx.clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first() ?: return -1).type, type)
     }
 
     override fun adaptToType(type: VirtualType, node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Node {
@@ -68,7 +69,7 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
             0 -> {
                 val clazz = ctx.clazz
                 NRGetB.findGetter(node.info, clazz, node.name, !ctx.method.modifiers.static, processor, ctx)?.let { return it }
-                val field = clazz.fields.find { it.name == node.name }!!
+                val field = clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first()!!
                 NodeGet(
                     node.info.withType(NodeTypes.GET_),
                     node.name,

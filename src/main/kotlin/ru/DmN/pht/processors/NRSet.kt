@@ -8,6 +8,7 @@ import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.node.nodeGetOrName
 import ru.DmN.pht.std.node.nodeValueClass
 import ru.DmN.pht.std.processor.utils.body
+import ru.DmN.pht.std.processor.utils.classes
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.method
 import ru.DmN.siberia.Processor
@@ -25,10 +26,10 @@ object NRSet : INodeProcessor<NodeSet> {
         ctx.body[node.name]?.let { return NodeSet(info.withType(NodeTypes.SET_), node.name, value) }
         val clazz = ctx.clazz
         findSetter(info, clazz, node.name, value, !ctx.method.modifiers.static, processor, ctx)?.let { return it }
-        val field = clazz.fields.find { it.name == node.name }!!
+        val field = clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first()!!
         return NodeFSet(
             info.withType(NodeTypes.FSET_),
-            mutableListOf(if (field.modifiers.isStatic) nodeValueClass(info, node.name) else nodeGetOrName(info, node.name), value),
+            mutableListOf(if (field.modifiers.isStatic) nodeValueClass(info, field.declaringClass!!.name) else nodeGetOrName(info, node.name), value),
             field
         )
     }
