@@ -1,0 +1,26 @@
+[USE_CTX
+|	(modules = pht)
+|	[USE_CTX
+|	|	(modules = test/siberia/all/export/helper)
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[CTC_MODULE_NAME]
+|	|	]
+|	]
+]
+[USE_CTX
+|	(modules = pht)
+|	[USE_CTX
+|	|	(modules = test/siberia/all/export/helper)
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[CTC_MODULE_NAME]
+|	|	]
+|	]
+]
