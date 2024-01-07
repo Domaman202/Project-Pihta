@@ -29,7 +29,7 @@
 						213)
 					(as ^dynamic
 						(mcall
-							test
+							(get test)
 							getI)))))))(use-ctx pht
 	(progn
 		(cls [] Test [^java.lang.Object]
@@ -61,7 +61,7 @@
 						213)
 					(as ^dynamic
 						(mcall
-							test
+							(get test)
 							getI)))))))(use-ctx pht
 	(progn
 		(cls [] Test [^java.lang.Object]
@@ -93,5 +93,5 @@
 						213)
 					(as ^dynamic
 						(mcall
-							test
+							(get test)
 							getI)))))))

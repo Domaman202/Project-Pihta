@@ -11,19 +11,16 @@ import ru.DmN.pht.std.compiler.java.utils.method
 object NCFSet : INodeCompiler<NodeFSet> {
     override fun compile(node: NodeFSet, compiler: Compiler, ctx: CompilationContext) {
         ctx.method.node.run {
-            when (node.type) {
-                NodeFSet.Type.UNKNOWN -> throw UnsupportedOperationException()
-                NodeFSet.Type.STATIC -> visitFieldInsn(
+            if (node.field.modifiers.isStatic)
+                visitFieldInsn(
                     Opcodes.PUTSTATIC,
-                    node.vtype.name,
-                    node.name,
+                    node.field.declaringClass!!.className,
+                    node.field.name,
                     compiler.compileVal(node.nodes[1], ctx).apply { load(this, this@run) }.type().desc
                 )
-
-                NodeFSet.Type.INSTANCE -> {
-                    val types = node.nodes.map { compiler.compileVal(it, ctx).apply { load(this, this@run) }.type() }
-                    visitFieldInsn(Opcodes.PUTFIELD, types[0].className, node.name, types[1].desc)
-                }
+            else {
+                val types = node.nodes.map { compiler.compileVal(it, ctx).apply { load(this, this@run) }.type() }
+                visitFieldInsn(Opcodes.PUTFIELD, node.field.declaringClass!!.className, node.field.name, types[1].desc)
             }
         }
     }

@@ -11,7 +11,7 @@ object NUFSetB : INodeUnparser<NodeFSet> {
         unparser.out.apply {
             append('(').append(node.operation).append('\n').append("\t".repeat(indent + 1))
             unparser.unparse(node.nodes[0], ctx, indent + 1)
-            append('\n').append("\t".repeat(indent + 1)).append(node.name)
+            append('\n').append("\t".repeat(indent + 1)).append(node.field.name)
             node.nodes.stream().skip(1).forEach { n ->
                 unparser.out.append('\n').append("\t".repeat(indent + 1))
                 unparser.unparse(n, ctx, indent + 1)

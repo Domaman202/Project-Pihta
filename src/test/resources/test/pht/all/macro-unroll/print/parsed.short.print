@@ -67,34 +67,8 @@
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	|	[SET_B
-|	|	|	|	|	[ADD
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[MACRO_ARG
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'a')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[SET_B
-|	|	|	|	|	[ADD
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'j')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[MACRO_ARG
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'b')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
+|	|	|	|	[SET_B]
+|	|	|	|	[SET_B]
 |	|	|	]
 |	|	]
 |	|	[MACRO
@@ -208,34 +182,8 @@
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	|	[SET_B
-|	|	|	|	|	[ADD
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[MACRO_ARG
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'a')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[SET_B
-|	|	|	|	|	[ADD
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'j')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[MACRO_ARG
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'b')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
+|	|	|	|	[SET_B]
+|	|	|	|	[SET_B]
 |	|	|	]
 |	|	]
 |	|	[MACRO

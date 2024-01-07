@@ -12,10 +12,10 @@ object NRFnB : IStdNodeProcessor<NodeFn>, IAdaptableProcessor<NodeFn> {
     override fun calc(node: NodeFn, processor: Processor, ctx: ProcessingContext): VirtualType =
         node.type ?: ctx.global.getType("Any", processor.tp)
 
-    override fun isAdaptableToType(type: VirtualType, node: NodeFn, processor: Processor, ctx: ProcessingContext): Boolean =
+    override fun adaptableTo(type: VirtualType, node: NodeFn, processor: Processor, ctx: ProcessingContext): Int =
         if (node.type == null)
-            findLambdaMethod(type).argsn.size == node.args.size
-        else node.type!!.isAssignableFrom(type)
+            if (findLambdaMethod(type).argsn.size == node.args.size) 1 else -1
+        else if (node.type!!.isAssignableFrom(type)) 1 else -1
 
     override fun adaptToType(type: VirtualType, node: NodeFn, processor: Processor, ctx: ProcessingContext): NodeFn {
         node.type = type

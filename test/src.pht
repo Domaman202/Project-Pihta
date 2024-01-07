@@ -1,5 +1,4 @@
-(app
-    (defn foo ^void []
-        (println "Foo!"))
-    (app-fn
-        (#foo .)))
+(app-fn
+    (def [[^float f]])
+    (set f 0)
+    (println f))

@@ -6,6 +6,6 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.VirtualType
 
 interface IAdaptableProcessor<T : Node> {
-    fun isAdaptableToType(type: VirtualType, node: T, processor: Processor, ctx: ProcessingContext): Boolean
+    fun adaptableTo(type: VirtualType, node: T, processor: Processor, ctx: ProcessingContext): Int
     fun adaptToType(type: VirtualType, node: T, processor: Processor, ctx: ProcessingContext): Node
 }

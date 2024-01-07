@@ -88,9 +88,7 @@ object NREnum : INodeProcessor<NodeNodesList> {
                                                                 ValType.VALUE
                                                             )
                                                         ),
-                                                        it.name,
-                                                        NodeFSet.Type.STATIC,
-                                                        type
+                                                        type.fields.find { f -> f.name == it.name }!!
                                                     )
                                                 }.toMutableList()
                                             )

@@ -59,8 +59,7 @@ enum class NodeTypes : INodeType {
     FOR("for", PARSED),
     FSET_("fset", PROCESSED),
     // g
-    GET_A("get", PARSED),
-    GET_("get!", PROCESSED),
+    GET_("get", PROCESSED),
     GET_OR_NAME("get-or-name!", true, true),
     GREAT_("great", PROCESSED),
     GREAT_OR_EQ_("great-or-eq", PROCESSED),

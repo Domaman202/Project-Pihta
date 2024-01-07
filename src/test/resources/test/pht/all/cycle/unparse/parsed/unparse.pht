@@ -15,7 +15,7 @@
 							i))
 					(inc i))
 				(as ^dynamic
-					j)))))(use-ctx pht
+					(get j))))))(use-ctx pht
 	(cls [] Test0 [^java.lang.Object]
 		(@static
 			(defn [] test ^dynamic []
@@ -32,7 +32,7 @@
 							i))
 					(inc i))
 				(as ^dynamic
-					j)))))(use-ctx pht
+					(get j))))))(use-ctx pht
 	(test-fn
 		0
 		(def
@@ -56,4 +56,5 @@
 					i))
 			(inc
 				i))
-		j))
+		(get
+			"j")))

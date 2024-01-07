@@ -1,12 +1,15 @@
 package ru.DmN.pht.std.parsers
 
 import ru.DmN.pht.std.ast.NodeFMGet
+import ru.DmN.pht.std.ast.NodeGet
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.node.NodeParsedTypes
 import ru.DmN.pht.std.node.NodeTypes
+import ru.DmN.pht.std.processor.utils.nodeValue
 import ru.DmN.pht.std.processor.utils.nodeValueClass
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.lexer.isNaming
 import ru.DmN.siberia.lexer.isOperation
@@ -17,7 +20,7 @@ import ru.DmN.siberia.parsers.INodeParser
 
 object NPGet : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
-        val info = INodeInfo.of(NodeTypes.GET_A, ctx, token)
+        val info = INodeInfo.of(NodeParsedTypes.GET, ctx, token)
         val nameToken = parser.nextToken()!!
         return when (nameToken.type) {
             Token.DefaultType.CLASS -> parse(
@@ -57,7 +60,7 @@ object NPGet : INodeParser {
         return if (j == 0) {
             if (clazz)
                 nodeValueClass(info, parts[0])
-            else NodeGetOrName(info.withType(NodeTypes.GET_OR_NAME), parts[0], static)
+            else NodeNodesList(info.withType(NodeParsedTypes.GET), mutableListOf(nodeValue(info, parts[0])))
         } else {
             val isStatic = static && j == 1
             NodeFMGet(

@@ -19,6 +19,6 @@ object NRDefSet : INodeProcessor<NodeNodesList> {
         val info = node.info
         return if (ctx.body[name] == null)
             NRDef.process(nodeDef(info, name, value), processor, ctx, mode)
-        else NodeSet(info.withType(NodeTypes.SET_), mutableListOf(value), name)
+        else NodeSet(info.withType(NodeTypes.SET_), name, value)
     }
 }

@@ -8,5 +8,5 @@ import ru.DmN.siberia.utils.VirtualType
 
 object NRIncDecB : INodeProcessor<NodeIncDec> {
     override fun calc(node: NodeIncDec, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        NRGetOrName.calc(node.name, ctx)
+        NRGetOrName.calc(node.info, node.name, processor, ctx)
 }

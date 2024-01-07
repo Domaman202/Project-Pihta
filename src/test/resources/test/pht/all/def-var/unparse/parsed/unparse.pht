@@ -6,14 +6,14 @@
 					(def [
 						[^int i 12]])
 					(as ^dynamic
-						i))))
+						(get i)))))
 		(cls [] Test1 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
 					(def [
 						[^long l 21]])
 					(as ^dynamic
-						l))))
+						(get l)))))
 		(cls [] Test2 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
@@ -22,7 +22,7 @@
 					(set! f
 						0)
 					(as ^dynamic
-						f))))
+						(get f)))))
 		(cls [] Test3 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
@@ -31,7 +31,7 @@
 					(set! d
 						33.44)
 					(as ^dynamic
-						d))))))(use-ctx pht
+						(get d)))))))(use-ctx pht
 	(progn
 		(cls [] Test0 [^java.lang.Object]
 			(@static
@@ -39,14 +39,14 @@
 					(def [
 						[^int i 12]])
 					(as ^dynamic
-						i))))
+						(get i)))))
 		(cls [] Test1 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
 					(def [
 						[^long l 21]])
 					(as ^dynamic
-						l))))
+						(get l)))))
 		(cls [] Test2 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
@@ -55,7 +55,7 @@
 					(set! f
 						0)
 					(as ^dynamic
-						f))))
+						(get f)))))
 		(cls [] Test3 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
@@ -64,7 +64,7 @@
 					(set! d
 						33.44)
 					(as ^dynamic
-						d))))))(use-ctx pht
+						(get d)))))))(use-ctx pht
 	(progn
 		(test-fn
 			0
@@ -75,7 +75,8 @@
 						12
 					]
 				])
-			i)
+			(get
+				"i"))
 		(test-fn
 			1
 			(def
@@ -86,7 +87,8 @@
 						21
 					]
 				])
-			l)
+			(get
+				"l"))
 		(test-fn
 			2
 			(def
@@ -98,7 +100,8 @@
 				])
 			(set! f
 				0)
-			f)
+			(get
+				"f"))
 		(test-fn
 			3
 			(def-set
@@ -107,4 +110,5 @@
 			(def-set
 				d
 				33.44)
-			d)))
+			(get
+				"d"))))

@@ -20,9 +20,11 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'i')
+|	|	|	[GET
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'i')
+|	|	|	|	]
 |	|	|	]
 |	|	]
 |	|	[TEST_FN
@@ -48,9 +50,11 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'l')
+|	|	|	[GET
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'l')
+|	|	|	|	]
 |	|	|	]
 |	|	]
 |	|	[TEST_FN
@@ -72,15 +76,12 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[SET_B
+|	|	|	[SET_B]
+|	|	|	[GET
 |	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'f')
 |	|	|	|	]
-|	|	|	]
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'f')
 |	|	|	]
 |	|	]
 |	|	[TEST_FN
@@ -108,9 +109,11 @@
 |	|	|	|	|	(value = '33.44')
 |	|	|	|	]
 |	|	|	]
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'd')
+|	|	|	[GET
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'd')
+|	|	|	|	]
 |	|	|	]
 |	|	]
 |	]
@@ -137,9 +140,11 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'i')
+|	|	|	[GET
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'i')
+|	|	|	|	]
 |	|	|	]
 |	|	]
 |	|	[TEST_FN
@@ -165,9 +170,11 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'l')
+|	|	|	[GET
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'l')
+|	|	|	|	]
 |	|	|	]
 |	|	]
 |	|	[TEST_FN
@@ -189,15 +196,12 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[SET_B
+|	|	|	[SET_B]
+|	|	|	[GET
 |	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'f')
 |	|	|	|	]
-|	|	|	]
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'f')
 |	|	|	]
 |	|	]
 |	|	[TEST_FN
@@ -225,9 +229,11 @@
 |	|	|	|	|	(value = '33.44')
 |	|	|	|	]
 |	|	|	]
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'd')
+|	|	|	[GET
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'd')
+|	|	|	|	]
 |	|	|	]
 |	|	]
 |	]

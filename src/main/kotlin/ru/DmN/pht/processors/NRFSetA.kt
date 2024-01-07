@@ -11,20 +11,13 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
 
-object NRFSetA : INodeProcessor<NodeNodesList> { // todo: calc
+object NRFSetA : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeFSet {
         val name = processor.computeString(node.nodes[1], ctx)
-        val type = if (node.nodes[0].isConstClass) ctx.global.getType(processor.computeString(node.nodes[0], ctx), processor.tp) else processor.calc(node.nodes[0], ctx)!!
         return NodeFSet(
             node.info.withType(NodeTypes.FSET_),
             mutableListOf(processor.process(node.nodes[0], ctx, ValType.VALUE)!!, processor.process(node.nodes[2], ctx, ValType.NO_VALUE)!!),
-            name,
-            if (node.nodes[0].isConstClass)
-                NodeFSet.Type.STATIC
-            else if (processor.calc(node.nodes[0], ctx)!!.fields.find { it.name == name } != null)
-                NodeFSet.Type.INSTANCE
-            else NodeFSet.Type.UNKNOWN,
-            type
+            (if (node.nodes[0].isConstClass) ctx.global.getType(processor.computeString(node.nodes[0], ctx), processor.tp) else processor.calc(node.nodes[0], ctx)!!).fields.find { it.name == name }!!
         )
     }
 }

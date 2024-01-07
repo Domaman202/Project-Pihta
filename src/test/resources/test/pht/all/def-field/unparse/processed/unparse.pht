@@ -18,7 +18,7 @@
 						202)
 					(as ^dynamic
 						(fget
-							test
+							(get test)
 							i)))))))(use-ctx pht
 	(progn
 		(cls [] Test [^java.lang.Object]
@@ -39,7 +39,7 @@
 						202)
 					(as ^dynamic
 						(fget
-							test
+							(get test)
 							i)))))))(use-ctx pht
 	(progn
 		(cls [] Test [^java.lang.Object]
@@ -60,5 +60,5 @@
 						202)
 					(as ^dynamic
 						(fget
-							test
+							(get test)
 							i)))))))

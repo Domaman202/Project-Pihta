@@ -1,9 +1,12 @@
 #!/bin/bash
-for file in ../dump/test/pht/all/*
+cd ../..
+for file in dump/test/pht/all/*
 do
-  cp -a $file/print/. ../src/test/resources/test/pht/all/${file:21}/print
+  mkdir -p src/test/resources/test/pht/all/${file:18}/print
+  cp -a $file/print/. src/test/resources/test/pht/all/${file:18}/print
 done
-for file in ../dump/test/siberia/all/*
+for file in dump/test/siberia/all/*
 do
-  cp -a $file/print/. ../src/test/resources/test/siberia/all/${file:24}/print
+  mkdir -p src/test/resources/test/pht/all/${file:18}/print
+  cp -a $file/print/. src/test/resources/test/siberia/all/${file:21}/print
 done

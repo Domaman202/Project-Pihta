@@ -35,7 +35,7 @@ enum class NodeParsedTypes(override val operation: String, override val processe
     FSET_A("fset", FSET_),
     FSET_B("fset", FSET_),
     // g
-    GET_B("get!", GET_),
+    GET("get", GET_),
     GREAT("great", GREAT_),
     GREAT_OR_EQ("great-or-eq", GREAT_OR_EQ_),
     // i

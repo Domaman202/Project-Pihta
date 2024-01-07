@@ -35,8 +35,8 @@ object NPSetB : INodeParser {
         return if (parts.size == 1)
             NodeSet(
                 info,
-                values,
-                parts.last()
+                parts.last(),
+                values.first()
             )
         else NodeFieldSet(
             info.withType(NodeParsedTypes.FSET_B),

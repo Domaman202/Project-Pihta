@@ -1,0 +1,30 @@
+(progn
+    (cls TestA [^Object] (@static
+        (fld [[i ^int]])
+        (defn test ^int []
+            (set i 776)
+            (get i))))
+    (test-fn 0 (#test ^TestA))
+
+    (cls TestB [^Object] (@static
+        (fld [[i ^int]])
+        (defn test ^int []
+            (set ^TestB/i 777)
+            (get ^TestB/i))))
+    (test-fn 1 (#test ^TestB))
+
+    (cls TestC [^Object]
+        (fld [[i ^int]])
+        (ctor [] (ccall))
+        (defn test ^int []
+            (set i 240422)
+            (get i)))
+    (test-fn 2 (#test (new ^TestC)))
+
+    (cls TestD [^Object]
+        (fld [[i ^int]])
+        (ctor [] (ccall))
+        (defn test ^int []
+            (set this/i 404)
+            (get this/i)))
+    (test-fn 3 (#test (new ^TestD))))
