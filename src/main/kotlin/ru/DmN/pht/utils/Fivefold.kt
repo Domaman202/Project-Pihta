@@ -2,7 +2,7 @@ package ru.DmN.pht.utils
 
 import java.io.Serializable
 
-data class FiveFold<out A, out B, out C, out D, out E>(
+data class Fivefold<out A, out B, out C, out D, out E>(
     val first: A,
     val second: B,
     val third: C,

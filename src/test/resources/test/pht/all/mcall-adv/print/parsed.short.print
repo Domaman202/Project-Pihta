@@ -4,7 +4,7 @@
 |	|	[CLS
 |	|	|	[GET_OR_NAME
 |	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'Test')
+|	|	|	|	(text = 'TestA')
 |	|	|	]
 |	|	|	[VALN
 |	|	|	|	[VALUE
@@ -40,7 +40,7 @@
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'Foo Static!')
+|	|	|	|	|	|	(value = 'Foo static!')
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
@@ -77,9 +77,11 @@
 |	|	|	|	(value = '0')
 |	|	|	]
 |	|	|	[MCALL
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'Test')
+|	|	|	|	[NEW
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = NAMING)
@@ -97,11 +99,9 @@
 |	|	|	|	(value = '1')
 |	|	|	]
 |	|	|	[MCALL
-|	|	|	|	[NEW
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Test')
-|	|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'TestA')
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = NAMING)
@@ -110,6 +110,108 @@
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = STRING)
 |	|	|	|	|	(value = '')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[CLS
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'TestB')
+|	|	|	]
+|	|	|	[VALN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'Object')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_STATIC
+|	|	|	|	[DEFN
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'foo')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	]
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	(value = 'Foo outer!')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[TEST_FN
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '2')
+|	|	|	|	|	]
+|	|	|	|	|	[MCALL
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = '.')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	|	(value = 'foo')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[CLS
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'TestC')
+|	|	|	]
+|	|	|	[VALN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'Object')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_STATIC
+|	|	|	|	[DEFN
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'foo')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	]
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	(value = 'Foo outer outer!')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[CLS
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'TestD')
+|	|	|	|	|	]
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[TEST_FN
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	(value = '3')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[MCALL
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = '.')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	|	|	(value = 'foo')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	]
@@ -121,7 +223,7 @@
 |	|	[CLS
 |	|	|	[GET_OR_NAME
 |	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'Test')
+|	|	|	|	(text = 'TestA')
 |	|	|	]
 |	|	|	[VALN
 |	|	|	|	[VALUE
@@ -157,7 +259,7 @@
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'Foo Static!')
+|	|	|	|	|	|	(value = 'Foo static!')
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
@@ -194,9 +296,11 @@
 |	|	|	|	(value = '0')
 |	|	|	]
 |	|	|	[MCALL
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'Test')
+|	|	|	|	[NEW
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = NAMING)
@@ -214,11 +318,9 @@
 |	|	|	|	(value = '1')
 |	|	|	]
 |	|	|	[MCALL
-|	|	|	|	[NEW
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Test')
-|	|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'TestA')
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = NAMING)
@@ -227,6 +329,108 @@
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = STRING)
 |	|	|	|	|	(value = '')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[CLS
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'TestB')
+|	|	|	]
+|	|	|	[VALN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'Object')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_STATIC
+|	|	|	|	[DEFN
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'foo')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	]
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	(value = 'Foo outer!')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[TEST_FN
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '2')
+|	|	|	|	|	]
+|	|	|	|	|	[MCALL
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = '.')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	|	(value = 'foo')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[CLS
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'TestC')
+|	|	|	]
+|	|	|	[VALN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'Object')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_STATIC
+|	|	|	|	[DEFN
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'foo')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	]
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	(value = 'Foo outer outer!')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[CLS
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'TestD')
+|	|	|	|	|	]
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[TEST_FN
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	(value = '3')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[MCALL
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = '.')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	|	|	(value = 'foo')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	]

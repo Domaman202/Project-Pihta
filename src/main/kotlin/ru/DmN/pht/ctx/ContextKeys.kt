@@ -19,6 +19,11 @@ enum class ContextKeys : IContextKey {
     CLASS,
 
     /**
+     * Список всех классов контекста (включая текущий)
+     */
+    CLASSES,
+
+    /**
      * Метод.
      */
     METHOD,

@@ -4,7 +4,7 @@
 |	|	[PROGN_
 |	|	|	[CLS_
 |	|	|	|	(type = final class)
-|	|	|	|	(name = Test)
+|	|	|	|	(name = TestA)
 |	|	|	|	[CTOR_
 |	|	|	|	|	(type = constructor)
 |	|	|	|	|	(desc = <init>()V)
@@ -23,7 +23,7 @@
 |	|	|	|	|	|	(desc = foo(Ljava/lang/Object;)Ljava/lang/String;)
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	(value = 'Foo Static!')
+|	|	|	|	|	|	|	(value = 'Foo static!')
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
@@ -46,11 +46,10 @@
 |	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	(method = foo(Ljava/lang/Object;)Ljava/lang/String;)
+|	|	|	|	|	|	|	|	(method = foo(Ljava/lang/String;)Ljava/lang/String;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	(value = 'Test')
+|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	(type = VT(TestA))
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	[VALUE
@@ -72,15 +71,90 @@
 |	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	(method = foo(Ljava/lang/String;)Ljava/lang/String;)
+|	|	|	|	|	|	|	|	(method = foo(Ljava/lang/Object;)Ljava/lang/String;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	|	(type = VT(Test))
+|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = STRING)
 |	|	|	|	|	|	|	|	|	(value = '')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = TestB)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = foo()Ljava/lang/String;)
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	(value = 'Foo outer!')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = Test2)
+|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestB')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = TestC)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = foo()Ljava/lang/String;)
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	(value = 'Foo outer outer!')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = TestD)
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test3)
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestC')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	)]
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
@@ -96,7 +170,7 @@
 |	|	[PROGN_
 |	|	|	[CLS_
 |	|	|	|	(type = final class)
-|	|	|	|	(name = Test)
+|	|	|	|	(name = TestA)
 |	|	|	|	[CTOR_
 |	|	|	|	|	(type = constructor)
 |	|	|	|	|	(desc = <init>()V)
@@ -115,7 +189,7 @@
 |	|	|	|	|	|	(desc = foo(Ljava/lang/Object;)Ljava/lang/String;)
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	(value = 'Foo Static!')
+|	|	|	|	|	|	|	(value = 'Foo static!')
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
@@ -138,11 +212,10 @@
 |	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	(method = foo(Ljava/lang/Object;)Ljava/lang/String;)
+|	|	|	|	|	|	|	|	(method = foo(Ljava/lang/String;)Ljava/lang/String;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	(value = 'Test')
+|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	(type = VT(TestA))
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	[VALUE
@@ -164,15 +237,90 @@
 |	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	(method = foo(Ljava/lang/String;)Ljava/lang/String;)
+|	|	|	|	|	|	|	|	(method = foo(Ljava/lang/Object;)Ljava/lang/String;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	|	(type = VT(Test))
+|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = STRING)
 |	|	|	|	|	|	|	|	|	(value = '')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = TestB)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = foo()Ljava/lang/String;)
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	(value = 'Foo outer!')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = Test2)
+|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestB')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = TestC)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = foo()Ljava/lang/String;)
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	(value = 'Foo outer outer!')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = TestD)
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test3)
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestC')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	)]
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]

@@ -1,13 +1,13 @@
 (use-ctx pht
 	(progn
-		(cls [] Test [^java.lang.Object]
+		(cls [] TestA [^java.lang.Object]
 			(ctor []
 				(mcall
 					super
 					<init>))
 			(@static
 				(defn [] foo ^java.lang.String [[o ^java.lang.Object]]
-					"Foo Static!"))
+					"Foo static!"))
 			(defn [] foo ^java.lang.String [[s ^java.lang.String]]
 				"Foo!"))
 		(cls [] Test0 [^java.lang.Object]
@@ -15,7 +15,7 @@
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mcall
-							^Test
+							(new ^TestA)
 							foo
 							"")))))
 		(cls [] Test1 [^java.lang.Object]
@@ -23,18 +23,41 @@
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mcall
-							(new ^Test)
+							^TestA
 							foo
-							"")))))))(use-ctx pht
+							"")))))
+		(cls [] TestB [^java.lang.Object]
+			(@static
+				(defn [] foo ^java.lang.String []
+					"Foo outer!")
+				(cls [] Test2 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									^TestB
+									foo)))))))
+		(cls [] TestC [^java.lang.Object]
+			(@static
+				(defn [] foo ^java.lang.String []
+					"Foo outer outer!")
+				(cls [] TestD [^java.lang.Object]
+					(cls [] Test3 [^java.lang.Object]
+						(@static
+							(defn [] test ^dynamic []
+								(as ^dynamic
+									(mcall
+										^TestC
+										foo))))))))))(use-ctx pht
 	(progn
-		(cls [] Test [^java.lang.Object]
+		(cls [] TestA [^java.lang.Object]
 			(ctor []
 				(mcall
 					super
 					<init>))
 			(@static
 				(defn [] foo ^java.lang.String [[o ^java.lang.Object]]
-					"Foo Static!"))
+					"Foo static!"))
 			(defn [] foo ^java.lang.String [[s ^java.lang.String]]
 				"Foo!"))
 		(cls [] Test0 [^java.lang.Object]
@@ -42,7 +65,7 @@
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mcall
-							^Test
+							(new ^TestA)
 							foo
 							"")))))
 		(cls [] Test1 [^java.lang.Object]
@@ -50,12 +73,35 @@
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mcall
-							(new ^Test)
+							^TestA
 							foo
-							"")))))))(use-ctx pht
+							"")))))
+		(cls [] TestB [^java.lang.Object]
+			(@static
+				(defn [] foo ^java.lang.String []
+					"Foo outer!")
+				(cls [] Test2 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									^TestB
+									foo)))))))
+		(cls [] TestC [^java.lang.Object]
+			(@static
+				(defn [] foo ^java.lang.String []
+					"Foo outer outer!")
+				(cls [] TestD [^java.lang.Object]
+					(cls [] Test3 [^java.lang.Object]
+						(@static
+							(defn [] test ^dynamic []
+								(as ^dynamic
+									(mcall
+										^TestC
+										foo))))))))))(use-ctx pht
 	(progn
 		(cls
-			Test
+			TestA
 			[
 				^Object
 			]
@@ -72,7 +118,7 @@
 							^Object
 						]
 					]
-					"Foo Static!"))
+					"Foo static!"))
 			(defn
 				foo
 				^String
@@ -86,13 +132,50 @@
 		(test-fn
 			0
 			(mcall
-				^Test
+				(new
+					^TestA)
 				foo
 				""))
 		(test-fn
 			1
 			(mcall
-				(new
-					^Test)
+				^TestA
 				foo
-				""))))
+				""))
+		(cls
+			TestB
+			[
+				^Object
+			]
+			(@static
+				(defn
+					foo
+					^String
+					[]
+					"Foo outer!")
+				(test-fn
+					2
+					(mcall
+						.
+						foo))))
+		(cls
+			TestC
+			[
+				^Object
+			]
+			(@static
+				(defn
+					foo
+					^String
+					[]
+					"Foo outer outer!")
+				(cls
+					TestD
+					[
+						^Object
+					]
+					(test-fn
+						3
+						(mcall
+							.
+							foo)))))))

@@ -1,8 +1,17 @@
 (progn
-    (cls Test [^Object]
+    (cls TestA [^Object]
         (ctor [] (ccall))
         (@static
-        (defn foo ^String [[o ^Object]] "Foo Static!"))
+        (defn foo ^String [[o ^Object]] "Foo static!"))
         (defn foo ^String [[s ^String]] "Foo!"))
-    (test-fn 0 (#foo ^Test ""))
-    (test-fn 1 (#foo (new ^Test) "")))
+    (test-fn 0 (#foo (new ^TestA) ""))
+    (test-fn 1 (#foo ^TestA ""))
+
+    (cls TestB [^Object] (@static
+        (defn foo ^String [] "Foo outer!")
+        (test-fn 2 (#foo .))))
+
+    (cls TestC [^Object] (@static
+        (defn foo ^String [] "Foo outer outer!")
+        (cls TestD [^Object]
+            (test-fn 3 (#foo .))))))

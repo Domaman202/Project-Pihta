@@ -13,6 +13,11 @@ import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.klassOf
 
+fun <T> sequenceOf(nullable: Collection<T>?, iterable: Iterable<T>): Sequence<T> =
+    if (nullable == null)
+        iterable.asSequence()
+    else nullable.asSequence() + iterable.asSequence()
+
 val VirtualType.nameWithGenerics: String
     get() {
         if (isArray)

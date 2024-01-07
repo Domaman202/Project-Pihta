@@ -211,7 +211,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         var strict = false
         var result = findMethodOrNull(pair.second, name, args, static, node, processor, ctx, gctx)
         if (result == null) {
-            val types = processor.computeTypesOr(node.nodes[0], ctx) ?: throwMNF(pair.second, name, args, processor, ctx)
+            val types = sequenceOf(processor.computeTypesOr(node.nodes[0], ctx), ctx.classes)
             for (type in types) {
                 result = findMethodOrNull(type, name, args, static, node, processor, ctx, gctx)
                 if (result != null) {
