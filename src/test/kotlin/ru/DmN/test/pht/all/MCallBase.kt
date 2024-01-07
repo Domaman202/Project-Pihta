@@ -3,7 +3,7 @@ package ru.DmN.test.pht.all
 import ru.DmN.test.Module
 import kotlin.test.assertEquals
 
-class MCall : Module("test/pht/all/mcall") {
+class MCallBase : Module("test/pht/all/mcall-base") {
     override fun Module.compileTest() {
         compile()
         assertEquals(test(0), "Foo!")

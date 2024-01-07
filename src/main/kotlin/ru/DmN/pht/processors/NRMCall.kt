@@ -3,6 +3,7 @@ package ru.DmN.pht.std.processors
 import ru.DmN.pht.ast.NodeTypedGet
 import ru.DmN.pht.processor.utils.MethodFindResultA
 import ru.DmN.pht.processor.utils.MethodFindResultB
+import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.std.ast.NodeFGet
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.ast.NodeMCall
@@ -26,12 +27,21 @@ import ru.DmN.siberia.utils.VirtualType
 import kotlin.streams.toList
 
 object NRMCall : INodeProcessor<NodeNodesList> {
-    override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        calc(findMethod(node, processor, ctx), node, processor, ctx)
+    override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
+        val instance0 = processor.compute(node.nodes[0], ctx)
+        return calc(findMethod(node, Static.ofInstanceNode(instance0, processor, ctx), processor, ctx), instance0, processor, ctx)
+    }
 
-    fun calc(result: MethodFindResultA, node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
+    /**
+     * Вычисляет тип, который вернёт функция.
+     *
+     * @param instance Нода instance из MCALL.
+     * @param processor Обработчик.
+     * @param ctx Контекст обработки.
+     */
+    fun calc(result: MethodFindResultA, instance: Node, processor: Processor, ctx: ProcessingContext): VirtualType {
         result.method.retgen ?: return result.method.rettype.let { rt ->
-            processor.calc(getInstance(result, node, processor, ctx), ctx).let { it ->
+            processor.calc(getInstance(result, instance, processor, ctx), ctx).let { it ->
                 if (rt is VTWG && it is VTWG)
                     rt.with(it.gens.filter { it.value.isFirst }.map { Pair(it.key, it.value.first()) }.toMap())
                 else rt
@@ -39,7 +49,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         }
         return result.generics
             ?: getGensFromArgs(result, processor, ctx)[result.method.retgen]
-            ?: processor.calc(getInstance(result, node, processor, ctx), ctx).let {
+            ?: processor.calc(getInstance(result, instance, processor, ctx), ctx).let {
                 if (it is VTWG) {
                     val gen = it.gens[result.method.retgen]!!
                     if (gen.isFirst)
@@ -51,8 +61,9 @@ object NRMCall : INodeProcessor<NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeMCall {
         val info = node.info
-        val result = findMethod(node, processor, ctx)
-        val instance = getInstance(result, node, processor, ctx)
+        val instance0 = processor.process(node.nodes[0], ctx, ValType.VALUE)!!
+        val result = findMethod(node, Static.ofInstanceNode(instance0, processor, ctx), processor, ctx)
+        val instance = getInstance(result, instance0, processor, ctx)
         val generics = calc(result, node, processor, ctx)
         return if (result.method.extension == null)
             NodeMCall(
@@ -86,7 +97,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         )
     }
 
-    fun getGensFromArgs(result: MethodFindResultA, processor: Processor, ctx: ProcessingContext): Map<String, VirtualType> {
+    private fun getGensFromArgs(result: MethodFindResultA, processor: Processor, ctx: ProcessingContext): Map<String, VirtualType> {
         val map = HashMap<String, VirtualType>()
         val argsg = result.method.argsg
         for (i in argsg.indices)
@@ -98,27 +109,26 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * Создаёт ноду объекта метод которого будут вызывать.
      *
      * @param result Результат поиска метода.
-     * @param node Необработанная нода MCALL.
+     * @param instance Нода instance из MCALL.
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
      * @return Нода.
      */
-    private fun getInstance(result: MethodFindResultA, node: NodeNodesList, processor: Processor, ctx: ProcessingContext) =
+    private fun getInstance(result: MethodFindResultA, instance: Node, processor: Processor, ctx: ProcessingContext) =
         if (result.type == SUPER)
-            nodeGetOrName(node.info, "this")
+            nodeGetOrName(instance.info, "this")
         else {
-            val instance = processor.process(node.nodes[0], ctx, ValType.VALUE)!!
             if (result.type == VIRTUAL && instance.isConstClass)
-                nodeGetInstance(result, node, processor, ctx)
+                nodeGetInstance(result, instance, processor, ctx)
             else if (instance.isLiteral && processor.computeString(instance, ctx) == ".")
                 when (result.type) {
                     UNKNOWN -> result.method.run {
                         if (modifiers.static)
-                            nodeValueClass(node.info, declaringClass!!.name)
+                            nodeValueClass(instance.info, declaringClass!!.name)
                         else throw RuntimeException()
                     }
 
-                    STATIC -> nodeGetInstance(result, node, processor, ctx)
+                    STATIC -> nodeGetInstance(result, instance, processor, ctx)
                     else -> throw RuntimeException()
                 }
             else instance
@@ -128,17 +138,17 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * Создаёт ноду получения INSTANCE от класса в котором определён метод.
      *
      * @param result Результат поиска метода.
-     * @param node Необработанная нода MCALL.
+     * @param instance Нода instance из MCALL.
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
      */
-    private fun nodeGetInstance(result: MethodFindResultA, node: NodeNodesList, processor: Processor, ctx: ProcessingContext) =
+    private fun nodeGetInstance(result: MethodFindResultA, instance: Node, processor: Processor, ctx: ProcessingContext) =
         NodeFGet(
-            node.info.withType(NodeTypes.FGET_),
-            mutableListOf(nodeValueClass(node.info, result.method.declaringClass!!.name)),
+            instance.info.withType(NodeTypes.FGET_),
+            mutableListOf(nodeValueClass(instance.info, result.method.declaringClass!!.name)),
             "INSTANCE",
             NodeFGet.Type.STATIC,
-            processor.computeType(node.nodes[0], ctx)
+            processor.computeType(instance, ctx)
         )
 
     /**
@@ -180,10 +190,11 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * Выполняет поиск метода.
      *
      * @param node Необработанная нода MCALL.
+     * @param static Фильтр статических методов.
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
      */
-    private fun findMethod(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): MethodFindResultA {
+    private fun findMethod(node: NodeNodesList, static: Static, processor: Processor, ctx: ProcessingContext): MethodFindResultA {
         val gctx = ctx.global
         //
         val pair = getCallTypeAndType(node, processor, ctx, gctx)
@@ -198,11 +209,11 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         val args = node.nodes.stream().skip(2).map { processor.process(it, ctx, ValType.VALUE)!! }.toList()
         //
         var strict = false
-        var result = findMethodOrNull(pair.second, name, args, node, processor, ctx, gctx)
+        var result = findMethodOrNull(pair.second, name, args, static, node, processor, ctx, gctx)
         if (result == null) {
             val types = processor.computeTypesOr(node.nodes[0], ctx) ?: throwMNF(pair.second, name, args, processor, ctx)
             for (type in types) {
-                result = findMethodOrNull(type, name, args, node, processor, ctx, gctx)
+                result = findMethodOrNull(type, name, args, static, node, processor, ctx, gctx)
                 if (result != null) {
                     strict = true
                     break
@@ -231,32 +242,28 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * @param clazz Класс для поиска метода.
      * @param name Имя метода.
      * @param args Аргументы.
+     * @param static Фильтр статических методов.
      * @param node Необработанная нода MCALL.
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
      * @param gctx GlobalContext.
      */
-    private fun findMethodOrNull(clazz: VirtualType, name: String, args: List<Node>, node: NodeNodesList, processor: Processor, ctx: ProcessingContext, gctx: GlobalContext): MethodFindResultB? {
-        return findMethodOrNull(
-            clazz,
-            name,
-            args,
-            processor,
-            ctx
-        ) ?: if (clazz == VTDynamic)
+    private fun findMethodOrNull(clazz: VirtualType, name: String, args: List<Node>, static: Static, node: NodeNodesList, processor: Processor, ctx: ProcessingContext, gctx: GlobalContext): MethodFindResultB? {
+        findMethodOrNull(clazz, name, args, static, processor, ctx)?.let { return it }
+        return if (clazz == VTDynamic)
             findMethod(
                 gctx.getType("ru.DmN.pht.std.utils.DynamicUtils", processor.tp),
                 "invokeMethod",
                 node.nodes.map { processor.process(it, ctx, ValType.VALUE)!! },
+                Static.ANY,
                 processor,
                 ctx
             )
         else {
-            val result = gctx.getMethodVariants(
-                (gctx.methods[name]?.asSequence() ?: gctx.methods["*"]?.asSequence()?.filter { it.name == name }
-                ?: return null),
-                args.map { ICastable.of(it, processor, ctx) }.toList()
-            ).firstOrNull() ?: return null
+            val variants = (gctx.methods[name]?.asSequence() ?: gctx.methods["*"]?.asSequence()?.filter { it.name == name } ?: return null)
+            val result = gctx.getMethodVariants(variants, args.map { ICastable.of(it, processor, ctx) }.toList())
+                .filter { static.filter(it.first) }
+                .firstOrNull() ?: return null
             MethodFindResultB(args.mapIndexed { i, it -> processor.adaptToType(result.first.argsc[i], it, ctx) }.toList(), result.first, result.second)
         }
     }
@@ -290,11 +297,12 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * @param type Тип в котором определён метод.
      * @param name Имя метода.
      * @param args Аргументы.
+     * @param static Фильтр статических методов.
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
      */
-    fun findMethod(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): MethodFindResultB =
-        findMethodOrNull(type, name, args, processor, ctx) ?: throwMNF(type, name, args, processor, ctx)
+    fun findMethod(type: VirtualType, name: String, args: List<Node>, static: Static, processor: Processor, ctx: ProcessingContext): MethodFindResultB =
+        findMethodOrNull(type, name, args, static, processor, ctx) ?: throwMNF(type, name, args, processor, ctx)
 
     /**
      * Ищет метод, подстраивает ноды аргументов, иначе возвращает null.
@@ -302,11 +310,14 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * @param type Тип в котором определён метод.
      * @param name Имя метода.
      * @param args Аргументы.
+     * @param static Фильтр статических методов.
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
      */
-    fun findMethodOrNull(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): MethodFindResultB? {
-        val result = ctx.global.getMethodVariants(type, name, args.map { ICastable.of(it, processor, ctx) }).firstOrNull() ?: return null
+    fun findMethodOrNull(type: VirtualType, name: String, args: List<Node>, static: Static, processor: Processor, ctx: ProcessingContext): MethodFindResultB? {
+        val result = ctx.global.getMethodVariants(type, name, args.map { ICastable.of(it, processor, ctx) })
+            .filter { static.filter(it.first) }
+            .firstOrNull() ?: return null
         return MethodFindResultB(args.mapIndexed { i, it -> processor.adaptToType(result.first.argsc[i], it, ctx) }.toList(), result.first, result.second)
     }
 

@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.std.ast.NodeFSet
 import ru.DmN.pht.std.ast.NodeFieldSet
 import ru.DmN.pht.std.ast.NodeMCall
@@ -34,6 +35,7 @@ object NRFSetB : INodeProcessor<NodeFieldSet> {
                     ctx.global.getType("ru.DmN.pht.std.utils.DynamicUtils", processor.tp),
                     "invokeSetter",
                     node.nodes,
+                    Static.ANY,
                     processor,
                     ctx
                 )
@@ -52,7 +54,7 @@ object NRFSetB : INodeProcessor<NodeFieldSet> {
                     result.method,
                     NodeMCall.Type.VIRTUAL
                 )
-            } else findSetter(type, node.name, node.nodes, processor, ctx)
+            } else findSetter(type, node.name, node.nodes, if (node.static) Static.STATIC else Static.NO_STATIC, processor, ctx)
         return if (result == null)
             NodeFSet(
                 info.withType(NodeTypes.FSET_),
@@ -69,11 +71,12 @@ object NRFSetB : INodeProcessor<NodeFieldSet> {
         )
     }
 
-    fun findSetter(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext) =
+    fun findSetter(type: VirtualType, name: String, args: List<Node>, static: Static, processor: Processor, ctx: ProcessingContext) =
         NRMCall.findMethodOrNull(
             type,
             "set${name.let { it[0].toUpperCase() + it.substring(1) }}",
             args,
+            static,
             processor,
             ctx
         )

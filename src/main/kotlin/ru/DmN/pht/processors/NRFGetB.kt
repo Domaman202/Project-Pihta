@@ -1,6 +1,7 @@
 package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.processor.utils.MethodFindResultB
+import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.std.ast.NodeFGet
 import ru.DmN.pht.std.ast.NodeFMGet
 import ru.DmN.pht.std.ast.NodeMCall
@@ -81,19 +82,21 @@ object NRFGetB : INodeProcessor<NodeFMGet> {
                         ctx.global.getType("ru.DmN.pht.std.utils.DynamicUtils", processor.tp),
                         "invokeGetter",
                         node.nodes,
+                        Static.ANY,
                         processor,
                         ctx
                     )
-                else findGetter(type, node.name, processor, ctx)
+                else findGetter(type, node.name, if (node.static) Static.STATIC else Static.NO_STATIC, processor, ctx)
             Pair(type, result)
         }
     }
 
-    fun findGetter(type: VirtualType, name: String, processor: Processor, ctx: ProcessingContext) =
+    fun findGetter(type: VirtualType, name: String, static: Static, processor: Processor, ctx: ProcessingContext) =
         NRMCall.findMethodOrNull(
             type,
             "get${name.let { it[0].toUpperCase() + it.substring(1) }}",
             emptyList(),
+            static,
             processor,
             ctx
         )

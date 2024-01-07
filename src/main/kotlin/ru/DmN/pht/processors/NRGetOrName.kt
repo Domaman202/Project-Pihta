@@ -1,6 +1,7 @@
 package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.ast.NodeTypedGet
+import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.pht.std.ast.NodeGet
 import ru.DmN.pht.std.ast.NodeGetOrName
@@ -57,7 +58,7 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
             return variable.get()
         if (node.name == "super")
             return lenArgs(ctx.body["this"]!!.type(), type)
-        NRFGetB.findGetter(ctx.clazz, node.name, processor, ctx)?.let { return lenArgs(it.method.rettype, type) } // todo: static / no static
+        NRFGetB.findGetter(ctx.clazz, node.name, if (ctx.method.modifiers.static) Static.STATIC else Static.ANY, processor, ctx)?.let { return lenArgs(it.method.rettype, type) }
         return lenArgs((ctx.clazz.fields.find { it.name == node.name } ?: return -1).type, type)
     }
 

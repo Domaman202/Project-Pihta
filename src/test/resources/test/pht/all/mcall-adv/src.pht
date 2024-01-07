@@ -1,0 +1,8 @@
+(progn
+    (cls Test [^Object]
+        (ctor [] (ccall))
+        (@static
+        (defn foo ^String [[o ^Object]] "Foo Static!"))
+        (defn foo ^String [[s ^String]] "Foo!"))
+    (test-fn 0 (#foo ^Test ""))
+    (test-fn 1 (#foo (new ^Test) "")))

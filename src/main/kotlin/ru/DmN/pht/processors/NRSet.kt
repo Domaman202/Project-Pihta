@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.std.ast.NodeFSet
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.ast.NodeSet
@@ -37,7 +38,7 @@ object NRSet : INodeProcessor<NodeSet> {
 
 
     private fun findSetter(info: INodeInfo, type: VirtualType, name: String, instance: Node, value: Node, call: NodeMCall.Type, processor: Processor, ctx: ProcessingContext): Node? =
-        NRFSetB.findSetter(type, name, listOf(value), processor, ctx)?.let {
+        NRFSetB.findSetter(type, name, listOf(value), if (call == NodeMCall.Type.STATIC) Static.STATIC else Static.NO_STATIC, processor, ctx)?.let {
             NodeMCall(
                 info.withType(NodeTypes.MCALL_),
                 NRMCall.processArguments(info, processor, ctx, it.method, it.args, it.compression),

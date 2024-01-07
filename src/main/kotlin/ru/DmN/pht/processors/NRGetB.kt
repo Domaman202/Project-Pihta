@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.std.ast.NodeGet
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.node.NodeTypes
@@ -48,7 +49,7 @@ object NRGetB : INodeProcessor<NodeNodesList> {
 
 
     private fun findGetter(info: INodeInfo, type: VirtualType, name: String, instance: Node, call: NodeMCall.Type, processor: Processor, ctx: ProcessingContext): Node? =
-        NRFGetB.findGetter(type, name, processor, ctx)?.let {
+        NRFGetB.findGetter(type, name, if (call == NodeMCall.Type.STATIC) Static.STATIC else Static.NO_STATIC, processor, ctx)?.let {
             NodeMCall(
                 info.withType(NodeTypes.MCALL_),
                 NRMCall.processArguments(info, processor, ctx, it.method, it.args, it.compression),

@@ -1,0 +1,98 @@
+(use-ctx pht
+	(progn
+		(cls [] Test [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(@static
+				(defn [] foo ^java.lang.String [[o ^java.lang.Object]]
+					"Foo Static!"))
+			(defn [] foo ^java.lang.String [[s ^java.lang.String]]
+				"Foo!"))
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							^Test
+							foo
+							"")))))
+		(cls [] Test1 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(new ^Test)
+							foo
+							"")))))))(use-ctx pht
+	(progn
+		(cls [] Test [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(@static
+				(defn [] foo ^java.lang.String [[o ^java.lang.Object]]
+					"Foo Static!"))
+			(defn [] foo ^java.lang.String [[s ^java.lang.String]]
+				"Foo!"))
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							^Test
+							foo
+							"")))))
+		(cls [] Test1 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(new ^Test)
+							foo
+							"")))))))(use-ctx pht
+	(progn
+		(cls
+			Test
+			[
+				^Object
+			]
+			(ctor
+				[]
+				(ccall))
+			(@static
+				(defn
+					foo
+					^String
+					[
+						[
+							o
+							^Object
+						]
+					]
+					"Foo Static!"))
+			(defn
+				foo
+				^String
+				[
+					[
+						s
+						^String
+					]
+				]
+				"Foo!"))
+		(test-fn
+			0
+			(mcall
+				^Test
+				foo
+				""))
+		(test-fn
+			1
+			(mcall
+				(new
+					^Test)
+				foo
+				""))))

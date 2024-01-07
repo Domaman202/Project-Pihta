@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.std.ast.NodeNew
 import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.utils.computeType
@@ -22,6 +23,7 @@ object NRNew : INodeProcessor<NodeNodesList> {
             type,
             "<init>",
             nodes.drop(1),
+            Static.NO_STATIC,
             processor,
             ctx
         )
