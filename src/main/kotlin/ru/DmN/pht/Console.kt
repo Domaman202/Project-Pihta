@@ -37,7 +37,7 @@ object Console : Console() {
                 module.load(processor, pctx, ValType.NO_VALUE)
                 File("dump").mkdir()
                 FileOutputStream("dump/parsed.unparse.pht").use { out ->
-                    val unparser = Unparser()
+                    val unparser = Unparser(1024*1024)
                     val uctx = UnparsingContext.base()
                     module.nodes.forEach { it ->
                         unparser.unparse(it, uctx, 0)
@@ -49,7 +49,7 @@ object Console : Console() {
                 }
                 processor.stageManager.runAll()
                 FileOutputStream("dump/processed.unparse.pht").use { out ->
-                    val unparser = Unparser()
+                    val unparser = Unparser(1024*1024)
                     val uctx = UnparsingContext.base()
                     processed.forEach { unparser.unparse(it, uctx, 0) }
                     out.write(unparser.out.toString().toByteArray())

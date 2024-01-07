@@ -57,7 +57,7 @@ abstract class Module(private val dir: String) {
         module.init()
         File("dump/$dir/unparse/parsed").mkdirs()
         FileOutputStream("dump/$dir/unparse/parsed/unparse.pht").use { out ->
-            val unparser = Unparser()
+            val unparser = Unparser(1024*1024)
             val uctx = UnparsingContext.base()
             module.nodes.forEach { unparser.unparse(it, uctx, 0) }
             out.write(unparser.out.toString().toByteArray())
@@ -74,7 +74,7 @@ abstract class Module(private val dir: String) {
         processor.stageManager.runAll()
         File("dump/$dir/unparse/processed").mkdirs()
         FileOutputStream("dump/$dir/unparse/processed/unparse.pht").use { out ->
-            val unparser = Unparser()
+            val unparser = Unparser(1024*1024)
             val uctx = UnparsingContext.base()
             processed.forEach { unparser.unparse(it, uctx, 0) }
             out.write(unparser.out.toString().toByteArray())
