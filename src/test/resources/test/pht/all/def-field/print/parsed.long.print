@@ -59,8 +59,10 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[FGET_B
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'i')
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'test')
+|	|	|	|	]
 |	|	|	]
 |	|	]
 |	]
@@ -126,8 +128,10 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[FGET_B
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'i')
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'test')
+|	|	|	|	]
 |	|	|	]
 |	|	]
 |	]

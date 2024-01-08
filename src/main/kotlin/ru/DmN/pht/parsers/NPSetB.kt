@@ -32,17 +32,17 @@ object NPSetB : INodeParser {
         }
     }
 
-    private fun parse(info: INodeInfo, name: String, static: Boolean, values: MutableList<Node>): Node {
+    private fun parse(info: INodeInfo, name: String, static: Boolean, nodes: MutableList<Node>): Node {
         val parts = name.split("/")
         return if (parts.size == 1)
             NodeSet(
                 info,
-                parts.last(),
-                values.first()
+                nodes,
+                parts.last()
             )
         else NodeFieldSet(
             info.withType(NodeParsedTypes.FSET_B),
-            values,
+            nodes,
             parse(info, parts, 1, static),
             parts.last(),
             static
@@ -57,6 +57,7 @@ object NPSetB : INodeParser {
             else NodeGetOrName(info.withType(NodeTypes.GET_OR_NAME), name, false)
         else NodeFMGet(
             info.withType(NodeParsedTypes.FGET_B),
+            mutableListOf(),
             parse(info, parts, i + 1, static),
             name,
             static

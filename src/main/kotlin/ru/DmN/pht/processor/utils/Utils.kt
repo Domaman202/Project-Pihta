@@ -2,13 +2,15 @@
 package ru.DmN.pht.std.processor.utils
 
 import ru.DmN.pht.ctx.ContextKeys
+import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.pht.std.compiler.java.utils.MacroDefine
 import ru.DmN.pht.std.processor.ctx.BodyContext
 import ru.DmN.pht.std.processor.ctx.EnumContext
 import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.ctx.MacroContext
-import ru.DmN.pht.processor.utils.LinkedClassesNode
+import ru.DmN.pht.std.utils.compute
 import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.ctx.IContextCollection
 import ru.DmN.siberia.ctx.IContextKey
@@ -16,6 +18,11 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
+
+fun Sequence<Node>.processValues(processor: Processor, ctx: ProcessingContext): Sequence<Node> =
+    this.map { processor.process(it, ctx, ValType.VALUE)!! }
+fun Sequence<Node>.computeValues(processor: Processor, ctx: ProcessingContext): Sequence<Node> =
+    this.map { processor.compute(it, ctx) }
 
 /**
  * Обрабатывает все под-ноды в режиме "VALUE".

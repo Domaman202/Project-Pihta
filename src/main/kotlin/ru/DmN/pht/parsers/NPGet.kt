@@ -13,55 +13,61 @@ import ru.DmN.siberia.lexer.isOperation
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
+import ru.DmN.siberia.parsers.NPProgn
 
 object NPGet : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val info = INodeInfo.of(NodeParsedTypes.GET, ctx, token)
         val nameToken = parser.nextToken()!!
-        return when (nameToken.type) {
-            Token.DefaultType.CLASS -> parse(
-                info,
-                nameToken.text!!,
-                static = true,
-                klass = true
-            )
-            Token.DefaultType.OPERATION -> parse(
-                info,
-                nameToken.text!!,
-                static = false,
-                klass = false
-            )
-            Token.DefaultType.OPEN_BRACKET -> {
-                parser.tokens.push(nameToken)
-                return NodeFMGet(
+        return NPProgn.parse(parser, ctx) { it ->
+            when (nameToken.type) {
+                Token.DefaultType.CLASS -> parse(
                     info,
-                    parser.parseNode(ctx)!!,
-                    parser.nextToken()!!
-                        .let { if (it.isOperation() || it.isNaming()) it else throw RuntimeException() }.text!!,
-                    false
+                    nameToken.text!!,
+                    it,
+                    static = true,
+                    klass = true
                 )
-            }
+                Token.DefaultType.OPERATION -> parse(
+                    info,
+                    nameToken.text!!,
+                    it,
+                    static = false,
+                    klass = false
+                )
+                Token.DefaultType.OPEN_BRACKET -> {
+                    parser.tokens.push(nameToken)
+                    NodeFMGet(
+                        info,
+                        it,
+                        parser.parseNode(ctx)!!,
+                        parser.nextToken()!!.let { if (it.isOperation() || it.isNaming()) it else throw RuntimeException() }.text!!,
+                        false
+                    )
+                }
 
-            else -> throw RuntimeException()
+                else -> throw RuntimeException()
+            }
         }
     }
 
-    private fun parse(info: INodeInfo, name: String, static: Boolean, klass: Boolean): Node {
+    private fun parse(info: INodeInfo, name: String, nodes: MutableList<Node>, static: Boolean, klass: Boolean): Node {
         val parts = name.split("/", "#") as MutableList<String>
-        return parse(info, parts, parts.size, static, klass)
+        return parse(info, parts, parts.size, nodes, static, klass)
     }
 
-    private fun parse(info: INodeInfo, parts: List<String>, i: Int, static: Boolean, clazz: Boolean): Node {
+    private fun parse(info: INodeInfo, parts: List<String>, i: Int, nodes: MutableList<Node>, static: Boolean, clazz: Boolean): Node {
         val j = i - 1
         return if (j == 0) {
             if (clazz)
                 nodeValueClass(info, parts[0])
-            else NodeNodesList(info.withType(NodeParsedTypes.GET), mutableListOf(nodeValue(info, parts[0])))
+            else NodeNodesList(info.withType(NodeParsedTypes.GET), nodes.apply { add(0, nodeValue(info, parts[0])) })
         } else {
             val isStatic = static && j == 1
             NodeFMGet(
                 info.withType(NodeParsedTypes.FGET_B),
-                parse(info, parts, j, static, clazz),
+                nodes,
+                parse(info, parts, j, nodes, static, clazz),
                 parts[j],
                 isStatic
             )

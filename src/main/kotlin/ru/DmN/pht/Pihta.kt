@@ -308,7 +308,7 @@ object Pihta : Module("pht") {
         add(FSET_,          NUFSetB)
         // g
         addSNU(GET)
-        add(GET_,           NUGet)
+        add(GET_,           NUGetA)
         // GET_
         add(GET_OR_NAME,    NUGetOrName)
         addSNU(GREAT)

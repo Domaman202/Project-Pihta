@@ -77,6 +77,7 @@ object NRFld : INodeProcessor<NodeFieldA> {
                             if (node.static)
                                 NodeFMGet(
                                     info.withType(FGET_B),
+                                    mutableListOf(),
                                     nodeValueClass(info, clazz.name),
                                     name,
                                     static = true,
@@ -84,6 +85,7 @@ object NRFld : INodeProcessor<NodeFieldA> {
                                 )
                             else NodeFMGet(
                                 info.withType(FGET_B),
+                                mutableListOf(),
                                 nodeGetOrName(info, "this"), name,
                                 static = false,
                                 native = true

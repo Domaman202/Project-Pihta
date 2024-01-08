@@ -86,16 +86,16 @@ object NRFGetB : INodeProcessor<NodeFMGet> {
                         processor,
                         ctx
                     )
-                else findGetter(type, node.name, if (node.static) Static.STATIC else Static.NO_STATIC, processor, ctx)
+                else findGetter(type, node.name, node.nodes, if (node.static) Static.STATIC else Static.NO_STATIC, processor, ctx)
             Pair(type, result)
         }
     }
 
-    fun findGetter(type: VirtualType, name: String, static: Static, processor: Processor, ctx: ProcessingContext) =
+    fun findGetter(type: VirtualType, name: String, nodes: List<Node>, static: Static, processor: Processor, ctx: ProcessingContext) =
         NRMCall.findMethodOrNull(
             type,
             "get${name.let { it[0].toUpperCase() + it.substring(1) }}",
-            emptyList(),
+            nodes,
             static,
             processor,
             ctx

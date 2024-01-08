@@ -1,68 +1,179 @@
 (use-ctx pht
-	(cls [] Test [^java.lang.Object]
-		(@static
-			(progn-
-				(@static
-					(defn [] setI ^void [[i ^int]]
-						(fset
-							^Test
-							i
-							i))
-					(defn [] getI ^int []
-						(fget
-							^Test
-							i))
-					(def [
-						[i ^int]]))))
-		(cls [] Test0 [^java.lang.Object]
+	(progn
+		(cls [] TestA [^java.lang.Object]
 			(@static
-				(defn [] test ^dynamic []
-					(fset
-						^Test
-						i
-						333)
-					(as ^dynamic
-						(get i)))))))(use-ctx pht
-	(cls [] Test [^java.lang.Object]
-		(@static
-			(progn-
+				(progn-
+					(@static
+						(defn [] setI ^void [[i ^int]]
+							(fset
+								^TestA
+								i
+								i))
+						(defn [] getI ^int []
+							(fget
+								^TestA
+								i))
+						(def [
+							[i ^int]]))))
+			(cls [] Test0 [^java.lang.Object]
 				(@static
-					(defn [] setI ^void [[i ^int]]
+					(defn [] test ^dynamic []
 						(fset
-							^Test
+							^TestA
 							i
-							i))
-					(defn [] getI ^int []
-						(fget
-							^Test
-							i))
-					(def [
-						[i ^int]]))))
-		(cls [] Test0 [^java.lang.Object]
+							333)
+						(get
+							"i")))))
+		(cls [] TestB [^java.lang.Object]
 			(@static
-				(defn [] test ^dynamic []
-					(fset
-						^Test
-						i
-						333)
-					(as ^dynamic
-						(get i)))))))(use-ctx pht
-	(cls
-		Test
-		[
-			^Object
-		]
-		(@static
-			(fld
-				[
+				(defn [] setFoo ^java.lang.String [[a ^java.lang.String][b ^java.lang.String]]
+					(add
+						a
+						" "
+						b
+						"!"))
+				(defn [] getFoo ^java.lang.String [[c ^java.lang.String][d ^java.lang.String]]
+					(add
+						"Боже, "
+						c
+						" "
+						d
+						"!"))
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(set! foo
+								"Слава"
+								"России"))))
+				(cls [] Test2 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(get
+								"foo"
+								"Путина"
+								"Храни"))))))))(use-ctx pht
+	(progn
+		(cls [] TestA [^java.lang.Object]
+			(@static
+				(progn-
+					(@static
+						(defn [] setI ^void [[i ^int]]
+							(fset
+								^TestA
+								i
+								i))
+						(defn [] getI ^int []
+							(fget
+								^TestA
+								i))
+						(def [
+							[i ^int]]))))
+			(cls [] Test0 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(set! i
+							333)
+						(get
+							"i")))))
+		(cls [] TestB [^java.lang.Object]
+			(@static
+				(defn [] setFoo ^java.lang.String [[a ^java.lang.String][b ^java.lang.String]]
+					(add
+						a
+						" "
+						b
+						"!"))
+				(defn [] getFoo ^java.lang.String [[c ^java.lang.String][d ^java.lang.String]]
+					(add
+						"Боже, "
+						c
+						" "
+						d
+						"!"))
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(set! foo
+								"Слава"
+								"России"))))
+				(cls [] Test2 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(get
+								"foo"
+								"Путина"
+								"Храни"))))))))(use-ctx pht
+	(progn
+		(cls
+			TestA
+			[
+				^Object
+			]
+			(@static
+				(fld
 					[
-						i
-						^int
+						[
+							i
+							^int
+						]
+					]))
+			(test-fn
+				0
+				(set! i
+					333)
+				(get
+					"i")))
+		(cls
+			TestB
+			[
+				^Object
+			]
+			(@static
+				(defn
+					setFoo
+					^String
+					[
+						[
+							a
+							^String
+						]
+						[
+							b
+							^String
+						]
 					]
-				]))
-		(test-fn
-			0
-			(set! i
-				333)
-			(get
-				"i"))))
+					(add
+						a
+						" "
+						b
+						"!"))
+				(defn
+					getFoo
+					^String
+					[
+						[
+							c
+							^String
+						]
+						[
+							d
+							^String
+						]
+					]
+					(add
+						"Боже, "
+						c
+						" "
+						d
+						"!"))
+				(test-fn
+					1
+					(set! foo
+						"Слава"
+						"России"))
+				(test-fn
+					2
+					(get
+						"foo"
+						"Путина"
+						"Храни"))))))

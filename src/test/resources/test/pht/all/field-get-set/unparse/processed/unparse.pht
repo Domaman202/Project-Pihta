@@ -116,9 +116,9 @@
 					this
 					setI
 					404)
-				(mcall
+				(fget
 					(get this)
-					getI)))
+					i)))
 		(cls [] Test3 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
@@ -243,9 +243,9 @@
 					this
 					setI
 					404)
-				(mcall
+				(fget
 					(get this)
-					getI)))
+					i)))
 		(cls [] Test3 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
@@ -370,9 +370,9 @@
 					this
 					setI
 					404)
-				(mcall
+				(fget
 					(get this)
-					getI)))
+					i)))
 		(cls [] Test3 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []

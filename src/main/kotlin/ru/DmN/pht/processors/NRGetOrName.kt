@@ -3,7 +3,7 @@ package ru.DmN.pht.std.processors
 import ru.DmN.pht.ast.NodeTypedGet
 import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.processors.IAdaptableProcessor
-import ru.DmN.pht.std.ast.NodeGet
+import ru.DmN.pht.std.ast.NodeGetA
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.processor.utils.body
@@ -15,6 +15,7 @@ import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.processor.ctx.ProcessingContext
+import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.utils.VirtualType
 
 object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeGetOrName> {
@@ -22,9 +23,9 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
         calc(node.info, node.name, processor, ctx)
 
     fun calc(info: INodeInfo, name: String, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        if (name == "super")
+        if (name == "super" || name == "this")
             ctx.body["this"]!!.type()
-        else NRGetB.calc(info, name, processor, ctx)
+        else processor.calc(NRGetB.process(info, name, mutableListOf(), processor, ctx, ValType.VALUE)!!, ctx)
 
     override fun computeInt(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Int =
         node.getValueAsString().toInt()
@@ -59,7 +60,7 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
             return variable.get()
         if (node.name == "super")
             return lenArgs(ctx.body["this"]!!.type(), type)
-        NRFGetB.findGetter(ctx.clazz, node.name, if (ctx.method.modifiers.static) Static.STATIC else Static.ANY, processor, ctx)?.let { return lenArgs(it.method.rettype, type) }
+        NRFGetB.findGetter(ctx.clazz, node.name, emptyList(), if (ctx.method.modifiers.static) Static.STATIC else Static.ANY, processor, ctx)?.let { return lenArgs(it.method.rettype, type) }
         return lenArgs((ctx.clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first() ?: return -1).type, type)
     }
 
@@ -68,14 +69,15 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
         return when (i) {
             0 -> {
                 val clazz = ctx.clazz
-                NRGetB.findGetter(node.info, clazz, node.name, !ctx.method.modifiers.static, processor, ctx)?.let { return it }
+                NRGetB.findGetter(node.info, clazz, node.name, emptyList(), !ctx.method.modifiers.static, processor, ctx)?.let { return it }
                 val field = clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first()!!
-                NodeGet(
+                NodeGetA(
                     node.info.withType(NodeTypes.GET_),
+                    mutableListOf(),
                     node.name,
                     if (field.modifiers.isStatic)
-                        NodeGet.Type.THIS_STATIC_FIELD
-                    else NodeGet.Type.THIS_FIELD
+                        NodeGetA.Type.THIS_STATIC_FIELD
+                    else NodeGetA.Type.THIS_FIELD
                 )
             }
             1 -> node

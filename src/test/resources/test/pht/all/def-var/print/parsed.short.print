@@ -76,7 +76,12 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[SET_B]
+|	|	|	[SET_B
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '0')
+|	|	|	|	]
+|	|	|	]
 |	|	|	[GET
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = STRING)
@@ -196,7 +201,12 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[SET_B]
+|	|	|	[SET_B
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '0')
+|	|	|	|	]
+|	|	|	]
 |	|	|	[GET
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = STRING)

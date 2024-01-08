@@ -17,6 +17,7 @@ import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
+import kotlin.math.min
 
 object NRMath : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
@@ -63,7 +64,13 @@ object NRMath : INodeProcessor<NodeNodesList> {
 
     fun getExtend(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): MethodFindResultB? {
         val result = findExtend(type, name, args, processor, ctx) ?: return null
-        return MethodFindResultB(args.mapIndexed { i, it -> processor.adaptToType(result.first.argsc[i], it, ctx) }.toList(), result.first, result.second)
+        val adapted = ArrayList<Node>()
+        val j = min(args.size, result.first.argsc.size)
+        for (i in 0 until j)
+            adapted += processor.adaptToType(result.first.argsc[i], args[i], ctx)
+        for (i in j until args.size)
+            adapted += args[i]
+        return MethodFindResultB(adapted, result.first, result.second)
     }
 
     fun findExtend(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Pair<VirtualMethod, Boolean>? =

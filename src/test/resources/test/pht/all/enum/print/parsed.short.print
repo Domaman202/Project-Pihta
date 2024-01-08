@@ -162,30 +162,21 @@
 |	|	|	|	(type = INT)
 |	|	|	|	(value = '0')
 |	|	|	]
-|	|	|	[FGET_B
-|	|	|	|	(type = STATIC)
-|	|	|	|	(text = 'RED')
-|	|	|	]
+|	|	|	[FGET_B]
 |	|	]
 |	|	[TEST_FN
 |	|	|	[VALUE
 |	|	|	|	(type = INT)
 |	|	|	|	(value = '1')
 |	|	|	]
-|	|	|	[FGET_B
-|	|	|	|	(type = STATIC)
-|	|	|	|	(text = 'GREEN')
-|	|	|	]
+|	|	|	[FGET_B]
 |	|	]
 |	|	[TEST_FN
 |	|	|	[VALUE
 |	|	|	|	(type = INT)
 |	|	|	|	(value = '2')
 |	|	|	]
-|	|	|	[FGET_B
-|	|	|	|	(type = STATIC)
-|	|	|	|	(text = 'BLUE')
-|	|	|	]
+|	|	|	[FGET_B]
 |	|	]
 |	]
 ]
@@ -353,30 +344,21 @@
 |	|	|	|	(type = INT)
 |	|	|	|	(value = '0')
 |	|	|	]
-|	|	|	[FGET_B
-|	|	|	|	(type = STATIC)
-|	|	|	|	(text = 'RED')
-|	|	|	]
+|	|	|	[FGET_B]
 |	|	]
 |	|	[TEST_FN
 |	|	|	[VALUE
 |	|	|	|	(type = INT)
 |	|	|	|	(value = '1')
 |	|	|	]
-|	|	|	[FGET_B
-|	|	|	|	(type = STATIC)
-|	|	|	|	(text = 'GREEN')
-|	|	|	]
+|	|	|	[FGET_B]
 |	|	]
 |	|	[TEST_FN
 |	|	|	[VALUE
 |	|	|	|	(type = INT)
 |	|	|	|	(value = '2')
 |	|	|	]
-|	|	|	[FGET_B
-|	|	|	|	(type = STATIC)
-|	|	|	|	(text = 'BLUE')
-|	|	|	]
+|	|	|	[FGET_B]
 |	|	]
 |	]
 ]

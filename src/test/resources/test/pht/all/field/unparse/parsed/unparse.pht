@@ -28,9 +28,9 @@
 						setI
 						213)
 					(as ^dynamic
-						(mcall
+						(fget
 							(get test)
-							getI)))))))(use-ctx pht
+							i)))))))(use-ctx pht
 	(progn
 		(cls [] Test [^java.lang.Object]
 			(progn-
@@ -60,9 +60,9 @@
 						setI
 						213)
 					(as ^dynamic
-						(mcall
+						(fget
 							(get test)
-							getI)))))))(use-ctx pht
+							i)))))))(use-ctx pht
 	(progn
 		(cls
 			Test

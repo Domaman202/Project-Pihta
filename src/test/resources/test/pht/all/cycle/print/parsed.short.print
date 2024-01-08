@@ -40,7 +40,18 @@
 |	|	|	|	|	(value = '10')
 |	|	|	|	]
 |	|	|	]
-|	|	|	[SET_B]
+|	|	|	[SET_B
+|	|	|	|	[ADD
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'j')
+|	|	|	|	|	]
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
 |	|	|	[INC_PRE
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
@@ -98,7 +109,18 @@
 |	|	|	|	|	(value = '10')
 |	|	|	|	]
 |	|	|	]
-|	|	|	[SET_B]
+|	|	|	[SET_B
+|	|	|	|	[ADD
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'j')
+|	|	|	|	|	]
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
 |	|	|	[INC_PRE
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)

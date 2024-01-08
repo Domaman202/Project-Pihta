@@ -12,7 +12,7 @@ import ru.DmN.siberia.compilers.INodeCompiler
 object NCSet : INodeCompiler<NodeSet> {
     override fun compile(node: NodeSet, compiler: Compiler, ctx: CompilationContext) {
         ctx.method.node.run {
-            val value = compiler.compileVal(node.value, ctx)
+            val value = compiler.compileVal(node.nodes[0], ctx)
             load(value, this)
             storeCast(ctx.body[node.name]!!, value.type(), this)
         }

@@ -8,17 +8,18 @@ import ru.DmN.siberia.utils.Variable
 import ru.DmN.pht.std.compiler.java.utils.body
 import ru.DmN.pht.std.compiler.java.utils.clazz
 import ru.DmN.pht.std.compiler.java.utils.method
-import ru.DmN.pht.std.ast.NodeGet
+import ru.DmN.pht.std.ast.NodeGetA
+import ru.DmN.pht.std.ast.NodeGetB
 import ru.DmN.pht.std.processor.utils.classes
 
-object NCGetA : INodeCompiler<NodeGet> {
-    override fun compileVal(node: NodeGet, compiler: Compiler, ctx: CompilationContext): Variable =
+object NCGetA : INodeCompiler<NodeGetB> {
+    override fun compileVal(node: NodeGetB, compiler: Compiler, ctx: CompilationContext): Variable =
         when (node.type) {
-            NodeGet.Type.VARIABLE -> ctx.body[node.name]!!
-            NodeGet.Type.THIS_FIELD, NodeGet.Type.THIS_STATIC_FIELD -> ctx.method.node.run {
+            NodeGetA.Type.VARIABLE -> ctx.body[node.name]!!
+            NodeGetA.Type.THIS_FIELD, NodeGetA.Type.THIS_STATIC_FIELD -> ctx.method.node.run {
                 val field = ctx.clazz.clazz.fields.find { it.name == name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first()!!
                 visitFieldInsn(
-                    if (node.type == NodeGet.Type.THIS_FIELD) Opcodes.GETFIELD else Opcodes.GETSTATIC,
+                    if (node.type == NodeGetA.Type.THIS_FIELD) Opcodes.GETFIELD else Opcodes.GETSTATIC,
                     field.declaringClass!!.className,
                     node.name,
                     field.desc

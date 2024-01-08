@@ -42,10 +42,7 @@
 |	|	|	|	(type = INT)
 |	|	|	|	(value = '0')
 |	|	|	]
-|	|	|	[FGET_B
-|	|	|	|	(type = STATIC)
-|	|	|	|	(text = 'I')
-|	|	|	]
+|	|	|	[FGET_B]
 |	|	]
 |	|	[TEST_FN
 |	|	|	[VALUE
@@ -103,10 +100,7 @@
 |	|	|	|	(type = INT)
 |	|	|	|	(value = '0')
 |	|	|	]
-|	|	|	[FGET_B
-|	|	|	|	(type = STATIC)
-|	|	|	|	(text = 'I')
-|	|	|	]
+|	|	|	[FGET_B]
 |	|	]
 |	|	[TEST_FN
 |	|	|	[VALUE
