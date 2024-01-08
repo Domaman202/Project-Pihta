@@ -9,6 +9,7 @@ import ru.DmN.pht.std.node.nodeGetOrName
 import ru.DmN.pht.std.node.nodeValueClass
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.forEach
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -43,7 +44,9 @@ object NRGetB : INodeProcessor<NodeNodesList> {
     fun process(info: INodeInfo, name: String, nodes: MutableList<Node>, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
         ctx.body[name]?.let { return if (mode == ValType.VALUE) NodeGetB(info.withType(NodeTypes.GET_), name, NodeGetA.Type.VARIABLE) else null }
         val clazz = ctx.clazz
-        findGetter(info, clazz, name, nodes, !ctx.method.modifiers.static, processor, ctx)?.let { return it }
+        ctx.classes.forEach(clazz) { it ->
+            findGetter(info, it, name, nodes, !ctx.method.modifiers.static, processor, ctx)?.let { return it }
+        }
         return if (mode == ValType.VALUE)
             NodeGetA(
                 info.withType(NodeTypes.GET_),

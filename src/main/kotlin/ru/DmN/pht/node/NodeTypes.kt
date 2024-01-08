@@ -70,6 +70,8 @@ enum class NodeTypes : INodeType {
     IMPORT_("import", PROCESSED),
     INC_PRE_("inc", PROCESSED),
     INC_POST_("inc-", PROCESSED),
+    INNER("inner", PARSED),
+    INNER_("inner", PROCESSED),
     IS_("is", PROCESSED),
     ITF_("itf", PROCESSED),
     // l

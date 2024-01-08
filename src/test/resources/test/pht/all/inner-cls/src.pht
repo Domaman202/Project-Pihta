@@ -1,0 +1,12 @@
+(progn
+    (cls TestA [^Object]
+        (ctor [] (ccall))
+        (cls TestB [^Object]
+            (inner [this$a ^TestA])
+            (def  [[this$a ^TestA]])
+            (ctor [[this$a ^TestA]]
+                (ccall)
+                (set this/this$a this$a))
+            (defn getA ^TestA []
+                this/this$a)))
+    (test-fn 0 (#getA (new ^TestB (new ^TestA)))))

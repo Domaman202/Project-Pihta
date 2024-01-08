@@ -16,10 +16,21 @@ object NCGetA : INodeCompiler<NodeGetB> {
     override fun compileVal(node: NodeGetB, compiler: Compiler, ctx: CompilationContext): Variable =
         when (node.type) {
             NodeGetA.Type.VARIABLE -> ctx.body[node.name]!!
-            NodeGetA.Type.THIS_FIELD, NodeGetA.Type.THIS_STATIC_FIELD -> ctx.method.node.run {
-                val field = ctx.clazz.clazz.fields.find { it.name == name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first()!!
+            NodeGetA.Type.THIS_FIELD -> ctx.method.node.run {
+                visitVarInsn(Opcodes.ALOAD, 0)
+                val field = ctx.clazz.clazz.fields.find { it.name == node.name }!!
                 visitFieldInsn(
-                    if (node.type == NodeGetA.Type.THIS_FIELD) Opcodes.GETFIELD else Opcodes.GETSTATIC,
+                    Opcodes.GETFIELD,
+                    field.declaringClass!!.className,
+                    node.name,
+                    field.desc
+                )
+                Variable(node.name, field.type, -1, true)
+            }
+            NodeGetA.Type.THIS_STATIC_FIELD -> ctx.method.node.run {
+                val field = ctx.clazz.clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first()!!
+                visitFieldInsn(
+                    Opcodes.GETSTATIC,
                     field.declaringClass!!.className,
                     node.name,
                     field.desc

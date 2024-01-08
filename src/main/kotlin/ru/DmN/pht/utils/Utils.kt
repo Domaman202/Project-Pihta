@@ -13,6 +13,11 @@ import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.klassOf
 
+inline fun <T> Iterable<T>.forEach(first: T, block: (T) -> Unit) {
+    block(first)
+    forEach(block)
+}
+
 fun <T> sequenceOf(nullable: Collection<T>?, iterable: Iterable<T>): Sequence<T> =
     if (nullable == null)
         iterable.asSequence()

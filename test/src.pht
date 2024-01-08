@@ -1,8 +1,12 @@
-(app
-    (defn setFoo ^String [[a ^String][b ^String]]
-        (+ a " " b "!"))
-    (defn getFoo ^String [[c ^String][d ^String]]
-        (+ "Боже, " c " " d "!"))
+(progn
+    (cls TestD [^Object]
+        (ctor [] (ccall))
+        (defn getD ^int [] 12))
+    (cls TestE [^Object]
+        (ctor [] (ccall))
+        (defn getE ^int [] 21))
     (app-fn
-        (println (set foo "Слава" "России"))
-        (println (get foo "Путина" "Храни"))))
+        (def [
+            [o (new ^TestD)]
+            [o (new ^TestE)]])
+        (println (+ (#getD o) (#getE o)))))

@@ -13,7 +13,7 @@ import ru.DmN.siberia.utils.VirtualType
 
 object NRTypedGet : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        processor.calc(node.nodes[0], ctx)
+        processor.computeType(node.nodes[0], ctx)
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeTypedGet =
         NodeTypedGet(node.info.withType(NodeTypes.TYPED_GET_), processor.computeString(node.nodes[1], ctx), processor.computeType(node.nodes[0], ctx))

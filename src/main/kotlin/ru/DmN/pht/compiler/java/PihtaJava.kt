@@ -1,6 +1,7 @@
 package ru.DmN.pht.std.compiler.java
 
 import ru.DmN.pht.compiler.java.compilers.NCECtor
+import ru.DmN.pht.compiler.java.compilers.NCInner
 import ru.DmN.pht.compiler.java.compilers.NCIs
 import ru.DmN.pht.compiler.java.compilers.NCTypedGet
 import ru.DmN.pht.std.Pihta
@@ -55,6 +56,7 @@ class PihtaJava(module: Pihta) : ModuleCompilers(module, Platforms.JAVA) {
         add(IF_,          NCIf)
         add(INC_PRE_,     NCIncDec)
         add(INC_POST_,    NCIncDec)
+        add(INNER_,       NCInner)
         add(IS_,          NCIs)
         add(ITF_,         NCClass)
         // l

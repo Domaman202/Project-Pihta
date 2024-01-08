@@ -4,6 +4,7 @@ import ru.DmN.pht.ast.NodeTypedGet
 import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.pht.std.ast.NodeGetA
+import ru.DmN.pht.std.ast.NodeGetB
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.processor.utils.body
@@ -71,9 +72,8 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
                 val clazz = ctx.clazz
                 NRGetB.findGetter(node.info, clazz, node.name, emptyList(), !ctx.method.modifiers.static, processor, ctx)?.let { return it }
                 val field = clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first()!!
-                NodeGetA(
+                NodeGetB(
                     node.info.withType(NodeTypes.GET_),
-                    mutableListOf(),
                     node.name,
                     if (field.modifiers.isStatic)
                         NodeGetA.Type.THIS_STATIC_FIELD

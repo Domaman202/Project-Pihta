@@ -48,7 +48,35 @@
 								(as ^dynamic
 									(mcall
 										^TestC
-										foo))))))))))(use-ctx pht
+										foo))))))))
+		(cls [] TestE [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] getE ^int []
+				12))
+		(cls [] TestF [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] getF ^int []
+				21))
+		(cls [] Test4 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(def [
+						[^TestE o (new ^TestE)]
+						[^TestF o (new ^TestF)]])
+					(as ^dynamic
+						(add
+							(mcall
+								(typed-get ^TestE o)
+								getE)
+							(mcall
+								(typed-get ^TestF o)
+								getF))))))))(use-ctx pht
 	(progn
 		(cls [] TestA [^java.lang.Object]
 			(ctor []
@@ -98,7 +126,35 @@
 								(as ^dynamic
 									(mcall
 										^TestC
-										foo))))))))))(use-ctx pht
+										foo))))))))
+		(cls [] TestE [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] getE ^int []
+				12))
+		(cls [] TestF [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] getF ^int []
+				21))
+		(cls [] Test4 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(def [
+						[^TestE o (new ^TestE)]
+						[^TestF o (new ^TestF)]])
+					(as ^dynamic
+						(add
+							(mcall
+								(typed-get ^TestE o)
+								getE)
+							(mcall
+								(typed-get ^TestF o)
+								getF))))))))(use-ctx pht
 	(progn
 		(cls
 			TestA
@@ -178,4 +234,52 @@
 						3
 						(mcall
 							.
-							foo)))))))
+							foo)))))
+		(cls
+			TestE
+			[
+				^Object
+			]
+			(ctor
+				[]
+				(ccall))
+			(defn
+				getE
+				^int
+				[]
+				12))
+		(cls
+			TestF
+			[
+				^Object
+			]
+			(ctor
+				[]
+				(ccall))
+			(defn
+				getF
+				^int
+				[]
+				21))
+		(test-fn
+			4
+			(def
+				[
+					[
+						o
+						(new
+							^TestE)
+					]
+					[
+						o
+						(new
+							^TestF)
+					]
+				])
+			(add
+				(mcall
+					o
+					getE)
+				(mcall
+					o
+					getF)))))

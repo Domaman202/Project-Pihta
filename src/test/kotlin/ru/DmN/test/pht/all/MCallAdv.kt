@@ -10,5 +10,6 @@ class MCallAdv : Module("test/pht/all/mcall-adv") {
         assertEquals(test(1), "Foo static!")
         assertEquals(test(2), "Foo outer!")
         assertEquals(test(3), "Foo outer outer!")
+        assertEquals(test(4), 33)
     }
 }

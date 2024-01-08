@@ -1,0 +1,115 @@
+(use-ctx pht
+	(progn
+		(cls [] TestA [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(cls [] TestB [^java.lang.Object]
+				(inner [this$a ^TestA])
+				(def [
+					[this$a ^TestA]])
+				(ctor [[this$a ^TestA]]
+					(mcall
+						super
+						<init>)
+					(fset
+						this
+						this$a
+						this$a))
+				(defn [] getA ^TestA []
+					(fget
+						(get this)
+						this$a))))
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(new ^TestB
+								(new ^TestA))
+							getA)))))))(use-ctx pht
+	(progn
+		(cls [] TestA [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(cls [] TestB [^java.lang.Object]
+				(inner [this$a ^TestA])
+				(def [
+					[this$a ^TestA]])
+				(ctor [[this$a ^TestA]]
+					(mcall
+						super
+						<init>)
+					(fset
+						this
+						this$a
+						this$a))
+				(defn [] getA ^TestA []
+					(fget
+						(get this)
+						this$a))))
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(new ^TestB
+								(new ^TestA))
+							getA)))))))(use-ctx pht
+	(progn
+		(cls
+			TestA
+			[
+				^Object
+			]
+			(ctor
+				[]
+				(ccall))
+			(cls
+				TestB
+				[
+					^Object
+				]
+				(inner
+					[
+						this$a
+						^TestA
+					])
+				(def
+					[
+						[
+							this$a
+							^TestA
+						]
+					])
+				(ctor
+					[
+						[
+							this$a
+							^TestA
+						]
+					]
+					(ccall)
+					(fset
+						this
+						this$a
+						this$a))
+				(defn
+					getA
+					^TestA
+					[]
+					(fget
+						(get
+							"this")
+						this$a))))
+		(test-fn
+			0
+			(mcall
+				(new
+					^TestB
+					(new
+						^TestA))
+				getA))))

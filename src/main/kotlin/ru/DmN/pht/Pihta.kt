@@ -103,6 +103,7 @@ object Pihta : Module("pht") {
         addNP("import",       NPImport)
         addSNP(INC_PRE)
         addSNP(INC_POST)
+        addSNP(INNER)
         addSNP(IS)
         addSNP(ITF)
         // l
@@ -324,6 +325,8 @@ object Pihta : Module("pht") {
         add(INC_PRE_,       NUIncDec)
         addSNU(INC_POST)
         add(INC_POST_,      NUIncDec)
+        addSNU(INNER)
+        add(INNER_,         NUInner)
         addSNU(IS)
         add(IS_,            NUIsAs)
         addSNU(ITF)
@@ -395,7 +398,7 @@ object Pihta : Module("pht") {
         addSNU(THROW)
         addSNU(THROW_)
         addSNU(TYPED_GET)
-        add(TYPED_GET,      NUTypedGet)
+        add(TYPED_GET_,     NUTypedGet)
         addSNU(TYPEOF)
         // u
         add(UNIT,           NUUnit)
@@ -511,6 +514,7 @@ object Pihta : Module("pht") {
         add(INC_PRE_,      NRIncDecB)
         add(INC_POST,      NRIncDec)
         add(INC_POST_,     NRIncDecB)
+        add(INNER,         NRInner)
         add(IS,            NRIs)
         add(IS_,           NRIs)
         add(ITF,           NRClass)

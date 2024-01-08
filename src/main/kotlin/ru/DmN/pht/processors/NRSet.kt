@@ -8,6 +8,7 @@ import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.node.nodeGetOrName
 import ru.DmN.pht.std.node.nodeValueClass
 import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.utils.forEach
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
@@ -22,8 +23,10 @@ object NRSet : INodeProcessor<NodeSet> {
         val value = node.nodes.asSequence().processValues(processor, ctx).toMutableList()
         ctx.body[node.name]?.let { return NodeSet(info.withType(NodeTypes.SET_), value, node.name) }
         val clazz = ctx.clazz
-        findSetter(info, clazz, node.name, value, !ctx.method.modifiers.static, processor, ctx)?.let { return it }
-        val field = clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first()!!
+        ctx.classes.forEach(clazz) { it ->
+            findSetter(info, it, node.name, value, !ctx.method.modifiers.static, processor, ctx)?.let { return it }
+        }
+        val field = clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields    .find { it.name == node.name } }.first()!!
         return NodeFSet(
             info.withType(NodeTypes.FSET_),
             mutableListOf<Node>(if (field.modifiers.isStatic) nodeValueClass(info, field.declaringClass!!.name) else nodeGetOrName(info, node.name)).apply { addAll(value) },

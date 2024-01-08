@@ -3,6 +3,7 @@ package ru.DmN.pht.std.processors
 import ru.DmN.pht.processor.utils.MethodFindResultA
 import ru.DmN.pht.processor.utils.MethodFindResultB
 import ru.DmN.pht.processor.utils.Static
+import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.pht.std.ast.NodeFGet
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.ast.NodeMCall.Type.*
@@ -35,6 +36,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
     /**
      * Вычисляет тип, который вернёт функция.
      *
+     * @param result Результат поиска метода.
      * @param instance Нода instance из MCALL.
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
@@ -120,18 +122,23 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         else {
             if (result.type == VIRTUAL && instance.isConstClass)
                 nodeGetInstance(result, instance, processor, ctx)
-            else if (instance.isLiteral && processor.computeString(instance, ctx) == ".")
-                when (result.type) {
-                    UNKNOWN -> result.method.run {
-                        if (modifiers.static)
-                            nodeValueClass(instance.info, declaringClass!!.name)
-                        else throw RuntimeException()
-                    }
+            else {
+                val np = processor.get(instance, ctx)
+                if (instance.isLiteral && (np as IStdNodeProcessor<Node>).computeString(instance, processor, ctx) == ".")
+                    when (result.type) {
+                        UNKNOWN -> result.method.run {
+                            if (modifiers.static)
+                                nodeValueClass(instance.info, declaringClass!!.name)
+                            else throw RuntimeException()
+                        }
 
-                    STATIC -> nodeGetInstance(result, instance, processor, ctx)
-                    else -> throw RuntimeException()
-                }
-            else instance
+                        STATIC -> nodeGetInstance(result, instance, processor, ctx)
+                        else -> throw RuntimeException()
+                    }
+                else if (np is IAdaptableProcessor<*>)
+                    (np as IAdaptableProcessor<Node>).adaptToType(result.method.declaringClass!!, instance, processor, ctx)
+                else instance
+            }
         }
 
     /**
@@ -209,11 +216,11 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         val args = node.nodes.stream().skip(2).map { processor.process(it, ctx, ValType.VALUE)!! }.toList()
         //
         var strict = false
-        var result = findMethodOrNull(pair.second, name, args, static, node, processor, ctx, gctx)
+        var result = findMethodOrNull(pair.second, name, args, static, node, processor, ctx)
         if (result == null) {
             val types = sequenceOf(processor.computeTypesOr(node.nodes[0], ctx), ctx.classes)
             for (type in types) {
-                result = findMethodOrNull(type, name, args, static, node, processor, ctx, gctx)
+                result = findMethodOrNull(type, name, args, static, node, processor, ctx)
                 if (result != null) {
                     strict = true
                     break
@@ -246,20 +253,21 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * @param node Необработанная нода MCALL.
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
-     * @param gctx GlobalContext.
      */
-    private fun findMethodOrNull(clazz: VirtualType, name: String, args: List<Node>, static: Static, node: NodeNodesList, processor: Processor, ctx: ProcessingContext, gctx: GlobalContext): MethodFindResultB? {
+    private fun findMethodOrNull(clazz: VirtualType, name: String, args: List<Node>, static: Static, node: NodeNodesList, processor: Processor, ctx: ProcessingContext): MethodFindResultB? {
         findMethodOrNull(clazz, name, args, static, processor, ctx)?.let { return it }
-        return if (clazz == VTDynamic)
+
+        return if (clazz == VTDynamic) {
             findMethod(
-                gctx.getType("ru.DmN.pht.std.utils.DynamicUtils", processor.tp),
+                ctx.global.getType("ru.DmN.pht.std.utils.DynamicUtils", processor.tp),
                 "invokeMethod",
                 node.nodes.map { processor.process(it, ctx, ValType.VALUE)!! },
                 Static.ANY,
                 processor,
                 ctx
             )
-        else {
+        } else {
+            val gctx = ctx.global
             val variants = (gctx.methods[name]?.asSequence() ?: gctx.methods["*"]?.asSequence()?.filter { it.name == name } ?: return null)
             val result = gctx.getMethodVariants(variants, args.map { ICastable.of(it, processor, ctx) }.toList())
                 .filter { static.filter(it.first) }
