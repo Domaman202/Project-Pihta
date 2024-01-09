@@ -329,10 +329,10 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         return MethodFindResultB(args.mapIndexed { i, it -> processor.adaptToType(result.first.argsc[i], it, ctx) }.toList(), result.first, result.second)
     }
 
-    private fun throwMNF(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Nothing =
+    fun throwMNF(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Nothing =
         throwMNF(type, name, args.map { processor.calc(it, ctx) })
 
-    private fun throwMNF(type: VirtualType, name: String, args: List<VirtualType?>): Nothing {
+    fun throwMNF(type: VirtualType, name: String, args: List<VirtualType?>): Nothing {
         val desc = StringBuilder()
         args.forEach { desc.append(it?.desc) }
         throw RuntimeException("Method '$name($desc)${type.desc}' not founded!")

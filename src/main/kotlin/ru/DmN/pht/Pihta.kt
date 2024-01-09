@@ -1,6 +1,7 @@
 package ru.DmN.pht.std
 
 import ru.DmN.pht.ast.IOpenlyNode
+import ru.DmN.pht.ast.ISyncNode
 import ru.DmN.pht.parsers.NPSA
 import ru.DmN.pht.processors.*
 import ru.DmN.pht.std.ast.IAbstractlyNode
@@ -421,6 +422,8 @@ object Pihta : Module("pht") {
         addSNU(ANN_OPEN_)
         addSNU(ANN_STATIC)
         addSNU(ANN_STATIC_)
+        addSNU(ANN_SYNC)
+        addSNU(ANN_SYNCHRONIZED_)
         addSNU(ANN_VARARGS)
         addSNU(ANN_VARARGS_)
 
@@ -565,6 +568,8 @@ object Pihta : Module("pht") {
         add(REM,           NRMath)
         add(REM_,          NRMathB)
         add(RET,           NRRet)
+        add(RFN,           NRRFn)
+        add(RFN_,          NRRFnB)
         add(ROLL_LEFT,     NRRollLeft)
         add(ROLL_RIGHT,    NRRollRight)
         // s
@@ -604,6 +609,7 @@ object Pihta : Module("pht") {
         add(ANN_FINAL,    NRSA { it, _, _ -> if (it is IFinallyNode)    it.final = true })
         add(ANN_OPEN,     NRSA { it, _, _ -> if (it is IOpenlyNode)     it.open = true })
         add(ANN_STATIC,   NRSA { it, _, _ -> if (it is IStaticallyNode) it.static = true })
+        add(ANN_SYNC,     NRSA { it, _, _ -> if (it is ISyncNode)       it.sync = true })
         add(ANN_VARARGS,  NRSA { it, _, _ -> if (it is IVarargNode)     it.varargs = true })
 
         // *

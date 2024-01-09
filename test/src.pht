@@ -1,12 +1,7 @@
 (progn
-    (cls TestD [^Object]
-        (ctor [] (ccall))
-        (defn getD ^int [] 12))
-    (cls TestE [^Object]
-        (ctor [] (ccall))
-        (defn getE ^int [] 21))
+    (import java
+        (types java.lang.Runnable))
+    (cls Test [^Object] (@static
+        (defn foo ^void [] (println "Foo!"))))
     (app-fn
-        (def [
-            [o (new ^TestD)]
-            [o (new ^TestE)]])
-        (println (+ (#getD o) (#getE o)))))
+        (println (rfn ^Runnable ^Test foo))))

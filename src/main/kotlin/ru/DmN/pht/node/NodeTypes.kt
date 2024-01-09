@@ -107,6 +107,8 @@ enum class NodeTypes : INodeType {
     RANGE("range", PARSED),
     REM_("rem", PROCESSED),
     RET_("ret", PROCESSED),
+    RFN("rfn", PARSED),
+    RFN_("rfn", PROCESSED),
     ROLL_LEFT("roll-left", PARSED),
     ROLL_RIGHT("roll-right", PARSED),
     // s
@@ -118,6 +120,8 @@ enum class NodeTypes : INodeType {
     SYMBOL("symbol", PARSED),
     SYMBOL_INT("symbol-int", PARSED),
     SYMBOL_CLS("symbol-cls", PARSED),
+    SYNC("sync", PARSED),
+    SYNC_("sync", PROCESSED),
     // t
     TEST_FN("test-fn", PARSED),
     THROW("throw", PARSED),
@@ -143,6 +147,7 @@ enum class NodeTypes : INodeType {
     ANN_FINAL_("@final", PROCESSED),
     ANN_OPEN_("@open", PROCESSED),
     ANN_STATIC_("@static", PROCESSED),
+    ANN_SYNCHRONIZED_("@synchronized", PROCESSED),
     ANN_VARARGS_("@varargs", PROCESSED),
 
     // *
