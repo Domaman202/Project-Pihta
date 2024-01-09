@@ -1,7 +1,8 @@
 (progn
     (import java
         (types java.lang.Runnable))
-    (cls Test [^Object] (@static
-        (defn foo ^void [] (println "Foo!"))))
+    (cls Test [^Object]
+        (ctor [] (ccall))
+        (defn foo ^void [] (println "Foo!")))
     (app-fn
-        (#run (rfn ^Runnable ^Test foo))))
+        (println (rfn ^Runnable (new ^Test) foo))))

@@ -1,10 +1,10 @@
 public class Test {
-    public static void foo() {
+    public void foo() {
         System.out.println("Foo!");
     }
 
     public static void main(String[] args) {
-        Runnable lambda = Test::foo;
+        Runnable lambda = new Test()::foo;
         System.out.println(lambda);
     }
 }
