@@ -380,6 +380,8 @@ object Pihta : Module("pht") {
         addSNU(REM)
         addSNU(REM_)
         addSNU(RET)
+        addSNU(RFN)
+        add(RFN_,           NURFn)
         addSNU(ROLL_LEFT)
         addSNU(ROLL_RIGHT)
         // s

@@ -17,30 +17,50 @@ object NCRFn : INodeCompiler<NodeRFn> {
         ctx.method.node.apply {
             node.method.run {
                 val declName = declaringClass!!.className
-                val desc = desc
-                val static = modifiers.static
-                if (!static)
+                if (modifiers.static) {
+                    visitInvokeDynamicInsn(
+                        node.lambda.name,
+                        "()L${node.type.className};",
+                        Handle(
+                            H_INVOKESTATIC,
+                            "java/lang/invoke/LambdaMetafactory",
+                            "metafactory",
+                            "(Ljava/lang/invoke/MethodHandles\$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;",
+                            false
+                        ),
+                        Type.getType(node.lambda.desc),
+                        Handle(
+                            H_INVOKESTATIC,
+                            declName,
+                            name,
+                            desc,
+                            declaringClass!!.isInterface
+                        ),
+                        Type.getType(desc),
+                    )
+                } else {
                     load(compiler.compileVal(node.instance, ctx), this@apply)
-                visitInvokeDynamicInsn(
-                    node.lambda.name,
-                    if (static) "()L${node.type.className};" else "(L${declName};)L${node.type.className};",
-                    Handle(
-                        H_INVOKESTATIC,
-                        "java/lang/invoke/LambdaMetafactory",
-                        "metafactory",
-                        "(Ljava/lang/invoke/MethodHandles\$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;",
-                        false
-                    ),
-                    Type.getType(desc),
-                    Handle(
-                        if (static) H_INVOKESTATIC else H_INVOKEVIRTUAL,
-                        declName,
-                        name,
-                        desc,
-                        declaringClass!!.isInterface
-                    ),
-                    Type.getType(desc)
-                )
+                    visitInvokeDynamicInsn(
+                        node.lambda.name,
+                        "(L${declName};)L${node.type.className};",
+                        Handle(
+                            H_INVOKESTATIC,
+                            "java/lang/invoke/LambdaMetafactory",
+                            "metafactory",
+                            "(Ljava/lang/invoke/MethodHandles\$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;",
+                            false
+                        ),
+                        Type.getType(node.lambda.desc),
+                        Handle(
+                            H_INVOKEVIRTUAL,
+                            declName,
+                            name,
+                            desc,
+                            declaringClass!!.isInterface
+                        ),
+                        Type.getType(desc),
+                    )
+                }
             }
         }
         return Variable.tmp(node, node.type)

@@ -1,0 +1,352 @@
+(use-ctx pht
+	(progn
+		(cls [] TestA [^java.lang.Object]
+			(@static
+				(defn [] foo ^void []
+					(unit))))
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(mcall
+						(rfn ^java.lang.Runnable
+							^TestA
+							foo)
+						run))))
+		(cls [] TestB [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] foo ^void []
+				(unit)))
+		(cls [] Test1 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(mcall
+						(rfn ^java.lang.Runnable
+							(new ^TestB)
+							foo)
+						run))))
+		(cls [] TestC [^java.lang.Object]
+			(@static
+				(defn [] foo ^void [[_ ^java.lang.String]]
+					(unit))))
+		(cls [] Test2 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(mcall
+						(rfn ^java.util.function.Consumer<^java.lang.Object>
+							^TestC
+							foo)
+						accept
+						"Foo Static!"))))
+		(cls [] TestD [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] foo ^void [[_ ^java.lang.String]]
+				(unit)))
+		(cls [] Test3 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(mcall
+						(rfn ^java.util.function.Consumer<^java.lang.Object>
+							(new ^TestD)
+							foo)
+						accept
+						"Foo!"))))
+		(cls [] TestE [^java.lang.Object]
+			(@static
+				(defn [] foo ^java.lang.String []
+					"Foo Static Supply!")))
+		(cls [] Test4 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(rfn ^java.util.function.Supplier<^java.lang.Object>
+								^TestE
+								foo)
+							get)))))
+		(cls [] TestF [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] foo ^java.lang.String []
+				"Foo Supply!"))
+		(cls [] Test5 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(rfn ^java.util.function.Supplier<^java.lang.Object>
+								(new ^TestF)
+								foo)
+							get)))))
+		(cls [] TestG [^java.lang.Object]
+			(@static
+				(defn [] foo ^java.lang.String [[o ^java.lang.String]]
+					o)))
+		(cls [] Test6 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(rfn ^java.util.function.Function<^java.lang.Object, ^java.lang.Object>
+								^TestG
+								foo)
+							apply
+							"Foo Static Function!")))))
+		(cls [] TestH [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] foo ^java.lang.String [[o ^java.lang.String]]
+				o))
+		(cls [] Test7 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(rfn ^java.util.function.Function<^java.lang.Object, ^java.lang.Object>
+								(new ^TestH)
+								foo)
+							apply
+							"Foo Function!")))))))(use-ctx pht
+	(progn
+		(cls [] TestA [^java.lang.Object]
+			(@static
+				(defn [] foo ^void []
+					(unit))))
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(mcall
+						(rfn ^java.lang.Runnable
+							^TestA
+							foo)
+						run))))
+		(cls [] TestB [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] foo ^void []
+				(unit)))
+		(cls [] Test1 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(mcall
+						(rfn ^java.lang.Runnable
+							(new ^TestB)
+							foo)
+						run))))
+		(cls [] TestC [^java.lang.Object]
+			(@static
+				(defn [] foo ^void [[_ ^java.lang.String]]
+					(unit))))
+		(cls [] Test2 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(mcall
+						(rfn ^java.util.function.Consumer<^java.lang.Object>
+							^TestC
+							foo)
+						accept
+						"Foo Static!"))))
+		(cls [] TestD [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] foo ^void [[_ ^java.lang.String]]
+				(unit)))
+		(cls [] Test3 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(mcall
+						(rfn ^java.util.function.Consumer<^java.lang.Object>
+							(new ^TestD)
+							foo)
+						accept
+						"Foo!"))))
+		(cls [] TestE [^java.lang.Object]
+			(@static
+				(defn [] foo ^java.lang.String []
+					"Foo Static Supply!")))
+		(cls [] Test4 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(rfn ^java.util.function.Supplier<^java.lang.Object>
+								^TestE
+								foo)
+							get)))))
+		(cls [] TestF [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] foo ^java.lang.String []
+				"Foo Supply!"))
+		(cls [] Test5 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(rfn ^java.util.function.Supplier<^java.lang.Object>
+								(new ^TestF)
+								foo)
+							get)))))
+		(cls [] TestG [^java.lang.Object]
+			(@static
+				(defn [] foo ^java.lang.String [[o ^java.lang.String]]
+					o)))
+		(cls [] Test6 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(rfn ^java.util.function.Function<^java.lang.Object, ^java.lang.Object>
+								^TestG
+								foo)
+							apply
+							"Foo Static Function!")))))
+		(cls [] TestH [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] foo ^java.lang.String [[o ^java.lang.String]]
+				o))
+		(cls [] Test7 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(rfn ^java.util.function.Function<^java.lang.Object, ^java.lang.Object>
+								(new ^TestH)
+								foo)
+							apply
+							"Foo Function!")))))))(use-ctx pht
+	(progn
+		(cls [] TestA [^java.lang.Object]
+			(@static
+				(defn [] foo ^void []
+					(unit))))
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(mcall
+						(rfn ^java.lang.Runnable
+							^TestA
+							foo)
+						run))))
+		(cls [] TestB [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] foo ^void []
+				(unit)))
+		(cls [] Test1 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(mcall
+						(rfn ^java.lang.Runnable
+							(new ^TestB)
+							foo)
+						run))))
+		(cls [] TestC [^java.lang.Object]
+			(@static
+				(defn [] foo ^void [[_ ^java.lang.String]]
+					(unit))))
+		(cls [] Test2 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(mcall
+						(rfn ^java.util.function.Consumer<^java.lang.Object>
+							^TestC
+							foo)
+						accept
+						"Foo Static!"))))
+		(cls [] TestD [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] foo ^void [[_ ^java.lang.String]]
+				(unit)))
+		(cls [] Test3 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(mcall
+						(rfn ^java.util.function.Consumer<^java.lang.Object>
+							(new ^TestD)
+							foo)
+						accept
+						"Foo!"))))
+		(cls [] TestE [^java.lang.Object]
+			(@static
+				(defn [] foo ^java.lang.String []
+					"Foo Static Supply!")))
+		(cls [] Test4 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(rfn ^java.util.function.Supplier<^java.lang.Object>
+								^TestE
+								foo)
+							get)))))
+		(cls [] TestF [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] foo ^java.lang.String []
+				"Foo Supply!"))
+		(cls [] Test5 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(rfn ^java.util.function.Supplier<^java.lang.Object>
+								(new ^TestF)
+								foo)
+							get)))))
+		(cls [] TestG [^java.lang.Object]
+			(@static
+				(defn [] foo ^java.lang.String [[o ^java.lang.String]]
+					o)))
+		(cls [] Test6 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(rfn ^java.util.function.Function<^java.lang.Object, ^java.lang.Object>
+								^TestG
+								foo)
+							apply
+							"Foo Static Function!")))))
+		(cls [] TestH [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] foo ^java.lang.String [[o ^java.lang.String]]
+				o))
+		(cls [] Test7 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(rfn ^java.util.function.Function<^java.lang.Object, ^java.lang.Object>
+								(new ^TestH)
+								foo)
+							apply
+							"Foo Function!")))))))

@@ -1,0 +1,42 @@
+(progn
+    (import java
+        (types java.lang.Runnable)
+        (types java.util.function.Consumer)
+        (types java.util.function.Supplier)
+        (types java.util.function.Function))
+
+    (cls TestA [^Object] (@static
+        (defn foo ^void [] (unit))))
+    (test-fn 0 (#run (rfn ^Runnable ^TestA foo)))
+
+    (cls TestB [^Object]
+        (ctor [] (ccall))
+        (defn foo ^void [] (unit)))
+    (test-fn 1 (#run (rfn ^Runnable (new ^TestB) foo)))
+
+    (cls TestC [^Object] (@static
+        (defn foo ^void [[_ ^String]] (unit))))
+    (test-fn 2 (#accept (rfn ^Consumer ^TestC foo) "Foo Static!"))
+
+    (cls TestD [^Object]
+        (ctor [] (ccall))
+        (defn foo ^void [[_ ^String]] (unit)))
+    (test-fn 3 (#accept (rfn ^Consumer (new ^TestD) foo) "Foo!"))
+
+    (cls TestE [^Object] (@static
+        (defn foo ^String [] "Foo Static Supply!")))
+    (test-fn 4 (#get (rfn ^Supplier ^TestE foo)))
+
+    (cls TestF [^Object]
+        (ctor [] (ccall))
+        (defn foo ^String [] "Foo Supply!"))
+    (test-fn 5 (#get (rfn ^Supplier (new ^TestF) foo)))
+
+    (cls TestG [^Object] (@static
+        (defn foo ^String [[o ^String]] o)))
+    (test-fn 6 (#apply (rfn ^Function ^TestG foo) "Foo Static Function!"))
+
+    (cls TestH [^Object]
+        (ctor [] (ccall))
+        (defn foo ^String [[o ^String]] o))
+    (test-fn 7 (#apply (rfn ^Function (new ^TestH) foo) "Foo Function!")))
