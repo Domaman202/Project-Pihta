@@ -4,6 +4,7 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        System.out.println((Runnable) Test::foo);
+        Runnable lambda = Test::foo;
+        System.out.println(lambda);
     }
 }

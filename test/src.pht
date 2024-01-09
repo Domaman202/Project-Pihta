@@ -4,4 +4,4 @@
     (cls Test [^Object] (@static
         (defn foo ^void [] (println "Foo!"))))
     (app-fn
-        (println (rfn ^Runnable ^Test foo))))
+        (#run (rfn ^Runnable ^Test foo))))

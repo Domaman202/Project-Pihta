@@ -6,4 +6,10 @@ import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 
-class NodeRFn(info: INodeInfo, val type: VirtualType, val instance: Node, val method: VirtualMethod) : Node(info)
+class NodeRFn(
+    info: INodeInfo,
+    val type: VirtualType,
+    val lambda: VirtualMethod,
+    val instance: Node,
+    val method: VirtualMethod
+) : Node(info)

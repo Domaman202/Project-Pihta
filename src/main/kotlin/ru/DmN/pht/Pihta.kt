@@ -140,6 +140,7 @@ object Pihta : Module("pht") {
         addSNP(RANGE)
         addSNP(REM)
         addSNP(RET)
+        addSNP(RFN)
         addSNP(ROLL_LEFT)
         addSNP(ROLL_RIGHT)
         // s

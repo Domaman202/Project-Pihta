@@ -28,7 +28,7 @@ object NRRFn : INodeProcessor<NodeNodesList> {
             if (instance.isConstClass)
                 findMethod(processor.computeType(instance, ctx), name, lambda, true)
             else findMethod(processor.calc(instance, ctx)!!, name, lambda, false)
-        return NodeRFn(node.info.withType(NodeTypes.RFN_), type, instance, method)
+        return NodeRFn(node.info.withType(NodeTypes.RFN_), type, lambda, instance, method)
     }
 
     private fun findMethod(instance: VirtualType, name: String, lambda: VirtualMethod, static: Boolean): VirtualMethod =
