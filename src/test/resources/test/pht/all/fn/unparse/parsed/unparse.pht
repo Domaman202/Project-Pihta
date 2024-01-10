@@ -1,0 +1,401 @@
+(use-ctx pht
+	(progn
+		(cls [] TestA [^java.lang.Object]
+			(@static
+				(defn [] test ^void [[o ^java.lang.Runnable]]
+					(mcall
+						o
+						run))
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(mcall
+								^TestA
+								test
+								(fn ^java.lang.Runnable [][]
+									(unit))))))))
+		(cls [] TestB [^java.lang.Object]
+			(@static
+				(defn [] test ^void [[o ^java.lang.Runnable]]
+					(mcall
+						o
+						run))
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(mcall
+								^TestB
+								test
+								(fn ^java.lang.Runnable [][]
+									(unit))))))))
+		(cls [] TestC [^java.lang.Object]
+			(@static
+				(defn [] test ^void [[o ^java.lang.Runnable]]
+					(mcall
+						o
+						run))
+				(cls [] Test2 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(def [
+								[^int i 12]
+								[^int j 21]])
+							(mcall
+								^TestC
+								test
+								(fn ^java.lang.Runnable [i j][]
+									(unit))))))))
+		(cls [] TestD [^java.lang.Object]
+			(@static
+				(defn [] test ^java.lang.String [[o ^java.util.function.Supplier]]
+					(as ^java.lang.String
+						(mcall
+							o
+							get)))
+				(cls [] Test3 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									^TestD
+									test
+									(fn ^java.util.function.Supplier [][]
+										"Foo D!"))))))))
+		(cls [] TestE [^java.lang.Object]
+			(@static
+				(defn [] test ^java.lang.String [[o ^java.util.function.Supplier]]
+					(as ^java.lang.String
+						(mcall
+							o
+							get)))
+				(cls [] Test4 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									^TestE
+									test
+									(fn ^java.util.function.Supplier [][]
+										"Foo E!"))))))))
+		(cls [] TestF [^java.lang.Object]
+			(@static
+				(defn [] test ^java.lang.Object [[o ^java.util.function.Supplier]]
+					(mcall
+						o
+						get))
+				(cls [] Test5 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(def [
+								[^int i 12]
+								[^int j 21]])
+							(as ^dynamic
+								(mcall
+									^TestF
+									test
+									(fn ^java.util.function.Supplier [i j][]
+										(as ^java.lang.Object
+											(add
+												i
+												j))))))))))))(use-ctx pht
+	(progn
+		(cls [] TestA [^java.lang.Object]
+			(@static
+				(defn [] test ^void [[o ^java.lang.Runnable]]
+					(mcall
+						o
+						run))
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(mcall
+								^TestA
+								test
+								(fn ^java.lang.Runnable [][]
+									(unit))))))))
+		(cls [] TestB [^java.lang.Object]
+			(@static
+				(defn [] test ^void [[o ^java.lang.Runnable]]
+					(mcall
+						o
+						run))
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(mcall
+								^TestB
+								test
+								(fn ^java.lang.Runnable [][]
+									(unit))))))))
+		(cls [] TestC [^java.lang.Object]
+			(@static
+				(defn [] test ^void [[o ^java.lang.Runnable]]
+					(mcall
+						o
+						run))
+				(cls [] Test2 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(def [
+								[^int i 12]
+								[^int j 21]])
+							(mcall
+								^TestC
+								test
+								(fn ^java.lang.Runnable [i j][]
+									(unit))))))))
+		(cls [] TestD [^java.lang.Object]
+			(@static
+				(defn [] test ^java.lang.String [[o ^java.util.function.Supplier]]
+					(as ^java.lang.String
+						(mcall
+							o
+							get)))
+				(cls [] Test3 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									^TestD
+									test
+									(fn ^java.util.function.Supplier [][]
+										"Foo D!"))))))))
+		(cls [] TestE [^java.lang.Object]
+			(@static
+				(defn [] test ^java.lang.String [[o ^java.util.function.Supplier]]
+					(as ^java.lang.String
+						(mcall
+							o
+							get)))
+				(cls [] Test4 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									^TestE
+									test
+									(fn ^java.util.function.Supplier [][]
+										"Foo E!"))))))))
+		(cls [] TestF [^java.lang.Object]
+			(@static
+				(defn [] test ^java.lang.Object [[o ^java.util.function.Supplier]]
+					(mcall
+						o
+						get))
+				(cls [] Test5 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(def [
+								[^int i 12]
+								[^int j 21]])
+							(as ^dynamic
+								(mcall
+									^TestF
+									test
+									(fn ^java.util.function.Supplier [i j][]
+										(as ^java.lang.Object
+											(add
+												i
+												j))))))))))))(use-ctx pht
+	(progn
+		(import
+			(types java.lang.Runnable)
+			(types java.util.function.Supplier)
+		(cls
+			TestA
+			[
+				^Object
+			]
+			(@static
+				(defn
+					test
+					^void
+					[
+						[
+							o
+							^Runnable
+						]
+					]
+					(mcall
+						o
+						run))
+				(test-fn
+					0
+					(mcall
+						^TestA
+						test
+						(fn
+							^Runnable
+							[]
+							[]
+							(unit))))))
+		(cls
+			TestB
+			[
+				^Object
+			]
+			(@static
+				(defn
+					test
+					^void
+					[
+						[
+							o
+							^Runnable
+						]
+					]
+					(mcall
+						o
+						run))
+				(test-fn
+					1
+					(mcall
+						^TestB
+						test
+						(fn
+							[]
+							[]
+							(unit))))))
+		(cls
+			TestC
+			[
+				^Object
+			]
+			(@static
+				(defn
+					test
+					^void
+					[
+						[
+							o
+							^Runnable
+						]
+					]
+					(mcall
+						o
+						run))
+				(test-fn
+					2
+					(def
+						[
+							[
+								i
+								12
+							]
+							[
+								j
+								21
+							]
+						])
+					(mcall
+						^TestC
+						test
+						(fn
+							^Runnable
+							[
+								i
+								j
+							]
+							[]
+							(unit))))))
+		(cls
+			TestD
+			[
+				^Object
+			]
+			(@static
+				(defn
+					test
+					^String
+					[
+						[
+							o
+							^Supplier
+						]
+					]
+					(mcall
+						o
+						get))
+				(test-fn
+					3
+					(mcall
+						^TestD
+						test
+						(fn
+							^Supplier
+							[]
+							[]
+							"Foo D!")))))
+		(cls
+			TestE
+			[
+				^Object
+			]
+			(@static
+				(defn
+					test
+					^String
+					[
+						[
+							o
+							^Supplier
+						]
+					]
+					(mcall
+						o
+						get))
+				(test-fn
+					4
+					(mcall
+						^TestE
+						test
+						(fn
+							[]
+							[]
+							"Foo E!")))))
+		(cls
+			TestF
+			[
+				^Object
+			]
+			(@static
+				(defn
+					test
+					^Object
+					[
+						[
+							o
+							^Supplier
+						]
+					]
+					(mcall
+						o
+						get))
+				(test-fn
+					5
+					(def
+						[
+							[
+								i
+								12
+							]
+							[
+								j
+								21
+							]
+						])
+					(mcall
+						^TestF
+						test
+						(fn
+							^Supplier
+							[
+								i
+								j
+							]
+							[]
+							(as
+								^Any
+								(add
+									i
+									j)))))))))

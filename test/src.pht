@@ -1,10 +1,6 @@
-(progn
-    (import java
-        (types java.util.function.Function))
-    (cls Provider [^Object] (@static
-        (defn foo ^String [[o ^String]] o)))
-    (cls Consumer [^Object] (@static
-        (defn test ^void [[f ^Function]]
-            (println (#apply f "Слава России!")))))
+(cls TestF [^Object] (@static
+    (defn test ^Object [[o ^java.util.function.Supplier]]
+        (#get o))
     (app-fn
-        (#test ^Consumer (rfn . ^Provider foo))))
+        (def [[i 12] [j 21]])
+        (println (#test ^TestF (fn ^java.util.function.Supplier [i j][] (as ^Object (+ i j))))))))

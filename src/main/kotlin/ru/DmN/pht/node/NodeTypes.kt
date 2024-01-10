@@ -55,7 +55,7 @@ enum class NodeTypes : INodeType {
     FGET_("fget", PROCESSED),
     FLD("fld", PARSED),
     FLD_("fld", PROCESSED),
-    FN_("!fn", PROCESSED),
+    FN_("fn", PROCESSED),
     FOR("for", PARSED),
     FSET_("fset", PROCESSED),
     // g

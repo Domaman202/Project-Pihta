@@ -1,0 +1,42 @@
+(progn
+    (import java
+        (types java.lang.Runnable)
+        (types java.util.function.Supplier))
+
+    (cls TestA [^Object] (@static
+        (defn test ^void [[o ^Runnable]]
+            (#run o))
+        (test-fn 0
+            (#test ^TestA (fn ^Runnable [][] (unit))))))
+
+    (cls TestB [^Object] (@static
+        (defn test ^void [[o ^Runnable]]
+            (#run o))
+        (test-fn 1
+            (#test ^TestB (fn [][] (unit))))))
+
+    (cls TestC [^Object] (@static
+        (defn test ^void [[o ^Runnable]]
+            (#run o))
+        (test-fn 2
+            (def [[i 12] [j 21]])
+            (#test ^TestC (fn ^Runnable [i j][] (unit))))))
+
+    (cls TestD [^Object] (@static
+        (defn test ^String [[o ^Supplier]]
+            (#get o))
+        (test-fn 3
+            (#test ^TestD (fn ^Supplier [][] "Foo D!")))))
+
+    (cls TestE [^Object] (@static
+        (defn test ^String [[o ^Supplier]]
+            (#get o))
+        (test-fn 4
+            (#test ^TestE (fn [][] "Foo E!")))))
+
+    (cls TestF [^Object] (@static
+        (defn test ^Object [[o ^Supplier]]
+            (#get o))
+        (test-fn 5
+            (def [[i 12] [j 21]])
+            (#test ^TestF (fn ^Supplier [i j][] (as ^Any (+ i j))))))))

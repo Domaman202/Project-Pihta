@@ -304,7 +304,7 @@ object Pihta : Module("pht") {
         addSNU(FLD)
         add(FLD_,           NUFld)
         addSNU(FN)
-        // FN_
+        add(FN_,            NUFn)
         addSNU(FOR)
         addSNU(FSET_A)
         add(FSET_B,         NUFSetA)

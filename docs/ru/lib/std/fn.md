@@ -22,8 +22,8 @@
     (app
         (defn test ^void [[o ^Runnable]]
             (#run o))
-        (defn main ^void [] (progn
-            (#test ^App (fn ^Runnable [][] (println "Арен брат, с днюхой!")))))))
+        (app-fn
+            (#test ^App (fn ^Runnable [][] (println "Арен брат, с днюхой!"))))))
 ```
 
 ```pihta
@@ -33,8 +33,8 @@
     (app
         (defn test ^void [[o ^Runnable]]
             (#run o))
-        (defn main ^void [] (progn
-            (#test ^App (fn [][] (println "Арен брат, с днюхой!")))))))
+        (app-fn
+            (#test ^App (fn [][] (println "Арен брат, с днюхой!"))))))
 ```
 
 ```pihta
@@ -44,9 +44,9 @@
     (app
         (defn test ^void [[o ^Runnable]]
             (#run o))
-        (defn main ^void [] (progn
+        (app-fn
             (def [[i 12] [j 21]])
-            (#test ^App (fn ^Runnable [i j][] (println (+ i j))))))))
+            (#test ^App (fn ^Runnable [i j][] (println (+ i j)))))))
 ```
 
 ```pihta
@@ -57,8 +57,8 @@
         (defn test ^void [[o ^Runnable]]
             (#run o))
         (fld [[i ^int] [j ^int]])
-        (defn main ^void [] (progn
+        (app-fn
             (set i 12)
             (set j 21)
-            (#test ^App (fn [i j][] (println (+ i j))))))))
+            (#test ^App (fn [i j][] (println (+ i j)))))))
 ```

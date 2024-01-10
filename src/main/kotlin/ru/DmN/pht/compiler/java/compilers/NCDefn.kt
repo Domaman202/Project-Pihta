@@ -11,6 +11,7 @@ import ru.DmN.pht.std.compiler.java.utils.clazz
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.with
 import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.CompilingStage
@@ -84,7 +85,7 @@ object NCDefn : INodeCompiler<NodeDefn> {
         return seq
     }
 
-    fun MethodNode.visit(node: NodeNodesList, method: VirtualMethod, compiler: Compiler, ctx: CompilationContext) {
+    fun MethodNode.visit(node: INodesList, method: VirtualMethod, compiler: Compiler, ctx: CompilationContext) {
         val start = Label()
         visitLabel(start)
         val body = BodyContext.of(start, method)
