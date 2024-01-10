@@ -100,7 +100,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         processor.computeList(list, ctx)
             .stream()
             .map { it -> processor.computeList(it, ctx).map { processor.computeString(it, ctx) } }
-            .forEach { it ->
+            .forEach {
                 argsn += it.first()
                 val type = it.last()
                 if (type.endsWith('^')) {
@@ -108,7 +108,8 @@ object NRDefn : INodeProcessor<NodeNodesList> {
                     argsc += generics[generic]!!
                     argsg += generic
                 } else {
-                    argsc += gctx.getType(type, processor.tp)
+//                    argsc += gctx.getType(type, processor.tp)
+                    argsc += NRValue.computeType(type, processor, ctx)
                     argsg += null
                 }
             }

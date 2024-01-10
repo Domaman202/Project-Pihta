@@ -35,7 +35,7 @@
 			(@static
 				(defn [] test ^dynamic []
 					(mcall
-						(rfn ^java.util.function.Consumer<^java.lang.Object>
+						(rfn ^java.util.function.Consumer
 							^TestC
 							foo)
 						accept
@@ -51,7 +51,7 @@
 			(@static
 				(defn [] test ^dynamic []
 					(mcall
-						(rfn ^java.util.function.Consumer<^java.lang.Object>
+						(rfn ^java.util.function.Consumer
 							(new ^TestD)
 							foo)
 						accept
@@ -65,7 +65,7 @@
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mcall
-							(rfn ^java.util.function.Supplier<^java.lang.Object>
+							(rfn ^java.util.function.Supplier
 								^TestE
 								foo)
 							get)))))
@@ -81,7 +81,7 @@
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mcall
-							(rfn ^java.util.function.Supplier<^java.lang.Object>
+							(rfn ^java.util.function.Supplier
 								(new ^TestF)
 								foo)
 							get)))))
@@ -94,7 +94,7 @@
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mcall
-							(rfn ^java.util.function.Function<^java.lang.Object, ^java.lang.Object>
+							(rfn ^java.util.function.Function
 								^TestG
 								foo)
 							apply
@@ -111,11 +111,32 @@
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mcall
-							(rfn ^java.util.function.Function<^java.lang.Object, ^java.lang.Object>
+							(rfn ^java.util.function.Function
 								(new ^TestH)
 								foo)
 							apply
-							"Foo Function!")))))))(use-ctx pht
+							"Foo Function!")))))
+		(cls [] TestI [^java.lang.Object]
+			(@static
+				(defn [] foo ^java.lang.String []
+					"Foo AutoType!")))
+		(cls [] TestJ [^java.lang.Object]
+			(@static
+				(defn [] test ^java.lang.String [[f ^java.util.function.Supplier]]
+					(as ^java.lang.String
+						(mcall
+							f
+							get)))))
+		(cls [] Test8 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							^TestJ
+							test
+							(rfn ^java.util.function.Supplier
+								^TestI
+								foo))))))))(use-ctx pht
 	(progn
 		(cls [] TestA [^java.lang.Object]
 			(@static
@@ -152,7 +173,7 @@
 			(@static
 				(defn [] test ^dynamic []
 					(mcall
-						(rfn ^java.util.function.Consumer<^java.lang.Object>
+						(rfn ^java.util.function.Consumer
 							^TestC
 							foo)
 						accept
@@ -168,7 +189,7 @@
 			(@static
 				(defn [] test ^dynamic []
 					(mcall
-						(rfn ^java.util.function.Consumer<^java.lang.Object>
+						(rfn ^java.util.function.Consumer
 							(new ^TestD)
 							foo)
 						accept
@@ -182,7 +203,7 @@
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mcall
-							(rfn ^java.util.function.Supplier<^java.lang.Object>
+							(rfn ^java.util.function.Supplier
 								^TestE
 								foo)
 							get)))))
@@ -198,7 +219,7 @@
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mcall
-							(rfn ^java.util.function.Supplier<^java.lang.Object>
+							(rfn ^java.util.function.Supplier
 								(new ^TestF)
 								foo)
 							get)))))
@@ -211,7 +232,7 @@
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mcall
-							(rfn ^java.util.function.Function<^java.lang.Object, ^java.lang.Object>
+							(rfn ^java.util.function.Function
 								^TestG
 								foo)
 							apply
@@ -228,11 +249,32 @@
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mcall
-							(rfn ^java.util.function.Function<^java.lang.Object, ^java.lang.Object>
+							(rfn ^java.util.function.Function
 								(new ^TestH)
 								foo)
 							apply
-							"Foo Function!")))))))(use-ctx pht
+							"Foo Function!")))))
+		(cls [] TestI [^java.lang.Object]
+			(@static
+				(defn [] foo ^java.lang.String []
+					"Foo AutoType!")))
+		(cls [] TestJ [^java.lang.Object]
+			(@static
+				(defn [] test ^java.lang.String [[f ^java.util.function.Supplier]]
+					(as ^java.lang.String
+						(mcall
+							f
+							get)))))
+		(cls [] Test8 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							^TestJ
+							test
+							(rfn ^java.util.function.Supplier
+								^TestI
+								foo))))))))(use-ctx pht
 	(progn
 		(import
 			(types java.lang.Runnable)
@@ -426,4 +468,42 @@
 						^TestH)
 					foo)
 				apply
-				"Foo Function!"))))
+				"Foo Function!"))
+		(cls
+			TestI
+			[
+				^Object
+			]
+			(@static
+				(defn
+					foo
+					^String
+					[]
+					"Foo AutoType!")))
+		(cls
+			TestJ
+			[
+				^Object
+			]
+			(@static
+				(defn
+					test
+					^String
+					[
+						[
+							f
+							^Supplier
+						]
+					]
+					(mcall
+						f
+						get))))
+		(test-fn
+			8
+			(mcall
+				^TestJ
+				test
+				(rfn
+					.
+					^TestI
+					foo)))))

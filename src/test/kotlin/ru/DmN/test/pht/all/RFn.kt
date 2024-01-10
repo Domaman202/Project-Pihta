@@ -14,5 +14,6 @@ class RFn : Module("test/pht/all/rfn") {
         assertEquals(test(5), "Foo Supply!")
         assertEquals(test(6), "Foo Static Function!")
         assertEquals(test(7), "Foo Function!")
+        assertEquals(test(8), "Foo AutoType!")
     }
 }

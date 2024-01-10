@@ -39,4 +39,11 @@
     (cls TestH [^Object]
         (ctor [] (ccall))
         (defn foo ^String [[o ^String]] o))
-    (test-fn 7 (#apply (rfn ^Function (new ^TestH) foo) "Foo Function!")))
+    (test-fn 7 (#apply (rfn ^Function (new ^TestH) foo) "Foo Function!"))
+
+    (cls TestI [^Object] (@static
+        (defn foo ^String [] "Foo AutoType!")))
+    (cls TestJ [^Object] (@static
+        (defn test ^String [[f ^Supplier]]
+            (#get f))))
+    (test-fn 8 (#test ^TestJ (rfn . ^TestI foo))))

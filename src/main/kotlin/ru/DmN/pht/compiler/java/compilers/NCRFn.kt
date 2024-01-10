@@ -15,12 +15,12 @@ import ru.DmN.siberia.utils.Variable
 object NCRFn : INodeCompiler<NodeRFn> {
     override fun compileVal(node: NodeRFn, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.apply {
-            node.method.run {
+            node.method!!.run {
                 val declName = declaringClass!!.className
                 if (modifiers.static) {
                     visitInvokeDynamicInsn(
-                        node.lambda.name,
-                        "()L${node.type.className};",
+                        node.lambda!!.name,
+                        "()L${node.type!!.className};",
                         Handle(
                             H_INVOKESTATIC,
                             "java/lang/invoke/LambdaMetafactory",
@@ -28,7 +28,7 @@ object NCRFn : INodeCompiler<NodeRFn> {
                             "(Ljava/lang/invoke/MethodHandles\$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;",
                             false
                         ),
-                        Type.getType(node.lambda.desc),
+                        Type.getType(node.lambda!!.desc),
                         Handle(
                             H_INVOKESTATIC,
                             declName,
@@ -41,8 +41,8 @@ object NCRFn : INodeCompiler<NodeRFn> {
                 } else {
                     load(compiler.compileVal(node.instance, ctx), this@apply)
                     visitInvokeDynamicInsn(
-                        node.lambda.name,
-                        "(L${declName};)L${node.type.className};",
+                        node.lambda!!.name,
+                        "(L${declName};)L${node.type!!.className};",
                         Handle(
                             H_INVOKESTATIC,
                             "java/lang/invoke/LambdaMetafactory",
@@ -50,7 +50,7 @@ object NCRFn : INodeCompiler<NodeRFn> {
                             "(Ljava/lang/invoke/MethodHandles\$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;",
                             false
                         ),
-                        Type.getType(node.lambda.desc),
+                        Type.getType(node.lambda!!.desc),
                         Handle(
                             H_INVOKEVIRTUAL,
                             declName,

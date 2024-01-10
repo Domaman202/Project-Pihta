@@ -8,8 +8,12 @@ import ru.DmN.siberia.utils.VirtualType
 
 class NodeRFn(
     info: INodeInfo,
-    val type: VirtualType,
-    val lambda: VirtualMethod,
+    var type: VirtualType?,
+    var lambda: VirtualMethod?,
     val instance: Node,
-    val method: VirtualMethod
-) : Node(info)
+    val name: String,
+    var method: VirtualMethod?
+) : Node(info) {
+    override fun copy(): NodeRFn =
+        NodeRFn(info, type, lambda, instance, name, method)
+}

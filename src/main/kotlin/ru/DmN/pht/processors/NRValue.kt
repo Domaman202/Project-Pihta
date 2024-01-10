@@ -40,15 +40,18 @@ object NRValue : IStdNodeProcessor<NodeValue> {
     override fun computeString(node: NodeValue, processor: Processor, ctx: ProcessingContext): String =
         node.getString()
 
-    override fun computeType(node: NodeValue, processor: Processor, ctx: ProcessingContext): VirtualType {
-        val gs = node.value.indexOf('<')
+    override fun computeType(node: NodeValue, processor: Processor, ctx: ProcessingContext): VirtualType =
+        computeType(node.value, processor, ctx)
+
+    fun computeType(value: String, processor: Processor, ctx: ProcessingContext): VirtualType {
+        val gs = value.indexOf('<')
         if (gs == -1)
-            return ctx.global.getType(node.value, processor.tp)
+            return ctx.global.getType(value, processor.tp)
         val gctx = ctx.global
-        val type = gctx.getType(node.value.substring(0, gs), processor.tp)
+        val type = gctx.getType(value.substring(0, gs), processor.tp)
         val iter = type.generics.keys.iterator()
         val generics = HashMap<String, OrPair<VirtualType, String>>()
-        var s = node.value.substring(gs)
+        var s = value.substring(gs)
         while (true) {
             val i = s.indexOf(',')
             generics[iter.next()] =
