@@ -40,7 +40,7 @@ val VirtualType.nameWithGenerics: String
     }
 
 val VirtualType.nameWithGens: String
-    get() = if (this is VTWG) this.nameWithGens else this.nameWithGenerics
+    get() = if (this is VTWG) this.nameWithGens else "^${this.name}"
 
 val VTWG.nameWithGens: String
     get() {
@@ -51,7 +51,7 @@ val VTWG.nameWithGens: String
         val sb = StringBuilder()
         gens.values.forEachIndexed { i, it ->
             if (it.isFirst)
-                sb.append('^').append(it.first())
+                sb.append(it.first().nameWithGens)
             else sb.append(it.second()).append('^')
             if (i != gens.size - 1) {
                 sb.append(", ")
@@ -233,3 +233,14 @@ fun lenArgs(src: VirtualType?, dist: VirtualType): Int =
             dist.toPrimitive()
                 ?.let { lenArgs(src, VirtualType.ofKlass(it)).let { i -> if (i == -1) return -1 else i } + 1 }
                 ?: lenArgs(VirtualType.ofKlass(src.ofPrimitive()), dist)
+
+fun lenArgsB(src: VirtualType, dist: VirtualType): Int = // todo: я хз что я сделал, но думаю оно недоработано
+    if (dist.isPrimitive == src.isPrimitive)
+        if (dist.isPrimitive)
+            if (src == dist) 0
+            else 1
+        else if (src.isAssignableFrom(dist) || dist.isAssignableFrom(src))
+            if (src == dist) 0
+            else lenArgs(src.superclass, dist) + 1
+        else -1
+    else -1

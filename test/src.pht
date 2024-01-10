@@ -1,12 +1,10 @@
 (progn
-    (cls TestD [^Object]
-        (ctor [] (ccall))
-        (defn getD ^int [] 12))
-    (cls TestE [^Object]
-        (ctor [] (ccall))
-        (defn getE ^int [] 21))
+    (import java
+        (types java.util.function.Function))
+    (cls Provider [^Object] (@static
+        (defn foo ^String [[o ^String]] o)))
+    (cls Consumer [^Object] (@static
+        (defn test ^void [[f ^Function]]
+            (println (#apply f "Слава России!")))))
     (app-fn
-        (def [
-            [o (new ^TestD)]
-            [o (new ^TestE)]])
-        (println (+ (#getD o) (#getE o)))))
+        (#test ^Consumer (rfn . ^Provider foo))))
