@@ -72,13 +72,8 @@ class GlobalContext(
             return tp.typeOf(name)
         tp.typeOfOrNull(name)?.let { return it }
         aliases[name]?.let { return tp.typeOf(it) }
-        return getTypeWithImport(name, tp, 0)
-    }
-
-    private fun getTypeWithImport(name: String, tp: TypesProvider, i: Int): VirtualType {
-        if (imports.size == i)
-            throw ClassNotFoundException(name)
-        tp.typeOfOrNull("${imports[i]}.$name")?.let { return it }
-        return getTypeWithImport(name, tp, i + 1)
+        for (i in imports.indices)
+            tp.typeOfOrNull("${imports[i]}.$name")?.let { return it }
+        throw ClassNotFoundException(name)
     }
 }
