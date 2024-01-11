@@ -12,11 +12,4 @@
 			(@static
 				(defn [] test ^dynamic []
 					(as ^dynamic
-						^ITest))))))(use-ctx pht
-	(progn
-		(itf
-			ITest
-			[])
-		(test-fn
-			0
-			^ITest)))
+						^ITest))))))

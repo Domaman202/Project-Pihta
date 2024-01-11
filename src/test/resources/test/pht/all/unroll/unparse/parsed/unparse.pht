@@ -44,29 +44,4 @@
 									1
 									1)
 								2)
-							2)))))))(use-ctx pht
-	(progn
-		(test-fn
-			0
-			(as
-				^dynamic
-				(roll-right
-					1
-					(add
-						1)
-					(mul
-						2)
-					(mul
-						2))))
-		(test-fn
-			1
-			(as
-				^dynamic
-				(roll-left
-					1
-					(add
-						1)
-					(mul
-						2)
-					(mul
-						2))))))
+							2)))))))

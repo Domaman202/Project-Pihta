@@ -32,21 +32,4 @@
 							i))
 					(inc i))
 				(as ^dynamic
-					(get j))))))(use-ctx pht
-	(cls [] Test0 [^java.lang.Object]
-		(@static
-			(defn [] test ^dynamic []
-				(def [
-					[^int i 0]
-					[^int j 0]])
-				(cycle
-					(less
-						i
-						10)
-					(set! j
-						(add
-							j
-							i))
-					(inc i))
-				(as ^dynamic
 					(get j))))))

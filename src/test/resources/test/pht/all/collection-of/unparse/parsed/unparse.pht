@@ -118,23 +118,4 @@
 										1
 										"России")
 									pht$tmp$56200))
-							toList)))))))(use-ctx pht
-	(progn
-		(test-fn
-			0
-			(array-of
-				12
-				21
-				33))
-		(test-fn
-			1
-			(array-of-type
-				^long
-				202
-				203
-				213))
-		(test-fn
-			2
-			(list-of
-				"Слава"
-				"России"))))
+							toList)))))))

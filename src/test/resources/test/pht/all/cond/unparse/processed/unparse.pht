@@ -76,43 +76,4 @@
 				(as ^dynamic
 					(mcall
 						out
-						toString))))))(use-ctx pht
-	(cls [] Test0 [^java.lang.Object]
-		(@static
-			(defn [] test ^dynamic []
-				(def [
-					[^java.lang.StringBuilder out (new ^java.lang.StringBuilder)]
-					[^int i -1]])
-				(cycle
-					(less-or-eq
-						i
-						1)
-					(if
-						(less
-							i
-							0)
-						(mcall
-							out
-							append
-							"М")
-						(if
-							(eq
-								i
-								0)
-							(mcall
-								out
-								append
-								"Р")
-							(if
-								(great
-									i
-									0)
-								(mcall
-									out
-									append
-									"Б"))))
-					(inc i))
-				(as ^dynamic
-					(mcall
-						out
 						toString))))))

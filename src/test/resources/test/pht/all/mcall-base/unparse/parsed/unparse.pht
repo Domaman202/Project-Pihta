@@ -78,46 +78,4 @@
 					(as ^dynamic
 						(mcall
 							(new ^Test)
-							foo)))))))(use-ctx pht
-	(progn
-		(app
-			(defn
-				foo
-				^String
-				[]
-				"Foo!"))
-		(cls
-			Test
-			[
-				^Object
-			]
-			(ctor
-				[]
-				(ccall))
-			(defn
-				foo
-				^String
-				[]
-				"Foo Instance!"))
-		(test-fn
-			0
-			(mcall
-				^App
-				foo))
-		(test-fn
-			1
-			(mcall
-				^App
-				foo))
-		(test-fn
-			2
-			(mcall
-				(new
-					^Test)
-				foo))
-		(test-fn
-			3
-			(mcall
-				(new
-					^Test)
-				foo))))
+							foo)))))))

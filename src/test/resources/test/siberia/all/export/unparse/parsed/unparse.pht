@@ -10,8 +10,4 @@
 			(@static
 				(defn [] test ^dynamic []
 					(as ^dynamic
-						"test/siberia/all/export"))))))(use-ctx pht
-	(use-ctx test/siberia/all/export/helper
-		(test-fn
-			0
-			(*module-name*))))
+						"test/siberia/all/export"))))))

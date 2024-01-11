@@ -56,30 +56,4 @@
 			(@static
 				(defn [] test ^dynamic []
 					(as ^dynamic
-						^App))))))(use-ctx pht
-	(use-ctx pht
-		(app
-			(@final
-				(fld
-					[
-						[
-							I
-							^int
-						]
-					]))
-			(defn
-				<clinit>
-				^void
-				[]
-				(fset
-					^App
-					I
-					333)))
-		(test-fn
-			0
-			(fget
-				^App
-				I))
-		(test-fn
-			1
-			^App)))
+						^App))))))

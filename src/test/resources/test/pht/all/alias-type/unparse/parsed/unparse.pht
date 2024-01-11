@@ -20,22 +20,4 @@
 			(@static
 				(defn [] test ^dynamic []
 					(as ^dynamic
-						^java.lang.String))))))(use-ctx pht
-	(progn
-		(alias-type
-			[
-				[
-					Object
-					obj
-				]
-				[
-					String
-					str
-				]
-			])
-		(test-fn
-			0
-			^obj)
-		(test-fn
-			1
-			^str)))
+						^java.lang.String))))))

@@ -9,9 +9,4 @@ import ru.DmN.siberia.utils.VirtualField
 class NodeFSet(info: INodeInfo, nodes: MutableList<Node>, val field: VirtualField) : NodeNodesList(info, nodes) {
     override fun copy(): NodeFSet =
         NodeFSet(info, copyNodes(), field)
-
-    init {
-        if (nodes[0].isConstClass && (nodes[0] as NodeValue).value == "App")
-            println()
-    }
 }

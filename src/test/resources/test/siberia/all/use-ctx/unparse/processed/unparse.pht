@@ -6,8 +6,4 @@
 	(use-ctx pht
 		(cls [] App [^java.lang.Object]
 			(@static
-				(defn [] main ^void [])))))(progn
-	(use-ctx pht
-		(cls [] App [^java.lang.Object]
-			(@static
 				(defn [] main ^void [])))))

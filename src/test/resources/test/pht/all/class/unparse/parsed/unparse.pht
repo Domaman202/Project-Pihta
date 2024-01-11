@@ -12,13 +12,4 @@
 			(@static
 				(defn [] test ^dynamic []
 					(as ^dynamic
-						^Test))))))(use-ctx pht
-	(progn
-		(cls
-			Test
-			[
-				^Object
-			])
-		(test-fn
-			0
-			^Test)))
+						^Test))))))

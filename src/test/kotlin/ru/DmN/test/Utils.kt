@@ -53,8 +53,6 @@ abstract class Module(private val dir: String) {
 
     fun unparse() {
         val tp = TypesProvider.java()
-        module.init = false
-        module.init()
         File("dump/$dir/unparse/parsed").mkdirs()
         FileOutputStream("dump/$dir/unparse/parsed/unparse.pht").use { out ->
             val unparser = Unparser(1024*1024)
@@ -165,4 +163,8 @@ abstract class Module(private val dir: String) {
 
     fun test(id: Int): Any? =
         URLClassLoader(arrayOf(File("dump/$dir").toURL())).loadClass("Test$id").getMethod("test").invoke(null)
+
+    companion object {
+        val UNPARSE = HashMap<Module, Boolean>()
+    }
 }

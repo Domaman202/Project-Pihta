@@ -34,35 +34,4 @@
 							sum
 							1
 							2
-							3)))))))(use-ctx pht
-	(progn
-		(app
-			(defn
-				sum
-				^int
-				[
-					[
-						a
-						^int
-					]
-					[
-						b
-						^int
-					]
-					[
-						c
-						^int
-					]
-				]
-				(add
-					a
-					b
-					c)))
-		(test-fn
-			0
-			(mcall
-				^App
-				sum
-				1
-				2
-				3))))
+							3)))))))

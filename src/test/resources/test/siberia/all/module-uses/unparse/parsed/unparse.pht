@@ -4,5 +4,4 @@
 			(defn [] main ^void []))))(use-ctx pht
 	(cls [] App [^java.lang.Object]
 		(@static
-			(defn [] main ^void []))))(use-ctx pht
-	(app-fn))
+			(defn [] main ^void []))))

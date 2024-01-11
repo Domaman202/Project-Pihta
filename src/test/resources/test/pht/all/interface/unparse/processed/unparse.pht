@@ -12,11 +12,4 @@
 			(@static
 				(defn [] test ^dynamic []
 					(as ^dynamic
-						^ITest))))))(use-ctx pht
-	(progn
-		(itf [] ITest [])
-		(cls [] Test0 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
 						^ITest))))))
