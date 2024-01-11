@@ -27,4 +27,11 @@ class LazyProcessValueList(
             list += get(i)
         return list
     }
+
+    fun drop(offset: Int): MutableList<Node> {
+        val list = ArrayList<Node>()
+        for (i in offset until node.nodes.size)
+            list += node.nodes[i]
+        return list
+    }
 }

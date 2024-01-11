@@ -276,11 +276,11 @@
 								^TestI
 								foo))))))))(use-ctx pht
 	(progn
-		(import
+		(import java
 			(types java.lang.Runnable)
 			(types java.util.function.Consumer)
 			(types java.util.function.Supplier)
-			(types java.util.function.Function)
+			(types java.util.function.Function))
 		(cls
 			TestA
 			[

@@ -53,9 +53,18 @@ inline fun sliceInsert(list: MutableList<Any?>, index: Int, elements: List<Any?>
 inline fun <T : IContextCollection<T>> T.with(ctx: GlobalContext) =
     this.with(ContextKeys.GLOBAL, ctx)
 inline fun <T : IContextCollection<T>> T.with(ctx: EnumContext) =
-    this.with(ContextKeys.ENUM, ctx).apply { this.clazz = ctx.type; this.classes = LinkedClassesNode(this.classes, ctx.type) }
+    this.with(ContextKeys.ENUM, ctx).apply {
+        this.clazz = ctx.type
+        this.classes = LinkedClassesNode(this.classes, ctx.type)
+        this.methodOrNull = null
+        this.bodyOrNull = null
+    }
 inline fun <T : IContextCollection<T>> T.with(ctx: VirtualType) =
-    this.with(ContextKeys.CLASS, ctx).apply { this.classes = LinkedClassesNode(this.classes, ctx) }
+    this.with(ContextKeys.CLASS, ctx).apply {
+        this.classes = LinkedClassesNode(this.classes, ctx)
+        this.methodOrNull = null
+        this.bodyOrNull = null
+    }
 inline fun <T : IContextCollection<T>> T.with(ctx: VirtualMethod?) =
     this.with(ContextKeys.METHOD, ctx)
 inline fun <T : IContextCollection<T>> T.with(ctx: BodyContext) =
@@ -68,9 +77,9 @@ inline fun IContextCollection<*>.isEnum() =
 inline fun IContextCollection<*>.isClass() =
     contexts.containsKey(ContextKeys.CLASS) || isEnum()
 inline fun IContextCollection<*>.isMethod() =
-    contexts.containsKey(ContextKeys.METHOD)
+    this.methodOrNull != null
 inline fun IContextCollection<*>.isBody() =
-    contexts.containsKey(ContextKeys.BODY)
+    this.bodyOrNull != null
 inline fun IContextCollection<*>.isMacro() =
     contexts.containsKey(ContextKeys.MACRO)
 
@@ -87,11 +96,17 @@ inline var IContextCollection<*>.classes
     get() = contexts[ContextKeys.CLASSES] as LinkedClassesNode<VirtualType>
 inline val IContextCollection<*>.clazzOrNull
     get() = contexts[ContextKeys.CLASS] as VirtualType?
-inline val IContextCollection<*>.method
-    get() = contexts[ContextKeys.METHOD] as VirtualMethod
-inline val IContextCollection<*>.body
+inline var IContextCollection<*>.method
+    set(value) { this.methodOrNull = value }
+    get() = this.methodOrNull!!
+inline var IContextCollection<*>.methodOrNull
+    set(value) { contexts[ContextKeys.METHOD] = value }
+    get() = contexts[ContextKeys.METHOD] as VirtualMethod?
+inline var IContextCollection<*>.body
+    set(value) { this.bodyOrNull = value }
     get() = this.bodyOrNull!!
-inline val IContextCollection<*>.bodyOrNull
+inline var IContextCollection<*>.bodyOrNull
+    set(value) { contexts[ContextKeys.BODY] = value }
     get() = contexts[ContextKeys.BODY] as BodyContext?
 inline val IContextCollection<*>.macro
     get() = contexts[ContextKeys.MACRO] as MacroContext

@@ -1,6 +1,10 @@
-(cls TestF [^Object] (@static
-    (defn test ^Object [[o ^java.util.function.Supplier]]
-        (#get o))
-    (app-fn
-        (def [[i 12] [j 21]])
-        (println (#test ^TestF (fn ^java.util.function.Supplier [i j][] (as ^Object (+ i j))))))))
+(progn
+    (import java
+        (types java.lang.Runnable)
+        (types java.util.function.Supplier))
+
+    (cls TestA [^Object] (@static
+        (defn test ^void [[o ^Runnable]]
+            (#run o))
+        (test-fn 0
+            (#test ^TestA (fn ^Runnable [][] (unit))))))

@@ -43,7 +43,7 @@ class PihtaJava(module: Pihta) : ModuleCompilers(module, Platforms.JAVA) {
         // f
         add(FGET_,        NCFGet)
         add(FLD_,         NCField)
-        add(FN_,          NCFn)
+        add(FN_,          NCDefault)
         add(FSET_,        NCFSet)
         // g
         add(GET_,         NCGetA)

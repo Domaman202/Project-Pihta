@@ -19,11 +19,6 @@ import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
 
 object NRClass : INodeProcessor<NodeNodesList> {
-    override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        if (node.type == NodeParsedTypes.OBJ)
-            processor.computeType(node.nodes[0], ctx)
-        else null
-
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeType {
         val gctx = ctx.global
         //

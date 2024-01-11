@@ -366,7 +366,7 @@ object Pihta : Module("pht") {
         add(NS_,            NUNs)
         // o
         addSNU(OBJ)
-        // OBJ_
+        add(OBJ_,           NUClass)
         addSNU(OR)
         addSNU(OR_)
         // p
@@ -556,8 +556,8 @@ object Pihta : Module("pht") {
         add(NS,            NRNs)
         add(NS_,           NRNs)
         // o
-        add(OBJ,           NRClass)
-        add(OBJ_,          NRClass)
+        add(OBJ,           NRObj)
+        add(OBJ_,          NRObjB)
         add(OR,            NRMath)
         add(OR_,           NRMathB)
         // p

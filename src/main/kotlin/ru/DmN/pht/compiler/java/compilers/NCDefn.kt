@@ -12,6 +12,7 @@ import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.with
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.ast.INodesList
+import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.CompilingStage
@@ -91,10 +92,10 @@ object NCDefn : INodeCompiler<NodeDefn> {
         val body = BodyContext.of(start, method)
         val context = ctx.with(MethodContext(this, method)).with(body)
         if (method.rettype == VirtualType.VOID) {
-            NCDefault.compile(node, compiler, context)
+            NCDefault.compile(node as Node, compiler, context)
             visitInsn(Opcodes.RETURN)
         } else {
-            val variable = NCDefault.compileVal(node, compiler, context)
+            val variable = NCDefault.compileVal(node as Node, compiler, context)
             if (variable.type == VirtualType.VOID)
                 visitFieldInsn(Opcodes.GETSTATIC, "kotlin/Unit", "INSTANCE", "Lkotlin/Unit;")
             else load(variable, this)

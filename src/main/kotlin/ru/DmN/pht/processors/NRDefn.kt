@@ -72,7 +72,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         return new
     }
 
-    fun processNodes(method: VirtualMethod, new: NodeNodesList, processor: Processor, ctx: ProcessingContext) {
+    private fun processNodes(method: VirtualMethod, new: NodeNodesList, processor: Processor, ctx: ProcessingContext) {
         var i = 0
         while (i < new.nodes.size.let { if (method.rettype != VirtualType.VOID) it - 1 else it }) {
             val it = processor.process(new.nodes[i], ctx, ValType.NO_VALUE)

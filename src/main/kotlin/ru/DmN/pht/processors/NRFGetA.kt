@@ -15,8 +15,16 @@ import ru.DmN.siberia.utils.VirtualField
 import ru.DmN.siberia.utils.VirtualType
 
 object NRFGetA : INodeProcessor<NodeNodesList> {
-    override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        findField(processor.calc(node.nodes[0], ctx), processor.computeString(node.nodes[1], ctx), node.nodes[0].isConstClass)?.type
+    override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? {
+        val static = node.nodes[0].isConstClass
+        return findField(
+            if (static)
+                processor.computeType(node.nodes[0], ctx)
+            else processor.calc(node.nodes[0], ctx),
+            processor.computeString(node.nodes[1], ctx),
+            static
+        )?.type
+    }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeFGet? {
         return if (mode == ValType.VALUE) {

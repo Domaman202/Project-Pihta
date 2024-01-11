@@ -86,10 +86,10 @@
 								(new ^java.lang.Error))
 							33)))))))(use-ctx pht
 	(progn
-		(import
+		(import java
 			(types java.lang.Exception)
 			(types java.lang.RuntimeException)
-			(types java.lang.Error)
+			(types java.lang.Error))
 		(test-fn
 			0
 			(catch

@@ -1,6 +1,7 @@
 package ru.DmN.pht.processor.utils
 
 import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.std.utils.computeType
 import ru.DmN.pht.std.utils.isConstClass
 import ru.DmN.pht.std.utils.isLiteral
 import ru.DmN.siberia.Processor
@@ -16,7 +17,7 @@ enum class Static(val filter: (method: VirtualMethod) -> Boolean) {
     companion object {
         fun ofInstanceNode(node: Node, processor: Processor, ctx: ProcessingContext): Static =
             if (node.isConstClass)
-                if (processor.calc(node, ctx)!!.fields.any { it.name == "INSTANCE" })
+                if (processor.computeType(node, ctx).fields.any { it.name == "INSTANCE" })
                     ANY
                 else STATIC
             else if (node.isLiteral && processor.computeString(node, ctx) == ".")

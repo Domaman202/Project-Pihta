@@ -12,8 +12,10 @@
 							(mcall
 								^TestA
 								test
-								(fn ^java.lang.Runnable [][]
-									(unit))))))))
+								(progn
+									(obj [] PhtLambda$83141452 [^java.lang.Object ^java.lang.Runnable]
+										(defn [] run ^void []
+											(unit))))))))))
 		(cls [] TestB [^java.lang.Object]
 			(@static
 				(defn [] test ^void [[o ^java.lang.Runnable]]
@@ -26,8 +28,10 @@
 							(mcall
 								^TestB
 								test
-								(fn ^java.lang.Runnable [][]
-									(unit))))))))
+								(progn
+									(obj [] PhtLambda$83141459 [^java.lang.Object ^java.lang.Runnable]
+										(defn [] run ^void []
+											(unit))))))))))
 		(cls [] TestC [^java.lang.Object]
 			(@static
 				(defn [] test ^void [[o ^java.lang.Runnable]]
@@ -43,8 +47,28 @@
 							(mcall
 								^TestC
 								test
-								(fn ^java.lang.Runnable [i j][]
-									(unit))))))))
+								(progn
+									(cls [] PhtLambda$83141467 [^java.lang.Object ^java.lang.Runnable]
+										(def [
+											[i ^int]
+											[j ^int]])
+										(ctor [[i ^int][j ^int]]
+											(mcall
+												super
+												<init>)
+											(fset
+												this
+												i
+												i)
+											(fset
+												this
+												j
+												j))
+										(defn [] run ^void []
+											(unit)))
+									(new ^PhtLambda$83141467
+										i
+										j))))))))
 		(cls [] TestD [^java.lang.Object]
 			(@static
 				(defn [] test ^java.lang.String [[o ^java.util.function.Supplier]]
@@ -59,8 +83,10 @@
 								(mcall
 									^TestD
 									test
-									(fn ^java.util.function.Supplier [][]
-										"Foo D!"))))))))
+									(progn
+										(obj [] PhtLambda$83141474 [^java.lang.Object ^java.util.function.Supplier]
+											(defn [] get ^java.lang.Object []
+												"Foo D!"))))))))))
 		(cls [] TestE [^java.lang.Object]
 			(@static
 				(defn [] test ^java.lang.String [[o ^java.util.function.Supplier]]
@@ -75,8 +101,10 @@
 								(mcall
 									^TestE
 									test
-									(fn ^java.util.function.Supplier [][]
-										"Foo E!"))))))))
+									(progn
+										(obj [] PhtLambda$83141481 [^java.lang.Object ^java.util.function.Supplier]
+											(defn [] get ^java.lang.Object []
+												"Foo E!"))))))))))
 		(cls [] TestF [^java.lang.Object]
 			(@static
 				(defn [] test ^java.lang.Object [[o ^java.util.function.Supplier]]
@@ -93,11 +121,31 @@
 								(mcall
 									^TestF
 									test
-									(fn ^java.util.function.Supplier [i j][]
-										(as ^java.lang.Object
-											(add
-												i
-												j))))))))))))(use-ctx pht
+									(progn
+										(cls [] PhtLambda$83141489 [^java.lang.Object ^java.util.function.Supplier]
+											(def [
+												[i ^int]
+												[j ^int]])
+											(ctor [[i ^int][j ^int]]
+												(mcall
+													super
+													<init>)
+												(fset
+													this
+													i
+													i)
+												(fset
+													this
+													j
+													j))
+											(defn [] get ^java.lang.Object []
+												(as ^java.lang.Object
+													(add
+														i
+														j))))
+										(new ^PhtLambda$83141489
+											i
+											j)))))))))))(use-ctx pht
 	(progn
 		(cls [] TestA [^java.lang.Object]
 			(@static
@@ -111,8 +159,10 @@
 							(mcall
 								^TestA
 								test
-								(fn ^java.lang.Runnable [][]
-									(unit))))))))
+								(progn
+									(obj [] PhtLambda$83141452 [^java.lang.Object ^java.lang.Runnable]
+										(defn [] run ^void []
+											(unit))))))))))
 		(cls [] TestB [^java.lang.Object]
 			(@static
 				(defn [] test ^void [[o ^java.lang.Runnable]]
@@ -125,8 +175,10 @@
 							(mcall
 								^TestB
 								test
-								(fn ^java.lang.Runnable [][]
-									(unit))))))))
+								(progn
+									(obj [] PhtLambda$83141459 [^java.lang.Object ^java.lang.Runnable]
+										(defn [] run ^void []
+											(unit))))))))))
 		(cls [] TestC [^java.lang.Object]
 			(@static
 				(defn [] test ^void [[o ^java.lang.Runnable]]
@@ -142,8 +194,28 @@
 							(mcall
 								^TestC
 								test
-								(fn ^java.lang.Runnable [i j][]
-									(unit))))))))
+								(progn
+									(cls [] PhtLambda$83141467 [^java.lang.Object ^java.lang.Runnable]
+										(def [
+											[i ^int]
+											[j ^int]])
+										(ctor [[i ^int][j ^int]]
+											(mcall
+												super
+												<init>)
+											(fset
+												this
+												i
+												i)
+											(fset
+												this
+												j
+												j))
+										(defn [] run ^void []
+											(unit)))
+									(new ^PhtLambda$83141467
+										i
+										j))))))))
 		(cls [] TestD [^java.lang.Object]
 			(@static
 				(defn [] test ^java.lang.String [[o ^java.util.function.Supplier]]
@@ -158,8 +230,10 @@
 								(mcall
 									^TestD
 									test
-									(fn ^java.util.function.Supplier [][]
-										"Foo D!"))))))))
+									(progn
+										(obj [] PhtLambda$83141474 [^java.lang.Object ^java.util.function.Supplier]
+											(defn [] get ^java.lang.Object []
+												"Foo D!"))))))))))
 		(cls [] TestE [^java.lang.Object]
 			(@static
 				(defn [] test ^java.lang.String [[o ^java.util.function.Supplier]]
@@ -174,8 +248,10 @@
 								(mcall
 									^TestE
 									test
-									(fn ^java.util.function.Supplier [][]
-										"Foo E!"))))))))
+									(progn
+										(obj [] PhtLambda$83141481 [^java.lang.Object ^java.util.function.Supplier]
+											(defn [] get ^java.lang.Object []
+												"Foo E!"))))))))))
 		(cls [] TestF [^java.lang.Object]
 			(@static
 				(defn [] test ^java.lang.Object [[o ^java.util.function.Supplier]]
@@ -192,11 +268,31 @@
 								(mcall
 									^TestF
 									test
-									(fn ^java.util.function.Supplier [i j][]
-										(as ^java.lang.Object
-											(add
-												i
-												j))))))))))))(use-ctx pht
+									(progn
+										(cls [] PhtLambda$83141489 [^java.lang.Object ^java.util.function.Supplier]
+											(def [
+												[i ^int]
+												[j ^int]])
+											(ctor [[i ^int][j ^int]]
+												(mcall
+													super
+													<init>)
+												(fset
+													this
+													i
+													i)
+												(fset
+													this
+													j
+													j))
+											(defn [] get ^java.lang.Object []
+												(as ^java.lang.Object
+													(add
+														i
+														j))))
+										(new ^PhtLambda$83141489
+											i
+											j)))))))))))(use-ctx pht
 	(progn
 		(cls [] TestA [^java.lang.Object]
 			(@static
@@ -210,8 +306,10 @@
 							(mcall
 								^TestA
 								test
-								(fn ^java.lang.Runnable [][]
-									(unit))))))))
+								(progn
+									(obj [] PhtLambda$83141452 [^java.lang.Object ^java.lang.Runnable]
+										(defn [] run ^void []
+											(unit))))))))))
 		(cls [] TestB [^java.lang.Object]
 			(@static
 				(defn [] test ^void [[o ^java.lang.Runnable]]
@@ -224,8 +322,10 @@
 							(mcall
 								^TestB
 								test
-								(fn ^java.lang.Runnable [][]
-									(unit))))))))
+								(progn
+									(obj [] PhtLambda$83141459 [^java.lang.Object ^java.lang.Runnable]
+										(defn [] run ^void []
+											(unit))))))))))
 		(cls [] TestC [^java.lang.Object]
 			(@static
 				(defn [] test ^void [[o ^java.lang.Runnable]]
@@ -241,8 +341,28 @@
 							(mcall
 								^TestC
 								test
-								(fn ^java.lang.Runnable [i j][]
-									(unit))))))))
+								(progn
+									(cls [] PhtLambda$83141467 [^java.lang.Object ^java.lang.Runnable]
+										(def [
+											[i ^int]
+											[j ^int]])
+										(ctor [[i ^int][j ^int]]
+											(mcall
+												super
+												<init>)
+											(fset
+												this
+												i
+												i)
+											(fset
+												this
+												j
+												j))
+										(defn [] run ^void []
+											(unit)))
+									(new ^PhtLambda$83141467
+										i
+										j))))))))
 		(cls [] TestD [^java.lang.Object]
 			(@static
 				(defn [] test ^java.lang.String [[o ^java.util.function.Supplier]]
@@ -257,8 +377,10 @@
 								(mcall
 									^TestD
 									test
-									(fn ^java.util.function.Supplier [][]
-										"Foo D!"))))))))
+									(progn
+										(obj [] PhtLambda$83141474 [^java.lang.Object ^java.util.function.Supplier]
+											(defn [] get ^java.lang.Object []
+												"Foo D!"))))))))))
 		(cls [] TestE [^java.lang.Object]
 			(@static
 				(defn [] test ^java.lang.String [[o ^java.util.function.Supplier]]
@@ -273,8 +395,10 @@
 								(mcall
 									^TestE
 									test
-									(fn ^java.util.function.Supplier [][]
-										"Foo E!"))))))))
+									(progn
+										(obj [] PhtLambda$83141481 [^java.lang.Object ^java.util.function.Supplier]
+											(defn [] get ^java.lang.Object []
+												"Foo E!"))))))))))
 		(cls [] TestF [^java.lang.Object]
 			(@static
 				(defn [] test ^java.lang.Object [[o ^java.util.function.Supplier]]
@@ -291,8 +415,28 @@
 								(mcall
 									^TestF
 									test
-									(fn ^java.util.function.Supplier [i j][]
-										(as ^java.lang.Object
-											(add
-												i
-												j))))))))))))
+									(progn
+										(cls [] PhtLambda$83141489 [^java.lang.Object ^java.util.function.Supplier]
+											(def [
+												[i ^int]
+												[j ^int]])
+											(ctor [[i ^int][j ^int]]
+												(mcall
+													super
+													<init>)
+												(fset
+													this
+													i
+													i)
+												(fset
+													this
+													j
+													j))
+											(defn [] get ^java.lang.Object []
+												(as ^java.lang.Object
+													(add
+														i
+														j))))
+										(new ^PhtLambda$83141489
+											i
+											j)))))))))))
