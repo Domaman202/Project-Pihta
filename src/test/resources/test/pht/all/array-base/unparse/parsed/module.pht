@@ -1,5 +1,5 @@
 (module
-  (name "test/pht/all/all/unparse/processed")
+  (name "test/pht/all/array-base/unparse/parsed")
   (version "1.0.0")
   (author "DomamaN202")
   (deps ["pht"])

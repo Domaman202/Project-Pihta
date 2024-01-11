@@ -1,0 +1,128 @@
+[USE_CTX_
+|	(modules = pht)
+|	(NODES:
+|	|	[CLS_
+|	|	|	(type = final class)
+|	|	|	(name = Test0)
+|	|	|	[ANN_STATIC_
+|	|	|	|	[DEFN_
+|	|	|	|	|	(type = method)
+|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	[DEF_
+|	|	|	|	|	|	[
+|	|	|	|	|	|	|	(name = arr-a)
+|	|	|	|	|	|	|	(type = [I)
+|	|	|	|	|	|	|	[NEW_ARRAY_]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[
+|	|	|	|	|	|	|	(name = arr-b)
+|	|	|	|	|	|	|	(type = [I)
+|	|	|	|	|	|	|	[NEW_ARRAY_]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[BODY_
+|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	|	|	(type = int)
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	(value = '0')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[CYCLE_
+|	|	|	|	|	|	|	[LESS_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[ARRAY_SIZE_
+|	|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	|	(text = 'arr-a')
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[ASET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'arr-a')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[INC_PRE_]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[BODY_
+|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	|	|	(type = int)
+|	|	|	|	|	|	|	|	[SUB_
+|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
+|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	|	|	(text = 'arr-a')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	(value = '1')
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[CYCLE_
+|	|	|	|	|	|	|	[GREAT_OR_EQ_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	(value = '0')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[ASET_
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'arr-b')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[AGET_]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[DEC_PRE_]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[AS_
+|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	(method = contentToString([I)Ljava/lang/String;)
+|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = '[I')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'arr-b')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	)
+]

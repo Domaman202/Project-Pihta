@@ -239,6 +239,7 @@ object Pihta : Module("pht") {
         addSNU(ADD)
         addSNU(ADD_)
         addSNU(AGET)
+        add(AGET_,          NUAGet)
         addSNU(ALIAS_TYPE)
         // ALIAS_TYPE_
         addSNU(AND)
@@ -250,7 +251,7 @@ object Pihta : Module("pht") {
         addSNU(ARRAY_SIZE)
         addSNU(ARRAY_SIZE_)
         addSNU(AS)
-        add(AS_, NUIsAs)
+        add(AS_,            NUIsAs)
         addSNU(AS_GENS)
         addSNU(ASET)
         addSNU(ASET_)

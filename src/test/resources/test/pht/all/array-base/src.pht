@@ -1,4 +1,4 @@
-(app-fn
+(test-fn 0
     (def [
         [arr-a (new-array ^int 10)]
         [arr-b (new-array ^int 10)]])
@@ -12,4 +12,4 @@
         (cycle (>= i 0)
             (aset arr-b i (aget arr-a i))
             (-- i)))
-    (println (#contentToString arr-b)))
+    (#contentToString arr-b))
