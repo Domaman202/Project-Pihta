@@ -33,38 +33,3 @@
 |	|	]
 |	]
 ]
-[USE_CTX
-|	(modules = pht)
-|	[PROGN
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '0')
-|	|	|	]
-|	|	|	[VALUE
-|	|	|	|	(type = STRING)
-|	|	|	|	(value = 'Текст из Сибири.')
-|	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '1')
-|	|	|	]
-|	|	|	[VALUE
-|	|	|	|	(type = STRING)
-|	|	|	|	(value = 'Текст из Кавказа.')
-|	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '2')
-|	|	|	]
-|	|	|	[VALUE
-|	|	|	|	(type = STRING)
-|	|	|	|	(value = 'Текст из Донбасса.')
-|	|	|	]
-|	|	]
-|	]
-]

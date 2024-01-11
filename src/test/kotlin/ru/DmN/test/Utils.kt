@@ -87,8 +87,6 @@ abstract class Module(private val dir: String) {
 
     private fun print() {
         val tp = TypesProvider.java()
-        module.init = false
-        module.init()
         File("dump/$dir/print").mkdirs()
         FileOutputStream("dump/$dir/print/parsed.short.print").use { short ->
             FileOutputStream("dump/$dir/print/parsed.long.print").use { long ->

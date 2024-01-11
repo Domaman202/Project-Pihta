@@ -14,20 +14,4 @@
 			(@static
 				(defn [] test ^dynamic []
 					(as ^dynamic
-						"Текст из Донбасса."))))))(use-ctx pht
-	(progn
-		(cls [] Test0 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						"Текст из Сибири."))))
-		(cls [] Test1 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						"Текст из Кавказа."))))
-		(cls [] Test2 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
 						"Текст из Донбасса."))))))

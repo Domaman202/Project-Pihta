@@ -17,22 +17,3 @@
 |	|	]
 |	)
 ]
-[USE_CTX_
-|	(modules = pht)
-|	(NODES:
-|	|	[CLS_
-|	|	|	(type = final class)
-|	|	|	(name = App)
-|	|	|	[ANN_STATIC_
-|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(desc = main()V)
-|	|	|	|	|	|	[UNIT]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[UNIT]
-|	|	|	]
-|	|	]
-|	)
-]

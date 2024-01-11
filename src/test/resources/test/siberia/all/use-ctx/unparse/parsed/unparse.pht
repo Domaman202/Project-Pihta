@@ -2,8 +2,4 @@
 	(use-ctx pht
 		(cls [] App [^java.lang.Object]
 			(@static
-				(defn [] main ^void [])))))(use-ctx 
-	(use-ctx pht
-		(cls [] App [^java.lang.Object]
-			(@static
 				(defn [] main ^void [])))))
