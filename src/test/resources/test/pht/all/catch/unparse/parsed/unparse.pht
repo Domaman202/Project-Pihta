@@ -1,44 +1,63 @@
 (use-ctx pht
 	(progn
-		(cls [] Test0 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(catch [
-							[_ ^java.lang.RuntimeException
-								(progn
-									12)]
-							[_ ^java.lang.Exception
-								(progn
-									21)]]
-							(throw
-								(new ^java.lang.Exception))
-							33)))))
-		(cls [] Test1 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(catch [
-							[_ ^java.lang.RuntimeException
-								(progn
-									12)]
-							[_ ^java.lang.Exception
-								(progn
-									21)]]
-							(throw
-								(new ^java.lang.RuntimeException))
-							33)))))
-		(cls [] Test2 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(catch [
-							[_ ^java.lang.RuntimeException
-								(progn
-									12)]
-							[_ ^java.lang.Exception
-								(progn
-									21)]]
-							(throw
-								(new ^java.lang.Error))
-							33)))))))
+		(import java
+			(types java.lang.Exception)
+			(types java.lang.RuntimeException)
+			(types java.lang.Error))
+		(test-fn
+			0
+			(catch
+				[
+					[
+						_
+						^RuntimeException
+						12
+					]
+					[
+						_
+						^Exception
+						21
+					]
+				]
+				(throw
+					(new
+						^Exception))
+				33))
+		(test-fn
+			1
+			(catch
+				[
+					[
+						_
+						^RuntimeException
+						12
+					]
+					[
+						_
+						^Exception
+						21
+					]
+				]
+				(throw
+					(new
+						^RuntimeException))
+				33))
+		(test-fn
+			2
+			(catch
+				[
+					[
+						_
+						^RuntimeException
+						12
+					]
+					[
+						_
+						^Exception
+						21
+					]
+				]
+				(throw
+					(new
+						^Error))
+				33))))

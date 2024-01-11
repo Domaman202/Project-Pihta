@@ -1,91 +1,75 @@
 (use-ctx pht
 	(progn
-		(cls [] TestA [^java.lang.Object]
+		(cls
+			TestA
+			[
+				^Object
+			]
 			(@static
-				(progn-
-					(@static
-						(defn [] setI ^void [[i ^int]]
-							(fset
-								^TestA
-								i
-								i))
-						(defn [] getI ^int []
-							(fget
-								^TestA
-								i))
-						(def [
-							[i ^int]]))))
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(mcall
-							^TestA
-							setI
-							333)
-						(as ^dynamic
-							(mcall
-								^TestA
-								getI))))))
-		(cls [] TestB [^java.lang.Object]
+				(fld
+					[
+						[
+							i
+							^int
+						]
+					]))
+			(test-fn
+				0
+				(set! i
+					333)
+				(get
+					"i")))
+		(cls
+			TestB
+			[
+				^Object
+			]
 			(@static
-				(defn [] setFoo ^java.lang.String [[a ^java.lang.String][b ^java.lang.String]]
-					(mcall
+				(defn
+					setFoo
+					^String
+					[
+						[
+							a
+							^String
+						]
+						[
+							b
+							^String
+						]
+					]
+					(add
 						a
-						add
-						(body
-							(def [
-								[(array-type ^java.lang.String) pht$tmp$46976 (new-array ^java.lang.String 3)]])
-							(aset
-								pht$tmp$46976
-								0
-								" ")
-							(aset
-								pht$tmp$46976
-								1
-								b)
-							(aset
-								pht$tmp$46976
-								2
-								"!")
-							pht$tmp$46976)))
-				(defn [] getFoo ^java.lang.String [[c ^java.lang.String][d ^java.lang.String]]
-					(mcall
+						" "
+						b
+						"!"))
+				(defn
+					getFoo
+					^String
+					[
+						[
+							c
+							^String
+						]
+						[
+							d
+							^String
+						]
+					]
+					(add
 						"Боже, "
-						add
-						(body
-							(def [
-								[(array-type ^java.lang.String) pht$tmp$46978 (new-array ^java.lang.String 4)]])
-							(aset
-								pht$tmp$46978
-								0
-								c)
-							(aset
-								pht$tmp$46978
-								1
-								" ")
-							(aset
-								pht$tmp$46978
-								2
-								d)
-							(aset
-								pht$tmp$46978
-								3
-								"!")
-							pht$tmp$46978)))
-				(cls [] Test1 [^java.lang.Object]
-					(@static
-						(defn [] test ^dynamic []
-							(mcall
-								^TestB
-								setFoo
-								"Слава"
-								"России"))))
-				(cls [] Test2 [^java.lang.Object]
-					(@static
-						(defn [] test ^dynamic []
-							(as ^dynamic
-								(mcall
-									^TestB
-									getFoo
-									"Путина"
-									"Храни")))))))))
+						c
+						" "
+						d
+						"!"))
+				(test-fn
+					1
+					(set! foo
+						"Слава"
+						"России"))
+				(test-fn
+					2
+					(get
+						"foo"
+						"Путина"
+						"Храни"))))))

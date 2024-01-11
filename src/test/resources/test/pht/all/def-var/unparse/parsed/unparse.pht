@@ -1,34 +1,48 @@
 (use-ctx pht
 	(progn
-		(cls [] Test0 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(def [
-						[^int i 12]])
-					(as ^dynamic
-						(get i)))))
-		(cls [] Test1 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(def [
-						[^long l 21]])
-					(as ^dynamic
-						(get l)))))
-		(cls [] Test2 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(def [
-						[^float f]])
-					(set! f
-						0)
-					(as ^dynamic
-						(get f)))))
-		(cls [] Test3 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(def [
-						[^double d 12.21]])
-					(set! d
-						33.44)
-					(as ^dynamic
-						(get d)))))))
+		(test-fn
+			0
+			(def
+				[
+					[
+						i
+						12
+					]
+				])
+			(get
+				"i"))
+		(test-fn
+			1
+			(def
+				[
+					[
+						^long
+						l
+						21
+					]
+				])
+			(get
+				"l"))
+		(test-fn
+			2
+			(def
+				[
+					[
+						^float
+						f
+					]
+				])
+			(set! f
+				0)
+			(get
+				"f"))
+		(test-fn
+			3
+			(def-set
+				d
+				12.21)
+			(def-set
+				d
+				33.44)
+			(get
+				"d"))))

@@ -28,6 +28,7 @@ object NPGet : INodeParser {
                     static = true,
                     klass = true
                 )
+                Token.DefaultType.STRING,
                 Token.DefaultType.OPERATION -> parse(
                     info,
                     nameToken.text!!,

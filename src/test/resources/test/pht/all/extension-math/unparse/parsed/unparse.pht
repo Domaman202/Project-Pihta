@@ -1,70 +1,57 @@
 (use-ctx pht
 	(progn
-		(cls [] App [^java.lang.Object]
-			(@static
-				(efn [] ^java.lang.String sub ^java.lang.String [[other ^java.lang.String]]
-					(mcall
-						this
-						add
-						(body
-							(def [
-								[(array-type ^java.lang.String) pht$tmp$46968 (new-array ^java.lang.String 1)]])
-							(aset
-								pht$tmp$46968
-								0
-								other)
-							pht$tmp$46968)))
-				(efn [] ^java.lang.String mul ^java.lang.String []
-					"mul")
-				(efn [] ^java.lang.String div ^java.lang.String []
-					"div")
-				(efn [] ^java.lang.String rem ^java.lang.String []
-					"rem")))
-		(cls [] Test0 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mcall
-							"Слава"
-							add
-							(body
-								(def [
-									[(array-type ^java.lang.String) pht$tmp$46972 (new-array ^java.lang.String 2)]])
-								(aset
-									pht$tmp$46972
-									0
-									" ")
-								(aset
-									pht$tmp$46972
-									1
-									"России")
-								pht$tmp$46972))))))
-		(cls [] Test1 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mcall
-							"Лол"
-							sub
-							"Кек")))))
-		(cls [] Test2 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mcall
-							""
-							mul)))))
-		(cls [] Test3 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mcall
-							""
-							div)))))
-		(cls [] Test4 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mcall
-							""
-							rem)))))))
+		(app
+			(efn
+				^String
+				sub
+				^String
+				[
+					[
+						other
+						^String
+					]
+				]
+				(add
+					this
+					other))
+			(efn
+				^String
+				mul
+				^String
+				[]
+				"mul")
+			(efn
+				^String
+				div
+				^String
+				[]
+				"div")
+			(efn
+				^String
+				rem
+				^String
+				[]
+				"rem"))
+		(test-fn
+			0
+			(add
+				"Слава"
+				" "
+				"России"))
+		(test-fn
+			1
+			(sub
+				"Лол"
+				"Кек"))
+		(test-fn
+			2
+			(mul
+				""))
+		(test-fn
+			3
+			(div
+				""))
+		(test-fn
+			4
+			(rem
+				""))))

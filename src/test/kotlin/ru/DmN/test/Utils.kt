@@ -28,7 +28,6 @@ import ru.DmN.test.Module as SiberiaModule
 abstract class Module(private val dir: String) {
     val module = (Parser(Module.getModuleFile(dir)).parseNode(ParsingContext.of(StdModule)) as NodeModule).module
 
-    //
     @Test
     open fun testPrint() {
         print()
@@ -49,9 +48,11 @@ abstract class Module(private val dir: String) {
     }
 
     open fun SiberiaModule.compileTest() = compile()
-    //
 
     fun unparse() {
+        module.nodes.clear()
+        module.init = false
+        module.init()
         val tp = TypesProvider.java()
         File("dump/$dir/unparse/parsed").mkdirs()
         FileOutputStream("dump/$dir/unparse/parsed/unparse.pht").use { out ->
@@ -86,6 +87,9 @@ abstract class Module(private val dir: String) {
 
 
     private fun print() {
+        module.nodes.clear()
+        module.init = false
+        module.init()
         val tp = TypesProvider.java()
         File("dump/$dir/print").mkdirs()
         FileOutputStream("dump/$dir/print/parsed.short.print").use { short ->
@@ -128,9 +132,10 @@ abstract class Module(private val dir: String) {
     }
 
     fun compile() {
-        val tp = TypesProvider.java()
+        module.nodes.clear()
         module.init = false
         module.init()
+        val tp = TypesProvider.java()
         val processed = ArrayList<Node>()
         val processor = Processor(tp)
         val pctx = ProcessingContext.base().with(Platforms.JAVA).apply { this.module = this@Module.module }
@@ -161,8 +166,4 @@ abstract class Module(private val dir: String) {
 
     fun test(id: Int): Any? =
         URLClassLoader(arrayOf(File("dump/$dir").toURL())).loadClass("Test$id").getMethod("test").invoke(null)
-
-    companion object {
-        val UNPARSE = HashMap<Module, Boolean>()
-    }
 }

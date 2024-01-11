@@ -1,79 +1,129 @@
 (use-ctx pht
 	(progn
-		(cls [] TestA [^java.lang.Object]
-			(ctor []
-				(mcall
-					super
-					<init>))
+		(cls
+			TestA
+			[
+				^Object
+			]
+			(ctor
+				[]
+				(ccall))
 			(@static
-				(defn [] foo ^java.lang.String [[o ^java.lang.Object]]
+				(defn
+					foo
+					^String
+					[
+						[
+							o
+							^Object
+						]
+					]
 					"Foo static!"))
-			(defn [] foo ^java.lang.String [[s ^java.lang.String]]
+			(defn
+				foo
+				^String
+				[
+					[
+						s
+						^String
+					]
+				]
 				"Foo!"))
-		(cls [] Test0 [^java.lang.Object]
+		(test-fn
+			0
+			(mcall
+				(new
+					^TestA)
+				foo
+				""))
+		(test-fn
+			1
+			(mcall
+				^TestA
+				foo
+				""))
+		(cls
+			TestB
+			[
+				^Object
+			]
 			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mcall
-							(new ^TestA)
-							foo
-							"")))))
-		(cls [] Test1 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mcall
-							^TestA
-							foo
-							"")))))
-		(cls [] TestB [^java.lang.Object]
-			(@static
-				(defn [] foo ^java.lang.String []
+				(defn
+					foo
+					^String
+					[]
 					"Foo outer!")
-				(cls [] Test2 [^java.lang.Object]
-					(@static
-						(defn [] test ^dynamic []
-							(as ^dynamic
-								(mcall
-									^TestB
-									foo)))))))
-		(cls [] TestC [^java.lang.Object]
+				(test-fn
+					2
+					(mcall
+						.
+						foo))))
+		(cls
+			TestC
+			[
+				^Object
+			]
 			(@static
-				(defn [] foo ^java.lang.String []
+				(defn
+					foo
+					^String
+					[]
 					"Foo outer outer!")
-				(cls [] TestD [^java.lang.Object]
-					(cls [] Test3 [^java.lang.Object]
-						(@static
-							(defn [] test ^dynamic []
-								(as ^dynamic
-									(mcall
-										^TestC
-										foo))))))))
-		(cls [] TestE [^java.lang.Object]
-			(ctor []
-				(mcall
-					super
-					<init>))
-			(defn [] getE ^int []
+				(cls
+					TestD
+					[
+						^Object
+					]
+					(test-fn
+						3
+						(mcall
+							.
+							foo)))))
+		(cls
+			TestE
+			[
+				^Object
+			]
+			(ctor
+				[]
+				(ccall))
+			(defn
+				getE
+				^int
+				[]
 				12))
-		(cls [] TestF [^java.lang.Object]
-			(ctor []
-				(mcall
-					super
-					<init>))
-			(defn [] getF ^int []
+		(cls
+			TestF
+			[
+				^Object
+			]
+			(ctor
+				[]
+				(ccall))
+			(defn
+				getF
+				^int
+				[]
 				21))
-		(cls [] Test4 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(def [
-						[^TestE o (new ^TestE)]
-						[^TestF o (new ^TestF)]])
-					(as ^dynamic
-						(add
-							(mcall
-								(typed-get ^TestE o)
-								getE)
-							(mcall
-								(typed-get ^TestF o)
-								getF))))))))
+		(test-fn
+			4
+			(def
+				[
+					[
+						o
+						(new
+							^TestE)
+					]
+					[
+						o
+						(new
+							^TestF)
+					]
+				])
+			(add
+				(mcall
+					o
+					getE)
+				(mcall
+					o
+					getF)))))

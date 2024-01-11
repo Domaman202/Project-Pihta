@@ -1,10 +1,6 @@
-(progn
-    (import java
-        (types java.lang.Runnable)
-        (types java.util.function.Supplier))
-
-    (cls TestA [^Object] (@static
-        (defn test ^void [[o ^Runnable]]
-            (#run o))
-        (test-fn 0
-            (#test ^TestA (fn ^Runnable [][] (unit))))))
+(app-fn
+    (def [[i 0][j 0]])
+    (cycle (< i 10)
+        (set j (+ j i))
+        (++ i))
+    (println (get "j")))

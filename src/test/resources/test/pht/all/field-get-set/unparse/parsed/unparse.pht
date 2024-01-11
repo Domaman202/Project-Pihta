@@ -1,128 +1,119 @@
 (use-ctx pht
 	(progn
-		(cls [] TestA [^java.lang.Object]
+		(cls
+			TestA
+			[
+				^Object
+			]
 			(@static
-				(progn-
-					(@static
-						(defn [] setI ^void [[i ^int]]
-							(fset
-								^TestA
-								i
-								i))
-						(defn [] getI ^int []
-							(fget
-								^TestA
-								i))
-						(def [
-							[i ^int]])))
-				(defn [] test ^int []
-					(mcall
-						^TestA
-						setI
+				(fld
+					[
+						[
+							i
+							^int
+						]
+					])
+				(defn
+					test
+					^int
+					[]
+					(set! i
 						776)
-					(mcall
-						^TestA
-						getI))))
-		(cls [] Test0 [^java.lang.Object]
+					(get
+						"i"))))
+		(test-fn
+			0
+			(mcall
+				^TestA
+				test))
+		(cls
+			TestB
+			[
+				^Object
+			]
 			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mcall
-							^TestA
-							test)))))
-		(cls [] TestB [^java.lang.Object]
-			(@static
-				(progn-
-					(@static
-						(defn [] setI ^void [[i ^int]]
-							(fset
-								^TestB
-								i
-								i))
-						(defn [] getI ^int []
-							(fget
-								^TestB
-								i))
-						(def [
-							[i ^int]])))
-				(defn [] test ^int []
-					(mcall
+				(fld
+					[
+						[
+							i
+							^int
+						]
+					])
+				(defn
+					test
+					^int
+					[]
+					(fset
 						^TestB
-						setI
+						i
 						777)
-					(mcall
+					(fget
 						^TestB
-						getI))))
-		(cls [] Test1 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mcall
-							^TestB
-							test)))))
-		(cls [] TestC [^java.lang.Object]
-			(progn-
-				(progn-
-					(defn [] setI ^void [[i ^int]]
-						(fset
-							this
-							i
-							i))
-					(defn [] getI ^int []
-						(fget
-							this
-							i))
-					(def [
-						[i ^int]])))
-			(ctor []
-				(mcall
-					super
-					<init>))
-			(defn [] test ^int []
-				(mcall
-					this
-					setI
+						i))))
+		(test-fn
+			1
+			(mcall
+				^TestB
+				test))
+		(cls
+			TestC
+			[
+				^Object
+			]
+			(fld
+				[
+					[
+						i
+						^int
+					]
+				])
+			(ctor
+				[]
+				(ccall))
+			(defn
+				test
+				^int
+				[]
+				(set! i
 					240422)
-				(mcall
+				(get
+					"i")))
+		(test-fn
+			2
+			(mcall
+				(new
+					^TestC)
+				test))
+		(cls
+			TestD
+			[
+				^Object
+			]
+			(fld
+				[
+					[
+						i
+						^int
+					]
+				])
+			(ctor
+				[]
+				(ccall))
+			(defn
+				test
+				^int
+				[]
+				(fset
 					this
-					getI)))
-		(cls [] Test2 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mcall
-							(new ^TestC)
-							test)))))
-		(cls [] TestD [^java.lang.Object]
-			(progn-
-				(progn-
-					(defn [] setI ^void [[i ^int]]
-						(fset
-							this
-							i
-							i))
-					(defn [] getI ^int []
-						(fget
-							this
-							i))
-					(def [
-						[i ^int]])))
-			(ctor []
-				(mcall
-					super
-					<init>))
-			(defn [] test ^int []
-				(mcall
-					this
-					setI
+					i
 					404)
 				(fget
-					(get this)
+					(get
+						"this")
 					i)))
-		(cls [] Test3 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mcall
-							(new ^TestD)
-							test)))))))
+		(test-fn
+			3
+			(mcall
+				(new
+					^TestD)
+				test))))

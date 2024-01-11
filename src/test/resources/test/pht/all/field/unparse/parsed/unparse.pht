@@ -1,33 +1,35 @@
 (use-ctx pht
 	(progn
-		(cls [] Test [^java.lang.Object]
-			(progn-
-				(progn-
-					(defn [] setI ^void [[i ^int]]
-						(fset
-							this
-							i
-							i))
-					(defn [] getI ^int []
-						(fget
-							this
-							i))
-					(def [
-						[i ^int]])))
-			(ctor []
-				(mcall
-					super
-					<init>)))
-		(cls [] Test0 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(def [
-						[^Test test (new ^Test)]])
-					(mcall
+		(cls
+			Test
+			[
+				^Object
+			]
+			(fld
+				[
+					[
+						i
+						^int
+					]
+				])
+			(ctor
+				[]
+				(ccall)))
+		(test-fn
+			0
+			(def
+				[
+					[
 						test
-						setI
-						213)
-					(as ^dynamic
-						(fget
-							(get test)
-							i)))))))
+						(new
+							^Test)
+					]
+				])
+			(fset
+				test
+				i
+				213)
+			(fget
+				(get
+					"test")
+				i))))

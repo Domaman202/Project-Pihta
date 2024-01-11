@@ -1,24 +1,26 @@
 (use-ctx pht
 	(progn
-		(cls [] Test0 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(add
-							(mul
-								(mul
-									1
-									2)
-								2)
-							1)))))
-		(cls [] Test1 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mul
-							(mul
-								(add
-									1
-									1)
-								2)
-							2)))))))
+		(test-fn
+			0
+			(as
+				^dynamic
+				(roll-right
+					1
+					(add
+						1)
+					(mul
+						2)
+					(mul
+						2))))
+		(test-fn
+			1
+			(as
+				^dynamic
+				(roll-left
+					1
+					(add
+						1)
+					(mul
+						2)
+					(mul
+						2))))))

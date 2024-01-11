@@ -1,23 +1,25 @@
 (use-ctx pht
 	(progn
 		(@open
-			(cls [] FooOpen [^java.lang.Object]
-				(ctor []
-					(mcall
-						super
-						<init>))))
-		(cls [] FooFinal [^java.lang.Object]
-			(ctor []
-				(mcall
-					super
-					<init>)))
-		(cls [] Test0 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						^FooOpen))))
-		(cls [] Test1 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						^FooFinal))))))
+			(cls
+				FooOpen
+				[
+					^Object
+				]
+				(ctor
+					[]
+					(ccall))))
+		(cls
+			FooFinal
+			[
+				^Object
+			]
+			(ctor
+				[]
+				(ccall)))
+		(test-fn
+			0
+			^FooOpen)
+		(test-fn
+			1
+			^FooFinal)))

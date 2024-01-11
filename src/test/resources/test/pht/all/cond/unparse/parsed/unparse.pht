@@ -1,15 +1,25 @@
 (use-ctx pht
-	(cls [] Test0 [^java.lang.Object]
-		(@static
-			(defn [] test ^dynamic []
-				(def [
-					[^java.lang.StringBuilder out (new ^java.lang.StringBuilder)]
-					[^int i -1]])
-				(cycle
-					(less-or-eq
-						i
-						1)
-					(if
+	(test-fn
+		0
+		(def
+			[
+				[
+					out
+					(new
+						^java.lang.StringBuilder)
+				]
+				[
+					i
+					-1
+				]
+			])
+		(cycle
+			(less-or-eq
+				i
+				1)
+			(cond
+				[
+					[
 						(less
 							i
 							0)
@@ -17,24 +27,28 @@
 							out
 							append
 							"М")
-						(if
-							(eq
-								i
-								0)
-							(mcall
-								out
-								append
-								"Р")
-							(if
-								(great
-									i
-									0)
-								(mcall
-									out
-									append
-									"Б"))))
-					(inc i))
-				(as ^dynamic
-					(mcall
-						out
-						toString))))))
+					]
+					[
+						(eq
+							i
+							0)
+						(mcall
+							out
+							append
+							"Р")
+					]
+					[
+						(great
+							i
+							0)
+						(mcall
+							out
+							append
+							"Б")
+					]
+				])
+			(inc
+				i))
+		(mcall
+			out
+			toString)))

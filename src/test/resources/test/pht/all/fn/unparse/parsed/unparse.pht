@@ -1,148 +1,203 @@
 (use-ctx pht
 	(progn
-		(cls [] TestA [^java.lang.Object]
+		(import java
+			(types java.lang.Runnable)
+			(types java.util.function.Supplier))
+		(cls
+			TestA
+			[
+				^Object
+			]
 			(@static
-				(defn [] test ^void [[o ^java.lang.Runnable]]
-					(mcall
-						o
-						run))
-				(cls [] Test0 [^java.lang.Object]
-					(@static
-						(defn [] test ^dynamic []
-							(mcall
-								^TestA
-								test
-								(progn
-									(obj [] PhtLambda$83141452 [^java.lang.Object ^java.lang.Runnable]
-										(defn [] run ^void []
-											(unit))))))))))
-		(cls [] TestB [^java.lang.Object]
-			(@static
-				(defn [] test ^void [[o ^java.lang.Runnable]]
-					(mcall
-						o
-						run))
-				(cls [] Test1 [^java.lang.Object]
-					(@static
-						(defn [] test ^dynamic []
-							(mcall
-								^TestB
-								test
-								(progn
-									(obj [] PhtLambda$83141459 [^java.lang.Object ^java.lang.Runnable]
-										(defn [] run ^void []
-											(unit))))))))))
-		(cls [] TestC [^java.lang.Object]
-			(@static
-				(defn [] test ^void [[o ^java.lang.Runnable]]
-					(mcall
-						o
-						run))
-				(cls [] Test2 [^java.lang.Object]
-					(@static
-						(defn [] test ^dynamic []
-							(def [
-								[^int i 12]
-								[^int j 21]])
-							(mcall
-								^TestC
-								test
-								(progn
-									(cls [] PhtLambda$83141467 [^java.lang.Object ^java.lang.Runnable]
-										(def [
-											[i ^int]
-											[j ^int]])
-										(ctor [[i ^int][j ^int]]
-											(mcall
-												super
-												<init>)
-											(fset
-												this
-												i
-												i)
-											(fset
-												this
-												j
-												j))
-										(defn [] run ^void []
-											(unit)))
-									(new ^PhtLambda$83141467
-										i
-										j))))))))
-		(cls [] TestD [^java.lang.Object]
-			(@static
-				(defn [] test ^java.lang.String [[o ^java.util.function.Supplier]]
-					(as ^java.lang.String
-						(mcall
+				(defn
+					test
+					^void
+					[
+						[
 							o
-							get)))
-				(cls [] Test3 [^java.lang.Object]
-					(@static
-						(defn [] test ^dynamic []
-							(as ^dynamic
-								(mcall
-									^TestD
-									test
-									(progn
-										(obj [] PhtLambda$83141474 [^java.lang.Object ^java.util.function.Supplier]
-											(defn [] get ^java.lang.Object []
-												"Foo D!"))))))))))
-		(cls [] TestE [^java.lang.Object]
+							^Runnable
+						]
+					]
+					(mcall
+						o
+						run))
+				(test-fn
+					0
+					(mcall
+						^TestA
+						test
+						(fn
+							^Runnable
+							[]
+							[]
+							(unit))))))
+		(cls
+			TestB
+			[
+				^Object
+			]
 			(@static
-				(defn [] test ^java.lang.String [[o ^java.util.function.Supplier]]
-					(as ^java.lang.String
-						(mcall
+				(defn
+					test
+					^void
+					[
+						[
 							o
-							get)))
-				(cls [] Test4 [^java.lang.Object]
-					(@static
-						(defn [] test ^dynamic []
-							(as ^dynamic
-								(mcall
-									^TestE
-									test
-									(progn
-										(obj [] PhtLambda$83141481 [^java.lang.Object ^java.util.function.Supplier]
-											(defn [] get ^java.lang.Object []
-												"Foo E!"))))))))))
-		(cls [] TestF [^java.lang.Object]
+							^Runnable
+						]
+					]
+					(mcall
+						o
+						run))
+				(test-fn
+					1
+					(mcall
+						^TestB
+						test
+						(fn
+							[]
+							[]
+							(unit))))))
+		(cls
+			TestC
+			[
+				^Object
+			]
 			(@static
-				(defn [] test ^java.lang.Object [[o ^java.util.function.Supplier]]
+				(defn
+					test
+					^void
+					[
+						[
+							o
+							^Runnable
+						]
+					]
+					(mcall
+						o
+						run))
+				(test-fn
+					2
+					(def
+						[
+							[
+								i
+								12
+							]
+							[
+								j
+								21
+							]
+						])
+					(mcall
+						^TestC
+						test
+						(fn
+							^Runnable
+							[
+								i
+								j
+							]
+							[]
+							(unit))))))
+		(cls
+			TestD
+			[
+				^Object
+			]
+			(@static
+				(defn
+					test
+					^String
+					[
+						[
+							o
+							^Supplier
+						]
+					]
 					(mcall
 						o
 						get))
-				(cls [] Test5 [^java.lang.Object]
-					(@static
-						(defn [] test ^dynamic []
-							(def [
-								[^int i 12]
-								[^int j 21]])
-							(as ^dynamic
-								(mcall
-									^TestF
-									test
-									(progn
-										(cls [] PhtLambda$83141489 [^java.lang.Object ^java.util.function.Supplier]
-											(def [
-												[i ^int]
-												[j ^int]])
-											(ctor [[i ^int][j ^int]]
-												(mcall
-													super
-													<init>)
-												(fset
-													this
-													i
-													i)
-												(fset
-													this
-													j
-													j))
-											(defn [] get ^java.lang.Object []
-												(as ^java.lang.Object
-													(add
-														i
-														j))))
-										(new ^PhtLambda$83141489
-											i
-											j)))))))))))
+				(test-fn
+					3
+					(mcall
+						^TestD
+						test
+						(fn
+							^Supplier
+							[]
+							[]
+							"Foo D!")))))
+		(cls
+			TestE
+			[
+				^Object
+			]
+			(@static
+				(defn
+					test
+					^String
+					[
+						[
+							o
+							^Supplier
+						]
+					]
+					(mcall
+						o
+						get))
+				(test-fn
+					4
+					(mcall
+						^TestE
+						test
+						(fn
+							[]
+							[]
+							"Foo E!")))))
+		(cls
+			TestF
+			[
+				^Object
+			]
+			(@static
+				(defn
+					test
+					^Object
+					[
+						[
+							o
+							^Supplier
+						]
+					]
+					(mcall
+						o
+						get))
+				(test-fn
+					5
+					(def
+						[
+							[
+								i
+								12
+							]
+							[
+								j
+								21
+							]
+						])
+					(mcall
+						^TestF
+						test
+						(fn
+							^Supplier
+							[
+								i
+								j
+							]
+							[]
+							(as
+								^Any
+								(add
+									i
+									j)))))))))

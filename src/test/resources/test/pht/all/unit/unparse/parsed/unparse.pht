@@ -1,7 +1,5 @@
 (use-ctx pht
-	(cls [] App [^java.lang.Object]
-		(@static
-			(@static
-				(defn [] main ^void []
-					(unit)))
-			(unit))))
+	(app
+		(app-fn
+			(unit))
+		(unit)))

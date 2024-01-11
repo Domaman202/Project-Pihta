@@ -1,39 +1,45 @@
 (use-ctx pht
 	(progn
 		(@abstract
-			(cls [] Test [^java.lang.Object]
-				(ctor []
-					(mcall
-						super
-						<init>))
+			(cls
+				Test
+				[
+					^Object
+				]
+				(ctor
+					[]
+					(ccall))
 				(@abstract
-					(defn [] foo ^java.lang.String []))))
-		(cls [] TestImpl [^Test]
-			(ctor []
-				(mcall
-					super
-					<init>))
-			(defn [] foo ^java.lang.String []
+					(defn
+						foo
+						^String
+						[]))))
+		(cls
+			TestImpl
+			[
+				^Test
+			]
+			(ctor
+				[]
+				(ccall))
+			(defn
+				foo
+				^String
+				[]
 				"Foo!"))
-		(cls [] Test0 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						^Test))))
-		(cls [] Test1 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						^TestImpl))))
-		(cls [] Test2 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(new ^TestImpl)))))
-		(cls [] Test3 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mcall
-							(new ^TestImpl)
-							foo)))))))
+		(test-fn
+			0
+			^Test)
+		(test-fn
+			1
+			^TestImpl)
+		(test-fn
+			2
+			(new
+				^TestImpl))
+		(test-fn
+			3
+			(mcall
+				(new
+					^TestImpl)
+				foo))))

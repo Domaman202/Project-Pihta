@@ -1,118 +1,86 @@
 (use-ctx pht
 	(progn
-		(cls [] Test0 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(add
-							12
-							21)))))
-		(cls [] Test1 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(sub
-							33
-							12)))))
-		(cls [] Test2 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(sub
-							33
-							12
-							21)))))
-		(cls [] Test3 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mul
-							2
-							2
-							3)))))
-		(cls [] Test4 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(div
-							12
-							3)))))
-		(cls [] Test5 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(rem
-							3
-							2)))))
-		(cls [] Test6 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(shift-right
-							1024
-							10)))))
-		(cls [] Test7 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(shift-left
-							1
-							10)))))
-		(cls [] Test8 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(add
-							12
-							21)))))
-		(cls [] Test9 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(sub
-							33
-							12)))))
-		(cls [] Test10 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(sub
-							33
-							12
-							21)))))
-		(cls [] Test11 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mul
-							2
-							2
-							3)))))
-		(cls [] Test12 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(div
-							12
-							3)))))
-		(cls [] Test13 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(rem
-							3
-							2)))))
-		(cls [] Test14 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(shift-right
-							1024
-							10)))))
-		(cls [] Test15 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(shift-left
-							1
-							10)))))))
+		(test-fn
+			0
+			(add
+				12
+				21))
+		(test-fn
+			1
+			(sub
+				33
+				12))
+		(test-fn
+			2
+			(sub
+				33
+				12
+				21))
+		(test-fn
+			3
+			(mul
+				2
+				2
+				3))
+		(test-fn
+			4
+			(div
+				12
+				3))
+		(test-fn
+			5
+			(rem
+				3
+				2))
+		(test-fn
+			6
+			(shift-right
+				1024
+				10))
+		(test-fn
+			7
+			(shift-left
+				1
+				10))
+		(test-fn
+			8
+			(add
+				12
+				21))
+		(test-fn
+			9
+			(sub
+				33
+				12))
+		(test-fn
+			10
+			(sub
+				33
+				12
+				21))
+		(test-fn
+			11
+			(mul
+				2
+				2
+				3))
+		(test-fn
+			12
+			(div
+				12
+				3))
+		(test-fn
+			13
+			(rem
+				3
+				2))
+		(test-fn
+			14
+			(shift-right
+				1024
+				10))
+		(test-fn
+			15
+			(shift-left
+				1
+				10))))
