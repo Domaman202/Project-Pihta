@@ -1,15 +1,3 @@
 (app-fn
-    (def [
-        [arr-a (new-array ^int 10)]
-        [arr-b (new-array ^int 10)]])
-    (body
-        (def [[i 0]])
-        (cycle (< i (array-size arr-a))
-            (aset arr-a i i)
-            (++ i)))
-    (body
-        (def [[i (- (array-size arr-a) 1)]])
-        (cycle (>= i 0)
-            (aset arr-b i (aget arr-a i))
-            (-- i)))
-    (println (#contentToString arr-b)))
+    (inl-def [[i (+ 12 21)]])
+    (println i))

@@ -7,11 +7,9 @@ import ru.DmN.pht.std.ast.NodeGetA
 import ru.DmN.pht.std.ast.NodeGetB
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.processor.utils.body
-import ru.DmN.pht.std.processor.utils.classes
-import ru.DmN.pht.std.processor.utils.clazz
-import ru.DmN.pht.std.processor.utils.method
+import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.lenArgs
+import ru.DmN.pht.utils.InlineVariable
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
@@ -27,6 +25,11 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
         if (name == "super" || name == "this")
             ctx.body["this"]!!.type()
         else processor.calc(NRGetB.process(info, name, mutableListOf(), processor, ctx, ValType.VALUE)!!, ctx)
+
+    override fun process(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
+        ctx.bodyOrNull?.get(node.name)?.let { if (it is InlineVariable) return processor.process(it.value, ctx, ValType.VALUE) }
+        return node // todo:
+    }
 
     override fun computeInt(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Int =
         node.getValueAsString().toInt()
