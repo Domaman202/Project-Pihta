@@ -3,13 +3,14 @@ package ru.DmN.pht.std.processors
 import ru.DmN.pht.ast.NodeTypedGet
 import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.processors.IAdaptableProcessor
-import ru.DmN.pht.std.ast.NodeGetA
-import ru.DmN.pht.std.ast.NodeGetB
+import ru.DmN.pht.std.ast.NodeGet
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.processor.utils.body
+import ru.DmN.pht.std.processor.utils.classes
+import ru.DmN.pht.std.processor.utils.clazz
+import ru.DmN.pht.std.processor.utils.method
 import ru.DmN.pht.std.utils.lenArgs
-import ru.DmN.pht.utils.InlineVariable
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
@@ -22,14 +23,10 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
         calc(node.info, node.name, processor, ctx)
 
     fun calc(info: INodeInfo, name: String, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        if (name == "super" || name == "this")
-            ctx.body["this"]!!.type()
-        else processor.calc(NRGetB.process(info, name, mutableListOf(), processor, ctx, ValType.VALUE)!!, ctx)
+        processor.calc(NRGetB.process(info, name, mutableListOf(), processor, ctx, ValType.VALUE)!!, ctx)
 
-    override fun process(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
-        ctx.bodyOrNull?.get(node.name)?.let { if (it is InlineVariable) return processor.process(it.value, ctx, ValType.VALUE) }
-        return node // todo:
-    }
+    override fun process(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
+        NRGetB.process(node.info, node.name, mutableListOf(), processor, ctx, mode)
 
     override fun computeInt(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Int =
         node.getValueAsString().toInt()
@@ -75,12 +72,12 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
                 val clazz = ctx.clazz
                 NRGetB.findGetter(node.info, clazz, node.name, emptyList(), !ctx.method.modifiers.static, processor, ctx)?.let { return it }
                 val field = clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first()!!
-                NodeGetB(
+                NodeGet(
                     node.info.withType(NodeTypes.GET_),
                     node.name,
                     if (field.modifiers.isStatic)
-                        NodeGetA.Type.THIS_STATIC_FIELD
-                    else NodeGetA.Type.THIS_FIELD
+                        NodeGet.Type.THIS_STATIC_FIELD
+                    else NodeGet.Type.THIS_FIELD
                 )
             }
             1 -> node

@@ -13,9 +13,14 @@ import ru.DmN.siberia.utils.nextOperation
 object NPGetOrName : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? {
         val tk = parser.nextOperation()
-        return if (tk.text!!.contains("[/#]".toRegex())) {
-            parser.tokens.push(tk)
-            parser.get(ctx, "get")!!.parse(parser, ctx, Token.operation(token.line, "get!"))
-        } else NodeGetOrName(INodeInfo.of(NodeTypes.GET_OR_NAME, ctx, token), tk.text!!, false)
+        return when (val text = tk.text!!) {
+            ".", "super" -> NodeGetOrName(INodeInfo.Companion.of(NodeTypes.NAME, ctx, token), text, false)
+            else -> {
+                if (tk.text!!.contains("[/#]".toRegex())) {
+                    parser.tokens.push(tk)
+                    parser.get(ctx, "get")!!.parse(parser, ctx, Token.operation(token.line, "get!"))
+                } else NodeGetOrName(INodeInfo.of(NodeTypes.GET_OR_NAME, ctx, token), text, false)
+            }
+        }
     }
 }

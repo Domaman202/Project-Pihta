@@ -10,18 +10,9 @@
 |	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	(desc = sum(III)I)
 |	|	|	|	|	|	[ADD_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'a')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'b')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'c')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]

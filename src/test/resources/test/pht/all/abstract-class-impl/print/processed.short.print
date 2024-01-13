@@ -12,10 +12,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	)]
 |	|	|	|	|	]
 |	|	|	|	|	[ANN_ABSTRACT_
@@ -35,10 +32,7 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	|	[DEFN_

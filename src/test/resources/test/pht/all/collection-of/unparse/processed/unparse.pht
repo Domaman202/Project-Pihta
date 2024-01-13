@@ -8,18 +8,18 @@
 							(def [
 								[(array-type ^int) pht$tmp$56198 (new-array ^int 3)]])
 							(aset
-								pht$tmp$56198
+								(get pht$tmp$56198)
 								0
 								12)
 							(aset
-								pht$tmp$56198
+								(get pht$tmp$56198)
 								1
 								21)
 							(aset
-								pht$tmp$56198
+								(get pht$tmp$56198)
 								2
 								33)
-							pht$tmp$56198)))))
+							(get pht$tmp$56198))))))
 		(cls [] Test1 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
@@ -28,18 +28,18 @@
 							(def [
 								[(array-type ^long) pht$tmp$46968 (new-array ^long 3)]])
 							(aset
-								pht$tmp$46968
+								(get pht$tmp$46968)
 								0
 								202)
 							(aset
-								pht$tmp$46968
+								(get pht$tmp$46968)
 								1
 								203)
 							(aset
-								pht$tmp$46968
+								(get pht$tmp$46968)
 								2
 								213)
-							pht$tmp$46968)))))
+							(get pht$tmp$46968))))))
 		(cls [] Test2 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
@@ -50,12 +50,12 @@
 									(def [
 										[(array-type ^java.lang.String) pht$tmp$56200 (new-array ^java.lang.String 2)]])
 									(aset
-										pht$tmp$56200
+										(get pht$tmp$56200)
 										0
 										"Слава")
 									(aset
-										pht$tmp$56200
+										(get pht$tmp$56200)
 										1
 										"России")
-									pht$tmp$56200))
+									(get pht$tmp$56200)))
 							toList)))))))

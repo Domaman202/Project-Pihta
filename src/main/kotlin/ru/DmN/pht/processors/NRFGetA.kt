@@ -28,18 +28,18 @@ object NRFGetA : INodeProcessor<NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeFGet? {
         return if (mode == ValType.VALUE) {
-            val nodes = processor.processNodes(node, ctx, ValType.VALUE)
-            val name = processor.computeString(nodes[1], ctx)
+            val instance = processor.process(node.nodes[0], ctx, ValType.VALUE)!!
+            val name = processor.computeString(node.nodes[1], ctx)
             val type =
-                if (nodes[0].isConstClass)
+                if (instance.isConstClass)
                     processor.computeType(node.nodes[0], ctx)
-                else processor.calc(nodes[0], ctx)!!
+                else processor.calc(instance, ctx)!!
             NodeFGet(
                 node.info.withType(NodeTypes.FGET_),
-                mutableListOf(nodes[0]),
+                mutableListOf(instance),
                 name,
                 type.let {
-                    val field = findField(it, name, nodes[0].isConstClass)
+                    val field = findField(it, name, instance.isConstClass)
                     if (field == null)
                         NodeFGet.Type.UNKNOWN
                     else if (field.modifiers.isStatic)

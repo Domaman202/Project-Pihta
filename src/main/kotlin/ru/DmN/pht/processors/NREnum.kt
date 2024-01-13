@@ -26,17 +26,7 @@ object NREnum : INodeProcessor<NodeNodesList> {
         //
         val generics = processor.computeListOr(node.nodes[0], ctx)
         val offset = if (generics == null) 0 else 1
-        val type = VirtualType.VirtualTypeImpl(
-            gctx.name(
-                processor.computeString(
-                    processor.process(
-                        node.nodes[offset],
-                        ctx,
-                        ValType.VALUE
-                    )!!, ctx
-                )
-            )
-        )
+        val type = VirtualType.VirtualTypeImpl(gctx.name(processor.computeString(node.nodes[offset], ctx,)))
         processor.tp.types[type.name.hashCode()] = type
         //
         val info = node.info

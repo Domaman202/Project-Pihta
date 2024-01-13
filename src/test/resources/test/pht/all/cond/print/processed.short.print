@@ -27,10 +27,7 @@
 |	|	|	|	|	]
 |	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	[LESS_OR_EQ_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	(value = '1')
@@ -38,10 +35,7 @@
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	[LESS_
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	(value = '0')
@@ -50,10 +44,7 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = append(Ljava/lang/CharSequence;)Ljava/lang/Appendable;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	(text = 'out')
-|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = STRING)
@@ -62,10 +53,7 @@
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	|	[EQ_
-|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	(value = '0')
@@ -74,10 +62,7 @@
 |	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	(method = append(Ljava/lang/CharSequence;)Ljava/lang/Appendable;)
 |	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	(text = 'out')
-|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	(type = STRING)
@@ -86,10 +71,7 @@
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	|	|	[GREAT_
-|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	(value = '0')
@@ -98,10 +80,7 @@
 |	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	(method = append(Ljava/lang/CharSequence;)Ljava/lang/Appendable;)
 |	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'out')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	(type = STRING)
@@ -118,10 +97,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'out')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	)]
 |	|	|	|	|	]
 |	|	|	|	]

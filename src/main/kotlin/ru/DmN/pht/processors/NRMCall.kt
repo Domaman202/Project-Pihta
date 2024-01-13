@@ -63,33 +63,35 @@ object NRMCall : INodeProcessor<NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeMCall {
         val info = node.info
-        val instance0 = processor.process(node.nodes[0], ctx, ValType.VALUE)!!
+        val instance0 = processor.compute(node.nodes[0], ctx)
         val result = findMethod(node, Static.ofInstanceNode(instance0, processor, ctx), processor, ctx)
-        val instance = getInstance(result, instance0, processor, ctx)
+        val instance1 = getInstance(result, instance0, processor, ctx)
         val generics = calc(result, node, processor, ctx)
-        return if (result.method.extension == null)
+        return if (result.method.extension == null) {
+            val instance2 = processor.process(instance1, ctx, ValType.VALUE)!!
             NodeMCall(
                 info.processed,
                 processArguments(info, processor, ctx, result.method, result.args, result.compression),
                 generics,
-                instance,
+                instance2,
                 result.method,
                 when (result.type) {
                     UNKNOWN ->
                         if (result.method.modifiers.static)
                             STATIC
                         else VIRTUAL
+
                     else -> result.type
                 }
             )
-        else NodeMCall(
+         }else NodeMCall(
             node.info.processed,
             processArguments(
                 node.info,
                 processor,
                 ctx,
                 result.method,
-                listOf(instance) + result.args,
+                listOf(instance1) + result.args,
                 result.compression
             ),
             generics,
@@ -118,7 +120,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      */
     private fun getInstance(result: MethodFindResultA, instance: Node, processor: Processor, ctx: ProcessingContext) =
         if (result.type == SUPER)
-            nodeGetOrName(instance.info, "this")
+            nodeGetVariable(instance.info, "this")
         else {
             if (result.type == VIRTUAL && instance.isConstClass)
                 nodeGetInstance(result, instance, processor, ctx)

@@ -11,10 +11,7 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	|	[CLS_
@@ -33,20 +30,11 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	)]
 |	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this$a')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[DEFN_

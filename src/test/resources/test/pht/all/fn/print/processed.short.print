@@ -12,10 +12,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = run()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'o')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	)]
 |	|	|	|	|	]
 |	|	|	|	|	[CLS_
@@ -50,10 +47,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = run()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'o')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	)]
 |	|	|	|	|	]
 |	|	|	|	|	[CLS_
@@ -88,10 +82,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = run()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'o')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	)]
 |	|	|	|	|	]
 |	|	|	|	|	[CLS_
@@ -146,10 +137,7 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	(text = 'o')
-|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	)]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -190,10 +178,7 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	(text = 'o')
-|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	)]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -232,10 +217,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'o')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	)]
 |	|	|	|	|	]
 |	|	|	|	|	[CLS_

@@ -1,12 +1,9 @@
 package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.ast.*
+import ru.DmN.pht.std.node.*
 import ru.DmN.pht.std.node.NodeParsedTypes.*
-import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.node.NodeTypes.FLD_
-import ru.DmN.pht.std.node.nodeDefn
-import ru.DmN.pht.std.node.nodeGetOrName
-import ru.DmN.pht.std.node.nodeValueClass
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.utils.computeList
@@ -60,7 +57,7 @@ object NRFld : INodeProcessor<NodeFieldA> {
                                 else NodeFieldSet(
                                     info.withType(FSET_B),
                                     mutableListOf(nodeGetOrName(info, name)),
-                                    nodeGetOrName(info, "this"),
+                                    nodeGetVariable(info, "this"),
                                     name,
                                     static = false,
                                     native = true
@@ -86,7 +83,8 @@ object NRFld : INodeProcessor<NodeFieldA> {
                             else NodeFMGet(
                                 info.withType(FGET_B),
                                 mutableListOf(),
-                                nodeGetOrName(info, "this"), name,
+                                nodeGetVariable(info, "this"),
+                                name,
                                 static = false,
                                 native = true
                             )

@@ -1,11 +1,10 @@
 package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.processor.utils.Static
-import ru.DmN.pht.std.ast.NodeGetA
-import ru.DmN.pht.std.ast.NodeGetB
+import ru.DmN.pht.std.ast.NodeGet
 import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.node.nodeGetOrName
+import ru.DmN.pht.std.node.nodeGetVariable
 import ru.DmN.pht.std.node.nodeValueClass
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.computeString
@@ -47,28 +46,27 @@ object NRGetB : INodeProcessor<NodeNodesList> {
             return if (mode == ValType.VALUE)
                 if (it is InlineVariable)
                     processor.process(it.value, ctx, ValType.VALUE)
-                else NodeGetB(info.withType(NodeTypes.GET_), name, NodeGetA.Type.VARIABLE)
+                else NodeGet(info.withType(NodeTypes.GET_), name, NodeGet.Type.VARIABLE)
             else null
         }
         val clazz = ctx.clazz
-        ctx.classes.forEach(clazz) { it ->
-            findGetter(info, it, name, nodes, !ctx.method.modifiers.static, processor, ctx)?.let { return it }
-        }
+        ctx.classes.forEach(clazz) { it -> findGetter(info, it, name, nodes, !ctx.method.modifiers.static, processor, ctx)?.let { return it } }
+        if (nodes.isNotEmpty())
+            throw RuntimeException("DEBUG")
         return if (mode == ValType.VALUE)
-            NodeGetA(
+            NodeGet(
                 info.withType(NodeTypes.GET_),
-                nodes,
                 name,
                 if ((clazz.fields.find { it.name == name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == name } }.first()!!).modifiers.isStatic)
-                    NodeGetA.Type.THIS_STATIC_FIELD
-                else NodeGetA.Type.THIS_FIELD
+                    NodeGet.Type.THIS_STATIC_FIELD
+                else NodeGet.Type.THIS_FIELD
             )
         else null
     }
 
     fun findGetter(info: INodeInfo, type: VirtualType, name: String, nodes: List<Node>, allowVirtual: Boolean, processor: Processor, ctx: ProcessingContext): Node? { // todo: static / no static
         if (allowVirtual)
-            findGetter(info, type, name, nodeGetOrName(info, "this"), nodes, NodeMCall.Type.VIRTUAL, processor, ctx)?.let { return it }
+            findGetter(info, type, name, nodeGetVariable(info, "this"), nodes, NodeMCall.Type.VIRTUAL, processor, ctx)?.let { return it }
         return findGetter(info, type, name, nodeValueClass(info, type.name), nodes, NodeMCall.Type.STATIC, processor, ctx)
     }
 

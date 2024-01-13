@@ -88,7 +88,7 @@
 		(cls [] TestG [^java.lang.Object]
 			(@static
 				(defn [] foo ^java.lang.String [[o ^java.lang.String]]
-					o)))
+					(get o))))
 		(cls [] Test6 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
@@ -105,7 +105,7 @@
 					super
 					<init>))
 			(defn [] foo ^java.lang.String [[o ^java.lang.String]]
-				o))
+				(get o)))
 		(cls [] Test7 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
@@ -125,7 +125,7 @@
 				(defn [] test ^java.lang.String [[f ^java.util.function.Supplier]]
 					(as ^java.lang.String
 						(mcall
-							f
+							(get f)
 							get)))))
 		(cls [] Test8 [^java.lang.Object]
 			(@static

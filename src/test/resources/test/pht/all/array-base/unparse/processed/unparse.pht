@@ -10,32 +10,32 @@
 						[^int i 0]])
 					(cycle
 						(less
-							i
+							(get i)
 							(array-size
-								arr-a))
+								(get arr-a)))
 						(aset
-							arr-a
-							i
-							i)
+							(get arr-a)
+							(get i)
+							(get i))
 						(inc i)))
 				(body
 					(def [
 						[^int i (sub
 								(array-size
-									arr-a)
+									(get arr-a))
 								1)]])
 					(cycle
 						(great-or-eq
-							i
+							(get i)
 							0)
 						(aset
-							arr-b
-							i
+							(get arr-b)
+							(get i)
 							(aget
-								arr-a
-								i))
+								(get arr-a)
+								(get i)))
 						(dec i)))
 				(as ^dynamic
 					(mcall
-						arr-b
+						(get arr-b)
 						contentToString))))))

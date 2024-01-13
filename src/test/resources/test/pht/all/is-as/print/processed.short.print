@@ -196,10 +196,7 @@
 |	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	(type = VT(long))
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -249,10 +246,7 @@
 |	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	(type = VT(float))
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'j')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -302,10 +296,7 @@
 |	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'j')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -355,10 +346,7 @@
 |	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	[IS_
 |	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'o')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -408,10 +396,7 @@
 |	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	[IS_
 |	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 's')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -459,10 +444,7 @@
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 's')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]

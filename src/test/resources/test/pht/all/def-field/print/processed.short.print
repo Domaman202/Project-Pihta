@@ -17,10 +17,7 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	]
@@ -41,10 +38,7 @@
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'test')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	(value = '202')

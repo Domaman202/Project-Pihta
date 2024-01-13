@@ -1,8 +1,6 @@
 package ru.DmN.pht.std.node
 
-import ru.DmN.pht.std.ast.NodeGetOrName
-import ru.DmN.pht.std.ast.NodeModifierNodesList
-import ru.DmN.pht.std.ast.NodeValue
+import ru.DmN.pht.std.ast.*
 import ru.DmN.pht.std.ast.NodeValue.Type.NIL
 import ru.DmN.pht.std.node.NodeParsedTypes.*
 import ru.DmN.pht.std.node.NodeTypes.*
@@ -77,10 +75,12 @@ fun nodeDefn(info: INodeInfo, name: String, ret: String, nodes: MutableList<Node
 // f
 fun nodeInitFld(info: INodeInfo, name: String) =
     NodeNodesList(info.withType(FSET_A),
-        mutableListOf(nodeGetOrName(info, "this"), nodeGetOrName(info, name), nodeGetOrName(info, name)))
+        mutableListOf(nodeGetVariable(info, "this"), nodeGetOrName(info, name), nodeGetOrName(info, name)))
 // g
 fun nodeGetOrName(info: INodeInfo, name: String) =
     NodeGetOrName(info.withType(GET_OR_NAME), name, false)
+fun nodeGetVariable(info: INodeInfo, name: String) =
+    NodeGet(info.withType(GET_), name, NodeGet.Type.VARIABLE)
 // i
 fun nodeIf(info: INodeInfo, nodes: MutableList<Node>) =
     NodeNodesList(info.withType(IF), nodes)
@@ -92,6 +92,8 @@ fun nodeMCall(info: INodeInfo, type: String, name: String, args: List<Node>) =
     NodeNodesList(info.withType(MCALL),
         mutableListOf<Node>(nodeValueClass(info, type), nodeValue(info, name)).apply { addAll(args) })
 // n
+fun nodeName(info: INodeInfo, name: String) =
+    NodeGetOrName(info.withType(NAME), name, false)
 fun nodeNew(info: INodeInfo, type: String, args: List<Node>) =
     NodeNodesList(info.withType(NEW),
         mutableListOf<Node>(nodeValueClass(info, type)).apply { addAll(args) })
@@ -119,11 +121,11 @@ fun nodeValue(info: INodeInfo, value: Boolean) =
     NodeValue.of(info, NodeValue.Type.BOOLEAN, value.toString())
 // w
 fun nodeWithGens(info: INodeInfo, node: Node, generics: Sequence<Node>) =
-    NodeNodesList(info.withType(NodeTypes.WITH_GENS),
+    NodeNodesList(info.withType(WITH_GENS),
         mutableListOf(node).apply { this.addAll(generics) })
 
 // Аннотации
 fun nodeStatic(info: INodeInfo, nodes: MutableList<Node>) =
-    NodeModifierNodesList(info.withType(NodeParsedTypes.ANN_STATIC), nodes)
+    NodeModifierNodesList(info.withType(ANN_STATIC), nodes)
 fun nodeStatic(info: INodeInfo, node: Node) =
     nodeStatic(info, mutableListOf(node))

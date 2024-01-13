@@ -353,6 +353,7 @@ object Pihta : Module("pht") {
         addSNU(MUL)
         addSNU(MUL_)
         // n
+        add(NAME,           NUGetOrName)
         addSNU(NAMED_BLOCK)
         add(NAMED_BLOCK_,   NUNamedBlock)
         addSNU(NEG)
@@ -545,6 +546,7 @@ object Pihta : Module("pht") {
         add(MUL,           NRMath)
         add(MUL_,          NRMathB)
         // n
+        add(NAME,          NRGetOrName)
         add(NAMED_BLOCK,   NRNamedList)
         add(NAMED_BLOCK_,  NRProgn)
         add(NEG,           NRMath)

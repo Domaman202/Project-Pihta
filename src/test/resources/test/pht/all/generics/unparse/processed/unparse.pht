@@ -6,7 +6,7 @@
 					(def [
 						[^java.util.ArrayList<^java.lang.Object> list (new ^java.util.ArrayList<^java.lang.Object>)]])
 					(mcall
-						list
+						(get list)
 						add
 						"Hi!")
 					^java.lang.String)))
@@ -16,7 +16,7 @@
 					(def [
 						[^java.util.List<^java.lang.Object> list (new ^java.util.ArrayList<^java.lang.Object>)]])
 					(mcall
-						list
+						(get list)
 						add
 						"Hi!")
 					^java.lang.String)))
@@ -26,7 +26,7 @@
 					(def [
 						[^java.util.ArrayList<^java.lang.Object> list (new ^java.util.ArrayList<^java.lang.Object>)]])
 					(mcall
-						list
+						(get list)
 						add
 						"Hi!")
 					^java.lang.String)))
@@ -37,7 +37,7 @@
 						[^java.util.List<^java.lang.Object> list (as ^java.util.List<^java.lang.Object>
 								(new ^java.util.ArrayList<^java.lang.Object>))]])
 					(mcall
-						list
+						(get list)
 						add
 						"Hi!")
 					^java.lang.String)))
@@ -47,7 +47,7 @@
 					super
 					<init>))
 			(defn [[T ^java.lang.Object]] foo T^ [[o T^]]
-				o))
+				(get o)))
 		(cls [] Test4 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
@@ -58,7 +58,7 @@
 					super
 					<init>))
 			(defn [] foo T^ [[o T^]]
-				o))
+				(get o)))
 		(cls [] Test5 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []

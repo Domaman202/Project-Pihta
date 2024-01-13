@@ -60,7 +60,7 @@ enum class NodeTypes : INodeType {
     FSET_("fset", PROCESSED),
     // g
     GET_("get", PROCESSED),
-    GET_OR_NAME("get-or-name!", true, true),
+    GET_OR_NAME("get-or-name!", PARSED),
     GREAT_("great", PROCESSED),
     GREAT_OR_EQ_("great-or-eq", PROCESSED),
     // i
@@ -88,6 +88,7 @@ enum class NodeTypes : INodeType {
     MCALL_("mcall", PROCESSED),
     MUL_("mul", PROCESSED),
     // n
+    NAME("name", PROCESSED),
     NAMED_BLOCK_("named-block", PROCESSED),
     NEG_("neg", PROCESSED),
     NEW_("new", PROCESSED),

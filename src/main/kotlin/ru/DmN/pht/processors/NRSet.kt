@@ -6,6 +6,7 @@ import ru.DmN.pht.std.ast.NodeMCall
 import ru.DmN.pht.std.ast.NodeSet
 import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.node.nodeGetOrName
+import ru.DmN.pht.std.node.nodeGetVariable
 import ru.DmN.pht.std.node.nodeValueClass
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.forEach
@@ -36,7 +37,7 @@ object NRSet : INodeProcessor<NodeSet> {
 
     private fun findSetter(info: INodeInfo, type: VirtualType, name: String, values: List<Node>, allowVirtual: Boolean, processor: Processor, ctx: ProcessingContext): Node? {
         if (allowVirtual)
-            findSetter(info, type, name, nodeGetOrName(info, "this"), values, NodeMCall.Type.VIRTUAL, processor, ctx)?.let { return it }
+            findSetter(info, type, name, nodeGetVariable(info, "this"), values, NodeMCall.Type.VIRTUAL, processor, ctx)?.let { return it }
         return findSetter(info, type, name, nodeValueClass(info, type.name), values, NodeMCall.Type.STATIC, processor, ctx)
     }
 

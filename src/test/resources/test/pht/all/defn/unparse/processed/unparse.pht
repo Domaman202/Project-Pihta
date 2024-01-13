@@ -4,9 +4,9 @@
 			(@static
 				(defn [] sum ^int [[a ^int][b ^int][c ^int]]
 					(add
-						a
-						b
-						c))))
+						(get a)
+						(get b)
+						(get c)))))
 		(cls [] Test0 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []

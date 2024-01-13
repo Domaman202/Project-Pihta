@@ -20,7 +20,7 @@ object NRFSetA : INodeProcessor<NodeNodesList> {
         val name = processor.computeString(node.nodes[1], ctx)
         return NodeFSet(
             node.info.withType(NodeTypes.FSET_),
-            mutableListOf(processor.process(node.nodes[0], ctx, ValType.VALUE)!!, processor.process(node.nodes[2], ctx, ValType.NO_VALUE)!!),
+            mutableListOf(processor.process(node.nodes[0], ctx, ValType.VALUE)!!, processor.process(node.nodes[2], ctx, ValType.VALUE)!!),
             instance.fields.find { it.name == name }!!
         )
     }

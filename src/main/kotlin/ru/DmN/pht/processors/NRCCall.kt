@@ -1,7 +1,7 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.std.node.nodeGetOrName
 import ru.DmN.pht.std.node.nodeMCall
+import ru.DmN.pht.std.node.nodeName
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -20,7 +20,7 @@ object NRCCall : INodeProcessor<NodeNodesList> {
         when (ctx.platform) {
             Platforms.JAVA -> {
                 val info = node.info
-                NRMCall.process(nodeMCall(info, nodeGetOrName(info, "super"), "<init>", node.nodes), processor, ctx, mode)
+                NRMCall.process(nodeMCall(info, nodeName(info, "super"), "<init>", node.nodes), processor, ctx, mode)
             }
 
             else -> node

@@ -599,7 +599,7 @@
 |	|	|	|	|	(value = 'test')
 |	|	|	|	]
 |	|	|	|	[RFN
-|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	[NAME
 |	|	|	|	|	|	(type = NO-STATIC)
 |	|	|	|	|	|	(text = '.')
 |	|	|	|	|	]

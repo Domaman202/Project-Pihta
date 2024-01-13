@@ -9,6 +9,7 @@ object ConsoleImpl : BaseConsole() {
     fun main(args: Array<String>) {
         commands += BaseCommands.HELP
         commands += BuildCommands.MODULE_SELECT
+        commands += BuildCommands.MODULE_UNPARSE
         commands += BuildCommands.MODULE_PRINT
         commands += BuildCommands.MODULE_COMPILE
         commands += BuildCommands.MODULE_RUN

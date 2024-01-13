@@ -196,10 +196,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$10001)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = [Z)
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -214,15 +211,9 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	|	[LESS_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$20002')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$10001')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -235,28 +226,19 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(boolean))
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
 |	|	|	|	|	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'e')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[INC_PRE_]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[EFN_
@@ -278,10 +260,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -296,10 +275,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	(type = int)
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -310,10 +286,7 @@
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(value = '0')
@@ -322,10 +295,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(Z)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -334,10 +304,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -348,10 +315,7 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[SET_
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '1')
@@ -362,10 +326,7 @@
 |	|	|	|	|	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
 |	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -375,10 +336,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(Z)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -388,10 +346,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -403,10 +358,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -434,10 +386,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$10001)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = [B)
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -452,15 +401,9 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	|	[LESS_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$20002')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$10001')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -473,28 +416,19 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(boolean))
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
 |	|	|	|	|	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'e')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[INC_PRE_]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[EFN_
@@ -516,10 +450,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -534,10 +465,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	(type = int)
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -548,10 +476,7 @@
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(value = '0')
@@ -560,10 +485,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(J)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -575,10 +497,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -589,10 +508,7 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[SET_
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '1')
@@ -603,10 +519,7 @@
 |	|	|	|	|	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
 |	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -616,10 +529,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(J)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -632,10 +542,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -647,10 +554,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -678,10 +582,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$10001)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = [S)
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -696,15 +597,9 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	|	[LESS_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$20002')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$10001')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -717,28 +612,19 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(boolean))
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
 |	|	|	|	|	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'e')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[INC_PRE_]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[EFN_
@@ -760,10 +646,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -778,10 +661,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	(type = int)
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -792,10 +672,7 @@
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(value = '0')
@@ -804,10 +681,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(J)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -819,10 +693,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -833,10 +704,7 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[SET_
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '1')
@@ -847,10 +715,7 @@
 |	|	|	|	|	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
 |	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -860,10 +725,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(J)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -876,10 +738,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -891,10 +750,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -922,10 +778,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$10001)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = [C)
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -940,15 +793,9 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	|	[LESS_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$20002')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$10001')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -961,28 +808,19 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(boolean))
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
 |	|	|	|	|	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'e')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[INC_PRE_]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[EFN_
@@ -1004,10 +842,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1022,10 +857,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	(type = int)
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -1036,10 +868,7 @@
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(value = '0')
@@ -1048,10 +877,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1060,10 +886,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1074,10 +897,7 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[SET_
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '1')
@@ -1088,10 +908,7 @@
 |	|	|	|	|	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
 |	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -1101,10 +918,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1114,10 +928,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1129,10 +940,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1160,10 +968,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$10001)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = [I)
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -1178,15 +983,9 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	|	[LESS_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$20002')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$10001')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -1199,28 +998,19 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(boolean))
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
 |	|	|	|	|	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'e')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[INC_PRE_]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[EFN_
@@ -1242,10 +1032,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1260,10 +1047,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	(type = int)
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -1274,10 +1058,7 @@
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(value = '0')
@@ -1286,10 +1067,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(I)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1298,10 +1076,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1312,10 +1087,7 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[SET_
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '1')
@@ -1326,10 +1098,7 @@
 |	|	|	|	|	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
 |	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -1339,10 +1108,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(I)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1352,10 +1118,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1367,10 +1130,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1398,10 +1158,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$10001)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = [J)
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -1416,15 +1173,9 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	|	[LESS_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$20002')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$10001')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -1437,28 +1188,19 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(boolean))
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
 |	|	|	|	|	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'e')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[INC_PRE_]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[EFN_
@@ -1480,10 +1222,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1498,10 +1237,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	(type = int)
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -1512,10 +1248,7 @@
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(value = '0')
@@ -1524,10 +1257,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(J)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1536,10 +1266,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1550,10 +1277,7 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[SET_
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '1')
@@ -1564,10 +1288,7 @@
 |	|	|	|	|	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
 |	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -1577,10 +1298,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(J)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1590,10 +1308,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1605,10 +1320,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1636,10 +1348,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$10001)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = [F)
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -1654,15 +1363,9 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	|	[LESS_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$20002')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$10001')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -1675,28 +1378,19 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(boolean))
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
 |	|	|	|	|	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'e')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[INC_PRE_]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[EFN_
@@ -1718,10 +1412,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1736,10 +1427,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	(type = int)
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -1750,10 +1438,7 @@
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(value = '0')
@@ -1762,10 +1447,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(F)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1774,10 +1456,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1788,10 +1467,7 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[SET_
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '1')
@@ -1802,10 +1478,7 @@
 |	|	|	|	|	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
 |	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -1815,10 +1488,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(F)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1828,10 +1498,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1843,10 +1510,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1874,10 +1538,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$10001)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = [D)
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -1892,15 +1553,9 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	|	[LESS_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$20002')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$10001')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -1913,28 +1568,19 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(boolean))
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
 |	|	|	|	|	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'e')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[INC_PRE_]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[EFN_
@@ -1956,10 +1602,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -1974,10 +1617,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	(type = int)
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -1988,10 +1628,7 @@
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(value = '0')
@@ -2000,10 +1637,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(D)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -2012,10 +1646,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -2026,10 +1657,7 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[SET_
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '1')
@@ -2040,10 +1668,7 @@
 |	|	|	|	|	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
 |	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -2053,10 +1678,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(D)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -2066,10 +1688,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -2081,10 +1700,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -2112,10 +1728,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$10001)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.Object;)
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -2130,15 +1743,9 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	|	[LESS_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$20002')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$10001')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -2151,25 +1758,16 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(boolean))
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'e')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[INC_PRE_]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	(text = 'list')
-|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[EFN_
@@ -2191,10 +1789,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -2209,10 +1804,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	(type = int)
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -2223,10 +1815,7 @@
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(value = '0')
@@ -2235,10 +1824,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(Ljava/lang/Object;)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -2247,10 +1833,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -2261,10 +1844,7 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[SET_
 |	|	|	|	|	|	|	|	|	|	|	|	[SUB_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '1')
@@ -2275,10 +1855,7 @@
 |	|	|	|	|	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	|	|	|	|	[GREAT_
 |	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -2288,10 +1865,7 @@
 |	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	(method = append(Ljava/lang/Object;)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -2301,10 +1875,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = append(C)Ljava/lang/AbstractStringBuilder;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.AbstractStringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -2316,10 +1887,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -2346,10 +1914,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[NEW_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.StringBuilder))
 |	|	|	|	|	|	|	|	|	|	|	|	|	(ctor = (Ljava/lang/CharSequence;)V)
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
@@ -2358,10 +1923,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$10029)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.String;)
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'arr')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -2376,15 +1938,9 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	|	|	|	|	|	|	[LESS_
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$20058')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'pht$tmp$10029')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[DEF_
@@ -2397,17 +1953,11 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(method = append(Ljava/lang/CharSequence;)Ljava/lang/Appendable;)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Appendable))
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
-|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'e')
-|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	[INC_PRE_]
 |	|	|	|	|	|	|	|	|	|	|	]
@@ -2415,10 +1965,7 @@
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'str')
-|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
 |	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -2457,10 +2004,7 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = floatToRawIntBits(F)I)
@@ -2472,10 +2016,7 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'other')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
@@ -2506,10 +2047,7 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(long))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = doubleToLongBits(D)J)
@@ -2521,10 +2059,7 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(long))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'other')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
@@ -2555,10 +2090,7 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = floatToRawIntBits(F)I)
@@ -2570,10 +2102,7 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'other')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
@@ -2604,10 +2133,7 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(long))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = doubleToLongBits(D)J)
@@ -2619,10 +2145,7 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(long))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'other')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
@@ -2640,10 +2163,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	|	|	[AND_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = LONG)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '4294967295')
@@ -2653,10 +2173,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	|	|	[AND_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'other')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = LONG)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '4294967295')
@@ -2677,10 +2194,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	|	|	[SHIFT_RIGHT_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '32')
@@ -2690,10 +2204,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	|	|	[SHIFT_RIGHT_
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(text = 'other')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '32')
@@ -2735,10 +2246,7 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = floatToRawIntBits(F)I)
@@ -2750,10 +2258,7 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'other')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
@@ -2793,10 +2298,7 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(long))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	(method = doubleToLongBits(D)J)
@@ -2808,10 +2310,7 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(long))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'other')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
@@ -2842,15 +2341,9 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	(text = 'offset')
-|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
@@ -2880,15 +2373,9 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(long))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	(text = 'offset')
-|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
@@ -2918,15 +2405,9 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	(text = 'offset')
-|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
@@ -2956,15 +2437,9 @@
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(long))
 |	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	|	(text = 'offset')
-|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]

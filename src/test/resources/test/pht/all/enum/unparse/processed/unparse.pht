@@ -3,45 +3,45 @@
 		(enum [] Colors [^java.lang.Enum]
 			(ector [[r ^int][g ^int][b ^int]]
 				(mcall
-					this
+					(get this)
 					setRed
-					r)
+					(get r))
 				(mcall
-					this
+					(get this)
 					setGreen
-					g)
+					(get g))
 				(mcall
-					this
+					(get this)
 					setBlue
-					b))
+					(get b)))
 			(progn-
 				(progn-
 					(defn [] setRed ^void [[red ^int]]
 						(fset
-							this
+							(get this)
 							red
-							red))
+							(get red)))
 					(defn [] getRed ^int []
 						(fget
-							this
+							(get this)
 							red))
 					(defn [] setGreen ^void [[green ^int]]
 						(fset
-							this
+							(get this)
 							green
-							green))
+							(get green)))
 					(defn [] getGreen ^int []
 						(fget
-							this
+							(get this)
 							green))
 					(defn [] setBlue ^void [[blue ^int]]
 						(fset
-							this
+							(get this)
 							blue
-							blue))
+							(get blue)))
 					(defn [] getBlue ^int []
 						(fget
-							this
+							(get this)
 							blue))
 					(def [
 						[red ^int]

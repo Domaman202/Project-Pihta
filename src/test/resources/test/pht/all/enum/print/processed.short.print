@@ -11,41 +11,23 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = setRed(I)V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	)
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'r')
-|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_]
 |	|	|	|	|	]
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = setGreen(I)V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	)
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'g')
-|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_]
 |	|	|	|	|	]
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = setBlue(I)V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	)
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'b')
-|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[PROGN_B_
@@ -54,72 +36,45 @@
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = setRed(I)V)
 |	|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'red')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = getRed()I)
 |	|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = setGreen(I)V)
 |	|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'green')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = getGreen()I)
 |	|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = setBlue(I)V)
 |	|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'blue')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = getBlue()I)
 |	|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'this')
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[FLD_]

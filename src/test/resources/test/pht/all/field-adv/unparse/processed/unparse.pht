@@ -8,7 +8,7 @@
 							(fset
 								^TestA
 								i
-								i))
+								(get i)))
 						(defn [] getI ^int []
 							(fget
 								^TestA
@@ -30,24 +30,24 @@
 			(@static
 				(defn [] setFoo ^java.lang.String [[a ^java.lang.String][b ^java.lang.String]]
 					(mcall
-						a
+						(get a)
 						add
 						(body
 							(def [
 								[(array-type ^java.lang.String) pht$tmp$46976 (new-array ^java.lang.String 3)]])
 							(aset
-								pht$tmp$46976
+								(get pht$tmp$46976)
 								0
 								" ")
 							(aset
-								pht$tmp$46976
+								(get pht$tmp$46976)
 								1
-								b)
+								(get b))
 							(aset
-								pht$tmp$46976
+								(get pht$tmp$46976)
 								2
 								"!")
-							pht$tmp$46976)))
+							(get pht$tmp$46976))))
 				(defn [] getFoo ^java.lang.String [[c ^java.lang.String][d ^java.lang.String]]
 					(mcall
 						"Боже, "
@@ -56,22 +56,22 @@
 							(def [
 								[(array-type ^java.lang.String) pht$tmp$46978 (new-array ^java.lang.String 4)]])
 							(aset
-								pht$tmp$46978
+								(get pht$tmp$46978)
 								0
-								c)
+								(get c))
 							(aset
-								pht$tmp$46978
+								(get pht$tmp$46978)
 								1
 								" ")
 							(aset
-								pht$tmp$46978
+								(get pht$tmp$46978)
 								2
-								d)
+								(get d))
 							(aset
-								pht$tmp$46978
+								(get pht$tmp$46978)
 								3
 								"!")
-							pht$tmp$46978)))
+							(get pht$tmp$46978))))
 				(cls [] Test1 [^java.lang.Object]
 					(@static
 						(defn [] test ^dynamic []

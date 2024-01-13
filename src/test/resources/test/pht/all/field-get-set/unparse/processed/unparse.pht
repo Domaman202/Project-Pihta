@@ -8,7 +8,7 @@
 							(fset
 								^TestA
 								i
-								i))
+								(get i)))
 						(defn [] getI ^int []
 							(fget
 								^TestA
@@ -38,7 +38,7 @@
 							(fset
 								^TestB
 								i
-								i))
+								(get i)))
 						(defn [] getI ^int []
 							(fget
 								^TestB
@@ -65,12 +65,12 @@
 				(progn-
 					(defn [] setI ^void [[i ^int]]
 						(fset
-							this
+							(get this)
 							i
-							i))
+							(get i)))
 					(defn [] getI ^int []
 						(fget
-							this
+							(get this)
 							i))
 					(def [
 						[i ^int]])))
@@ -80,11 +80,11 @@
 					<init>))
 			(defn [] test ^int []
 				(mcall
-					this
+					(get this)
 					setI
 					240422)
 				(mcall
-					this
+					(get this)
 					getI)))
 		(cls [] Test2 [^java.lang.Object]
 			(@static
@@ -98,12 +98,12 @@
 				(progn-
 					(defn [] setI ^void [[i ^int]]
 						(fset
-							this
+							(get this)
 							i
-							i))
+							(get i)))
 					(defn [] getI ^int []
 						(fget
-							this
+							(get this)
 							i))
 					(def [
 						[i ^int]])))
@@ -113,7 +113,7 @@
 					<init>))
 			(defn [] test ^int []
 				(mcall
-					this
+					(get this)
 					setI
 					404)
 				(fget

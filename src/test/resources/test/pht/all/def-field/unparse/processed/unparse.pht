@@ -13,7 +13,7 @@
 					(def [
 						[^Test test (new ^Test)]])
 					(fset
-						test
+						(get test)
 						i
 						202)
 					(as ^dynamic

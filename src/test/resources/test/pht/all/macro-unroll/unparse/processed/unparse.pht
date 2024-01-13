@@ -8,29 +8,29 @@
 				(progn
 					(set! i
 						(add
-							i
+							(get i)
 							222))
 					(set! j
 						(add
-							j
+							(get j)
 							333))
 					(set! i
 						(add
-							i
+							(get i)
 							-222))
 					(set! j
 						(add
-							j
+							(get j)
 							333))
 					(set! i
 						(add
-							i
+							(get i)
 							-222))
 					(set! j
 						(add
-							j
+							(get j)
 							333)))
 				(as ^dynamic
 					(add
-						i
-						j))))))
+						(get i)
+						(get j)))))))

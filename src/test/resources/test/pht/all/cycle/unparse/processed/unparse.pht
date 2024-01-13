@@ -7,12 +7,12 @@
 					[^int j 0]])
 				(cycle
 					(less
-						i
+						(get i)
 						10)
 					(set! j
 						(add
-							j
-							i))
+							(get j)
+							(get i)))
 					(inc i))
 				(as ^dynamic
 					(get j))))))

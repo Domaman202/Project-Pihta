@@ -5,12 +5,12 @@
 				(progn-
 					(defn [] setI ^void [[i ^int]]
 						(fset
-							this
+							(get this)
 							i
-							i))
+							(get i)))
 					(defn [] getI ^int []
 						(fget
-							this
+							(get this)
 							i))
 					(def [
 						[i ^int]])))
@@ -24,7 +24,7 @@
 					(def [
 						[^Test test (new ^Test)]])
 					(mcall
-						test
+						(get test)
 						setI
 						213)
 					(as ^dynamic

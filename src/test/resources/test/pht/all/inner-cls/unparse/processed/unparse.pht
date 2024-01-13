@@ -14,9 +14,9 @@
 						super
 						<init>)
 					(fset
-						this
+						(get this)
 						this$a
-						this$a))
+						(get this$a)))
 				(defn [] getA ^TestA []
 					(fget
 						(get this)

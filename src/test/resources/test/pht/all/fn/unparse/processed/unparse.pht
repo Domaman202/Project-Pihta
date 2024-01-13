@@ -4,7 +4,7 @@
 			(@static
 				(defn [] test ^void [[o ^java.lang.Runnable]]
 					(mcall
-						o
+						(get o)
 						run))
 				(cls [] Test0 [^java.lang.Object]
 					(@static
@@ -20,7 +20,7 @@
 			(@static
 				(defn [] test ^void [[o ^java.lang.Runnable]]
 					(mcall
-						o
+						(get o)
 						run))
 				(cls [] Test1 [^java.lang.Object]
 					(@static
@@ -36,7 +36,7 @@
 			(@static
 				(defn [] test ^void [[o ^java.lang.Runnable]]
 					(mcall
-						o
+						(get o)
 						run))
 				(cls [] Test2 [^java.lang.Object]
 					(@static
@@ -57,24 +57,24 @@
 												super
 												<init>)
 											(fset
-												this
+												(get this)
 												i
-												i)
+												(get i))
 											(fset
-												this
+												(get this)
 												j
-												j))
+												(get j)))
 										(defn [] run ^void []
 											(unit)))
 									(new ^PhtLambda$83141467
-										i
-										j))))))))
+										(get i)
+										(get j)))))))))
 		(cls [] TestD [^java.lang.Object]
 			(@static
 				(defn [] test ^java.lang.String [[o ^java.util.function.Supplier]]
 					(as ^java.lang.String
 						(mcall
-							o
+							(get o)
 							get)))
 				(cls [] Test3 [^java.lang.Object]
 					(@static
@@ -92,7 +92,7 @@
 				(defn [] test ^java.lang.String [[o ^java.util.function.Supplier]]
 					(as ^java.lang.String
 						(mcall
-							o
+							(get o)
 							get)))
 				(cls [] Test4 [^java.lang.Object]
 					(@static
@@ -109,7 +109,7 @@
 			(@static
 				(defn [] test ^java.lang.Object [[o ^java.util.function.Supplier]]
 					(mcall
-						o
+						(get o)
 						get))
 				(cls [] Test5 [^java.lang.Object]
 					(@static
@@ -131,18 +131,18 @@
 													super
 													<init>)
 												(fset
-													this
+													(get this)
 													i
-													i)
+													(get i))
 												(fset
-													this
+													(get this)
 													j
-													j))
+													(get j)))
 											(defn [] get ^java.lang.Object []
 												(as ^java.lang.Object
 													(add
-														i
-														j))))
+														(get i)
+														(get j)))))
 										(new ^PhtLambda$83141489
-											i
-											j)))))))))))
+											(get i)
+											(get j))))))))))))

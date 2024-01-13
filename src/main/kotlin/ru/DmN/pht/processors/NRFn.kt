@@ -25,13 +25,12 @@ object NRFn : INodeProcessor<NodeNodesList> {
         val gctx = ctx.global
         val cctx = ctx.clazz
         val bctx = ctx.body
-        val nodes = LazyProcessValueList(node, processor, ctx)
-        val offset = if (nodes[0].isConstClass) 1 else 0
-        val type = if (offset == 1) gctx.getType(nodes[0].valueAsString, processor.tp) else null
-        val refs = processor.computeStringNodes(nodes[offset] as INodesList, ctx)
+        val offset = if (node.nodes[0].isConstClass) 1 else 0
+        val type = if (offset == 1) gctx.getType(node.nodes[0].valueAsString, processor.tp) else null
+        val refs = processor.computeStringNodes(processor.compute(node.nodes[offset], ctx) as INodesList, ctx)
             .map { ref -> bctx[ref]?.let { NVC.of(it) } ?: NVC.of(cctx.fields.find { it.name == ref }!!) }
-        val args = processor.computeStringNodes(nodes[offset + 1] as INodesList, ctx)
-        val body = nodes.drop(offset + 2)
+        val args = processor.computeStringNodes(processor.compute(node.nodes[offset + 1], ctx) as INodesList, ctx)
+        val body = LazyProcessValueList(node, processor, ctx).drop(offset + 2)
         val new = NodeFn(node.info.withType(NodeTypes.FN_), NodeFn.Source(body, type, args, gctx.name("PhtLambda\$${node.info.hashCode().absoluteValue}"), refs))
         if (ctx.platform == Platforms.JAVA) {
             processor.stageManager.pushTask(ProcessingStage.FINALIZATION) {

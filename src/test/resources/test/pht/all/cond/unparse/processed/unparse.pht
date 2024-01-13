@@ -7,34 +7,34 @@
 					[^int i -1]])
 				(cycle
 					(less-or-eq
-						i
+						(get i)
 						1)
 					(if
 						(less
-							i
+							(get i)
 							0)
 						(mcall
-							out
+							(get out)
 							append
 							"М")
 						(if
 							(eq
-								i
+								(get i)
 								0)
 							(mcall
-								out
+								(get out)
 								append
 								"Р")
 							(if
 								(great
-									i
+									(get i)
 									0)
 								(mcall
-									out
+									(get out)
 									append
 									"Б"))))
 					(inc i))
 				(as ^dynamic
 					(mcall
-						out
+						(get out)
 						toString))))))

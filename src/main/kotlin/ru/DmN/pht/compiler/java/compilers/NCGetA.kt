@@ -8,15 +8,15 @@ import ru.DmN.siberia.utils.Variable
 import ru.DmN.pht.std.compiler.java.utils.body
 import ru.DmN.pht.std.compiler.java.utils.clazz
 import ru.DmN.pht.std.compiler.java.utils.method
-import ru.DmN.pht.std.ast.NodeGetA
-import ru.DmN.pht.std.ast.NodeGetB
+import ru.DmN.pht.std.ast.NodeGet
+import ru.DmN.pht.std.ast.NodeGet.Type.*
 import ru.DmN.pht.std.processor.utils.classes
 
-object NCGetA : INodeCompiler<NodeGetB> {
-    override fun compileVal(node: NodeGetB, compiler: Compiler, ctx: CompilationContext): Variable =
+object NCGetA : INodeCompiler<NodeGet> {
+    override fun compileVal(node: NodeGet, compiler: Compiler, ctx: CompilationContext): Variable =
         when (node.type) {
-            NodeGetA.Type.VARIABLE -> ctx.body[node.name]!!
-            NodeGetA.Type.THIS_FIELD -> ctx.method.node.run {
+            VARIABLE -> ctx.body[node.name]!!
+            THIS_FIELD -> ctx.method.node.run {
                 visitVarInsn(Opcodes.ALOAD, 0)
                 val field = ctx.clazz.clazz.fields.find { it.name == node.name }!!
                 visitFieldInsn(
@@ -27,7 +27,7 @@ object NCGetA : INodeCompiler<NodeGetB> {
                 )
                 Variable(node.name, field.type, -1, true)
             }
-            NodeGetA.Type.THIS_STATIC_FIELD -> ctx.method.node.run {
+            THIS_STATIC_FIELD -> ctx.method.node.run {
                 val field = ctx.clazz.clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first()!!
                 visitFieldInsn(
                     Opcodes.GETSTATIC,
