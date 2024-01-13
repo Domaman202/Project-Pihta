@@ -1,6 +1,12 @@
 package ru.DmN.phtx.ppl
 
 import ru.DmN.phtx.ppl.page.Page
+import java.awt.Color
+import java.awt.Font
+import java.awt.Font.BOLD
+import java.awt.Font.ITALIC
+import java.awt.Graphics
+import java.awt.Graphics2D
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 import java.awt.event.KeyEvent.VK_LEFT
@@ -11,7 +17,7 @@ import javax.swing.JFrame.MAXIMIZED_BOTH
 import javax.swing.JPanel
 
 class Presentation(title: String) {
-    val frame = JFrame(title)
+    val frame = Frame(title)
     val pages: MutableList<Page> = ArrayList()
     var index: Int = -1
 
@@ -50,6 +56,22 @@ class Presentation(title: String) {
             frame.add(pages[index].component)
         frame.revalidate()
         frame.repaint()
+    }
+
+    inner class Frame(title: String) : JFrame(title) {
+        override fun paint(g: Graphics?) {
+            super.paint(g)
+            paintPageIndex(g!!)
+        }
+
+        private fun paintPageIndex(g: Graphics) {
+            val width = size.width
+            val height = size.height
+            val string = "($index)"
+            g.font = Font("TimesRoman", BOLD + ITALIC, 24)
+            g.color = Color.WHITE
+            g.drawString(string, width - g.fontMetrics.stringWidth(string) - 25, height - 25)
+        }
     }
 
     inner class KeyListener : KeyAdapter() {
