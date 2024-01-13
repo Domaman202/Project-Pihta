@@ -70,6 +70,12 @@ object Test {
                     32,
                     false
                 )
+                this += TitleImageImagePage(
+                    "Флаги Российской Империи",
+                    36,
+                    ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg")),
+                    ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg"))
+                )
                 this += ImagePage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg")))
                 //
                 this.start()
