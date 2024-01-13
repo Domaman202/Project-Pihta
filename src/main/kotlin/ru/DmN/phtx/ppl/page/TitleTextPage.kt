@@ -24,7 +24,7 @@ class TitleTextPage(val title: String, val text: String, val titleFont: Int, val
             var textY = height - textHeight * (lines.size + 1)
             lines.forEach {
                 textY += textHeight
-                g.drawString(it, (width - textMetrics.stringWidth(it)) / 2, textY)
+                g.drawString(it, textFont, textY)
             }
         }
     }

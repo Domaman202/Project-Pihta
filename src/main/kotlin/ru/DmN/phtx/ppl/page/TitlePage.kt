@@ -12,8 +12,8 @@ class TitlePage(val text: String, val font: Int) : Page() {
         override fun paintComponent(g: Graphics?) {
             g as Graphics2D
             g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
-            font = Font("TimesRoman", BOLD + ITALIC, this@TitlePage.font)
-            val metrics = g.getFontMetrics(font)
+            g.font = Font("TimesRoman", BOLD + ITALIC, this@TitlePage.font)
+            val metrics = g.getFontMetrics(g.font)
             g.drawString(text, (width - metrics.stringWidth(text)) / 2, metrics.height)
         }
     }

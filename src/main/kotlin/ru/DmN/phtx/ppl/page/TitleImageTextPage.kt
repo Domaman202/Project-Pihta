@@ -22,11 +22,12 @@ class TitleImageTextPage(val title: String, val image: Image, val text: String, 
             g.font = Font("TimesRoman", ITALIC, textFont)
             val textMetrics = g.getFontMetrics(g.font)
             val lines = text.split('\n')
+            val textX = lines.map { (width - textMetrics.stringWidth(it)) / 2 }.average().toInt()
             val textHeight = textMetrics.height
             var textY = height - textHeight * (lines.size + 1)
             lines.forEach {
                 textY += textHeight
-                g.drawString(it, (width - textMetrics.stringWidth(it)) / 2, textY)
+                g.drawString(it, textX, textY)
             }
             val offset = (titleY * 1.5).toInt()
             val imgWidth = width - offset * 2

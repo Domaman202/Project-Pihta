@@ -1,10 +1,7 @@
 package ru.DmN.test.phtx.ppl
 
 import ru.DmN.phtx.ppl.Presentation
-import ru.DmN.phtx.ppl.page.TitleImagePage
-import ru.DmN.phtx.ppl.page.TitleImageTextPage
-import ru.DmN.phtx.ppl.page.TitlePage
-import ru.DmN.phtx.ppl.page.TitleTextPage
+import ru.DmN.phtx.ppl.page.*
 import java.awt.Color
 import javax.imageio.ImageIO
 import javax.swing.SwingUtilities
@@ -44,6 +41,7 @@ object Test {
                     36,
                     32
                 )
+                this += ImagePage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg")))
                 //
                 this.start()
             }

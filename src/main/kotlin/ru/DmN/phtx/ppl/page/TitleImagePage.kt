@@ -11,8 +11,8 @@ class TitleImagePage(val text: String, val font: Int, val image: Image) : Page()
         override fun paintComponent(g: Graphics?) {
             g as Graphics2D
             g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
-            font = Font("TimesRoman", BOLD + ITALIC, this@TitleImagePage.font)
-            val metrics = g.getFontMetrics(font)
+            g.font = Font("TimesRoman", BOLD + ITALIC, this@TitleImagePage.font)
+            val metrics = g.getFontMetrics(g.font)
             val titleX = (width - metrics.stringWidth(text)) / 2
             val titleY = metrics.height
             g.drawString(text, titleX, titleY)
