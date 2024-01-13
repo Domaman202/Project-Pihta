@@ -7,7 +7,7 @@ import java.awt.Graphics2D
 import java.awt.RenderingHints
 import javax.swing.JComponent
 
-class TitleTextPage(val title: String, val text: String, val titleFont: Int, val textFont: Int) : Page() {
+class TitleTextPage(val title: String, val text: String, val titleFont: Int, val textFont: Int, val textUp: Boolean) : Page() {
     override val component: JComponent = object : JComponent() {
         override fun paintComponent(g: Graphics?) {
             g as Graphics2D
@@ -19,12 +19,20 @@ class TitleTextPage(val title: String, val text: String, val titleFont: Int, val
             g.drawString(title, titleX, titleY)
             g.font = Font("TimesRoman", ITALIC, textFont)
             val textMetrics = g.getFontMetrics(g.font)
-            val lines = text.split('\n')
             val textHeight = textMetrics.height
-            var textY = height - textHeight * (lines.size + 1)
-            lines.forEach {
-                textY += textHeight
-                g.drawString(it, textFont, textY)
+            val lines = text.split('\n')
+            if (textUp) {
+                var textY = titleY + textHeight
+                lines.forEach {
+                    textY += textHeight
+                    g.drawString(it, textFont, textY)
+                }
+            } else {
+                var textY = height - textHeight * (lines.size + 1)
+                lines.forEach {
+                    textY += textHeight
+                    g.drawString(it, textFont, textY)
+                }
             }
         }
     }
