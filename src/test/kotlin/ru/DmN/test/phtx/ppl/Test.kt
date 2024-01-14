@@ -16,35 +16,25 @@ object Test {
         SwingUtilities.invokeLater {
             darkTheme()
             Presentation("Тестовая Презентация").apply {
-                this += PagePair(
-                    EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg"))),
-                    EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg")))
-                )
                 this += PageList(
                     listOf(
-                        EPair(
-                            EText("Слава России!", 36),
-                            EText("Слава Гагаузии!", 36),
-                        ),
-                        EPair(
-                            EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg"))),
-                            EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img3.jpg"))),
-                            Element.SizeType.DYNAMIC
-                        )
+                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg"))),
+                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg")))
                     )
                 )
                 this += PageList(
                     listOf(
-                        EFixedPair(
-                            EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img0.jpg"))),
-                            EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg"))),
-                            1/2f
-                        ),
-                        EPair(
-                            EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg"))),
-                            EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img3.jpg"))),
-                            Element.SizeType.DYNAMIC
-                        )
+                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg"))),
+                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg"))),
+                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img3.jpg")))
+                    )
+                )
+                this += PageList(
+                    listOf(
+                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img0.jpg"))),
+                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg"))),
+                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg"))),
+                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img3.jpg")))
                     )
                 )
                 //
