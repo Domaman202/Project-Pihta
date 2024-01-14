@@ -18,10 +18,10 @@ class ETitle(private val text: String, private val font: Int) : Element() {
         val metrics = g.getFontMetrics(g.font)
         val height = metrics.height
         if (dir == DrawDirection.UP_TO_DOWN) {
-            g.drawString(text, (size.width - metrics.stringWidth(text)) / 2, height + offset.up)
+            g.drawString(text, (size.width - metrics.stringWidth(text) + offset.right - offset.left) / 2, height + offset.up)
             return offset.up(height)
         } else {
-            g.drawString(text, (size.width - metrics.stringWidth(text)) / 2,  size.height - height / 2 - offset.down)
+            g.drawString(text, (size.width - metrics.stringWidth(text) - offset.right - offset.left) / 2, size.height - height / 2 - offset.down)
             return offset.down(height)
         }
     }
