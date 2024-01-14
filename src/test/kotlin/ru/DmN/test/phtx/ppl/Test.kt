@@ -23,8 +23,8 @@ object Test {
                 this += PageList(
                     listOf(
                         EPair(
-                            ETitle("Слава России!", 36),
-                            ETitle("Слава Гагаузии!", 36),
+                            EText("Слава России!", 36),
+                            EText("Слава Гагаузии!", 36),
                         ),
                         EPair(
                             EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg"))),
