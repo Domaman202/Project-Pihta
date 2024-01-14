@@ -13,7 +13,7 @@ class EImage(private val image: Image) : Element() {
 
     override fun paint(dir: DrawDirection, offset: Offset, size: Dimension, g: Graphics2D): Offset {
         if (dir == DrawDirection.UP_TO_DOWN) {
-            val x = offset.right + 32
+            val x = offset.left + 32
             val y = offset.up + 32
             val sizeX = size.width - offset.left - offset.right - 64
             val sizeY = size.height - offset.up - offset.down - 64
