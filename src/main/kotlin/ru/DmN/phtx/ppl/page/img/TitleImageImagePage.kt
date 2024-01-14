@@ -1,5 +1,6 @@
-package ru.DmN.phtx.ppl.page
+package ru.DmN.phtx.ppl.page.img
 
+import ru.DmN.phtx.ppl.page.Page
 import java.awt.*
 import java.awt.Font.BOLD
 import java.awt.Font.ITALIC
@@ -8,8 +9,9 @@ import javax.swing.JComponent
 
 class TitleImageImagePage(val text: String, val font: Int, val image0: Image, val image1: Image) : Page() {
     override val component: JComponent = object : JComponent() {
-        override fun paintComponent(g: Graphics?) {
+        override fun paintComponent(g: Graphics) {
             g as Graphics2D
+            g.blackout()
             g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
             g.font = Font("TimesRoman", BOLD + ITALIC, this@TitleImageImagePage.font)
             val metrics = g.getFontMetrics(g.font)

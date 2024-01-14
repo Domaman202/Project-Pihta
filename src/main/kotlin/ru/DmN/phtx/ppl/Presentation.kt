@@ -6,20 +6,21 @@ import java.awt.Font
 import java.awt.Font.BOLD
 import java.awt.Font.ITALIC
 import java.awt.Graphics
-import java.awt.Graphics2D
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 import java.awt.event.KeyEvent.VK_LEFT
 import java.awt.event.KeyEvent.VK_RIGHT
+import java.lang.Thread.sleep
 import javax.swing.JFrame
 import javax.swing.JFrame.EXIT_ON_CLOSE
 import javax.swing.JFrame.MAXIMIZED_BOTH
-import javax.swing.JPanel
+import kotlin.concurrent.thread
 
-class Presentation(title: String) {
-    val frame = Frame(title)
-    val pages: MutableList<Page> = ArrayList()
-    var index: Int = -1
+class Presentation(title: String, val blackout: Int = 1000) {
+    private val frame = Frame(title)
+    private val pages: MutableList<Page> = ArrayList()
+    private var index: Int = -1
+    private var updateThread: Thread? = null
 
     fun start() {
         frame.addKeyListener(KeyListener())
@@ -52,16 +53,29 @@ class Presentation(title: String) {
     private fun update(index: Int, prevIndex: Int) {
         if (prevIndex > -1)
             frame.remove(pages[prevIndex].component)
-        if (index > -1)
-            frame.add(pages[index].component)
+        if (index > -1) {
+            val page = pages[index]
+            updateThread?.interrupt()
+            updateThread = thread {
+                try {
+                    for (i in 0..blackout) {
+                        page.blackout = i / blackout.toFloat()
+                        frame.repaint()
+                        sleep(1)
+                    }
+                } catch (_: InterruptedException) {
+                }
+            }
+            frame.add(page.component)
+        }
         frame.revalidate()
         frame.repaint()
     }
 
     inner class Frame(title: String) : JFrame(title) {
-        override fun paint(g: Graphics?) {
+        override fun paint(g: Graphics) {
             super.paint(g)
-            paintPageIndex(g!!)
+            paintPageIndex(g)
         }
 
         private fun paintPageIndex(g: Graphics) {
