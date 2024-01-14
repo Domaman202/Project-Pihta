@@ -8,14 +8,10 @@ import ru.DmN.phtx.ppl.element.Element.Offset.Companion.EMPTY
 import java.awt.Dimension
 import java.awt.Graphics2D
 
-class PageElementList(val list: List<Element>) : Page() {
+class PageList(val list: List<Element>) : Page() {
     override fun paint(size: Dimension, g: Graphics2D) {
         super.paint(size, g)
-        //
-        var pair = Pair(EMPTY, list)
-        pair = draw0(pair, size, g)
-        pair = draw1(pair, size, g)
-        pair = draw2(pair, size, g)
+        draw2(draw1(draw0(Pair(EMPTY, list), size, g), size, g), size, g)
     }
 
     private fun draw0(pair: Pair<Offset, List<Element>>, size: Dimension, g: Graphics2D): Pair<Offset, List<Element>> {

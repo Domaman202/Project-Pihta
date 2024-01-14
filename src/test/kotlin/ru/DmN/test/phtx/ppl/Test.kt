@@ -1,10 +1,11 @@
 package ru.DmN.test.phtx.ppl
 
 import ru.DmN.phtx.ppl.Presentation
+import ru.DmN.phtx.ppl.element.EFixedImage
 import ru.DmN.phtx.ppl.element.EImage
 import ru.DmN.phtx.ppl.element.EText
 import ru.DmN.phtx.ppl.element.ETitle
-import ru.DmN.phtx.ppl.page.PageElementList
+import ru.DmN.phtx.ppl.page.PageList
 import java.awt.Color
 import javax.imageio.ImageIO
 import javax.swing.SwingUtilities
@@ -17,20 +18,20 @@ object Test {
         SwingUtilities.invokeLater {
             darkTheme()
             Presentation("Тестовая Презентация").apply {
-                this += PageElementList(
+                this += PageList(
                     listOf(
                         ETitle("Крещение Руси! (I)", 36),
                         EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img0.jpg"))),
                     )
                 )
-                this += PageElementList(
+                this += PageList(
                     listOf(
                         ETitle("Великие Русские Флаги! (II)", 36),
                         EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg"))),
                         EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg")))
                     )
                 )
-                this += PageElementList(
+                this += PageList(
                     listOf(
                         ETitle("Слава России! (III)", 36),
                         EText(
@@ -47,7 +48,7 @@ object Test {
                         EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg")))
                     )
                 )
-                this += PageElementList(
+                this += PageList(
                     listOf(
                         ETitle("Слава России! (IV)", 36),
                         EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg"))),
@@ -64,7 +65,7 @@ object Test {
                         ),
                     )
                 )
-                this += PageElementList(
+                this += PageList(
                     listOf(
                         ETitle("Слава России! (V)", 36),
                         EText(
@@ -92,9 +93,9 @@ object Test {
                         )
                     )
                 )
-                this += PageElementList(
+                this += PageList(
                     listOf(
-                        ETitle("Великие Войны России! (V)", 36),
+                        ETitle("Великие Войны России! (VII)", 36),
                         EText(
                             """
                             1. Первая война Руси с Османской Империей началась в 1568 году.
@@ -140,6 +141,14 @@ object Test {
                             """.trimIndent(),
                             20
                         )
+                    )
+                )
+                this += PageList(
+                    listOf(
+                        EFixedImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img0.jpg")), 1/4f),
+                        EFixedImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg")), 1/4f),
+                        EFixedImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img0.jpg")), 1/4f),
+                        EFixedImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg")), 1/4f)
                     )
                 )
                 //

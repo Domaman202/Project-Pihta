@@ -7,20 +7,20 @@ import java.awt.RenderingHints.KEY_ANTIALIASING
 import java.awt.RenderingHints.VALUE_ANTIALIAS_ON
 import java.awt.geom.RoundRectangle2D
 
-class EImage(private val image: Image) : Element() {
+class EFixedImage(private val image: Image, private val height: Float) : Element() {
     override val size: SizeType
-        get() = SizeType.DYNAMIC
+        get() = SizeType.FIXED
 
     override fun paint(dir: DrawDirection, offset: Offset, size: Dimension, g: Graphics2D): Offset {
         if (dir == DrawDirection.UP_TO_DOWN) {
             val x = offset.left + 32
             val y = offset.up + 32
-            val sizeX = size.width - offset.right - 64
-            val sizeY = size.height - offset.up - offset.down - 64
+            val sizeX = size.width - 64
+            val sizeY = (size.height * height).toInt() - 42
             g.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON)
             g.clip = RoundRectangle2D.Float(x.toFloat(), y.toFloat(), sizeX.toFloat(), sizeY.toFloat(), 50f, 50f)
             g.drawImage(image, x, y, sizeX, sizeY, null)
-            return offset.up(sizeY)
+            return offset.up(sizeY + 32)
         } else TODO()
     }
 }
