@@ -52,7 +52,7 @@ class Presentation(title: String, val blackout: Int = 1000) {
 
     private fun update(index: Int, prevIndex: Int) {
         if (prevIndex > -1)
-            pages[prevIndex].onHide(this)
+            frame.remove(pages[prevIndex].component)
         if (index > -1) {
             val page = pages[index]
             updateThread?.interrupt()
@@ -66,7 +66,7 @@ class Presentation(title: String, val blackout: Int = 1000) {
                 } catch (_: InterruptedException) {
                 }
             }
-            page.onShow(this)
+            frame.add(page.component)
         }
         frame.revalidate()
         frame.repaint()
