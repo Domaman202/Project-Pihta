@@ -56,12 +56,28 @@ class PageList(val list: List<Element>) : Page() {
                     0 -> break
                     1 -> it.paint(UP_TO_DOWN, offset, size, g)
                     2 -> {
-                        val off = offset.right(size.width / 2)
-                        list[0].paint(UP_TO_DOWN, off, size, g)
-                        list[1].paint(UP_TO_DOWN, off.left(size.width / 2), size, g)
+                        list[0].paint(UP_TO_DOWN, offset.right(size.width / 2), size, g)
+                        list[1].paint(UP_TO_DOWN, offset.left(size.width / 2), size, g)
                     }
 
-                    else -> throw RuntimeException("PPL не поддерживает более 2 динамических элементов на 1 странице!")
+                    3 -> {
+                        val left = offset.right(size.width / 2)
+                        val right = offset.left(size.width / 2)
+                        list[0].paint(UP_TO_DOWN, left.down(size.height / 2), size, g)
+                        list[1].paint(UP_TO_DOWN, right.down(size.height / 2), size, g)
+                        list[2].paint(UP_TO_DOWN, offset.up(size.height / 2).left(size.width / 4).right(size.width / 4), size, g)
+                    }
+
+                    4 -> {
+                        val left = offset.right(size.width / 2)
+                        val right = offset.left(size.width / 2)
+                        list[0].paint(UP_TO_DOWN, left.down(size.height / 2), size, g)
+                        list[1].paint(UP_TO_DOWN, right.down(size.height / 2), size, g)
+                        list[2].paint(UP_TO_DOWN, left.up(size.height / 2), size, g)
+                        list[3].paint(UP_TO_DOWN, right.up(size.height / 2), size, g)
+                    }
+
+                    else -> throw RuntimeException("PPL позволяет ставить только 1/2/3/4 динамических элемента подряд!")
                 }
             }
         }
