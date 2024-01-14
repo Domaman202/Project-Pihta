@@ -1,7 +1,12 @@
 package ru.DmN.test.phtx.ppl
 
 import ru.DmN.phtx.ppl.Presentation
-import ru.DmN.phtx.ppl.page.*
+import ru.DmN.phtx.ppl.page.img.ImagePage
+import ru.DmN.phtx.ppl.page.img.TitleImageImagePage
+import ru.DmN.phtx.ppl.page.img.TitleImagePage
+import ru.DmN.phtx.ppl.page.img.TitleImageTextPage
+import ru.DmN.phtx.ppl.page.text.TitlePage
+import ru.DmN.phtx.ppl.page.text.TitleTextPage
 import java.awt.Color
 import javax.imageio.ImageIO
 import javax.swing.SwingUtilities
