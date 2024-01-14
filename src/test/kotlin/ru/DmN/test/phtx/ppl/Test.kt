@@ -1,6 +1,7 @@
 package ru.DmN.test.phtx.ppl
 
 import ru.DmN.phtx.ppl.Presentation
+import ru.DmN.phtx.ppl.page.gif.GifPage
 import ru.DmN.phtx.ppl.page.img.ImagePage
 import ru.DmN.phtx.ppl.page.img.TitleImageImagePage
 import ru.DmN.phtx.ppl.page.img.TitleImagePage
@@ -46,10 +47,10 @@ object Test {
                     32,
                     false
                 )
-                this += TitleImagePage("Крещение Руси", 36, ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img0.jpeg")))
+                this += TitleImagePage("Крещение Руси", 36, ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img0.jpg")))
                 this += TitleImageTextPage(
                     "Крещение Руси",
-                    ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img0.jpeg")),
+                    ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img0.jpg")),
                     """
                         1. В 988 году князь Владимир Святославич крестил Русь.
                         2. Событие произошло по приглашению византийского императора Василия II.
@@ -63,7 +64,7 @@ object Test {
                 )
                 this += TitleImageTextPage(
                     "Крещение Руси",
-                    ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img0.jpeg")),
+                    ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img0.jpg")),
                     """
                         1. В 988 году князь Владимир Святославич крестил Русь.
                         2. Событие произошло по приглашению византийского императора Василия II.
@@ -82,6 +83,7 @@ object Test {
                     ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg"))
                 )
                 this += ImagePage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg")))
+                this += GifPage(Test::class.java.getResourceAsStream("/test/phtx/ppl/gif0.gif")!!, 50)
                 //
                 this.start()
             }
