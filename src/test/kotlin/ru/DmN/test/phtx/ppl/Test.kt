@@ -15,7 +15,12 @@ object Test {
     fun main(args: Array<String>) {
         SwingUtilities.invokeLater {
             darkTheme()
-            Presentation("Тестовая Презентация").apply {
+            Presentation("Тестовая Презентация", 1000).apply {
+                this += PageList(
+                    listOf(
+                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img0.jpg")))
+                    )
+                )
                 this += PageList(
                     listOf(
                         EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg"))),

@@ -18,6 +18,7 @@ dependencies {
     implementation("org.ow2.asm:asm-tree:9.5")
     implementation("org.ow2.asm:asm-util:9.5")
     implementation("org.ow2.asm:asm-commons:9.5")
+    implementation("uk.co.caprica:vlcj:4.8.2")
     testImplementation(kotlin("test"))
     testImplementation("org.apache.commons:commons-lang3:3.14.0")
 }
