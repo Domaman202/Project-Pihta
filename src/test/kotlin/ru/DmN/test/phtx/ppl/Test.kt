@@ -2,6 +2,7 @@ package ru.DmN.test.phtx.ppl
 
 import ru.DmN.phtx.ppl.Presentation
 import ru.DmN.phtx.ppl.element.*
+import ru.DmN.phtx.ppl.page.PageFractal
 import ru.DmN.phtx.ppl.page.PageList
 import ru.DmN.phtx.ppl.page.PagePair
 import java.awt.Color
@@ -16,32 +17,7 @@ object Test {
         SwingUtilities.invokeLater {
             darkTheme()
             Presentation("Тестовая Презентация", 1000).apply {
-                this += PageList(
-                    listOf(
-                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img0.jpg")))
-                    )
-                )
-                this += PageList(
-                    listOf(
-                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg"))),
-                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg")))
-                    )
-                )
-                this += PageList(
-                    listOf(
-                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg"))),
-                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg"))),
-                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img3.jpg")))
-                    )
-                )
-                this += PageList(
-                    listOf(
-                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img0.jpg"))),
-                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg"))),
-                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg"))),
-                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img3.jpg")))
-                    )
-                )
+                this += PageFractal()
                 //
                 this.start()
             }
