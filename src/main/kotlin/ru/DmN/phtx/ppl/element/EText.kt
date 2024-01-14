@@ -22,14 +22,14 @@ class EText(private val text: String, private val font: Int) : Element() {
             var textY = height
             lines.forEach {
                 textY += height
-                g.drawString(it, font, textY + offset.up)
+                g.drawString(it, font + offset.left, textY + offset.up)
             }
             return offset.up(textY)
         } else {
             var textY = size.height
             lines.reversed().forEach {
                 textY -= height
-                g.drawString(it, font, textY - offset.down)
+                g.drawString(it, font + offset.left, textY - offset.down)
             }
             return offset.down((lines.size + 1) * height)
         }
