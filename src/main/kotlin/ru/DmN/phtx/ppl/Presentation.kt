@@ -1,5 +1,9 @@
 package ru.DmN.phtx.ppl
 
+import com.itextpdf.text.Document
+import com.itextpdf.text.Image
+import com.itextpdf.text.Rectangle
+import com.itextpdf.text.pdf.PdfWriter
 import ru.DmN.phtx.ppl.page.Page
 import java.awt.Color
 import java.awt.Font
@@ -13,7 +17,9 @@ import java.awt.event.KeyEvent.*
 import java.awt.image.BufferedImage
 import java.awt.image.BufferedImage.TYPE_INT_RGB
 import java.io.File
+import java.io.FileOutputStream
 import java.lang.Thread.sleep
+import java.net.URI
 import javax.imageio.ImageIO
 import javax.swing.JFrame
 import javax.swing.JFrame.EXIT_ON_CLOSE
@@ -112,13 +118,18 @@ class Presentation(title: String, var blackout: Int = 1000) {
                             frame.isVisible = true
                             for (i in oi downTo 0)
                                 prevPage()
+                            val document = Document(Rectangle(frame.width.toFloat(), frame.height.toFloat()), 0f, 0f, 0f, 0f)
+                            PdfWriter.getInstance(document, FileOutputStream("dump/screenshots.pdf"))
+                            document.open()
                             for (i in 0 until pages.size) {
                                 nextPage()
                                 sleep(10)
-                                val screenshot = BufferedImage(frame.bounds.width, frame.bounds.height, TYPE_INT_RGB)
+                                val screenshot = BufferedImage(frame.width, frame.height, TYPE_INT_RGB)
                                 frame.paint(screenshot.graphics)
                                 ImageIO.write(screenshot, "png", File("dump/$index.png"))
+                                document.add(Image.getInstance(screenshot, null))
                             }
+                            document.close()
                             frame.dispose()
                             frame.isUndecorated = od
                             frame.isVisible = true
