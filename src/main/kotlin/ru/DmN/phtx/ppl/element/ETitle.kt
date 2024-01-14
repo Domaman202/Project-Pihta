@@ -1,5 +1,7 @@
 package ru.DmN.phtx.ppl.element
 
+import ru.DmN.phtx.ppl.element.Element.DrawDirection.UP_TO_DOWN
+import ru.DmN.phtx.ppl.element.Element.SizeType.FIXED
 import java.awt.Dimension
 import java.awt.Font
 import java.awt.Font.BOLD
@@ -10,14 +12,14 @@ import java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_ON
 
 class ETitle(private val text: String, private val font: Int) : Element() {
     override val size: SizeType
-        get() = SizeType.FIXED
+        get() = FIXED
 
     override fun paint(dir: DrawDirection, offset: Offset, size: Dimension, g: Graphics2D): Offset {
         g.setRenderingHint(KEY_TEXT_ANTIALIASING, VALUE_TEXT_ANTIALIAS_ON)
         g.font = Font("TimesRoman", BOLD + ITALIC, font)
         val metrics = g.getFontMetrics(g.font)
         val height = metrics.height
-        if (dir == DrawDirection.UP_TO_DOWN) {
+        if (dir == UP_TO_DOWN) {
             g.drawString(text, (size.width - metrics.stringWidth(text) + offset.right - offset.left) / 2, height + offset.up)
             return offset.up(height)
         } else {

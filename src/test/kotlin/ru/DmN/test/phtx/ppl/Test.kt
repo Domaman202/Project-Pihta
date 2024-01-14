@@ -33,6 +33,20 @@ object Test {
                         )
                     )
                 )
+                this += PageList(
+                    listOf(
+                        EFixedPair(
+                            EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img0.jpg"))),
+                            EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg"))),
+                            1/2f
+                        ),
+                        EPair(
+                            EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg"))),
+                            EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img3.jpg"))),
+                            Element.SizeType.DYNAMIC
+                        )
+                    )
+                )
                 //
                 this.start()
             }
