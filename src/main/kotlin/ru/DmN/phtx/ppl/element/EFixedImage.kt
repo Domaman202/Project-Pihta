@@ -1,5 +1,7 @@
 package ru.DmN.phtx.ppl.element
 
+import ru.DmN.phtx.ppl.element.Element.DrawDirection.UP_TO_DOWN
+import ru.DmN.phtx.ppl.element.Element.SizeType.FIXED
 import java.awt.Dimension
 import java.awt.Graphics2D
 import java.awt.Image
@@ -9,10 +11,10 @@ import java.awt.geom.RoundRectangle2D
 
 class EFixedImage(private val image: Image, private val height: Float) : Element() {
     override val size: SizeType
-        get() = SizeType.FIXED
+        get() = FIXED
 
     override fun paint(dir: DrawDirection, offset: Offset, size: Dimension, g: Graphics2D): Offset {
-        if (dir == DrawDirection.UP_TO_DOWN) {
+        if (dir == UP_TO_DOWN) {
             val x = offset.left + 32
             val y = offset.up + 32
             val sizeX = size.width - 64
