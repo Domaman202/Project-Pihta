@@ -6,17 +6,23 @@ import java.awt.Font
 import java.awt.Font.BOLD
 import java.awt.Font.ITALIC
 import java.awt.Graphics
+import java.awt.Robot
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
-import java.awt.event.KeyEvent.VK_LEFT
-import java.awt.event.KeyEvent.VK_RIGHT
+import java.awt.event.KeyEvent.*
+import java.awt.image.BufferedImage
+import java.awt.image.BufferedImage.TYPE_INT_RGB
+import java.io.File
 import java.lang.Thread.sleep
+import javax.imageio.ImageIO
 import javax.swing.JFrame
 import javax.swing.JFrame.EXIT_ON_CLOSE
 import javax.swing.JFrame.MAXIMIZED_BOTH
+import javax.swing.SwingUtilities
 import kotlin.concurrent.thread
 
-class Presentation(title: String, val blackout: Int = 1000) {
+
+class Presentation(title: String, var blackout: Int = 1000) {
     val frame = Frame(title)
     private val pages: MutableList<Page> = ArrayList()
     private var index: Int = -1
@@ -93,6 +99,40 @@ class Presentation(title: String, val blackout: Int = 1000) {
             when (e!!.keyCode) {
                 VK_LEFT -> prevPage()
                 VK_RIGHT -> nextPage()
+                VK_P -> {
+                    File("dump").mkdir()
+                    if (e.modifiersEx and CTRL_DOWN_MASK == CTRL_DOWN_MASK) {
+                        SwingUtilities.invokeLater {
+                            val oi = index
+                            val ob = blackout
+                            val od = frame.isUndecorated
+                            blackout = 1
+                            frame.dispose()
+                            frame.isUndecorated = true
+                            frame.isVisible = true
+                            for (i in oi downTo 0)
+                                prevPage()
+                            for (i in 0 until pages.size) {
+                                nextPage()
+                                sleep(10)
+                                val screenshot = BufferedImage(frame.bounds.width, frame.bounds.height, TYPE_INT_RGB)
+                                frame.paint(screenshot.graphics)
+                                ImageIO.write(screenshot, "png", File("dump/$index.png"))
+                            }
+                            frame.dispose()
+                            frame.isUndecorated = od
+                            frame.isVisible = true
+                            blackout = ob
+                            for (i in oi..pages.size - 2) {
+                                prevPage()
+                            }
+                        }
+                    } else {
+                        val screenshot = Robot().createScreenCapture(frame.bounds)
+                        ImageIO.write(screenshot, "png", File("dump/$index.png"))
+                        println("!")
+                    }
+                }
             }
         }
     }
