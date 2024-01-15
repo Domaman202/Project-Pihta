@@ -79,7 +79,10 @@ val Node.valueAsString
     get() = (this as IValueNode).getValueAsString()
 
 fun findLambdaMethod(type: VirtualType): VirtualMethod =
-    type.methods.first { it.declaringClass == type && it.modifiers.abstract }
+    findLambdaMethodOrNull(type)!!
+
+fun findLambdaMethodOrNull(type: VirtualType): VirtualMethod? =
+    type.methods.firstOrNull { it.declaringClass == type && it.modifiers.abstract }
 
 fun lenArgs(from: List<VirtualType>, to: List<ICastable>, varargs: Boolean): Pair<Int, Boolean> =
     if (varargs) {

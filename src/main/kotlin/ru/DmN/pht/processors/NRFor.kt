@@ -31,18 +31,20 @@ object NRFor : INodeProcessor<NodeNodesList> {
                     code += nodeCycle(
                         info,
                         nodeMCall(info, nodeGetOrName(info, iter), "hasNext", listOf()),
-                        listOf(
-                            nodeDef(
-                                info,
-                                name,
-                                nodeMCall(
+                        if (name != "_")
+                            listOf(
+                                nodeDef(
                                     info,
-                                    nodeGetOrName(info, iter),
-                                    "next",
-                                    emptyList()
+                                    name,
+                                    nodeMCall(
+                                        info,
+                                        nodeGetOrName(info, iter),
+                                        "next",
+                                        emptyList()
+                                    )
                                 )
-                            )
-                        ) + node.nodes.drop(1)
+                            ) + node.nodes.drop(1)
+                        else node.nodes.drop(1)
                     )
                     NRBody.process(nodeBody(info, code), processor, ctx, mode)
                 } else {
@@ -63,12 +65,12 @@ object NRFor : INodeProcessor<NodeNodesList> {
                                             nodeArraySize(info, arr)
                                         )
                                     ),
-                                    listOf(nodeDef(info, name, nodeAGet(info, arr, i))) +
-                                            node.nodes.drop(1) +
-                                            NodeNodesList(
-                                                info.withType(NodeParsedTypes.INC_PRE),
-                                                mutableListOf(nodeValue(info, i))
-                                            )
+                                    if (name != "_")
+                                        listOf(nodeDef(info, name, nodeAGet(info, arr, i)))
+                                            + node.nodes.drop(1)
+                                            + NodeNodesList(info.withType(NodeParsedTypes.INC_PRE), mutableListOf(nodeValue(info, i)))
+                                    else node.nodes.drop(1)
+                                            + NodeNodesList(info.withType(NodeParsedTypes.INC_PRE), mutableListOf(nodeValue(info, i)))
                                 )
                             )
                         ), processor, ctx, mode

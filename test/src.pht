@@ -1,10 +1,13 @@
 (progn
+    (import java
+        (types java.lang.Runnable)
+        (types java.lang.Thread))
     (obj Test [^Object]
         (def [[i ^int]])
         (ctor [] (ccall))
         (defn checkI ^int []
             (++ i)
-            (#sleep ^java.lang.Thread 0 10)
+            (#sleep ^Thread 0 10)
             (-- i)
             i))
     (app
@@ -12,4 +15,7 @@
             (catch [[_ ^java.lang.InterruptedException]]
                 (for [_ (range 0 1000000)]
                     (#checkI ^Test))))
-        (app-fn))
+        (app-fn
+            (def [
+                [t0 (new ^Thread (rfn ^Runnable ^App test))]
+                [t1 (new ^Thread (rfn ^Runnable ^App test))]]))))
