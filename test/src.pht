@@ -1,29 +1,15 @@
 (progn
-    (cls TestA [^Object]
+    (obj Test [^Object]
+        (def [[i ^int]])
         (ctor [] (ccall))
-        (@static
-        (defn foo ^String [[o ^Object]] "Foo static!"))
-        (defn foo ^String [[s ^String]] "Foo!"))
-    (test-fn 0 (#foo (new ^TestA) ""))
-    (test-fn 1 (#foo ^TestA ""))
-
-    (cls TestB [^Object] (@static
-        (defn foo ^String [] "Foo outer!")
-        (test-fn 2 (#foo .))))
-
-    (cls TestC [^Object] (@static
-        (defn foo ^String [] "Foo outer outer!")
-        (cls TestD [^Object]
-            (test-fn 3 (#foo .)))))
-
-    (cls TestE [^Object]
-        (ctor [] (ccall))
-        (defn getE ^int [] 12))
-    (cls TestF [^Object]
-        (ctor [] (ccall))
-        (defn getF ^int [] 21))
-    (test-fn 4
-        (def [
-            [o (new ^TestE)]
-            [o (new ^TestF)]])
-        (+ (#getE o) (#getF o))))
+        (defn checkI ^int []
+            (++ i)
+            (#sleep ^java.lang.Thread 0 10)
+            (-- i)
+            i))
+    (app
+        (defn test ^void []
+            (catch [[_ ^java.lang.InterruptedException]]
+                (for [_ (range 0 1000000)]
+                    (#checkI ^Test))))
+        (app-fn))
