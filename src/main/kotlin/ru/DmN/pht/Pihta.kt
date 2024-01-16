@@ -179,6 +179,7 @@ object Pihta : Module("pht") {
         addSANP(ANN_FINAL)
         addSANP(ANN_OPEN)
         addSANP(ANN_STATIC)
+        addSANP(ANN_SYNC)
         addSANP(ANN_VARARGS)
 
         // *
@@ -430,7 +431,7 @@ object Pihta : Module("pht") {
         addSNU(ANN_STATIC)
         addSNU(ANN_STATIC_)
         addSNU(ANN_SYNC)
-        addSNU(ANN_SYNCHRONIZED_)
+        addSNU(ANN_SYNC_)
         addSNU(ANN_VARARGS)
         addSNU(ANN_VARARGS_)
 
