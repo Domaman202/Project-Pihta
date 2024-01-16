@@ -154,6 +154,7 @@ object Pihta : Module("pht") {
         addSNP(SYMBOL)
         addSNP(SYMBOL_INT)
         addSNP(SYMBOL_CLS)
+        addSNP(SYNC)
         // t
         addSNP(TEST_FN)
         addSNP(THROW)
@@ -402,6 +403,8 @@ object Pihta : Module("pht") {
         addSNU(SYMBOL)
         addSNU(SYMBOL_INT)
         addSNU(SYMBOL_CLS)
+        addSNU(SYNC)
+        add(SYNC_,          NUSync)
         // t
         addSNU(TEST_FN)
         addSNU(THROW)
@@ -593,6 +596,8 @@ object Pihta : Module("pht") {
         add(SYMBOL,        NRSymbol)
         add(SYMBOL_INT,    NRSymbolInt)
         add(SYMBOL_CLS,    NRSymbolCls)
+        add(SYNC,          NRSync)
+        add(SYNC_,         NRProgn)
         // t
         add(TEST_FN,       NRTestFn)
         add(THROW,         NRThrow)

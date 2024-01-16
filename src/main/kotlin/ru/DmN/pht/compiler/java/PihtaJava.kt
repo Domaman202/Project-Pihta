@@ -83,6 +83,7 @@ class PihtaJava(module: Pihta) : ModuleCompilers(module, Platforms.JAVA) {
         add(SHIFT_LEFT_,  NCMath)
         add(SHIFT_RIGHT_, NCMath)
         add(SUB_,         NCMath)
+        add(SYNC_,        NCSync)
         // t
         add(THROW_,       NCThrow)
         add(TYPED_GET_,   NCTypedGet)
