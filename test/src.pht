@@ -1,25 +1,30 @@
 (progn
     (import java
-        (types java.lang.Exception)
-        (types java.lang.RuntimeException)
-        (types java.lang.Error))
-    (test-fn 0
-        (catch ^int [
-                [_ ^RuntimeException 12]
-                [_ ^Exception        21]]
-            (throw (new ^Exception))))
-    (test-fn 1
-        (catch ^int [
-                [_ ^RuntimeException 12]
-                [_ ^Exception        21]]
-            (throw (new ^RuntimeException))))
-    (test-fn 2
-        (catch [
-                [_ ^RuntimeException (unit)]
-                [_ ^Exception        (unit)]]
-            (throw (new ^Error))))
-    (test-fn 3
-        (catch [
-                [e ^RuntimeException (#toString e)]
-                [_ ^Exception        nil]]
-            (throw (new ^RuntimeException)))))
+        (types java.lang.InterruptedException)
+        (types java.lang.Runnable)
+        (types java.lang.Thread))
+    (obj Test [^Object]
+        (def [[i ^int]])
+        (ctor [] (ccall))
+        (defn checkI ^int []
+            (++ i)
+            (#sleep ^Thread 0 10)
+            (-- i)
+            i))
+    (app
+        (defn test ^void []
+            (catch [[_ ^InterruptedException]]
+                (cycle true
+                    (#checkI ^Test))))
+        (app-fn
+            (def [
+                [t0 (new ^Thread (rfn . ^App test))]
+                [t1 (new ^Thread (rfn . ^App test))]
+                [s 0]])
+            (#start t0)
+            (#start t1)
+            (for [_ (range 0 10)]
+                (set s (+ s (#checkI ^Test))))
+            (#interrupt t0)
+            (#interrupt t1)
+            (println s))))

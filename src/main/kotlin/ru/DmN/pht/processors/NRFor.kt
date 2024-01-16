@@ -31,20 +31,11 @@ object NRFor : INodeProcessor<NodeNodesList> {
                     code += nodeCycle(
                         info,
                         nodeMCall(info, nodeGetOrName(info, iter), "hasNext", listOf()),
-                        if (name != "_")
-                            listOf(
-                                nodeDef(
-                                    info,
-                                    name,
-                                    nodeMCall(
-                                        info,
-                                        nodeGetOrName(info, iter),
-                                        "next",
-                                        emptyList()
-                                    )
-                                )
-                            ) + node.nodes.drop(1)
-                        else node.nodes.drop(1)
+                        listOf(
+                            if (name == "_")
+                                nodeMCall(info, nodeGetOrName(info, iter), "next", emptyList())
+                            else nodeDef(info, name, nodeMCall(info, nodeGetOrName(info, iter), "next", emptyList()))
+                        ) + node.nodes.drop(1)
                     )
                     NRBody.process(nodeBody(info, code), processor, ctx, mode)
                 } else {
