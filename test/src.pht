@@ -10,8 +10,8 @@
             (sync (fget ^Test INSTANCE)
                 (++ i)
                 (#sleep ^Thread 0 10)
-                (-- i)
-                i)))
+                (-- i))
+            i))
     (app
         (defn test ^void []
             (catch [[_ ^InterruptedException]]

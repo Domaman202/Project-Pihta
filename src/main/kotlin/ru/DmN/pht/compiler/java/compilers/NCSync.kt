@@ -4,6 +4,7 @@ import jdk.internal.org.objectweb.asm.Opcodes
 import org.objectweb.asm.Label
 import ru.DmN.pht.ast.NodeSync
 import ru.DmN.pht.std.compiler.java.utils.body
+import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
@@ -22,18 +23,11 @@ object NCSync : INodeCompiler<NodeSync> {
         ctx.method.node.run {
             val start = Label()
             val end = Label()
-            val id = compiler.compileVal(node.lock, ctx).let {
-                if (it.tmp) {
-                    visitInsn(Opcodes.DUP)
-                    val id = ctx.body.lvi.getAndIncrement()
-                    visitLocalVariable(Variable.tmp(node), "Ljava/lang/Object;", null, start, end, id)
-                    visitVarInsn(Opcodes.ASTORE, id)
-                    id
-                } else {
-                    visitVarInsn(Opcodes.ALOAD, it.id)
-                    it.id
-                }
-            }
+            load(compiler.compileVal(node.lock, ctx), this)
+            val id = ctx.body.lvi.getAndIncrement()
+            visitLocalVariable(Variable.tmp(node), "Ljava/lang/Object;", null, start, end, id)
+            visitVarInsn(Opcodes.ASTORE, id)
+            visitVarInsn(Opcodes.ALOAD, id)
             visitInsn(Opcodes.MONITORENTER)
             visitLabel(start)
             return compile(node, compiler, ctx).apply {
