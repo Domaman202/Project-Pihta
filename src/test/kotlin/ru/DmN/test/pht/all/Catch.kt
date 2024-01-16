@@ -10,5 +10,6 @@ class Catch : Module("test/pht/all/catch") {
         assertEquals(test(0), 21)
         assertEquals(test(1), 12)
         assertFails { test(2) }
+        assertEquals(test(3), "java.lang.RuntimeException")
     }
 }

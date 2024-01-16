@@ -472,7 +472,7 @@ object Pihta : Module("pht") {
         add(BREAK,         NRBreakContinue)
         //
         add(CATCH,         NRCatch)
-        add(CATCH_,        NRCatch)
+        add(CATCH_,        NRCatchB)
         add(CCALL,         NRCCall)
         add(CLS,           NRClass)
         add(COND,          NRCond)

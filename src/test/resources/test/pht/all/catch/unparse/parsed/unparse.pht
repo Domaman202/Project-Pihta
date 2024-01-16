@@ -7,6 +7,7 @@
 		(test-fn
 			0
 			(catch
+				^int
 				[
 					[
 						_
@@ -21,11 +22,11 @@
 				]
 				(throw
 					(new
-						^Exception))
-				33))
+						^Exception))))
 		(test-fn
 			1
 			(catch
+				^int
 				[
 					[
 						_
@@ -40,8 +41,7 @@
 				]
 				(throw
 					(new
-						^RuntimeException))
-				33))
+						^RuntimeException))))
 		(test-fn
 			2
 			(catch
@@ -49,15 +49,34 @@
 					[
 						_
 						^RuntimeException
-						12
+						(unit)
 					]
 					[
 						_
 						^Exception
-						21
+						(unit)
 					]
 				]
 				(throw
 					(new
-						^Error))
-				33))))
+						^Error))))
+		(test-fn
+			3
+			(catch
+				[
+					[
+						e
+						^RuntimeException
+						(mcall
+							e
+							toString)
+					]
+					[
+						_
+						^Exception
+						nil
+					]
+				]
+				(throw
+					(new
+						^RuntimeException))))))

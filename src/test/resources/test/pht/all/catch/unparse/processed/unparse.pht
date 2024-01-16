@@ -4,7 +4,7 @@
 			(@static
 				(defn [] test ^dynamic []
 					(as ^dynamic
-						(catch [
+						(catch ^int [
 							[_ ^java.lang.RuntimeException
 								(progn
 									12)]
@@ -12,13 +12,12 @@
 								(progn
 									21)]]
 							(throw
-								(new ^java.lang.Exception))
-							33)))))
+								(new ^java.lang.Exception)))))))
 		(cls [] Test1 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
 					(as ^dynamic
-						(catch [
+						(catch ^int [
 							[_ ^java.lang.RuntimeException
 								(progn
 									12)]
@@ -26,19 +25,30 @@
 								(progn
 									21)]]
 							(throw
-								(new ^java.lang.RuntimeException))
-							33)))))
+								(new ^java.lang.RuntimeException)))))))
 		(cls [] Test2 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
-					(as ^dynamic
-						(catch [
-							[_ ^java.lang.RuntimeException
-								(progn
-									12)]
-							[_ ^java.lang.Exception
-								(progn
-									21)]]
-							(throw
-								(new ^java.lang.Error))
-							33)))))))
+					(catch [
+						[_ ^java.lang.RuntimeException
+							(progn
+								(unit))]
+						[_ ^java.lang.Exception
+							(progn
+								(unit))]]
+						(throw
+							(new ^java.lang.Error))))))
+		(cls [] Test3 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(catch [
+						[e ^java.lang.RuntimeException
+							(progn
+								(mcall
+									(get e)
+									toString))]
+						[_ ^java.lang.Exception
+							(progn
+								nil)]]
+						(throw
+							(new ^java.lang.RuntimeException))))))))

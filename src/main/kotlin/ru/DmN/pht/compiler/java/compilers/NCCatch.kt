@@ -2,11 +2,10 @@ package ru.DmN.pht.std.compiler.java.compilers
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
+import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.std.ast.NodeCatch
 import ru.DmN.pht.std.compiler.java.ctx.BodyContext
-import ru.DmN.pht.std.compiler.java.utils.body
-import ru.DmN.pht.std.compiler.java.utils.method
-import ru.DmN.pht.std.compiler.java.utils.with
+import ru.DmN.pht.std.compiler.java.utils.*
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.ctx.CompilationContext
@@ -16,18 +15,31 @@ import ru.DmN.siberia.utils.Variable
 
 object NCCatch : INodeCompiler<NodeCatch> {
     override fun compile(node: NodeCatch, compiler: Compiler, ctx: CompilationContext) =
-        compile(node, compiler, ctx, NCDefault::compile) { it, context -> compiler.compile(it, context) }
+        compile(node, ctx, { NCDefault.compile(node, compiler, ctx) }, { a, b, _ -> compiler.compile(a, b) })
 
-    override fun compileVal(node: NodeCatch, compiler: Compiler, ctx: CompilationContext): Variable =
-        compile(node, compiler, ctx, NCDefault::compileVal) { it, context -> compiler.compileVal(it, context) }
+    override fun compileVal(node: NodeCatch, compiler: Compiler, ctx: CompilationContext): Variable {
+        compile(
+            node,
+            ctx,
+            { load(NCDefault.compileVal(node, compiler, ctx), it) },
+            { it, context, mctx -> load(compiler.compileVal(it, context), mctx) }
+        )
+        return Variable.tmp(node, node.type)
+    }
 
-    private fun <T> compile(node: NodeCatch, compiler: Compiler, ctx: CompilationContext, compileBody: (node: NodeCatch, compiler: Compiler, ctx: CompilationContext) -> T, compileCatcher: (node: Node, ctx: CompilationContext) -> T): T {
+
+    private fun compile(
+        node: NodeCatch,
+        ctx: CompilationContext,
+        compileBody: (mctx: MethodNode) -> Unit,
+        compileCatch: (node: Node, ctx: CompilationContext, mctx: MethodNode) -> Unit
+    ) {
         ctx.method.node.run {
             val tryStart = Label()
             val tryStop = Label()
             val allCatchStop = Label()
             visitLabel(tryStart)
-            val result = compileBody(node, compiler, ctx)
+            compileBody(this)
             visitLabel(tryStop)
             visitJumpInsn(Opcodes.GOTO, allCatchStop)
             val bctx = ctx.body
@@ -37,7 +49,10 @@ object NCCatch : INodeCompiler<NodeCatch> {
                 if (it.third != null) {
                     val body = BodyContext.of(bctx, handle)
                     body.add(it.first, it.second)
-                    compileCatcher(it.third!!, ctx.with(body))
+                    if (it.first == "_")
+                        visitInsn(Opcodes.POP)
+                    else visitVarInsn(Opcodes.ASTORE, body[it.first]!!.id)
+                    compileCatch(it.third!!, ctx.with(body), this)
                     val handleStop = Label()
                     visitLabel(handleStop)
                     body.stop = handleStop
@@ -46,7 +61,6 @@ object NCCatch : INodeCompiler<NodeCatch> {
                 visitTryCatchBlock(tryStart, tryStop, handle, it.second.className)
             }
             visitLabel(allCatchStop)
-            return result
         }
     }
 }
