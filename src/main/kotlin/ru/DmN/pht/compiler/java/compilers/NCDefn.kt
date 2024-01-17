@@ -33,6 +33,9 @@ object NCDefn : INodeCompiler<NodeDefn> {
                 else if (node.abstract) it + Opcodes.ACC_ABSTRACT
                 else if (node.open) it
                 else it + Opcodes.ACC_FINAL
+            }.let {
+                if (node.sync) it + Opcodes.ACC_SYNCHRONIZED
+                else it
             },
             method.name,
             method.desc,

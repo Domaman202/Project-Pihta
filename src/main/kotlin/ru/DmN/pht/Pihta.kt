@@ -154,6 +154,7 @@ object Pihta : Module("pht") {
         addSNP(SYMBOL)
         addSNP(SYMBOL_INT)
         addSNP(SYMBOL_CLS)
+        addSNP(SYNC)
         // t
         addSNP(TEST_FN)
         addSNP(THROW)
@@ -179,6 +180,7 @@ object Pihta : Module("pht") {
         addSANP(ANN_FINAL)
         addSANP(ANN_OPEN)
         addSANP(ANN_STATIC)
+        addSANP(ANN_SYNC)
         addSANP(ANN_VARARGS)
 
         // *
@@ -329,7 +331,7 @@ object Pihta : Module("pht") {
         addSNU(INC_POST)
         add(INC_POST_,      NUIncDec)
         addSNU(INL_DEF)
-        // INC_DEF_
+        // INL_DEF_
         addSNU(INNER)
         add(INNER_,         NUInner)
         addSNU(IS)
@@ -401,6 +403,8 @@ object Pihta : Module("pht") {
         addSNU(SYMBOL)
         addSNU(SYMBOL_INT)
         addSNU(SYMBOL_CLS)
+        addSNU(SYNC)
+        add(SYNC_,          NUSync)
         // t
         addSNU(TEST_FN)
         addSNU(THROW)
@@ -430,7 +434,7 @@ object Pihta : Module("pht") {
         addSNU(ANN_STATIC)
         addSNU(ANN_STATIC_)
         addSNU(ANN_SYNC)
-        addSNU(ANN_SYNCHRONIZED_)
+        addSNU(ANN_SYNC_)
         addSNU(ANN_VARARGS)
         addSNU(ANN_VARARGS_)
 
@@ -472,7 +476,7 @@ object Pihta : Module("pht") {
         add(BREAK,         NRBreakContinue)
         //
         add(CATCH,         NRCatch)
-        add(CATCH_,        NRCatch)
+        add(CATCH_,        NRCatchB)
         add(CCALL,         NRCCall)
         add(CLS,           NRClass)
         add(COND,          NRCond)
@@ -592,6 +596,8 @@ object Pihta : Module("pht") {
         add(SYMBOL,        NRSymbol)
         add(SYMBOL_INT,    NRSymbolInt)
         add(SYMBOL_CLS,    NRSymbolCls)
+        add(SYNC,          NRSync)
+        add(SYNC_,         NRProgn)
         // t
         add(TEST_FN,       NRTestFn)
         add(THROW,         NRThrow)

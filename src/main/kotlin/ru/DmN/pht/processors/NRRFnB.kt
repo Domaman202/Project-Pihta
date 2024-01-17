@@ -15,13 +15,14 @@ object NRRFnB : INodeProcessor<NodeRFn>, IAdaptableProcessor<NodeRFn> {
         node.type ?: ctx.global.getType("Any", processor.tp)
 
     override fun adaptableTo(type: VirtualType, node: NodeRFn, processor: Processor, ctx: ProcessingContext): Int {
+        val lambda = findLambdaMethodOrNull(type) ?: return -1
         val static = node.instance.isConstClass
         return findMethod(
             if (static)
                 processor.computeType(node.instance, ctx)
             else processor.calc(node.instance, ctx)!!,
             node.name,
-            findLambdaMethod(type),
+            lambda,
             static
         )
     }

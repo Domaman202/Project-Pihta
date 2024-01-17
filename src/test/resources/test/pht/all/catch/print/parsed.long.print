@@ -11,6 +11,10 @@
 |	|	|	|	(value = '0')
 |	|	|	]
 |	|	|	[CATCH
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'int')
+|	|	|	|	]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[GET_OR_NAME
@@ -48,10 +52,6 @@
 |	|	|	|	|	|	|	(value = 'Exception')
 |	|	|	|	|	|	]
 |	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '33')
 |	|	|	|	]
 |	|	|	]
 |	|	]
@@ -61,6 +61,10 @@
 |	|	|	|	(value = '1')
 |	|	|	]
 |	|	|	[CATCH
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'int')
+|	|	|	|	]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[GET_OR_NAME
@@ -98,10 +102,6 @@
 |	|	|	|	|	|	|	(value = 'RuntimeException')
 |	|	|	|	|	|	]
 |	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '33')
 |	|	|	|	]
 |	|	|	]
 |	|	]
@@ -121,9 +121,55 @@
 |	|	|	|	|	|	|	(type = CLASS)
 |	|	|	|	|	|	|	(value = 'RuntimeException')
 |	|	|	|	|	|	]
+|	|	|	|	|	|	[UNIT]
+|	|	|	|	|	]
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = '_')
+|	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'Exception')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[UNIT]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[THROW
+|	|	|	|	|	[NEW
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'Error')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '3')
+|	|	|	]
+|	|	|	[CATCH
+|	|	|	|	[VALN
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'e')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'RuntimeException')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[MCALL
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'e')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	|	|	(value = 'toString')
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[VALN
@@ -136,8 +182,8 @@
 |	|	|	|	|	|	|	(value = 'Exception')
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	|	(type = NIL)
+|	|	|	|	|	|	|	(value = 'nil')
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
@@ -145,13 +191,9 @@
 |	|	|	|	|	[NEW
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'Error')
+|	|	|	|	|	|	|	(value = 'RuntimeException')
 |	|	|	|	|	|	]
 |	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '33')
 |	|	|	|	]
 |	|	|	]
 |	|	]

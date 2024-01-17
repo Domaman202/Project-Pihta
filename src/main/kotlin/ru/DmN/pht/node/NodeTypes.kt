@@ -149,7 +149,7 @@ enum class NodeTypes : INodeType {
     ANN_FINAL_("@final", PROCESSED),
     ANN_OPEN_("@open", PROCESSED),
     ANN_STATIC_("@static", PROCESSED),
-    ANN_SYNCHRONIZED_("@synchronized", PROCESSED),
+    ANN_SYNC_("@synchronized", PROCESSED),
     ANN_VARARGS_("@varargs", PROCESSED),
 
     // *

@@ -17,10 +17,6 @@
 |	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Exception))
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	(value = '33')
-|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -41,10 +37,6 @@
 |	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.RuntimeException))
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	(value = '33')
-|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -57,17 +49,27 @@
 |	|	|	|	|	[DEFN_
 |	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	[CATCH_
-|	|	|	|	|	|	|	|	[THROW_
-|	|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Error))
-|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	[CATCH_
+|	|	|	|	|	|	|	[THROW_
+|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Error))
 |	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	(value = '33')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = Test3)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[CATCH_
+|	|	|	|	|	|	|	[THROW_
+|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	(type = VT(java.lang.RuntimeException))
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]

@@ -1,7 +1,6 @@
 package ru.DmN.pht.std.compiler.java
 
 import ru.DmN.pht.compiler.java.compilers.*
-import ru.DmN.pht.processors.NRRFn
 import ru.DmN.pht.std.Pihta
 import ru.DmN.pht.std.compiler.java.compilers.*
 import ru.DmN.pht.std.node.NodeTypes.*
@@ -84,6 +83,7 @@ class PihtaJava(module: Pihta) : ModuleCompilers(module, Platforms.JAVA) {
         add(SHIFT_LEFT_,  NCMath)
         add(SHIFT_RIGHT_, NCMath)
         add(SUB_,         NCMath)
+        add(SYNC_,        NCSync)
         // t
         add(THROW_,       NCThrow)
         add(TYPED_GET_,   NCTypedGet)
@@ -99,6 +99,7 @@ class PihtaJava(module: Pihta) : ModuleCompilers(module, Platforms.JAVA) {
         add(ANN_FINAL_,    NCDefault)
         add(ANN_OPEN_,     NCDefault)
         add(ANN_STATIC_,   NCDefault)
+        add(ANN_SYNC_,     NCDefault)
         add(ANN_VARARGS_,  NCDefault)
     }
 }

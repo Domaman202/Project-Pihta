@@ -4,17 +4,22 @@
         (types java.lang.RuntimeException)
         (types java.lang.Error))
     (test-fn 0
-        (catch [[_ ^RuntimeException 12]
+        (catch ^int [
+                [_ ^RuntimeException 12]
                 [_ ^Exception        21]]
-            (throw (new ^Exception))
-            33))
+            (throw (new ^Exception))))
     (test-fn 1
-        (catch [[_ ^RuntimeException 12]
+        (catch ^int [
+                [_ ^RuntimeException 12]
                 [_ ^Exception        21]]
-            (throw (new ^RuntimeException))
-            33))
+            (throw (new ^RuntimeException))))
     (test-fn 2
-        (catch [[_ ^RuntimeException 12]
-                [_ ^Exception        21]]
-            (throw (new ^Error))
-            33)))
+        (catch [
+                [_ ^RuntimeException (unit)]
+                [_ ^Exception        (unit)]]
+            (throw (new ^Error))))
+    (test-fn 3
+        (catch [
+                [e ^RuntimeException (#toString e)]
+                [_ ^Exception        nil]]
+            (throw (new ^RuntimeException)))))

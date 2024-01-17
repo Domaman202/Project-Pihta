@@ -1,6 +1,6 @@
 package ru.DmN.pht.std.utils
 
-class IntDownIterator(var i: Int, val end: Int) : Iterator<Int> {
+class IntDownIterator(private var i: Int, private val end: Int) : Iterator<Int> {
     override fun hasNext(): Boolean =
         i >= end
 
