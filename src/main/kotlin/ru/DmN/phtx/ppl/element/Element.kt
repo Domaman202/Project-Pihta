@@ -4,18 +4,23 @@ import java.awt.Dimension
 import java.awt.Graphics2D
 
 abstract class Element {
-    abstract val size: SizeType
-
-    abstract fun paint(dir: DrawDirection, offset: Offset, size: Dimension, g: Graphics2D): Offset
+    abstract val type: SizeType
+    abstract fun size(window: Dimension, g: Graphics2D): Size
+    abstract fun paint(offset: Offset, free: Size, w: Dimension, g: Graphics2D)
 
     enum class SizeType {
         FIXED,
         DYNAMIC
     }
 
-    enum class DrawDirection {
-        UP_TO_DOWN,
-        DOWN_TO_UP
+    data class Size(
+        val width: Int,
+        val height: Int
+    ) {
+        fun sub(width: Int, height: Int) =
+            Size(this.width - width, this.height - height)
+        fun div(): Size =
+            Size(width, height / 2)
     }
 
     data class Offset(
@@ -24,6 +29,7 @@ abstract class Element {
         val left: Int,
         val right: Int
     ) {
+
         fun up(up: Int) =
             Offset(up + this.up, down, left, right)
         fun down(down: Int) =
@@ -38,6 +44,8 @@ abstract class Element {
         
         fun offset(offset: Offset) =
             Offset(up + offset.up, down + offset.down, left + offset.left, right + offset.right)
+        fun offset(size: Size) =
+            up(size.height)
 
         companion object {
             val EMPTY = Offset(0, 0, 0, 0)

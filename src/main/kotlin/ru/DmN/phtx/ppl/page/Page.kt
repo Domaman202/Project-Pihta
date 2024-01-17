@@ -23,7 +23,7 @@ abstract class Page {
         presentation.frame.remove(component)
     }
 
-    open fun paint(size: Dimension, g: Graphics2D) {
+    open fun paint(w: Dimension, g: Graphics2D) {
         g.composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, blackout)
     }
 }

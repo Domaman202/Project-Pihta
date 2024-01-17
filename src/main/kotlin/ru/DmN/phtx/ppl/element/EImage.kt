@@ -1,6 +1,5 @@
 package ru.DmN.phtx.ppl.element
 
-import ru.DmN.phtx.ppl.element.Element.DrawDirection.UP_TO_DOWN
 import ru.DmN.phtx.ppl.element.Element.SizeType.DYNAMIC
 import java.awt.Dimension
 import java.awt.Graphics2D
@@ -10,19 +9,21 @@ import java.awt.RenderingHints.VALUE_ANTIALIAS_ON
 import java.awt.geom.RoundRectangle2D
 
 class EImage(private val image: Image) : Element() {
-    override val size: SizeType
+    override val type: SizeType
         get() = DYNAMIC
 
-    override fun paint(dir: DrawDirection, offset: Offset, size: Dimension, g: Graphics2D): Offset {
-        if (dir == UP_TO_DOWN) {
-            val x = offset.left + 32
-            val y = offset.up + 32
-            val sizeX = size.width - offset.left - offset.right - 64
-            val sizeY = size.height - offset.up - offset.down - 64
-            g.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON)
+    override fun size(window: Dimension, g: Graphics2D): Size =
+        Size(-1, -1)
+
+    override fun paint(offset: Offset, free: Size, w: Dimension, g: Graphics2D) {
+        g.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON)
+        val x = offset.left + 32
+        val y = offset.up + 32
+        val sizeX = free.width - 64
+        val sizeY = free.height - 64
+        g.clip = g.clip.apply {
             g.clip = RoundRectangle2D.Float(x.toFloat(), y.toFloat(), sizeX.toFloat(), sizeY.toFloat(), 50f, 50f)
             g.drawImage(image, x, y, sizeX, sizeY, null)
-            return offset.up(sizeY)
-        } else TODO()
+        }
     }
 }
