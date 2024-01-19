@@ -34,7 +34,7 @@ class Presentation(title: String, var blackout: Int = 1000) {
     private var index: Int = -1
     private var updateThread: Thread? = null
 
-    fun start() {
+    fun show() {
         frame.addKeyListener(KeyListener())
         frame.defaultCloseOperation = EXIT_ON_CLOSE
         frame.focusTraversalKeysEnabled = true

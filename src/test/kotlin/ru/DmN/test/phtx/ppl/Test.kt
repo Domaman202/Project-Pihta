@@ -44,7 +44,7 @@ object Test {
                     )
                 )
                 //
-                this.start()
+                this.show()
             }
         }
     }

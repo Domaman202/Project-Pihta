@@ -13,6 +13,8 @@ import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.klassOf
 
+
+
 inline fun <T> Iterable<T>.forEach(first: T, block: (T) -> Unit) {
     block(first)
     forEach(block)

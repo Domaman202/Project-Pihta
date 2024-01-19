@@ -24,6 +24,9 @@ import ru.DmN.pht.std.processor.utils.method
 import ru.DmN.pht.std.processors.*
 import ru.DmN.pht.unparsers.*
 import ru.DmN.pht.processor.utils.LinkedClassesNode
+import ru.DmN.pht.utils.addNP
+import ru.DmN.pht.utils.addSANP
+import ru.DmN.pht.utils.addSNP
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
@@ -221,20 +224,8 @@ object Pihta : Module("pht") {
         "-"  to "sub"
     }
 
-    private fun addNP(pattern: String, parser: INodeParser) {
-        add(pattern.toRegularExpr(), parser)
-    }
-
-    private fun addSNP(type: INodeType) {
-        add(type.operation.toRegularExpr(), SimpleNP(type))
-    }
-
-    private fun addSANP(type: INodeType) {
-        add(type.operation.toRegularExpr(), NPSA(type))
-    }
-
     private infix fun String.to(alias: String) {
-        add(this.toRegularExpr(), NPNodeAlias(alias))
+        Pihta.add(this.toRegularExpr(), NPNodeAlias(alias))
     }
 
     override fun initUnparsers() {

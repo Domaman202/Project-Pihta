@@ -1,0 +1,6 @@
+(module
+    (name "phtx/ppl/presentation/helper")
+    (version "1.0.0")
+    (author "DomamaN202")
+    (deps ["phtx/ppl"])
+    (class "ru.DmN.phtx.ppl.helper.presentation.Helper"))
