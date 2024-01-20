@@ -1,19 +1,18 @@
 package ru.DmN.test.phtx.ppl
 
-import ru.DmN.phtx.ppl.Presentation
-import ru.DmN.phtx.ppl.element.*
+import ru.DmN.phtx.ppl.element.EImage
+import ru.DmN.phtx.ppl.element.EText
+import ru.DmN.phtx.ppl.element.ETitle
 import ru.DmN.phtx.ppl.page.PageList
-import java.awt.Color
+import ru.DmN.phtx.ppl.utils.Presentation
 import javax.imageio.ImageIO
 import javax.swing.SwingUtilities
-import javax.swing.UIManager
-import javax.swing.plaf.nimbus.NimbusLookAndFeel
 
 object Test {
     @JvmStatic
     fun main(args: Array<String>) {
         SwingUtilities.invokeLater {
-            darkTheme()
+            Presentation.setDarkTheme()
             Presentation("Тестовая Презентация", 1000).apply {
                 this += PageList(
                     listOf(
@@ -47,23 +46,5 @@ object Test {
                 this.show()
             }
         }
-    }
-
-    private fun darkTheme() {
-        UIManager.setLookAndFeel(NimbusLookAndFeel())
-        UIManager.put("control", Color(64, 64, 64))
-        UIManager.put("info", Color(64, 64, 64))
-        UIManager.put("nimbusBase", Color(18, 30, 49))
-        UIManager.put("nimbusAlertYellow", Color(248, 187, 0))
-        UIManager.put("nimbusDisabledText", Color(128, 128, 128))
-        UIManager.put("nimbusFocus", Color(115, 164, 209))
-        UIManager.put("nimbusGreen", Color(176, 179, 50))
-        UIManager.put("nimbusInfoBlue", Color(66, 139, 221))
-        UIManager.put("nimbusLightBackground", Color(18, 30, 49))
-        UIManager.put("nimbusOrange", Color(191, 98, 4))
-        UIManager.put("nimbusRed", Color(169, 46, 34))
-        UIManager.put("nimbusSelectedText", Color(255, 255, 255))
-        UIManager.put("nimbusSelectionBackground", Color(104, 93, 156))
-        UIManager.put("text", Color(230, 230, 230))
     }
 }

@@ -3,15 +3,13 @@ package ru.DmN.phtx.ppl.node
 import ru.DmN.siberia.node.INodeType
 import ru.DmN.siberia.node.NodeTypes.Type
 import ru.DmN.siberia.node.NodeTypes.Type.PARSED
-import ru.DmN.siberia.node.NodeTypes.Type.PROCESSED
 
 enum class NodeTypes : INodeType {
-    // l
-    LIST("list", PARSED),
+    // e
+    E_TITLE("e-title", PARSED),
     // p
-    PRESENTATION("presentation", PARSED),
-    // t
-    TITLE("title", PARSED);
+    PAGE_LIST("page-list", PARSED),
+    PRESENTATION("presentation", PARSED);
 
     override val operation: String
     override val processable: Boolean

@@ -2,7 +2,7 @@ package ru.DmN.pht.std
 
 import ru.DmN.pht.ast.IOpenlyNode
 import ru.DmN.pht.ast.ISyncNode
-import ru.DmN.pht.parsers.NPSA
+import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.pht.processors.*
 import ru.DmN.pht.std.ast.IAbstractlyNode
 import ru.DmN.pht.std.ast.IFinallyNode
@@ -19,33 +19,29 @@ import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.utils.classes
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.macros as macros_list
 import ru.DmN.pht.std.processor.utils.method
 import ru.DmN.pht.std.processors.*
 import ru.DmN.pht.unparsers.*
-import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.pht.utils.addNP
 import ru.DmN.pht.utils.addSANP
 import ru.DmN.pht.utils.addSNP
+import ru.DmN.pht.utils.addSNU
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.node.INodeType
 import ru.DmN.siberia.node.NodeTypes.PROGN
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parser.utils.parsersPool
-import ru.DmN.siberia.parsers.INodeParser
-import ru.DmN.siberia.parsers.SimpleNP
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processors.NRProgn
-import ru.DmN.siberia.unparsers.NUDefault
 import ru.DmN.siberia.utils.Module
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.VirtualType
 import java.util.*
+import ru.DmN.pht.std.processor.utils.macros as macros_list
 import ru.DmN.pht.std.processors.NRProgn as NRPrognA
 
 object Pihta : Module("pht") {
@@ -225,7 +221,7 @@ object Pihta : Module("pht") {
     }
 
     private infix fun String.to(alias: String) {
-        Pihta.add(this.toRegularExpr(), NPNodeAlias(alias))
+        add(this.toRegularExpr(), NPNodeAlias(alias))
     }
 
     override fun initUnparsers() {
@@ -434,10 +430,6 @@ object Pihta : Module("pht") {
         addSNU(CTC_TYPE_NAME)
         addSNU(CTC_FN_NAME)
         addSNU(CTC_NS_NAME)
-    }
-
-    private fun addSNU(type: INodeType) {
-        add(type, NUDefault)
     }
 
     override fun initProcessors() {

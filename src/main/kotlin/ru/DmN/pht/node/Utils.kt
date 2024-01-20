@@ -7,7 +7,10 @@ import ru.DmN.pht.std.node.NodeTypes.*
 import ru.DmN.pht.std.utils.mapMutable
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.ast.NodeUse
 import ru.DmN.siberia.node.INodeInfo
+import ru.DmN.siberia.node.NodeTypes
+import ru.DmN.siberia.node.NodeTypes.USE_CTX
 
 val INodeInfo.processed
     get() = this.withType((this.type as IParsedNodeType).processed)
@@ -84,6 +87,9 @@ fun nodeGetVariable(info: INodeInfo, name: String) =
 // i
 fun nodeIf(info: INodeInfo, nodes: MutableList<Node>) =
     NodeNodesList(info.withType(IF), nodes)
+// l
+fun nodeListOf(info: INodeInfo, nodes: MutableList<Node>) =
+    NodeNodesList(info.withType(LIST_OF), nodes)
 // m
 fun nodeMCall(info: INodeInfo, instance: Node, name: String, args: List<Node>) =
     NodeNodesList(info.withType(MCALL),
@@ -104,6 +110,9 @@ fun nodeNewArray(info: INodeInfo, type: String, size: Int) =
 fun nodeObj(info: INodeInfo, name: String, parents: List<String>, nodes: List<Node>) =
     NodeNodesList(info.withType(OBJ),
         mutableListOf(nodeValue(info, name), nodeValn(info, parents.mapMutable { nodeValue(info, it) })).apply { addAll(nodes) })
+// u
+fun nodeUseCtx(info: INodeInfo, name: String, body: Node) =
+    NodeUse(info.withType(USE_CTX), listOf(name), mutableListOf(body))
 // v
 fun nodeValn(info: INodeInfo, nodes: MutableList<Node>) =
     NodeNodesList(info.withType(VALN), nodes)

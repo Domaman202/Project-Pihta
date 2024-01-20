@@ -3,5 +3,5 @@
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["pht" "phtx/ppl"])
-    (uses ["pht" "Phtx/ppl"])
+    (uses ["pht" "phtx/ppl"])
     (files ["src.pht"]))

@@ -1,6 +1,6 @@
 package ru.DmN.phtx.ppl.page
 
-import ru.DmN.phtx.ppl.Presentation
+import ru.DmN.phtx.ppl.utils.Presentation
 import java.awt.Color
 import java.awt.Font
 import java.awt.Graphics

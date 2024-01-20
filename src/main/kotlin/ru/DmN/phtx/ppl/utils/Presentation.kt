@@ -1,4 +1,4 @@
-package ru.DmN.phtx.ppl
+package ru.DmN.phtx.ppl.utils
 
 import com.itextpdf.text.Document
 import com.itextpdf.text.Image
@@ -19,14 +19,14 @@ import java.awt.image.BufferedImage.TYPE_INT_RGB
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.Thread.sleep
-import java.net.URI
 import javax.imageio.ImageIO
 import javax.swing.JFrame
 import javax.swing.JFrame.EXIT_ON_CLOSE
 import javax.swing.JFrame.MAXIMIZED_BOTH
 import javax.swing.SwingUtilities
+import javax.swing.UIManager
+import javax.swing.plaf.nimbus.NimbusLookAndFeel
 import kotlin.concurrent.thread
-
 
 class Presentation(title: String, var blackout: Int = 1000) {
     val frame = Frame(title)
@@ -82,6 +82,26 @@ class Presentation(title: String, var blackout: Int = 1000) {
         }
         frame.revalidate()
         frame.repaint()
+    }
+
+    companion object {
+        fun setDarkTheme() {
+            UIManager.setLookAndFeel(NimbusLookAndFeel())
+            UIManager.put("control", Color(64, 64, 64))
+            UIManager.put("info", Color(64, 64, 64))
+            UIManager.put("nimbusBase", Color(18, 30, 49))
+            UIManager.put("nimbusAlertYellow", Color(248, 187, 0))
+            UIManager.put("nimbusDisabledText", Color(128, 128, 128))
+            UIManager.put("nimbusFocus", Color(115, 164, 209))
+            UIManager.put("nimbusGreen", Color(176, 179, 50))
+            UIManager.put("nimbusInfoBlue", Color(66, 139, 221))
+            UIManager.put("nimbusLightBackground", Color(18, 30, 49))
+            UIManager.put("nimbusOrange", Color(191, 98, 4))
+            UIManager.put("nimbusRed", Color(169, 46, 34))
+            UIManager.put("nimbusSelectedText", Color(255, 255, 255))
+            UIManager.put("nimbusSelectionBackground", Color(104, 93, 156))
+            UIManager.put("text", Color(230, 230, 230))
+        }
     }
 
     inner class Frame(title: String) : JFrame(title) {
