@@ -189,7 +189,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                     val type = method.argsc.last().componentType!!.name
                     add(
                         NRArrayOfType.process(
-                            nodeArrayType(info, type, args.asSequence().drop(args.size - overflow).map { nodeAs(info, it, type) }.toMutableList()),
+                            nodeArrayOfType(info, type, args.asSequence().drop(args.size - overflow).map { nodeAs(info, it, type) }.toMutableList()),
                             processor,
                             ctx,
                             ValType.VALUE

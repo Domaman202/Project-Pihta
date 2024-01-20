@@ -6,6 +6,7 @@ import ru.DmN.siberia.node.NodeTypes.Type.PARSED
 
 enum class NodeTypes : INodeType {
     // e
+    E_TEXT("e-text", PARSED),
     E_TITLE("e-title", PARSED),
     // p
     PAGE_LIST("page-list", PARSED),

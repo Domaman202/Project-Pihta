@@ -21,11 +21,12 @@ fun nodeAGet(info: INodeInfo, name: String, index: String) =
         mutableListOf(nodeGetOrName(info, name), nodeGetOrName(info, index)))
 fun nodeArrayOf(info: INodeInfo, elements: MutableList<Node>) =
     NodeNodesList(info.withType(ARRAY_OF), elements)
+fun nodeArrayOfType(info: INodeInfo, type: String, elements: MutableList<Node>) =
+    NodeNodesList(info.withType(ARRAY_OF_TYPE),
+        elements.apply { add(0, nodeValueClass(info, type)) })
 fun nodeArraySize(info: INodeInfo, name: String) =
     NodeNodesList(info.withType(ARRAY_SIZE),
         mutableListOf(nodeGetOrName(info, name)))
-fun nodeArrayType(info: INodeInfo, type: String, nodes: MutableList<Node>) =
-    NodeNodesList(info.withType(ARRAY_OF_TYPE), nodes.apply { add(0, nodeValueClass(info, type)) })
 fun nodeAs(info: INodeInfo, node: Node, type: String) =
     NodeNodesList(info.withType(AS),
         mutableListOf(nodeValueClass(info, type), node))
