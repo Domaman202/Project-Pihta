@@ -13,16 +13,19 @@ import ru.DmN.siberia.utils.VirtualType
 
 object NRArrayOf : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
+        elementType(node, processor, ctx).arrayType
+
+    private fun elementType(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
         if (node.nodes.isEmpty())
-            ctx.global.getType("Any", processor.tp).arrayType
-        else processor.calc(node.nodes[0], ctx)!!.arrayType
+            ctx.global.getType("Any", processor.tp)
+        else processor.calc(node.nodes[0], ctx)!!
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeNodesList? =
         if (mode == ValType.VALUE) {
             val info = node.info
             val tmp = Variable.tmp(node)
             NRBody.process(nodeBody(info, ArrayList<Node>().apply {
-                this.add(nodeDef(info, tmp, nodeNewArray(info, calc(node, processor, ctx).name, node.nodes.size)))
+                this.add(nodeDef(info, tmp, nodeNewArray(info, elementType(node, processor, ctx).name, node.nodes.size)))
                 this.addAll(node.nodes.mapIndexed { i, it -> nodeASet(info, tmp, i, it) })
                 this.add(nodeGetOrName(info, tmp))
             }), processor, ctx, ValType.VALUE)
