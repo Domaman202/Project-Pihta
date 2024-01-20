@@ -23,6 +23,7 @@ class PihtaJava(module: Pihta) : ModuleCompilers(module, Platforms.JAVA) {
         add(BREAK_,       NCBreak)
         // c
         add(CATCH_,       NCCatch)
+        add(CLASS_OF_,    NCClassOf)
         add(CLS_,         NCClass)
         add(CONTINUE_,    NCContinue)
         add(CTOR_,        NCDefn)
