@@ -1,7 +1,7 @@
 package ru.DmN.pht.std.parsers
 
 import ru.DmN.pht.std.ast.NodeImport
-import ru.DmN.pht.std.imports.StdImportsHelper
+import ru.DmN.pht.std.imports.Helper
 import ru.DmN.pht.std.imports.ast.IValueNode
 import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.utils.text
@@ -18,7 +18,7 @@ object NPImport : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val module = parser.nextOperation().text!!
         val context = ctx.subCtx()
-        context.loadedModules.add(0, StdImportsHelper)
+        context.loadedModules.add(0, Helper)
         return NPProgn.parse(parser, context) { it ->
             val map = HashMap<String, MutableList<Any?>>()
             it.forEach { map.getOrPut(it.text) { ArrayList() } += (it as IValueNode).value }

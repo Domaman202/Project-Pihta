@@ -1,31 +1,3 @@
-(progn
-    (import java
-        (types java.lang.InterruptedException)
-        (types java.lang.Runnable)
-        (types java.lang.Thread))
-    (obj Test [^Object]
-        (def [[i ^int]])
-        (ctor [] (ccall))
-        (defn checkI ^int []
-            (sync (fget ^Test INSTANCE)
-                (++ i)
-                (#sleep ^Thread 0 10)
-                (-- i))
-            i))
-    (app
-        (defn test ^void []
-            (catch [[_ ^InterruptedException]]
-                (cycle true
-                    (#checkI ^Test))))
-        (app-fn
-            (def [
-                [t0 (new ^Thread (rfn . ^App test))]
-                [t1 (new ^Thread (rfn . ^App test))]
-                [s 0]])
-            (#start t0)
-            (#start t1)
-            (for [_ (range 0 10)]
-                (set s (+ s (#checkI ^Test))))
-            (#interrupt t0)
-            (#interrupt t1)
-            (println s))))
+(use-ctx pht phtx/ppl
+    (app-fn
+        (println (inc-txt "res/0.txt"))))

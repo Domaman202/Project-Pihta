@@ -151,14 +151,25 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
      */
-    private fun nodeGetInstance(result: MethodFindResultA, instance: Node, processor: Processor, ctx: ProcessingContext) =
-        NodeFGet(
+    private fun nodeGetInstance(result: MethodFindResultA, instance: Node, processor: Processor, ctx: ProcessingContext): Node {
+        val type = processor.computeType(instance, ctx)
+        val name = result.method.declaringClass!!.name
+        return if (name.endsWith("\$Companion")) {
+            NodeFGet(
+                instance.info.withType(NodeTypes.FGET_),
+                mutableListOf(nodeValueClass(instance.info, type.name)),
+                "Companion",
+                NodeFGet.Type.STATIC,
+                type
+            )
+        } else NodeFGet(
             instance.info.withType(NodeTypes.FGET_),
-            mutableListOf(nodeValueClass(instance.info, result.method.declaringClass!!.name)),
+            mutableListOf(nodeValueClass(instance.info, name)),
             "INSTANCE",
             NodeFGet.Type.STATIC,
-            processor.computeType(instance, ctx)
+            type
         )
+    }
 
     /**
      * Преобразует исходные аргументы "args" в список нод для передачи в NodeMCall.
@@ -178,7 +189,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                     val type = method.argsc.last().componentType!!.name
                     add(
                         NRArrayOfType.process(
-                            nodeArrayType(info, type, args.asSequence().drop(args.size - overflow).map { nodeAs(info, it, type) }.toMutableList()),
+                            nodeArrayOfType(info, type, args.asSequence().drop(args.size - overflow).map { nodeAs(info, it, type) }.toMutableList()),
                             processor,
                             ctx,
                             ValType.VALUE
@@ -217,8 +228,25 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         }
         val args = node.nodes.stream().skip(2).map { processor.process(it, ctx, ValType.VALUE)!! }.toList()
         //
-        var strict = false
+        // Class / Instance
         var result = findMethodOrNull(pair.second, name, args, static, node, processor, ctx)
+        // Companion Object
+        if (result == null) {
+            pair.second.fields.find { it.name == "Companion" }?.let { fld ->
+                findMethodOrNull(fld.type, name, args, Static.ANY, node, processor, ctx)?.let {
+                    return MethodFindResultA(
+                        VIRTUAL,
+                        it.args,
+                        it.method,
+                        generic,
+                        false,
+                        it.compression
+                    )
+                }
+            }
+        }
+        // Other
+        var strict = false
         if (result == null) {
             val types = sequenceOf(processor.computeTypesOr(node.nodes[0], ctx), ctx.classes)
             for (type in types) {

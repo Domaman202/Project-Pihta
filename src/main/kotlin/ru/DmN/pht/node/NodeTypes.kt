@@ -29,6 +29,8 @@ enum class NodeTypes : INodeType {
     // c
     CATCH_("catch", PROCESSED),
     CCALL("ccall", PARSED),
+    CLASS_OF("class-of", PARSED),
+    CLASS_OF_("class-of", PROCESSED),
     CLS_("cls", PROCESSED),
     COND("cond", PARSED),
     CONTINUE_("continue", PROCESSED),

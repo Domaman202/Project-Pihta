@@ -3,4 +3,4 @@
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["pht"])
-    (files ["src.pht"]))
+    (src ["src.pht"]))

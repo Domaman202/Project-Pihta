@@ -2,5 +2,5 @@
     (name "pht/imports/helper")
     (version "1.0.0")
     (author "DomamaN202")
-    (class "ru.DmN.pht.std.imports.StdImportsHelper")
-    (deps "pht"))
+    (deps ["pht"])
+    (class "ru.DmN.pht.std.imports.Helper"))

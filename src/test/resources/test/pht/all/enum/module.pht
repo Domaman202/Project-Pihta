@@ -4,4 +4,4 @@
     (author "DomamaN202")
     (deps ["pht"])
     (uses ["pht"])
-    (files ["src.pht"]))
+    (src ["src.pht"]))

@@ -3,6 +3,7 @@ package ru.DmN.pht.std.processors
 import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.std.ast.NodeNew
 import ru.DmN.pht.std.node.NodeTypes
+import ru.DmN.pht.std.processors.NRMCall.findMethod
 import ru.DmN.pht.std.utils.computeType
 import ru.DmN.pht.std.utils.processNodes
 import ru.DmN.siberia.Processor
@@ -19,7 +20,7 @@ object NRNew : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeNew {
         val nodes = processor.processNodes(node, ctx, ValType.VALUE)
         val type = calc(node, processor, ctx)
-        val ctor = NRMCall.findMethod(
+        val ctor = findMethod(
             type,
             "<init>",
             nodes.drop(1),

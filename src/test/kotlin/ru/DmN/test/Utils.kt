@@ -1,6 +1,7 @@
 package ru.DmN.test
 
 import org.objectweb.asm.ClassWriter
+import ru.DmN.pht.std.compiler.java.utils.classes
 import ru.DmN.pht.std.module.StdModule
 import ru.DmN.pht.std.module.ast.NodeModule
 import ru.DmN.siberia.Compiler
@@ -63,7 +64,7 @@ abstract class Module(private val dir: String) {
         }
         val processed = ArrayList<Node>()
         val processor = Processor(tp)
-        val pctx = ProcessingContext.base().with(Platforms.JAVA).apply { this.module = this@Module.module }
+        val pctx = ProcessingContext.base().with(Platforms.JVM).apply { this.module = this@Module.module }
         module.load(processor, pctx, ValType.NO_VALUE)
         module.nodes.forEach { it ->
             processor.process(it, pctx, ValType.NO_VALUE)?.let {
@@ -104,7 +105,7 @@ abstract class Module(private val dir: String) {
         }
         val processed = ArrayList<Node>()
         val processor = Processor(tp)
-        val pctx = ProcessingContext.base().with(Platforms.JAVA).apply { this.module = this@Module.module }
+        val pctx = ProcessingContext.base().with(Platforms.JVM).apply { this.module = this@Module.module }
         module.load(processor, pctx, ValType.NO_VALUE)
         module.nodes.forEach { it ->
             processor.process(it, pctx, ValType.NO_VALUE)?.let {
@@ -138,7 +139,7 @@ abstract class Module(private val dir: String) {
         val tp = TypesProvider.java()
         val processed = ArrayList<Node>()
         val processor = Processor(tp)
-        val pctx = ProcessingContext.base().with(Platforms.JAVA).apply { this.module = this@Module.module }
+        val pctx = ProcessingContext.base().with(Platforms.JVM).apply { this.module = this@Module.module }
         module.load(processor, pctx, ValType.NO_VALUE)
         module.nodes.forEach { it ->
             processor.process(it, pctx, ValType.NO_VALUE)?.let {
@@ -150,18 +151,8 @@ abstract class Module(private val dir: String) {
         val cctx = CompilationContext.base()
         processed.forEach { compiler.compile(it, cctx) }
         compiler.stageManager.runAll()
-        compiler.finalizers.forEach { it.value.run() }
         File("dump/$dir").mkdirs()
-        compiler.classes.values.forEach {
-            if (it.name.contains('/'))
-                File("dump/$dir/${it.name.substring(0, it.name.lastIndexOf('/'))}").mkdirs()
-            FileOutputStream("dump/$dir/${it.name}.class").use { stream ->
-                val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
-                it.accept(writer)
-                val b = writer.toByteArray()
-                stream.write(b)
-            }
-        }
+        compiler.finalizers.forEach { it("dump/$dir") }
     }
 
     fun test(id: Int): Any? =

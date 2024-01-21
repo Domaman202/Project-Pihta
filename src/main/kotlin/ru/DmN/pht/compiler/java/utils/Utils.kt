@@ -3,6 +3,7 @@ package ru.DmN.pht.std.compiler.java.utils
 import org.objectweb.asm.Label
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
+import org.objectweb.asm.tree.ClassNode
 import ru.DmN.pht.ctx.ContextKeys
 import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.siberia.utils.Variable
@@ -13,6 +14,7 @@ import ru.DmN.pht.std.compiler.java.ctx.MethodContext
 import ru.DmN.pht.std.processor.utils.classes
 import ru.DmN.pht.std.processor.utils.isEnum
 import ru.DmN.siberia.ctx.IContextCollection
+import ru.DmN.siberia.ctx.IContextKey
 
 fun <T : IContextCollection<T>> T.with(ctx: ClassContext) =
     this.with(ContextKeys.CLASS, ctx).apply { this.classes = LinkedClassesNode(this.classes, ctx.clazz) }
@@ -30,6 +32,9 @@ fun IContextCollection<*>.isMethod() =
 fun IContextCollection<*>.isBody() =
     contexts.containsKey(ContextKeys.BODY)
 
+var MutableMap<IContextKey, Any?>.classes
+    set(value) { this[ContextKeys.CLASSES] = value }
+    get() = this[ContextKeys.CLASSES] as MutableMap<String, ClassNode>
 val IContextCollection<*>.clazz
     get() = contexts[ContextKeys.CLASS] as ClassContext
 val IContextCollection<*>.method

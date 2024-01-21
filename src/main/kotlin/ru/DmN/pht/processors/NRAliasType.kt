@@ -10,6 +10,7 @@ import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.*
+import ru.DmN.siberia.processor.utils.Platforms.JVM
 import ru.DmN.siberia.processors.INodeProcessor
 
 object NRAliasType : INodeProcessor<NodeNodesList> {
@@ -22,7 +23,7 @@ object NRAliasType : INodeProcessor<NodeNodesList> {
             }
         }
         return when (ctx.platform) {
-            Platforms.JAVA -> null
+            JVM -> null
             else -> NodeAliasType(node.info.withType(NodeTypes.ALIAS_TYPE_), imports)
         }
     }

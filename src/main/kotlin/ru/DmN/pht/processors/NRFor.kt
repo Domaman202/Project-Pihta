@@ -1,14 +1,14 @@
 package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.node.*
-import ru.DmN.pht.std.processor.utils.*
+import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.Platforms
+import ru.DmN.siberia.processor.utils.Platforms.JVM
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
@@ -17,7 +17,7 @@ import ru.DmN.siberia.utils.Variable
 object NRFor : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
         when (ctx.platform) {
-            Platforms.JAVA -> {
+            JVM -> {
                 val info = node.info
                 val nodes = processor.computeList(node.nodes[0], ctx)
                 val name = processor.computeString(nodes[0], ctx)

@@ -1,14 +1,16 @@
 package ru.DmN.pht.std
 
+import org.objectweb.asm.ClassWriter
 import ru.DmN.pht.ast.IOpenlyNode
 import ru.DmN.pht.ast.ISyncNode
-import ru.DmN.pht.parsers.NPSA
+import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.pht.processors.*
 import ru.DmN.pht.std.ast.IAbstractlyNode
 import ru.DmN.pht.std.ast.IFinallyNode
 import ru.DmN.pht.std.ast.IStaticallyNode
 import ru.DmN.pht.std.ast.IVarargNode
-import ru.DmN.pht.std.compiler.java.PihtaJava
+import ru.DmN.pht.std.compiler.java.PihtaJvm
+import ru.DmN.pht.std.compiler.java.utils.classes
 import ru.DmN.pht.std.node.NodeParsedTypes.*
 import ru.DmN.pht.std.node.NodeTypes.*
 import ru.DmN.pht.std.parser.utils.clearMacros
@@ -19,30 +21,32 @@ import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.utils.classes
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.macros as macros_list
 import ru.DmN.pht.std.processor.utils.method
 import ru.DmN.pht.std.processors.*
 import ru.DmN.pht.unparsers.*
-import ru.DmN.pht.processor.utils.LinkedClassesNode
+import ru.DmN.pht.utils.addNP
+import ru.DmN.pht.utils.addSANP
+import ru.DmN.pht.utils.addSNP
+import ru.DmN.pht.utils.addSNU
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.node.INodeType
 import ru.DmN.siberia.node.NodeTypes.PROGN
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parser.utils.parsersPool
-import ru.DmN.siberia.parsers.INodeParser
-import ru.DmN.siberia.parsers.SimpleNP
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processors.NRProgn
-import ru.DmN.siberia.unparsers.NUDefault
 import ru.DmN.siberia.utils.Module
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.VirtualType
+import java.io.File
+import java.io.FileOutputStream
 import java.util.*
+import kotlin.collections.HashMap
+import ru.DmN.pht.std.processor.utils.macros as macros_list
 import ru.DmN.pht.std.processors.NRProgn as NRPrognA
 
 object Pihta : Module("pht") {
@@ -67,6 +71,7 @@ object Pihta : Module("pht") {
         // c
         addSNP(CATCH)
         addSNP(CCALL)
+        addSNP(CLASS_OF)
         addSNP(CLS)
         addNP("comment",  NPComment)
         addSNP(COND)
@@ -221,18 +226,6 @@ object Pihta : Module("pht") {
         "-"  to "sub"
     }
 
-    private fun addNP(pattern: String, parser: INodeParser) {
-        add(pattern.toRegularExpr(), parser)
-    }
-
-    private fun addSNP(type: INodeType) {
-        add(type.operation.toRegularExpr(), SimpleNP(type))
-    }
-
-    private fun addSANP(type: INodeType) {
-        add(type.operation.toRegularExpr(), NPSA(type))
-    }
-
     private infix fun String.to(alias: String) {
         add(this.toRegularExpr(), NPNodeAlias(alias))
     }
@@ -267,6 +260,7 @@ object Pihta : Module("pht") {
         addSNU(CATCH)
         add(CATCH_,         NUCatch)
         addSNU(CCALL)
+        addSNU(CLASS_OF)
         addSNU(CLS)
         add(CLS_,           NUClass)
         addSNU(COND)
@@ -445,10 +439,6 @@ object Pihta : Module("pht") {
         addSNU(CTC_NS_NAME)
     }
 
-    private fun addSNU(type: INodeType) {
-        add(type, NUDefault)
-    }
-
     override fun initProcessors() {
         // a
         add(ADD,           NRMath)
@@ -478,6 +468,8 @@ object Pihta : Module("pht") {
         add(CATCH,         NRCatch)
         add(CATCH_,        NRCatchB)
         add(CCALL,         NRCCall)
+        add(CLASS_OF,      NRClassOf)
+        add(CLASS_OF_,     NRClassOf)
         add(CLS,           NRClass)
         add(COND,          NRCond)
         add(CONTINUE,      NRBreakContinue)
@@ -635,7 +627,7 @@ object Pihta : Module("pht") {
     }
 
     override fun initCompilers() {
-        PihtaJava(this).init()
+        PihtaJvm(this).init()
     }
 
     override fun load(parser: Parser, ctx: ParsingContext) {
@@ -672,7 +664,31 @@ object Pihta : Module("pht") {
 
     override fun load(compiler: Compiler, ctx: CompilationContext): Variable? {
         if (!ctx.loadedModules.contains(this)) {
+            // Контексты
+            compiler.contexts.classes = HashMap()
             ctx.classes = LinkedClassesNode.LinkedClassesNodeStart as LinkedClassesNode<VirtualType>
+            // Финализация
+            compiler.finalizers.add { dir ->
+                compiler.contexts.classes.values.forEach {
+                    if (it.name.contains('/'))
+                        File("$dir/${it.name.substring(0, it.name.lastIndexOf('/'))}").mkdirs()
+                    FileOutputStream("$dir/${it.name}.class").use { stream ->
+                        val writer =
+                            try {
+                                val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
+                                it.accept(writer)
+                                writer
+                            } catch (_: ArrayIndexOutOfBoundsException) {
+                                println("Внимание: класс '${it.name}' скомпилирован без просчёта фреймов.")
+                                val writer = ClassWriter(ClassWriter.COMPUTE_MAXS)
+                                it.accept(writer)
+                                writer
+                            }
+                        val b = writer.toByteArray()
+                        stream.write(b)
+                    }
+                }
+            }
         }
         return super.load(compiler, ctx)
     }
