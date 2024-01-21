@@ -1,3 +1,14 @@
+## e-pair
+Создаёт `пару` `элементов`.
+
+### Применение
+
+1. `(e-pair e0 e1)`<br>
+`e0` `e1` - _элементы_.
+
+### Примеры
+
+```pihta
 (progn
     (import phtx/ppl (types ru.DmN.phtx.ppl.utils.Presentation))
     (app-fn
@@ -18,3 +29,6 @@
                     (e-pair
                         (e-image (inc-img "res/1.jpg"))
                         (e-image (inc-img "res/0.jpg")))))))))
+```
+
+***Требует наличие файлов `0.jpg` `1.jpg` `2.jpg` `3.jpg` в папке `res` исполняемого модуля.***
