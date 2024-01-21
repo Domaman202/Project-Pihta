@@ -29,9 +29,9 @@ object PhtPresentationLib : Module("phtx/ppl") {
 
     override fun initProcessors() {
         // i
-        add(INC_IMG, NRIncImg)
-        add(INC_TXT, NRIncTxt)
+        add(INC_IMG,        NRIncImg)
+        add(INC_TXT,        NRIncTxt)
         // p
-        add(PRESENTATION, NRPresentation)
+        add(PRESENTATION,   NRPresentation)
     }
 }

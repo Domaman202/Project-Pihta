@@ -19,9 +19,10 @@ object NRArrayOfType : INodeProcessor<NodeNodesList> {
         if (mode == ValType.VALUE) {
             val info = node.info
             val tmp = Variable.tmp(node)
+            val type = processor.computeString(node.nodes[0], ctx)
             NRBody.process(nodeBody(info, ArrayList<Node>().apply {
-                this.add(nodeDef(info, tmp, nodeNewArray(info, processor.computeString(node.nodes[0], ctx), node.nodes.size - 1)))
-                this.addAll(node.nodes.asSequence().drop(1).mapIndexed { i, it -> nodeASet(info, tmp, i, it) })
+                this.add(nodeDef(info, tmp, nodeNewArray(info, type, node.nodes.size - 1)))
+                this.addAll(node.nodes.asSequence().drop(1).mapIndexed { i, it -> nodeASet(info, tmp, i, nodeAs(info, it, type)) })
                 this.add(nodeGetOrName(info, tmp))
             }), processor, ctx, ValType.VALUE)
         } else null
