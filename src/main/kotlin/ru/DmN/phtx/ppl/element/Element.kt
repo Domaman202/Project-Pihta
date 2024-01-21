@@ -5,7 +5,7 @@ import java.awt.Graphics2D
 
 abstract class Element {
     abstract val type: SizeType
-    abstract fun size(window: Dimension, g: Graphics2D): Size
+    abstract fun size(w: Dimension, g: Graphics2D): Size
     abstract fun paint(offset: Offset, free: Size, w: Dimension, g: Graphics2D)
 
     enum class SizeType {
@@ -17,9 +17,13 @@ abstract class Element {
         val width: Int,
         val height: Int
     ) {
+        operator fun plus(other: Size) =
+            Size(width + other.width, height + other.height)
         fun sub(width: Int, height: Int) =
             Size(this.width - width, this.height - height)
-        fun div(): Size =
+        fun divWidth(): Size =
+            Size(width / 2, height)
+        fun divHeight(): Size =
             Size(width, height / 2)
     }
 

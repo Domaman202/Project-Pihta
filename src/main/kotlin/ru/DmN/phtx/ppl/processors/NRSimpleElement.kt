@@ -11,6 +11,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.ValType.NO_VALUE
+import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VirtualType
 
@@ -20,12 +21,15 @@ class NRSimpleElement(val type: String) : INodeProcessor<NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
         val info = node.info
-        return NRMCall.process(
+        val new = nodeNew(info, type, node.nodes)
+        return if (mode == VALUE)
+            new
+        else NRMCall.process(
             nodeMCall(
                 info,
                 nodeGetVariable(info, "phtx\$ppl\$page"),
                 "plusAssign",
-                listOf(nodeNew(info, type, node.nodes))
+                listOf(new)
             ),
             processor,
             ctx,
