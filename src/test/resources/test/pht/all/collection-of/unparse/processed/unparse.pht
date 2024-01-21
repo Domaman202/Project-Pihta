@@ -48,14 +48,14 @@
 							(as (array-type ^java.lang.Object)
 								(body
 									(def [
-										[(array-type ^java.lang.String) pht$tmp$56200 (new-array ^java.lang.String 2)]])
+										[(array-type ^java.lang.Object) pht$tmp$46969 (new-array ^java.lang.Object 2)]])
 									(aset
-										(get pht$tmp$56200)
+										(get pht$tmp$46969)
 										0
 										"Слава")
 									(aset
-										(get pht$tmp$56200)
+										(get pht$tmp$46969)
 										1
 										"России")
-									(get pht$tmp$56200)))
+									(get pht$tmp$46969)))
 							toList)))))))

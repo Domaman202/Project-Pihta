@@ -1,5 +1,6 @@
 package ru.DmN.pht.std
 
+import org.objectweb.asm.ClassWriter
 import ru.DmN.pht.ast.IOpenlyNode
 import ru.DmN.pht.ast.ISyncNode
 import ru.DmN.pht.processor.utils.LinkedClassesNode
@@ -8,7 +9,8 @@ import ru.DmN.pht.std.ast.IAbstractlyNode
 import ru.DmN.pht.std.ast.IFinallyNode
 import ru.DmN.pht.std.ast.IStaticallyNode
 import ru.DmN.pht.std.ast.IVarargNode
-import ru.DmN.pht.std.compiler.java.PihtaJava
+import ru.DmN.pht.std.compiler.java.PihtaJvm
+import ru.DmN.pht.std.compiler.java.utils.classes
 import ru.DmN.pht.std.node.NodeParsedTypes.*
 import ru.DmN.pht.std.node.NodeTypes.*
 import ru.DmN.pht.std.parser.utils.clearMacros
@@ -40,7 +42,10 @@ import ru.DmN.siberia.processors.NRProgn
 import ru.DmN.siberia.utils.Module
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.VirtualType
+import java.io.File
+import java.io.FileOutputStream
 import java.util.*
+import kotlin.collections.HashMap
 import ru.DmN.pht.std.processor.utils.macros as macros_list
 import ru.DmN.pht.std.processors.NRProgn as NRPrognA
 
@@ -622,7 +627,7 @@ object Pihta : Module("pht") {
     }
 
     override fun initCompilers() {
-        PihtaJava(this).init()
+        PihtaJvm(this).init()
     }
 
     override fun load(parser: Parser, ctx: ParsingContext) {
@@ -659,7 +664,31 @@ object Pihta : Module("pht") {
 
     override fun load(compiler: Compiler, ctx: CompilationContext): Variable? {
         if (!ctx.loadedModules.contains(this)) {
+            // Контексты
+            compiler.contexts.classes = HashMap()
             ctx.classes = LinkedClassesNode.LinkedClassesNodeStart as LinkedClassesNode<VirtualType>
+            // Финализация
+            compiler.finalizers.add { dir ->
+                compiler.contexts.classes.values.forEach {
+                    if (it.name.contains('/'))
+                        File("$dir/${it.name.substring(0, it.name.lastIndexOf('/'))}").mkdirs()
+                    FileOutputStream("$dir/${it.name}.class").use { stream ->
+                        val writer =
+                            try {
+                                val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
+                                it.accept(writer)
+                                writer
+                            } catch (_: ArrayIndexOutOfBoundsException) {
+                                println("Внимание: класс '${it.name}' скомпилирован без просчёта фреймов.")
+                                val writer = ClassWriter(ClassWriter.COMPUTE_MAXS)
+                                it.accept(writer)
+                                writer
+                            }
+                        val b = writer.toByteArray()
+                        stream.write(b)
+                    }
+                }
+            }
         }
         return super.load(compiler, ctx)
     }

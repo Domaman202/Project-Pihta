@@ -13,6 +13,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.*
+import ru.DmN.siberia.processor.utils.Platforms.JVM
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VirtualType
 import kotlin.math.absoluteValue
@@ -32,7 +33,7 @@ object NRFn : INodeProcessor<NodeNodesList> {
         val args = processor.computeStringNodes(processor.compute(node.nodes[offset + 1], ctx) as INodesList, ctx)
         val body = LazyProcessValueList(node, processor, ctx).drop(offset + 2)
         val new = NodeFn(node.info.withType(NodeTypes.FN_), NodeFn.Source(body, type, args, gctx.name("PhtLambda\$${node.info.hashCode().absoluteValue}"), refs))
-        if (ctx.platform == Platforms.JAVA) {
+        if (ctx.platform == JVM) {
             processor.stageManager.pushTask(ProcessingStage.FINALIZATION) {
                 finalize(node.info, new, processor, ctx)
             }

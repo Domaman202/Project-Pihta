@@ -8,7 +8,7 @@
 						add
 						(body
 							(def [
-								[(array-type ^java.lang.String) pht$tmp$46968 (new-array ^java.lang.String 1)]])
+								[(array-type ^java.lang.Object) pht$tmp$46968 (new-array ^java.lang.Object 1)]])
 							(aset
 								(get pht$tmp$46968)
 								0
@@ -29,7 +29,7 @@
 							add
 							(body
 								(def [
-									[(array-type ^java.lang.String) pht$tmp$46972 (new-array ^java.lang.String 2)]])
+									[(array-type ^java.lang.Object) pht$tmp$46972 (new-array ^java.lang.Object 2)]])
 								(aset
 									(get pht$tmp$46972)
 									0

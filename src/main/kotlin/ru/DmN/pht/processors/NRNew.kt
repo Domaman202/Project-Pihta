@@ -28,8 +28,6 @@ object NRNew : INodeProcessor<NodeNodesList> {
             processor,
             ctx
         )
-        if (type.name.endsWith("Presentation"))
-            println()
         val info = node.info
         return NodeNew(
             info.withType(NodeTypes.NEW_),

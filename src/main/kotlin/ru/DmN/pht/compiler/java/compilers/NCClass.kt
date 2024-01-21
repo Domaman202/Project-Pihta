@@ -4,6 +4,7 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import ru.DmN.pht.std.ast.NodeType
 import ru.DmN.pht.std.compiler.java.ctx.ClassContext
+import ru.DmN.pht.std.compiler.java.utils.classes
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.compiler.java.utils.with
 import ru.DmN.pht.std.node.NodeTypes.*
@@ -20,7 +21,7 @@ object NCClass : INodeCompiler<NodeType> {
     override fun compile(node: NodeType, compiler: Compiler, ctx: CompilationContext) {
         compiler.stageManager.pushTask(CompilingStage.TYPES_PREDEFINE) {
             val cn = ClassNode().apply {
-                compiler.classes[node.type.name] = this
+                compiler.contexts.classes[node.type.name] = this
                 visit(
                     ctx.javaClassVersion,
                     Opcodes.ACC_PUBLIC.let {

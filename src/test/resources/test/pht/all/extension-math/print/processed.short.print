@@ -10,7 +10,7 @@
 |	|	|	|	|	|	(type = extension method)
 |	|	|	|	|	|	(desc = sub(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;)
 |	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	(method = add(Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/String;)
+|	|	|	|	|	|	|	(method = add(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;)
 |	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = CLASS)
@@ -22,7 +22,7 @@
 |	|	|	|	|	|	|	|	[DEF_
 |	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	(name = pht$tmp$46968)
-|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.String;)
+|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.Object;)
 |	|	|	|	|	|	|	|	|	|	[NEW_ARRAY_]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
@@ -74,7 +74,7 @@
 |	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	(method = add(Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/String;)
+|	|	|	|	|	|	|	|	(method = add(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;)
 |	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	(type = CLASS)
@@ -89,7 +89,7 @@
 |	|	|	|	|	|	|	|	|	[DEF_
 |	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$46972)
-|	|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.String;)
+|	|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.Object;)
 |	|	|	|	|	|	|	|	|	|	|	[NEW_ARRAY_]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]

@@ -8,14 +8,14 @@ do
   (version \"1.0.0\")
   (author \"DomamaN202\")
   (deps [\"pht\"])
-  (files [\"unparse.pht\"]))" > $file/unparse/parsed/module.pht
+  (src [\"unparse.pht\"]))" > $file/unparse/parsed/module.pht
   mkdir -p $file/unparse/processed
   echo "(module
   (name \"${file:19}/unparse/processed\")
   (version \"1.0.0\")
   (author \"DomamaN202\")
   (deps [\"pht\"])
-  (files [\"unparse.pht\"]))" > $file/unparse/processed/module.pht
+  (src [\"unparse.pht\"]))" > $file/unparse/processed/module.pht
 done
 for file in src/test/resources/test/siberia/all/*
 do
@@ -25,12 +25,12 @@ do
   (version \"1.0.0\")
   (author \"DomamaN202\")
   (deps [\"pht\"])
-  (files [\"unparse.pht\"]))" > $file/unparse/parsed/module.pht
+  (src [\"unparse.pht\"]))" > $file/unparse/parsed/module.pht
   mkdir -p $file/unparse/processed
   echo "(module
   (name \"${file:19}/unparse/processed\")
   (version \"1.0.0\")
   (author \"DomamaN202\")
   (deps [\"pht\"])
-  (files [\"unparse.pht\"]))" > $file/unparse/processed/module.pht
+  (src [\"unparse.pht\"]))" > $file/unparse/processed/module.pht
 done

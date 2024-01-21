@@ -8,7 +8,7 @@ import ru.DmN.siberia.compiler.utils.ModuleCompilers
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.processor.utils.Platforms
 
-class PihtaJava(module: Pihta) : ModuleCompilers(module, Platforms.JAVA) {
+class PihtaJvm(module: Pihta) : ModuleCompilers(module, Platforms.JVM) {
     override fun onInitialize() {
         // a
         add(ADD_,         NCMath)
