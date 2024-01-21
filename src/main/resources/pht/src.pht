@@ -38,10 +38,10 @@
             (universal-array-extends [^boolean ^byte ^short ^char ^int ^long ^float ^double ^Any]))
 
         (cls StringExtends [^Object]
-            (@varargs (efn ^String add ^String [[arr (array-type ^String)]] (progn
+            (@varargs (efn ^String add ^String [[arr (array-type ^Any)]] (progn
                 (def [[str (new ^StringBuilder this)]])
                 (for [e arr]
-                    (#append str e))
+                    (#append str (#toString ^java.util.Objects e)))
                 (#toString str)))))
 
         (cls MathExtends [^Object]

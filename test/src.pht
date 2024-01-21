@@ -15,4 +15,4 @@
                 (e-image (inc-img "res/2.jpg")))
             (page-list
                 (for [i (range 0 19)]
-                    (e-title (+ "i = " (#toString i)) 36)))))))
+                    (e-title (+ "i = " i) 36)))))))
