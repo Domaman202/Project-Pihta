@@ -18,15 +18,13 @@ object NRPresentation : INodeProcessor<NodeNodesList> {
         if (mode == ValType.VALUE) {
             val info = node.info
             val args = listOf(node.nodes[0], node.nodes[1])
-            val body = mutableListOf<Node>(
-                nodeDef(
-                    info,
-                    "phtx\$ppl\$presentation",
-                    nodeNew(info, "ru.DmN.phtx.ppl.utils.Presentation", args)
-                )
-            )
-            body.addAll(node.nodes.asSequence().drop(2))
-            body.add(nodeGetVariable(info, "phtx\$ppl\$presentation"))
+            val body = mutableListOf<Node>(nodeDef(
+                info,
+                "phtx\$ppl\$presentation",
+                nodeNew(info, "ru.DmN.phtx.ppl.utils.Presentation", args)
+            ))
+            body += node.nodes.asSequence().drop(2)
+            body += nodeGetVariable(info, "phtx\$ppl\$presentation")
             NRUseCtx.process(
                 nodeUseCtx(
                     info,

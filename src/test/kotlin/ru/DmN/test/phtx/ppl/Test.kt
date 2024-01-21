@@ -15,7 +15,7 @@ object Test {
             Presentation.setDarkTheme()
             Presentation("Тестовая Презентация", 1000).apply {
                 this += PageList(
-                    listOf(
+                    mutableListOf(
                         ETitle("Крещение Руси", 36),
                         EText("""
                             1. Крещение Руси произошло в IX веке благодаря князю Владимиру.
@@ -34,14 +34,12 @@ object Test {
                         """.trimIndent(), 24)
                     )
                 )
-                this += PageList(
-                    listOf(
-                        ETitle("Флаги Росссийской Империи", 36),
-                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg"))),
-                        ETitle("Флаги Росссийской Империи", 36),
-                        EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg"))),
-                    )
-                )
+                this += PageList().apply {
+                    this += ETitle("Флаги Росссийской Империи", 36)
+                    this += EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img1.jpg")))
+                    this += ETitle("Флаги Росссийской Империи", 36)
+                    this += EImage(ImageIO.read(Test::class.java.getResourceAsStream("/test/phtx/ppl/img2.jpg")))
+                }
                 //
                 this.show()
             }

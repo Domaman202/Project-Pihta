@@ -8,7 +8,11 @@ import ru.DmN.phtx.ppl.element.Element.SizeType.FIXED
 import java.awt.Dimension
 import java.awt.Graphics2D
 
-class PageList(val list: List<Element>) : Page() {
+class PageList(val list: MutableList<Element> = mutableListOf()) : Page() {
+    operator fun plusAssign(element: Element) {
+        list.add(element)
+    }
+
     override fun paint(w: Dimension, g: Graphics2D) {
         super.paint(w, g)
         //

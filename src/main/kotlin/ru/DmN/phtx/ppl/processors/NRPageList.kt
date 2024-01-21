@@ -13,6 +13,13 @@ import ru.DmN.siberia.processors.NRUseCtx
 object NRPageList : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
         val info = node.info
+        val body = mutableListOf<Node>(nodeDef(
+            info,
+            "phtx\$ppl\$page",
+            nodeNew(info, "ru.DmN.phtx.ppl.page.PageList", mutableListOf())
+        ))
+        body += node.nodes
+        body += nodeGetVariable(info, "phtx\$ppl\$page")
         return NRUseCtx.process(
             nodeUseCtx(
                 info,
@@ -22,15 +29,9 @@ object NRPageList : INodeProcessor<NodeNodesList> {
                     nodeGetVariable(info, "phtx\$ppl\$presentation"),
                     "plusAssign",
                     listOf(
-                        nodeNew(
+                        nodeBody(
                             info,
-                            "ru.DmN.phtx.ppl.page.PageList",
-                            mutableListOf(
-                                nodeListOf(
-                                    info,
-                                    node.nodes
-                                )
-                            )
+                            body
                         )
                     )
                 )

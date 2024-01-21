@@ -1,6 +1,9 @@
 package ru.DmN.phtx.ppl.processors
 
+import ru.DmN.pht.std.node.nodeGetVariable
+import ru.DmN.pht.std.node.nodeMCall
 import ru.DmN.pht.std.node.nodeNew
+import ru.DmN.pht.std.processors.NRMCall
 import ru.DmN.pht.std.processors.NRNew
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
@@ -15,6 +18,18 @@ class NRSimpleElement(val type: String) : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
         processor.tp.typeOf(type)
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node =
-        NRNew.process(nodeNew(node.info, type, node.nodes), processor, ctx, NO_VALUE)
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
+        val info = node.info
+        return NRMCall.process(
+            nodeMCall(
+                info,
+                nodeGetVariable(info, "phtx\$ppl\$page"),
+                "plusAssign",
+                listOf(nodeNew(info, type, node.nodes))
+            ),
+            processor,
+            ctx,
+            NO_VALUE
+        )
+    }
 }
