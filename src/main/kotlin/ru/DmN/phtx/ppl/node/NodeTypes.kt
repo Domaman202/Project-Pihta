@@ -6,8 +6,12 @@ import ru.DmN.siberia.node.NodeTypes.Type.PARSED
 
 enum class NodeTypes : INodeType {
     // e
+    E_IMAGE("e-image", PARSED),
     E_TEXT("e-text", PARSED),
     E_TITLE("e-title", PARSED),
+    // i
+    INC_IMG("inc-img", PARSED),
+    INC_TXT("inc-txt", PARSED),
     // p
     PAGE_LIST("page-list", PARSED),
     PRESENTATION("presentation", PARSED);
