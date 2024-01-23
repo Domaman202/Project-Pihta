@@ -1,6 +1,6 @@
 [USE_CTX
 |	[USE_CTX
-|	|	(modules = pht)
+|	|	(modules = pht pht/jvm)
 |	|	[APP_FN]
 |	]
 ]

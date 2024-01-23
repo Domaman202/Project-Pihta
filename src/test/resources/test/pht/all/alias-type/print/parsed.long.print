@@ -1,5 +1,5 @@
 [USE_CTX
-|	(modules = pht)
+|	(modules = pht pht/jvm)
 |	[PROGN
 |	|	[ALIAS_TYPE
 |	|	|	[VALN

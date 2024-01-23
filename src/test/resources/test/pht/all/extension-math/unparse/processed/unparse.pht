@@ -1,4 +1,4 @@
-(use-ctx pht
+(use-ctx pht pht/jvm
 	(progn
 		(cls [] App [^java.lang.Object]
 			(@static

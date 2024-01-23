@@ -1,4 +1,4 @@
-(use-ctx pht
+(use-ctx pht pht/jvm
 	(progn
 		(enum [] Colors [^java.lang.Enum]
 			(ector [[r ^int][g ^int][b ^int]]

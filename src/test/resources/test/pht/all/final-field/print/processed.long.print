@@ -1,5 +1,5 @@
 [USE_CTX_
-|	(modules = pht)
+|	(modules = pht pht/jvm)
 |	(NODES:
 |	|	[USE_CTX_
 |	|	|	(modules = pht)

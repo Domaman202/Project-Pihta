@@ -1,4 +1,4 @@
-(use-ctx pht
+(use-ctx pht pht/jvm
 	(progn
 		(cls [] Test0 [^java.lang.Object]
 			(@static
@@ -30,15 +30,18 @@
 							(aset
 								(get pht$tmp$46968)
 								0
-								202)
+								(as ^long
+									202))
 							(aset
 								(get pht$tmp$46968)
 								1
-								203)
+								(as ^long
+									203))
 							(aset
 								(get pht$tmp$46968)
 								2
-								213)
+								(as ^long
+									213))
 							(get pht$tmp$46968))))))
 		(cls [] Test2 [^java.lang.Object]
 			(@static

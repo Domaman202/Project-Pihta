@@ -12,10 +12,8 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.Platforms
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processor.utils.module
-import ru.DmN.siberia.processor.utils.with
+import ru.DmN.siberia.processor.utils.*
+import ru.DmN.siberia.processors.NRUseCtx
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.utils.Module
 import ru.DmN.siberia.utils.TypesProvider
@@ -53,7 +51,7 @@ abstract class Module(private val dir: String) {
     fun unparse() {
         module.nodes.clear()
         module.init = false
-        module.init()
+        module.init(Platforms.UNIVERSAL)
         val tp = TypesProvider.java()
         File("dump/$dir/unparse/parsed").mkdirs()
         FileOutputStream("dump/$dir/unparse/parsed/unparse.pht").use { out ->
@@ -64,13 +62,13 @@ abstract class Module(private val dir: String) {
         }
         val processed = ArrayList<Node>()
         val processor = Processor(tp)
-        val pctx = ProcessingContext.base().with(Platforms.JVM).apply { this.module = this@Module.module }
-        module.load(processor, pctx, ValType.NO_VALUE)
-        module.nodes.forEach { it ->
-            processor.process(it, pctx, ValType.NO_VALUE)?.let {
-                processed += it
-            }
-        }
+        NRUseCtx.injectModules(
+            mutableListOf(module.name),
+            processed,
+            processed,
+            processor,
+            ProcessingContext.base().with(Platforms.JVM).apply { this.module = this@Module.module }
+        )
         processor.stageManager.runAll()
         File("dump/$dir/unparse/processed").mkdirs()
         FileOutputStream("dump/$dir/unparse/processed/unparse.pht").use { out ->
@@ -90,7 +88,7 @@ abstract class Module(private val dir: String) {
     private fun print() {
         module.nodes.clear()
         module.init = false
-        module.init()
+        module.init(Platforms.UNIVERSAL)
         val tp = TypesProvider.java()
         File("dump/$dir/print").mkdirs()
         FileOutputStream("dump/$dir/print/parsed.short.print").use { short ->
@@ -105,13 +103,13 @@ abstract class Module(private val dir: String) {
         }
         val processed = ArrayList<Node>()
         val processor = Processor(tp)
-        val pctx = ProcessingContext.base().with(Platforms.JVM).apply { this.module = this@Module.module }
-        module.load(processor, pctx, ValType.NO_VALUE)
-        module.nodes.forEach { it ->
-            processor.process(it, pctx, ValType.NO_VALUE)?.let {
-                processed += it
-            }
-        }
+        NRUseCtx.injectModules(
+            mutableListOf(module.name),
+            processed,
+            processed,
+            processor,
+            ProcessingContext.base().with(Platforms.JVM).apply { this.module = this@Module.module }
+        )
         processor.stageManager.runAll()
         FileOutputStream("dump/$dir/print/processed.short.print").use { short ->
             FileOutputStream("dump/$dir/print/processed.long.print").use { long ->
@@ -135,17 +133,17 @@ abstract class Module(private val dir: String) {
     fun compile() {
         module.nodes.clear()
         module.init = false
-        module.init()
+        module.init(Platforms.UNIVERSAL)
         val tp = TypesProvider.java()
         val processed = ArrayList<Node>()
         val processor = Processor(tp)
-        val pctx = ProcessingContext.base().with(Platforms.JVM).apply { this.module = this@Module.module }
-        module.load(processor, pctx, ValType.NO_VALUE)
-        module.nodes.forEach { it ->
-            processor.process(it, pctx, ValType.NO_VALUE)?.let {
-                processed += it
-            }
-        }
+        NRUseCtx.injectModules(
+            mutableListOf(module.name),
+            processed,
+            processed,
+            processor,
+            ProcessingContext.base().with(Platforms.JVM).apply { this.module = this@Module.module }
+        )
         processor.stageManager.runAll()
         val compiler = Compiler(tp)
         val cctx = CompilationContext.base()

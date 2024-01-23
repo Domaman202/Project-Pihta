@@ -1,5 +1,5 @@
 [USE_CTX
-|	(modules = pht)
+|	(modules = pht pht/jvm)
 |	[TEST_FN
 |	|	[VALUE
 |	|	|	(type = INT)

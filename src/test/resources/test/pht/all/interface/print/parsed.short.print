@@ -1,5 +1,5 @@
 [USE_CTX
-|	(modules = pht)
+|	(modules = pht pht/jvm)
 |	[PROGN
 |	|	[ITF
 |	|	|	[GET_OR_NAME
