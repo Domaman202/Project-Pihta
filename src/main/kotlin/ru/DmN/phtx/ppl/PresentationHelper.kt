@@ -8,18 +8,24 @@ import ru.DmN.phtx.ppl.processors.NRPageList
 import ru.DmN.siberia.utils.Module
 
 object PresentationHelper : Module("phtx/ppl/presentation/helper") {
-    override fun initParsers() {
+    private fun initParsers() {
         // p
         addNP("page-list", NPPageList)
     }
 
-    override fun initUnparsers() {
+    private fun initUnparsers() {
         // p
         addSNU(PAGE_LIST)
     }
 
-    override fun initProcessors() {
+    private fun initProcessors() {
         // p
         add(PAGE_LIST, NRPageList)
+    }
+
+    init {
+        initParsers()
+        initUnparsers()
+        initProcessors()
     }
 }

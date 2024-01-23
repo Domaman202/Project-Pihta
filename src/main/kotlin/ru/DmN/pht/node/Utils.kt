@@ -113,7 +113,7 @@ fun nodeObj(info: INodeInfo, name: String, parents: List<String>, nodes: List<No
         mutableListOf(nodeValue(info, name), nodeValn(info, parents.mapMutable { nodeValue(info, it) })).apply { addAll(nodes) })
 // u
 fun nodeUseCtx(info: INodeInfo, name: String, body: Node) =
-    NodeUse(info.withType(USE_CTX), listOf(name), mutableListOf(body))
+    NodeUse(info.withType(USE_CTX), mutableListOf(name), mutableListOf(body))
 // v
 fun nodeValn(info: INodeInfo, nodes: MutableList<Node>) =
     NodeNodesList(info.withType(VALN), nodes)

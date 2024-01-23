@@ -11,7 +11,7 @@ import ru.DmN.phtx.ppl.processors.NRPresentation
 import ru.DmN.siberia.utils.Module
 
 object PhtPresentationLib : Module("phtx/ppl") {
-    override fun initParsers() {
+    private fun initParsers() {
         // i
         addSNP(INC_IMG)
         addSNP(INC_TXT)
@@ -19,7 +19,7 @@ object PhtPresentationLib : Module("phtx/ppl") {
         addNP("presentation", NPPresentation)
     }
 
-    override fun initUnparsers() {
+    private fun initUnparsers() {
         // i
         addSNU(INC_IMG)
         addSNU(INC_TXT)
@@ -27,11 +27,17 @@ object PhtPresentationLib : Module("phtx/ppl") {
         addSNU(PRESENTATION)
     }
 
-    override fun initProcessors() {
+    private fun initProcessors() {
         // i
         add(INC_IMG,        NRIncImg)
         add(INC_TXT,        NRIncTxt)
         // p
         add(PRESENTATION,   NRPresentation)
+    }
+
+    init {
+        initParsers()
+        initUnparsers()
+        initProcessors()
     }
 }

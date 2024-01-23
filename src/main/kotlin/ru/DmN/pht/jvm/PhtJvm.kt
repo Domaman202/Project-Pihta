@@ -1,15 +1,64 @@
-package ru.DmN.pht.std.compiler.java
+package ru.DmN.pht.jvm
 
-import ru.DmN.pht.compiler.java.compilers.*
-import ru.DmN.pht.std.Pihta
+import org.objectweb.asm.ClassWriter
+import ru.DmN.pht.ast.ISyncNode
+import ru.DmN.pht.jvm.compilers.*
+import ru.DmN.pht.processors.NRSync
 import ru.DmN.pht.std.compiler.java.compilers.*
+import ru.DmN.pht.std.compiler.java.utils.classes
+import ru.DmN.pht.std.node.NodeParsedTypes.ANN_SYNC
 import ru.DmN.pht.std.node.NodeTypes.*
+import ru.DmN.pht.std.processors.NRClassOf
+import ru.DmN.pht.std.processors.NRSA
+import ru.DmN.pht.unparsers.NUSync
+import ru.DmN.pht.utils.addSANP
+import ru.DmN.pht.utils.addSNP
+import ru.DmN.pht.utils.addSNU
+import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.ModuleCompilers
 import ru.DmN.siberia.compilers.NCDefault
-import ru.DmN.siberia.processor.utils.Platforms
+import ru.DmN.siberia.processor.utils.Platforms.JVM
+import ru.DmN.siberia.processors.NRProgn
+import java.io.File
+import java.io.FileOutputStream
 
-class PihtaJvm(module: Pihta) : ModuleCompilers(module, Platforms.JVM) {
-    override fun onInitialize() {
+object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
+    private fun initParsers() {
+        // c
+        addSNP(CLASS_OF)
+        // s
+        addSNP(SYNC)
+
+        // @
+        addSANP(ANN_SYNC)
+    }
+
+    private fun initUnparsers() {
+        // c
+        addSNU(CLASS_OF)
+        // s
+        addSNU(SYNC)
+        add(SYNC_, NUSync)
+
+        // @
+        addSNU(ANN_SYNC)
+        addSNU(ANN_SYNC_)
+    }
+
+    private fun initProcessors() {
+        // c
+        add(CLASS_OF,  NRClassOf)
+        add(CLASS_OF_, NRClassOf)
+        // s
+        add(SYNC,      NRSync)
+        add(SYNC_,     NRProgn)
+
+        // @
+        add(ANN_SYNC, NRSA { it, _, _ -> if (it is ISyncNode) it.sync = true })
+    }
+
+    private fun initCompilers() {
         // a
         add(ADD_,         NCMath)
         add(AGET_,        NCAGet)
@@ -102,5 +151,41 @@ class PihtaJvm(module: Pihta) : ModuleCompilers(module, Platforms.JVM) {
         add(ANN_STATIC_,   NCDefault)
         add(ANN_SYNC_,     NCDefault)
         add(ANN_VARARGS_,  NCDefault)
+    }
+
+    override fun load(compiler: Compiler, ctx: CompilationContext) {
+        // Контексты
+        compiler.contexts.classes = HashMap()
+        // Финализация
+        compiler.finalizers.add { dir ->
+            compiler.contexts.classes.values.forEach {
+                if (it.name.contains('/'))
+                    File("$dir/${it.name.substring(0, it.name.lastIndexOf('/'))}").mkdirs()
+                FileOutputStream("$dir/${it.name}.class").use { stream ->
+                    val writer =
+                        try {
+                            val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
+                            it.accept(writer)
+                            writer
+                        } catch (_: ArrayIndexOutOfBoundsException) {
+                            println("Внимание: класс '${it.name}' скомпилирован без просчёта фреймов.")
+                            val writer = ClassWriter(ClassWriter.COMPUTE_MAXS)
+                            it.accept(writer)
+                            writer
+                        }
+                    val b = writer.toByteArray()
+                    stream.write(b)
+                }
+            }
+        }
+        //
+        super.load(compiler, ctx)
+    }
+
+    init {
+        initParsers()
+        initUnparsers()
+        initProcessors()
+        initCompilers()
     }
 }

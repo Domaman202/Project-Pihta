@@ -1,4 +1,4 @@
-package ru.DmN.pht.compiler.java.compilers
+package ru.DmN.pht.jvm.compilers
 
 import org.objectweb.asm.Handle
 import org.objectweb.asm.Opcodes.H_INVOKESTATIC

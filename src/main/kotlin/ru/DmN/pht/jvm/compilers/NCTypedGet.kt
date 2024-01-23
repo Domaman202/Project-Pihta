@@ -1,4 +1,4 @@
-package ru.DmN.pht.compiler.java.compilers
+package ru.DmN.pht.jvm.compilers
 
 import ru.DmN.pht.ast.NodeTypedGet
 import ru.DmN.pht.std.compiler.java.utils.body

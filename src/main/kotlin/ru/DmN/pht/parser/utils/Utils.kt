@@ -27,6 +27,8 @@ fun Parser.phtParseNode(ctx: ParsingContext): Node? {
                 OPERATION -> {
                     val parser = get(ctx, token.text!!)
                     if (parser == null) {
+                        if (token.text == "page-list")
+                            println()
                         tokens.push(token)
                         parseMacro(ctx, Token(token.line, OPERATION, "macro"))
                     } else parser.parse(this, ctx, token)

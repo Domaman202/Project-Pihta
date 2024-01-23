@@ -7,7 +7,7 @@ import ru.DmN.phtx.ppl.utils.addSEP
 import ru.DmN.siberia.utils.Module
 
 object PageHelper : Module("phtx/ppl/page/helper") {
-    override fun initParsers() {
+    private fun initParsers() {
         // e
         addSNP(E_IMAGE)
         addSNP(E_PAIR)
@@ -15,7 +15,7 @@ object PageHelper : Module("phtx/ppl/page/helper") {
         addSNP(E_TITLE)
     }
 
-    override fun initUnparsers() {
+    private fun initUnparsers() {
         // e
         addSNU(E_IMAGE)
         addSNU(E_PAIR)
@@ -23,11 +23,17 @@ object PageHelper : Module("phtx/ppl/page/helper") {
         addSNU(E_TITLE)
     }
 
-    override fun initProcessors() {
+    private fun initProcessors() {
         // e
         addSEP(E_IMAGE, "ru.DmN.phtx.ppl.element.EImage")
         addSEP(E_PAIR, "ru.DmN.phtx.ppl.element.EPair")
         addSEP(E_TEXT, "ru.DmN.phtx.ppl.element.EText")
         addSEP(E_TITLE, "ru.DmN.phtx.ppl.element.ETitle")
+    }
+
+    init {
+        initParsers()
+        initUnparsers()
+        initProcessors()
     }
 }

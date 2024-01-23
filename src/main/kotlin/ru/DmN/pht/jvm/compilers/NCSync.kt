@@ -1,4 +1,4 @@
-package ru.DmN.pht.compiler.java.compilers
+package ru.DmN.pht.jvm.compilers
 
 import jdk.internal.org.objectweb.asm.Opcodes
 import org.objectweb.asm.Label

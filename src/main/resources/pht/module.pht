@@ -3,5 +3,4 @@
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["siberia"])
-    (src ["src.pht"])
     (class "ru.DmN.pht.std.Pihta"))

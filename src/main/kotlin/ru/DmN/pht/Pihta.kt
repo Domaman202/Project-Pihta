@@ -1,16 +1,13 @@
 package ru.DmN.pht.std
 
-import org.objectweb.asm.ClassWriter
 import ru.DmN.pht.ast.IOpenlyNode
-import ru.DmN.pht.ast.ISyncNode
+import ru.DmN.pht.jvm.PhtJvm
 import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.pht.processors.*
 import ru.DmN.pht.std.ast.IAbstractlyNode
 import ru.DmN.pht.std.ast.IFinallyNode
 import ru.DmN.pht.std.ast.IStaticallyNode
 import ru.DmN.pht.std.ast.IVarargNode
-import ru.DmN.pht.std.compiler.java.PihtaJvm
-import ru.DmN.pht.std.compiler.java.utils.classes
 import ru.DmN.pht.std.node.NodeParsedTypes.*
 import ru.DmN.pht.std.node.NodeTypes.*
 import ru.DmN.pht.std.parser.utils.clearMacros
@@ -36,21 +33,18 @@ import ru.DmN.siberia.node.NodeTypes.PROGN
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parser.utils.parsersPool
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.Platforms.JVM
 import ru.DmN.siberia.processor.utils.module
+import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.NRProgn
 import ru.DmN.siberia.utils.Module
-import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.VirtualType
-import java.io.File
-import java.io.FileOutputStream
 import java.util.*
-import kotlin.collections.HashMap
 import ru.DmN.pht.std.processor.utils.macros as macros_list
 import ru.DmN.pht.std.processors.NRProgn as NRPrognA
 
 object Pihta : Module("pht") {
-    override fun initParsers() {
+    private fun initParsers() {
         // a
         addSNP(ADD)
         addSNP(AGET)
@@ -71,7 +65,6 @@ object Pihta : Module("pht") {
         // c
         addSNP(CATCH)
         addSNP(CCALL)
-        addSNP(CLASS_OF)
         addSNP(CLS)
         addNP("comment",  NPComment)
         addSNP(COND)
@@ -159,7 +152,6 @@ object Pihta : Module("pht") {
         addSNP(SYMBOL)
         addSNP(SYMBOL_INT)
         addSNP(SYMBOL_CLS)
-        addSNP(SYNC)
         // t
         addSNP(TEST_FN)
         addSNP(THROW)
@@ -185,7 +177,6 @@ object Pihta : Module("pht") {
         addSANP(ANN_FINAL)
         addSANP(ANN_OPEN)
         addSANP(ANN_STATIC)
-        addSANP(ANN_SYNC)
         addSANP(ANN_VARARGS)
 
         // *
@@ -230,7 +221,7 @@ object Pihta : Module("pht") {
         add(this.toRegularExpr(), NPNodeAlias(alias))
     }
 
-    override fun initUnparsers() {
+    private fun initUnparsers() {
         // a
         addSNU(ADD)
         addSNU(ADD_)
@@ -260,7 +251,6 @@ object Pihta : Module("pht") {
         addSNU(CATCH)
         add(CATCH_,         NUCatch)
         addSNU(CCALL)
-        addSNU(CLASS_OF)
         addSNU(CLS)
         add(CLS_,           NUClass)
         addSNU(COND)
@@ -397,8 +387,6 @@ object Pihta : Module("pht") {
         addSNU(SYMBOL)
         addSNU(SYMBOL_INT)
         addSNU(SYMBOL_CLS)
-        addSNU(SYNC)
-        add(SYNC_,          NUSync)
         // t
         addSNU(TEST_FN)
         addSNU(THROW)
@@ -427,8 +415,6 @@ object Pihta : Module("pht") {
         addSNU(ANN_OPEN_)
         addSNU(ANN_STATIC)
         addSNU(ANN_STATIC_)
-        addSNU(ANN_SYNC)
-        addSNU(ANN_SYNC_)
         addSNU(ANN_VARARGS)
         addSNU(ANN_VARARGS_)
 
@@ -439,7 +425,7 @@ object Pihta : Module("pht") {
         addSNU(CTC_NS_NAME)
     }
 
-    override fun initProcessors() {
+    private fun initProcessors() {
         // a
         add(ADD,           NRMath)
         add(ADD_,          NRMathB)
@@ -468,8 +454,6 @@ object Pihta : Module("pht") {
         add(CATCH,         NRCatch)
         add(CATCH_,        NRCatchB)
         add(CCALL,         NRCCall)
-        add(CLASS_OF,      NRClassOf)
-        add(CLASS_OF_,     NRClassOf)
         add(CLS,           NRClass)
         add(COND,          NRCond)
         add(CONTINUE,      NRBreakContinue)
@@ -588,8 +572,6 @@ object Pihta : Module("pht") {
         add(SYMBOL,        NRSymbol)
         add(SYMBOL_INT,    NRSymbolInt)
         add(SYMBOL_CLS,    NRSymbolCls)
-        add(SYNC,          NRSync)
-        add(SYNC_,         NRProgn)
         // t
         add(TEST_FN,       NRTestFn)
         add(THROW,         NRThrow)
@@ -616,7 +598,6 @@ object Pihta : Module("pht") {
         add(ANN_FINAL,    NRSA { it, _, _ -> if (it is IFinallyNode)    it.final = true })
         add(ANN_OPEN,     NRSA { it, _, _ -> if (it is IOpenlyNode)     it.open = true })
         add(ANN_STATIC,   NRSA { it, _, _ -> if (it is IStaticallyNode) it.static = true })
-        add(ANN_SYNC,     NRSA { it, _, _ -> if (it is ISyncNode)       it.sync = true })
         add(ANN_VARARGS,  NRSA { it, _, _ -> if (it is IVarargNode)     it.varargs = true })
 
         // *
@@ -626,17 +607,14 @@ object Pihta : Module("pht") {
         add(CTC_NS_NAME,     NRCTSC { _, ctx -> ctx.global.namespace })
     }
 
-    override fun initCompilers() {
-        PihtaJvm(this).init()
-    }
-
-    override fun load(parser: Parser, ctx: ParsingContext) {
+    override fun load(parser: Parser, ctx: ParsingContext, uses: MutableList<String>) {
         if (!ctx.loadedModules.contains(this)) {
             ctx.macros = Stack()
             ctx.parsersPool.push(parser.parseNode)
             parser.parseNode = { phtParseNode(it) }
+            uses.add(uses.indexOf("pht") + 1, "pht/jvm")
+            super.load(parser, ctx, uses)
         }
-        super.load(parser, ctx)
     }
 
     override fun clear(parser: Parser, ctx: ParsingContext) {
@@ -649,47 +627,39 @@ object Pihta : Module("pht") {
         if (ctx.loadedModules.contains(this)) {
             ctx.clearMacros()
             parser.parseNode = ctx.parsersPool.pop()
+            if (ctx.platform == JVM)
+                PhtJvm.unload(parser, ctx)
+            super.unload(parser, ctx)
         }
-        super.unload(parser, ctx)
     }
 
-    override fun load(processor: Processor, ctx: ProcessingContext, mode: ValType): Boolean {
+    override fun load(processor: Processor, ctx: ProcessingContext, uses: MutableList<String>): Boolean {
         if (!ctx.loadedModules.contains(this)) {
             processor.contexts.macros_list = HashMap()
             ctx.global = GlobalContext()
             ctx.classes = LinkedClassesNode.LinkedClassesNodeStart as LinkedClassesNode<VirtualType>
+            if (ctx.platform != JVM)
+                uses.removeAt(uses.indexOf("pht") + 1)
+            return super.load(processor, ctx, uses)
         }
-        return super.load(processor, ctx, mode)
+        return false
     }
 
-    override fun load(compiler: Compiler, ctx: CompilationContext): Variable? {
+    override fun load(compiler: Compiler, ctx: CompilationContext) {
         if (!ctx.loadedModules.contains(this)) {
             // Контексты
-            compiler.contexts.classes = HashMap()
             ctx.classes = LinkedClassesNode.LinkedClassesNodeStart as LinkedClassesNode<VirtualType>
-            // Финализация
-            compiler.finalizers.add { dir ->
-                compiler.contexts.classes.values.forEach {
-                    if (it.name.contains('/'))
-                        File("$dir/${it.name.substring(0, it.name.lastIndexOf('/'))}").mkdirs()
-                    FileOutputStream("$dir/${it.name}.class").use { stream ->
-                        val writer =
-                            try {
-                                val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
-                                it.accept(writer)
-                                writer
-                            } catch (_: ArrayIndexOutOfBoundsException) {
-                                println("Внимание: класс '${it.name}' скомпилирован без просчёта фреймов.")
-                                val writer = ClassWriter(ClassWriter.COMPUTE_MAXS)
-                                it.accept(writer)
-                                writer
-                            }
-                        val b = writer.toByteArray()
-                        stream.write(b)
-                    }
-                }
-            }
+            // Платформно-зависимые функции
+            if (ctx.platform == JVM)
+                ctx.loadedModules += PhtJvm
+            //
+            super.load(compiler, ctx)
         }
-        return super.load(compiler, ctx)
+    }
+
+    init {
+        initParsers()
+        initUnparsers()
+        initProcessors()
     }
 }
