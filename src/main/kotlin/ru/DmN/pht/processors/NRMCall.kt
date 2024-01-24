@@ -10,16 +10,14 @@ import ru.DmN.pht.std.ast.NodeMCall.Type.*
 import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.node.*
 import ru.DmN.pht.std.processor.ctx.GlobalContext
-import ru.DmN.pht.std.processor.utils.ICastable
-import ru.DmN.pht.std.processor.utils.classes
-import ru.DmN.pht.std.processor.utils.clazz
-import ru.DmN.pht.std.processor.utils.global
+import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.processor.ctx.ProcessingContext
+import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VTDynamic
@@ -67,38 +65,51 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         val result = findMethod(node, Static.ofInstanceNode(instance0, processor, ctx), processor, ctx)
         val instance1 = getInstance(result, instance0, processor, ctx)
         val generics = calc(result, node, processor, ctx)
-        return if (result.method.extension == null) {
+        val method = result.method
+        //
+        val new = if (method.extension == null) {
             val instance2 = processor.process(instance1, ctx, ValType.VALUE)!!
             NodeMCall(
                 info.processed,
-                processArguments(info, processor, ctx, result.method, result.args, result.compression),
+                processArguments(info, processor, ctx, method, result.args, result.compression),
                 generics,
                 instance2,
-                result.method,
+                method,
                 when (result.type) {
                     UNKNOWN ->
-                        if (result.method.modifiers.static)
+                        if (method.modifiers.static)
                             STATIC
                         else VIRTUAL
 
                     else -> result.type
                 }
             )
-         }else NodeMCall(
+        } else NodeMCall(
             node.info.processed,
             processArguments(
                 node.info,
                 processor,
                 ctx,
-                result.method,
+                method,
                 listOf(instance1) + result.args,
                 result.compression
             ),
             generics,
-            NodeValue.of(node.info, NodeValue.Type.CLASS, result.method.extension!!.name),
-            result.method,
+            NodeValue.of(node.info, NodeValue.Type.CLASS, method.extension!!.name),
+            method,
             NodeMCall.Type.EXTEND
         )
+        //
+        if (method.modifiers.inline)
+            new.inline = method.inline
+        //
+        if (ctx.method.modifiers.inline) {
+            processor.stageManager.pushTask(ProcessingStage.FINALIZATION) {
+                println("Inlinable")
+            }
+        }
+        //
+        return new
     }
 
     /**

@@ -43,6 +43,7 @@ object NRECtor : INodeProcessor<NodeNodesList> {
             args.third,
             MethodModifiers(ctor = true),
             null,
+            null,
             type.generics
         )
         type.methods += method

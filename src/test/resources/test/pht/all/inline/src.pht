@@ -1,0 +1,6 @@
+(app
+    (@inline
+    (defn foo ^String []
+        "Foo!"))
+    (test-fn 0
+        (mcall . foo)))

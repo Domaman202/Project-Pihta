@@ -1,7 +1,7 @@
 package ru.DmN.pht.std.ast
 
 /**
- * Нода которая может быть абструктной
+ * Нода, которая может быть абструктной
  */
 interface IAbstractlyNode {
     /**

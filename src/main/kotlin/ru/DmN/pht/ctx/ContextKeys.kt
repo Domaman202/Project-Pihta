@@ -43,6 +43,11 @@ enum class ContextKeys : IContextKey {
     NAMED_BLOCKS,
 
     /**
+     * Хук возврата.
+     */
+    RETURN_HOOK,
+
+    /**
      * Контекст макроса.
      */
     MACRO,

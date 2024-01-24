@@ -1,7 +1,7 @@
 package ru.DmN.pht.std.ast
 
 /**
- * Нода которая может быть статической.
+ * Нода, которая может быть статической.
  */
 interface IStaticallyNode {
     /**

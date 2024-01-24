@@ -54,6 +54,7 @@ object NREFn : INodeProcessor<NodeNodesList> {
             args.third,
             MethodModifiers(static = true, extension = true),
             extend,
+            null,
             generics
         )
         type.methods += method

@@ -13,6 +13,8 @@ import ru.DmN.pht.std.compiler.java.ctx.ClassContext
 import ru.DmN.pht.std.compiler.java.ctx.MethodContext
 import ru.DmN.pht.std.processor.utils.classes
 import ru.DmN.pht.std.processor.utils.isEnum
+import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.ctx.IContextCollection
 import ru.DmN.siberia.ctx.IContextKey
 
@@ -24,6 +26,8 @@ fun <T : IContextCollection<T>> T.with(ctx: BodyContext) =
     this.with(ContextKeys.BODY, ctx)
 fun <T : IContextCollection<T>> T.withNamedBlock(name: String, ctx: NamedBlockData) =
     this.with(ContextKeys.NAMED_BLOCKS, (this.namedBlocksOrNull?.let { HashMap(it) } ?: HashMap<String, NamedBlockData>()).apply { this[name] = ctx })
+fun <T : IContextCollection<T>> T.with(hook: () -> Unit) =
+    this.with(ContextKeys.RETURN_HOOK, hook)
 
 fun IContextCollection<*>.isClass() =
     contexts.containsKey(ContextKeys.CLASS) || isEnum()
@@ -49,6 +53,9 @@ val IContextCollection<*>.namedBlocks
     get() = this.namedBlocksOrNull!!
 val IContextCollection<*>.namedBlocksOrNull
     get() = contexts[ContextKeys.NAMED_BLOCKS] as MutableMap<String, NamedBlockData>?
+var IContextCollection<*>.returnHook
+    set(value) { contexts[ContextKeys.RETURN_HOOK] = value }
+    get() = contexts[ContextKeys.RETURN_HOOK] as () -> Unit
 
 fun load(variable: Variable, node: MethodVisitor) {
     if (!variable.tmp) {

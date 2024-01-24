@@ -1,5 +1,6 @@
 package ru.DmN.pht.std
 
+import ru.DmN.pht.ast.IInlinableNode
 import ru.DmN.pht.ast.IOpenlyNode
 import ru.DmN.pht.jvm.PhtJvm
 import ru.DmN.pht.processor.utils.LinkedClassesNode
@@ -175,6 +176,7 @@ object Pihta : Module("pht") {
         // @
         addSANP(ANN_ABSTRACT)
         addSANP(ANN_FINAL)
+        addSANP(ANN_INLINE)
         addSANP(ANN_OPEN)
         addSANP(ANN_STATIC)
         addSANP(ANN_VARARGS)
@@ -411,6 +413,8 @@ object Pihta : Module("pht") {
         addSNU(ANN_ABSTRACT_)
         addSNU(ANN_FINAL)
         addSNU(ANN_FINAL_)
+        addSNU(ANN_INLINE)
+        addSNU(ANN_INLINE_)
         addSNU(ANN_OPEN)
         addSNU(ANN_OPEN_)
         addSNU(ANN_STATIC)
@@ -595,6 +599,7 @@ object Pihta : Module("pht") {
 
         // @
         add(ANN_ABSTRACT, NRSA { it, _, _ -> if (it is IAbstractlyNode) it.abstract = true })
+        add(ANN_INLINE,   NRSA { it, _, _ -> if (it is IInlinableNode)  it.inline = true })
         add(ANN_FINAL,    NRSA { it, _, _ -> if (it is IFinallyNode)    it.final = true })
         add(ANN_OPEN,     NRSA { it, _, _ -> if (it is IOpenlyNode)     it.open = true })
         add(ANN_STATIC,   NRSA { it, _, _ -> if (it is IStaticallyNode) it.static = true })

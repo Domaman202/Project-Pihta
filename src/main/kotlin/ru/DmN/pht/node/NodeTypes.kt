@@ -72,6 +72,7 @@ enum class NodeTypes : INodeType {
     IMPORT_("import", PROCESSED),
     INC_PRE_("inc", PROCESSED),
     INC_POST_("inc-", PROCESSED),
+    INL_BODY("inl-body", PROCESSED),
     INL_DEF("inl-def", PARSED),
     INNER("inner", PARSED),
     INNER_("inner", PROCESSED),
@@ -149,6 +150,7 @@ enum class NodeTypes : INodeType {
     // @
     ANN_ABSTRACT_("@abstract", PROCESSED),
     ANN_FINAL_("@final", PROCESSED),
+    ANN_INLINE_("@inline", PROCESSED),
     ANN_OPEN_("@open", PROCESSED),
     ANN_STATIC_("@static", PROCESSED),
     ANN_SYNC_("@synchronized", PROCESSED),

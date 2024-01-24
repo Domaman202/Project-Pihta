@@ -1,0 +1,38 @@
+[USE_CTX
+|	(modules = pht pht/jvm)
+|	[APP
+|	|	[ANN_INLINE
+|	|	|	[DEFN
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'foo')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'String')
+|	|	|	|	]
+|	|	|	|	[VALN]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'Foo!')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[MCALL
+|	|	|	|	[NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = '.')
+|	|	|	|	]
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'foo')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	]
+]

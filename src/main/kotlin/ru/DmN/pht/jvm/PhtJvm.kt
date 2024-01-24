@@ -102,6 +102,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(IF_,          NCIf)
         add(INC_PRE_,     NCIncDec)
         add(INC_POST_,    NCIncDec)
+        add(INL_BODY,     NCInlBody)
         add(INNER_,       NCInner)
         add(IS_,          NCIs)
         add(ITF_,         NCClass)
@@ -147,6 +148,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         // @
         add(ANN_ABSTRACT_, NCDefault)
         add(ANN_FINAL_,    NCDefault)
+        add(ANN_INLINE_,   NCDefault)
         add(ANN_OPEN_,     NCDefault)
         add(ANN_STATIC_,   NCDefault)
         add(ANN_SYNC_,     NCDefault)

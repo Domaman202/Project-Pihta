@@ -75,6 +75,7 @@ enum class NodeParsedTypes(override val operation: String, override val processe
     // @
     ANN_ABSTRACT("@abstract", ANN_ABSTRACT_),
     ANN_FINAL("@final", ANN_FINAL_),
+    ANN_INLINE("@inline", ANN_INLINE_),
     ANN_OPEN("@open", ANN_OPEN_),
     ANN_STATIC("@static", ANN_STATIC_),
     ANN_SYNC("@synchronized", ANN_SYNC_),
