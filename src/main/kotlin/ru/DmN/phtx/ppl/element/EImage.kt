@@ -12,8 +12,8 @@ class EImage(private val image: Image) : Element() {
     override val type: SizeType
         get() = DYNAMIC
 
-    override fun size(window: Dimension, g: Graphics2D): Size =
-        Size(-1, -1)
+    override fun size(w: Dimension, g: Graphics2D): Size =
+        Size(image.getWidth(null), image.getHeight(null))
 
     override fun paint(offset: Offset, free: Size, w: Dimension, g: Graphics2D) {
         g.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON)

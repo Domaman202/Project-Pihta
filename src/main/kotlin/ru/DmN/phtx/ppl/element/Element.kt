@@ -21,10 +21,10 @@ abstract class Element {
             Size(width + other.width, height + other.height)
         fun sub(width: Int, height: Int) =
             Size(this.width - width, this.height - height)
-        fun divWidth(): Size =
-            Size(width / 2, height)
-        fun divHeight(): Size =
-            Size(width, height / 2)
+        fun divWidth(i: Int = 2): Size =
+            Size(width / i, height)
+        fun divHeight(i: Int = 2): Size =
+            Size(width, height / i)
     }
 
     data class Offset(

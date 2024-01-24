@@ -1,6 +1,8 @@
-(app
-    (@inline
-    (defn foo ^void []
-        (println "Foo!")))
-    (app-fn
-        (mcall . foo)))
+(app-fn
+    (#show (presentation "Тестовая Презентация" 2500
+        (page-list
+            (c-fourfold
+                (e-image (inc-img "res/0.jpg"))
+                (e-image (inc-img "res/1.jpg"))
+                (e-image (inc-img "res/2.jpg"))
+                (e-image (inc-img "res/3.jpg")))))))

@@ -102,6 +102,10 @@ class Presentation(title: String, var blackout: Int = 1000) {
             UIManager.put("nimbusSelectionBackground", Color(104, 93, 156))
             UIManager.put("text", Color(230, 230, 230))
         }
+
+        init {
+            setDarkTheme()
+        }
     }
 
     inner class Frame(title: String) : JFrame(title) {

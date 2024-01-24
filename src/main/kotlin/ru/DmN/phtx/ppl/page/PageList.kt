@@ -23,9 +23,7 @@ class PageList(val list: MutableList<Element> = mutableListOf()) : Page() {
             free = free.sub(0, size.height)
         }
         //
-        elements.filter { it.second == DYNAMIC }.drop(1).forEach { _ ->
-            free = free.divHeight()
-        }
+        free = free.divHeight(elements.asSequence().filter { it.second == DYNAMIC }.count())
         //
         var offset = Offset.EMPTY
         elements.forEach { (element, type, size) ->

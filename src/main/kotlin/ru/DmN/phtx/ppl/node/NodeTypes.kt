@@ -5,9 +5,12 @@ import ru.DmN.siberia.node.NodeTypes.Type
 import ru.DmN.siberia.node.NodeTypes.Type.PARSED
 
 enum class NodeTypes : INodeType {
+    // c
+    C_PAIR("c-pair", PARSED),
+    C_TRIPLE("c-triple", PARSED),
+    C_FOURFOLD("c-fourfold", PARSED),
     // e
     E_IMAGE("e-image", PARSED),
-    E_PAIR("e-pair", PARSED),
     E_TEXT("e-text", PARSED),
     E_TITLE("e-title", PARSED),
     // i
