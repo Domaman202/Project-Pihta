@@ -93,7 +93,7 @@ object NCDefn : INodeCompiler<NodeDefn> {
         val start = Label()
         visitLabel(start)
         val body = BodyContext.of(start, method)
-        val context = ctx.with(MethodContext(this, method)).with(body)
+        val context = ctx.with(MethodContext(this, method) { _, _, it -> visitReturn(it.node, it.method.rettype) }).with(body)
         if (method.rettype == VirtualType.VOID) {
             NCDefault.compile(node as Node, compiler, context)
             visitInsn(Opcodes.RETURN)

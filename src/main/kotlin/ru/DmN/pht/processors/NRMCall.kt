@@ -101,6 +101,13 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         )
     }
 
+    /**
+     * Получает generic-и из аргументов.
+     *
+     * @param result Результат поиска метода.
+     * @param processor Обработчик.
+     * @param ctx Контекст обработки.
+     */
     private fun getGensFromArgs(result: MethodFindResultA, processor: Processor, ctx: ProcessingContext): Map<String, VirtualType> {
         val map = HashMap<String, VirtualType>()
         val argsg = result.method.argsg
