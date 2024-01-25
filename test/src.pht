@@ -1,4 +1,7 @@
-(progn
-    (import java (types java.util.function.Supplier))
-    (test-fn 4
-        (#get (fn ^Supplier [][] (#get (fn ^Supplier [][] "Сало Сало!"))))))
+(use-ctx pht
+    (app
+        (@inline
+        (defn foo ^void []
+            (println "Foo!")))
+        (app-fn
+            (#foo .))))
