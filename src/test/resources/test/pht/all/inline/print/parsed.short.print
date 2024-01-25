@@ -42,9 +42,9 @@
 |	|	|	|	|	(type = CLASS)
 |	|	|	|	|	(value = 'TestA')
 |	|	|	|	]
-|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'foo')
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	(value = 'foo')
 |	|	|	|	]
 |	|	|	]
 |	|	]
@@ -116,9 +116,9 @@
 |	|	|	|	|	(type = CLASS)
 |	|	|	|	|	(value = 'TestB')
 |	|	|	|	]
-|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'sum')
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	(value = 'sum')
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
@@ -127,6 +127,148 @@
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
 |	|	|	|	|	(value = '21')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[IMPORT
+|	|	|	(module = java)
+|	|	|	(types = [java.util.function.Supplier])
+|	|	]
+|	|	[CLS
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'TestC')
+|	|	|	]
+|	|	|	[VALN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'Object')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_STATIC
+|	|	|	|	[ANN_INLINE
+|	|	|	|	|	[DEFN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'get')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'getter')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = 'Supplier')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[MCALL
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'getter')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	|	|	(value = 'get')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '2')
+|	|	|	]
+|	|	|	[MCALL
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'TestC')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	(value = 'get')
+|	|	|	|	]
+|	|	|	|	[FN
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'Supplier')
+|	|	|	|	|	]
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	(value = 'Сало!')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '3')
+|	|	|	]
+|	|	|	[MCALL
+|	|	|	|	[FN
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'Supplier')
+|	|	|	|	|	]
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	(value = 'Сало!')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	(value = 'get')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '4')
+|	|	|	]
+|	|	|	[MCALL
+|	|	|	|	[FN
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'Supplier')
+|	|	|	|	|	]
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[MCALL
+|	|	|	|	|	|	[FN
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	(value = 'Supplier')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALN]
+|	|	|	|	|	|	|	[VALN]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	(value = 'Сало Сало!')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	|	(value = 'get')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	(value = 'get')
 |	|	|	|	]
 |	|	|	]
 |	|	]

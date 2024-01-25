@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.node
 
+import ru.DmN.pht.ast.NodeTypedGet
 import ru.DmN.pht.std.ast.*
 import ru.DmN.pht.std.ast.NodeValue.Type.NIL
 import ru.DmN.pht.std.node.NodeParsedTypes.*
@@ -11,6 +12,7 @@ import ru.DmN.siberia.ast.NodeUse
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.node.NodeTypes
 import ru.DmN.siberia.node.NodeTypes.USE_CTX
+import ru.DmN.siberia.utils.VirtualType
 
 val INodeInfo.processed
     get() = this.withType((this.type as IParsedNodeType).processed)
@@ -54,12 +56,9 @@ fun nodeCycle(info: INodeInfo, cond: Node, body: List<Node>) =
     NodeNodesList(info.withType(CYCLE),
         mutableListOf(cond).apply { addAll(body) })
 // d
-fun nodeDefT(info: INodeInfo, fields: List<Pair<String, String>>) =
+fun nodeDef(info: INodeInfo, fields: List<Pair<String, String>>) =
     NodeNodesList(info.withType(DEF),
         mutableListOf(nodeValn(info, fields.mapMutable { nodeValn(info, mutableListOf(nodeGetOrName(info, it.first), nodeValueClass(info, it.second))) })))
-fun nodeDefV(info: INodeInfo, fields: List<Pair<String, Node>>) =
-    NodeNodesList(info.withType(DEF),
-        mutableListOf(nodeValn(info, fields.mapMutable { nodeValn(info, mutableListOf(nodeGetOrName(info, it.first), it.second)) })))
 fun nodeDef(info: INodeInfo, name: String, type: String) =
     NodeNodesList(info.withType(DEF),
         mutableListOf(nodeValn(info, nodeValn(info, mutableListOf(nodeGetOrName(info, name), nodeValueClass(info, type))))))
@@ -89,6 +88,9 @@ fun nodeGetOrName(info: INodeInfo, name: String) =
 fun nodeGetVariable(info: INodeInfo, name: String) =
     NodeGet(info.withType(GET_), name, NodeGet.Type.VARIABLE)
 // i
+fun nodeInlDef(info: INodeInfo, fields: List<Pair<String, Node>>) =
+    NodeNodesList(info.withType(INL_DEF),
+        mutableListOf(nodeValn(info, fields.mapMutable { nodeValn(info, mutableListOf(nodeGetOrName(info, it.first), it.second)) })))
 fun nodeIf(info: INodeInfo, nodes: MutableList<Node>) =
     NodeNodesList(info.withType(IF), nodes)
 // l
@@ -114,6 +116,9 @@ fun nodeNewArray(info: INodeInfo, type: String, size: Int) =
 fun nodeObj(info: INodeInfo, name: String, parents: List<String>, nodes: List<Node>) =
     NodeNodesList(info.withType(OBJ),
         mutableListOf(nodeValue(info, name), nodeValn(info, parents.mapMutable { nodeValue(info, it) })).apply { addAll(nodes) })
+// t
+fun nodeTypesGet(info: INodeInfo, name: String, type: VirtualType) =
+    NodeTypedGet(info.withType(TYPED_GET_), name, type)
 // u
 fun nodeUseCtx(info: INodeInfo, name: String, body: Node) =
     NodeUse(info.withType(USE_CTX), mutableListOf(name), mutableListOf(body))
@@ -138,6 +143,8 @@ fun nodeWithGens(info: INodeInfo, node: Node, generics: Sequence<Node>) =
         mutableListOf(node).apply { this.addAll(generics) })
 
 // Аннотации
+fun nodeInline(info: INodeInfo, node: Node) =
+    NodeModifierNodesList(info.withType(ANN_INLINE), mutableListOf(node))
 fun nodeStatic(info: INodeInfo, nodes: MutableList<Node>) =
     NodeModifierNodesList(info.withType(ANN_STATIC), nodes)
 fun nodeStatic(info: INodeInfo, node: Node) =

@@ -4,11 +4,25 @@
         (defn foo ^String []
             "Foo!"))))
     (test-fn 0
-        (mcall ^TestA foo))
+        (#foo ^TestA))
 
     (cls TestB [^Object] (@static
         (@inline
         (defn sum ^int [[a ^int][b ^int]]
             (+ a b)))))
     (test-fn 1
-        (mcall ^TestB sum 12 21)))
+        (#sum ^TestB 12 21))
+
+    (import java (types java.util.function.Supplier))
+    (cls TestC [^Object] (@static
+        (@inline
+        (defn get ^String [[getter ^Supplier]]
+            (#get getter)))))
+    (test-fn 2
+        (#get ^TestC (fn ^Supplier [][] "Сало!")))
+
+    (test-fn 3
+        (#get (fn ^Supplier [][] "Сало!")))
+
+    (test-fn 4
+        (#get (fn ^Supplier [][] (#get (fn ^Supplier [][] "Сало Сало!"))))))

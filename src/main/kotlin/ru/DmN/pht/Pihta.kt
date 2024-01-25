@@ -3,6 +3,7 @@ package ru.DmN.pht.std
 import ru.DmN.pht.ast.IInlinableNode
 import ru.DmN.pht.ast.IOpenlyNode
 import ru.DmN.pht.jvm.PhtJvm
+import ru.DmN.pht.parsers.NPInlBody
 import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.pht.processors.*
 import ru.DmN.pht.std.ast.IAbstractlyNode
@@ -103,6 +104,7 @@ object Pihta : Module("pht") {
         addNP("import",       NPImport)
         addSNP(INC_PRE)
         addSNP(INC_POST)
+        addNP("inl-body",     NPInlBody)
         addSNP(INL_DEF)
         addSNP(INNER)
         addSNP(IS)
@@ -316,6 +318,7 @@ object Pihta : Module("pht") {
         add(INC_PRE_,       NUIncDec)
         addSNU(INC_POST)
         add(INC_POST_,      NUIncDec)
+        add(INL_BODY_,      NUInlBody)
         addSNU(INL_DEF)
         // INL_DEF_
         addSNU(INNER)
@@ -508,6 +511,9 @@ object Pihta : Module("pht") {
         add(INC_PRE_,      NRIncDecB)
         add(INC_POST,      NRIncDec)
         add(INC_POST_,     NRIncDecB)
+        add(INL_BODY_A,    NRInlBodyA)
+        add(INL_BODY_B,    NRInlBodyB)
+        add(INL_BODY_,     NRInlBodyA)
         add(INL_DEF,       NRInlDef)
         add(INNER,         NRInner)
         add(IS,            NRIs)

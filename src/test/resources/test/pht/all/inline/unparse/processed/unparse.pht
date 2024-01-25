@@ -9,9 +9,8 @@
 			(@static
 				(defn [] test ^dynamic []
 					(as ^dynamic
-						(mcall
-							^TestA
-							foo)))))
+						(inl-body ^java.lang.String
+							"Foo!")))))
 		(cls [] TestB [^java.lang.Object]
 			(@static
 				(@inline
@@ -23,8 +22,36 @@
 			(@static
 				(defn [] test ^dynamic []
 					(as ^dynamic
-						(mcall
-							^TestB
-							sum
-							12
-							21)))))))
+						(inl-body ^int
+							(add
+								12
+								21))))))
+		(cls [] TestC [^java.lang.Object]
+			(@static
+				(@inline
+					(defn [] get ^java.lang.String [[getter ^java.util.function.Supplier]]
+						(as ^java.lang.String
+							(mcall
+								(get getter)
+								get))))))
+		(cls [] Test2 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(inl-body ^java.lang.String
+							(inl-body ^java.util.function.Supplier<^java.lang.Object>
+								(inl-body ^java.util.function.Supplier<^java.lang.Object>
+									"Сало!")))))))
+		(cls [] Test3 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(inl-body ^java.lang.String
+							"Сало!")))))
+		(cls [] Test4 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(inl-body ^java.lang.Object
+							(inl-body ^java.lang.String
+								"Сало Сало!"))))))))

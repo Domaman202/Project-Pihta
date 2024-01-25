@@ -85,6 +85,85 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = TestC)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[ANN_INLINE_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(desc = get(Ljava/util/function/Supplier;)Ljava/lang/String;)
+|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	(type = VT(java.lang.String))
+|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	)]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = Test2)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = get(Ljava/util/function/Supplier;)Ljava/lang/String;)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	(value = 'TestC')
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	[FN_]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = Test3)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[FN_]
+|	|	|	|	|	|	|	|	)]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = Test4)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[FN_]
+|	|	|	|	|	|	|	|	)]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
 |	|	]
 |	)
 ]

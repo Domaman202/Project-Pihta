@@ -18,6 +18,7 @@ class NodeMCall(
     var inline: Node? = null
 
     override fun copy(): NodeMCall =
+//        this
         NodeMCall(info, copyNodes(), generic, instance, method, type).apply { this.inline = this@NodeMCall.inline }
 
     override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {

@@ -1,5 +1,7 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.ast.NodeInlBodyA
+import ru.DmN.pht.ast.NodeInlBodyB
 import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.node.nodeAs
@@ -65,9 +67,13 @@ object NRDefn : INodeProcessor<NodeNodesList> {
             else ArrayList(),
             method
         )
+        //
         if (node.nodes.size > 3) {
             processor.stageManager.pushTask(ProcessingStage.METHODS_BODY) {
-                processNodes(method, new, processor, ctx.with(method).with(BodyContext.of(method)))
+                val context = ctx.with(method).with(BodyContext.of(method))
+                if (method.modifiers.inline)
+                    method.inline = NodeInlBodyB(node.info.withType(NodeTypes.INL_BODY_A), new.nodes.toMutableList(), method.rettype, context)
+                processNodes(method, new, processor, context)
             }
         }
         return new

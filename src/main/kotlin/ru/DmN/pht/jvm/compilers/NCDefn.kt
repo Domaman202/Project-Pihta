@@ -10,6 +10,7 @@ import ru.DmN.pht.std.compiler.java.ctx.MethodContext
 import ru.DmN.pht.std.compiler.java.utils.clazz
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.with
+import ru.DmN.pht.std.utils.type
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
@@ -42,6 +43,7 @@ object NCDefn : INodeCompiler<NodeDefn> {
             method.signature,
             null
         ) as MethodNode
+        //
         if (!node.abstract) {
             compiler.stageManager.pushTask(CompilingStage.METHODS_BODY) {
                 mnode.visit(node, method, compiler, ctx)

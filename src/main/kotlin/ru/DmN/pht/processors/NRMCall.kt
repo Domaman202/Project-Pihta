@@ -1,19 +1,23 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.ast.NodeInlBodyA
+import ru.DmN.pht.ast.NodeInlBodyB
 import ru.DmN.pht.processor.utils.MethodFindResultA
 import ru.DmN.pht.processor.utils.MethodFindResultB
 import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.processors.IAdaptableProcessor
-import ru.DmN.pht.std.ast.NodeFGet
-import ru.DmN.pht.std.ast.NodeMCall
+import ru.DmN.pht.processors.IInlinableProcessor
+import ru.DmN.pht.processors.NRInlDef
+import ru.DmN.pht.std.ast.*
 import ru.DmN.pht.std.ast.NodeMCall.Type.*
-import ru.DmN.pht.std.ast.NodeValue
+import ru.DmN.pht.std.compiler.java.compilers.NCDefn
+import ru.DmN.pht.std.compiler.java.compilers.NCMCall
 import ru.DmN.pht.std.node.*
+import ru.DmN.pht.std.processor.ctx.BodyContext
 import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.*
 import ru.DmN.siberia.Processor
-import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.node.INodeInfo
@@ -101,20 +105,29 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             NodeMCall.Type.EXTEND
         )
         //
-        if (method.modifiers.inline) {
-            new.inline = method.inline!!.copy().apply {
-                this as INodesList
-                this.nodes.add(0, NRDef.process(nodeDefV(info, method.argsn.mapIndexed { i, it -> Pair(it, result.args[i]) }), processor, ctx, ValType.NO_VALUE))
-            }
+        processor.stageManager.pushTask(ProcessingStage.FINALIZATION) {
+            finalize(method, result.args, instance1, new, processor, ctx, mode)
         }
         //
-//        if (ctx.method.modifiers.inline) {
-//            processor.stageManager.pushTask(ProcessingStage.FINALIZATION) {
-//                println("Inlinable")
-//            }
-//        }
-        //
         return new
+    }
+
+    private fun finalize(method: VirtualMethod, args: List<Node>, instance: Node, node: NodeMCall, processor: Processor, ctx: ProcessingContext, mode: ValType) {
+        node.inline =
+            if (method.inline != null)
+                method.inline!!.copy()
+            else {
+                val np = processor.get(instance, ctx)
+                if (np is IInlinableProcessor<*> && (np as IInlinableProcessor<Node>).isInlinable(instance, processor, ctx))
+                    np.inline(instance, processor, ctx)
+                else return
+            }.run {
+                this as NodeInlBodyA
+                val context = if (this is NodeInlBodyB) this.ctx else ctx
+                val bctx = BodyContext.of(null)
+                method.argsn.forEachIndexed { i, it -> NRInlDef.process(it, args[i], bctx) }
+                processor.process(this, context.with(bctx), mode)
+            }
     }
 
     /**

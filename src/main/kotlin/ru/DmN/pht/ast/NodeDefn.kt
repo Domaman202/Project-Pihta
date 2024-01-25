@@ -3,13 +3,10 @@ package ru.DmN.pht.std.ast
 import ru.DmN.pht.ast.IInlinableNode
 import ru.DmN.pht.ast.IOpenlyNode
 import ru.DmN.pht.ast.ISyncNode
-import ru.DmN.pht.ast.NodeInlBody
-import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualMethod.VirtualMethodImpl
 import ru.DmN.siberia.utils.indent
 
 class NodeDefn(
@@ -21,10 +18,7 @@ class NodeDefn(
         set(value) { method.modifiers.abstract = value }
         get() = method.modifiers.abstract
     override var inline: Boolean
-        set(value) {
-            method.modifiers.inline = value
-            (method as VirtualMethodImpl).inline = NodeInlBody(info.withType(NodeTypes.INL_BODY), nodes, method.rettype)
-        }
+        set(value) { method.modifiers.inline = value }
         get() = method.modifiers.inline
     override var open: Boolean
         set(value) { method.modifiers.final = !value }

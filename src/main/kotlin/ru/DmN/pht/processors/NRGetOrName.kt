@@ -1,16 +1,20 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.ast.NodeInlBodyA
 import ru.DmN.pht.ast.NodeTypedGet
 import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.processors.IAdaptableProcessor
+import ru.DmN.pht.processors.IInlinableProcessor
 import ru.DmN.pht.std.ast.NodeGet
 import ru.DmN.pht.std.ast.NodeGetOrName
 import ru.DmN.pht.std.node.NodeTypes
+import ru.DmN.pht.std.node.nodeTypesGet
 import ru.DmN.pht.std.processor.utils.body
 import ru.DmN.pht.std.processor.utils.classes
 import ru.DmN.pht.std.processor.utils.clazz
 import ru.DmN.pht.std.processor.utils.method
 import ru.DmN.pht.std.utils.lenArgs
+import ru.DmN.pht.utils.InlineVariable
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
@@ -18,7 +22,7 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.utils.VirtualType
 
-object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeGetOrName> {
+object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeGetOrName>, IInlinableProcessor<NodeGetOrName> {
     override fun calc(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): VirtualType? =
         calc(node.info, node.name, processor, ctx)
 
@@ -81,7 +85,24 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
                 )
             }
             1 -> node
-            else -> NodeTypedGet.of(node, type)
+            else -> nodeTypesGet(node.info, node.name, type)
         }
+    }
+
+    override fun isInlinable(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Boolean =
+        ctx.body[node.name]?.let { it is InlineVariable } == true
+
+    override fun inline(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Node {
+        val n = (ctx.body[node.name] as InlineVariable).value
+        val np = processor.get(n, ctx)
+        return NodeInlBodyA(
+            node.info.withType(NodeTypes.INL_BODY_A),
+            mutableListOf(
+                if (np is IInlinableProcessor<*> && (np as IInlinableProcessor<Node>).isInlinable(n, processor, ctx))
+                    np.inline(n, processor, ctx)
+                else n
+            ),
+            null
+        )
     }
 }

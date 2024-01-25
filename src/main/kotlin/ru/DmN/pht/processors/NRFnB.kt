@@ -1,14 +1,19 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.ast.NodeInlBodyA
 import ru.DmN.pht.processors.IAdaptableProcessor
+import ru.DmN.pht.processors.IInlinableProcessor
 import ru.DmN.pht.std.ast.NodeFn
+import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.processor.utils.global
 import ru.DmN.pht.std.utils.findLambdaMethod
+import ru.DmN.pht.std.utils.isConstClass
 import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.VirtualType
 
-object NRFnB : IStdNodeProcessor<NodeFn>, IAdaptableProcessor<NodeFn> {
+object NRFnB : IStdNodeProcessor<NodeFn>, IAdaptableProcessor<NodeFn>, IInlinableProcessor<NodeFn> {
     override fun calc(node: NodeFn, processor: Processor, ctx: ProcessingContext): VirtualType =
         node.source.type ?: ctx.global.getType("Any", processor.tp)
 
@@ -23,4 +28,10 @@ object NRFnB : IStdNodeProcessor<NodeFn>, IAdaptableProcessor<NodeFn> {
         node.source.type = type
         return node
     }
+
+    override fun isInlinable(node: NodeFn, processor: Processor, ctx: ProcessingContext): Boolean =
+        true
+
+    override fun inline(node: NodeFn, processor: Processor, ctx: ProcessingContext): Node =
+        NodeInlBodyA(node.info.withType(NodeTypes.INL_BODY_A), node.source.nodes.toMutableList(), calc(node, processor, ctx))
 }

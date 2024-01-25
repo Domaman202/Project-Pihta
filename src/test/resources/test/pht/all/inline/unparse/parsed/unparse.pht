@@ -46,4 +46,59 @@
 				^TestB
 				sum
 				12
-				21))))
+				21))
+		(import java
+			(types java.util.function.Supplier))
+		(cls
+			TestC
+			[
+				^Object
+			]
+			(@static
+				(@inline
+					(defn
+						get
+						^String
+						[
+							[
+								getter
+								^Supplier
+							]
+						]
+						(mcall
+							getter
+							get)))))
+		(test-fn
+			2
+			(mcall
+				^TestC
+				get
+				(fn
+					^Supplier
+					[]
+					[]
+					"Сало!")))
+		(test-fn
+			3
+			(mcall
+				(fn
+					^Supplier
+					[]
+					[]
+					"Сало!")
+				get))
+		(test-fn
+			4
+			(mcall
+				(fn
+					^Supplier
+					[]
+					[]
+					(mcall
+						(fn
+							^Supplier
+							[]
+							[]
+							"Сало Сало!")
+						get))
+				get))))

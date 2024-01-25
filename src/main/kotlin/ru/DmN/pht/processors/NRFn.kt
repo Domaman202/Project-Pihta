@@ -1,5 +1,7 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.ast.NodeInlBodyA
+import ru.DmN.pht.processors.IInlinableProcessor
 import ru.DmN.pht.std.ast.NodeFn
 import ru.DmN.pht.std.node.*
 import ru.DmN.pht.std.processor.utils.body
@@ -18,7 +20,7 @@ import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VirtualType
 import kotlin.math.absoluteValue
 
-object NRFn : INodeProcessor<NodeNodesList> {
+object NRFn : INodeProcessor<NodeNodesList>, IInlinableProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
         ctx.global.getType(if (node.nodes[0].isConstClass) processor.computeString(node.nodes[0], ctx) else "Any", processor.tp)
 
@@ -40,6 +42,12 @@ object NRFn : INodeProcessor<NodeNodesList> {
         }
         return new
     }
+
+    override fun isInlinable(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): Boolean =
+        true
+
+    override fun inline(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): Node =
+        NodeInlBodyA(node.info.withType(NodeTypes.INL_BODY_A), node.nodes.drop(3).toMutableList(), null)
 
     private fun finalize(info: INodeInfo, node: NodeFn, processor: Processor, ctx: ProcessingContext) {
         node.source.run {
@@ -81,7 +89,7 @@ object NRFn : INodeProcessor<NodeNodesList> {
                             listOf("java.lang.Object", type.name)
                         else listOf(type.name),
                         mutableListOf<Node>(
-                            nodeDefT(info, fields),
+                            nodeDef(info, fields),
                             nodeCtor(
                                 info,
                                 ctorArgs,

@@ -2,7 +2,7 @@ package ru.DmN.pht.jvm.compilers
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
-import ru.DmN.pht.ast.NodeInlBody
+import ru.DmN.pht.ast.NodeInlBodyA
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.compiler.java.utils.with
@@ -13,8 +13,8 @@ import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.VirtualType
 
-object NCInlBody : INodeCompiler<NodeInlBody> {
-    override fun compile(node: NodeInlBody, compiler: Compiler, ctx: CompilationContext) {
+object NCInlBody : INodeCompiler<NodeInlBodyA> {
+    override fun compile(node: NodeInlBodyA, compiler: Compiler, ctx: CompilationContext) {
         ctx.method.node.run {
             val endLabel = Label()
             if (node.type == VirtualType.VOID)
@@ -27,7 +27,7 @@ object NCInlBody : INodeCompiler<NodeInlBody> {
         }
     }
 
-    override fun compileVal(node: NodeInlBody, compiler: Compiler, ctx: CompilationContext): Variable {
+    override fun compileVal(node: NodeInlBodyA, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.run {
             val endLabel = Label()
             load(NCDefault.compileVal(node, compiler, ctx.with { visitJumpInsn(Opcodes.GOTO, endLabel) }), this)

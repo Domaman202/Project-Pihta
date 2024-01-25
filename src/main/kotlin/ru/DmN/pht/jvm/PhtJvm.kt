@@ -102,7 +102,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(IF_,          NCIf)
         add(INC_PRE_,     NCIncDec)
         add(INC_POST_,    NCIncDec)
-        add(INL_BODY,     NCInlBody)
+        add(INL_BODY_,    NCInlBody)
         add(INNER_,       NCInner)
         add(IS_,          NCIs)
         add(ITF_,         NCClass)
