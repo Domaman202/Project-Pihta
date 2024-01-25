@@ -13,6 +13,7 @@ import ru.DmN.pht.std.processor.ctx.GlobalContext
 import ru.DmN.pht.std.processor.utils.*
 import ru.DmN.pht.std.utils.*
 import ru.DmN.siberia.Processor
+import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.node.INodeInfo
@@ -100,14 +101,18 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             NodeMCall.Type.EXTEND
         )
         //
-        if (method.modifiers.inline)
-            new.inline = method.inline
-        //
-        if (ctx.method.modifiers.inline) {
-            processor.stageManager.pushTask(ProcessingStage.FINALIZATION) {
-                println("Inlinable")
+        if (method.modifiers.inline) {
+            new.inline = method.inline!!.copy().apply {
+                this as INodesList
+                this.nodes.add(0, NRDef.process(nodeDefV(info, method.argsn.mapIndexed { i, it -> Pair(it, result.args[i]) }), processor, ctx, ValType.NO_VALUE))
             }
         }
+        //
+//        if (ctx.method.modifiers.inline) {
+//            processor.stageManager.pushTask(ProcessingStage.FINALIZATION) {
+//                println("Inlinable")
+//            }
+//        }
         //
         return new
     }

@@ -54,9 +54,12 @@ fun nodeCycle(info: INodeInfo, cond: Node, body: List<Node>) =
     NodeNodesList(info.withType(CYCLE),
         mutableListOf(cond).apply { addAll(body) })
 // d
-fun nodeDef(info: INodeInfo, fields: List<Pair<String, String>>) =
+fun nodeDefT(info: INodeInfo, fields: List<Pair<String, String>>) =
     NodeNodesList(info.withType(DEF),
         mutableListOf(nodeValn(info, fields.mapMutable { nodeValn(info, mutableListOf(nodeGetOrName(info, it.first), nodeValueClass(info, it.second))) })))
+fun nodeDefV(info: INodeInfo, fields: List<Pair<String, Node>>) =
+    NodeNodesList(info.withType(DEF),
+        mutableListOf(nodeValn(info, fields.mapMutable { nodeValn(info, mutableListOf(nodeGetOrName(info, it.first), it.second)) })))
 fun nodeDef(info: INodeInfo, name: String, type: String) =
     NodeNodesList(info.withType(DEF),
         mutableListOf(nodeValn(info, nodeValn(info, mutableListOf(nodeGetOrName(info, name), nodeValueClass(info, type))))))

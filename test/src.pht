@@ -1,8 +1,14 @@
-(app-fn
-    (#show (presentation "Тестовая Презентация" 2500
-        (page-list
-            (c-fourfold
-                (e-image (inc-img "res/0.jpg"))
-                (e-image (inc-img "res/1.jpg"))
-                (e-image (inc-img "res/2.jpg"))
-                (e-image (inc-img "res/3.jpg")))))))
+(progn
+    (cls TestA [^Object] (@static
+        (@inline
+        (defn foo ^String []
+            "Foo!"))))
+    (test-fn 0
+        (mcall ^TestA foo))
+
+    (cls TestB [^Object] (@static
+        (@inline
+        (defn sum ^int [[a ^int][b ^int]]
+            (+ a b)))))
+    (test-fn 1
+        (mcall ^TestB sum 12 21)))

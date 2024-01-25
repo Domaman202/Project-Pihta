@@ -7,5 +7,6 @@ class Inline : Module("test/pht/all/inline") {
     override fun Module.compileTest() {
         compile()
         assertEquals(test(0), "Foo!")
+        assertEquals(test(1), 33)
     }
 }

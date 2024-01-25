@@ -1,6 +1,14 @@
-(app
-    (@inline
-    (defn foo ^String []
-        "Foo!"))
+(progn
+    (cls TestA [^Object] (@static
+        (@inline
+        (defn foo ^String []
+            "Foo!"))))
     (test-fn 0
-        (mcall . foo)))
+        (mcall ^TestA foo))
+
+    (cls TestB [^Object] (@static
+        (@inline
+        (defn sum ^int [[a ^int][b ^int]]
+            (+ a b)))))
+    (test-fn 1
+        (mcall ^TestB sum 12 21)))

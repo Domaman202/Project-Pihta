@@ -1,13 +1,30 @@
 (use-ctx pht pht/jvm
-	(cls [] App [^java.lang.Object]
-		(@static
-			(@inline
-				(defn [] foo ^java.lang.String []
-					"Foo!"))
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(mcall
-								^App
-								foo))))))))
+	(progn
+		(cls [] TestA [^java.lang.Object]
+			(@static
+				(@inline
+					(defn [] foo ^java.lang.String []
+						"Foo!"))))
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							^TestA
+							foo)))))
+		(cls [] TestB [^java.lang.Object]
+			(@static
+				(@inline
+					(defn [] sum ^int [[a ^int][b ^int]]
+						(add
+							(get a)
+							(get b))))))
+		(cls [] Test1 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							^TestB
+							sum
+							12
+							21)))))))

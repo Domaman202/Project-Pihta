@@ -81,7 +81,7 @@ object NRFn : INodeProcessor<NodeNodesList> {
                             listOf("java.lang.Object", type.name)
                         else listOf(type.name),
                         mutableListOf<Node>(
-                            nodeDef(info, fields),
+                            nodeDefT(info, fields),
                             nodeCtor(
                                 info,
                                 ctorArgs,
