@@ -52,7 +52,7 @@ object NPGet : INodeParser {
         }
     }
 
-    private fun parse(info: INodeInfo, name: String, nodes: MutableList<Node>, static: Boolean, klass: Boolean): Node {
+    fun parse(info: INodeInfo, name: String, nodes: MutableList<Node>, static: Boolean, klass: Boolean): Node {
         val parts = name.split("/", "#") as MutableList<String>
         return parse(info, parts, parts.size, nodes, static, klass)
     }

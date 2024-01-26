@@ -1,5 +1,6 @@
-(use-ctx pht
+(progn
     (import java
+        (types java.lang.System)
         (types java.lang.Iterable)
         (types java.util.Iterator)
         (types java.lang.StringBuilder)
@@ -102,7 +103,25 @@
                 (#longBitsToDouble ^java.lang.Double
                     (shift-right
                         (#doubleToLongBits ^java.lang.Double this)
-                        offset)))))
+                        offset))))
+
+        (cls StdOut [^Object] (@static (@inline
+            (defmacro print-as-int [types]
+                (macro-unroll [[type types]]
+                    (defn print ^void [[msg (macro-arg type)]]
+                        (#print (get ^System/out) (as ^int msg)))
+                    (defn println ^void [[msg (macro-arg type)]]
+                        (#println (get ^System/out) (as ^int msg)))))
+            (defmacro print- [types]
+                (macro-unroll [[type types]]
+                    (defn print ^void [[msg (macro-arg type)]]
+                        (#print (get ^System/out) msg))
+                    (defn println ^void [[msg (macro-arg type)]]
+                        (#println (get ^System/out) msg))))
+            (defn println ^void []
+                (#println (get ^System/out)))
+            (print-         [^boolean ^char ^int ^long ^float ^double ^Any])
+            (print-as-int   [^byte ^short])))))
 
     (export
         (import java

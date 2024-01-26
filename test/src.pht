@@ -1,7 +1,2 @@
-(use-ctx pht
-    (app
-        (@inline
-        (defn foo ^void []
-            (println "Foo!")))
-        (app-fn
-            (#foo .))))
+(app-fn
+    (println "Слава России!"))

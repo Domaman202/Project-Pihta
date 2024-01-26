@@ -22,10 +22,9 @@ object NPValueB : INodeParser {
 
                     Token.DefaultType.PRIMITIVE -> NodeValue.Type.PRIMITIVE
                     Token.DefaultType.CLASS     -> {
-                        if (text.contains("[/#]".toRegex())) {
-                            parser.tokens.push(token)
-                            return parser.get(ctx, "get")!!.parse(parser, ctx, Token.operation(token.line, "get_"))
-                        } else NodeValue.Type.CLASS
+                        if (text.contains("[/#]".toRegex()))
+                            return NPGet.parse(INodeInfo.of(NodeTypes.VALUE), token.text!!, mutableListOf(), static = true, klass = true)
+                        else NodeValue.Type.CLASS
                     }
                     Token.DefaultType.CLASS_WITH_GEN -> NodeValue.Type.CLASS_WITH_GEN
 

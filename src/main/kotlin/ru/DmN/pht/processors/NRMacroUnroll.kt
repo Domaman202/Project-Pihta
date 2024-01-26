@@ -1,14 +1,14 @@
 package ru.DmN.pht.std.processors
 
 import ru.DmN.pht.std.ast.NodeMacroUtil
+import ru.DmN.pht.std.ast.NodeModifierNodesList
+import ru.DmN.pht.std.node.NodeTypes.PROGN_B_
 import ru.DmN.pht.std.processor.utils.macro
 import ru.DmN.pht.std.processor.utils.with
 import ru.DmN.pht.std.utils.computeList
 import ru.DmN.pht.std.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.node.NodeTypes
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
@@ -44,6 +44,6 @@ object NRMacroUnroll : INodeProcessor<NodeMacroUtil> { // todo: calc
                 }
             }
         }
-        return NodeNodesList(info.withType(NodeTypes.PROGN_), nodes)
+        return NodeModifierNodesList(info.withType(PROGN_B_), nodes)
     }
 }
