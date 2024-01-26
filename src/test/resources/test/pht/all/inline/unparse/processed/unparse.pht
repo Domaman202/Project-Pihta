@@ -54,4 +54,43 @@
 					(as ^dynamic
 						(inl-body ^java.lang.Object
 							(inl-body ^java.lang.String
-								"Сало Сало!"))))))))
+								"Сало Сало!"))))))
+		(cls [] TestD [^java.lang.Object]
+			(@static
+				(@inline
+					(efn [] ^java.lang.String slava ^java.lang.String []
+						(mcall
+							"Слава Великой "
+							add
+							(body
+								(def [
+									[(array-type ^java.lang.Object) pht$tmp$47003 (new-array ^java.lang.Object 2)]])
+								(aset
+									(get pht$tmp$47003)
+									0
+									(get this))
+								(aset
+									(get pht$tmp$47003)
+									1
+									"!")
+								(get pht$tmp$47003)))))))
+		(cls [] Test5 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(inl-body ^java.lang.String
+							(mcall
+								"Слава Великой "
+								add
+								(body
+									(def [
+										[(array-type ^java.lang.Object) pht$tmp$47003 (new-array ^java.lang.Object 2)]])
+									(aset
+										(get pht$tmp$47003)
+										0
+										"России")
+									(aset
+										(get pht$tmp$47003)
+										1
+										"!")
+									(get pht$tmp$47003))))))))))

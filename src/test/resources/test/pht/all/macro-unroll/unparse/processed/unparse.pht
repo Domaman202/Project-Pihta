@@ -5,7 +5,7 @@
 				(def [
 					[^int i 0]
 					[^int j 0]])
-				(progn
+				(progn-
 					(set! i
 						(add
 							(get i)

@@ -124,8 +124,15 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             }.run {
                 this as NodeInlBodyA
                 val context = if (this is NodeInlBodyB) this.ctx else ctx
-                val bctx = BodyContext.of(null)
-                method.argsn.forEachIndexed { i, it -> NRInlDef.process(it, args[i], bctx) }
+                val bctx = BodyContext.of(ctx.body)
+                method.argsn.asSequence().let {
+                    if (method.extension == null)
+                        it
+                    else {
+                        NRInlDef.process("this", instance, bctx)
+                        it.drop(1)
+                    }
+                }.forEachIndexed { i, it -> NRInlDef.process(it, args[i], bctx) }
                 processor.process(this, context.with(bctx), mode)
             }
     }

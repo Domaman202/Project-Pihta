@@ -11,5 +11,6 @@ class Inline : Module("test/pht/all/inline") {
         assertEquals(test(2), "Сало!")
         assertEquals(test(3), "Сало!")
         assertEquals(test(4), "Сало Сало!")
+        assertEquals(test(5), "Слава Великой России!")
     }
 }

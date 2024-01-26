@@ -26,6 +26,12 @@ class BodyContext(
                 BodyContext(ArrayList(), ArrayList(), AtomicInteger(0))
             else BodyContext(ArrayList(), SubList(ctx.variables, ArrayList()), ctx.nvi).apply { ctx.children.add(this) }
 
+
+        fun of(ctx: BodyContext?, variables: MutableList<Variable>, nvi: AtomicInteger): BodyContext =
+            if (ctx == null)
+                BodyContext(ArrayList(), ArrayList(), AtomicInteger(0))
+            else BodyContext(ArrayList(), SubList(ctx.variables, variables), nvi).apply { ctx.children.add(this) }
+
         fun of(method: VirtualMethod): BodyContext {
             val ctx = of(null)
             if (!method.modifiers.static)

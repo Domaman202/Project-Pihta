@@ -1,2 +1,7 @@
-(app-fn
-    (println "Слава России!"))
+(progn
+    (cls TestD [^Object] (@static
+        (@inline
+        (efn ^String slava ^String []
+            (+ "Слава Великой " this "!")))))
+    (test-fn 5
+        (#slava "России")))

@@ -101,4 +101,25 @@
 							[]
 							"Сало Сало!")
 						get))
-				get))))
+				get))
+		(cls
+			TestD
+			[
+				^Object
+			]
+			(@static
+				(@inline
+					(efn
+						^String
+						slava
+						^String
+						[]
+						(add
+							"Слава Великой "
+							this
+							"!")))))
+		(test-fn
+			5
+			(mcall
+				"России"
+				slava))))

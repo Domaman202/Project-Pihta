@@ -1,5 +1,6 @@
 package ru.DmN.pht.std.processors
 
+import ru.DmN.pht.ast.NodeInlBodyB
 import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.node.NodeTypes
 import ru.DmN.pht.std.processor.ctx.BodyContext
@@ -61,16 +62,21 @@ object NREFn : INodeProcessor<NodeNodesList> {
         gctx.getExtensions(extend) += method
         //
         val new = NodeDefn(node.info.withType(NodeTypes.EFN_), node.nodes.drop(4 + offset).toMutableList(), method)
+        //
         processor.stageManager.pushTask(ProcessingStage.METHODS_BODY) {
+            val context = ctx.with(method).with(BodyContext.of(method))
+            if (method.modifiers.inline)
+                method.inline = NodeInlBodyB(node.info.withType(NodeTypes.INL_BODY_A), new.nodes.toMutableList(), method.rettype, context)
             processNodesList(
                 new,
                 processor,
-                ctx.with(method).with(BodyContext.of(method)),
+                context,
                 if (method.rettype == VirtualType.VOID)
                     ValType.NO_VALUE
                 else ValType.VALUE
             )
         }
+        //
         return new
     }
 }

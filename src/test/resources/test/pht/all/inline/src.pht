@@ -25,4 +25,11 @@
         (#get (fn ^Supplier [][] "Сало!")))
 
     (test-fn 4
-        (#get (fn ^Supplier [][] (#get (fn ^Supplier [][] "Сало Сало!"))))))
+        (#get (fn ^Supplier [][] (#get (fn ^Supplier [][] "Сало Сало!")))))
+
+    (cls TestD [^Object] (@static
+        (@inline
+        (efn ^String slava ^String []
+            (+ "Слава Великой " this "!")))))
+    (test-fn 5
+        (#slava "России")))

@@ -70,8 +70,13 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
     }
 
     override fun adaptToType(type: VirtualType, node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Node {
-        val i = ctx.body.variables.count { it.name == node.name }
-        return when (i) {
+        return when (ctx.body.variables.count {
+            if (it.name == node.name)
+                if (it is InlineVariable)
+                    return node
+                else true
+            else false
+        }) {
             0 -> {
                 val clazz = ctx.clazz
                 NRGetB.findGetter(node.info, clazz, node.name, emptyList(), !ctx.method.modifiers.static, processor, ctx)?.let { return it }
