@@ -379,6 +379,7 @@ object Pihta : Module("pht") {
         addSNU(REM)
         addSNU(REM_)
         addSNU(RET)
+        addSNU(RET_)
         addSNU(RFN)
         add(RFN_,           NURFn)
         addSNU(ROLL_LEFT)
