@@ -158,6 +158,9 @@ enum class NodeTypes : INodeType {
     ANN_SYNC_("@synchronized", PROCESSED),
     ANN_VARARGS_("@varargs", PROCESSED),
 
+    // @@
+    CT_IF_PLATFORM("@@if-platform", PARSED),
+
     // *
     CTC_MODULE_NAME("*module-name*", PARSED),
     CTC_TYPE_NAME("*type-name*", PARSED),

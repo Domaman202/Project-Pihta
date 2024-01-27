@@ -3,6 +3,7 @@ package ru.DmN.pht.std
 import ru.DmN.pht.ast.IInlinableNode
 import ru.DmN.pht.ast.IOpenlyNode
 import ru.DmN.pht.jvm.PhtJvm
+import ru.DmN.pht.parsers.NPIfPlatform
 import ru.DmN.pht.parsers.NPInlBody
 import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.pht.processors.*
@@ -182,6 +183,9 @@ object Pihta : Module("pht") {
         addSANP(ANN_OPEN)
         addSANP(ANN_STATIC)
         addSANP(ANN_VARARGS)
+
+        // @@
+        addNP("@@if-platform", NPIfPlatform)
 
         // *
         addSNP(CTC_MODULE_NAME)
@@ -425,6 +429,9 @@ object Pihta : Module("pht") {
         addSNU(ANN_VARARGS)
         addSNU(ANN_VARARGS_)
 
+        // @@
+        add(CT_IF_PLATFORM, NUIfPlatform)
+
         // *
         addSNU(CTC_MODULE_NAME)
         addSNU(CTC_TYPE_NAME)
@@ -610,6 +617,9 @@ object Pihta : Module("pht") {
         add(ANN_OPEN,     NRSA { it, _, _ -> if (it is IOpenlyNode)     it.open = true })
         add(ANN_STATIC,   NRSA { it, _, _ -> if (it is IStaticallyNode) it.static = true })
         add(ANN_VARARGS,  NRSA { it, _, _ -> if (it is IVarargNode)     it.varargs = true })
+
+        // @@
+        add(CT_IF_PLATFORM, NRIfPlatform)
 
         // *
         add(CTC_MODULE_NAME, NRCTSC { _, ctx -> ctx.module.name })

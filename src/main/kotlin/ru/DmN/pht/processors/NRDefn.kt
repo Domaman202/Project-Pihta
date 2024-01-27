@@ -1,6 +1,5 @@
 package ru.DmN.pht.std.processors
 
-import ru.DmN.pht.ast.NodeInlBodyA
 import ru.DmN.pht.ast.NodeInlBodyB
 import ru.DmN.pht.std.ast.NodeDefn
 import ru.DmN.pht.std.node.NodeTypes

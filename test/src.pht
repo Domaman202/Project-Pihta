@@ -1,7 +1,4 @@
-(progn
-    (cls TestD [^Object] (@static
-        (@inline
-        (efn ^String slava ^String []
-            (+ "Слава Великой " this "!")))))
-    (test-fn 5
-        (#slava "России")))
+(@@if-platform jvm
+    (cls App [^Object] (@static
+        (defn main ^void []
+            (println "Hi!")))))

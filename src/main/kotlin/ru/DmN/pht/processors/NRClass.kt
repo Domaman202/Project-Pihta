@@ -15,7 +15,6 @@ import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.FieldModifiers
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
-import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
 
 object NRClass : INodeProcessor<NodeNodesList> {
