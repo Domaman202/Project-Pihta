@@ -13,4 +13,14 @@ class DebugNodeInfo(val info: INodeInfo) : INodeInfo {
 
     override fun withType(type: INodeType): INodeInfo =
         DebugNodeInfo(info.withType(type))
+
+    override fun print() {
+        println("""
+            [
+            | type: $type
+            | file: $file
+            | line: $line
+            ]
+        """.trimIndent())
+    }
 }

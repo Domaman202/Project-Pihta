@@ -34,44 +34,44 @@
 						add
 						(body
 							(def [
-								[(array-type ^java.lang.Object) pht$tmp$46976 (new-array ^java.lang.Object 3)]])
+								[(array-type ^java.lang.Object) pht$tmp$14177 (new-array ^java.lang.Object 3)]])
 							(aset
-								(get pht$tmp$46976)
+								(get pht$tmp$14177)
 								0
 								" ")
 							(aset
-								(get pht$tmp$46976)
+								(get pht$tmp$14177)
 								1
 								(get b))
 							(aset
-								(get pht$tmp$46976)
+								(get pht$tmp$14177)
 								2
 								"!")
-							(get pht$tmp$46976))))
+							(get pht$tmp$14177))))
 				(defn [] getFoo ^java.lang.String [[c ^java.lang.String][d ^java.lang.String]]
 					(mcall
 						"Боже, "
 						add
 						(body
 							(def [
-								[(array-type ^java.lang.Object) pht$tmp$46978 (new-array ^java.lang.Object 4)]])
+								[(array-type ^java.lang.Object) pht$tmp$14179 (new-array ^java.lang.Object 4)]])
 							(aset
-								(get pht$tmp$46978)
+								(get pht$tmp$14179)
 								0
 								(get c))
 							(aset
-								(get pht$tmp$46978)
+								(get pht$tmp$14179)
 								1
 								" ")
 							(aset
-								(get pht$tmp$46978)
+								(get pht$tmp$14179)
 								2
 								(get d))
 							(aset
-								(get pht$tmp$46978)
+								(get pht$tmp$14179)
 								3
 								"!")
-							(get pht$tmp$46978))))
+							(get pht$tmp$14179))))
 				(cls [] Test1 [^java.lang.Object]
 					(@static
 						(defn [] test ^dynamic []

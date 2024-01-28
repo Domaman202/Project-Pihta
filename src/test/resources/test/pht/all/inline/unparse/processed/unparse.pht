@@ -64,16 +64,16 @@
 							add
 							(body
 								(def [
-									[(array-type ^java.lang.Object) pht$tmp$47003 (new-array ^java.lang.Object 2)]])
+									[(array-type ^java.lang.Object) pht$tmp$26023 (new-array ^java.lang.Object 2)]])
 								(aset
-									(get pht$tmp$47003)
+									(get pht$tmp$26023)
 									0
 									(get this))
 								(aset
-									(get pht$tmp$47003)
+									(get pht$tmp$26023)
 									1
 									"!")
-								(get pht$tmp$47003)))))))
+								(get pht$tmp$26023)))))))
 		(cls [] Test5 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
@@ -84,13 +84,13 @@
 								add
 								(body
 									(def [
-										[(array-type ^java.lang.Object) pht$tmp$47003 (new-array ^java.lang.Object 2)]])
+										[(array-type ^java.lang.Object) pht$tmp$26023 (new-array ^java.lang.Object 2)]])
 									(aset
-										(get pht$tmp$47003)
+										(get pht$tmp$26023)
 										0
 										"России")
 									(aset
-										(get pht$tmp$47003)
+										(get pht$tmp$26023)
 										1
 										"!")
-									(get pht$tmp$47003))))))))))
+									(get pht$tmp$26023))))))))))

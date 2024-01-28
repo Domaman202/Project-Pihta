@@ -8,12 +8,12 @@
 						add
 						(body
 							(def [
-								[(array-type ^java.lang.Object) pht$tmp$46968 (new-array ^java.lang.Object 1)]])
+								[(array-type ^java.lang.Object) pht$tmp$7911 (new-array ^java.lang.Object 1)]])
 							(aset
-								(get pht$tmp$46968)
+								(get pht$tmp$7911)
 								0
 								(get other))
-							(get pht$tmp$46968))))
+							(get pht$tmp$7911))))
 				(efn [] ^java.lang.String mul ^java.lang.String []
 					"mul")
 				(efn [] ^java.lang.String div ^java.lang.String []
@@ -29,16 +29,16 @@
 							add
 							(body
 								(def [
-									[(array-type ^java.lang.Object) pht$tmp$46972 (new-array ^java.lang.Object 2)]])
+									[(array-type ^java.lang.Object) pht$tmp$7915 (new-array ^java.lang.Object 2)]])
 								(aset
-									(get pht$tmp$46972)
+									(get pht$tmp$7915)
 									0
 									" ")
 								(aset
-									(get pht$tmp$46972)
+									(get pht$tmp$7915)
 									1
 									"России")
-								(get pht$tmp$46972)))))))
+								(get pht$tmp$7915)))))))
 		(cls [] Test1 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []

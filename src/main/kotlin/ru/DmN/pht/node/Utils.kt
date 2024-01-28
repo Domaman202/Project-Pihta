@@ -121,7 +121,7 @@ fun nodeTypesGet(info: INodeInfo, name: String, type: VirtualType) =
     NodeTypedGet(info.withType(TYPED_GET_), name, type)
 // u
 fun nodeUseCtx(info: INodeInfo, name: String, body: Node) =
-    NodeUse(info.withType(USE_CTX), mutableListOf(name), mutableListOf(body))
+    NodeUse(info.withType(USE_CTX), mutableListOf(body), mutableListOf(name))
 // v
 fun nodeValn(info: INodeInfo, nodes: MutableList<Node>) =
     NodeNodesList(info.withType(VALN), nodes)
