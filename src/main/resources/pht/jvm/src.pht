@@ -16,7 +16,6 @@
                     (for [e this]
                         (#add list e))
                     list)))
-
             (defmacro contentToString [type]
                 (efn (array-type (macro-arg type)) contentToString ^String [] (progn
                     (def [[str (new ^StringBuilder)]])
@@ -30,12 +29,10 @@
                         (#append str (aget this 0)))
                     (#append str ']')
                     (#toString str))))
-
             (defmacro universal-array-extends [types]
                 (macro-unroll [[type types]]
                     (toList (macro-arg type))
                     (contentToString (macro-arg type))))
-
             (universal-array-extends [^boolean ^byte ^short ^char ^int ^long ^float ^double ^Any]))
 
         (cls StringExtends [^Object]
@@ -46,23 +43,33 @@
                 (#toString str))))))
 
     (ns ru.DmN.pht.io
-        (cls StdOut [^Object] (@static (@inline
-            (defmacro print-as-int [types]
+        (cls StdOut [^Object] (@static
+            (defmacro defn-print-as-int [types]
                 (macro-unroll [[type types]]
                     (defn print ^void [[msg (macro-arg type)]]
-                        (#print (get ^System/out) (as ^int msg)))
+                        (#print ^System/out (as ^int msg)))
                     (defn println ^void [[msg (macro-arg type)]]
-                        (#println (get ^System/out) (as ^int msg)))))
-            (defmacro print- [types]
+                        (#println ^System/out (as ^int msg)))
+                    (@varargs
+                        (defn print ^void [[msg (array-type (macro-arg type))]]
+                            (#print ^System/out (#contentToString msg)))
+                        (defn println ^void [[msg (array-type (macro-arg type))]]
+                            (#println ^System/out (#contentToString msg))))))
+            (defmacro defn-print [types]
                 (macro-unroll [[type types]]
                     (defn print ^void [[msg (macro-arg type)]]
-                        (#print (get ^System/out) msg))
+                        (#print ^System/out msg))
                     (defn println ^void [[msg (macro-arg type)]]
-                        (#println (get ^System/out) msg))))
+                        (#println ^System/out msg))
+                    (@varargs
+                        (defn print ^void [[msg (array-type (macro-arg type))]]
+                            (#print ^System/out (#contentToString msg)))
+                        (defn println ^void [[msg (array-type (macro-arg type))]]
+                            (#println ^System/out (#contentToString msg))))))
             (defn println ^void []
-                (#println (get ^System/out)))
-            (print-         [^boolean ^char ^int ^long ^float ^double ^Any])
-            (print-as-int   [^byte ^short])))))
+                (#println ^System/out))
+            (defn-print         [^boolean ^char ^int ^long ^float ^double ^Any])
+            (defn-print-as-int  [^byte ^short]))))
 
     (ns ru.DmN.pht.math
         (cls MathExtends [^Object]
@@ -131,7 +138,7 @@
             (types java.lang.Object)
             (types java.lang.String))
         (alias-type [[Object Any]])
-        (import pht
+        (import pht/jvm
             (extensions ru.DmN.pht.ArrayExtends)
             (extensions ru.DmN.pht.StringExtends)
             (extensions ru.DmN.pht.math.MathExtends))))

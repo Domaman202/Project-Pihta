@@ -6,11 +6,7 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.VirtualType
 
-class NodeFn(
-    info: INodeInfo,
-    val source: Source,
-    var processed: MutableList<Node>? = null
-) : Node(info), INodesList {
+class NodeFn(info: INodeInfo, val source: Source, var processed: MutableList<Node>? = null) : Node(info), INodesList {
     override val nodes: MutableList<Node>
         get() = processed ?: source.nodes
 

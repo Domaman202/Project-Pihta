@@ -7,6 +7,7 @@ import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.processors.NRProgn
 import ru.DmN.siberia.utils.VirtualType
@@ -16,7 +17,8 @@ object NRInlBodyA : INodeProcessor<NodeInlBodyA> {
         node.type
 
     override fun process(node: NodeInlBodyA, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
-        val new = NodeInlBodyA(node.info.withType(NodeTypes.INL_BODY_), processor.processNodes(node, ctx, mode), node.type)
+        val new = NodeInlBodyA(node.info.withType(NodeTypes.INL_BODY_), node.nodes, node.type)
+        processNodesList(new, processor, ctx, mode)
         if (new.type == null)
             new.type = NRProgn.calc(new, processor, ctx)
         return new

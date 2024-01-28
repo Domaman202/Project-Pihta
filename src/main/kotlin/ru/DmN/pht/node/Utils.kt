@@ -1,7 +1,10 @@
 package ru.DmN.pht.std.node
 
 import ru.DmN.pht.ast.NodeTypedGet
-import ru.DmN.pht.std.ast.*
+import ru.DmN.pht.std.ast.NodeGet
+import ru.DmN.pht.std.ast.NodeGetOrName
+import ru.DmN.pht.std.ast.NodeModifierNodesList
+import ru.DmN.pht.std.ast.NodeValue
 import ru.DmN.pht.std.ast.NodeValue.Type.NIL
 import ru.DmN.pht.std.node.NodeParsedTypes.*
 import ru.DmN.pht.std.node.NodeTypes.*
@@ -10,7 +13,6 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.ast.NodeUse
 import ru.DmN.siberia.node.INodeInfo
-import ru.DmN.siberia.node.NodeTypes
 import ru.DmN.siberia.node.NodeTypes.USE_CTX
 import ru.DmN.siberia.utils.VirtualType
 
@@ -23,9 +25,9 @@ fun nodeAGet(info: INodeInfo, name: String, index: String) =
         mutableListOf(nodeGetOrName(info, name), nodeGetOrName(info, index)))
 fun nodeArrayOf(info: INodeInfo, elements: MutableList<Node>) =
     NodeNodesList(info.withType(ARRAY_OF), elements)
-fun nodeArrayOfType(info: INodeInfo, type: String, elements: MutableList<Node>) =
+fun nodeArrayOfType(info: INodeInfo, type: String, elements: List<Node>) =
     NodeNodesList(info.withType(ARRAY_OF_TYPE),
-        elements.apply { add(0, nodeValueClass(info, type)) })
+        mutableListOf<Node>(nodeValueClass(info, type)).apply { addAll(elements) })
 fun nodeArraySize(info: INodeInfo, name: String) =
     NodeNodesList(info.withType(ARRAY_SIZE),
         mutableListOf(nodeGetOrName(info, name)))

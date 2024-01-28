@@ -60,6 +60,14 @@ val VTWG.nameWithGens: String
         return "^$name<$sb>"
     }
 
+inline fun <T, R> List<T>.mapIndexedMutable(transform: (Int, T) -> R): MutableList<R> {
+    val list = ArrayList<R>(this.size)
+    var i = 0
+    for (it in this)
+        list.add(transform(i++, it))
+    return list
+}
+
 inline fun <T, R> List<T>.mapMutable(transform: (T) -> R): MutableList<R> {
     val list = ArrayList<R>(this.size)
     for (it in this)
