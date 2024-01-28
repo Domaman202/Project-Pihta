@@ -40,7 +40,12 @@ val VirtualType.nameWithGenerics: String
     }
 
 val VirtualType.nameWithGens: String
-    get() = if (this is VTWG) this.nameWithGens else "^${this.name}"
+    get() =
+        if (this is VTWG)
+            this.nameWithGens
+        else if (this.isArray)
+            "(array-type ${this.componentType!!.nameWithGens})"
+        else "^${this.name}"
 
 val VTWG.nameWithGens: String
     get() {

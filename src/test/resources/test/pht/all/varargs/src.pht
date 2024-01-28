@@ -6,5 +6,5 @@
             (for [e arr]
                 (#append str e))
             (#toString str)))))
-    (app-fn
-        (println (- "Слава " "России!"))))
+    (test-fn 0
+        (- "Слава " "России!")))

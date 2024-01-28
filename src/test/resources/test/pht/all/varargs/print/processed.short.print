@@ -1,0 +1,123 @@
+[USE_CTX_
+|	(modules = pht pht/jvm)
+|	(NODES:
+|	|	[PROGN_
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = StringExtends)
+|	|	|	|	[ANN_VARARGS_
+|	|	|	|	|	[EFN_
+|	|	|	|	|	|	(type = varargs extension method)
+|	|	|	|	|	|	(desc = sub(Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/String;)
+|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	(name = str)
+|	|	|	|	|	|	|	|	|	(type = java.lang.StringBuilder)
+|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.StringBuilder))
+|	|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[BODY_
+|	|	|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$56261)
+|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.String;)
+|	|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$46986)
+|	|	|	|	|	|	|	|	|	|	(type = int)
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	(value = '0')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[CYCLE_
+|	|	|	|	|	|	|	|	|	[LESS_
+|	|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	|	[ARRAY_SIZE_
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	|	|	(name = e)
+|	|	|	|	|	|	|	|	|	|	|	(type = java.lang.String)
+|	|	|	|	|	|	|	|	|	|	|	[AGET_]
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	(method = append(Ljava/lang/CharSequence;)Ljava/lang/Appendable;)
+|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[INC_PRE_]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	)]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = Test0)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = sub(Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/String;)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	(value = 'StringExtends')
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	(value = 'Слава ')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[BODY_
+|	|	|	|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$27709)
+|	|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.String;)
+|	|	|	|	|	|	|	|	|	|	|	[NEW_ARRAY_]
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[ASET_
+|	|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	(value = '0')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'России!')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	)
+]

@@ -245,6 +245,7 @@ object Pihta : Module("pht") {
         addSNU(ARRAY_OF_TYPE)
         addSNU(ARRAY_SIZE)
         addSNU(ARRAY_SIZE_)
+        addSNU(ARRAY_TYPE)
         addSNU(AS)
         add(AS_,            NUIsAs)
         addSNU(AS_GENS)

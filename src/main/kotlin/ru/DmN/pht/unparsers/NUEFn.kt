@@ -21,7 +21,7 @@ object NUEFn : INodeUnparser<NodeDefn> {
                 append(" [")
                 argsn.asSequence().drop(1).forEachIndexed { i, it ->
                     append('[').append(it).append(' ')
-                    argsg[i]?.let { append(it).append('^') } ?: append(argsc[i].nameWithGens)
+                    argsg[i]?.let { append(it).append('^') } ?: append(argsc[i + 1].nameWithGens)
                     append(']')
                 }
                 append(']')

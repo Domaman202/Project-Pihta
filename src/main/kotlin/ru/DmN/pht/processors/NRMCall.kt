@@ -225,29 +225,30 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * @return Преобразованные аргументы.
      */
     fun processArguments(info: INodeInfo, processor: Processor, ctx: ProcessingContext, method: VirtualMethod, args: List<Node>, compression: Boolean = method.modifiers.varargs): MutableList<Node> =
-        (if (compression) {
+        if (compression) {
             val overflow = args.size.let { if (it > 0) it + 1 else 0 } - method.argsc.size
             if (overflow > 0)
                 args.dropLast(overflow).toMutableList().apply {
-                    val type = method.argsc.last().componentType!!.name
                     add(
                         NRArrayOfType.process(
-                            nodeArrayOfType(info, type, args.asSequence().drop(args.size - overflow).map { nodeAs(info, it, type) }.toMutableList()),
+                            nodeArrayOfType(
+                                info,
+                                method.argsc.last().componentType!!.name,
+                                args.drop(args.size - overflow)
+                            ),
                             processor,
                             ctx,
                             ValType.VALUE
                         )!!
                     )
                 }
-            else (args + NRNewArray.process(
-                nodeNewArray(info, method.argsc.last().name.substring(1), 0),
-                processor,
-                ctx,
-                ValType.VALUE
-            )!!).toMutableList()
-        } else args)
-            .mapIndexed { i, it -> NRAs.process(nodeAs(info, it, method.argsc[i].name), processor, ctx, ValType.VALUE)!! }
-            .toMutableList()
+            else (args + NRNewArray.process(nodeNewArray(info, method.argsc.last().name.substring(1), 0), processor, ctx, ValType.VALUE)!!).toMutableList()
+        } else { args }.mapIndexedMutable { i, it ->
+            val np = processor.get(it, ctx)
+            if (np is IAdaptableProcessor<*>)
+                (np as IAdaptableProcessor<Node>).adaptToType(method.argsc[i], it, processor, ctx)
+            else { it }.let { NRAs.process(nodeAs(info, it, method.argsc[i].name), processor, ctx, ValType.VALUE)!! }
+        }
 
     /**
      * Выполняет поиск метода.
@@ -269,7 +270,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             generic = gctx.getType(it.substring(gs + 2, it.length - 1), processor.tp)
             it.substring(0, gs)
         }
-        val args = node.nodes.stream().skip(2).map { processor.process(it, ctx, ValType.VALUE)!! }.toList()
+        val args = node.nodes.asSequence().drop(2).map { processor.process(it, ctx, ValType.VALUE)!! }.toList()
         //
         // Class / Instance
         var result = findMethodOrNull(pair.second, name, args, static, node, processor, ctx)
