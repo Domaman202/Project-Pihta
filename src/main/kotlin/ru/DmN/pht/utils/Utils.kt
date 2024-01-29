@@ -19,20 +19,21 @@ import ru.DmN.siberia.utils.klassOf
  * "set-value" -> "setValue"
  * "set-" -> "set_"
  */
-fun String.normalizeName(): String {
-    val sb = StringBuilder()
-    var i = 0
-    while (i < this.length) {
-        sb.append(
-            when (val c = this[i]) {
-                '-' -> if (i == this.lastIndex) '_' else this[++i].uppercase()
-                else -> c
-            }
-        )
-        i++
-    }
-    return sb.toString()
-}
+fun String.normalizeName(): String =
+    if (this.contains('-')) {
+        val sb = StringBuilder()
+        var i = 0
+        while (i < this.length) {
+            sb.append(
+                when (val c = this[i]) {
+                    '-' -> if (i == this.lastIndex) '_' else this[++i].uppercase()
+                    else -> c
+                }
+            )
+            i++
+        }
+        sb.toString()
+    } else this
 
 inline fun <T> Iterable<T>.forEach(first: T, block: (T) -> Unit) {
     block(first)

@@ -11,6 +11,7 @@ import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.method
 import ru.DmN.pht.std.ast.NodeMCall
+import ru.DmN.pht.std.utils.normalizeName
 
 object NCMCall : INodeCompiler<NodeMCall> {
     override fun compile(node: NodeMCall, compiler: Compiler, ctx: CompilationContext) {
@@ -39,7 +40,7 @@ object NCMCall : INodeCompiler<NodeMCall> {
                         Opcodes.INVOKESPECIAL
                     else Opcodes.INVOKEVIRTUAL,
                     declaringClass!!.className,
-                    name,
+                    name.normalizeName(),
                     desc,
                     declaringClass!!.isInterface
                 )

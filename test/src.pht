@@ -1,10 +1,5 @@
-(progn
-    (cls StringExtends [^Object]
-        (@varargs
-        (efn ^String sub ^String [[arr (array-type ^String)]] (progn
-            (def [[str (new ^StringBuilder this)]])
-            (for [e arr]
-                (#append str e))
-            (#toString str)))))
+(app
+    (defn print-foo ^void []
+        (println "Foo!"))
     (app-fn
-        (println (- "Слава " "России!"))))
+        (#print-foo .)))

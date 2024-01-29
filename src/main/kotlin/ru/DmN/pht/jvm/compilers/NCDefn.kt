@@ -10,6 +10,7 @@ import ru.DmN.pht.std.compiler.java.ctx.MethodContext
 import ru.DmN.pht.std.compiler.java.utils.clazz
 import ru.DmN.pht.std.compiler.java.utils.load
 import ru.DmN.pht.std.compiler.java.utils.with
+import ru.DmN.pht.std.utils.normalizeName
 import ru.DmN.pht.std.utils.type
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.ast.INodesList
@@ -28,6 +29,7 @@ object NCDefn : INodeCompiler<NodeDefn> {
         val cnode = ctx.clazz.node
         //
         val method = node.method
+        val name = method.name.normalizeName()
         val mnode = cnode.visitMethod(
             Opcodes.ACC_PUBLIC.let {
                 if (node.static) it + Opcodes.ACC_STATIC
@@ -38,7 +40,7 @@ object NCDefn : INodeCompiler<NodeDefn> {
                 if (node.sync) it + Opcodes.ACC_SYNCHRONIZED
                 else it
             },
-            method.name,
+            name,
             method.desc,
             method.signature,
             null
@@ -48,10 +50,10 @@ object NCDefn : INodeCompiler<NodeDefn> {
             compiler.stageManager.pushTask(CompilingStage.METHODS_BODY) {
                 mnode.visit(node, method, compiler, ctx)
                 if (method.argsg.asSequence().filterNotNull().any()) {
-                    findOtherMethods(method).forEach { it ->
+                    findOtherMethods(method, name).forEach { it ->
                         cnode.visitMethod(
                             Opcodes.ACC_PUBLIC + Opcodes.ACC_BRIDGE + Opcodes.ACC_SYNTHETIC,
-                            it.name,
+                            it.name.normalizeName(),
                             it.desc,
                             it.signature,
                             null
@@ -76,12 +78,12 @@ object NCDefn : INodeCompiler<NodeDefn> {
         }
     }
 
-    private fun findOtherMethods(method: VirtualMethod): Sequence<VirtualMethod> {
+    private fun findOtherMethods(method: VirtualMethod, name: String): Sequence<VirtualMethod> {
         var seq = emptySequence<VirtualMethod>()
-        method.declaringClass!!.parents.forEach { seq += findMethods(it, method.name) }
+        method.declaringClass!!.parents.forEach { seq += findMethods(it, name) }
         return seq
             .filter { !it.modifiers.static }
-            .filter { it.name == method.name }
+            .filter { it.name == name }
             .filter { m -> m.argsc.mapIndexed { i, type -> method.argsc[i].isAssignableFrom(type) }.all { it } }
     }
 
