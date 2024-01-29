@@ -43,7 +43,9 @@ enum class NodeTypes : INodeType {
     DEF("def", PARSED),
     DEF_("def", PROCESSED),
     DEF_SET("def-set", PARSED),
-    DEFMACRO("defmacro", PARSED),
+    DEF_ANN("def-ann", PARSED),
+    DEF_ANN_("def-ann", PROCESSED),
+    DEF_MACRO("def-macro", PARSED),
     DEFN_("defn", PROCESSED),
     DIV_("div", PROCESSED),
     // e

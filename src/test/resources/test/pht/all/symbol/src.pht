@@ -1,7 +1,7 @@
 (progn
-    (defmacro test-symbol []
+    (def-macro test-symbol []
         (symbol (rand-symbol)))
-    (defmacro test-lazy-symbol []
+    (def-macro test-lazy-symbol []
         (lazy-symbol (rand-symbol)))
     (test-fn 0 (test-symbol))
     (test-fn 1 (test-symbol))

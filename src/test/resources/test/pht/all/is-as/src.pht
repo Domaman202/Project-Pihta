@@ -1,5 +1,5 @@
 (progn
-    (defmacro init []
+    (def-macro init []
         (def [
             [i 12]
             [j 21l]

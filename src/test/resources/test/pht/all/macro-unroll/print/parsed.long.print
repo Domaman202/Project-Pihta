@@ -29,7 +29,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	]
-|	|	[DEFMACRO
+|	|	[DEF_MACRO
 |	|	|	[GET_OR_NAME
 |	|	|	|	(type = NO-STATIC)
 |	|	|	|	(text = 'test')

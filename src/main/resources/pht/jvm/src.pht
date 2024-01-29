@@ -10,13 +10,13 @@
 
     (ns ru.DmN.pht
         (cls ArrayExtends [^Object]
-            (defmacro toList [type]
+            (def-macro toList [type]
                 (efn (array-type (macro-arg type)) toList ^List [] (progn
                     (def [[list (new ^ArrayList)]])
                     (for [e this]
                         (#add list e))
                     list)))
-            (defmacro contentToString [type]
+            (def-macro contentToString [type]
                 (efn (array-type (macro-arg type)) contentToString ^String [] (progn
                     (def [[str (new ^StringBuilder)]])
                     (#append str '[')
@@ -29,7 +29,7 @@
                         (#append str (aget this 0)))
                     (#append str ']')
                     (#toString str))))
-            (defmacro universal-array-extends [types]
+            (def-macro universal-array-extends [types]
                 (macro-unroll [[type types]]
                     (toList (macro-arg type))
                     (contentToString (macro-arg type))))
@@ -44,7 +44,7 @@
 
     (ns ru.DmN.pht.io
         (cls StdOut [^Object] (@static
-            (defmacro defn-print-as-int [types]
+            (def-macro defn-print-as-int [types]
                 (macro-unroll [[type types]]
                     (defn print ^void [[msg (macro-arg type)]]
                         (#print ^System/out (as ^int msg)))
@@ -55,7 +55,7 @@
                             (#print ^System/out (#contentToString msg)))
                         (defn println ^void [[msg (array-type (macro-arg type))]]
                             (#println ^System/out (#contentToString msg))))))
-            (defmacro defn-print [types]
+            (def-macro defn-print [types]
                 (macro-unroll [[type types]]
                     (defn print ^void [[msg (macro-arg type)]]
                         (#print ^System/out msg))

@@ -11,7 +11,7 @@
 ```pihta
 (use-ctx pht
     (app-fn
-        (defmacro log [data]
+        (def-macro log [data]
             (println (macro-arg data)))
         (log 240222)))
 ```

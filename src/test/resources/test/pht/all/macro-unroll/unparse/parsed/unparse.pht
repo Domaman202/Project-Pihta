@@ -12,7 +12,7 @@
 					0
 				]
 			])
-		(defmacro
+		(def-macro
 			test
 			[
 				argsA

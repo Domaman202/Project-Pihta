@@ -15,7 +15,7 @@
 ```pihta
 (use-ctx pht
     (app-fn
-        (defmacro print-sum [a b]
+        (def-macro print-sum [a b]
             (println (- (macro-arg a) (macro-arg b))))
         (print-sum 3333 1111)))
 ```
@@ -23,7 +23,7 @@
 ```pihta
 (use-ctx pht
     (app-fn
-        (defmacro print-sum [a b]
+        (def-macro print-sum [a b]
             (println (- (macro-arg a) (macro-arg b))))
         (macro print-sum 213 202)))
 ```

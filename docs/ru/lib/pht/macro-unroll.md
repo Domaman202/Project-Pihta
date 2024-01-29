@@ -12,7 +12,7 @@
 ```pihta
 (use-ctx pht
     (app-fn
-        (defmacro print-args [argsA argsB]
+        (def-macro print-args [argsA argsB]
             (macro-unroll [[a argsA] [b argsB]]
                 (println (macro-arg a) (macro-arg b))))
         (print-args ["202" "203" "213"] ["Первый" "Второй" "Третий"])))

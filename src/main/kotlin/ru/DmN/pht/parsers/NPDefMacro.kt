@@ -18,7 +18,7 @@ object NPDefMacro : INodeParser {
         ctx.macros.push(uuid)
         return NPProgn.parse(parser, ctx) {
             ctx.macros.pop()
-            NodeDefMacro(INodeInfo.of(NodeTypes.DEFMACRO, ctx, token), it, uuid)
+            NodeDefMacro(INodeInfo.of(NodeTypes.DEF_MACRO, ctx, token), it, uuid)
         }
     }
 }

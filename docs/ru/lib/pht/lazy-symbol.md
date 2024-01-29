@@ -12,10 +12,10 @@
 
 ```pihta
 (use-ctx pht
-    (defmacro test []
+    (def-macro test []
         (valn-repeat 10
             (println (symbol (rand-symbol)))))
-    (defmacro test-lazy []
+    (def-macro test-lazy []
         (valn-repeat 10
             (println (lazy-symbol (rand-symbol)))))
     (app-fn

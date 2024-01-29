@@ -38,12 +38,12 @@ fun String.log() = println(this)
 
 > (Lisp)
 ```lisp
-(defmacro baza () (print "Glory to Russia!"))`
+(def-macro baza () (print "Glory to Russia!"))`
 (baza)
 ```
 > (Pihta)
 ```lisp
-(defmacro base []
+(def-macro base []
    (println "Glory to Russia!"))`
 (baza)
 ```

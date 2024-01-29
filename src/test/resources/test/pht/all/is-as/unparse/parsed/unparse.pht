@@ -1,6 +1,6 @@
 (use-ctx pht pht/jvm
 	(progn
-		(defmacro
+		(def-macro
 			init
 			[]
 			(def

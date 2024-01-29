@@ -15,7 +15,7 @@
         (@static
             (defn foo ^void [[arg0 ^Object] [arg1 ^Object] [arg2 ^Object]]
                 (println arg0 arg1 arg2)))
-        (defmacro call-foo [args]
+        (def-macro call-foo [args]
             (macro-inline [args]
                 (#foo . (macro-arg args))))
         (app-fn
