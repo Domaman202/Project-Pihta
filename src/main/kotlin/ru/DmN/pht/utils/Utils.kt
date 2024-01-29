@@ -13,6 +13,27 @@ import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.klassOf
 
+/**
+ * Нормализация имени для jvm:
+ *
+ * "set-value" -> "setValue"
+ * "set-" -> "set_"
+ */
+fun String.normalizeName(): String {
+    val sb = StringBuilder()
+    var i = 0
+    while (i < this.length) {
+        sb.append(
+            when (val c = this[i]) {
+                '-' -> if (i == this.lastIndex) '_' else this[++i].uppercase()
+                else -> c
+            }
+        )
+        i++
+    }
+    return sb.toString()
+}
+
 inline fun <T> Iterable<T>.forEach(first: T, block: (T) -> Unit) {
     block(first)
     forEach(block)
