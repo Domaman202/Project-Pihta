@@ -102,7 +102,7 @@ object Pihta : Module("pht") {
         addSNP(GREAT_OR_EQ)
         // i
         addSNP(IF)
-        addNP("import",       NPImport)
+        addSNP(IMPORT)
         addSNP(INC_PRE)
         addSNP(INC_POST)
         addNP("inl-body",     NPInlBody)

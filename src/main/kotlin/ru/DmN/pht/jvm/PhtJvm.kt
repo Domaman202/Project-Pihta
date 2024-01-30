@@ -9,9 +9,11 @@ import ru.DmN.pht.compiler.java.compilers.*
 import ru.DmN.pht.compiler.java.utils.classes
 import ru.DmN.pht.node.NodeParsedTypes.ANN_SYNC
 import ru.DmN.pht.node.NodeTypes.*
+import ru.DmN.pht.parsers.NPDefAnn
 import ru.DmN.pht.processors.NRClassOf
 import ru.DmN.pht.processors.NRSA
 import ru.DmN.pht.unparsers.NUSync
+import ru.DmN.pht.utils.addNP
 import ru.DmN.pht.utils.addSANP
 import ru.DmN.pht.utils.addSNP
 import ru.DmN.pht.utils.addSNU
@@ -29,7 +31,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         // c
         addSNP(CLASS_OF)
         // d
-        addSNP(DEF_ANN)
+        addNP("def-ann", NPDefAnn)
         // s
         addSNP(SYNC)
 

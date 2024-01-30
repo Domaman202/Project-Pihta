@@ -1,5 +1,2 @@
-(app
-    (defn print-foo ^void []
-        (println "Foo!"))
-    (app-fn
-        (#print-foo .)))
+(app-fn
+    (println "Hi!"))

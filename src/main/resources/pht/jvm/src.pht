@@ -1,12 +1,13 @@
 (progn
-    (import java
-        (types java.lang.Enum)
-        (types java.lang.Iterable)
-        (types java.lang.StringBuilder)
-        (types java.lang.System)
-        (types java.util.ArrayList)
-        (types java.util.Iterator)
-        (types java.util.List))
+    (import "java" [
+        [types [
+            java.lang.Enum
+            java.lang.Iterable
+            java.lang.StringBuilder
+            java.lang.System
+            java.util.ArrayList
+            java.util.Iterator
+            java.util.List]]])
 
     (ns ru.DmN.pht
         (cls ArrayExtends [^Object]
@@ -133,12 +134,14 @@
                         offset)))))
 
     (export
-        (import java
-            (types java.lang.Class)
-            (types java.lang.Object)
-            (types java.lang.String))
+        (import "java" [
+            [types [
+                java.lang.Class
+                java.lang.Object
+                java.lang.String]]])
         (alias-type [[Object Any]])
-        (import pht/jvm
-            (extensions ru.DmN.pht.ArrayExtends)
-            (extensions ru.DmN.pht.StringExtends)
-            (extensions ru.DmN.pht.math.MathExtends))))
+        (import "pht/jvm" [
+            [extensions [
+                ru.DmN.pht.ArrayExtends
+                ru.DmN.pht.StringExtends
+                ru.DmN.pht.math.MathExtends]]])))
