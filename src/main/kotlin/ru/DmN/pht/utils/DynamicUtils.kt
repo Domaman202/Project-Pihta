@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.utils
+package ru.DmN.pht.utils
 
 object DynamicUtils {
     @JvmStatic

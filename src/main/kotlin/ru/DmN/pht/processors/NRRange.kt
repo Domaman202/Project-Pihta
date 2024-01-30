@@ -1,9 +1,9 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.processors
 
-import ru.DmN.pht.std.ast.NodeMCall
-import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.node.nodeValueClass
-import ru.DmN.pht.std.processor.utils.global
+import ru.DmN.pht.ast.NodeMCall
+import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.node.nodeValueClass
+import ru.DmN.pht.processor.utils.global
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -23,9 +23,9 @@ object NRRange : INodeProcessor<NodeNodesList> {
                 info.withType(NodeTypes.MCALL_),
                 node.nodes,
                 null,
-                nodeValueClass(info, "ru.DmN.pht.std.utils.IteratorUtils"),
+                nodeValueClass(info, "ru.DmN.pht.utils.IteratorUtils"),
                 ctx.global.getType(
-                    "ru.DmN.pht.std.utils.IteratorUtils",
+                    "ru.DmN.pht.utils.IteratorUtils",
                     processor.tp
                 ).methods.find { it.name == "range" }!!,
                 NodeMCall.Type.STATIC

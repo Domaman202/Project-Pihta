@@ -1,8 +1,8 @@
 package ru.DmN.pht.unparsers
 
-import ru.DmN.pht.std.ast.NodeDefn
-import ru.DmN.pht.std.utils.nameWithGenerics
-import ru.DmN.pht.std.utils.nameWithGens
+import ru.DmN.pht.ast.NodeDefn
+import ru.DmN.pht.utils.nameWithGenerics
+import ru.DmN.pht.utils.nameWithGens
 import ru.DmN.pht.unparsers.NUDefn.unparseGenerics
 import ru.DmN.siberia.Unparser
 import ru.DmN.siberia.unparser.UnparsingContext

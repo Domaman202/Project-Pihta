@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.ast
+package ru.DmN.pht.ast
 
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList

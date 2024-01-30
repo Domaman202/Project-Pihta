@@ -1,12 +1,12 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.processors
 
-import ru.DmN.pht.std.ast.NodeMacroUtil
-import ru.DmN.pht.std.ast.NodeModifierNodesList
-import ru.DmN.pht.std.node.NodeTypes.PROGN_B_
-import ru.DmN.pht.std.processor.utils.macro
-import ru.DmN.pht.std.processor.utils.with
-import ru.DmN.pht.std.utils.computeList
-import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.ast.NodeMacroUtil
+import ru.DmN.pht.ast.NodeModifierNodesList
+import ru.DmN.pht.node.NodeTypes.PROGN_B_
+import ru.DmN.pht.processor.utils.macro
+import ru.DmN.pht.processor.utils.with
+import ru.DmN.pht.utils.computeList
+import ru.DmN.pht.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext

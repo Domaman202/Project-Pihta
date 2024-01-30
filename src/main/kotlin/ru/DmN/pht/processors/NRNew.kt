@@ -1,11 +1,11 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.processors
 
 import ru.DmN.pht.processor.utils.Static
-import ru.DmN.pht.std.ast.NodeNew
-import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.processors.NRMCall.findMethod
-import ru.DmN.pht.std.utils.computeType
-import ru.DmN.pht.std.utils.processNodes
+import ru.DmN.pht.ast.NodeNew
+import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.processors.NRMCall.findMethod
+import ru.DmN.pht.utils.computeType
+import ru.DmN.pht.utils.processNodes
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext

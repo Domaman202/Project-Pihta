@@ -1,16 +1,18 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.processors
 
-import ru.DmN.pht.std.imports.ast.NodeAliasType
-import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.utils.computeList
-import ru.DmN.pht.std.utils.computeStringNodes
+import ru.DmN.pht.helper.ast.NodeAliasType
+import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.utils.computeList
+import ru.DmN.pht.utils.computeStringNodes
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.*
 import ru.DmN.siberia.processor.utils.Platforms.JVM
+import ru.DmN.siberia.processor.utils.ProcessingStage
+import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
 
 object NRAliasType : INodeProcessor<NodeNodesList> {

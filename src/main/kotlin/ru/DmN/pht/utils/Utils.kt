@@ -1,9 +1,9 @@
-package ru.DmN.pht.std.utils
+package ru.DmN.pht.utils
 
 import ru.DmN.pht.processors.IAdaptableProcessor
-import ru.DmN.pht.std.ast.IValueNode
-import ru.DmN.pht.std.processor.utils.ICastable
-import ru.DmN.pht.std.processors.IStdNodeProcessor
+import ru.DmN.pht.ast.IValueNode
+import ru.DmN.pht.processor.utils.ICastable
+import ru.DmN.pht.processors.IStdNodeProcessor
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node

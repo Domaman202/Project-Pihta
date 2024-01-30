@@ -1,9 +1,9 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeTypedGet
-import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.utils.computeString
-import ru.DmN.pht.std.utils.computeType
+import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.utils.computeType
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext

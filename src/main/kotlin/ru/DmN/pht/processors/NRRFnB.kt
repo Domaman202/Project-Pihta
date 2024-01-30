@@ -2,8 +2,8 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeRFn
 import ru.DmN.pht.processors.NRRFn.process
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.utils.*
+import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor

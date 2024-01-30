@@ -1,11 +1,11 @@
-package ru.DmN.pht.std.compiler.java.compilers
+package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.pht.std.ast.NodeCatch
-import ru.DmN.pht.std.compiler.java.ctx.BodyContext
-import ru.DmN.pht.std.compiler.java.utils.*
+import ru.DmN.pht.ast.NodeCatch
+import ru.DmN.pht.compiler.java.ctx.BodyContext
+import ru.DmN.pht.compiler.java.utils.*
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.ctx.CompilationContext

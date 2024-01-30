@@ -1,6 +1,6 @@
-package ru.DmN.pht.std.ast
+package ru.DmN.pht.ast
 
-import ru.DmN.pht.std.utils.isConstClass
+import ru.DmN.pht.utils.isConstClass
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.node.INodeInfo

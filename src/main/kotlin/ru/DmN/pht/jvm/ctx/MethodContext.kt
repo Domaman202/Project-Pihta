@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.compiler.java.ctx
+package ru.DmN.pht.compiler.java.ctx
 
 import org.objectweb.asm.tree.MethodNode
 import ru.DmN.siberia.Compiler

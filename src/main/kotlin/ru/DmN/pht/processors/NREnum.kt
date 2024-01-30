@@ -1,14 +1,14 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.processors
 
-import ru.DmN.pht.std.ast.NodeFSet
-import ru.DmN.pht.std.ast.NodeType
-import ru.DmN.pht.std.node.*
-import ru.DmN.pht.std.processor.ctx.EnumContext
-import ru.DmN.pht.std.processor.utils.*
-import ru.DmN.pht.std.utils.computeList
-import ru.DmN.pht.std.utils.computeListOr
-import ru.DmN.pht.std.utils.computeString
-import ru.DmN.pht.std.utils.computeType
+import ru.DmN.pht.ast.NodeFSet
+import ru.DmN.pht.ast.NodeType
+import ru.DmN.pht.node.*
+import ru.DmN.pht.processor.ctx.EnumContext
+import ru.DmN.pht.processor.utils.*
+import ru.DmN.pht.utils.computeList
+import ru.DmN.pht.utils.computeListOr
+import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.utils.computeType
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList

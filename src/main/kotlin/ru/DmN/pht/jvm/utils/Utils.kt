@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.compiler.java.utils
+package ru.DmN.pht.compiler.java.utils
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.MethodVisitor
@@ -8,11 +8,11 @@ import ru.DmN.pht.ctx.ContextKeys
 import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.VirtualType
-import ru.DmN.pht.std.compiler.java.ctx.BodyContext
-import ru.DmN.pht.std.compiler.java.ctx.ClassContext
-import ru.DmN.pht.std.compiler.java.ctx.MethodContext
-import ru.DmN.pht.std.processor.utils.classes
-import ru.DmN.pht.std.processor.utils.isEnum
+import ru.DmN.pht.compiler.java.ctx.BodyContext
+import ru.DmN.pht.compiler.java.ctx.ClassContext
+import ru.DmN.pht.compiler.java.ctx.MethodContext
+import ru.DmN.pht.processor.utils.classes
+import ru.DmN.pht.processor.utils.isEnum
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.ctx.IContextCollection

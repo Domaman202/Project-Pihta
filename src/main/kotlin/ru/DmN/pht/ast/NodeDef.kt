@@ -1,7 +1,7 @@
-package ru.DmN.pht.std.ast
+package ru.DmN.pht.ast
 
 import ru.DmN.pht.ast.IOpenlyNode
-import ru.DmN.pht.std.processor.utils.Variable
+import ru.DmN.pht.processor.utils.Variable
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl

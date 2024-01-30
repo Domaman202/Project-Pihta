@@ -1,17 +1,17 @@
-package ru.DmN.pht.std.compiler.java.compilers
+package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.pht.std.ast.NodeDefn
-import ru.DmN.pht.std.compiler.java.ctx.BodyContext
-import ru.DmN.pht.std.compiler.java.ctx.MethodContext
-import ru.DmN.pht.std.compiler.java.utils.clazz
-import ru.DmN.pht.std.compiler.java.utils.load
-import ru.DmN.pht.std.compiler.java.utils.with
-import ru.DmN.pht.std.utils.normalizeName
-import ru.DmN.pht.std.utils.type
+import ru.DmN.pht.ast.NodeDefn
+import ru.DmN.pht.compiler.java.ctx.BodyContext
+import ru.DmN.pht.compiler.java.ctx.MethodContext
+import ru.DmN.pht.compiler.java.utils.clazz
+import ru.DmN.pht.compiler.java.utils.load
+import ru.DmN.pht.compiler.java.utils.with
+import ru.DmN.pht.utils.normalizeName
+import ru.DmN.pht.utils.type
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node

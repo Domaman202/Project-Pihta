@@ -1,6 +1,6 @@
 package ru.DmN.pht.unparsers
 
-import ru.DmN.pht.std.ast.NodeMCall
+import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.siberia.Unparser
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.unparsers.INodeUnparser

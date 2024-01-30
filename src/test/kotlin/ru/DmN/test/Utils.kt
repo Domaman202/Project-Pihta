@@ -1,7 +1,5 @@
 package ru.DmN.test
 
-import org.objectweb.asm.ClassWriter
-import ru.DmN.pht.std.compiler.java.utils.classes
 import ru.DmN.pht.std.module.StdModule
 import ru.DmN.pht.std.module.ast.NodeModule
 import ru.DmN.siberia.Compiler
@@ -12,7 +10,9 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.*
+import ru.DmN.siberia.processor.utils.Platforms
+import ru.DmN.siberia.processor.utils.module
+import ru.DmN.siberia.processor.utils.with
 import ru.DmN.siberia.processors.NRUseCtx
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.utils.Module

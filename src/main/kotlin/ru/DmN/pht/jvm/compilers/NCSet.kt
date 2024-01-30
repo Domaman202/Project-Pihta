@@ -1,11 +1,11 @@
-package ru.DmN.pht.std.compiler.java.compilers
+package ru.DmN.pht.compiler.java.compilers
 
-import ru.DmN.pht.std.ast.NodeSet
-import ru.DmN.pht.std.compiler.java.utils.body
-import ru.DmN.pht.std.compiler.java.utils.load
-import ru.DmN.pht.std.compiler.java.utils.method
-import ru.DmN.pht.std.compiler.java.utils.storeCast
-import ru.DmN.pht.std.utils.normalizeName
+import ru.DmN.pht.ast.NodeSet
+import ru.DmN.pht.compiler.java.utils.body
+import ru.DmN.pht.compiler.java.utils.load
+import ru.DmN.pht.compiler.java.utils.method
+import ru.DmN.pht.compiler.java.utils.storeCast
+import ru.DmN.pht.utils.normalizeName
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler

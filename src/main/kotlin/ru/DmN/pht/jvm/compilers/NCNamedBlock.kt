@@ -1,10 +1,10 @@
-package ru.DmN.pht.std.compiler.java.compilers
+package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Label
-import ru.DmN.pht.std.ast.NodeNamedList
-import ru.DmN.pht.std.compiler.java.utils.NamedBlockData
-import ru.DmN.pht.std.compiler.java.utils.method
-import ru.DmN.pht.std.compiler.java.utils.withNamedBlock
+import ru.DmN.pht.ast.NodeNamedList
+import ru.DmN.pht.compiler.java.utils.NamedBlockData
+import ru.DmN.pht.compiler.java.utils.method
+import ru.DmN.pht.compiler.java.utils.withNamedBlock
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler

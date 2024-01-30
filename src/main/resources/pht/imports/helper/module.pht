@@ -3,4 +3,4 @@
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["pht"])
-    (class "ru.DmN.pht.std.imports.Helper"))
+    (class "ru.DmN.pht.imports.Helper"))

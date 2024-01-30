@@ -1,7 +1,7 @@
 package ru.DmN.pht.utils
 
 import ru.DmN.pht.parsers.NPSA
-import ru.DmN.pht.std.Pihta
+import ru.DmN.pht.Pihta
 import ru.DmN.siberia.node.INodeType
 import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.siberia.parsers.SimpleNP

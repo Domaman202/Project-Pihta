@@ -1,9 +1,9 @@
-package ru.DmN.pht.std.compiler.java.compilers
+package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
-import ru.DmN.pht.std.ast.NodeDef
-import ru.DmN.pht.std.compiler.java.utils.*
-import ru.DmN.pht.std.utils.normalizeName
+import ru.DmN.pht.ast.NodeDef
+import ru.DmN.pht.compiler.java.utils.*
+import ru.DmN.pht.utils.normalizeName
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler

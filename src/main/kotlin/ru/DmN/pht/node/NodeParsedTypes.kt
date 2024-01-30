@@ -1,6 +1,6 @@
-package ru.DmN.pht.std.node
+package ru.DmN.pht.node
 
-import ru.DmN.pht.std.node.NodeTypes.*
+import ru.DmN.pht.node.NodeTypes.*
 import ru.DmN.siberia.node.INodeType
 
 enum class NodeParsedTypes(override val operation: String, override val processed: INodeType) : IParsedNodeType {

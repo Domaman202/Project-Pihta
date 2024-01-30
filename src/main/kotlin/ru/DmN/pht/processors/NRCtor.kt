@@ -1,12 +1,12 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.processors
 
-import ru.DmN.pht.std.ast.NodeDefn
-import ru.DmN.pht.std.node.NodeParsedTypes
-import ru.DmN.pht.std.processor.ctx.BodyContext
-import ru.DmN.pht.std.processor.utils.clazz
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.with
-import ru.DmN.pht.std.utils.type
+import ru.DmN.pht.ast.NodeDefn
+import ru.DmN.pht.node.NodeParsedTypes
+import ru.DmN.pht.processor.ctx.BodyContext
+import ru.DmN.pht.processor.utils.clazz
+import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.processor.utils.with
+import ru.DmN.pht.utils.type
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext

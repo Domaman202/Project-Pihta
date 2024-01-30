@@ -1,9 +1,9 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.processors
 
-import ru.DmN.pht.std.ast.NodeMacroUtil
-import ru.DmN.pht.std.processor.ctx.MacroContext
-import ru.DmN.pht.std.processor.utils.macro
-import ru.DmN.pht.std.utils.*
+import ru.DmN.pht.ast.NodeMacroUtil
+import ru.DmN.pht.processor.ctx.MacroContext
+import ru.DmN.pht.processor.utils.macro
+import ru.DmN.pht.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext

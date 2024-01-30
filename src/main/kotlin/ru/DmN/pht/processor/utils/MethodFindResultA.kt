@@ -1,6 +1,6 @@
 package ru.DmN.pht.processor.utils
 
-import ru.DmN.pht.std.ast.NodeMCall
+import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType

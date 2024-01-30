@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.processor.utils
+package ru.DmN.pht.processor.utils
 
 import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.siberia.Processor

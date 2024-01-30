@@ -1,8 +1,8 @@
-package ru.DmN.pht.std.imports
+package ru.DmN.pht.imports
 
-import ru.DmN.pht.std.imports.parsers.NPArgument
-import ru.DmN.pht.std.imports.parsers.NPValue
-import ru.DmN.pht.std.imports.parsers.NPValueList
+import ru.DmN.pht.helper.parsers.NPArgument
+import ru.DmN.pht.helper.parsers.NPValue
+import ru.DmN.pht.imports.parsers.NPValueList
 import ru.DmN.siberia.utils.Module
 
 object Helper : Module("pht/imports/helper") {

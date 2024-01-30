@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.ast
+package ru.DmN.pht.ast
 
 import ru.DmN.pht.ast.IOpenlyNode
 import ru.DmN.siberia.ast.Node

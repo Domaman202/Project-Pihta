@@ -1,10 +1,10 @@
-package ru.DmN.pht.std.parsers
+package ru.DmN.pht.parsers
 
-import ru.DmN.pht.std.ast.NodeImport
-import ru.DmN.pht.std.imports.Helper
-import ru.DmN.pht.std.imports.ast.IValueNode
-import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.utils.text
+import ru.DmN.pht.ast.NodeImport
+import ru.DmN.pht.imports.Helper
+import ru.DmN.pht.helper.ast.IValueNode
+import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.utils.text
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token

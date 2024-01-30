@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeInlBodyA
 import ru.DmN.pht.ast.NodeInlBodyB
@@ -8,15 +8,15 @@ import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.pht.processors.IInlinableProcessor
 import ru.DmN.pht.processors.NRInlDef
-import ru.DmN.pht.std.ast.*
-import ru.DmN.pht.std.ast.NodeMCall.Type.*
-import ru.DmN.pht.std.compiler.java.compilers.NCDefn
-import ru.DmN.pht.std.compiler.java.compilers.NCMCall
-import ru.DmN.pht.std.node.*
-import ru.DmN.pht.std.processor.ctx.BodyContext
-import ru.DmN.pht.std.processor.ctx.GlobalContext
-import ru.DmN.pht.std.processor.utils.*
-import ru.DmN.pht.std.utils.*
+import ru.DmN.pht.ast.*
+import ru.DmN.pht.ast.NodeMCall.Type.*
+import ru.DmN.pht.compiler.java.compilers.NCDefn
+import ru.DmN.pht.compiler.java.compilers.NCMCall
+import ru.DmN.pht.node.*
+import ru.DmN.pht.processor.ctx.BodyContext
+import ru.DmN.pht.processor.ctx.GlobalContext
+import ru.DmN.pht.processor.utils.*
+import ru.DmN.pht.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -333,7 +333,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
 
         return if (clazz == VTDynamic) {
             findMethod(
-                ctx.global.getType("ru.DmN.pht.std.utils.DynamicUtils", processor.tp),
+                ctx.global.getType("ru.DmN.pht.utils.DynamicUtils", processor.tp),
                 "invokeMethod",
                 node.nodes.map { processor.process(it, ctx, ValType.VALUE)!! },
                 Static.ANY,

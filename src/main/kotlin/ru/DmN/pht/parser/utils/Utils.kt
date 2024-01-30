@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.parser.utils
+package ru.DmN.pht.parser.utils
 
 import ru.DmN.pht.ctx.ContextKeys
 import ru.DmN.siberia.Parser

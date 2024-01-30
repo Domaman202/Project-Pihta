@@ -1,6 +1,6 @@
 package ru.DmN.test
 
-import ru.DmN.pht.std.utils.normalizeName
+import ru.DmN.pht.utils.normalizeName
 
 object Test {
     @JvmStatic

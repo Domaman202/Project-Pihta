@@ -1,7 +1,7 @@
-package ru.DmN.pht.std.imports.parsers
+package ru.DmN.pht.helper.parsers
 
-import ru.DmN.pht.std.imports.ast.NodeValue
-import ru.DmN.pht.std.node.NodeTypes
+import ru.DmN.pht.helper.ast.NodeValue
+import ru.DmN.pht.node.NodeTypes
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token

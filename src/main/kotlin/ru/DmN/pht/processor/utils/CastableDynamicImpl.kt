@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.processor.utils
+package ru.DmN.pht.processor.utils
 
 import ru.DmN.siberia.utils.VirtualType
 

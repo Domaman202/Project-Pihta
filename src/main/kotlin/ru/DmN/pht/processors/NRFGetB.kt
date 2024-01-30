@@ -1,15 +1,15 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.processors
 
 import ru.DmN.pht.processor.utils.MethodFindResultB
 import ru.DmN.pht.processor.utils.Static
-import ru.DmN.pht.std.ast.NodeFGet
-import ru.DmN.pht.std.ast.NodeFMGet
-import ru.DmN.pht.std.ast.NodeMCall
-import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.node.nodeValue
-import ru.DmN.pht.std.node.nodeValueClass
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.utils.computeType
+import ru.DmN.pht.ast.NodeFGet
+import ru.DmN.pht.ast.NodeFMGet
+import ru.DmN.pht.ast.NodeMCall
+import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.node.nodeValue
+import ru.DmN.pht.node.nodeValueClass
+import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.utils.computeType
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -79,7 +79,7 @@ object NRFGetB : INodeProcessor<NodeFMGet> {
             val result =
                 if (type == VTDynamic)
                     NRMCall.findMethod(
-                        ctx.global.getType("ru.DmN.pht.std.utils.DynamicUtils", processor.tp),
+                        ctx.global.getType("ru.DmN.pht.utils.DynamicUtils", processor.tp),
                         "invokeGetter",
                         node.nodes,
                         Static.ANY,

@@ -1,8 +1,8 @@
-package ru.DmN.pht.std.processor.ctx
+package ru.DmN.pht.processor.ctx
 
-import ru.DmN.pht.std.compiler.java.utils.MacroDefine
-import ru.DmN.pht.std.processor.utils.ICastable
-import ru.DmN.pht.std.utils.lenArgs
+import ru.DmN.pht.compiler.java.utils.MacroDefine
+import ru.DmN.pht.processor.utils.ICastable
+import ru.DmN.pht.utils.lenArgs
 import ru.DmN.siberia.utils.*
 
 class GlobalContext(

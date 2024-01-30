@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.imports.ast
+package ru.DmN.pht.helper.ast
 
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo

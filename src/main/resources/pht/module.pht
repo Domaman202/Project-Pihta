@@ -5,4 +5,4 @@
     (deps ["siberia"])
     (uses ["siberia"])
     (src ["src.pht"])
-    (class "ru.DmN.pht.std.Pihta"))
+    (class "ru.DmN.pht.Pihta"))

@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.processors
 
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node

@@ -1,11 +1,11 @@
-package ru.DmN.pht.std.compiler.java.compilers
+package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.pht.std.ast.NodeEField
-import ru.DmN.pht.std.compiler.java.utils.clazz
+import ru.DmN.pht.ast.NodeEField
+import ru.DmN.pht.compiler.java.utils.clazz
 
 object NCEField : INodeCompiler<NodeEField> {
     override fun compile(node: NodeEField, compiler: Compiler, ctx: CompilationContext) {

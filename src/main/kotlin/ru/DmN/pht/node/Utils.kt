@@ -1,14 +1,14 @@
-package ru.DmN.pht.std.node
+package ru.DmN.pht.node
 
 import ru.DmN.pht.ast.NodeTypedGet
-import ru.DmN.pht.std.ast.NodeGet
-import ru.DmN.pht.std.ast.NodeGetOrName
-import ru.DmN.pht.std.ast.NodeModifierNodesList
-import ru.DmN.pht.std.ast.NodeValue
-import ru.DmN.pht.std.ast.NodeValue.Type.NIL
-import ru.DmN.pht.std.node.NodeParsedTypes.*
-import ru.DmN.pht.std.node.NodeTypes.*
-import ru.DmN.pht.std.utils.mapMutable
+import ru.DmN.pht.ast.NodeGet
+import ru.DmN.pht.ast.NodeGetOrName
+import ru.DmN.pht.ast.NodeModifierNodesList
+import ru.DmN.pht.ast.NodeValue
+import ru.DmN.pht.ast.NodeValue.Type.NIL
+import ru.DmN.pht.node.NodeParsedTypes.*
+import ru.DmN.pht.node.NodeTypes.*
+import ru.DmN.pht.utils.mapMutable
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.ast.NodeUse

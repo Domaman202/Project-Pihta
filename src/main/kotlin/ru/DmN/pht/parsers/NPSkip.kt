@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.parsers
+package ru.DmN.pht.parsers
 
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node

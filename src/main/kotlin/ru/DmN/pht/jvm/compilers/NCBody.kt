@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.compiler.java.compilers
+package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Label
 import ru.DmN.siberia.Compiler
@@ -7,10 +7,10 @@ import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.utils.Variable
-import ru.DmN.pht.std.compiler.java.ctx.BodyContext
-import ru.DmN.pht.std.compiler.java.utils.bodyOrNull
-import ru.DmN.pht.std.compiler.java.utils.method
-import ru.DmN.pht.std.compiler.java.utils.with
+import ru.DmN.pht.compiler.java.ctx.BodyContext
+import ru.DmN.pht.compiler.java.utils.bodyOrNull
+import ru.DmN.pht.compiler.java.utils.method
+import ru.DmN.pht.compiler.java.utils.with
 
 object NCBody : INodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext) =

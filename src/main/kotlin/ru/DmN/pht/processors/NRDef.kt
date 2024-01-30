@@ -1,13 +1,13 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.processors
 
-import ru.DmN.pht.std.ast.NodeDef
-import ru.DmN.pht.std.ast.NodeDef.VariableOrField
-import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.processor.utils.Variable
-import ru.DmN.pht.std.processor.utils.body
-import ru.DmN.pht.std.processor.utils.clazz
-import ru.DmN.pht.std.processor.utils.isBody
-import ru.DmN.pht.std.utils.*
+import ru.DmN.pht.ast.NodeDef
+import ru.DmN.pht.ast.NodeDef.VariableOrField
+import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.processor.utils.Variable
+import ru.DmN.pht.processor.utils.body
+import ru.DmN.pht.processor.utils.clazz
+import ru.DmN.pht.processor.utils.isBody
+import ru.DmN.pht.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList

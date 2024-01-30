@@ -1,11 +1,11 @@
 package ru.DmN.phtx.ppl.processors
 
-import ru.DmN.pht.std.node.nodeGetOrName
-import ru.DmN.pht.std.node.nodeMCall
-import ru.DmN.pht.std.node.nodeNew
-import ru.DmN.pht.std.node.nodeValue
-import ru.DmN.pht.std.processors.NRMCall
-import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.node.nodeGetOrName
+import ru.DmN.pht.node.nodeMCall
+import ru.DmN.pht.node.nodeNew
+import ru.DmN.pht.node.nodeValue
+import ru.DmN.pht.processors.NRMCall
+import ru.DmN.pht.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList

@@ -1,6 +1,6 @@
 package ru.DmN.pht.parsers
 
-import ru.DmN.pht.std.ast.NodeModifierNodesList
+import ru.DmN.pht.ast.NodeModifierNodesList
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token

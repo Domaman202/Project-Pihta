@@ -1,13 +1,13 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeInlBodyA
 import ru.DmN.pht.processors.IInlinableProcessor
-import ru.DmN.pht.std.ast.NodeFn
-import ru.DmN.pht.std.node.*
-import ru.DmN.pht.std.processor.utils.body
-import ru.DmN.pht.std.processor.utils.clazz
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.utils.*
+import ru.DmN.pht.ast.NodeFn
+import ru.DmN.pht.node.*
+import ru.DmN.pht.processor.utils.body
+import ru.DmN.pht.processor.utils.clazz
+import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node

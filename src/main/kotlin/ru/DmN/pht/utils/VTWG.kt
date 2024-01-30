@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.utils
+package ru.DmN.pht.utils
 
 import ru.DmN.pht.utils.OrPair
 import ru.DmN.siberia.utils.VirtualField

@@ -1,6 +1,6 @@
-package ru.DmN.pht.std.ast
+package ru.DmN.pht.ast
 
-import ru.DmN.pht.std.utils.NVC
+import ru.DmN.pht.utils.NVC
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo

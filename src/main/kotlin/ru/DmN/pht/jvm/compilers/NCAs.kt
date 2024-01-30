@@ -1,12 +1,12 @@
-package ru.DmN.pht.std.compiler.java.compilers
+package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.utils.Variable
-import ru.DmN.pht.std.ast.NodeIsAs
-import ru.DmN.pht.std.compiler.java.utils.*
+import ru.DmN.pht.ast.NodeIsAs
+import ru.DmN.pht.compiler.java.utils.*
 
 object NCAs : INodeCompiler<NodeIsAs> {
     override fun compileVal(node: NodeIsAs, compiler: Compiler, ctx: CompilationContext): Variable {

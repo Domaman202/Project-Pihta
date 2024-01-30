@@ -1,9 +1,9 @@
 package ru.DmN.phtx.ppl.processors
 
-import ru.DmN.pht.std.node.nodeValue
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processors.IStdNodeProcessor
-import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.node.nodeValue
+import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.processors.IStdNodeProcessor
+import ru.DmN.pht.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList

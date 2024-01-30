@@ -1,6 +1,6 @@
-package ru.DmN.pht.std.ast
+package ru.DmN.pht.ast
 
-import ru.DmN.pht.std.node.NodeTypes
+import ru.DmN.pht.node.NodeTypes
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.indent

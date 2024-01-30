@@ -1,10 +1,10 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.std.ast.NodeGet
-import ru.DmN.pht.std.ast.NodeGet.Type.*
-import ru.DmN.pht.std.processor.utils.body
-import ru.DmN.pht.std.processor.utils.classes
-import ru.DmN.pht.std.processor.utils.clazz
+import ru.DmN.pht.ast.NodeGet
+import ru.DmN.pht.ast.NodeGet.Type.*
+import ru.DmN.pht.processor.utils.body
+import ru.DmN.pht.processor.utils.classes
+import ru.DmN.pht.processor.utils.clazz
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor

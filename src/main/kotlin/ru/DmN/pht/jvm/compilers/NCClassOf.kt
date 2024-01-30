@@ -2,7 +2,7 @@ package ru.DmN.pht.jvm.compilers
 
 import org.objectweb.asm.Type
 import ru.DmN.pht.ast.NodeClassOf
-import ru.DmN.pht.std.compiler.java.utils.method
+import ru.DmN.pht.compiler.java.utils.method
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler

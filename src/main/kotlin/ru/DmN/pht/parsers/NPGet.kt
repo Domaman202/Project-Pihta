@@ -1,9 +1,9 @@
-package ru.DmN.pht.std.parsers
+package ru.DmN.pht.parsers
 
-import ru.DmN.pht.std.ast.NodeFMGet
-import ru.DmN.pht.std.node.NodeParsedTypes
-import ru.DmN.pht.std.node.nodeValue
-import ru.DmN.pht.std.node.nodeValueClass
+import ru.DmN.pht.ast.NodeFMGet
+import ru.DmN.pht.node.NodeParsedTypes
+import ru.DmN.pht.node.nodeValue
+import ru.DmN.pht.node.nodeValueClass
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList

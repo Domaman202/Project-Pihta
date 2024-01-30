@@ -1,7 +1,7 @@
-package ru.DmN.pht.std.parsers
+package ru.DmN.pht.parsers
 
-import ru.DmN.pht.std.ast.NodeLazySymbol
-import ru.DmN.pht.std.node.NodeTypes.LAZY_SYMBOL
+import ru.DmN.pht.ast.NodeLazySymbol
+import ru.DmN.pht.node.NodeTypes.LAZY_SYMBOL
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token

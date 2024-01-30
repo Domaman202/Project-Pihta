@@ -1,10 +1,10 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeRFn
-import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processors.NRMCall
-import ru.DmN.pht.std.utils.*
+import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.processors.NRMCall
+import ru.DmN.pht.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext

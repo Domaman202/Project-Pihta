@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.ast
+package ru.DmN.pht.ast
 
 /**
  * Нода, которая может быть статической.

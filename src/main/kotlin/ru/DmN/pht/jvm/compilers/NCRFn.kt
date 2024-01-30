@@ -5,8 +5,8 @@ import org.objectweb.asm.Opcodes.H_INVOKESTATIC
 import org.objectweb.asm.Opcodes.H_INVOKEVIRTUAL
 import org.objectweb.asm.Type
 import ru.DmN.pht.ast.NodeRFn
-import ru.DmN.pht.std.compiler.java.utils.load
-import ru.DmN.pht.std.compiler.java.utils.method
+import ru.DmN.pht.compiler.java.utils.load
+import ru.DmN.pht.compiler.java.utils.method
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler

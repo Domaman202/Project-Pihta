@@ -1,14 +1,14 @@
 @file:Suppress("NOTHING_TO_INLINE")
-package ru.DmN.pht.std.processor.utils
+package ru.DmN.pht.processor.utils
 
 import ru.DmN.pht.ctx.ContextKeys
 import ru.DmN.pht.processor.utils.LinkedClassesNode
-import ru.DmN.pht.std.compiler.java.utils.MacroDefine
-import ru.DmN.pht.std.processor.ctx.BodyContext
-import ru.DmN.pht.std.processor.ctx.EnumContext
-import ru.DmN.pht.std.processor.ctx.GlobalContext
-import ru.DmN.pht.std.processor.ctx.MacroContext
-import ru.DmN.pht.std.utils.compute
+import ru.DmN.pht.compiler.java.utils.MacroDefine
+import ru.DmN.pht.processor.ctx.BodyContext
+import ru.DmN.pht.processor.ctx.EnumContext
+import ru.DmN.pht.processor.ctx.GlobalContext
+import ru.DmN.pht.processor.ctx.MacroContext
+import ru.DmN.pht.utils.compute
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList

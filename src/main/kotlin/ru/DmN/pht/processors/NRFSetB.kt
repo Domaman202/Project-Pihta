@@ -1,15 +1,15 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.processors
 
 import ru.DmN.pht.processor.utils.Static
-import ru.DmN.pht.std.ast.NodeFSet
-import ru.DmN.pht.std.ast.NodeFieldSet
-import ru.DmN.pht.std.ast.NodeMCall
-import ru.DmN.pht.std.ast.NodeValue
-import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.node.nodeValue
-import ru.DmN.pht.std.node.nodeValueClass
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.utils.computeString
+import ru.DmN.pht.ast.NodeFSet
+import ru.DmN.pht.ast.NodeFieldSet
+import ru.DmN.pht.ast.NodeMCall
+import ru.DmN.pht.ast.NodeValue
+import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.node.nodeValue
+import ru.DmN.pht.node.nodeValueClass
+import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.utils.computeString
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -36,7 +36,7 @@ object NRFSetB : INodeProcessor<NodeFieldSet> {
                 null
             else if (type == VTDynamic) {
                 val result = NRMCall.findMethod(
-                    ctx.global.getType("ru.DmN.pht.std.utils.DynamicUtils", processor.tp),
+                    ctx.global.getType("ru.DmN.pht.utils.DynamicUtils", processor.tp),
                     "invokeSetter",
                     node.nodes,
                     Static.ANY,

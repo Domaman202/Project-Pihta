@@ -1,8 +1,8 @@
-package ru.DmN.pht.std.parsers
+package ru.DmN.pht.parsers
 
-import ru.DmN.pht.std.ast.NodeDefMacro
-import ru.DmN.pht.std.node.NodeTypes
-import ru.DmN.pht.std.parser.utils.macros
+import ru.DmN.pht.ast.NodeDefMacro
+import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.parser.utils.macros
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token

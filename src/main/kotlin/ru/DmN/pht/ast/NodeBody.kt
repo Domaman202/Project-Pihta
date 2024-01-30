@@ -1,6 +1,6 @@
-package ru.DmN.pht.std.ast
+package ru.DmN.pht.ast
 
-import ru.DmN.pht.std.processor.ctx.BodyContext
+import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.node.INodeInfo

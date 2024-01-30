@@ -1,8 +1,8 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.std.ast.NodeModifierNodesList
-import ru.DmN.pht.std.node.NodeTypes.PROGN_B_
-import ru.DmN.pht.std.processors.IStdNodeProcessor
+import ru.DmN.pht.ast.NodeModifierNodesList
+import ru.DmN.pht.node.NodeTypes.PROGN_B_
+import ru.DmN.pht.processors.IStdNodeProcessor
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList

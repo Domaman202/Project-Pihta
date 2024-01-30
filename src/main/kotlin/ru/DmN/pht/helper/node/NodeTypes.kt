@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.imports.node
+package ru.DmN.pht.helper.node
 
 import ru.DmN.siberia.node.INodeType
 

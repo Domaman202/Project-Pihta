@@ -1,8 +1,8 @@
 package ru.DmN.pht.jvm.compilers
 
 import ru.DmN.pht.ast.NodeInner
-import ru.DmN.pht.std.compiler.java.utils.classes
-import ru.DmN.pht.std.compiler.java.utils.clazz
+import ru.DmN.pht.compiler.java.utils.classes
+import ru.DmN.pht.compiler.java.utils.clazz
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler

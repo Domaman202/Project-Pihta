@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.compiler.java.utils
+package ru.DmN.pht.compiler.java.utils
 
 import org.objectweb.asm.Label
 

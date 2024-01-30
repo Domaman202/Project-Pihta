@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.node
+package ru.DmN.pht.node
 
 import ru.DmN.siberia.node.INodeType
 import ru.DmN.siberia.node.NodeTypes.Type

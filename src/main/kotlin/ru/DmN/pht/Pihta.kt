@@ -1,4 +1,4 @@
-package ru.DmN.pht.std
+package ru.DmN.pht
 
 import ru.DmN.pht.ast.IInlinableNode
 import ru.DmN.pht.ast.IOpenlyNode
@@ -7,22 +7,22 @@ import ru.DmN.pht.parsers.NPIfPlatform
 import ru.DmN.pht.parsers.NPInlBody
 import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.pht.processors.*
-import ru.DmN.pht.std.ast.IAbstractlyNode
-import ru.DmN.pht.std.ast.IFinallyNode
-import ru.DmN.pht.std.ast.IStaticallyNode
-import ru.DmN.pht.std.ast.IVarargNode
-import ru.DmN.pht.std.node.NodeParsedTypes.*
-import ru.DmN.pht.std.node.NodeTypes.*
-import ru.DmN.pht.std.parser.utils.clearMacros
-import ru.DmN.pht.std.parser.utils.macros
-import ru.DmN.pht.std.parser.utils.phtParseNode
-import ru.DmN.pht.std.parsers.*
-import ru.DmN.pht.std.processor.ctx.GlobalContext
-import ru.DmN.pht.std.processor.utils.classes
-import ru.DmN.pht.std.processor.utils.clazz
-import ru.DmN.pht.std.processor.utils.global
-import ru.DmN.pht.std.processor.utils.method
-import ru.DmN.pht.std.processors.*
+import ru.DmN.pht.ast.IAbstractlyNode
+import ru.DmN.pht.ast.IFinallyNode
+import ru.DmN.pht.ast.IStaticallyNode
+import ru.DmN.pht.ast.IVarargNode
+import ru.DmN.pht.node.NodeParsedTypes.*
+import ru.DmN.pht.node.NodeTypes.*
+import ru.DmN.pht.parser.utils.clearMacros
+import ru.DmN.pht.parser.utils.macros
+import ru.DmN.pht.parser.utils.phtParseNode
+import ru.DmN.pht.parsers.*
+import ru.DmN.pht.processor.ctx.GlobalContext
+import ru.DmN.pht.processor.utils.classes
+import ru.DmN.pht.processor.utils.clazz
+import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.processor.utils.method
+import ru.DmN.pht.processors.*
 import ru.DmN.pht.unparsers.*
 import ru.DmN.pht.utils.addNP
 import ru.DmN.pht.utils.addSANP
@@ -43,8 +43,8 @@ import ru.DmN.siberia.processors.NRProgn
 import ru.DmN.siberia.utils.Module
 import ru.DmN.siberia.utils.VirtualType
 import java.util.*
-import ru.DmN.pht.std.processor.utils.macros as macros_list
-import ru.DmN.pht.std.processors.NRProgn as NRPrognA
+import ru.DmN.pht.processor.utils.macros as macros_list
+import ru.DmN.pht.processors.NRProgn as NRPrognA
 
 object Pihta : Module("pht") {
     private fun initParsers() {

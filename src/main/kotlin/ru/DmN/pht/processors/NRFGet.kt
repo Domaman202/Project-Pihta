@@ -1,8 +1,8 @@
-package ru.DmN.pht.std.processors
+package ru.DmN.pht.processors
 
-import ru.DmN.pht.std.ast.NodeFGet
-import ru.DmN.pht.std.ast.NodeFGet.Type.*
-import ru.DmN.pht.std.utils.computeType
+import ru.DmN.pht.ast.NodeFGet
+import ru.DmN.pht.ast.NodeFGet.Type.*
+import ru.DmN.pht.utils.computeType
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor

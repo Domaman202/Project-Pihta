@@ -1,4 +1,4 @@
-package ru.DmN.pht.std.processor.ctx
+package ru.DmN.pht.processor.ctx
 
 import ru.DmN.siberia.utils.SubList
 import ru.DmN.siberia.utils.Variable
