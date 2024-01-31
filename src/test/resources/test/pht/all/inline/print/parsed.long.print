@@ -131,8 +131,24 @@
 |	|	|	]
 |	|	]
 |	|	[IMPORT
-|	|	|	(module = java)
-|	|	|	(types = [java.util.function.Supplier])
+|	|	|	[VALUE
+|	|	|	|	(type = STRING)
+|	|	|	|	(value = 'java')
+|	|	|	]
+|	|	|	[VALN
+|	|	|	|	[VALN
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'types')
+|	|	|	|	|	]
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'java.util.function.Supplier')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
 |	|	]
 |	|	[CLS
 |	|	|	[GET_OR_NAME

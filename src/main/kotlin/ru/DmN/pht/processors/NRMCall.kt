@@ -342,11 +342,16 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             )
         } else {
             val gctx = ctx.global
-            val variants = (gctx.methods[name]?.asSequence() ?: gctx.methods["*"]?.asSequence()?.filter { it.name == name } ?: return null)
-            val result = gctx.getMethodVariants(variants, args.map { ICastable.of(it, processor, ctx) }.toList())
-                .filter { static.filter(it.first) }
-                .firstOrNull() ?: return null
-            MethodFindResultB(args.mapIndexed { i, it -> processor.adaptToType(result.first.argsc[i], it, ctx) }.toList(), result.first, result.second)
+            makeFindResultB(
+                args,
+                getMethodVariants(
+                    (gctx.methods[name] ?: gctx.methods["*"])?.asSequence()?.filter { it.name == name } ?: return null,
+                    args.map { ICastable.of(it, processor, ctx) }.toList()
+                ),
+                static,
+                processor,
+                ctx
+            )
         }
     }
 
@@ -396,11 +401,22 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
      */
-    fun findMethodOrNull(type: VirtualType, name: String, args: List<Node>, static: Static, processor: Processor, ctx: ProcessingContext): MethodFindResultB? {
-        val result = ctx.global.getMethodVariants(type, name, args.map { ICastable.of(it, processor, ctx) })
-            .filter { static.filter(it.first) }
-            .firstOrNull() ?: return null
-        return MethodFindResultB(args.mapIndexed { i, it -> processor.adaptToType(result.first.argsc[i], it, ctx) }.toList(), result.first, result.second)
+    fun findMethodOrNull(type: VirtualType, name: String, args: List<Node>, static: Static, processor: Processor, ctx: ProcessingContext): MethodFindResultB? =
+        makeFindResultB(
+            args,
+            ctx.global.getMethodVariants(type, name, args.map { ICastable.of(it, processor, ctx) }),
+            static,
+            processor,
+            ctx
+        )
+
+    private fun makeFindResultB(args: List<Node>, find: Sequence<Pair<VirtualMethod, Boolean>>, static: Static, processor: Processor, ctx: ProcessingContext): MethodFindResultB? {
+        val result = find.filter { static.filter(it.first) }.firstOrNull() ?: return null
+        return MethodFindResultB(
+            args.mapIndexed { i, it -> processor.adaptToType(result.first.argsc[i], it, ctx) }.toList(),
+            result.first,
+            result.second
+        )
     }
 
     fun throwMNF(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Nothing =

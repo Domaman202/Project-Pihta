@@ -29,10 +29,9 @@ object NRImport : INodeProcessor<NodeNodesList> {
                 val cmacros = gctx.macros
                 val pmacros = processor.contexts.macros
                 forEach { it ->
-                    it as String
                     val i = it.lastIndexOf('.')
                     val name = it.substring(i + 1)
-                    cmacros += pmacros[it.substring(0, i)]!!.find { it.name == name }!!
+                    cmacros += pmacros[if (i == -1) "" else it.substring(0, i)]!!.find { it.name == name }!!
                 }
             }
         }
@@ -42,7 +41,6 @@ object NRImport : INodeProcessor<NodeNodesList> {
                 val aliases = gctx.aliases
                 val imports = gctx.imports
                 forEach {
-                    it as String
                     if (it.endsWith('*'))
                         imports += it.substring(0, it.length - 2)
                     else aliases[it.substring(it.lastIndexOf('.') + 1)] = it
@@ -52,14 +50,12 @@ object NRImport : INodeProcessor<NodeNodesList> {
 
         processor.stageManager.pushTask(ProcessingStage.EXTENSIONS_IMPORT) {
             data["extensions"]?.forEach { it ->
-                it as String
                 gctx.getType(it, processor.tp).methods
                     .stream()
                     .filter { it.modifiers.extension }
                     .forEach { gctx.getExtensions(it.extension!!) += it }
             }
             data["methods"]?.forEach { it ->
-                it as String
                 val i = it.lastIndexOf('.')
                 val name = it.substring(i + 1)
                 val methods = gctx.methods.getOrPut(name) { ArrayList() }

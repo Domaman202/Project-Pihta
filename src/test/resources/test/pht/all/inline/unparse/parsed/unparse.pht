@@ -47,8 +47,16 @@
 				sum
 				12
 				21))
-		(import java
-			(types java.util.function.Supplier))
+		(import
+			"java"
+			[
+				[
+					types
+					[
+						java.util.function.Supplier
+					]
+				]
+			])
 		(cls
 			TestC
 			[

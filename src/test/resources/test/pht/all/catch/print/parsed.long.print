@@ -2,8 +2,32 @@
 |	(modules = pht pht/jvm)
 |	[PROGN
 |	|	[IMPORT
-|	|	|	(module = java)
-|	|	|	(types = [java.lang.Exception java.lang.RuntimeException java.lang.Error])
+|	|	|	[VALUE
+|	|	|	|	(type = STRING)
+|	|	|	|	(value = 'java')
+|	|	|	]
+|	|	|	[VALN
+|	|	|	|	[VALN
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'types')
+|	|	|	|	|	]
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'java.lang.Exception')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'java.lang.RuntimeException')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'java.lang.Error')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
 |	|	]
 |	|	[TEST_FN
 |	|	|	[VALUE

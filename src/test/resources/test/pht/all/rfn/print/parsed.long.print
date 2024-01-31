@@ -2,8 +2,36 @@
 |	(modules = pht pht/jvm)
 |	[PROGN
 |	|	[IMPORT
-|	|	|	(module = java)
-|	|	|	(types = [java.lang.Runnable java.util.function.Consumer java.util.function.Supplier java.util.function.Function])
+|	|	|	[VALUE
+|	|	|	|	(type = STRING)
+|	|	|	|	(value = 'java')
+|	|	|	]
+|	|	|	[VALN
+|	|	|	|	[VALN
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'types')
+|	|	|	|	|	]
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'java.lang.Runnable')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'java.util.function.Consumer')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'java.util.function.Supplier')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'java.util.function.Function')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
 |	|	]
 |	|	[CLS
 |	|	|	[GET_OR_NAME

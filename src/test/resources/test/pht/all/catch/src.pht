@@ -1,8 +1,9 @@
 (progn
-    (import java
-        (types java.lang.Exception)
-        (types java.lang.RuntimeException)
-        (types java.lang.Error))
+    (import "java" [
+        [types [
+            java.lang.Exception
+            java.lang.RuntimeException
+            java.lang.Error]]])
     (test-fn 0
         (catch ^int [
                 [_ ^RuntimeException 12]

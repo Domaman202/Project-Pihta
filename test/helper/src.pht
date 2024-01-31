@@ -1,0 +1,4 @@
+(use-ctx pht
+    (cls Foo [^Object] (@static
+        (defn foo ^void []
+            (println "Foo!")))))

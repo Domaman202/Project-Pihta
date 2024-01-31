@@ -9,6 +9,7 @@ import ru.DmN.pht.processor.ctx.EnumContext
 import ru.DmN.pht.processor.ctx.GlobalContext
 import ru.DmN.pht.processor.ctx.MacroContext
 import ru.DmN.pht.utils.compute
+import ru.DmN.pht.utils.lenArgs
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -18,6 +19,15 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
+
+fun getMethodVariants(variants: Sequence<VirtualMethod>, args: List<ICastable>): Sequence<Pair<VirtualMethod, Boolean>> =
+    variants
+        .map { Pair(it, if (it.modifiers.extension) listOf(ICastable.of(it.extension!!)) + args else args) }
+        .filter { it.first.argsc.size == it.second.size || it.first.modifiers.varargs }
+        .map { Pair(it.first, lenArgs(it.first.argsc, it.second, it.first.modifiers.varargs)) }
+        .filter { it.second.first > -1 }
+        .sortedBy { it.second.first }
+        .map { Pair(it.first, it.second.second) }
 
 fun Sequence<Node>.processValues(processor: Processor, ctx: ProcessingContext): Sequence<Node> =
     this.map { processor.process(it, ctx, ValType.VALUE)!! }

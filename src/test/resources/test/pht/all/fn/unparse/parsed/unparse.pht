@@ -1,8 +1,16 @@
 (use-ctx pht pht/jvm
 	(progn
-		(import java
-			(types java.lang.Runnable)
-			(types java.util.function.Supplier))
+		(import
+			"java"
+			[
+				[
+					types
+					[
+						java.lang.Runnable
+						java.util.function.Supplier
+					]
+				]
+			])
 		(cls
 			TestA
 			[

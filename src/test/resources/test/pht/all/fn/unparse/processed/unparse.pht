@@ -13,7 +13,7 @@
 								^TestA
 								test
 								(progn
-									(obj [] PhtLambda$1286718199 [^java.lang.Object ^java.lang.Runnable]
+									(obj [] PhtLambda$1286718198 [^java.lang.Object ^java.lang.Runnable]
 										(defn [] run ^void []
 											(unit))))))))))
 		(cls [] TestB [^java.lang.Object]
@@ -29,7 +29,7 @@
 								^TestB
 								test
 								(progn
-									(obj [] PhtLambda$1286718192 [^java.lang.Object ^java.lang.Runnable]
+									(obj [] PhtLambda$1286718191 [^java.lang.Object ^java.lang.Runnable]
 										(defn [] run ^void []
 											(unit))))))))))
 		(cls [] TestC [^java.lang.Object]
@@ -48,7 +48,7 @@
 								^TestC
 								test
 								(progn
-									(cls [] PhtLambda$1286718184 [^java.lang.Object ^java.lang.Runnable]
+									(cls [] PhtLambda$1286718183 [^java.lang.Object ^java.lang.Runnable]
 										(def [
 											[i ^int]
 											[j ^int]])
@@ -66,7 +66,7 @@
 												(get j)))
 										(defn [] run ^void []
 											(unit)))
-									(new ^PhtLambda$1286718184
+									(new ^PhtLambda$1286718183
 										(get i)
 										(get j)))))))))
 		(cls [] TestD [^java.lang.Object]
@@ -84,7 +84,7 @@
 									^TestD
 									test
 									(progn
-										(obj [] PhtLambda$1286718177 [^java.lang.Object ^java.util.function.Supplier]
+										(obj [] PhtLambda$1286718176 [^java.lang.Object ^java.util.function.Supplier]
 											(defn [] get ^java.lang.Object []
 												"Foo D!"))))))))))
 		(cls [] TestE [^java.lang.Object]
@@ -102,7 +102,7 @@
 									^TestE
 									test
 									(progn
-										(obj [] PhtLambda$1286718170 [^java.lang.Object ^java.util.function.Supplier]
+										(obj [] PhtLambda$1286718169 [^java.lang.Object ^java.util.function.Supplier]
 											(defn [] get ^java.lang.Object []
 												"Foo E!"))))))))))
 		(cls [] TestF [^java.lang.Object]
@@ -122,7 +122,7 @@
 									^TestF
 									test
 									(progn
-										(cls [] PhtLambda$1286718162 [^java.lang.Object ^java.util.function.Supplier]
+										(cls [] PhtLambda$1286718161 [^java.lang.Object ^java.util.function.Supplier]
 											(def [
 												[i ^int]
 												[j ^int]])
@@ -143,6 +143,6 @@
 													(add
 														(get i)
 														(get j)))))
-										(new ^PhtLambda$1286718162
+										(new ^PhtLambda$1286718161
 											(get i)
 											(get j))))))))))))

@@ -1,9 +1,10 @@
 (progn
-    (import java
-        (types java.lang.Runnable)
-        (types java.util.function.Consumer)
-        (types java.util.function.Supplier)
-        (types java.util.function.Function))
+    (import "java" [
+        [types [
+            java.lang.Runnable
+            java.util.function.Consumer
+            java.util.function.Supplier
+            java.util.function.Function]]])
 
     (cls TestA [^Object] (@static
         (defn foo ^void [] (unit))))

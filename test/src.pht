@@ -1,2 +1,4 @@
-(app-fn
-    (println "Hi!"))
+(use-ctx pht test/helper
+    (import "test/helper" [[methods [Foo.foo]]])
+    (app-fn
+        (#foo .)))

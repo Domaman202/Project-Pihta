@@ -317,7 +317,7 @@ object Pihta : Module("pht") {
         // i
         addSNU(IF)
         addSNU(IF_)
-        add(IMPORT,         NUImport)
+        addSNU(IMPORT)
         add(IMPORT_,        NUImport)
         addSNU(INC_PRE)
         add(INC_PRE_,       NUIncDec)

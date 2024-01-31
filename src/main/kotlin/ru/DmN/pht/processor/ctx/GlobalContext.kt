@@ -2,6 +2,7 @@ package ru.DmN.pht.processor.ctx
 
 import ru.DmN.pht.compiler.java.utils.MacroDefine
 import ru.DmN.pht.processor.utils.ICastable
+import ru.DmN.pht.processor.utils.getMethodVariants
 import ru.DmN.pht.utils.lenArgs
 import ru.DmN.siberia.utils.*
 
@@ -38,15 +39,6 @@ class GlobalContext(
 
     fun getMethodVariants(type: VirtualType, name: String, args: List<ICastable>): Sequence<Pair<VirtualMethod, Boolean>> =
         getMethodVariants(getAllMethods(type).filter { it.name == name }, args)
-
-    fun getMethodVariants(variants: Sequence<VirtualMethod>, args: List<ICastable>): Sequence<Pair<VirtualMethod, Boolean>> =
-        variants
-            .map { Pair(it, if (it.modifiers.extension) listOf(ICastable.of(it.extension!!)) + args else args) }
-            .filter { it.first.argsc.size == it.second.size || it.first.modifiers.varargs }
-            .map { Pair(it.first, lenArgs(it.first.argsc, it.second, it.first.modifiers.varargs)) }
-            .filter { it.second.first > -1 }
-            .sortedBy { it.second.first }
-            .map { Pair(it.first, it.second.second) }
 
     private fun getAllMethods(type: VirtualType): Sequence<VirtualMethod> =
         if (type.isArray) {
