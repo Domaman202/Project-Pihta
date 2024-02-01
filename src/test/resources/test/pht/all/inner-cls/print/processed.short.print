@@ -11,7 +11,7 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	|	[CLS_
@@ -30,18 +30,18 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	|	)]
 |	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	[GET_]
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
+|	|	|	|	|	|	|	[GET_ var this$a]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[DEFN_
 |	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	(desc = getA()LTestA;)
 |	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]

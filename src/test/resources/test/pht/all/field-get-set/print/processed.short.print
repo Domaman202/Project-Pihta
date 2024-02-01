@@ -16,7 +16,7 @@
 |	|	|	|	|	|	|	|	|	|	(type = CLASS)
 |	|	|	|	|	|	|	|	|	|	(value = 'TestA')
 |	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	[GET_ var i]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[DEFN_
@@ -94,7 +94,7 @@
 |	|	|	|	|	|	|	|	|	|	(type = CLASS)
 |	|	|	|	|	|	|	|	|	|	(value = 'TestB')
 |	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	[GET_ var i]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[DEFN_
@@ -167,15 +167,15 @@
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = setI(I)V)
 |	|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	|	[GET_]
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var this]
+|	|	|	|	|	|	|	|	[GET_ var i]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = getI()I)
 |	|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[FLD_]
@@ -187,7 +187,7 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	|	[DEFN_
@@ -196,7 +196,7 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = setI(I)V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = INT)
@@ -206,7 +206,7 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = getI()I)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	]
@@ -239,15 +239,15 @@
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = setI(I)V)
 |	|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	|	[GET_]
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var this]
+|	|	|	|	|	|	|	|	[GET_ var i]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = getI()I)
 |	|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[FLD_]
@@ -259,7 +259,7 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	|	[DEFN_
@@ -268,7 +268,7 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = setI(I)V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = INT)
@@ -276,7 +276,7 @@
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[FGET_
-|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]

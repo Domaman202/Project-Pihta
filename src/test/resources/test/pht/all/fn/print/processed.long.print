@@ -15,7 +15,10 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = run()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	(name = o)
+|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	|	(type = VIRTUAL)
@@ -61,7 +64,10 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = run()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	(name = o)
+|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	|	(type = VIRTUAL)
@@ -107,7 +113,10 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = run()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	(name = o)
+|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	|	(type = VIRTUAL)
@@ -173,7 +182,10 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	(name = o)
+|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
 |	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -225,7 +237,10 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	(name = o)
+|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
 |	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -275,7 +290,10 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	(name = o)
+|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	(generic = VT(java.lang.Object))
 |	|	|	|	|	|	|	(type = VIRTUAL)

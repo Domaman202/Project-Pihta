@@ -49,7 +49,10 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	)
 |	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	(type = SUPER)
@@ -135,7 +138,10 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	)
 |	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	(type = SUPER)
@@ -227,7 +233,10 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	)
 |	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	(type = SUPER)
@@ -278,7 +287,10 @@
 |	|	|	|	|	|	(name = foo)
 |	|	|	|	|	|	(desc = (Ljava/lang/String;)Ljava/lang/String;)
 |	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	(name = o)
+|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
@@ -322,7 +334,10 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	)
 |	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	(type = SUPER)
@@ -333,7 +348,10 @@
 |	|	|	|	|	(name = foo)
 |	|	|	|	|	(desc = (Ljava/lang/String;)Ljava/lang/String;)
 |	|	|	|	|	(sign = null)
-|	|	|	|	|	[GET_]
+|	|	|	|	|	[GET_
+|	|	|	|	|	|	(name = o)
+|	|	|	|	|	|	(type = var)
+|	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
@@ -396,7 +414,10 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	(name = f)
+|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
 |	|	|	|	|	|	|	|	(type = VIRTUAL)

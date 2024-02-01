@@ -21,7 +21,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var list]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = STRING)
@@ -54,7 +54,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var list]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = STRING)
@@ -87,7 +87,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var list]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = STRING)
@@ -123,7 +123,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var list]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = STRING)
@@ -146,13 +146,13 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	|	[DEFN_
 |	|	|	|	|	(type = method)
 |	|	|	|	|	(desc = foo(Ljava/lang/Object;)Ljava/lang/Object;)
-|	|	|	|	|	[GET_]
+|	|	|	|	|	[GET_ var o]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
@@ -178,13 +178,13 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	|	[DEFN_
 |	|	|	|	|	(type = method)
 |	|	|	|	|	(desc = foo(Ljava/lang/Object;)Ljava/lang/Object;)
-|	|	|	|	|	[GET_]
+|	|	|	|	|	[GET_ var o]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
@@ -224,7 +224,7 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	|	[DEFN_
@@ -245,7 +245,7 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	|	[DEFN_

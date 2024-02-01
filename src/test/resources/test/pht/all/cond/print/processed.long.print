@@ -31,7 +31,10 @@
 |	|	|	|	|	]
 |	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	[LESS_OR_EQ_
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	(value = '1')
@@ -39,7 +42,10 @@
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	[LESS_
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	(value = '0')
@@ -48,7 +54,10 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = append(Ljava/lang/CharSequence;)Ljava/lang/Appendable;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	(name = out)
+|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	(generic = VT(java.lang.Appendable))
 |	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -59,7 +68,10 @@
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	|	[EQ_
-|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	(value = '0')
@@ -68,7 +80,10 @@
 |	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	(method = append(Ljava/lang/CharSequence;)Ljava/lang/Appendable;)
 |	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	|	(name = out)
+|	|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Appendable))
 |	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -79,7 +94,10 @@
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	|	|	[GREAT_
-|	|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	(value = '0')
@@ -88,7 +106,10 @@
 |	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	(method = append(Ljava/lang/CharSequence;)Ljava/lang/Appendable;)
 |	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	|	|	(name = out)
+|	|	|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Appendable))
 |	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -107,7 +128,10 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	(name = out)
+|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	(generic = VT(java.lang.String))
 |	|	|	|	|	|	|	(type = VIRTUAL)

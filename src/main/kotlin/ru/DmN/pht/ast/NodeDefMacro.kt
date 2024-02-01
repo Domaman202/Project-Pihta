@@ -8,7 +8,4 @@ import java.util.*
 class NodeDefMacro(info: INodeInfo, nodes: MutableList<Node>, val uuid: UUID) : NodeNodesList(info, nodes) {
     override fun copy(): NodeDefMacro =
         NodeDefMacro(info, copyNodes(), uuid)
-
-//    override fun print(builder: StringBuilder, indent: Int): StringBuilder =
-//        printNodes(builder.indent(indent).append('[').append(text).append(" (").append(uuid).append(')'), indent).append(']')
 }

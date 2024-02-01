@@ -11,23 +11,23 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = setRed(I)V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)
-|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	[GET_ var r]
 |	|	|	|	|	]
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = setGreen(I)V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)
-|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	[GET_ var g]
 |	|	|	|	|	]
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = setBlue(I)V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)
-|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	[GET_ var b]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[PROGN_B_
@@ -36,45 +36,45 @@
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = setRed(I)V)
 |	|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	|	[GET_]
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var this]
+|	|	|	|	|	|	|	|	[GET_ var red]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = getRed()I)
 |	|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = setGreen(I)V)
 |	|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	|	[GET_]
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var this]
+|	|	|	|	|	|	|	|	[GET_ var green]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = getGreen()I)
 |	|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = setBlue(I)V)
 |	|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	|	[GET_]
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var this]
+|	|	|	|	|	|	|	|	[GET_ var blue]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = getBlue()I)
 |	|	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[FLD_]

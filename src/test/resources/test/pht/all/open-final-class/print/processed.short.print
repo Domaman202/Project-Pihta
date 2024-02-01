@@ -12,7 +12,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	|	)]
 |	|	|	|	|	]
 |	|	|	|	]
@@ -26,7 +26,7 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	]

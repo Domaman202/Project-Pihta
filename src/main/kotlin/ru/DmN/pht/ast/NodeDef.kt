@@ -1,6 +1,5 @@
 package ru.DmN.pht.ast
 
-import ru.DmN.pht.ast.IOpenlyNode
 import ru.DmN.pht.processor.utils.Variable
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo

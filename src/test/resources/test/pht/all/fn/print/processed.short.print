@@ -12,7 +12,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = run()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var o]
 |	|	|	|	|	|	|	)]
 |	|	|	|	|	]
 |	|	|	|	|	[CLS_
@@ -47,7 +47,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = run()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var o]
 |	|	|	|	|	|	|	)]
 |	|	|	|	|	]
 |	|	|	|	|	[CLS_
@@ -82,7 +82,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = run()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var o]
 |	|	|	|	|	|	|	)]
 |	|	|	|	|	]
 |	|	|	|	|	[CLS_
@@ -137,7 +137,7 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	[GET_ var o]
 |	|	|	|	|	|	|	|	)]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -178,7 +178,7 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	[GET_ var o]
 |	|	|	|	|	|	|	|	)]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -217,7 +217,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var o]
 |	|	|	|	|	|	|	)]
 |	|	|	|	|	]
 |	|	|	|	|	[CLS_

@@ -37,7 +37,7 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	|	[DEFN_
@@ -101,7 +101,7 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	|	[DEFN_
@@ -171,7 +171,7 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	|	[DEFN_
@@ -208,7 +208,7 @@
 |	|	|	|	|	[DEFN_
 |	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	(desc = foo(Ljava/lang/String;)Ljava/lang/String;)
-|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	[GET_ var o]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
@@ -244,13 +244,13 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	)]
 |	|	|	|	]
 |	|	|	|	[DEFN_
 |	|	|	|	|	(type = method)
 |	|	|	|	|	(desc = foo(Ljava/lang/String;)Ljava/lang/String;)
-|	|	|	|	|	[GET_]
+|	|	|	|	|	[GET_ var o]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
@@ -302,7 +302,7 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	[GET_ var f]
 |	|	|	|	|	|	|	|	)]
 |	|	|	|	|	|	]
 |	|	|	|	|	]

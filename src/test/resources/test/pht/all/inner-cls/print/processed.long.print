@@ -14,7 +14,10 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	)
 |	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	(type = SUPER)
@@ -39,14 +42,23 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	|	(type = SUPER)
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	[GET_]
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this$a)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[DEFN_
@@ -55,7 +67,10 @@
 |	|	|	|	|	|	(desc = ()LTestA;)
 |	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	[FGET_
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]

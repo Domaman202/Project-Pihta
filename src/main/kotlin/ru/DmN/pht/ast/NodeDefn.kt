@@ -1,19 +1,13 @@
 package ru.DmN.pht.ast
 
-import ru.DmN.pht.ast.IInlinableNode
-import ru.DmN.pht.ast.IOpenlyNode
-import ru.DmN.pht.ast.ISyncNode
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.indent
 
-class NodeDefn(
-    info: INodeInfo,
-    nodes: MutableList<Node>,
-    val method: VirtualMethod
-) : NodeNodesList(info, nodes), IAbstractlyNode, IInlinableNode, IOpenlyNode, IStaticallyNode, ISyncNode, IVarargNode {
+class NodeDefn(info: INodeInfo, nodes: MutableList<Node>, val method: VirtualMethod) : NodeNodesList(info, nodes),
+    IAbstractlyNode, IInlinableNode, IOpenlyNode, IStaticallyNode, ISyncNode, IVarargNode {
     override var abstract: Boolean
         set(value) { method.modifiers.abstract = value }
         get() = method.modifiers.abstract

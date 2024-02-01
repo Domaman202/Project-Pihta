@@ -27,7 +27,7 @@
 |	|	|	|	|	]
 |	|	|	|	|	[CYCLE_
 |	|	|	|	|	|	[LESS_OR_EQ_
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_ var i]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	(value = '1')
@@ -35,7 +35,7 @@
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	[LESS_
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var i]
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	(value = '0')
@@ -44,7 +44,7 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = append(Ljava/lang/CharSequence;)Ljava/lang/Appendable;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	[GET_ var out]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = STRING)
@@ -53,7 +53,7 @@
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	|	[EQ_
-|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	[GET_ var i]
 |	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	(value = '0')
@@ -62,7 +62,7 @@
 |	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	(method = append(Ljava/lang/CharSequence;)Ljava/lang/Appendable;)
 |	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	|	[GET_ var out]
 |	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	(type = STRING)
@@ -71,7 +71,7 @@
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[IF_
 |	|	|	|	|	|	|	|	|	[GREAT_
-|	|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	|	[GET_ var i]
 |	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	(value = '0')
@@ -80,7 +80,7 @@
 |	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	(method = append(Ljava/lang/CharSequence;)Ljava/lang/Appendable;)
 |	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	|	|	|	[GET_ var out]
 |	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	(type = STRING)
@@ -97,7 +97,7 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_ var out]
 |	|	|	|	|	|	|	)]
 |	|	|	|	|	]
 |	|	|	|	]

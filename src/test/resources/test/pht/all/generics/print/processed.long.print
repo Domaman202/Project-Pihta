@@ -25,7 +25,10 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	(name = list)
+|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	(generic = VT(boolean))
 |	|	|	|	|	|	|	(type = VIRTUAL)
@@ -64,7 +67,10 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	(name = list)
+|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	(generic = VT(boolean))
 |	|	|	|	|	|	|	(type = VIRTUAL)
@@ -103,7 +109,10 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	(name = list)
+|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	(generic = VT(boolean))
 |	|	|	|	|	|	|	(type = VIRTUAL)
@@ -145,7 +154,10 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = add(Ljava/lang/Object;)Z)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	(name = list)
+|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	(generic = VT(boolean))
 |	|	|	|	|	|	|	(type = VIRTUAL)
@@ -173,7 +185,10 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	)
 |	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	(type = SUPER)
@@ -184,7 +199,10 @@
 |	|	|	|	|	(name = foo)
 |	|	|	|	|	(desc = (Ljava/lang/Object;)Ljava/lang/Object;)
 |	|	|	|	|	(sign = <T:Ljava/lang/Object;>(TT;)TT;)
-|	|	|	|	|	[GET_]
+|	|	|	|	|	[GET_
+|	|	|	|	|	|	(name = o)
+|	|	|	|	|	|	(type = var)
+|	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
@@ -216,7 +234,10 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	)
 |	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	(type = SUPER)
@@ -227,7 +248,10 @@
 |	|	|	|	|	(name = foo)
 |	|	|	|	|	(desc = (Ljava/lang/Object;)Ljava/lang/Object;)
 |	|	|	|	|	(sign = (TT;)TT;)
-|	|	|	|	|	[GET_]
+|	|	|	|	|	[GET_
+|	|	|	|	|	|	(name = o)
+|	|	|	|	|	|	(type = var)
+|	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[CLS_
@@ -276,7 +300,10 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	)
 |	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	(type = SUPER)
@@ -305,7 +332,10 @@
 |	|	|	|	|	[MCALL_
 |	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	)
 |	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	(type = SUPER)
