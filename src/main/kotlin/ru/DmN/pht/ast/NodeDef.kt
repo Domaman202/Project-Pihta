@@ -15,8 +15,15 @@ class NodeDef(info: INodeInfo, val variables: List<VariableOrField>, val isVaria
     override var open: Boolean = false
 
     override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
-        indent(indent).append('[').append(info.type)
-        // todo: modifiers
+        indent(indent).append('[').append(info.type).append('\n')
+            .indent(indent + 1).append('(')
+        if (static)
+            append("static ")
+        else if (open)
+            append("open ")
+        if (final)
+            append("final ")
+        append(if (isVariable) "var)" else "field)")
         if (variables.isNotEmpty()) {
             variables.forEach {
                 append('\n').indent(indent + 1).append("[\n")

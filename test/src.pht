@@ -1,3 +1,3 @@
-(progn
-    (test-fn 0 (class-of ^Any))
-    (test-fn 1 (#getName (class-of ^Object))))
+(app-fn
+    (def [[i 12]])
+    (println i))
