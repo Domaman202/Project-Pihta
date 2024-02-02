@@ -93,6 +93,7 @@
 |	|	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	(name = i)
 |	|	|	|	|	|	|	|	|	|	(type = int)
@@ -228,6 +229,7 @@
 |	|	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	(name = i)
 |	|	|	|	|	|	|	|	|	|	(type = int)

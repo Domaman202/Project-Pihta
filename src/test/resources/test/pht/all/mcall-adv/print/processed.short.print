@@ -208,6 +208,7 @@
 |	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = o)
 |	|	|	|	|	|	|	|	(type = TestE)

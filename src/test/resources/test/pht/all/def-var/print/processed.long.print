@@ -13,6 +13,7 @@
 |	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
 |	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = i)
 |	|	|	|	|	|	|	|	(type = int)
@@ -43,6 +44,7 @@
 |	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
 |	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = l)
 |	|	|	|	|	|	|	|	(type = long)
@@ -73,6 +75,7 @@
 |	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
 |	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = f)
 |	|	|	|	|	|	|	|	(type = float)
@@ -105,6 +108,7 @@
 |	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
 |	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = d)
 |	|	|	|	|	|	|	|	(type = double)

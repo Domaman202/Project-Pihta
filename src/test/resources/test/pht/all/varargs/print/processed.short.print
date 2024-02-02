@@ -11,6 +11,7 @@
 |	|	|	|	|	|	(desc = sub(Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/String;)
 |	|	|	|	|	|	[PROGN_
 |	|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	(name = str)
 |	|	|	|	|	|	|	|	|	(type = java.lang.StringBuilder)
@@ -22,6 +23,7 @@
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[BODY_
 |	|	|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	(name = pht$tmp$56261)
 |	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.String;)
@@ -29,6 +31,7 @@
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	(name = pht$tmp$46986)
 |	|	|	|	|	|	|	|	|	|	(type = int)
@@ -46,6 +49,7 @@
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	(name = e)
 |	|	|	|	|	|	|	|	|	|	|	(type = java.lang.String)
@@ -101,6 +105,7 @@
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[BODY_
 |	|	|	|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$27709)
 |	|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.String;)

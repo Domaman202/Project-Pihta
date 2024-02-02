@@ -13,6 +13,7 @@
 |	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
 |	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = i)
 |	|	|	|	|	|	|	|	(type = int)
@@ -40,6 +41,7 @@
 |	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
 |	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = i)
 |	|	|	|	|	|	|	|	(type = int)
@@ -67,6 +69,7 @@
 |	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
 |	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = i)
 |	|	|	|	|	|	|	|	(type = int)
@@ -94,6 +97,7 @@
 |	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
 |	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = i)
 |	|	|	|	|	|	|	|	(type = int)
@@ -121,6 +125,7 @@
 |	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
 |	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = i)
 |	|	|	|	|	|	|	|	(type = int)
@@ -148,6 +153,7 @@
 |	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
 |	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = i)
 |	|	|	|	|	|	|	|	(type = int)

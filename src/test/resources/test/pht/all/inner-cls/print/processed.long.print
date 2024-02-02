@@ -29,6 +29,7 @@
 |	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	[INNER_]
 |	|	|	|	|	[DEF_
+|	|	|	|	|	|	(field)
 |	|	|	|	|	|	[
 |	|	|	|	|	|	|	(name = this$a)
 |	|	|	|	|	|	|	(type = TestA)

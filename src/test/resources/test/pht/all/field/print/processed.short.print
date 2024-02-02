@@ -43,6 +43,7 @@
 |	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = test)
 |	|	|	|	|	|	|	|	(type = Test)

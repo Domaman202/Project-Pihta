@@ -9,6 +9,7 @@
 |	|	|	|	|	(type = method)
 |	|	|	|	|	(desc = test()Ljava/lang/Object;)
 |	|	|	|	|	[DEF_
+|	|	|	|	|	|	(var)
 |	|	|	|	|	|	[
 |	|	|	|	|	|	|	(name = out)
 |	|	|	|	|	|	|	(type = java.lang.StringBuilder)

@@ -7,6 +7,7 @@
 |	|	|	|	(name = Test)
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[DEF_
+|	|	|	|	|	(field)
 |	|	|	|	|	[
 |	|	|	|	|	|	(name = i)
 |	|	|	|	|	|	(type = int)
@@ -41,6 +42,7 @@
 |	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
 |	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = test)
 |	|	|	|	|	|	|	|	(type = Test)

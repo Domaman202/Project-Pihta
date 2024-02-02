@@ -276,6 +276,7 @@
 |	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
 |	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = o)
 |	|	|	|	|	|	|	|	(type = TestE)

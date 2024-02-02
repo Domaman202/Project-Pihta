@@ -10,6 +10,7 @@
 |	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = i)
 |	|	|	|	|	|	|	|	(type = int)
@@ -34,6 +35,7 @@
 |	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = l)
 |	|	|	|	|	|	|	|	(type = long)
@@ -58,6 +60,7 @@
 |	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = f)
 |	|	|	|	|	|	|	|	(type = float)
@@ -84,6 +87,7 @@
 |	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
 |	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = d)
 |	|	|	|	|	|	|	|	(type = double)
