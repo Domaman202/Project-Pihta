@@ -23,7 +23,7 @@
 ```pihta
 (use-ctx pht
     (import java
-        (types java.util.function.Function))
+        [[types [java.util.function.Function]]])
     (cls Test [^Object] (@static
         (defn foo ^String [[o ^String]] o)))
     (app-fn
@@ -33,7 +33,7 @@
 ```pihta
 (progn
     (import java
-        (types java.util.function.Function))
+        [[types [java.util.function.Function]]])
     (cls Test [^Object]
         (ctor [] (ccall))
         (defn foo ^String [[o ^String]] o))
@@ -44,7 +44,7 @@
 ```pihta
 (use-ctx pht
     (import java
-        (types java.util.function.Function))
+        [[types [java.util.function.Function]]])
     (cls Provider [^Object] (@static
         (defn foo ^String [[o ^String]] o)))
     (cls Consumer [^Object] (@static
