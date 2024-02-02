@@ -1,10 +1,16 @@
 (use-ctx pht
-    (import java
-        [[types [java.util.function.Function]]])
-    (cls Provider [^Object] (@static
-        (defn foo ^String [[o ^String]] o)))
-    (cls Consumer [^Object] (@static
-        (defn test ^void [[f ^Function]]
-            (println (#apply f "Слава России!")))))
+    (enum Colors [^Enum]
+        (ector [[r ^int] [g ^int] [b ^int]]
+            (set this/red r)
+            (set this/green g)
+            (set this/blue b))
+        (fld [
+            [red    ^int]
+            [green  ^int]
+            [blue   ^int]])
+        (efld [
+            [RED    255 0 0]
+            [GREEN  0 255 0]
+            [BLUE   0 0 255]]))
     (app-fn
-        (#test ^Consumer (rfn . ^Provider foo))))
+        (println ^Colors/RED)))

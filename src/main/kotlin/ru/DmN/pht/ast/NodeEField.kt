@@ -6,16 +6,20 @@ import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.indent
 
 class NodeEField(info: INodeInfo, val fields: List<Pair<String, List<Node>>>) : Node(info) {
-//    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
-//        indent(indent).append('[').append(text)
-//        if (fields.isNotEmpty()) {
-//            append('\n')
-//            fields.forEach { it ->
-//                indent(indent + 1).append('(').append(it.first).append(')').append('\n')
-//                it.second.forEach { it.print(builder, indent + 2).append('\n') }
-//            }
-//            indent(indent)
-//        }
-//        append(']')
-//    }
+    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+        indent(indent).append('[').append(text)
+        if (fields.isNotEmpty()) {
+            append('\n')
+            fields.forEach { it ->
+                indent(indent + 1).append("[\n")
+                    .indent(indent + 2).append("(name = ").append(it.first).append(')').append('\n')
+                    .indent(indent + 2).append("(arguments: ").append('\n')
+                it.second.forEach { it.print(builder, indent + 3, short).append('\n') }
+                indent(indent + 2).append(")\n")
+                    .indent(indent + 1).append("]\n")
+            }
+            indent(indent)
+        }
+        append(']')
+    }
 }

@@ -12,9 +12,8 @@
 
 ```pihta
 (use-ctx pht
-    (enum Colors [^Object]
+    (enum Colors [^Enum]
         (ector [[r ^int] [g ^int] [b ^int]]
-            (ccall)
             (set this/red r)
             (set this/green g)
             (set this/blue b))
