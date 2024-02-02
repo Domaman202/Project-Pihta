@@ -29,7 +29,18 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = run()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[RFN_]
+|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	(type = java.lang.Runnable)
+|	|	|	|	|	|	|	|	|	(lambda = run()V)
+|	|	|	|	|	|	|	|	|	(method = foo()V)
+|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	|	(type = VIRTUAL)
@@ -79,7 +90,18 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = run()V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[RFN_]
+|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	(type = java.lang.Runnable)
+|	|	|	|	|	|	|	|	|	(lambda = run()V)
+|	|	|	|	|	|	|	|	|	(method = foo()V)
+|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestB))
+|	|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	|	(type = VIRTUAL)
@@ -114,7 +136,18 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = accept(Ljava/lang/Object;)V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[RFN_]
+|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	(type = java.util.function.Consumer)
+|	|	|	|	|	|	|	|	|	(lambda = accept(Ljava/lang/Object;)V)
+|	|	|	|	|	|	|	|	|	(method = foo(Ljava/lang/String;)V)
+|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'TestC')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	|	(type = VIRTUAL)
@@ -168,7 +201,18 @@
 |	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	(method = accept(Ljava/lang/Object;)V)
 |	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[RFN_]
+|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	(type = java.util.function.Consumer)
+|	|	|	|	|	|	|	|	|	(lambda = accept(Ljava/lang/Object;)V)
+|	|	|	|	|	|	|	|	|	(method = foo(Ljava/lang/String;)V)
+|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestD))
+|	|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	|	(type = VIRTUAL)
@@ -212,7 +256,18 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[RFN_]
+|	|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
+|	|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestE')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
 |	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -268,7 +323,18 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[RFN_]
+|	|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
+|	|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestF))
+|	|	|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
 |	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -309,7 +375,18 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = apply(Ljava/lang/Object;)Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[RFN_]
+|	|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Function)
+|	|	|	|	|	|	|	|	|	|	(lambda = apply(Ljava/lang/Object;)Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	(method = foo(Ljava/lang/String;)Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestG')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
 |	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -369,7 +446,18 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = apply(Ljava/lang/Object;)Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[RFN_]
+|	|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Function)
+|	|	|	|	|	|	|	|	|	|	(lambda = apply(Ljava/lang/Object;)Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	(method = foo(Ljava/lang/String;)Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestH))
+|	|	|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
 |	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -448,7 +536,18 @@
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
 |	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	[RFN_]
+|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
+|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'TestI')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]

@@ -18,7 +18,7 @@
 ```pihta
 (use-ctx pht
     (import java
-        (types java.lang.Runnable))
+        [[types [java.lang.Runnable]]])
     (app
         (defn test ^void [[o ^Runnable]]
             (#run o))
@@ -29,7 +29,7 @@
 ```pihta
 (use-ctx pht
     (import java
-        (types java.lang.Runnable))
+        [[types [java.lang.Runnable]]])
     (app
         (defn test ^void [[o ^Runnable]]
             (#run o))
@@ -40,7 +40,7 @@
 ```pihta
 (use-ctx pht
     (import java
-        (types java.lang.Runnable))
+        [[types [java.lang.Runnable]]])
     (app
         (defn test ^void [[o ^Runnable]]
             (#run o))
@@ -52,7 +52,7 @@
 ```pihta
 (use-ctx pht
     (import java
-        (types java.lang.Runnable))
+        [[types [java.lang.Runnable]]])
     (app
         (defn test ^void [[o ^Runnable]]
             (#run o))

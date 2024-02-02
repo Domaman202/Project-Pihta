@@ -41,6 +41,7 @@
 |	|	|	|	]
 |	|	|	]
 |	|	|	[SET_B
+|	|	|	|	(name = j)
 |	|	|	|	[ADD
 |	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	(type = NO-STATIC)

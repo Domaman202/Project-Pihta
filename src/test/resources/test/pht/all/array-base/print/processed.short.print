@@ -14,7 +14,7 @@
 |	|	|	|	|	|	|	(name = arr-a)
 |	|	|	|	|	|	|	(type = [I)
 |	|	|	|	|	|	|	[NEW_ARRAY_
-|	|	|	|	|	|	|	|	(type: int)
+|	|	|	|	|	|	|	|	(type = int)
 |	|	|	|	|	|	|	|	(size:
 |	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -27,7 +27,7 @@
 |	|	|	|	|	|	|	(name = arr-b)
 |	|	|	|	|	|	|	(type = [I)
 |	|	|	|	|	|	|	[NEW_ARRAY_
-|	|	|	|	|	|	|	|	(type: int)
+|	|	|	|	|	|	|	|	(type = int)
 |	|	|	|	|	|	|	|	(size:
 |	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	(type = INT)

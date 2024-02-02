@@ -151,7 +151,7 @@
 |	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$27709)
 |	|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.String;)
 |	|	|	|	|	|	|	|	|	|	|	[NEW_ARRAY_
-|	|	|	|	|	|	|	|	|	|	|	|	(type: java.lang.String)
+|	|	|	|	|	|	|	|	|	|	|	|	(type = java.lang.String)
 |	|	|	|	|	|	|	|	|	|	|	|	(size:
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)

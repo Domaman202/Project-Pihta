@@ -5,10 +5,28 @@ import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.indent
 
 class NodeFn(info: INodeInfo, val source: Source, var processed: MutableList<Node>? = null) : Node(info), INodesList {
     override val nodes: MutableList<Node>
         get() = processed ?: source.nodes
+
+    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+        indent(indent).append('[').append(info.type).append('\n')
+            .indent(indent + 1).append("(source:")
+        if (source.nodes.isNotEmpty()) {
+            builder.append('\n')
+            source.nodes.forEach { it.print(builder, indent + 2, short).append('\n') }
+            builder.indent(indent + 1)
+        }
+        append(")\n").indent(indent + 1).append("(processed:")
+        processed?.let { it ->
+            builder.append('\n')
+            it.forEach { it.print(builder, indent + 2, short).append('\n') }
+            builder.indent(indent + 1)
+        }
+        append(")\n").indent(indent).append(']')
+    }
 
     data class Source (
         val nodes: MutableList<Node>,

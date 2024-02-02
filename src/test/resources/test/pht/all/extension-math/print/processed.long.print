@@ -33,7 +33,7 @@
 |	|	|	|	|	|	|	|	|	|	(name = pht$tmp$7911)
 |	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.Object;)
 |	|	|	|	|	|	|	|	|	|	[NEW_ARRAY_
-|	|	|	|	|	|	|	|	|	|	|	(type: java.lang.Object)
+|	|	|	|	|	|	|	|	|	|	|	(type = java.lang.Object)
 |	|	|	|	|	|	|	|	|	|	|	(size:
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
@@ -129,7 +129,7 @@
 |	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$7915)
 |	|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.Object;)
 |	|	|	|	|	|	|	|	|	|	|	[NEW_ARRAY_
-|	|	|	|	|	|	|	|	|	|	|	|	(type: java.lang.Object)
+|	|	|	|	|	|	|	|	|	|	|	|	(type = java.lang.Object)
 |	|	|	|	|	|	|	|	|	|	|	|	(size:
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)

@@ -159,7 +159,31 @@
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
 |	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	[FN_]
+|	|	|	|	|	|	|	|	[FN_
+|	|	|	|	|	|	|	|	|	(source:
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'Сало!')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	(processed:
+|	|	|	|	|	|	|	|	|	|	[OBJ_
+|	|	|	|	|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	|	|	|	|	(name = PhtLambda$2032184986)
+|	|	|	|	|	|	|	|	|	|	|	(parents = [java.lang.Object java.util.function.Supplier])
+|	|	|	|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	|	|	|	(name = get)
+|	|	|	|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'Сало!')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -180,7 +204,31 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[FN_]
+|	|	|	|	|	|	|	|	|	[FN_
+|	|	|	|	|	|	|	|	|	|	(source:
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = 'Сало!')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	(processed:
+|	|	|	|	|	|	|	|	|	|	|	[OBJ_
+|	|	|	|	|	|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	|	|	|	|	|	(name = PhtLambda$2032184982)
+|	|	|	|	|	|	|	|	|	|	|	|	(parents = [java.lang.Object java.util.function.Supplier])
+|	|	|	|	|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(name = get)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'Сало!')
+|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
 |	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -204,7 +252,73 @@
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[FN_]
+|	|	|	|	|	|	|	|	|	[FN_
+|	|	|	|	|	|	|	|	|	|	(source:
+|	|	|	|	|	|	|	|	|	|	|	[MCALL
+|	|	|	|	|	|	|	|	|	|	|	|	[FN
+|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'Supplier')
+|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[VALN]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[VALN]
+|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'Сало Сало!')
+|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'get')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	(processed:
+|	|	|	|	|	|	|	|	|	|	|	[OBJ_
+|	|	|	|	|	|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	|	|	|	|	|	(name = PhtLambda$2032184978)
+|	|	|	|	|	|	|	|	|	|	|	|	(parents = [java.lang.Object java.util.function.Supplier])
+|	|	|	|	|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(name = get)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	[FN_
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(source:
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'Сало Сало!')
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(processed:
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	[OBJ_
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(name = PhtLambda$2032184978)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(parents = [java.lang.Object java.util.function.Supplier])
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(name = get)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'Сало Сало!')
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
+|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
 |	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -245,7 +359,7 @@
 |	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$26023)
 |	|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.Object;)
 |	|	|	|	|	|	|	|	|	|	|	[NEW_ARRAY_
-|	|	|	|	|	|	|	|	|	|	|	|	(type: java.lang.Object)
+|	|	|	|	|	|	|	|	|	|	|	|	(type = java.lang.Object)
 |	|	|	|	|	|	|	|	|	|	|	|	(size:
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
