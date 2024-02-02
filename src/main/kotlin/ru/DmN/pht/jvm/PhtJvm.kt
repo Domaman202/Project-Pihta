@@ -12,6 +12,7 @@ import ru.DmN.pht.node.NodeTypes.*
 import ru.DmN.pht.parsers.NPDefAnn
 import ru.DmN.pht.processors.NRClassOf
 import ru.DmN.pht.processors.NRSA
+import ru.DmN.pht.unparsers.NUClassOf
 import ru.DmN.pht.unparsers.NUSync
 import ru.DmN.pht.utils.addNP
 import ru.DmN.pht.utils.addSANP
@@ -42,12 +43,13 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
     private fun initUnparsers() {
         // c
         addSNU(CLASS_OF)
+        add(CLASS_OF_, NUClassOf)
         // d
         addSNU(DEF_ANN)
         // DEF_ANN_
         // s
         addSNU(SYNC)
-        add(SYNC_, NUSync)
+        add(SYNC_,     NUSync)
 
         // @
         addSNU(ANN_SYNC)

@@ -1,0 +1,14 @@
+(use-ctx pht pht/jvm
+	(progn
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(class-of ^java.lang.Object)))))
+		(cls [] Test1 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							(class-of ^java.lang.Object)
+							getName)))))))

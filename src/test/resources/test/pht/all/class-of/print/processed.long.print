@@ -1,0 +1,55 @@
+[USE_CTX_
+|	(modules = pht pht/jvm)
+|	(NODES:
+|	|	[PROGN_
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = Test0)
+|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[CLASS_OF_
+|	|	|	|	|	|	|	|	(class = java.lang.Object)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = Test1)
+|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = getName()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[CLASS_OF_
+|	|	|	|	|	|	|	|	|	|	(class = java.lang.Object)
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
+|	|	|	|	|	|	|	|	(type = VIRTUAL)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	)
+|	(EXPORTS:
+|	|	[PROGN_]
+|	)
+]
