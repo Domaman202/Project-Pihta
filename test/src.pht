@@ -1,11 +1,9 @@
 (use-ctx pht
-    (import java
-        [[types [java.lang.Runnable]]])
-    (app
-        (defn test ^void [[o ^Runnable]]
-            (#run o))
-        (fld [[i ^int] [j ^int]])
-        (app-fn
-            (set i 12)
-            (set j 21)
-            (#test ^App (fn [i j][] (println (+ i j)))))))
+    (import java [
+        [types [
+            java.lang.Exception
+            java.lang.RuntimeException]]])
+    (app-fn
+        (catch [[_ ^RuntimeException    (println "Runtime Exception!")]
+                [_ ^Exception           (println "Exception!")]]
+            (throw (new ^Exception)))))

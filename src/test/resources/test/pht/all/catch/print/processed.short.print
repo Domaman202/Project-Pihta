@@ -12,6 +12,28 @@
 |	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	[CATCH_
+|	|	|	|	|	|	|	|	(catchers:
+|	|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	|	(var = _)
+|	|	|	|	|	|	|	|	|	|	(exception = java.lang.RuntimeException)
+|	|	|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	|	(var = _)
+|	|	|	|	|	|	|	|	|	|	(exception = java.lang.Exception)
+|	|	|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	[THROW_
 |	|	|	|	|	|	|	|	|	[NEW_
 |	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Exception))
@@ -32,6 +54,28 @@
 |	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	[CATCH_
+|	|	|	|	|	|	|	|	(catchers:
+|	|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	|	(var = _)
+|	|	|	|	|	|	|	|	|	|	(exception = java.lang.RuntimeException)
+|	|	|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	|	(var = _)
+|	|	|	|	|	|	|	|	|	|	(exception = java.lang.Exception)
+|	|	|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	[THROW_
 |	|	|	|	|	|	|	|	|	[NEW_
 |	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.RuntimeException))
@@ -50,6 +94,22 @@
 |	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
 |	|	|	|	|	|	[CATCH_
+|	|	|	|	|	|	|	(catchers:
+|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	(var = _)
+|	|	|	|	|	|	|	|	|	(exception = java.lang.RuntimeException)
+|	|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	|	[UNIT]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	(var = _)
+|	|	|	|	|	|	|	|	|	(exception = java.lang.Exception)
+|	|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	|	[UNIT]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	[THROW_
 |	|	|	|	|	|	|	|	[NEW_
 |	|	|	|	|	|	|	|	|	(type = VT(java.lang.Error))
@@ -67,6 +127,29 @@
 |	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
 |	|	|	|	|	|	[CATCH_
+|	|	|	|	|	|	|	(catchers:
+|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	(var = e)
+|	|	|	|	|	|	|	|	|	(exception = java.lang.RuntimeException)
+|	|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_ var e]
+|	|	|	|	|	|	|	|	|	|	|	)]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	(var = _)
+|	|	|	|	|	|	|	|	|	(exception = java.lang.Exception)
+|	|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = NIL)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	[THROW_
 |	|	|	|	|	|	|	|	[NEW_
 |	|	|	|	|	|	|	|	|	(type = VT(java.lang.RuntimeException))

@@ -16,9 +16,10 @@
 
 ```pihta
 (use-ctx pht
-    (import java
-        (types java.lang.Exception)
-        (types java.lang.RuntimeException))
+    (import java [
+        [types [
+            java.lang.Exception
+            java.lang.RuntimeException]]])
     (app-fn
         (catch [[_ ^RuntimeException    (println "Runtime Exception!")]
                 [_ ^Exception           (println "Exception!")]]
