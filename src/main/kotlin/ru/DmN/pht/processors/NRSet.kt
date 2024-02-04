@@ -3,8 +3,11 @@ package ru.DmN.pht.processors
 import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.ast.NodeFSet
 import ru.DmN.pht.ast.NodeMCall
+import ru.DmN.pht.ast.NodeMCall.Type.STATIC
+import ru.DmN.pht.ast.NodeMCall.Type.VIRTUAL
 import ru.DmN.pht.ast.NodeSet
 import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.node.NodeTypes.MCALL_
 import ru.DmN.pht.node.nodeGetOrName
 import ru.DmN.pht.node.nodeGetVariable
 import ru.DmN.pht.node.nodeValueClass
@@ -37,15 +40,15 @@ object NRSet : INodeProcessor<NodeSet> {
 
     private fun findSetter(info: INodeInfo, type: VirtualType, name: String, values: List<Node>, allowVirtual: Boolean, processor: Processor, ctx: ProcessingContext): Node? {
         if (allowVirtual)
-            findSetter(info, type, name, nodeGetVariable(info, "this"), values, NodeMCall.Type.VIRTUAL, processor, ctx)?.let { return it }
-        return findSetter(info, type, name, nodeValueClass(info, type.name), values, NodeMCall.Type.STATIC, processor, ctx)
+            findSetter(info, type, name, nodeGetVariable(info, "this"), values, VIRTUAL, processor, ctx)?.let { return it }
+        return findSetter(info, type, name, nodeValueClass(info, type.name), values, STATIC, processor, ctx)
     }
 
 
     private fun findSetter(info: INodeInfo, type: VirtualType, name: String, instance: Node, value: List<Node>, call: NodeMCall.Type, processor: Processor, ctx: ProcessingContext): Node? =
-        NRFSetB.findSetter(type, name, value, if (call == NodeMCall.Type.STATIC) Static.STATIC else Static.NO_STATIC, processor, ctx)?.let {
+        NRFSetB.findSetter(type, name, value, if (call == STATIC) Static.STATIC else Static.NO_STATIC, processor, ctx)?.let {
             NodeMCall(
-                info.withType(NodeTypes.MCALL_),
+                info.withType(MCALL_),
                 NRMCall.processArguments(info, processor, ctx, it.method, it.args, it.compression),
                 null,
                 instance,

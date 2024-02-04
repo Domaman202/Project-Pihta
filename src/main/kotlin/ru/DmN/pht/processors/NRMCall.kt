@@ -1,17 +1,10 @@
 package ru.DmN.pht.processors
 
+import ru.DmN.pht.ast.NodeFGet
 import ru.DmN.pht.ast.NodeInlBodyA
 import ru.DmN.pht.ast.NodeInlBodyB
-import ru.DmN.pht.processor.utils.MethodFindResultA
-import ru.DmN.pht.processor.utils.MethodFindResultB
-import ru.DmN.pht.processor.utils.Static
-import ru.DmN.pht.processors.IAdaptableProcessor
-import ru.DmN.pht.processors.IInlinableProcessor
-import ru.DmN.pht.processors.NRInlDef
-import ru.DmN.pht.ast.*
+import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.ast.NodeMCall.Type.*
-import ru.DmN.pht.compiler.java.compilers.NCDefn
-import ru.DmN.pht.compiler.java.compilers.NCMCall
 import ru.DmN.pht.node.*
 import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.ctx.GlobalContext
@@ -24,11 +17,11 @@ import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VTDynamic
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
-import kotlin.streams.toList
 
 object NRMCall : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
@@ -73,7 +66,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         val method = result.method
         //
         val new = if (method.extension == null) {
-            val instance2 = processor.process(instance1, ctx, ValType.VALUE)!!
+            val instance2 = processor.process(instance1, ctx, VALUE)!!
             NodeMCall(
                 info.processed,
                 processArguments(info, processor, ctx, method, result.args, result.compression),
@@ -100,9 +93,9 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 result.compression
             ),
             generics,
-            NodeValue.of(node.info, NodeValue.Type.CLASS, method.extension!!.name),
+            nodeValueClass(node.info, method.extension!!.name),
             method,
-            NodeMCall.Type.EXTEND
+            EXTEND
         )
         //
         processor.stageManager.pushTask(ProcessingStage.FINALIZATION) {
@@ -238,16 +231,16 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                             ),
                             processor,
                             ctx,
-                            ValType.VALUE
+                            VALUE
                         )!!
                     )
                 }
-            else (args + NRNewArray.process(nodeNewArray(info, method.argsc.last().name.substring(1), 0), processor, ctx, ValType.VALUE)!!).toMutableList()
+            else (args + NRNewArray.process(nodeNewArray(info, method.argsc.last().name.substring(1), 0), processor, ctx, VALUE)!!).toMutableList()
         } else { args }.mapIndexedMutable { i, it ->
             val np = processor.get(it, ctx)
             if (np is IAdaptableProcessor<*>)
                 (np as IAdaptableProcessor<Node>).adaptToType(method.argsc[i], it, processor, ctx)
-            else { it }.let { NRAs.process(nodeAs(info, it, method.argsc[i].name), processor, ctx, ValType.VALUE)!! }
+            else { it }.let { NRAs.process(nodeAs(info, it, method.argsc[i].name), processor, ctx, VALUE)!! }
         }
 
     /**
@@ -270,7 +263,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             generic = gctx.getType(it.substring(gs + 2, it.length - 1), processor.tp)
             it.substring(0, gs)
         }
-        val args = node.nodes.asSequence().drop(2).map { processor.process(it, ctx, ValType.VALUE)!! }.toList()
+        val args = node.nodes.asSequence().drop(2).map { processor.process(it, ctx, VALUE)!! }.toList()
         //
         // Class / Instance
         var result = findMethodOrNull(pair.second, name, args, static, node, processor, ctx)
@@ -335,7 +328,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             findMethod(
                 ctx.global.getType("ru.DmN.pht.utils.DynamicUtils", processor.tp),
                 "invokeMethod",
-                node.nodes.map { processor.process(it, ctx, ValType.VALUE)!! },
+                node.nodes.map { processor.process(it, ctx, VALUE)!! },
                 Static.ANY,
                 processor,
                 ctx

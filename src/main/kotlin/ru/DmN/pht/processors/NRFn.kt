@@ -1,9 +1,9 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.ast.NodeInlBodyA
-import ru.DmN.pht.processors.IInlinableProcessor
 import ru.DmN.pht.ast.NodeFn
+import ru.DmN.pht.ast.NodeInlBodyA
 import ru.DmN.pht.node.*
+import ru.DmN.pht.node.NodeTypes.FN_
 import ru.DmN.pht.processor.utils.body
 import ru.DmN.pht.processor.utils.clazz
 import ru.DmN.pht.processor.utils.global
@@ -14,8 +14,11 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.*
 import ru.DmN.siberia.processor.utils.Platforms.JVM
+import ru.DmN.siberia.processor.utils.ProcessingStage.FINALIZATION
+import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.platform
+import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VirtualType
 import kotlin.math.absoluteValue
@@ -34,9 +37,9 @@ object NRFn : INodeProcessor<NodeNodesList>, IInlinableProcessor<NodeNodesList> 
             .map { ref -> bctx[ref]?.let { NVC.of(it) } ?: NVC.of(cctx.fields.find { it.name == ref }!!) }
         val args = processor.computeStringNodes(processor.compute(node.nodes[offset + 1], ctx) as INodesList, ctx)
         val body = LazyProcessValueList(node, processor, ctx).drop(offset + 2)
-        val new = NodeFn(node.info.withType(NodeTypes.FN_), NodeFn.Source(body, type, args, gctx.name("PhtLambda\$${node.info.hashCode().absoluteValue}"), refs))
+        val new = NodeFn(node.info.withType(FN_), NodeFn.Source(body, type, args, gctx.name("PhtLambda\$${node.info.hashCode().absoluteValue}"), refs))
         if (ctx.platform == JVM) {
-            processor.stageManager.pushTask(ProcessingStage.FINALIZATION) {
+            processor.stageManager.pushTask(FINALIZATION) {
                 finalize(node.info, new, processor, ctx)
             }
         }

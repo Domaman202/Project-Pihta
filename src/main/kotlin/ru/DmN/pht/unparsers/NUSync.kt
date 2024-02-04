@@ -1,6 +1,6 @@
 package ru.DmN.pht.unparsers
 
-import ru.DmN.pht.ast.NodeSync
+import ru.DmN.pht.jvm.ast.NodeSync
 import ru.DmN.siberia.Unparser
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.unparsers.INodeUnparser

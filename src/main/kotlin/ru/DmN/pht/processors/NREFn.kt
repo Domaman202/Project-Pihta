@@ -1,8 +1,9 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.ast.NodeInlBodyB
 import ru.DmN.pht.ast.NodeDefn
-import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.ast.NodeInlBodyB
+import ru.DmN.pht.node.NodeTypes.EFN_
+import ru.DmN.pht.node.NodeTypes.INL_BODY_A
 import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.utils.clazz
 import ru.DmN.pht.processor.utils.global
@@ -11,8 +12,10 @@ import ru.DmN.pht.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ProcessingStage
+import ru.DmN.siberia.processor.utils.ProcessingStage.METHODS_BODY
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.ValType.NO_VALUE
+import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.MethodModifiers
@@ -61,19 +64,19 @@ object NREFn : INodeProcessor<NodeNodesList> {
         type.methods += method
         gctx.getExtensions(extend) += method
         //
-        val new = NodeDefn(node.info.withType(NodeTypes.EFN_), node.nodes.drop(4 + offset).toMutableList(), method)
+        val new = NodeDefn(node.info.withType(EFN_), node.nodes.drop(4 + offset).toMutableList(), method)
         //
-        processor.stageManager.pushTask(ProcessingStage.METHODS_BODY) {
+        processor.stageManager.pushTask(METHODS_BODY) {
             val context = ctx.with(method).with(BodyContext.of(method))
             if (method.modifiers.inline)
-                method.inline = NodeInlBodyB(node.info.withType(NodeTypes.INL_BODY_A), new.nodes.toMutableList(), method.rettype, context)
+                method.inline = NodeInlBodyB(node.info.withType(INL_BODY_A), new.nodes.toMutableList(), method.rettype, context)
             processNodesList(
                 new,
                 processor,
                 context,
                 if (method.rettype == VirtualType.VOID)
-                    ValType.NO_VALUE
-                else ValType.VALUE
+                    NO_VALUE
+                else VALUE
             )
         }
         //

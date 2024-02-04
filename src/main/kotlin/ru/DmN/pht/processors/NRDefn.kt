@@ -1,8 +1,9 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.ast.NodeInlBodyB
 import ru.DmN.pht.ast.NodeDefn
+import ru.DmN.pht.ast.NodeInlBodyB
 import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.node.NodeTypes.DEFN_
 import ru.DmN.pht.node.nodeAs
 import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.ctx.GlobalContext
@@ -14,8 +15,9 @@ import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ProcessingStage
+import ru.DmN.siberia.processor.utils.ProcessingStage.METHODS_BODY
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.ValType.NO_VALUE
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.MethodModifiers
 import ru.DmN.siberia.utils.VirtualMethod
@@ -60,7 +62,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         type.methods += method
         //
         val new = NodeDefn(
-            node.info.withType(NodeTypes.DEFN_),
+            node.info.withType(DEFN_),
             if (node.nodes.size > 3 + offset)
                 node.nodes.drop(3 + offset).toMutableList()
             else ArrayList(),
@@ -68,7 +70,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         )
         //
         if (node.nodes.size > 3) {
-            processor.stageManager.pushTask(ProcessingStage.METHODS_BODY) {
+            processor.stageManager.pushTask(METHODS_BODY) {
                 val context = ctx.with(method).with(BodyContext.of(method))
                 if (method.modifiers.inline)
                     method.inline = NodeInlBodyB(node.info.withType(NodeTypes.INL_BODY_A), new.nodes.toMutableList(), method.rettype, context)
@@ -81,7 +83,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
     private fun processNodes(method: VirtualMethod, new: NodeNodesList, processor: Processor, ctx: ProcessingContext) {
         var i = 0
         while (i < new.nodes.size.let { if (method.rettype != VirtualType.VOID) it - 1 else it }) {
-            val it = processor.process(new.nodes[i], ctx, ValType.NO_VALUE)
+            val it = processor.process(new.nodes[i], ctx, NO_VALUE)
             if (it == null) {
                 new.nodes.removeAt(i)
                 i--

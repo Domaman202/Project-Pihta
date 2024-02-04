@@ -14,6 +14,7 @@ import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VTDynamic
 import ru.DmN.siberia.utils.VirtualType
@@ -21,7 +22,7 @@ import ru.DmN.siberia.utils.VirtualType
 object NRFSetB : INodeProcessor<NodeFieldSet> {
     override fun process(node: NodeFieldSet, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
         val info = node.info
-        val instance = processor.process(node.instance, ctx, ValType.VALUE)!!
+        val instance = processor.process(node.instance, ctx, VALUE)!!
             .let {
                 if (node.static)
                     nodeValueClass(info, processor.computeString(it, ctx))
@@ -62,7 +63,7 @@ object NRFSetB : INodeProcessor<NodeFieldSet> {
         return if (result == null)
             NodeFSet(
                 info.withType(NodeTypes.FSET_),
-                mutableListOf(instance, processor.process(node.nodes.first(), ctx, ValType.VALUE)!!),
+                mutableListOf(instance, processor.process(node.nodes.first(), ctx, VALUE)!!),
                 type.fields.find { it.name == node.name }!!
             )
         else NodeMCall(

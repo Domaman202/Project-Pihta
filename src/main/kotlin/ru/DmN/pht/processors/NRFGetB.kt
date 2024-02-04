@@ -1,19 +1,23 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.processor.utils.MethodFindResultB
-import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.ast.NodeFGet
+import ru.DmN.pht.ast.NodeFGet.Type.*
 import ru.DmN.pht.ast.NodeFMGet
 import ru.DmN.pht.ast.NodeMCall
-import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.ast.NodeMCall.Type.VIRTUAL
+import ru.DmN.pht.node.NodeTypes.FGET_
+import ru.DmN.pht.node.NodeTypes.MCALL_
 import ru.DmN.pht.node.nodeValue
 import ru.DmN.pht.node.nodeValueClass
+import ru.DmN.pht.processor.utils.MethodFindResultB
+import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.utils.computeType
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VTDynamic
 import ru.DmN.siberia.utils.VirtualType
@@ -23,22 +27,22 @@ object NRFGetB : INodeProcessor<NodeFMGet> {
         getMethod(node, processor, ctx).second?.method?.rettype ?: NRFGetA.findField(getInstanceType(node, processor, ctx), node.name, node.static)?.type
 
     override fun process(node: NodeFMGet, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
-        if (mode == ValType.VALUE) {
+        if (mode == VALUE) {
             val info = node.info
-            val instance = processor.process(node.instance, ctx, ValType.VALUE)!!
+            val instance = processor.process(node.instance, ctx, VALUE)!!
             val result = getMethod(node, processor, ctx)
             if (result.second == null)
                 NodeFGet(
-                    info.withType(NodeTypes.FGET_),
+                    info.withType(FGET_),
                     mutableListOf(instance),
                     node.name,
                     result.first.let {
                         val field = NRFGetA.findField(it, node.name, node.static)
                         if (field == null)
-                            NodeFGet.Type.UNKNOWN
+                            UNKNOWN
                         else if (field.modifiers.isStatic)
-                            NodeFGet.Type.STATIC
-                        else NodeFGet.Type.INSTANCE
+                            STATIC
+                        else INSTANCE
                     },
                     result.first
                 )
@@ -46,7 +50,7 @@ object NRFGetB : INodeProcessor<NodeFMGet> {
                 val method = result.second!!.method
                 if (result.first == VTDynamic)
                     NodeMCall(
-                        info.withType(NodeTypes.MCALL_),
+                        info.withType(MCALL_),
                         NRMCall.processArguments(
                             info,
                             processor,
@@ -58,15 +62,15 @@ object NRFGetB : INodeProcessor<NodeFMGet> {
                         null,
                         nodeValueClass(info, method.declaringClass!!.name),
                         method,
-                        NodeMCall.Type.VIRTUAL
+                        VIRTUAL
                     )
                 else NodeMCall(
-                    info.withType(NodeTypes.MCALL_),
+                    info.withType(MCALL_),
                     NRMCall.processArguments(info, processor, ctx, method, node.nodes, result.second!!.compression),
                     null,
                     instance,
                     method,
-                    NodeMCall.Type.VIRTUAL
+                    VIRTUAL
                 )
             }
         } else null

@@ -1,13 +1,15 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeMCall
-import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.ast.NodeMCall.Type.STATIC
+import ru.DmN.pht.node.NodeTypes.MCALL_
 import ru.DmN.pht.node.nodeValueClass
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VirtualType
@@ -17,10 +19,10 @@ object NRRange : INodeProcessor<NodeNodesList> {
         ctx.global.getType("java.util.Iterator", processor.tp)
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeNodesList? =
-        if (mode == ValType.VALUE) {
+        if (mode == VALUE) {
             val info = node.info
             val it = NodeMCall(
-                info.withType(NodeTypes.MCALL_),
+                info.withType(MCALL_),
                 node.nodes,
                 null,
                 nodeValueClass(info, "ru.DmN.pht.utils.IteratorUtils"),
@@ -28,7 +30,7 @@ object NRRange : INodeProcessor<NodeNodesList> {
                     "ru.DmN.pht.utils.IteratorUtils",
                     processor.tp
                 ).methods.find { it.name == "range" }!!,
-                NodeMCall.Type.STATIC
+                STATIC
             )
             processNodesList(it, processor, ctx, mode)
             it

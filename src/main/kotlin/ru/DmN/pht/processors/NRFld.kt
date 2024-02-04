@@ -4,6 +4,7 @@ import ru.DmN.pht.ast.*
 import ru.DmN.pht.node.*
 import ru.DmN.pht.node.NodeParsedTypes.*
 import ru.DmN.pht.node.NodeTypes.FLD_
+import ru.DmN.pht.node.NodeTypes.PROGN_B
 import ru.DmN.pht.processor.utils.clazz
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.utils.computeList
@@ -94,10 +95,10 @@ object NRFld : INodeProcessor<NodeFieldA> {
             }
         return processor.process(
             NodeModifierNodesList(
-                info.withType(if (node.final) ANN_FINAL else NodeTypes.PROGN_B),
+                info.withType(if (node.final) ANN_FINAL else PROGN_B),
                 mutableListOf(
                     NodeModifierNodesList(
-                        info.withType(if (node.static) ANN_STATIC else NodeTypes.PROGN_B),
+                        info.withType(if (node.static) ANN_STATIC else PROGN_B),
                         body.apply { this += NodeFieldB(info.withType(FLD_), fields) }
                     )
                 )

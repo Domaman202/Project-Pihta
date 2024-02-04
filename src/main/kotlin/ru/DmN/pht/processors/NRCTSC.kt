@@ -1,6 +1,7 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeValue
+import ru.DmN.pht.node.nodeValue
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
@@ -17,5 +18,5 @@ class NRCTSC(val const: (processor: Processor, ctx: ProcessingContext) -> String
         ctx.global.getType("String", processor.tp)
 
     override fun process(node: Node, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeValue =
-        NodeValue.of(node.info, NodeValue.Type.STRING, const(processor, ctx))
+        nodeValue(node.info, const(processor, ctx))
 }

@@ -10,8 +10,9 @@ import ru.DmN.pht.utils.type
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ProcessingStage
+import ru.DmN.siberia.processor.utils.ProcessingStage.METHODS_BODY
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.ValType.NO_VALUE
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.MethodModifiers
@@ -41,8 +42,8 @@ object NRCtor : INodeProcessor<NodeNodesList> {
         type.methods += method
         //
         val new = NodeDefn(node.info.withType((node.type as NodeParsedTypes).processed), node.nodes.drop(1).toMutableList(), method)
-        processor.stageManager.pushTask(ProcessingStage.METHODS_BODY) {
-            processNodesList(new, processor, ctx.with(method).with(BodyContext.of(method)), ValType.NO_VALUE)
+        processor.stageManager.pushTask(METHODS_BODY) {
+            processNodesList(new, processor, ctx.with(method).with(BodyContext.of(method)), NO_VALUE)
         }
         return new
     }

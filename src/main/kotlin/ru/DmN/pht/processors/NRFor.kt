@@ -1,6 +1,8 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.node.*
+import ru.DmN.pht.node.NodeParsedTypes.INC_PRE
+import ru.DmN.pht.node.NodeParsedTypes.LESS
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.utils.computeList
 import ru.DmN.pht.utils.computeString
@@ -50,7 +52,7 @@ object NRFor : INodeProcessor<NodeNodesList> {
                                 nodeCycle(
                                     info,
                                     NodeNodesList(
-                                        info.withType(NodeParsedTypes.LESS),
+                                        info.withType(LESS),
                                         mutableListOf(
                                             nodeGetOrName(info, i),
                                             nodeArraySize(info, arr)
@@ -59,9 +61,9 @@ object NRFor : INodeProcessor<NodeNodesList> {
                                     if (name != "_")
                                         listOf(nodeDef(info, name, nodeAGet(info, arr, i)))
                                             + node.nodes.drop(1)
-                                            + NodeNodesList(info.withType(NodeParsedTypes.INC_PRE), mutableListOf(nodeValue(info, i)))
+                                            + NodeNodesList(info.withType(INC_PRE), mutableListOf(nodeValue(info, i)))
                                     else node.nodes.drop(1)
-                                            + NodeNodesList(info.withType(NodeParsedTypes.INC_PRE), mutableListOf(nodeValue(info, i)))
+                                            + NodeNodesList(info.withType(INC_PRE), mutableListOf(nodeValue(info, i)))
                                 )
                             )
                         ), processor, ctx, mode

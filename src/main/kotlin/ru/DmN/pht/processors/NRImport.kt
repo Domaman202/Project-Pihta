@@ -1,7 +1,7 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeImport
-import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.node.NodeTypes.IMPORT_
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.processor.utils.macros
 import ru.DmN.pht.utils.computeList
@@ -10,7 +10,7 @@ import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.Platforms.JVM
-import ru.DmN.siberia.processor.utils.ProcessingStage
+import ru.DmN.siberia.processor.utils.ProcessingStage.*
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
@@ -24,7 +24,7 @@ object NRImport : INodeProcessor<NodeNodesList> {
             .map { processor.computeList(it, ctx) }
             .associate { it -> Pair(processor.computeString(it[0], ctx), processor.computeList(it[1], ctx).map { processor.computeString(it, ctx) }) }
 
-        processor.stageManager.pushTask(ProcessingStage.MACROS_IMPORT) {
+        processor.stageManager.pushTask(MACROS_IMPORT) {
             data["macros"]?.run {
                 val cmacros = gctx.macros
                 val pmacros = processor.contexts.macros
@@ -36,7 +36,7 @@ object NRImport : INodeProcessor<NodeNodesList> {
             }
         }
 
-        processor.stageManager.pushTask(ProcessingStage.TYPES_IMPORT) {
+        processor.stageManager.pushTask(TYPES_IMPORT) {
             data["types"]?.run {
                 val aliases = gctx.aliases
                 val imports = gctx.imports
@@ -48,7 +48,7 @@ object NRImport : INodeProcessor<NodeNodesList> {
             }
         }
 
-        processor.stageManager.pushTask(ProcessingStage.EXTENSIONS_IMPORT) {
+        processor.stageManager.pushTask(EXTENSIONS_IMPORT) {
             data["extensions"]?.forEach { it ->
                 gctx.getType(it, processor.tp).methods
                     .stream()
@@ -68,7 +68,7 @@ object NRImport : INodeProcessor<NodeNodesList> {
 
         return when (ctx.platform) {
             JVM -> null
-            else -> NodeImport(node.info.withType(NodeTypes.IMPORT_), module, data)
+            else -> NodeImport(node.info.withType(IMPORT_), module, data)
         }
     }
 }

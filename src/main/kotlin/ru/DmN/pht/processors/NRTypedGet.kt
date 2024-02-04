@@ -1,7 +1,7 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeTypedGet
-import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.node.NodeTypes.TYPED_GET_
 import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.computeType
 import ru.DmN.siberia.Processor
@@ -16,5 +16,5 @@ object NRTypedGet : INodeProcessor<NodeNodesList> {
         processor.computeType(node.nodes[0], ctx)
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeTypedGet =
-        NodeTypedGet(node.info.withType(NodeTypes.TYPED_GET_), processor.computeString(node.nodes[1], ctx), processor.computeType(node.nodes[0], ctx))
+        NodeTypedGet(node.info.withType(TYPED_GET_), processor.computeString(node.nodes[1], ctx), processor.computeType(node.nodes[0], ctx))
 }

@@ -29,8 +29,6 @@ enum class NodeTypes : INodeType {
     // c
     CATCH_("catch", PROCESSED),
     CCALL("ccall", PARSED),
-    CLASS_OF("class-of", PARSED),
-    CLASS_OF_("class-of", PROCESSED),
     CLS_("cls", PROCESSED),
     COND("cond", PARSED),
     CONTINUE_("continue", PROCESSED),
@@ -42,8 +40,6 @@ enum class NodeTypes : INodeType {
     DEC_POST_("dec-", PROCESSED),
     DEF("def", PARSED),
     DEF_("def", PROCESSED),
-    DEF_ANN("def-ann", PARSED),
-    DEF_ANN_("def-ann", PROCESSED),
     DEF_SET("def-set", PARSED),
     DEF_MACRO("def-macro", PARSED),
     DEFN_("defn", PROCESSED),
@@ -129,8 +125,6 @@ enum class NodeTypes : INodeType {
     SYMBOL("symbol", PARSED),
     SYMBOL_INT("symbol-int", PARSED),
     SYMBOL_CLS("symbol-cls", PARSED),
-    SYNC("sync", PARSED),
-    SYNC_("sync", PROCESSED),
     // t
     TEST_FN("test-fn", PARSED),
     THROW("throw", PARSED),
@@ -157,7 +151,6 @@ enum class NodeTypes : INodeType {
     ANN_INLINE_("@inline", PROCESSED),
     ANN_OPEN_("@open", PROCESSED),
     ANN_STATIC_("@static", PROCESSED),
-    ANN_SYNC_("@synchronized", PROCESSED),
     ANN_VARARGS_("@varargs", PROCESSED),
 
     // @@

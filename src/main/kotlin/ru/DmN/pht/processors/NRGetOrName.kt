@@ -1,20 +1,16 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.ast.NodeInlBodyA
-import ru.DmN.pht.ast.NodeTypedGet
-import ru.DmN.pht.processor.utils.Static
-import ru.DmN.pht.processors.IAdaptableProcessor
-import ru.DmN.pht.processors.IInlinableProcessor
 import ru.DmN.pht.ast.NodeGet
+import ru.DmN.pht.ast.NodeGet.Type.THIS_FIELD
+import ru.DmN.pht.ast.NodeGet.Type.THIS_STATIC_FIELD
 import ru.DmN.pht.ast.NodeGetOrName
-import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.ast.NodeInlBodyA
+import ru.DmN.pht.node.NodeTypes.GET_
+import ru.DmN.pht.node.NodeTypes.INL_BODY_A
 import ru.DmN.pht.node.nodeTypesGet
-import ru.DmN.pht.processor.utils.body
-import ru.DmN.pht.processor.utils.classes
-import ru.DmN.pht.processor.utils.clazz
-import ru.DmN.pht.processor.utils.method
-import ru.DmN.pht.utils.lenArgs
+import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.utils.InlineVariable
+import ru.DmN.pht.utils.lenArgs
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.node.INodeInfo
@@ -82,11 +78,11 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
                 NRGetB.findGetter(node.info, clazz, node.name, emptyList(), !ctx.method.modifiers.static, processor, ctx)?.let { return it }
                 val field = clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first()!!
                 NodeGet(
-                    node.info.withType(NodeTypes.GET_),
+                    node.info.withType(GET_),
                     node.name,
                     if (field.modifiers.isStatic)
-                        NodeGet.Type.THIS_STATIC_FIELD
-                    else NodeGet.Type.THIS_FIELD
+                        THIS_STATIC_FIELD
+                    else THIS_FIELD
                 )
             }
             1 -> node
@@ -101,7 +97,7 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
         val n = (ctx.body[node.name] as InlineVariable).value
         val np = processor.get(n, ctx)
         return NodeInlBodyA(
-            node.info.withType(NodeTypes.INL_BODY_A),
+            node.info.withType(INL_BODY_A),
             mutableListOf(
                 if (np is IInlinableProcessor<*> && (np as IInlinableProcessor<Node>).isInlinable(n, processor, ctx))
                     np.inline(n, processor, ctx)

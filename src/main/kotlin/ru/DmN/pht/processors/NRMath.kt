@@ -3,6 +3,9 @@ package ru.DmN.pht.processors
 import ru.DmN.pht.processor.utils.MethodFindResultB
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.node.*
+import ru.DmN.pht.node.NodeParsedTypes.SHIFT_LEFT
+import ru.DmN.pht.node.NodeParsedTypes.SHIFT_RIGHT
+import ru.DmN.pht.node.NodeTypes.MCALL_
 import ru.DmN.pht.processor.utils.ICastable
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.utils.adaptToType
@@ -14,6 +17,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
@@ -26,31 +30,31 @@ object NRMath : INodeProcessor<NodeNodesList> {
     }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
-        val nodes = processor.processNodes(node, ctx, ValType.VALUE)
+        val nodes = processor.processNodes(node, ctx, VALUE)
         val firstType = processor.calc(nodes[0], ctx)!!
         val result = getExtend(firstType, node.text, nodes.drop(1), processor, ctx)
         val info = node.info
         return if (result == null)
-            if (mode == ValType.VALUE)
+            if (mode == VALUE)
                 NodeNodesList(
                     info.processed,
                     (when (info.type) {
-                        NodeParsedTypes.SHIFT_LEFT,
-                        NodeParsedTypes.SHIFT_RIGHT -> nodes
+                        SHIFT_LEFT,
+                        SHIFT_RIGHT -> nodes
 
                         else -> nodes.map {
                             NRAs.process(
                                 nodeAs(info, it, firstType.name),
                                 processor,
                                 ctx,
-                                ValType.VALUE
+                                VALUE
                             )!!
                         }
                     }).toMutableList()
                 )
             else null
         else NodeMCall(
-            info.withType(NodeTypes.MCALL_),
+            info.withType(MCALL_),
             processArguments(info, processor, ctx, listOf(nodes[0]) + result.args, result),
             null,
             nodeValueClass(info, result.method.declaringClass!!.name),

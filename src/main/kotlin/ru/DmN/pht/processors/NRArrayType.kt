@@ -9,6 +9,7 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.utils.VirtualType
 
 object NRArrayType : IStdNodeProcessor<NodeNodesList> {
@@ -20,8 +21,8 @@ object NRArrayType : IStdNodeProcessor<NodeNodesList> {
     }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
-        if (mode == ValType.VALUE) {
-            val type = processor.process(node.nodes[0], ctx, ValType.VALUE)!!
+        if (mode == VALUE) {
+            val type = processor.process(node.nodes[0], ctx, VALUE)!!
             if (type.isConstClass)
                 nodeValueClass(node.info, processor.computeType(type, ctx).arrayType.name)
             else processor.calc(type, ctx)?.let { nodeValueClass(node.info, it.arrayType.name) }

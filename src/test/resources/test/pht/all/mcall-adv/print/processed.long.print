@@ -300,7 +300,10 @@
 |	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	(method = getE()I)
 |	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	[TYPED_GET_]
+|	|	|	|	|	|	|	|	|	|	[TYPED_GET_
+|	|	|	|	|	|	|	|	|	|	|	(name = o)
+|	|	|	|	|	|	|	|	|	|	|	(type = TestE)
+|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	(generic = VT(int))
 |	|	|	|	|	|	|	|	|	(type = VIRTUAL)
@@ -308,7 +311,10 @@
 |	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	(method = getF()I)
 |	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	[TYPED_GET_]
+|	|	|	|	|	|	|	|	|	|	[TYPED_GET_
+|	|	|	|	|	|	|	|	|	|	|	(name = o)
+|	|	|	|	|	|	|	|	|	|	|	(type = TestF)
+|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	(generic = VT(int))
 |	|	|	|	|	|	|	|	|	(type = VIRTUAL)

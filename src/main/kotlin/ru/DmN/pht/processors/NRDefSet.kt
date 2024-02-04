@@ -1,7 +1,7 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeSet
-import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.node.NodeTypes.SET_
 import ru.DmN.pht.node.nodeDef
 import ru.DmN.pht.processor.utils.body
 import ru.DmN.pht.processor.utils.processValues
@@ -19,6 +19,6 @@ object NRDefSet : INodeProcessor<NodeNodesList> {
         val value = node.nodes.asSequence().drop(1).processValues(processor, ctx)
         return if (ctx.body[name] == null)
             NRDef.process(nodeDef(node.info, name, value.first()), processor, ctx, mode)
-        else NodeSet(node.info.withType(NodeTypes.SET_), value.toMutableList(), name)
+        else NodeSet(node.info.withType(SET_), value.toMutableList(), name)
     }
 }

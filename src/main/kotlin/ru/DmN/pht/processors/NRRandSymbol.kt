@@ -6,12 +6,13 @@ import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.ValType.VALUE
 import java.util.*
 import kotlin.math.absoluteValue
 
 object NRRandSymbol : IStdNodeProcessor<Node> {
     override fun process(node: Node, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeValue? =
-        if (mode == ValType.VALUE)
+        if (mode == VALUE)
             nodeValue(node.info, Random().nextInt())
         else null
 

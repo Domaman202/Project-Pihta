@@ -1,7 +1,7 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeCatch
-import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.node.NodeTypes.CATCH_
 import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.utils.body
 import ru.DmN.pht.processor.utils.with
@@ -14,7 +14,6 @@ import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.processors.NRProgn
 import ru.DmN.siberia.utils.VirtualType
 import kotlin.streams.toList
 
@@ -32,7 +31,7 @@ object NRCatch : INodeProcessor<NodeNodesList> {
                 1
             else 0
         return NodeCatch(
-            info.withType(NodeTypes.CATCH_),
+            info.withType(CATCH_),
             node.nodes.stream().skip(offset + 1L).toList() as MutableList<Node>,
             if (offset == 1) processor.computeType(node.nodes[0], ctx) else null,
             processor.computeList(node.nodes[offset], ctx).map {

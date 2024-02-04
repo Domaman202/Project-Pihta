@@ -1,14 +1,15 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeRFn
-import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.node.NodeTypes.RFN_
 import ru.DmN.pht.processor.utils.global
-import ru.DmN.pht.processors.NRMCall
 import ru.DmN.pht.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.ValType.NO_VALUE
+import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
@@ -18,16 +19,16 @@ object NRRFn : INodeProcessor<NodeNodesList> { // todo: двусторонний
         ctx.global.getType(if (node.nodes[0].isConstClass) processor.computeString(node.nodes[0], ctx) else "Any", processor.tp)
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeRFn? {
-        if (mode == ValType.NO_VALUE)
+        if (mode == NO_VALUE)
             return null
         val typeNode = node.nodes[0]
         val type =
             if (typeNode.isLiteral && processor.computeString(typeNode, ctx) == ".")
                 null
             else processor.computeType(node.nodes[0], ctx)
-        val instance = processor.process(node.nodes[1], ctx, ValType.VALUE)!!
+        val instance = processor.process(node.nodes[1], ctx, VALUE)!!
         val name = processor.computeString(node.nodes[2], ctx)
-        return NodeRFn(node.info.withType(NodeTypes.RFN_), type, null, instance, name, null).process(processor, ctx)
+        return NodeRFn(node.info.withType(RFN_), type, null, instance, name, null).process(processor, ctx)
     }
 
     fun NodeRFn.process(processor: Processor, ctx: ProcessingContext): NodeRFn {

@@ -1,8 +1,7 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeAGet
-import ru.DmN.pht.node.NodeTypes
-import ru.DmN.pht.node.processed
+import ru.DmN.pht.node.NodeTypes.AGET_
 import ru.DmN.pht.utils.processNodes
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
@@ -18,6 +17,6 @@ object NRAGet : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeAGet? =
         if (mode == ValType.VALUE) {
             val nodes = processor.processNodes(node, ctx, ValType.VALUE)
-            NodeAGet(node.info.withType(NodeTypes.AGET_), nodes[0], nodes[1])
+            NodeAGet(node.info.withType(AGET_), nodes[0], nodes[1])
         } else null
 }

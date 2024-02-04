@@ -2,19 +2,17 @@ package ru.DmN.pht.jvm
 
 import org.objectweb.asm.ClassWriter
 import ru.DmN.pht.ast.ISyncNode
-import ru.DmN.pht.jvm.compilers.*
-import ru.DmN.pht.processors.NRDefAnn
-import ru.DmN.pht.processors.NRSync
 import ru.DmN.pht.compiler.java.compilers.*
 import ru.DmN.pht.compiler.java.utils.classes
-import ru.DmN.pht.node.NodeParsedTypes.ANN_SYNC
+import ru.DmN.pht.jvm.compilers.*
+import ru.DmN.pht.jvm.node.NodeParsedTypes.ANN_SYNC
+import ru.DmN.pht.jvm.node.NodeTypes.*
 import ru.DmN.pht.node.NodeTypes.*
-import ru.DmN.pht.parsers.NPDefAnn
-import ru.DmN.pht.processors.NRClassOf
+import ru.DmN.pht.jvm.processors.NRClassOf
 import ru.DmN.pht.processors.NRSA
+import ru.DmN.pht.jvm.processors.NRSync
 import ru.DmN.pht.unparsers.NUClassOf
 import ru.DmN.pht.unparsers.NUSync
-import ru.DmN.pht.utils.addNP
 import ru.DmN.pht.utils.addSANP
 import ru.DmN.pht.utils.addSNP
 import ru.DmN.pht.utils.addSNU
@@ -31,8 +29,6 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
     private fun initParsers() {
         // c
         addSNP(CLASS_OF)
-        // d
-        addNP("def-ann", NPDefAnn)
         // s
         addSNP(SYNC)
 
@@ -44,9 +40,6 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         // c
         addSNU(CLASS_OF)
         add(CLASS_OF_, NUClassOf)
-        // d
-        addSNU(DEF_ANN)
-        // DEF_ANN_
         // s
         addSNU(SYNC)
         add(SYNC_,     NUSync)
@@ -60,8 +53,6 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         // c
         add(CLASS_OF,  NRClassOf)
         add(CLASS_OF_, NRClassOf)
-        // d
-        add(DEF_ANN,   NRDefAnn)
         // s
         add(SYNC,      NRSync)
         add(SYNC_,     NRProgn)

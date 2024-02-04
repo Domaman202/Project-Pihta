@@ -1,8 +1,7 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeInlBodyA
-import ru.DmN.pht.node.NodeTypes
-import ru.DmN.pht.utils.processNodes
+import ru.DmN.pht.node.NodeTypes.INL_BODY_
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -17,7 +16,7 @@ object NRInlBodyA : INodeProcessor<NodeInlBodyA> {
         node.type
 
     override fun process(node: NodeInlBodyA, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
-        val new = NodeInlBodyA(node.info.withType(NodeTypes.INL_BODY_), node.nodes, node.type)
+        val new = NodeInlBodyA(node.info.withType(INL_BODY_), node.nodes, node.type)
         processNodesList(new, processor, ctx, mode)
         if (new.type == null)
             new.type = NRProgn.calc(new, processor, ctx)

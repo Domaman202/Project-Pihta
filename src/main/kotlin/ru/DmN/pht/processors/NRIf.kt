@@ -1,6 +1,6 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.node.NodeTypes.IF_
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -19,6 +19,6 @@ object NRIf : INodeProcessor<NodeNodesList> {
         val nodes = mutableListOf(processor.process(node.nodes[0], ctx, ValType.VALUE)!!)
         for (i in 1 until node.nodes.size)
             nodes += processor.process(node.nodes[i], ctx, mode)!!
-        return NodeNodesList(node.info.withType(NodeTypes.IF_), nodes)
+        return NodeNodesList(node.info.withType(IF_), nodes)
     }
 }

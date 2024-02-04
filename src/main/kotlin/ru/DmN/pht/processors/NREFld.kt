@@ -1,7 +1,7 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeEField
-import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.node.NodeTypes.EFLD_
 import ru.DmN.pht.processor.ctx.EnumConstContext
 import ru.DmN.pht.processor.utils.clazz
 import ru.DmN.pht.processor.utils.enum
@@ -30,6 +30,6 @@ object NREFld : INodeProcessor<NodeNodesList> {
             fields += VirtualField.VirtualFieldImpl(type, name, type, FieldModifiers(isFinal = true, isStatic = true, isEnum = true))
             enums += EnumConstContext(name, nodes)
         }
-        return NodeEField(node.info.withType(NodeTypes.EFLD_), list)
+        return NodeEField(node.info.withType(EFLD_), list)
     }
 }

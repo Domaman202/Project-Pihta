@@ -1,8 +1,8 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.ast.NodeNew
-import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.node.NodeTypes.NEW_
+import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.processors.NRMCall.findMethod
 import ru.DmN.pht.utils.computeType
 import ru.DmN.pht.utils.processNodes
@@ -30,7 +30,7 @@ object NRNew : INodeProcessor<NodeNodesList> {
         )
         val info = node.info
         return NodeNew(
-            info.withType(NodeTypes.NEW_),
+            info.withType(NEW_),
             NRMCall.processArguments(info, processor, ctx, ctor.method, ctor.args, ctor.compression),
             type,
             ctor.method

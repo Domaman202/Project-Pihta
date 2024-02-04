@@ -78,7 +78,6 @@ enum class NodeParsedTypes(override val operation: String, override val processe
     ANN_INLINE("@inline", ANN_INLINE_),
     ANN_OPEN("@open", ANN_OPEN_),
     ANN_STATIC("@static", ANN_STATIC_),
-    ANN_SYNC("@synchronized", ANN_SYNC_),
     ANN_VARARGS("@varargs", ANN_VARARGS_);
 
     override val processable: Boolean

@@ -6,6 +6,7 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
+import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.VirtualType
 
@@ -19,9 +20,9 @@ object NRRollLeft : INodeProcessor<NodeNodesList> {
     }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
-        var expr = processor.process(node.nodes[0], ctx, ValType.VALUE)!!
+        var expr = processor.process(node.nodes[0], ctx, VALUE)!!
         for (i in 1 until node.nodes.size)
-            expr = processor.process(node.nodes[i].apply { this as INodesList; this.nodes.add(0, expr) }, ctx, ValType.VALUE)!!
+            expr = processor.process(node.nodes[i].apply { this as INodesList; this.nodes.add(0, expr) }, ctx, VALUE)!!
         return expr
     }
 }

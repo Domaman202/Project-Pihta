@@ -1,7 +1,7 @@
-package ru.DmN.pht.processors
+package ru.DmN.pht.jvm.processors
 
 import ru.DmN.pht.ast.NodeClassOf
-import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.jvm.node.NodeTypes.CLASS_OF_
 import ru.DmN.pht.utils.computeType
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
@@ -17,6 +17,6 @@ object NRClassOf : INodeProcessor<Node> {
 
     override fun process(node: Node, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
         if (mode == ValType.VALUE)
-            NodeClassOf(node.info.withType(NodeTypes.CLASS_OF_), processor.computeType((node as NodeNodesList).nodes[0], ctx).name)
+            NodeClassOf(node.info.withType(CLASS_OF_), processor.computeType((node as NodeNodesList).nodes[0], ctx).name)
         else null
 }
