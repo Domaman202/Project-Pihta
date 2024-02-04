@@ -1,9 +1,5 @@
 (use-ctx pht
-    (import java [
-        [types [
-            java.lang.Exception
-            java.lang.RuntimeException]]])
     (app-fn
-        (catch [[_ ^RuntimeException    (println "Runtime Exception!")]
-                [_ ^Exception           (println "Exception!")]]
-            (throw (new ^Exception)))))
+        (println (body (def [[i 0]]) (++   i)))
+        (println (body (def [[i 0]]) (inc  i)))
+        (println (body (def [[i 0]]) (inc- i)))
