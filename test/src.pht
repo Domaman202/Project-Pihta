@@ -1,5 +1,13 @@
-(use-ctx pht
+(progn
+    (cls TestA [^Object]
+        (ctor [] (ccall))
+        (defn fooA ^void [] (println "FooA!")))
+    (cls TestB [^Object]
+        (ctor [] (ccall))
+        (defn fooB ^void [] (println "FooB!")))
     (app-fn
-        (println (body (def [[i 0]]) (++   i)))
-        (println (body (def [[i 0]]) (inc  i)))
-        (println (body (def [[i 0]]) (inc- i)))
+        (def [
+            [o (new ^TestA)]
+            [o (new ^TestB)]])
+        (#fooA o)
+        (#fooB o)))
