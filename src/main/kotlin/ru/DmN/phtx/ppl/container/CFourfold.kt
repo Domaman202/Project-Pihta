@@ -13,11 +13,11 @@ class CFourfold(private val first: Element, private val second: Element, private
     override fun size(w: Dimension, g: Graphics2D): Size =
         first.size(w, g) + second.size(w, g) + third.size(w, g)
 
-    override fun paint(offset: Offset, free: Size, w: Dimension, g: Graphics2D) {
-        val a = w.width / ((offset.right + offset.left) / 480 + 2)
-        val b = free.divWidth().divHeight()
-        val right = offset.right(a)
-        val left = offset.left(a)
+    override fun paint(o: Offset, f: Size, w: Dimension, g: Graphics2D) {
+        val a = w.width / ((o.right + o.left) / 480 + 2)
+        val b = f.divWidth().divHeight()
+        val right = o.right(a)
+        val left = o.left(a)
         first.paint(right, b, w, g)
         second.paint(left, b, w, g)
         third.paint(right.up(b.height), b, w, g)

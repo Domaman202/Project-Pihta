@@ -15,12 +15,12 @@ class EImage(private val image: Image) : Element() {
     override fun size(w: Dimension, g: Graphics2D): Size =
         Size(image.getWidth(null), image.getHeight(null))
 
-    override fun paint(offset: Offset, free: Size, w: Dimension, g: Graphics2D) {
+    override fun paint(o: Offset, f: Size, w: Dimension, g: Graphics2D) {
         g.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON)
-        val x = offset.left + 32
-        val y = offset.up + 32
-        val sizeX = free.width - 64
-        val sizeY = free.height - 64
+        val x = o.left + 32
+        val y = o.up + 32
+        val sizeX = f.width - 64
+        val sizeY = f.height - 64
         g.clip = g.clip.apply {
             g.clip = RoundRectangle2D.Float(x.toFloat(), y.toFloat(), sizeX.toFloat(), sizeY.toFloat(), 50f, 50f)
             g.drawImage(image, x, y, sizeX, sizeY, null)

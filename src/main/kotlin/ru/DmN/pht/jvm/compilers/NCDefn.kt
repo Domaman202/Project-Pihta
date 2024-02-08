@@ -7,24 +7,23 @@ import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.compiler.java.ctx.BodyContext
 import ru.DmN.pht.compiler.java.ctx.MethodContext
+import ru.DmN.pht.compiler.java.utils.classes
 import ru.DmN.pht.compiler.java.utils.clazz
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.compiler.java.utils.with
+import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
 import ru.DmN.pht.utils.normalizeName
-import ru.DmN.pht.utils.type
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.CompilingStage
-import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.SubList
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 
-object NCDefn : INodeCompiler<NodeDefn> {
+object NCDefn : IStdNodeCompiler<NodeDefn, MethodNode> {
     override fun compile(node: NodeDefn, compiler: Compiler, ctx: CompilationContext) {
         val cnode = ctx.clazz.node
         //
@@ -77,6 +76,9 @@ object NCDefn : INodeCompiler<NodeDefn> {
             }
         }
     }
+
+    override fun getAsm(node: NodeDefn, compiler: Compiler, ctx: CompilationContext): MethodNode = // todo: тестовый код, потом поправить надо
+        compiler.contexts.classes[node.method.declaringClass!!.name]!!.methods.find { it.name == node.method.name && it.desc == node.method.desc }!!
 
     private fun findOtherMethods(method: VirtualMethod, name: String): Sequence<VirtualMethod> {
         var seq = emptySequence<VirtualMethod>()

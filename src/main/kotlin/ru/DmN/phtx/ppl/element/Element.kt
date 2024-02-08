@@ -6,7 +6,7 @@ import java.awt.Graphics2D
 abstract class Element {
     abstract val type: SizeType
     abstract fun size(w: Dimension, g: Graphics2D): Size
-    abstract fun paint(offset: Offset, free: Size, w: Dimension, g: Graphics2D)
+    abstract fun paint(o: Offset, f: Size, w: Dimension, g: Graphics2D)
 
     enum class SizeType {
         FIXED,
@@ -18,6 +18,8 @@ abstract class Element {
         val height: Int
     ) {
         operator fun plus(other: Size) =
+            Size(width + other.width, height + other.height)
+        operator fun minus(other: Size) =
             Size(width + other.width, height + other.height)
         fun sub(width: Int, height: Int) =
             Size(this.width - width, this.height - height)
@@ -46,9 +48,9 @@ abstract class Element {
         fun offset(up: Int, down: Int, left: Int, right: Int) =
             Offset(up + this.up, down + this.down, left + this.left, right + this.right)
         
-        fun offset(offset: Offset) =
+        operator fun plus(offset: Offset) =
             Offset(up + offset.up, down + offset.down, left + offset.left, right + offset.right)
-        fun offset(size: Size) =
+        operator fun plus(size: Size) =
             up(size.height)
 
         companion object {

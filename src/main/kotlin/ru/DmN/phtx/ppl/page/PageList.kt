@@ -7,6 +7,7 @@ import ru.DmN.phtx.ppl.element.Element.SizeType.DYNAMIC
 import ru.DmN.phtx.ppl.element.Element.SizeType.FIXED
 import java.awt.Dimension
 import java.awt.Graphics2D
+import kotlin.math.max
 
 class PageList(val list: MutableList<Element> = mutableListOf()) : Page() {
     operator fun plusAssign(element: Element) {
@@ -23,12 +24,12 @@ class PageList(val list: MutableList<Element> = mutableListOf()) : Page() {
             free = free.sub(0, size.height)
         }
         //
-        free = free.divHeight(elements.asSequence().filter { it.second == DYNAMIC }.count())
+        free = free.divHeight(max(1, elements.asSequence().filter { it.second == DYNAMIC }.count()))
         //
         var offset = Offset.EMPTY
         elements.forEach { (element, type, size) ->
             element.paint(offset, free, w, g)
-            offset = offset.offset(if (type == FIXED) size else free)
+            offset += if (type == FIXED) size else free
         }
     }
 }

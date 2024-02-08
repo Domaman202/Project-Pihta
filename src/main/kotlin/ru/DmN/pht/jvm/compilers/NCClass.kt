@@ -7,6 +7,7 @@ import ru.DmN.pht.compiler.java.ctx.ClassContext
 import ru.DmN.pht.compiler.java.utils.classes
 import ru.DmN.pht.compiler.java.utils.method
 import ru.DmN.pht.compiler.java.utils.with
+import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
 import ru.DmN.pht.node.NodeTypes.*
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
@@ -17,7 +18,7 @@ import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.desc
 
-object NCClass : INodeCompiler<NodeType> {
+object NCClass : IStdNodeCompiler<NodeType, ClassNode> {
     override fun compile(node: NodeType, compiler: Compiler, ctx: CompilationContext) {
         compiler.stageManager.pushTask(CompilingStage.TYPES_PREDEFINE) {
             val cn = ClassNode().apply {
@@ -86,4 +87,7 @@ object NCClass : INodeCompiler<NodeType> {
         }
         return Variable.tmp(node, node.type)
     }
+
+    override fun getAsm(node: NodeType, compiler: Compiler, ctx: CompilationContext): ClassNode = // todo: тестовый код, потом поправить надо
+        compiler.contexts.classes[node.type.name]!!
 }

@@ -13,10 +13,10 @@ class CPair(private val first: Element, private val second: Element) : Element()
     override fun size(w: Dimension, g: Graphics2D): Size =
         first.size(w, g) + second.size(w, g)
 
-    override fun paint(offset: Offset, free: Size, w: Dimension, g: Graphics2D) {
-        val a = w.width / ((offset.right + offset.left) / 480 + 2)
-        val b = free.divWidth()
-        first.paint(offset.right(a), b, w, g)
-        second.paint(offset.left(a), b, w, g)
+    override fun paint(o: Offset, f: Size, w: Dimension, g: Graphics2D) {
+        val a = w.width / ((o.right + o.left) / 480 + 2)
+        val b = f.divWidth()
+        first.paint(o.right(a), b, w, g)
+        second.paint(o.left(a), b, w, g)
     }
 }

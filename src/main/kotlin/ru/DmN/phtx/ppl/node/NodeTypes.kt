@@ -5,6 +5,8 @@ import ru.DmN.siberia.node.NodeTypes.Type
 import ru.DmN.siberia.node.NodeTypes.Type.PARSED
 
 enum class NodeTypes : INodeType {
+    // a
+    A_SIZED("a-sized", PARSED),
     // c
     C_PAIR("c-pair", PARSED),
     C_TRIPLE("c-triple", PARSED),

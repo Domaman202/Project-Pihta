@@ -12,17 +12,17 @@ class EText(private val text: String, private val font: Int) : Element() {
     override val type: SizeType
         get() = FIXED
 
-    override fun size(window: Dimension, g: Graphics2D): Size =
-        Size(window.width, g.getFontMetrics(Font("TimesRoman", ITALIC, font)).height * (text.count { it == '\n' } + 3))
+    override fun size(w: Dimension, g: Graphics2D): Size =
+        Size(w.width, g.getFontMetrics(Font("TimesRoman", ITALIC, font)).height * (text.count { it == '\n' } + 3))
 
-    override fun paint(offset: Offset, free: Size, w: Dimension, g: Graphics2D) {
+    override fun paint(o: Offset, f: Size, w: Dimension, g: Graphics2D) {
         g.setRenderingHint(KEY_TEXT_ANTIALIASING, VALUE_TEXT_ANTIALIAS_ON)
         g.font = Font("TimesRoman", ITALIC, font)
         val height = g.getFontMetrics(g.font).height
         var textY = height
         text.split('\n').forEach {
             textY += height
-            g.drawString(it, font + offset.left, textY + offset.up)
+            g.drawString(it, font + o.left, textY + o.up)
         }
     }
 }
