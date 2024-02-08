@@ -1,13 +1,6 @@
-(progn
-    (cls TestA [^Object]
-        (ctor [] (ccall))
-        (defn fooA ^void [] (println "FooA!")))
-    (cls TestB [^Object]
-        (ctor [] (ccall))
-        (defn fooB ^void [] (println "FooB!")))
+(use-ctx pht phtx/ppl
     (app-fn
-        (def [
-            [o (new ^TestA)]
-            [o (new ^TestB)]])
-        (#fooA o)
-        (#fooB o)))
+        (#show (presentation "Тестовая Презентация" 1000
+            (page-list
+                (a-offset 127 127 127 127
+                    (e-image (inc-img "res/img0.jpg"))))))))

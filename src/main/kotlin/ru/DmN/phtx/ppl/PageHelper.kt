@@ -10,6 +10,7 @@ object PageHelper : Module("phtx/ppl/page/helper") {
     private fun initParsers() {
         // a
         addSNP(A_SIZED)
+        addSNP(A_OFFSET)
         // c
         addSNP(C_PAIR)
         addSNP(C_TRIPLE)
@@ -23,6 +24,7 @@ object PageHelper : Module("phtx/ppl/page/helper") {
     private fun initUnparsers() {
         // a
         addSNU(A_SIZED)
+        addSNU(A_OFFSET)
         // c
         addSNU(C_PAIR)
         addSNU(C_TRIPLE)
@@ -36,6 +38,7 @@ object PageHelper : Module("phtx/ppl/page/helper") {
     private fun initProcessors() {
         // a
         addSEP(A_SIZED, "ru.DmN.phtx.ppl.attribute.ASized")
+        addSEP(A_OFFSET, "ru.DmN.phtx.ppl.attribute.AOffset")
         // c
         addSEP(C_PAIR, "ru.DmN.phtx.ppl.container.CPair")
         addSEP(C_TRIPLE, "ru.DmN.phtx.ppl.container.CTriple")

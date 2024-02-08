@@ -3,16 +3,14 @@
 
 ### Применение
 
-1. `(e-text image)`<br>
+1. `(e-image image)`<br>
 `image` - _картика_.
 
 ### Примеры
 
 ```pihta
 (use-ctx pht phtx/ppl
-    (import phtx/ppl (types ru.DmN.phtx.ppl.utils.Presentation))
     (app-fn
-        (#setDarkTheme ^Presentation)
         (#show (presentation "Тестовая Презентация" 1000
             (page-list
                 (e-image (inc-img "res/0.jpg")))))))
