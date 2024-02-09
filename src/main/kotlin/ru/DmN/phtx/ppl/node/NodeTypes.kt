@@ -20,6 +20,7 @@ enum class NodeTypes : INodeType {
     INC_IMG("inc-img", PARSED),
     INC_TXT("inc-txt", PARSED),
     // p
+    PAGE_FRACTAL("page-fractal", PARSED),
     PAGE_LIST("page-list", PARSED),
     PRESENTATION("presentation", PARSED);
 

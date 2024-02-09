@@ -20,11 +20,11 @@ class PageFractal : Page() {
     override val component = object : JComponent() {
         override fun paint(g: Graphics) {
             super.paint(g)
-            g.color = Color(s shl 6 xor s shl 12)
+            g.color = Color(- (s / 2) shl 8)
             val startTime = System.currentTimeMillis()
             draw(size.width / 2.0, size.height / 2.0, s, g)
             val time = System.currentTimeMillis() - startTime
-            if (time > 100 || s > 500)
+            if (time > 100 || s >= 511)
                 inc = false
             else if (s < 1)
                 inc = true

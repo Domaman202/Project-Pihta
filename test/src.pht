@@ -1,6 +1,74 @@
-(use-ctx pht phtx/ppl
+(progn
     (app-fn
-        (#show (presentation "Тестовая Презентация" 1000
+        (#show (presentation "Язык Программирования \"Пихта\"" 2500
+            (page-fractal)
             (page-list
-                (a-offset 127 127 127 127
-                    (e-image (inc-img "res/img0.jpg"))))))))
+                (e-title "Вступление" 36)
+                (e-image (inc-img "res/img2.jpeg")))
+            (page-list
+                (e-title "Появление \"Пихты\"" 36)
+                (e-text  (inc-txt "res/txt0.txt") 36))
+            (page-list
+                (e-title "Национальная идея" 36)
+                (e-image (inc-img "res/img5.jpg")))
+            (page-list
+                (e-title "Проблема множества языков" 36)
+                (c-pair
+                    (e-image (inc-img "res/img4.png"))
+                    (e-image (inc-img "res/img6.jpg"))))
+            (page-list
+                (e-title "Проблема ограничений языков" 36)
+                (c-pair
+                    (e-image (inc-img "res/img16.jpg"))
+                    (e-image (inc-img "res/img17.jpg"))))
+            (page-list
+                (e-title "Решаем проблемы! (Или как устроена Пихта?)" 36)
+                (e-text  (inc-txt "res/txt1.txt") 36)
+                (e-image (inc-img "res/img18.jpg")))
+            (page-list
+                (e-title "Модульная система" 36)
+                (c-pair
+                    (a-offset 0 0 80 0 (a-sized 820 480
+                        (e-image (inc-img "res/img24.png"))))
+                    (a-offset 0 0 80 0 (a-sized 820 480
+                        (e-image (inc-img "res/img25.png")))))
+                (e-image (inc-img "res/img26.png")))
+            (page-list
+                (e-title "Объектно-ориентированное программирование" 36)
+                (e-image (inc-img "res/img10.png")))
+            (page-list
+                (e-title "Синтаксис" 36)
+                (c-pair
+                    (a-sized -1 480 (e-image (inc-img "res/img27.png")))
+                    (a-sized -1 480 (e-image (inc-img "res/img28.png"))))
+                (a-sized -1 480 (e-image (inc-img "res/img29.png"))))
+            (page-list
+                (e-title "Привязка других языков" 36)
+                (e-image (inc-img "res/img30.png")))
+            (page-list
+                (e-title "Привязка других языков" 36)
+                (e-image (inc-img "res/img31.png")))
+            (page-list
+                (e-title "Макросы" 36)
+                (c-pair
+                    (e-image (inc-img "res/img32.png"))
+                    (a-sized 960 360
+                        (e-image (inc-img "res/img33.png")))))
+            (page-list
+                (e-title "Наши контакты" 36)
+                (a-offset 200 0 0 0
+                    (c-triple
+                        (e-title "Дискорд" 32)
+                        (e-title "Гитхаб" 32)
+                        (e-title "Телеграм" 32)))
+                (a-offset 120 0 0 0
+                    (c-triple
+                        (a-sized 640 480
+                            (e-image (inc-img "res/img19.png")))
+                        (a-sized 640 480
+                            (e-image (inc-img "res/img20.png")))
+                        (a-sized 640 480
+                            (e-image (inc-img "res/img21.png"))))))
+            (page-list
+                (e-title "Zа Россию!" 36)
+                (e-image (inc-img "res/img22.jpg")))))))

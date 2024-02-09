@@ -13,7 +13,7 @@ class EText(private val text: String, private val font: Int) : Element() {
         get() = FIXED
 
     override fun size(w: Dimension, g: Graphics2D): Size =
-        Size(w.width, g.getFontMetrics(Font("TimesRoman", ITALIC, font)).height * (text.count { it == '\n' } + 3))
+        Size(w.width, g.getFontMetrics(Font("TimesRoman", ITALIC, font)).height * (text.count { it == '\n' } + 2))
 
     override fun paint(o: Offset, f: Size, w: Dimension, g: Graphics2D) {
         g.setRenderingHint(KEY_TEXT_ANTIALIASING, VALUE_TEXT_ANTIALIAS_ON)
