@@ -13,15 +13,21 @@ import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.CompilingStage
 import ru.DmN.siberia.compiler.utils.javaClassVersion
-import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.desc
 
 object NCClass : IStdNodeCompiler<NodeType, ClassNode> {
     override fun compile(node: NodeType, compiler: Compiler, ctx: CompilationContext) {
-        compiler.stageManager.pushTask(CompilingStage.TYPES_PREDEFINE) {
-            val cn = ClassNode().apply {
+        compileAsm(node, compiler, ctx)
+    }
+
+    override fun compileVal(node: NodeType, compiler: Compiler, ctx: CompilationContext): Variable =
+        compileValAsm(node, compiler, ctx).first
+
+    override fun compileAsm(node: NodeType, compiler: Compiler, ctx: CompilationContext): ClassNode =
+        ClassNode().apply {
+            compiler.stageManager.pushTask(CompilingStage.TYPES_PREDEFINE) {
                 compiler.contexts.classes[node.type.name] = this
                 visit(
                     ctx.javaClassVersion,
@@ -43,26 +49,26 @@ object NCClass : IStdNodeCompiler<NodeType, ClassNode> {
             }
             compiler.stageManager.pushTask(CompilingStage.TYPES_DEFINE) {
                 if (node.info.type == OBJ_) {
-                    cn.visitField(
+                    visitField(
                         Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC + Opcodes.ACC_FINAL,
                         "INSTANCE",
-                        cn.name.desc,
+                        name.desc,
                         null,
                         null
                     )
-                    cn.visitMethod(Opcodes.ACC_STATIC, "<clinit>", "()V", null, null).run {
+                    visitMethod(Opcodes.ACC_STATIC, "<clinit>", "()V", null, null).run {
                         visitCode()
-                        visitTypeInsn(Opcodes.NEW, cn.name)
+                        visitTypeInsn(Opcodes.NEW, name)
                         visitInsn(Opcodes.DUP)
-                        visitMethodInsn(Opcodes.INVOKESPECIAL, cn.name, "<init>", "()V", false)
-                        visitFieldInsn(Opcodes.PUTSTATIC, cn.name, "INSTANCE", cn.name.desc)
+                        visitMethodInsn(Opcodes.INVOKESPECIAL, name, "<init>", "()V", false)
+                        visitFieldInsn(Opcodes.PUTSTATIC, name, "INSTANCE", name.desc)
                         visitInsn(Opcodes.RETURN)
                         visitEnd()
                     }
                 }
-                NCDefault.compile(node, compiler, ctx.with(ClassContext(cn, node.type)))
+                NCDefault.compile(node, compiler, ctx.with(ClassContext(this, node.type)))
                 if (node.info.type == OBJ_) {
-                    cn.methods.find { it.name == "<init>" && it.desc == "()V" } ?: cn.visitMethod(
+                    methods.find { it.name == "<init>" && it.desc == "()V" } ?: visitMethod(
                         Opcodes.ACC_PRIVATE,
                         "<init>",
                         "()V",
@@ -71,23 +77,18 @@ object NCClass : IStdNodeCompiler<NodeType, ClassNode> {
                     ).run {
                         visitCode()
                         visitVarInsn(Opcodes.ALOAD, 0)
-                        visitMethodInsn(Opcodes.INVOKESPECIAL, cn.superName, "<init>", "()V", false)
+                        visitMethodInsn(Opcodes.INVOKESPECIAL, superName, "<init>", "()V", false)
                         visitInsn(Opcodes.RETURN)
                         visitEnd()
                     }
                 }
             }
         }
-    }
 
-    override fun compileVal(node: NodeType, compiler: Compiler, ctx: CompilationContext): Variable {
-        compile(node, compiler, ctx)
-        compiler.stageManager.pushTask(CompilingStage.METHODS_BODY) {
-            ctx.method.node.visitFieldInsn(Opcodes.GETSTATIC, node.type.className, "INSTANCE", node.type.desc)
+    override fun compileValAsm(node: NodeType, compiler: Compiler, ctx: CompilationContext): Pair<Variable, ClassNode> =
+        Pair(Variable.tmp(node, node.type), compileAsm(node, compiler, ctx)).apply {
+            compiler.stageManager.pushTask(CompilingStage.METHODS_BODY) {
+                ctx.method.node.visitFieldInsn(Opcodes.GETSTATIC, node.type.className, "INSTANCE", node.type.desc)
+            }
         }
-        return Variable.tmp(node, node.type)
-    }
-
-    override fun getAsm(node: NodeType, compiler: Compiler, ctx: CompilationContext): ClassNode = // todo: тестовый код, потом поправить надо
-        compiler.contexts.classes[node.type.name]!!
 }

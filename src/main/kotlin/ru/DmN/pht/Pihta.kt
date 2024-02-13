@@ -1,16 +1,7 @@
 package ru.DmN.pht
 
-import ru.DmN.pht.ast.IInlinableNode
-import ru.DmN.pht.ast.IOpenlyNode
+import ru.DmN.pht.ast.*
 import ru.DmN.pht.jvm.PhtJvm
-import ru.DmN.pht.parsers.NPIfPlatform
-import ru.DmN.pht.parsers.NPInlBody
-import ru.DmN.pht.processor.utils.LinkedClassesNode
-import ru.DmN.pht.processors.*
-import ru.DmN.pht.ast.IAbstractlyNode
-import ru.DmN.pht.ast.IFinallyNode
-import ru.DmN.pht.ast.IStaticallyNode
-import ru.DmN.pht.ast.IVarargNode
 import ru.DmN.pht.node.NodeParsedTypes.*
 import ru.DmN.pht.node.NodeTypes.*
 import ru.DmN.pht.parser.utils.clearMacros
@@ -18,10 +9,7 @@ import ru.DmN.pht.parser.utils.macros
 import ru.DmN.pht.parser.utils.phtParseNode
 import ru.DmN.pht.parsers.*
 import ru.DmN.pht.processor.ctx.GlobalContext
-import ru.DmN.pht.processor.utils.classes
-import ru.DmN.pht.processor.utils.clazz
-import ru.DmN.pht.processor.utils.global
-import ru.DmN.pht.processor.utils.method
+import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.processors.*
 import ru.DmN.pht.unparsers.*
 import ru.DmN.pht.utils.addNP

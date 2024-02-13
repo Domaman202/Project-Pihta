@@ -7,7 +7,6 @@ import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.compiler.java.ctx.BodyContext
 import ru.DmN.pht.compiler.java.ctx.MethodContext
-import ru.DmN.pht.compiler.java.utils.classes
 import ru.DmN.pht.compiler.java.utils.clazz
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.compiler.java.utils.with
@@ -25,6 +24,10 @@ import ru.DmN.siberia.utils.VirtualType
 
 object NCDefn : IStdNodeCompiler<NodeDefn, MethodNode> {
     override fun compile(node: NodeDefn, compiler: Compiler, ctx: CompilationContext) {
+        compileAsm(node, compiler, ctx)
+    }
+
+    override fun compileAsm(node: NodeDefn, compiler: Compiler, ctx: CompilationContext): MethodNode {
         val cnode = ctx.clazz.node
         //
         val method = node.method
@@ -75,10 +78,9 @@ object NCDefn : IStdNodeCompiler<NodeDefn, MethodNode> {
                 }
             }
         }
+        //
+        return mnode
     }
-
-    override fun getAsm(node: NodeDefn, compiler: Compiler, ctx: CompilationContext): MethodNode = // todo: тестовый код, потом поправить надо
-        compiler.contexts.classes[node.method.declaringClass!!.name]!!.methods.find { it.name == node.method.name && it.desc == node.method.desc }!!
 
     private fun findOtherMethods(method: VirtualMethod, name: String): Sequence<VirtualMethod> {
         var seq = emptySequence<VirtualMethod>()
