@@ -1,5 +1,6 @@
 (progn
-    (@annotation ^java.lang.FunctionalInterface
-    (itf IFoo [^Object] (@abstract
+    (import jvm [[types [java.lang.SuppressWarnings]]])
+    (@annotation ^SuppressWarnings [[(@list "deprecated")]]
+    (itf IFoo [] (@abstract
         (defn foo ^void []))))
     (app-fn))

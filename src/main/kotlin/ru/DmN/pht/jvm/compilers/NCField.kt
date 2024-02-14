@@ -9,7 +9,7 @@ import ru.DmN.pht.utils.normalizeName
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 
-object NCField : IStdNodeCompiler<NodeFieldB, List<FieldNode>> {
+object NCField : IStdNodeCompiler<NodeFieldB, List<FieldNode>, Nothing> {
     override fun compile(node: NodeFieldB, compiler: Compiler, ctx: CompilationContext) {
         val clazz = ctx.clazz.node
         node.fields.forEach { it ->

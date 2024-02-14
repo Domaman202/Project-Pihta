@@ -22,7 +22,7 @@ import ru.DmN.siberia.utils.SubList
 import ru.DmN.siberia.utils.VirtualMethod
 import ru.DmN.siberia.utils.VirtualType
 
-object NCDefn : IStdNodeCompiler<NodeDefn, MethodNode> {
+object NCDefn : IStdNodeCompiler<NodeDefn, MethodNode, Nothing> {
     override fun compile(node: NodeDefn, compiler: Compiler, ctx: CompilationContext) {
         compileAsm(node, compiler, ctx)
     }

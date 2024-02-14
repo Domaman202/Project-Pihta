@@ -17,7 +17,7 @@ import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.desc
 
-object NCClass : IStdNodeCompiler<NodeType, ClassNode> {
+object NCClass : IStdNodeCompiler<NodeType, ClassNode, Nothing> {
     override fun compile(node: NodeType, compiler: Compiler, ctx: CompilationContext) {
         compileAsm(node, compiler, ctx)
     }

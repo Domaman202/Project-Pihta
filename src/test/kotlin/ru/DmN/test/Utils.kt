@@ -19,6 +19,7 @@ import ru.DmN.siberia.utils.Module
 import ru.DmN.siberia.utils.TypesProvider
 import java.io.File
 import java.io.FileOutputStream
+import java.net.URI
 import java.net.URLClassLoader
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -154,5 +155,5 @@ abstract class Module(private val dir: String) {
     }
 
     fun test(id: Int): Any? =
-        URLClassLoader(arrayOf(File("dump/$dir").toURL())).loadClass("Test$id").getMethod("test").invoke(null)
+        URLClassLoader(arrayOf(File("dump/$dir").toURI().toURL())).loadClass("Test$id").getMethod("test").invoke(null)
 }

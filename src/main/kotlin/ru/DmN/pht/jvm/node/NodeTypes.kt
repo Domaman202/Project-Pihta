@@ -15,6 +15,7 @@ enum class NodeTypes : INodeType {
 
     // @
     ANN_ANN_("@annotation", PROCESSED),
+    ANN_LIST_("@list", PROCESSED),
     ANN_SYNC_("@synchronized", PROCESSED);
 
     override val operation: String

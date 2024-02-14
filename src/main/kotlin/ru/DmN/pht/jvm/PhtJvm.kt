@@ -5,11 +5,11 @@ import ru.DmN.pht.ast.ISyncNode
 import ru.DmN.pht.compiler.java.compilers.*
 import ru.DmN.pht.compiler.java.utils.classes
 import ru.DmN.pht.jvm.compilers.*
-import ru.DmN.pht.jvm.node.NodeParsedTypes.ANN_ANN
-import ru.DmN.pht.jvm.node.NodeParsedTypes.ANN_SYNC
+import ru.DmN.pht.jvm.node.NodeParsedTypes.*
 import ru.DmN.pht.jvm.node.NodeTypes.*
 import ru.DmN.pht.jvm.processors.NRAnnotation
 import ru.DmN.pht.jvm.processors.NRClassOf
+import ru.DmN.pht.jvm.processors.NRList
 import ru.DmN.pht.jvm.processors.NRSync
 import ru.DmN.pht.node.NodeTypes.*
 import ru.DmN.pht.processors.NRSA
@@ -36,6 +36,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
 
         // @
         addSANP(ANN_ANN)
+        addSANP(ANN_LIST)
         addSANP(ANN_SYNC)
     }
 
@@ -50,6 +51,8 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         // @
         addSNU(ANN_ANN)
         addSNU(ANN_ANN_)
+        addSNU(ANN_LIST)
+        addSNU(ANN_LIST_)
         addSNU(ANN_SYNC)
         addSNU(ANN_SYNC_)
     }
@@ -63,8 +66,10 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(SYNC_,     NRProgn)
 
         // @
-        add(ANN_ANN,  NRAnnotation)
-        add(ANN_ANN_, NRAnnotation)
+        add(ANN_ANN,   NRAnnotation)
+        add(ANN_ANN_,  NRAnnotation)
+        add(ANN_LIST,  NRList)
+        add(ANN_LIST_, NRList)
         add(ANN_SYNC, NRSA { it, _, _ -> if (it is ISyncNode) it.sync = true })
     }
 
@@ -160,6 +165,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(ANN_ANN_,      NCAnnotation)
         add(ANN_FINAL_,    NCDefault)
         add(ANN_INLINE_,   NCDefault)
+        add(ANN_LIST_,     NCList)
         add(ANN_OPEN_,     NCDefault)
         add(ANN_STATIC_,   NCDefault)
         add(ANN_SYNC_,     NCDefault)

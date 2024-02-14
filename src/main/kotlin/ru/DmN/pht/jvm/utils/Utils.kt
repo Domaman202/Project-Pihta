@@ -11,12 +11,21 @@ import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.compiler.java.ctx.BodyContext
 import ru.DmN.pht.compiler.java.ctx.ClassContext
 import ru.DmN.pht.compiler.java.ctx.MethodContext
+import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
 import ru.DmN.pht.processor.utils.classes
 import ru.DmN.pht.processor.utils.isEnum
 import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.ctx.IContextCollection
 import ru.DmN.siberia.ctx.IContextKey
+
+fun Compiler.computeValue(node: Node, ctx: CompilationContext): Any? =
+    this.get(ctx, node).let {
+        if (it is IStdNodeCompiler<*, *, *>)
+            (it as IStdNodeCompiler<Node, *, *>).computeValue(node, this, ctx)
+        else throw UnsupportedOperationException()
+    }
 
 fun <T : IContextCollection<T>> T.with(ctx: ClassContext) =
     this.with(ContextKeys.CLASS, ctx).apply { this.classes = LinkedClassesNode(this.classes, ctx.clazz) }
