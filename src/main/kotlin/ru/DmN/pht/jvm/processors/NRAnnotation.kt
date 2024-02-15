@@ -3,6 +3,7 @@ package ru.DmN.pht.jvm.processors
 import ru.DmN.pht.jvm.ast.NodeAnnotation
 import ru.DmN.pht.jvm.node.NodeTypes.ANN_ANN_
 import ru.DmN.pht.utils.computeList
+import ru.DmN.pht.utils.computeListOr
 import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.computeType
 import ru.DmN.siberia.Processor
@@ -32,12 +33,14 @@ object NRAnnotation : INodeProcessor<NodeNodesList> {
         processor.stageManager.pushTask(ProcessingStage.METHODS_BODY) {
             processor.computeList(node.nodes[1], ctx)
                 .map { it ->
-                    processor.computeList(it, ctx).let {
+                    processor.computeListOr(it, ctx)?.let {
                         if (it.size == 2)
                             Pair(processor.computeString(it[0], ctx), it[1])
                         else Pair(null, it[0])
-                    }
-                }.forEach { args[it.first] = processor.process(it.second, ctx, ValType.VALUE)!! }
+                    } ?: Pair(null, it)
+                }.forEach {
+                    args[it.first] = processor.process(it.second, ctx, ValType.VALUE)!!
+                }
             //
             if (node.nodes.isNotEmpty()) {
                 val list =

@@ -161,7 +161,7 @@ fun Processor.computeListOr(node: Node, ctx: ProcessingContext): List<Node>? =
     this.get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeList(node, this, ctx)
-        else throw UnsupportedOperationException()
+        else null
     }
 
 fun Processor.computeType(node: Node, ctx: ProcessingContext): VirtualType =

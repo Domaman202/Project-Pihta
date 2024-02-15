@@ -54,20 +54,23 @@ object NCAnnotation : INodeCompiler<NodeAnnotation> {
             else -> return
         }
         //
-        var i = 0
         val names = node.type!!.methods
-        node.arguments.entries.stream()
-            .map {
+        node.arguments.entries.asSequence()
+            .mapIndexed { i, it ->
                 Pair(
                     it.key ?: names[i].name,
                     compiler.computeValue(it.value, ctx)
-                ).apply { i++ }
-            }.forEach { it ->
+                )
+            }.forEachIndexed { i, it ->
                 val name = it.first
                 val value = it.second
                 if (value is Array<*>) {
                     val arr = visitor.visitArray(name)
                     value.forEach { arr.visit(null, it) }
+                    arr.visitEnd()
+                } else if (names[i].rettype.isArray) {
+                    val arr = visitor.visitArray(name)
+                    arr.visit(null, it.second)
                     arr.visitEnd()
                 } else visitor.visit(name, value)
             }
