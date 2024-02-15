@@ -9,7 +9,7 @@ import java.awt.Dimension
 import java.awt.Graphics2D
 import kotlin.math.max
 
-class PageList(val list: MutableList<Element> = mutableListOf()) : Page() {
+open class PageList(val list: MutableList<Element> = mutableListOf()) : Page() {
     operator fun plusAssign(element: Element) {
         list.add(element)
     }

@@ -5,12 +5,9 @@ import com.itextpdf.text.Image
 import com.itextpdf.text.Rectangle
 import com.itextpdf.text.pdf.PdfWriter
 import ru.DmN.phtx.ppl.page.Page
-import java.awt.Color
-import java.awt.Font
+import java.awt.*
 import java.awt.Font.BOLD
 import java.awt.Font.ITALIC
-import java.awt.Graphics
-import java.awt.Robot
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 import java.awt.event.KeyEvent.*

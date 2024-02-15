@@ -1,6 +1,6 @@
 (progn
-    (import jvm [[types [java.lang.SuppressWarnings]]])
-    (@annotation ^SuppressWarnings ["deprecated"]
-    (itf IFoo [] (@abstract
-        (defn foo ^void []))))
-    (app-fn))
+    (app-fn
+        (#show (presentation "Тестовая презентация" 2500
+            (page-sized-list 1920 1080
+                (a-offset 200 200 400 400
+                    (e-image (inc-img "res/img3.jpg"))))))))

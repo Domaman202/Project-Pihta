@@ -7,20 +7,25 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.ValType.NO_VALUE
+import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.processors.NRUseCtx
 
-object NRPageList : INodeProcessor<NodeNodesList> {
+object NRPageSizedList : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
         val info = node.info
         val body = mutableListOf<Node>(
             nodeDef(
                 info,
                 "phtx\$ppl\$page",
-                nodeNew(info, "ru.DmN.phtx.ppl.page.PageList", mutableListOf())
+                nodeNew(
+                    info,
+                    "ru.DmN.phtx.ppl.page.PageSizedList",
+                    node.nodes.dropLast(node.nodes.size - 2).map { processor.process(it, ctx, VALUE)!! } // todo: dropLast for sequence
+                )
             )
         )
-        body += node.nodes
+        body += node.nodes.drop(2)
         body += nodeGetVariable(info, "phtx\$ppl\$page")
         return NRUseCtx.process(
             nodeUseCtx(

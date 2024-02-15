@@ -22,6 +22,7 @@ enum class NodeTypes : INodeType {
     // p
     PAGE_FRACTAL("page-fractal", PARSED),
     PAGE_LIST("page-list", PARSED),
+    PAGE_SIZED_LIST("page-sized-list", PARSED),
     PRESENTATION("presentation", PARSED);
 
     override val operation: String
