@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "ru.DmN.pht"
-version = "1.14.3"
+version = "1.15.0"
 
 repositories {
     mavenCentral()
@@ -12,16 +12,12 @@ repositories {
 }
 
 dependencies {
-    implementation("ru.DmN.siberia:Project-Siberia:1.11.1")
+    api("ru.DmN.siberia:Project-Siberia:1.11.1")
     implementation(kotlin("reflect"))
     implementation("org.ow2.asm:asm:9.5")
     implementation("org.ow2.asm:asm-tree:9.5")
     implementation("org.ow2.asm:asm-util:9.5")
     implementation("org.ow2.asm:asm-commons:9.5")
-    implementation("uk.co.caprica:vlcj:4.8.2")
-    implementation("com.itextpdf:itextpdf:5.5.13.3")
-    testImplementation(kotlin("test"))
-    testImplementation("org.apache.commons:commons-lang3:3.14.0")
 }
 
 java {
