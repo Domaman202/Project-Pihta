@@ -70,6 +70,7 @@ enum class NodeTypes : INodeType {
     IMPORT_("import", PROCESSED),
     INC_PRE_("inc", PROCESSED),
     INC_POST_("inc-", PROCESSED),
+    INC_PHT("inc-pht", PARSED),
     INL_BODY_A("inl-body", PARSED),
     INL_BODY_B("inl-body", PARSED),
     INL_BODY_("inl-body", PROCESSED),

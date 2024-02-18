@@ -93,6 +93,7 @@ object Pihta : Module("pht") {
         addSNP(IMPORT)
         addSNP(INC_PRE)
         addSNP(INC_POST)
+        addNP("inc-pht",      NPIncPht)
         addNP("inl-body",     NPInlBody)
         addSNP(INL_DEF)
         addSNP(INNER)
@@ -311,6 +312,7 @@ object Pihta : Module("pht") {
         add(INC_PRE_,       NUIncDec)
         addSNU(INC_POST)
         add(INC_POST_,      NUIncDec)
+        addSNU(INC_PHT)
         add(INL_BODY_,      NUInlBody)
         addSNU(INL_DEF)
         // INL_DEF_
@@ -508,6 +510,7 @@ object Pihta : Module("pht") {
         add(INC_PRE_,      NRIncDecB)
         add(INC_POST,      NRIncDec)
         add(INC_POST_,     NRIncDecB)
+        add(INC_PHT,       NRIncPht)
         add(INL_BODY_A,    NRInlBodyA)
         add(INL_BODY_B,    NRInlBodyB)
         add(INL_BODY_,     NRInlBodyA)
