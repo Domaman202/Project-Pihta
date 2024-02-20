@@ -152,6 +152,7 @@ object Pihta : Module("pht") {
         addSNP(TYPEOF)
         // u
         addNP("unit",   NPUnit)
+        addSNP(UNREALIZED)
         // v
         addSNP(VALN)
         addNP("valn!",  NPValnB)
@@ -397,6 +398,7 @@ object Pihta : Module("pht") {
         addSNU(TYPEOF)
         // u
         add(UNIT,           NUUnit)
+        addSNU(UNREALIZED)
         // v
         add(VALN,           NUValn)
         add(VALN_,          NUValn)
@@ -590,6 +592,7 @@ object Pihta : Module("pht") {
         add(TYPEOF,        NRTypeof)
         // u
         add(UNIT,          NRUnit)
+        add(UNREALIZED,    NRUnrealized)
         // v
         add(VALN,          NRValn)
         add(VALN_,         NRValn)

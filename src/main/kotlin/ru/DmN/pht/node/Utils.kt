@@ -108,6 +108,9 @@ fun nodeMCall(info: INodeInfo, type: String, name: String, args: List<Node>) =
 // n
 fun nodeName(info: INodeInfo, name: String) =
     NodeGetOrName(info.withType(NAME), name, false)
+fun nodeNew(info: INodeInfo, type: String) =
+    NodeNodesList(info.withType(NEW),
+        mutableListOf(nodeValueClass(info, type)))
 fun nodeNew(info: INodeInfo, type: String, args: List<Node>) =
     NodeNodesList(info.withType(NEW),
         mutableListOf<Node>(nodeValueClass(info, type)).apply { addAll(args) })
@@ -119,6 +122,10 @@ fun nodeObj(info: INodeInfo, name: String, parents: List<String>, nodes: List<No
     NodeNodesList(info.withType(OBJ),
         mutableListOf(nodeValue(info, name), nodeValn(info, parents.mapMutable { nodeValue(info, it) })).apply { addAll(nodes) })
 // t
+fun nodeThrow(info: INodeInfo, clazz: String) =
+    NodeNodesList(info.withType(THROW), mutableListOf(nodeNew(info, clazz)))
+fun nodeThrow(info: INodeInfo, clazz: String, args: List<Node>) =
+    NodeNodesList(info.withType(THROW), mutableListOf(nodeNew(info, clazz, args)))
 fun nodeTypesGet(info: INodeInfo, name: String, type: VirtualType) =
     NodeTypedGet(info.withType(TYPED_GET_), name, type)
 // u
