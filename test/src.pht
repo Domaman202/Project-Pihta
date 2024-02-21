@@ -1,2 +1,4 @@
-(app-fn
-    (unrealized))
+(progn
+    (import jvm [[types [java.lang.*]]])
+    (app-fn
+        (println ^System)))

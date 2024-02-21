@@ -18,6 +18,7 @@ dependencies {
     implementation("org.ow2.asm:asm-tree:9.5")
     implementation("org.ow2.asm:asm-util:9.5")
     implementation("org.ow2.asm:asm-commons:9.5")
+    testImplementation(kotlin("test"))
 }
 
 java {
