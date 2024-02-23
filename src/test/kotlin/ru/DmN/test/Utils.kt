@@ -49,7 +49,7 @@ abstract class Module(private val dir: String) {
 
     fun unparse() {
         val mp = ModulesProvider.of(JVM)
-        val module = (Parser(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module()) as NodeModule).module
+        val module = (Parser(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(JVM)) as NodeModule).module
         module.init(JVM, mp)
         val tp = TypesProvider.java()
         File("dump/$dir/unparse/parsed").mkdirs()
@@ -86,7 +86,7 @@ abstract class Module(private val dir: String) {
 
     private fun print() {
         val mp = ModulesProvider.of(JVM)
-        val module = (Parser(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module()) as NodeModule).module
+        val module = (Parser(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(JVM)) as NodeModule).module
         module.init(JVM, mp)
         val tp = TypesProvider.java()
         File("dump/$dir/print").mkdirs()
@@ -131,7 +131,7 @@ abstract class Module(private val dir: String) {
 
     fun compile() {
         val mp = ModulesProvider.of(JVM)
-        val module = (Parser(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module()) as NodeModule).module
+        val module = (Parser(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(JVM)) as NodeModule).module
         module.init(JVM, mp)
         val tp = TypesProvider.java()
         val processed = ArrayList<Node>()

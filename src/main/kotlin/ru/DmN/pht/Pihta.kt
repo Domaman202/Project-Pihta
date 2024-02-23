@@ -629,7 +629,10 @@ object Pihta : Module("pht") {
             ctx.macros = Stack()
             ctx.parsersPool.push(parser.parseNode)
             parser.parseNode = { phtParseNode(it) }
-            uses.add(uses.indexOf("pht") + 1, "pht/jvm")
+            // Платформно-зависимые функции
+            if (ctx.platform == JVM)
+                uses += "pht/jvm"
+            //
             super.load(parser, ctx, uses)
         }
     }
@@ -644,8 +647,6 @@ object Pihta : Module("pht") {
         if (ctx.loadedModules.contains(this)) {
             ctx.clearMacros()
             parser.parseNode = ctx.parsersPool.pop()
-            if (ctx.platform == JVM)
-                PhtJvm.unload(parser, ctx)
             super.unload(parser, ctx)
         }
     }
@@ -655,8 +656,6 @@ object Pihta : Module("pht") {
             processor.contexts.macros_list = HashMap()
             ctx.global = GlobalContext()
             ctx.classes = LinkedClassesNode.LinkedClassesNodeStart as LinkedClassesNode<VirtualType>
-            if (ctx.platform != JVM)
-                uses.removeAt(uses.indexOf("pht") + 1)
             return super.load(processor, ctx, uses)
         }
         return false
@@ -666,10 +665,6 @@ object Pihta : Module("pht") {
         if (!ctx.loadedModules.contains(this)) {
             // Контексты
             ctx.classes = LinkedClassesNode.LinkedClassesNodeStart as LinkedClassesNode<VirtualType>
-            // Платформно-зависимые функции
-            if (ctx.platform == JVM)
-                ctx.loadedModules += PhtJvm
-            //
             super.load(compiler, ctx)
         }
     }
