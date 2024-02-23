@@ -1,6 +1,5 @@
 package ru.DmN.test
 
-import ru.DmN.pht.std.module.StdModule
 import ru.DmN.pht.std.module.ast.NodeModule
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.Parser
@@ -10,23 +9,22 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.Platforms
+import ru.DmN.siberia.processor.utils.Platforms.JVM
 import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processor.utils.with
-import ru.DmN.siberia.processors.NRUseCtx
+import ru.DmN.siberia.processors.NRUseCtx.injectModules
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.utils.Module
+import ru.DmN.siberia.utils.ModulesProvider
 import ru.DmN.siberia.utils.TypesProvider
 import java.io.File
 import java.io.FileOutputStream
-import java.net.URI
 import java.net.URLClassLoader
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import ru.DmN.test.Module as SiberiaModule
 
 abstract class Module(private val dir: String) {
-    val module = (Parser(Module.getModuleFile(dir)).parseNode(ParsingContext.of(StdModule)) as NodeModule).module
 
     @Test
     open fun testPrint() {
@@ -38,8 +36,8 @@ abstract class Module(private val dir: String) {
     open fun testUnparse() {
         unparse()
         unparseCheck()
-        (object : SiberiaModule("${module.name}/unparse/parsed") { }).compileTest()
-        (object : SiberiaModule("${module.name}/unparse/processed") { }).compileTest()
+        (object : SiberiaModule("${dir}/unparse/parsed") { }).compileTest()
+        (object : SiberiaModule("${dir}/unparse/processed") { }).compileTest()
     }
 
     @Test
@@ -50,30 +48,30 @@ abstract class Module(private val dir: String) {
     open fun SiberiaModule.compileTest() = compile()
 
     fun unparse() {
-        module.nodes.clear()
-        module.init = false
-        module.init(Platforms.UNIVERSAL)
+        val mp = ModulesProvider.of(JVM)
+        val module = (Parser(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module()) as NodeModule).module
+        module.init(JVM, mp)
         val tp = TypesProvider.java()
         File("dump/$dir/unparse/parsed").mkdirs()
         FileOutputStream("dump/$dir/unparse/parsed/unparse.pht").use { out ->
-            val unparser = Unparser(1024*1024)
+            val unparser = Unparser(mp, 1024*1024)
             val uctx = UnparsingContext.base()
             module.nodes.forEach { unparser.unparse(it, uctx, 0) }
             out.write(unparser.out.toString().toByteArray())
         }
         val processed = ArrayList<Node>()
-        val processor = Processor(tp)
-        NRUseCtx.injectModules(
+        val processor = Processor(mp, tp)
+        mp.injectModules(
             mutableListOf(module.name),
             processed,
             processed,
             processor,
-            ProcessingContext.base().with(Platforms.JVM).apply { this.module = this@Module.module }
+            ProcessingContext.base().with(JVM).apply { this.module = module }
         )
         processor.stageManager.runAll()
         File("dump/$dir/unparse/processed").mkdirs()
         FileOutputStream("dump/$dir/unparse/processed/unparse.pht").use { out ->
-            val unparser = Unparser(1024*1024)
+            val unparser = Unparser(mp, 1024*1024)
             val uctx = UnparsingContext.base()
             processed.forEach { unparser.unparse(it, uctx, 0) }
             out.write(unparser.out.toString().toByteArray())
@@ -81,15 +79,15 @@ abstract class Module(private val dir: String) {
     }
 
     private fun unparseCheck() {
-        assertEquals(String(File("dump/$dir/unparse/parsed/unparse.pht").readBytes()), module.getModuleFile("unparse/parsed/unparse.pht"), "parsed.unparse.pht")
-        assertEquals(String(File("dump/$dir/unparse/processed/unparse.pht").readBytes()), module.getModuleFile("unparse/processed/unparse.pht"), "processed.unparse.pht")
+        assertEquals(readDumpFile("unparse/parsed/unparse.pht"),    readTestFile("unparse/parsed/unparse.pht"),     "parsed.unparse.pht")
+        assertEquals(readDumpFile("unparse/processed/unparse.pht"), readTestFile("unparse/processed/unparse.pht"),  "processed.unparse.pht")
     }
 
 
     private fun print() {
-        module.nodes.clear()
-        module.init = false
-        module.init(Platforms.UNIVERSAL)
+        val mp = ModulesProvider.of(JVM)
+        val module = (Parser(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module()) as NodeModule).module
+        module.init(JVM, mp)
         val tp = TypesProvider.java()
         File("dump/$dir/print").mkdirs()
         FileOutputStream("dump/$dir/print/parsed.short.print").use { short ->
@@ -103,13 +101,13 @@ abstract class Module(private val dir: String) {
             }
         }
         val processed = ArrayList<Node>()
-        val processor = Processor(tp)
-        NRUseCtx.injectModules(
+        val processor = Processor(mp, tp)
+        mp.injectModules(
             mutableListOf(module.name),
             processed,
             processed,
             processor,
-            ProcessingContext.base().with(Platforms.JVM).apply { this.module = this@Module.module }
+            ProcessingContext.base().with(JVM).apply { this.module = module }
         )
         processor.stageManager.runAll()
         FileOutputStream("dump/$dir/print/processed.short.print").use { short ->
@@ -125,28 +123,28 @@ abstract class Module(private val dir: String) {
     }
 
     private fun printCheck() {
-        assertEquals(String(File("dump/$dir/print/parsed.short.print").readBytes()), module.getModuleFile("print/parsed.short.print"), "parsed.short.print")
-        assertEquals(String(File("dump/$dir/print/processed.short.print").readBytes()), module.getModuleFile("print/processed.short.print"), "processed.short.print")
-        assertEquals(String(File("dump/$dir/print/parsed.long.print").readBytes()), module.getModuleFile("print/parsed.long.print"), "parsed.long.print")
-        assertEquals(String(File("dump/$dir/print/processed.long.print").readBytes()), module.getModuleFile("print/processed.long.print"), "processed.long.print")
+        assertEquals(readDumpFile("print/parsed.short.print"),      readTestFile("print/parsed.short.print"),   "parsed.short.print")
+        assertEquals(readDumpFile("print/processed.short.print"),   readTestFile("print/processed.short.print"),"processed.short.print")
+        assertEquals(readDumpFile("print/parsed.long.print"),       readTestFile("print/parsed.long.print"),    "parsed.long.print")
+        assertEquals(readDumpFile("print/processed.long.print"),    readTestFile("print/processed.long.print"), "processed.long.print")
     }
 
     fun compile() {
-        module.nodes.clear()
-        module.init = false
-        module.init(Platforms.UNIVERSAL)
+        val mp = ModulesProvider.of(JVM)
+        val module = (Parser(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module()) as NodeModule).module
+        module.init(JVM, mp)
         val tp = TypesProvider.java()
         val processed = ArrayList<Node>()
-        val processor = Processor(tp)
-        NRUseCtx.injectModules(
+        val processor = Processor(mp, tp)
+        mp.injectModules(
             mutableListOf(module.name),
             processed,
             processed,
             processor,
-            ProcessingContext.base().with(Platforms.JVM).apply { this.module = this@Module.module }
+            ProcessingContext.base().with(JVM).apply { this.module = module }
         )
         processor.stageManager.runAll()
-        val compiler = Compiler(tp)
+        val compiler = Compiler(mp, tp)
         val cctx = CompilationContext.base()
         processed.forEach { compiler.compile(it, cctx) }
         compiler.stageManager.runAll()
@@ -156,4 +154,9 @@ abstract class Module(private val dir: String) {
 
     fun test(id: Int): Any? =
         URLClassLoader(arrayOf(File("dump/$dir").toURI().toURL())).loadClass("Test$id").getMethod("test").invoke(null)
+
+    private fun readDumpFile(file: String) =
+        File("dump/$dir/$file").readText()
+    private fun readTestFile(file: String) =
+        String(Module::class.java.getResourceAsStream("/$dir/$file")!!.readBytes())
 }

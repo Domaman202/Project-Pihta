@@ -12,9 +12,7 @@ import ru.DmN.siberia.processors.INodeProcessor
 
 object NRIncPht : INodeProcessor<NodeIncPht> {
     override fun process(node: NodeIncPht, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
-        val module = ctx.module
-        //
         val file = processor.computeString(node.nodes[0], ctx)
-        return processor.process(Parser(module.getModuleFile(file)).parseNode(node.ctx)!!, ctx, mode)
+        return processor.process(Parser(ctx.module.getModuleFile(file), processor.mp).parseNode(node.ctx)!!, ctx, mode)
     }
 }
