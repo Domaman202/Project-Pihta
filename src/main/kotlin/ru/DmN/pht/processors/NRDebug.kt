@@ -1,5 +1,6 @@
 package ru.DmN.pht.processors
 
+import ru.DmN.pht.node.nodePrintln
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -12,5 +13,5 @@ object NRDebug : INodeProcessor<Node> {
         null
 
     override fun process(node: Node, processor: Processor, ctx: ProcessingContext, mode: ValType): Node =
-        node
+        NRPrint.process(nodePrintln(node.info, node.info.print("Точка отладки.\nтест!")), processor, ctx, ValType.NO_VALUE)
 }

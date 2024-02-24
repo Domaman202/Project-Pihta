@@ -117,6 +117,10 @@ fun nodeNew(info: INodeInfo, type: String, args: List<Node>) =
 fun nodeNewArray(info: INodeInfo, type: String, size: Int) =
     NodeNodesList(info.withType(NEW_ARRAY),
         mutableListOf(nodeValueClass(info, type), nodeValue(info, size)))
+// p
+fun nodePrintln(info: INodeInfo, message: String) =
+    NodeNodesList(info.withType(PRINTLN),
+        mutableListOf(nodeValue(info, message)))
 // o
 fun nodeObj(info: INodeInfo, name: String, parents: List<String>, nodes: List<Node>) =
     NodeNodesList(info.withType(OBJ),

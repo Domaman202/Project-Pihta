@@ -35,7 +35,7 @@ enum class NodeTypes : INodeType {
     CTOR_("ctor", PROCESSED),
     CYCLE_("cycle", PROCESSED),
     // d
-    DEBUG("debug", true, true),
+    DEBUG("debug", PARSED),
     DEC_PRE_("dec", PROCESSED),
     DEC_POST_("dec-", PROCESSED),
     DEF("def", PARSED),

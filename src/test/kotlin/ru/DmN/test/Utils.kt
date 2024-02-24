@@ -11,6 +11,7 @@ import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.Platforms.JVM
 import ru.DmN.siberia.processor.utils.module
+import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processor.utils.with
 import ru.DmN.siberia.processors.NRUseCtx.injectModules
 import ru.DmN.siberia.unparser.UnparsingContext
@@ -55,7 +56,7 @@ abstract class Module(private val dir: String) {
         File("dump/$dir/unparse/parsed").mkdirs()
         FileOutputStream("dump/$dir/unparse/parsed/unparse.pht").use { out ->
             val unparser = Unparser(mp, 1024*1024)
-            val uctx = UnparsingContext.base()
+            val uctx = UnparsingContext.base().apply { this.platform = JVM }
             module.nodes.forEach { unparser.unparse(it, uctx, 0) }
             out.write(unparser.out.toString().toByteArray())
         }
@@ -72,7 +73,7 @@ abstract class Module(private val dir: String) {
         File("dump/$dir/unparse/processed").mkdirs()
         FileOutputStream("dump/$dir/unparse/processed/unparse.pht").use { out ->
             val unparser = Unparser(mp, 1024*1024)
-            val uctx = UnparsingContext.base()
+            val uctx = UnparsingContext.base().apply { this.platform = JVM }
             processed.forEach { unparser.unparse(it, uctx, 0) }
             out.write(unparser.out.toString().toByteArray())
         }
