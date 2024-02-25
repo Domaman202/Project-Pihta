@@ -33,7 +33,7 @@ object NUDefn : INodeUnparser<NodeDefn> {
     fun unparseGenerics(node: NodeDefn, unparser: Unparser) {
         unparser.out.apply {
             append(" [")
-            node.method.generics.entries.stream().skip(node.method.declaringClass!!.generics.size.toLong())
+            node.method.generics.entries.stream().skip(node.method.declaringClass.generics.size.toLong())
                 .forEach { append('[').append(it.key).append(' ').append(it.value.nameWithGenerics).append(']') }
             append("] ")
         }

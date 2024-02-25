@@ -84,7 +84,7 @@ object NCDefn : IStdNodeCompiler<NodeDefn, MethodNode, Nothing> {
 
     private fun findOtherMethods(method: VirtualMethod, name: String): Sequence<VirtualMethod> {
         var seq = emptySequence<VirtualMethod>()
-        method.declaringClass!!.parents.forEach { seq += findMethods(it, name) }
+        method.declaringClass.parents.forEach { seq += findMethods(it, name) }
         return seq
             .filter { !it.modifiers.static }
             .filter { it.name == name }

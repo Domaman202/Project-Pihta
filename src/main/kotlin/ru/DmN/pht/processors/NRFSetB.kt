@@ -55,7 +55,7 @@ object NRFSetB : INodeProcessor<NodeFieldSet> {
                         result.compression
                     ),
                     null,
-                    nodeValueClass(info, result.method.declaringClass!!.name),
+                    nodeValueClass(info, result.method.declaringClass.name),
                     result.method,
                     NodeMCall.Type.VIRTUAL
                 )

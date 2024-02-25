@@ -16,7 +16,7 @@ object NCRFn : INodeCompiler<NodeRFn> {
     override fun compileVal(node: NodeRFn, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.apply {
             node.method!!.run {
-                val declName = declaringClass!!.className
+                val declName = declaringClass.className
                 if (modifiers.static) {
                     visitInvokeDynamicInsn(
                         node.lambda!!.name,
@@ -34,7 +34,7 @@ object NCRFn : INodeCompiler<NodeRFn> {
                             declName,
                             name,
                             desc,
-                            declaringClass!!.isInterface
+                            declaringClass.isInterface
                         ),
                         Type.getType(desc),
                     )

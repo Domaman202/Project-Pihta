@@ -33,7 +33,7 @@ object NRSet : INodeProcessor<NodeSet> {
         val field = clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields    .find { it.name == node.name } }.first()!!
         return NodeFSet(
             info.withType(NodeTypes.FSET_),
-            mutableListOf<Node>(if (field.modifiers.isStatic) nodeValueClass(info, field.declaringClass!!.name) else nodeGetOrName(info, node.name)).apply { addAll(value) },
+            mutableListOf<Node>(if (field.modifiers.isStatic) nodeValueClass(info, field.declaringClass.name) else nodeGetOrName(info, node.name)).apply { addAll(value) },
             field
         )
     }

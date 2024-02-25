@@ -36,7 +36,7 @@ object NRCompare : INodeProcessor<NodeNodesList> {
                 info.withType(MCALL_),
                 NRMath.processArguments(info, processor, ctx, listOf(nodes[0]) + result.args, result),
                 null,
-                nodeValueClass(info, result.method.declaringClass!!.name),
+                nodeValueClass(info, result.method.declaringClass.name),
                 result.method,
                 EXTEND
             )

@@ -12,7 +12,7 @@ import ru.DmN.pht.compiler.java.utils.method
 object NCNew : INodeCompiler<NodeNew> {
     override fun compileVal(node: NodeNew, compiler: Compiler, ctx: CompilationContext): Variable {
         node.ctor.run {
-            val type = declaringClass!!
+            val type = declaringClass
             val desc = desc
             ctx.method.node.run {
                 visitTypeInsn(Opcodes.NEW, type.className)

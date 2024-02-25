@@ -14,13 +14,13 @@ object NCFSet : INodeCompiler<NodeFSet> {
             if (node.field.modifiers.isStatic)
                 visitFieldInsn(
                     Opcodes.PUTSTATIC,
-                    node.field.declaringClass!!.className,
+                    node.field.declaringClass.className,
                     node.field.name,
                     compiler.compileVal(node.nodes[1], ctx).apply { load(this, this@run) }.type().desc
                 )
             else {
                 val types = node.nodes.map { compiler.compileVal(it, ctx).apply { load(this, this@run) }.type() }
-                visitFieldInsn(Opcodes.PUTFIELD, node.field.declaringClass!!.className, node.field.name, types[1].desc)
+                visitFieldInsn(Opcodes.PUTFIELD, node.field.declaringClass.className, node.field.name, types[1].desc)
             }
         }
     }

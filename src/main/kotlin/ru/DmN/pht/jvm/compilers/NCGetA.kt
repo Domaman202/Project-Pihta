@@ -23,7 +23,7 @@ object NCGetA : INodeCompiler<NodeGet> {
                 val field = ctx.clazz.clazz.fields.find { it.name == name }!!
                 visitFieldInsn(
                     Opcodes.GETFIELD,
-                    field.declaringClass!!.className,
+                    field.declaringClass.className,
                     name,
                     field.desc
                 )
@@ -34,7 +34,7 @@ object NCGetA : INodeCompiler<NodeGet> {
                 val field = ctx.clazz.clazz.fields.find { it.name == name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == name } }.first()!!
                 visitFieldInsn(
                     Opcodes.GETSTATIC,
-                    field.declaringClass!!.className,
+                    field.declaringClass.className,
                     name,
                     field.desc
                 )

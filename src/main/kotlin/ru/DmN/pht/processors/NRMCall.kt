@@ -166,7 +166,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                     when (result.type) {
                         UNKNOWN -> result.method.run {
                             if (modifiers.static)
-                                nodeValueClass(instance.info, declaringClass!!.name)
+                                nodeValueClass(instance.info, declaringClass.name)
                             else throw RuntimeException()
                         }
 
@@ -174,7 +174,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                         else -> throw RuntimeException()
                     }
                 else if (np is IAdaptableProcessor<*>)
-                    (np as IAdaptableProcessor<Node>).adaptToType(result.method.declaringClass!!, instance, processor, ctx)
+                    (np as IAdaptableProcessor<Node>).adaptToType(result.method.declaringClass, instance, processor, ctx)
                 else instance
             }
         }

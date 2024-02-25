@@ -60,7 +60,7 @@ object NRFGetB : INodeProcessor<NodeFMGet> {
                             result.second!!.compression
                         ),
                         null,
-                        nodeValueClass(info, method.declaringClass!!.name),
+                        nodeValueClass(info, method.declaringClass.name),
                         method,
                         VIRTUAL
                     )

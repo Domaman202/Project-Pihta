@@ -34,15 +34,15 @@ object NCMCall : INodeCompiler<NodeMCall> {
                 mnode.visitMethodInsn(
                     if (modifiers.static)
                         Opcodes.INVOKESTATIC
-                    else if (declaringClass!!.isInterface)
+                    else if (declaringClass.isInterface)
                         Opcodes.INVOKEINTERFACE
                     else if (node.type == NodeMCall.Type.SUPER)
                         Opcodes.INVOKESPECIAL
                     else Opcodes.INVOKEVIRTUAL,
-                    declaringClass!!.className,
+                    declaringClass.className,
                     name.normalizeName(),
                     desc,
-                    declaringClass!!.isInterface
+                    declaringClass.isInterface
                 )
                 Pair(mnode, this.rettype)
             }
