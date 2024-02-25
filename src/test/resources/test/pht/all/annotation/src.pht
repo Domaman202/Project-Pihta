@@ -1,0 +1,11 @@
+(progn
+    (import java [[types [java.lang.SuppressWarnings]]])
+    (@annotation ^SuppressWarnings ["deprecated"]
+    (cls TestA [^Object]))
+    (test-fn 0 ^TestA)
+
+    (import java [[types [java.lang.FunctionalInterface]]])
+    (@annotation ^FunctionalInterface []
+    (itf ITestB [] (@abstract
+        (defn foo ^void []))))
+    (test-fn 1 ^ITestB))

@@ -11,6 +11,7 @@ import ru.DmN.pht.jvm.processors.NRAnnotation
 import ru.DmN.pht.jvm.processors.NRClassOf
 import ru.DmN.pht.jvm.processors.NRList
 import ru.DmN.pht.jvm.processors.NRSync
+import ru.DmN.pht.jvm.unparsers.NUAnnotation
 import ru.DmN.pht.node.NodeTypes.*
 import ru.DmN.pht.processors.NRSA
 import ru.DmN.pht.unparsers.NUClassOf
@@ -50,7 +51,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
 
         // @
         addSNU(ANN_ANN)
-        addSNU(ANN_ANN_)
+        add(ANN_ANN_,  NUAnnotation)
         addSNU(ANN_LIST)
         addSNU(ANN_LIST_)
         addSNU(ANN_SYNC)

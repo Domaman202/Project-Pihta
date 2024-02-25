@@ -1,0 +1,12 @@
+(use-ctx pht pht/jvm
+	(file-cls
+		(defn
+			foo
+			^String
+			[]
+			"Foo!")
+		(test-fn
+			0
+			(mcall
+				.
+				foo))))

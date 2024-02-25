@@ -1,0 +1,5 @@
+(use-ctx pht pht/jvm
+	(cls [] Test0 [^java.lang.Object]
+		(@static
+			(defn [] test ^dynamic []
+				"Внешний вставленный код!"))))

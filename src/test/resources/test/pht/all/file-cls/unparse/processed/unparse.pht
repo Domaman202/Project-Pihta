@@ -1,0 +1,12 @@
+(use-ctx pht pht/jvm
+	(cls [] Src [^java.lang.Object]
+		(@static
+			(defn [] foo ^java.lang.String []
+				"Foo!")
+			(cls [] Test0 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(as ^dynamic
+							(mcall
+								^Src
+								foo))))))))

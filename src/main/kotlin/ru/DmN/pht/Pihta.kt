@@ -79,6 +79,7 @@ object Pihta : Module("pht") {
         addSNP(EQ)
         // f
         addSNP(FGET_A)
+        addSNP(FILE_CLS)
         addNP("fld",          NPFld)
         addSNP(FN)
         addSNP(FOR)
@@ -288,6 +289,8 @@ object Pihta : Module("pht") {
         addSNU(FGET_A)
         add(FGET_B,         NUFGetA)
         add(FGET_,          NUFGetB)
+        addSNU(FILE_CLS)
+        // FILE_CLS_
         addSNU(FLD)
         add(FLD_,           NUFld)
         addSNU(FN)
@@ -490,6 +493,7 @@ object Pihta : Module("pht") {
         add(FGET_A,        NRFGetA)
         add(FGET_B,        NRFGetB)
         add(FGET_,         NRFGet)
+        add(FILE_CLS,      NRFileCls)
         add(FLD,           NRFld)
         add(FN,            NRFn)
         add(FN_,           NRFnB)

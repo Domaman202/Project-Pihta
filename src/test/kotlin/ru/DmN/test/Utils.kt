@@ -25,7 +25,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import ru.DmN.test.Module as SiberiaModule
 
-abstract class Module(private val dir: String) {
+abstract class Module(val dir: String) {
 
     @Test
     open fun testPrint() {
@@ -79,7 +79,7 @@ abstract class Module(private val dir: String) {
         }
     }
 
-    private fun unparseCheck() {
+    fun unparseCheck() {
         assertEquals(readDumpFile("unparse/parsed/unparse.pht"),    readTestFile("unparse/parsed/unparse.pht"),     "parsed.unparse.pht")
         assertEquals(readDumpFile("unparse/processed/unparse.pht"), readTestFile("unparse/processed/unparse.pht"),  "processed.unparse.pht")
     }

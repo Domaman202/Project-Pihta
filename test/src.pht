@@ -1,2 +1,3 @@
-(app-fn
-    (debug))
+(progn
+    (ns ru.DmN.test (file-cls))
+    (app-fn))
