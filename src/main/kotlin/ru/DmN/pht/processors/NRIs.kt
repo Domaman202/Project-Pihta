@@ -9,7 +9,7 @@ import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.Platforms.JVM
+import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processor.utils.platform

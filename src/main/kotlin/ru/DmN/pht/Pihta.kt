@@ -1,7 +1,6 @@
 package ru.DmN.pht
 
 import ru.DmN.pht.ast.*
-import ru.DmN.pht.jvm.PhtJvm
 import ru.DmN.pht.node.NodeParsedTypes.*
 import ru.DmN.pht.node.NodeTypes.*
 import ru.DmN.pht.parser.utils.clearMacros
@@ -12,10 +11,8 @@ import ru.DmN.pht.processor.ctx.GlobalContext
 import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.processors.*
 import ru.DmN.pht.unparsers.*
-import ru.DmN.pht.utils.addNP
-import ru.DmN.pht.utils.addSANP
-import ru.DmN.pht.utils.addSNP
-import ru.DmN.pht.utils.addSNU
+import ru.DmN.pht.utils.*
+import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
@@ -24,7 +21,6 @@ import ru.DmN.siberia.node.NodeTypes.PROGN
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parser.utils.parsersPool
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.Platforms.JVM
 import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.NRProgn

@@ -16,6 +16,7 @@ import ru.DmN.pht.node.NodeTypes.*
 import ru.DmN.pht.processors.NRSA
 import ru.DmN.pht.unparsers.NUClassOf
 import ru.DmN.pht.unparsers.NUSync
+import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.addSANP
 import ru.DmN.pht.utils.addSNP
 import ru.DmN.pht.utils.addSNU
@@ -23,7 +24,6 @@ import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.ModuleCompilers
 import ru.DmN.siberia.compilers.NCDefault
-import ru.DmN.siberia.processor.utils.Platforms.JVM
 import ru.DmN.siberia.processors.NRProgn
 import java.io.File
 import java.io.FileOutputStream

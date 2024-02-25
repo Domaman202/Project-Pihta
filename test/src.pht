@@ -1,3 +1,2 @@
-(progn
-    (ns ru.DmN.test (file-cls))
-    (app-fn))
+(app-fn
+    (println "Hi!"))

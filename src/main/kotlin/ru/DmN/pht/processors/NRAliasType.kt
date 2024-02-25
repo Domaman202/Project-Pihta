@@ -3,13 +3,13 @@ package ru.DmN.pht.processors
 import ru.DmN.pht.helper.ast.NodeAliasType
 import ru.DmN.pht.node.NodeTypes.ALIAS_TYPE_
 import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.computeList
 import ru.DmN.pht.utils.computeStringNodes
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.Platforms.JVM
 import ru.DmN.siberia.processor.utils.ProcessingStage.TYPES_IMPORT
 import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.platform

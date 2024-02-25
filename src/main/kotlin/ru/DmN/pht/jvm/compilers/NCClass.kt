@@ -12,7 +12,6 @@ import ru.DmN.pht.node.NodeTypes.*
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.CompilingStage
-import ru.DmN.siberia.compiler.utils.javaClassVersion
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.desc
@@ -30,7 +29,7 @@ object NCClass : IStdNodeCompiler<NodeType, ClassNode, Nothing> {
             compiler.stageManager.pushTask(CompilingStage.TYPES_PREDEFINE) {
                 compiler.contexts.classes[node.type.name] = this
                 visit(
-                    ctx.javaClassVersion,
+                    jcv,
                     Opcodes.ACC_PUBLIC.let {
                         when (node.info.type) {
                             ENUM_ -> it + Opcodes.ACC_ENUM
@@ -91,4 +90,18 @@ object NCClass : IStdNodeCompiler<NodeType, ClassNode, Nothing> {
                 ctx.method.node.visitFieldInsn(Opcodes.GETSTATIC, node.type.className, "INSTANCE", node.type.desc)
             }
         }
+
+    private val jcv: Int
+    init {
+        var version = System.getProperty("java.version")
+        if (version.startsWith("1.")) {
+            version = version.substring(2, 3)
+        } else {
+            val dot = version.indexOf(".")
+            if (dot != -1) {
+                version = version.substring(0, dot)
+            }
+        }
+        jcv = Opcodes.V1_2 + version.toInt() - 2
+    }
 }
