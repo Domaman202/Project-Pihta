@@ -2,6 +2,9 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeRFn
 import ru.DmN.pht.node.NodeTypes.RFN_
+import ru.DmN.pht.node.nodeMCall
+import ru.DmN.pht.node.nodeValueClass
+import ru.DmN.pht.processor.utils.classes
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.utils.*
 import ru.DmN.siberia.Processor
@@ -16,17 +19,26 @@ import ru.DmN.siberia.utils.VirtualType
 
 object NRRFn : INodeProcessor<NodeNodesList> { // todo: двусторонний calc для аргументов (вычисление расстояния до типа)
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType(if (node.nodes[0].isConstClass) processor.computeString(node.nodes[0], ctx) else "Any", processor.tp)
+        ctx.global.getType(
+            if (node.nodes[0].isConstClass) processor.computeString(node.nodes[0], ctx) else "Any",
+            processor.tp
+        )
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeRFn? {
         if (mode == NO_VALUE)
             return null
-        val typeNode = node.nodes[0]
         val type =
-            if (typeNode.isLiteral && processor.computeString(typeNode, ctx) == ".")
-                null
-            else processor.computeType(node.nodes[0], ctx)
-        val instance = processor.process(node.nodes[1], ctx, VALUE)!!
+            node.nodes[0].let {
+                if (it.isLiteral && processor.computeString(it, ctx) == ".")
+                    null
+                else processor.computeType(it, ctx)
+            }
+        val instance =
+            node.nodes[1].let {
+                if (it.isLiteral && processor.computeString(it, ctx) == ".")
+                    null
+                else processor.process(it, ctx, VALUE)!!
+            }
         val name = processor.computeString(node.nodes[2], ctx)
         return NodeRFn(node.info.withType(RFN_), type, null, instance, name, null).process(processor, ctx)
     }
@@ -36,13 +48,26 @@ object NRRFn : INodeProcessor<NodeNodesList> { // todo: двусторонний
             return this
         lambda = findLambdaMethod(type!!)
         method =
-            if (instance.isConstClass)
-                findMethod(processor.computeType(instance, ctx), name, lambda!!, true)
-            else findMethod(processor.calc(instance, ctx)!!, name, lambda!!, false)
+            if (instance != null)
+                if (instance!!.isConstClass)
+                    findMethod(processor.computeType(instance!!, ctx), name, lambda!!, true)
+                else findMethod(processor.calc(instance!!, ctx)!!, name, lambda!!, false)
+            else ctx.classes
+                .asSequence()
+                .map { Pair(it, findMethodOrNull(it, name, lambda!!, true)) }
+                .filter { it.second != null }
+                .first()
+                .let {
+                    instance = nodeValueClass(info, it.first.name)
+                    it.second
+                }
         return this
     }
 
     private fun findMethod(instance: VirtualType, name: String, lambda: VirtualMethod, static: Boolean): VirtualMethod =
+        findMethodOrNull(instance, name, lambda, static) ?: NRMCall.throwMNF(instance, name, lambda.argsc)
+
+    fun findMethodOrNull(instance: VirtualType, name: String, lambda: VirtualMethod, static: Boolean): VirtualMethod? =
         instance.methods
             .asSequence()
             .filter { it.modifiers.static == static && it.name == name && it.argsc.size == lambda.argsc.size }
@@ -50,5 +75,4 @@ object NRRFn : INodeProcessor<NodeNodesList> { // todo: двусторонний
             .sortedBy { it.second }
             .lastOrNull()
             ?.first
-            ?: NRMCall.throwMNF(instance, name, lambda.argsc)
 }

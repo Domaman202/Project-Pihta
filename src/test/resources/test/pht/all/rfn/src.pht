@@ -47,4 +47,11 @@
     (cls TestJ [^Object] (@static
         (defn test ^String [[f ^Supplier]]
             (#get f))))
-    (test-fn 8 (#test ^TestJ (rfn . ^TestI foo))))
+    (test-fn 8 (#test ^TestJ (rfn . ^TestI foo)))
+
+    (cls TestK [^Object] (@static
+        (defn test ^String [[f ^Supplier]]
+            (#get f)))
+        (cls TestL [^Object] (@static
+            (defn foo ^String [] "Foo All Auto!"))
+            (test-fn 9 (#test . (rfn . . foo))))))

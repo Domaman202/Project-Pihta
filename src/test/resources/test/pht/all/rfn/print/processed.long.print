@@ -553,6 +553,89 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = TestK)
+|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	(desc = (Ljava/util/function/Supplier;)Ljava/lang/String;)
+|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(java.lang.String))
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	(name = f)
+|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
+|	|	|	|	|	|	|	|	(type = VIRTUAL)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[CLS_
+|	|	|	|	|	(type = final class)
+|	|	|	|	|	(name = TestL)
+|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	(desc = ()Ljava/lang/String;)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	(value = 'Foo All Auto!')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = Test9)
+|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	(method = test(Ljava/util/function/Supplier;)Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestK')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
+|	|	|	|	|	|	|	|	|	|	(type = STATIC)
+|	|	|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
+|	|	|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestL')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
 |	|	]
 |	)
 |	(EXPORTS:

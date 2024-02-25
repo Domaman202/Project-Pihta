@@ -238,4 +238,42 @@
 				(rfn
 					.
 					^TestI
-					foo)))))
+					foo)))
+		(cls
+			TestK
+			[
+				^Object
+			]
+			(@static
+				(defn
+					test
+					^String
+					[
+						[
+							f
+							^Supplier
+						]
+					]
+					(mcall
+						f
+						get)))
+			(cls
+				TestL
+				[
+					^Object
+				]
+				(@static
+					(defn
+						foo
+						^String
+						[]
+						"Foo All Auto!"))
+				(test-fn
+					9
+					(mcall
+						.
+						test
+						(rfn
+							.
+							.
+							foo)))))))

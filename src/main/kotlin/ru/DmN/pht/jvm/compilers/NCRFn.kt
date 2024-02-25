@@ -39,7 +39,7 @@ object NCRFn : INodeCompiler<NodeRFn> {
                         Type.getType(desc),
                     )
                 } else {
-                    load(compiler.compileVal(node.instance, ctx), this@apply)
+                    load(compiler.compileVal(node.instance!!, ctx), this@apply)
                     visitInvokeDynamicInsn(
                         node.lambda!!.name,
                         "(L${declName};)L${node.type!!.className};",

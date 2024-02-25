@@ -16,6 +16,11 @@
 `name` - _имя метода_.<br><br>
 4. `(rfn . instance name)`<br>
 `instance` - _объект_.<br>
+`name` - _имя метода_.<br><br>
+5. `(rfn ^type . name)`<br>
+`^type` - _тип ссылки_.<br>
+`instance` - _объект_.<br><br>
+6. `(rfn . . name)`<br>
 `name` - _имя метода_.
 
 ### Примеры
@@ -52,4 +57,26 @@
             (println (#apply f "Слава России!")))))
     (app-fn
         (#test ^Consumer (rfn . ^Provider foo))))
+```
+
+```pihta
+(progn
+    (import java [[types [java.lang.Runnable]]])
+    (cls Test [^Object] (@static
+        (defn foo ^void []
+            (println "Foo!")))
+        (app-fn
+            (#run (rfn ^Runnable . foo)))))
+```
+
+```pihta
+(use-ctx pht
+    (import java [[types [java.lang.Runnable]]])
+    (cls Test [^Object] (@static
+        (defn foo ^void []
+            (println "Foo!"))
+        (defn run-runnable ^void [[runnable ^Runnable]]
+            (#run runnable)))
+        (app-fn
+            (#run-runnable . (rfn . . foo)))))
 ```

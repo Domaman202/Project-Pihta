@@ -136,4 +136,25 @@
 							test
 							(rfn ^java.util.function.Supplier
 								^TestI
-								foo))))))))
+								foo))))))
+		(cls [] TestK [^java.lang.Object]
+			(@static
+				(defn [] test ^java.lang.String [[f ^java.util.function.Supplier]]
+					(as ^java.lang.String
+						(mcall
+							(get f)
+							get))))
+			(cls [] TestL [^java.lang.Object]
+				(@static
+					(defn [] foo ^java.lang.String []
+						"Foo All Auto!"))
+				(cls [] Test9 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									^TestK
+									test
+									(rfn ^java.util.function.Supplier
+										^TestL
+										foo))))))))))
