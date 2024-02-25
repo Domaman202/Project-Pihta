@@ -9,7 +9,7 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.Platforms.JVM
+import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processor.utils.with
@@ -52,7 +52,7 @@ abstract class Module(val dir: String) {
         val mp = ModulesProvider.of(JVM)
         val module = (Parser(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(JVM)) as NodeModule).module
         module.init(JVM, mp)
-        val tp = TypesProvider.java()
+        val tp = TypesProvider.of(JVM)
         File("dump/$dir/unparse/parsed").mkdirs()
         FileOutputStream("dump/$dir/unparse/parsed/unparse.pht").use { out ->
             val unparser = Unparser(mp, 1024*1024)
@@ -89,7 +89,7 @@ abstract class Module(val dir: String) {
         val mp = ModulesProvider.of(JVM)
         val module = (Parser(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(JVM)) as NodeModule).module
         module.init(JVM, mp)
-        val tp = TypesProvider.java()
+        val tp = TypesProvider.of(JVM)
         File("dump/$dir/print").mkdirs()
         FileOutputStream("dump/$dir/print/parsed.short.print").use { short ->
             FileOutputStream("dump/$dir/print/parsed.long.print").use { long ->
@@ -134,7 +134,7 @@ abstract class Module(val dir: String) {
         val mp = ModulesProvider.of(JVM)
         val module = (Parser(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(JVM)) as NodeModule).module
         module.init(JVM, mp)
-        val tp = TypesProvider.java()
+        val tp = TypesProvider.of(JVM)
         val processed = ArrayList<Node>()
         val processor = Processor(mp, tp)
         mp.injectModules(
@@ -146,8 +146,8 @@ abstract class Module(val dir: String) {
         )
         processor.stageManager.runAll()
         val compiler = Compiler(mp, tp)
-        val cctx = CompilationContext.base()
-        processed.forEach { compiler.compile(it, cctx) }
+        val ctx = CompilationContext.base().apply { this.platform = JVM }
+        processed.forEach { compiler.compile(it, ctx) }
         compiler.stageManager.runAll()
         File("dump/$dir").mkdirs()
         compiler.finalizers.forEach { it("dump/$dir") }
