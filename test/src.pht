@@ -1,9 +1,6 @@
-(use-ctx pht
-    (import java [[types [java.lang.Runnable]]])
-    (cls Test [^Object] (@static
-        (defn foo ^void []
-            (println "Foo!"))
-        (defn run-runnable ^void [[runnable ^Runnable]]
-            (#run runnable)))
-        (app-fn
-            (#run-runnable . (rfn . . foo)))))
+(progn
+    (file-fn
+        (def [[i ^int]])
+        (set i 12)
+        (println i))
+    (app-fn))

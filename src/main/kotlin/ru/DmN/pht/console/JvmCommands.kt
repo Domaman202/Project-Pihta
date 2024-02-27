@@ -59,11 +59,15 @@ object JvmCommands {
     fun moduleRun(console: Console, vararg  args: Any?) {
         console.println("Запуск...")
         try {
-            console.println(Class.forName("App", true, URLClassLoader(arrayOf(File("dump").toURL()))).getMethod("main").invoke(null))
+            console.println(getAppClass().getMethod("main").invoke(null))
             console.println("Запуск окончен успешно!")
         } catch (t: Throwable) {
             console.println("Запуск окончен с ошибками:")
             t.printStackTrace(console.print)
         }
     }
+
+    @JvmStatic
+    fun getAppClass() =
+        Class.forName("App", true, URLClassLoader(arrayOf(File("dump").toURL())))
 }
