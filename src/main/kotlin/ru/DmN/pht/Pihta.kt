@@ -146,6 +146,7 @@ object Pihta : Module("pht") {
         // t
         addSNP(TEST_FN)
         addSNP(THROW)
+        addSNP(TRCALL)
         addSNP(TYPED_GET)
         addSNP(TYPEOF)
         // u
@@ -395,6 +396,8 @@ object Pihta : Module("pht") {
         addSNU(TEST_FN)
         addSNU(THROW)
         addSNU(THROW_)
+        addSNU(TRCALL)
+        addSNU(TRCALL_)
         addSNU(TYPED_GET)
         add(TYPED_GET_,     NUTypedGet)
         addSNU(TYPEOF)
@@ -591,6 +594,8 @@ object Pihta : Module("pht") {
         // t
         add(TEST_FN,       NRTestFn)
         add(THROW,         NRThrow)
+        add(TRCALL,        NRTRCall)
+        add(TRCALL_,       NRTRCall)
         add(TYPED_GET,     NRTypedGet)
         add(TYPED_GET_,    NRTypedGetB)
         add(TYPEOF,        NRTypeof)

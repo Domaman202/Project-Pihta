@@ -1,6 +1,9 @@
-(progn
-    (file-fn
-        (def [[i ^int]])
-        (set i 12)
-        (println i))
-    (app-fn))
+(app
+    (defn fac ^int [[i ^int][r ^int]]
+        (if (< i 1)
+            r
+            (trcall (- i 1) (* i r))))
+    (defn fac ^int [[i ^int]]
+        (#fac . i 1))
+    (app-fn
+        (println (#fac . 4))))

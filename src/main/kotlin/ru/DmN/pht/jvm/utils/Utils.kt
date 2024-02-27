@@ -101,17 +101,21 @@ fun storeCast(variable: Variable, from: VirtualType, node: MethodVisitor) {
 
 fun store(variable: Variable, node: MethodVisitor) {
     if (!variable.tmp) {
-        node.visitVarInsn(
-            when (variable.type().name) {
-                "boolean", "byte", "short", "char", "int" -> Opcodes.ISTORE
-                "long" -> Opcodes.LSTORE
-                "float" -> Opcodes.FSTORE
-                "double" -> Opcodes.DSTORE
-                else -> Opcodes.ASTORE
-            },
-            variable.id
-        )
+        store(variable.type().name, variable.id, node)
     }
+}
+
+fun store(type: String, id: Int, node: MethodVisitor) {
+    node.visitVarInsn(
+        when (type) {
+            "boolean", "byte", "short", "char", "int" -> Opcodes.ISTORE
+            "long" -> Opcodes.LSTORE
+            "float" -> Opcodes.FSTORE
+            "double" -> Opcodes.DSTORE
+            else -> Opcodes.ASTORE
+        },
+        id
+    )
 }
 
 fun bytecodeCast(from: String, to: String, node: MethodVisitor) {

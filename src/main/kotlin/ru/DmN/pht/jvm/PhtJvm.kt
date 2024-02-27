@@ -153,6 +153,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(SYNC_,        NCSync)
         // t
         add(THROW_,       NCThrow)
+        add(TRCALL_,      NCTRCall)
         add(TYPED_GET_,   NCTypedGet)
         // u
         add(UNIT,         NCUnit)
