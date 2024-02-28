@@ -5,31 +5,29 @@ import ru.DmN.pht.ast.NodeFGet.Type.*
 import ru.DmN.pht.ast.NodeFMGet
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.ast.NodeMCall.Type.VIRTUAL
-import ru.DmN.pht.node.NodeTypes.FGET_
-import ru.DmN.pht.node.NodeTypes.MCALL_
-import ru.DmN.pht.node.nodeValue
-import ru.DmN.pht.node.nodeValueClass
 import ru.DmN.pht.processor.utils.MethodFindResultB
 import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.utils.computeType
+import ru.DmN.pht.utils.node.NodeTypes.FGET_
+import ru.DmN.pht.utils.node.NodeTypes.MCALL_
+import ru.DmN.pht.utils.node.nodeValue
+import ru.DmN.pht.utils.node.nodeValueClass
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.VTDynamic
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VTDynamic
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRFGetB : INodeProcessor<NodeFMGet> {
     override fun calc(node: NodeFMGet, processor: Processor, ctx: ProcessingContext): VirtualType? =
         getMethod(node, processor, ctx).second?.method?.rettype ?: NRFGetA.findField(getInstanceType(node, processor, ctx), node.name, node.static)?.type
 
-    override fun process(node: NodeFMGet, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
-        if (mode == VALUE) {
+    override fun process(node: NodeFMGet, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
+        if (valMode) {
             val info = node.info
-            val instance = processor.process(node.instance, ctx, VALUE)!!
+            val instance = processor.process(node.instance, ctx, true)!!
             val result = getMethod(node, processor, ctx)
             if (result.second == null)
                 NodeFGet(
@@ -98,7 +96,7 @@ object NRFGetB : INodeProcessor<NodeFMGet> {
     fun findGetter(type: VirtualType, name: String, nodes: List<Node>, static: Static, processor: Processor, ctx: ProcessingContext) =
         NRMCall.findMethodOrNull(
             type,
-            "get${name.let { it[0].toUpperCase() + it.substring(1) }}",
+            "get${name.let { it[0].uppercase() + it.substring(1) }}",
             nodes,
             static,
             processor,

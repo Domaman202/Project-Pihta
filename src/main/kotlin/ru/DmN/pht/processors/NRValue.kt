@@ -1,37 +1,37 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeValue
+import ru.DmN.pht.ast.NodeValue.Type.*
 import ru.DmN.pht.processor.utils.global
-import ru.DmN.pht.utils.VTWG
 import ru.DmN.pht.utils.OrPair
+import ru.DmN.pht.utils.vtype.VTWG
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRValue : IStdNodeProcessor<NodeValue> {
     override fun calc(node: NodeValue, processor: Processor, ctx: ProcessingContext): VirtualType =
         ctx.global.getType(
             when (node.vtype) {
-                NodeValue.Type.NIL    -> "Any"
-                NodeValue.Type.BOOLEAN-> "boolean"
-                NodeValue.Type.CHAR   -> "char"
-                NodeValue.Type.INT    -> "int"
-                NodeValue.Type.LONG   -> "long"
-                NodeValue.Type.FLOAT  -> "float"
-                NodeValue.Type.DOUBLE -> "double"
-                NodeValue.Type.STRING,
-                NodeValue.Type.NAMING -> "String"
-                NodeValue.Type.PRIMITIVE,
-                NodeValue.Type.CLASS,
-                NodeValue.Type.CLASS_WITH_GEN -> "Class"
+                NIL             -> "Any"
+                BOOLEAN         -> "boolean"
+                CHAR            -> "char"
+                INT             -> "int"
+                LONG            -> "long"
+                FLOAT           -> "float"
+                DOUBLE          -> "double"
+                STRING,
+                NAMING          -> "String"
+                PRIMITIVE,
+                CLASS,
+                CLASS_WITH_GEN  -> "Class"
             }, processor.tp
         )
 
-    override fun process(node: NodeValue, processor: Processor, ctx: ProcessingContext, mode: ValType): Node =
-        if (node.vtype == NodeValue.Type.CLASS)
-            NodeValue(node.info, NodeValue.Type.CLASS, computeType(node, processor, ctx).name)
+    override fun process(node: NodeValue, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node =
+        if (node.vtype == CLASS)
+            NodeValue(node.info, CLASS, computeType(node, processor, ctx).name)
         else node
 
     override fun computeInt(node: NodeValue, processor: Processor, ctx: ProcessingContext): Int =

@@ -2,16 +2,15 @@ package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.siberia.Compiler
-import ru.DmN.siberia.compilers.INodeCompiler
-import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.compiler.java.utils.method
-import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.utils.normalizeName
+import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.compilers.INodeCompiler
+import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NCMCall : INodeCompiler<NodeMCall> {
     override fun compile(node: NodeMCall, compiler: Compiler, ctx: CompilationContext) {

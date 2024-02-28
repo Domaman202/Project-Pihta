@@ -9,8 +9,8 @@ import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.desc
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NCValue : IStdNodeCompiler<NodeValue, Nothing, Any?> {
     override fun compileVal(node: NodeValue, compiler: Compiler, ctx: CompilationContext): Variable =

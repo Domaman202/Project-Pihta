@@ -2,7 +2,6 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeFSet
 import ru.DmN.pht.ast.NodeType
-import ru.DmN.pht.node.*
 import ru.DmN.pht.processor.ctx.EnumContext
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.processor.utils.with
@@ -10,33 +9,31 @@ import ru.DmN.pht.utils.computeList
 import ru.DmN.pht.utils.computeListOr
 import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.computeType
+import ru.DmN.pht.utils.node.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.*
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processor.utils.ValType.NO_VALUE
-import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType.VirtualTypeImpl
 
 object NREnum : INodeProcessor<NodeNodesList> {
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node {
         val gctx = ctx.global
         //
         val generics = processor.computeListOr(node.nodes[0], ctx)
         val offset = if (generics == null) 0 else 1
-        val type = VirtualType.VirtualTypeImpl(gctx.name(processor.computeString(node.nodes[offset], ctx,)))
+        val type = VirtualTypeImpl(gctx.name(processor.computeString(node.nodes[offset], ctx,)))
         processor.tp.types[type.name.hashCode()] = type
         //
         val info = node.info
         val new = NodeType(info.withType(NodeTypes.ENUM_), node.nodes.drop(2 + offset).toMutableList(), type)
         processor.stageManager.pushTask(TYPES_PREDEFINE) {
             type.parents =
-                processor.computeList(processor.process(node.nodes[1 + offset], ctx, VALUE)!!, ctx)
+                processor.computeList(processor.process(node.nodes[1 + offset], ctx, true)!!, ctx)
                     .map { processor.computeType(it, ctx) }
                     .toMutableList()
             generics?.forEach {
@@ -46,7 +43,7 @@ object NREnum : INodeProcessor<NodeNodesList> {
             processor.stageManager.pushTask(TYPES_DEFINE) {
                 val ectx = EnumContext(type)
                 val context = ctx.with(ectx)
-                processNodesList(new, processor, context, NO_VALUE)
+                processNodesList(new, processor, context, false)
                 processor.stageManager.pushTask(METHODS_BODY) {
                     if (type.methods.find { it.name == "<clinit>" } == null) {
                         new.nodes += processor.process(
@@ -77,7 +74,7 @@ object NREnum : INodeProcessor<NodeNodesList> {
                                                                 ),
                                                                 processor,
                                                                 ctx,
-                                                                VALUE
+                                                                true
                                                             )
                                                         ),
                                                         type.fields.find { f -> f.name == it.name }!!
@@ -89,7 +86,7 @@ object NREnum : INodeProcessor<NodeNodesList> {
                                 )
                             ),
                             context,
-                            NO_VALUE
+                            false
                         )!!
                     }
                 }

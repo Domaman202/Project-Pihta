@@ -1,23 +1,22 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.node.*
-import ru.DmN.pht.node.NodeParsedTypes.INC_PRE
-import ru.DmN.pht.node.NodeParsedTypes.LESS
 import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.computeList
 import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.utils.node.*
+import ru.DmN.pht.utils.node.NodeParsedTypes.INC_PRE
+import ru.DmN.pht.utils.node.NodeParsedTypes.LESS
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.pht.utils.Platforms.JVM
-import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.Variable
 
 object NRFor : INodeProcessor<NodeNodesList> {
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node =
         when (ctx.platform) {
             JVM -> {
                 val info = node.info
@@ -39,7 +38,7 @@ object NRFor : INodeProcessor<NodeNodesList> {
                             else nodeDef(info, name, nodeMCall(info, nodeGetOrName(info, iter), "next", emptyList()))
                         ) + node.nodes.drop(1)
                     )
-                    NRBody.process(nodeBody(info, code), processor, ctx, mode)
+                    NRBody.process(nodeBody(info, code), processor, ctx, valMode)
                 } else {
                     val arr = Variable.tmp(node, 1)
                     val i = Variable.tmp(node, 2)
@@ -66,7 +65,10 @@ object NRFor : INodeProcessor<NodeNodesList> {
                                             + NodeNodesList(info.withType(INC_PRE), mutableListOf(nodeValue(info, i)))
                                 )
                             )
-                        ), processor, ctx, mode
+                        ),
+                        processor,
+                        ctx,
+                        valMode
                     )
                 }
             }

@@ -2,7 +2,7 @@ package ru.DmN.pht.utils
 
 import ru.DmN.pht.jvm.utils.JRTP
 import ru.DmN.siberia.utils.IPlatform
-import ru.DmN.siberia.utils.TypesProvider
+import ru.DmN.siberia.utils.vtype.TypesProvider
 
 /**
  * Стандартные целевые платформы.

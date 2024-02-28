@@ -5,17 +5,16 @@ import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processors.NRProgn
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRValnRepeat : IStdNodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
         processor.calc(node.nodes.last(), ctx)
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeNodesList =
-        NRProgn.process(nodeProgn(node.info, repeat(node, processor, ctx)), processor, ctx, mode)
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeNodesList =
+        NRProgn.process(nodeProgn(node.info, repeat(node, processor, ctx)), processor, ctx, valMode)
 
     override fun computeList(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): List<Node> =
         repeat(node, processor, ctx)

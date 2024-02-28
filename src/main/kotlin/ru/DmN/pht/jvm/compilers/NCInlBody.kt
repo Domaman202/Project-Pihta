@@ -11,7 +11,7 @@ import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NCInlBody : INodeCompiler<NodeInlBodyA> {
     override fun compile(node: NodeInlBodyA, compiler: Compiler, ctx: CompilationContext) {

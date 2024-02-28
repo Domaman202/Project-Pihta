@@ -1,7 +1,9 @@
 package ru.DmN.pht.jvm.utils
 
-import ru.DmN.siberia.utils.*
-import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
+import ru.DmN.siberia.utils.Klass
+import ru.DmN.siberia.utils.klassOf
+import ru.DmN.siberia.utils.vtype.*
+import ru.DmN.siberia.utils.vtype.VirtualType.VirtualTypeImpl
 import java.lang.reflect.Modifier
 import java.util.*
 

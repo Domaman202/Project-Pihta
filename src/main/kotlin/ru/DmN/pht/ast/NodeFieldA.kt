@@ -2,7 +2,7 @@ package ru.DmN.pht.ast
 
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.node.INodeInfo
+import ru.DmN.siberia.utils.node.INodeInfo
 
 class NodeFieldA(info: INodeInfo, nodes: MutableList<Node>, override var static: Boolean = false, override var final: Boolean = false) : NodeNodesList(info, nodes), IStaticallyNode, IFinallyNode {
     override fun copy(): NodeNodesList =

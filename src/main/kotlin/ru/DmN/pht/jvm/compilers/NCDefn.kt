@@ -19,8 +19,8 @@ import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.CompilingStage
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.SubList
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NCDefn : IStdNodeCompiler<NodeDefn, MethodNode, Nothing> {
     override fun compile(node: NodeDefn, compiler: Compiler, ctx: CompilationContext) {

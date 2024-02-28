@@ -1,11 +1,11 @@
 package ru.DmN.pht.ast
 
-import ru.DmN.pht.node.NodeTypes
-import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.node.INodeInfo
+import ru.DmN.pht.utils.node.NodeTypes
+import ru.DmN.siberia.ast.BaseNode
 import ru.DmN.siberia.utils.indent
+import ru.DmN.siberia.utils.node.INodeInfo
 
-open class NodeGetOrName(info: INodeInfo, val name: String, val static: Boolean) : Node(info), IValueNode { // todo: А зачем тут static?
+open class NodeGetOrName(info: INodeInfo, val name: String, val static: Boolean) : BaseNode(info), IValueNode { // todo: А зачем тут static?
     override fun isLiteral(): Boolean =
         true
 

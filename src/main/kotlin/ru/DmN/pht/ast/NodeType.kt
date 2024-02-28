@@ -2,11 +2,11 @@ package ru.DmN.pht.ast
 
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.node.INodeInfo
-import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
 import ru.DmN.siberia.utils.indent
+import ru.DmN.siberia.utils.node.INodeInfo
+import ru.DmN.siberia.utils.vtype.VirtualType
 
-class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeImpl) : NodeNodesList(info, nodes), IAbstractlyNode, IOpenlyNode {
+class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualType.VirtualTypeImpl) : NodeNodesList(info, nodes), IAbstractlyNode, IOpenlyNode {
     override var abstract: Boolean
         get() = type.isAbstract
         set(value) { type.isAbstract = value }

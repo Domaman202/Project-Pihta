@@ -4,7 +4,6 @@ import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
 
 class LazyProcessValueList(
     val node: NodeNodesList,
@@ -18,7 +17,7 @@ class LazyProcessValueList(
             node.nodes[i]
         else {
             processed += i
-            process.process(node.nodes[i], ctx, ValType.VALUE)!!.apply { node.nodes[i] = this }
+            process.process(node.nodes[i], ctx, true)!!.apply { node.nodes[i] = this }
         }
 
     fun dropAndProcess(offset: Int): MutableList<Node> {

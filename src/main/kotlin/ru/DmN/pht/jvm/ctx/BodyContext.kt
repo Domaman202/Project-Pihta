@@ -3,8 +3,8 @@ package ru.DmN.pht.compiler.java.ctx
 import org.objectweb.asm.Label
 import ru.DmN.siberia.utils.SubList
 import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualType
 import java.util.concurrent.atomic.AtomicInteger
 
 class BodyContext(

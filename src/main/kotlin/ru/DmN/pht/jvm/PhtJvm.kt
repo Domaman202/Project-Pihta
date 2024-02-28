@@ -12,7 +12,7 @@ import ru.DmN.pht.jvm.processors.NRClassOf
 import ru.DmN.pht.jvm.processors.NRList
 import ru.DmN.pht.jvm.processors.NRSync
 import ru.DmN.pht.jvm.unparsers.NUAnnotation
-import ru.DmN.pht.node.NodeTypes.*
+import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.pht.processors.NRSA
 import ru.DmN.pht.unparsers.NUClassOf
 import ru.DmN.pht.unparsers.NUSync

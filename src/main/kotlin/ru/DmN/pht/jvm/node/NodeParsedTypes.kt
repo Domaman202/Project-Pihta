@@ -1,8 +1,8 @@
 package ru.DmN.pht.jvm.node
 
 import ru.DmN.pht.jvm.node.NodeTypes.*
-import ru.DmN.pht.node.IParsedNodeType
-import ru.DmN.siberia.node.INodeType
+import ru.DmN.pht.utils.node.IParsedNodeType
+import ru.DmN.siberia.utils.node.INodeType
 
 enum class NodeParsedTypes(override val operation: String, override val processed: INodeType) : IParsedNodeType {
     // @

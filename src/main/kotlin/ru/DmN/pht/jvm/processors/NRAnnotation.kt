@@ -11,16 +11,15 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage
-import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.processors.NRProgn
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRAnnotation : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
         NRProgn.calc(node, processor, ctx)
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeAnnotation {
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeAnnotation {
         val args = HashMap<String?, Node>()
         val nodes = ArrayList<Node>()
         val new = NodeAnnotation(
@@ -39,7 +38,7 @@ object NRAnnotation : INodeProcessor<NodeNodesList> {
                         else Pair(null, it[0])
                     } ?: Pair(null, it)
                 }.forEach {
-                    args[it.first] = processor.process(it.second, ctx, ValType.VALUE)!!
+                    args[it.first] = processor.process(it.second, ctx, true)!!
                 }
             //
             if (node.nodes.isNotEmpty()) {
@@ -48,10 +47,10 @@ object NRAnnotation : INodeProcessor<NodeNodesList> {
                         .dropLast(1) // todo: drop last for sequence
                         .asSequence()
                         .drop(2)
-                        .map { processor.process(it, ctx, ValType.NO_VALUE) }
+                        .map { processor.process(it, ctx, false) }
                         .filterNotNull()
                         .toMutableList()
-                processor.process(node.nodes.last(), ctx, ValType.VALUE)?.let { list += it }
+                processor.process(node.nodes.last(), ctx, true)?.let { list += it }
                 nodes.addAll(list) // todo: optimize
             }
             //

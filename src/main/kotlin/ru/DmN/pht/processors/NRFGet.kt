@@ -6,13 +6,13 @@ import ru.DmN.pht.utils.computeType
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.VirtualField
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualField
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRFGet : INodeProcessor<NodeFGet> {
     override fun calc(node: NodeFGet, processor: Processor, ctx: ProcessingContext): VirtualType {
         val filter = when (node.type) {
-            UNKNOWN  -> { _: VirtualField  -> true }
+            UNKNOWN  -> { _:  VirtualField -> true }
             STATIC   -> { it: VirtualField -> it.modifiers.isStatic }
             INSTANCE -> { it: VirtualField -> !it.modifiers.isStatic }
         }

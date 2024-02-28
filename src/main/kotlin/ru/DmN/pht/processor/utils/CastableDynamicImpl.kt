@@ -1,6 +1,6 @@
 package ru.DmN.pht.processor.utils
 
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object CastableDynamicImpl : ICastable {
     override fun castableTo(to: VirtualType): Int =

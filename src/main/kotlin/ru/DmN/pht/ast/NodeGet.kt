@@ -1,10 +1,10 @@
 package ru.DmN.pht.ast
 
-import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.node.INodeInfo
+import ru.DmN.siberia.ast.BaseNode
 import ru.DmN.siberia.utils.indent
+import ru.DmN.siberia.utils.node.INodeInfo
 
-class NodeGet(info: INodeInfo, val name: String, val type: Type) : Node(info) {
+class NodeGet(info: INodeInfo, val name: String, val type: Type) : BaseNode(info) {
     override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type)
         if (short)

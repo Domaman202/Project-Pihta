@@ -5,23 +5,22 @@ import ru.DmN.pht.ast.NodeInlBodyA
 import ru.DmN.pht.ast.NodeInlBodyB
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.ast.NodeMCall.Type.*
-import ru.DmN.pht.node.*
 import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.ctx.GlobalContext
 import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.utils.*
+import ru.DmN.pht.utils.node.*
+import ru.DmN.pht.utils.vtype.VTWG
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ProcessingStage
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processor.utils.ValType.VALUE
+import ru.DmN.siberia.processor.utils.ProcessingStage.FINALIZATION
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.VTDynamic
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.node.INodeInfo
+import ru.DmN.siberia.utils.vtype.VTDynamic
+import ru.DmN.siberia.utils.vtype.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRMCall : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
@@ -57,7 +56,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             }
     }
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeMCall {
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeMCall {
         val info = node.info
         val instance0 = processor.compute(node.nodes[0], ctx)
         val result = findMethod(node, Static.ofInstanceNode(instance0, processor, ctx), processor, ctx)
@@ -66,7 +65,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         val method = result.method
         //
         val new = if (method.extension == null) {
-            val instance2 = processor.process(instance1, ctx, VALUE)!!
+            val instance2 = processor.process(instance1, ctx, true)!!
             NodeMCall(
                 info.processed,
                 processArguments(info, processor, ctx, method, result.args, result.compression),
@@ -98,14 +97,14 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             EXTEND
         )
         //
-        processor.stageManager.pushTask(ProcessingStage.FINALIZATION) {
-            finalize(method, result.args, instance1, new, processor, ctx, mode)
+        processor.stageManager.pushTask(FINALIZATION) {
+            finalize(method, result.args, instance1, new, processor, ctx, valMode)
         }
         //
         return new
     }
 
-    private fun finalize(method: VirtualMethod, args: List<Node>, instance: Node, node: NodeMCall, processor: Processor, ctx: ProcessingContext, mode: ValType) {
+    private fun finalize(method: VirtualMethod, args: List<Node>, instance: Node, node: NodeMCall, processor: Processor, ctx: ProcessingContext, valMode: Boolean) {
         node.inline =
             if (method.inline != null)
                 method.inline!!.copy()
@@ -126,7 +125,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                         it.drop(1)
                     }
                 }.forEachIndexed { i, it -> NRInlDef.process(it, args[i], bctx) }
-                processor.process(this, context.with(bctx), mode)
+                processor.process(this, context.with(bctx), valMode)
             }
     }
 
@@ -189,7 +188,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      */
     private fun nodeGetInstance(result: MethodFindResultA, instance: Node, processor: Processor, ctx: ProcessingContext): Node {
         val type = processor.computeType(instance, ctx)
-        val name = result.method.declaringClass!!.name
+        val name = result.method.declaringClass.name
         return if (name.endsWith("\$Companion")) {
             NodeFGet(
                 instance.info.withType(NodeTypes.FGET_),
@@ -231,16 +230,16 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                             ),
                             processor,
                             ctx,
-                            VALUE
+                            true
                         )!!
                     )
                 }
-            else (args + NRNewArray.process(nodeNewArray(info, method.argsc.last().name.substring(1), 0), processor, ctx, VALUE)!!).toMutableList()
+            else (args + NRNewArray.process(nodeNewArray(info, method.argsc.last().name.substring(1), 0), processor, ctx, true)!!).toMutableList()
         } else { args }.mapIndexedMutable { i, it ->
             val np = processor.get(it, ctx)
             if (np is IAdaptableProcessor<*>)
                 (np as IAdaptableProcessor<Node>).adaptToType(method.argsc[i], it, processor, ctx)
-            else { it }.let { NRAs.process(nodeAs(info, it, method.argsc[i].name), processor, ctx, VALUE)!! }
+            else { it }.let { NRAs.process(nodeAs(info, it, method.argsc[i].name), processor, ctx, true)!! }
         }
 
     /**
@@ -263,7 +262,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             generic = gctx.getType(it.substring(gs + 2, it.length - 1), processor.tp)
             it.substring(0, gs)
         }
-        val args = node.nodes.asSequence().drop(2).map { processor.process(it, ctx, VALUE)!! }.toList()
+        val args = node.nodes.asSequence().drop(2).map { processor.process(it, ctx, true)!! }.toList()
         //
         // Class / Instance
         var result = findMethodOrNull(pair.second, name, args, static, node, processor, ctx)
@@ -328,7 +327,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             findMethod(
                 ctx.global.getType("ru.DmN.pht.utils.DynamicUtils", processor.tp),
                 "invokeMethod",
-                node.nodes.map { processor.process(it, ctx, VALUE)!! },
+                node.nodes.map { processor.process(it, ctx, true)!! },
                 Static.ANY,
                 processor,
                 ctx

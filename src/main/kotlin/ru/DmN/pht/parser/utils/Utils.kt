@@ -1,9 +1,8 @@
 package ru.DmN.pht.parser.utils
 
-import ru.DmN.pht.ctx.ContextKeys
+import ru.DmN.pht.utils.ctx.ContextKeys
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.ctx.IContextCollection
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.lexer.Token.DefaultType.*
 import ru.DmN.siberia.parser.ctx.ParsingContext
@@ -11,6 +10,7 @@ import ru.DmN.siberia.parser.utils.parseMCall
 import ru.DmN.siberia.parser.utils.parseMacro
 import ru.DmN.siberia.parser.utils.parseValn
 import ru.DmN.siberia.parser.utils.parseValue
+import ru.DmN.siberia.utils.ctx.IContextCollection
 import java.util.*
 
 fun Parser.phtParseNode(ctx: ParsingContext): Node? {

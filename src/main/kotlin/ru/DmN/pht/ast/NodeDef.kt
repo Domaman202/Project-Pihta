@@ -1,13 +1,14 @@
 package ru.DmN.pht.ast
 
 import ru.DmN.pht.processor.utils.Variable
+import ru.DmN.siberia.ast.BaseNode
 import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.node.INodeInfo
-import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
-import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.indent
+import ru.DmN.siberia.utils.node.INodeInfo
+import ru.DmN.siberia.utils.vtype.VirtualField.VirtualFieldImpl
+import ru.DmN.siberia.utils.vtype.VirtualType
 
-class NodeDef(info: INodeInfo, val variables: List<VariableOrField>, val isVariable: Boolean) : Node(info), IStaticallyNode, IFinallyNode, IOpenlyNode {
+class NodeDef(info: INodeInfo, val variables: List<VariableOrField>, val isVariable: Boolean) : BaseNode(info), IStaticallyNode, IFinallyNode, IOpenlyNode {
     override var static: Boolean = false
         set(value) { field = value; variables.asSequence().map { it.field?.modifiers }.filterNotNull().forEach { it.isStatic = value } }
     override var final: Boolean = false

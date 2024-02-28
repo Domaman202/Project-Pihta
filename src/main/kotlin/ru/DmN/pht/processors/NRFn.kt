@@ -2,32 +2,31 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeFn
 import ru.DmN.pht.ast.NodeInlBodyA
-import ru.DmN.pht.node.*
-import ru.DmN.pht.node.NodeTypes.FN_
 import ru.DmN.pht.processor.utils.body
 import ru.DmN.pht.processor.utils.clazz
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.utils.*
+import ru.DmN.pht.utils.Platforms.JVM
+import ru.DmN.pht.utils.node.*
+import ru.DmN.pht.utils.node.NodeTypes.FN_
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.siberia.processor.utils.ProcessingStage.FINALIZATION
-import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.node.INodeInfo
+import ru.DmN.siberia.utils.vtype.VirtualType
 import kotlin.math.absoluteValue
 
 object NRFn : INodeProcessor<NodeNodesList>, IInlinableProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
         ctx.global.getType(if (node.nodes[0].isConstClass) processor.computeString(node.nodes[0], ctx) else "Any", processor.tp)
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeFn {
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeFn {
         val gctx = ctx.global
         val cctx = ctx.clazz
         val bctx = ctx.body
@@ -73,7 +72,10 @@ object NRFn : INodeProcessor<NodeNodesList>, IInlinableProcessor<NodeNodesList> 
                                 listOf("java.lang.Object", type.name)
                             else listOf(type.name),
                             listOf(defnNode)
-                        ), processor, ctx, ValType.VALUE
+                        ),
+                        processor,
+                        ctx,
+                        true
                     )
                 )
             } else {
@@ -103,7 +105,7 @@ object NRFn : INodeProcessor<NodeNodesList>, IInlinableProcessor<NodeNodesList> 
                     ),
                     nodeNew(info, name, refs.map { nodeGetOrName(info, it.name) })
                 )
-                processNodesList(node, processor, ctx, ValType.VALUE)
+                processNodesList(node, processor, ctx, true)
             }
         }
     }

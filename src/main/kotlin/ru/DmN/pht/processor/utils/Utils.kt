@@ -1,24 +1,22 @@
 @file:Suppress("NOTHING_TO_INLINE")
 package ru.DmN.pht.processor.utils
 
-import ru.DmN.pht.ctx.ContextKeys
-import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.pht.compiler.java.utils.MacroDefine
 import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.ctx.EnumContext
 import ru.DmN.pht.processor.ctx.GlobalContext
 import ru.DmN.pht.processor.ctx.MacroContext
 import ru.DmN.pht.utils.compute
+import ru.DmN.pht.utils.ctx.ContextKeys
 import ru.DmN.pht.utils.lenArgs
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.ctx.IContextCollection
-import ru.DmN.siberia.ctx.IContextKey
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.ctx.IContextCollection
+import ru.DmN.siberia.utils.ctx.IContextKey
+import ru.DmN.siberia.utils.vtype.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 fun getMethodVariants(variants: Sequence<VirtualMethod>, args: List<ICastable>): Sequence<Pair<VirtualMethod, Boolean>> =
     variants
@@ -30,7 +28,7 @@ fun getMethodVariants(variants: Sequence<VirtualMethod>, args: List<ICastable>):
         .map { Pair(it.first, it.second.second) }
 
 fun Sequence<Node>.processValues(processor: Processor, ctx: ProcessingContext): Sequence<Node> =
-    this.map { processor.process(it, ctx, ValType.VALUE)!! }
+    this.map { processor.process(it, ctx, true)!! }
 fun Sequence<Node>.computeValues(processor: Processor, ctx: ProcessingContext): Sequence<Node> =
     this.map { processor.compute(it, ctx) }
 
@@ -39,7 +37,7 @@ fun Sequence<Node>.computeValues(processor: Processor, ctx: ProcessingContext): 
  */
 fun <T : NodeNodesList> processValue(node: T, processor: Processor, ctx: ProcessingContext): T {
     for (i in 0 until node.nodes.size)
-        node.nodes[i] = processor.process(node.nodes[i], ctx, ValType.VALUE)!!
+        node.nodes[i] = processor.process(node.nodes[i], ctx, true)!!
     return node
 }
 
@@ -48,7 +46,7 @@ fun <T : NodeNodesList> processValue(node: T, processor: Processor, ctx: Process
  */
 fun <T : NodeNodesList> processNoValue(node: T, processor: Processor, ctx: ProcessingContext): T {
     for (i in 0 until node.nodes.size)
-        node.nodes[i] = processor.process(node.nodes[i], ctx, ValType.NO_VALUE)!!
+        node.nodes[i] = processor.process(node.nodes[i], ctx, false)!!
     return node
 }
 

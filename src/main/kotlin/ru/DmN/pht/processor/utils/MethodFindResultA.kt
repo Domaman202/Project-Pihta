@@ -2,8 +2,8 @@ package ru.DmN.pht.processor.utils
 
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 data class MethodFindResultA(
     val type: NodeMCall.Type,

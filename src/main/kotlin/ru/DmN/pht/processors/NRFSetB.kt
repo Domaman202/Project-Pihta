@@ -1,28 +1,28 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.ast.NodeFSet
 import ru.DmN.pht.ast.NodeFieldSet
 import ru.DmN.pht.ast.NodeMCall
+import ru.DmN.pht.ast.NodeMCall.Type.VIRTUAL
 import ru.DmN.pht.ast.NodeValue
-import ru.DmN.pht.node.NodeTypes
-import ru.DmN.pht.node.nodeValue
-import ru.DmN.pht.node.nodeValueClass
+import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.utils.node.NodeTypes.FSET_
+import ru.DmN.pht.utils.node.NodeTypes.MCALL_
+import ru.DmN.pht.utils.node.nodeValue
+import ru.DmN.pht.utils.node.nodeValueClass
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.VTDynamic
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VTDynamic
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRFSetB : INodeProcessor<NodeFieldSet> {
-    override fun process(node: NodeFieldSet, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
+    override fun process(node: NodeFieldSet, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node {
         val info = node.info
-        val instance = processor.process(node.instance, ctx, VALUE)!!
+        val instance = processor.process(node.instance, ctx, true)!!
             .let {
                 if (node.static)
                     nodeValueClass(info, processor.computeString(it, ctx))
@@ -45,7 +45,7 @@ object NRFSetB : INodeProcessor<NodeFieldSet> {
                     ctx
                 )
                 return NodeMCall(
-                    info.withType(NodeTypes.MCALL_),
+                    info.withType(MCALL_),
                     NRMCall.processArguments(
                         info,
                         processor,
@@ -57,29 +57,29 @@ object NRFSetB : INodeProcessor<NodeFieldSet> {
                     null,
                     nodeValueClass(info, result.method.declaringClass.name),
                     result.method,
-                    NodeMCall.Type.VIRTUAL
+                    VIRTUAL
                 )
             } else findSetter(type, node.name, node.nodes, if (node.static) Static.STATIC else Static.NO_STATIC, processor, ctx)
         return if (result == null)
             NodeFSet(
-                info.withType(NodeTypes.FSET_),
-                mutableListOf(instance, processor.process(node.nodes.first(), ctx, VALUE)!!),
+                info.withType(FSET_),
+                mutableListOf(instance, processor.process(node.nodes.first(), ctx, true)!!),
                 type.fields.find { it.name == node.name }!!
             )
         else NodeMCall(
-            info.withType(NodeTypes.MCALL_),
+            info.withType(MCALL_),
             NRMCall.processArguments(info, processor, ctx, result.method, node.nodes, result.compression),
             null,
             instance,
             result.method,
-            NodeMCall.Type.VIRTUAL
+            VIRTUAL
         )
     }
 
     fun findSetter(type: VirtualType, name: String, args: List<Node>, static: Static, processor: Processor, ctx: ProcessingContext) =
         NRMCall.findMethodOrNull(
             type,
-            "set${name.let { it[0].toUpperCase() + it.substring(1) }}",
+            "set${name.let { it[0].uppercase() + it.substring(1) }}",
             args,
             static,
             processor,

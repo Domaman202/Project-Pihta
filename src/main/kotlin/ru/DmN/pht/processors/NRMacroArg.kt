@@ -7,16 +7,15 @@ import ru.DmN.pht.utils.*
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType
 import java.util.*
 
 object NRMacroArg : IStdNodeProcessor<NodeMacroUtil> {
     override fun calc(node: NodeMacroUtil, processor: Processor, ctx: ProcessingContext): VirtualType? =
         processor.calc(compute(node, processor, ctx), ctx)
 
-    override fun process(node: NodeMacroUtil, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
-        processor.process(compute(node, processor, ctx), ctx, mode)
+    override fun process(node: NodeMacroUtil, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
+        processor.process(compute(node, processor, ctx), ctx, valMode)
 
     override fun compute(node: NodeMacroUtil, processor: Processor, ctx: ProcessingContext): Node =
         processor.compute(findMacroArgument(node, processor, ctx), ctx).copy()

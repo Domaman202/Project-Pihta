@@ -1,23 +1,24 @@
 package ru.DmN.pht.parsers
 
 import ru.DmN.pht.ast.NodeFMGet
-import ru.DmN.pht.node.NodeParsedTypes
-import ru.DmN.pht.node.nodeValue
-import ru.DmN.pht.node.nodeValueClass
+import ru.DmN.pht.utils.node.NodeParsedTypes.FGET_B
+import ru.DmN.pht.utils.node.NodeParsedTypes.GET
+import ru.DmN.pht.utils.node.nodeValue
+import ru.DmN.pht.utils.node.nodeValueClass
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.lexer.isNaming
 import ru.DmN.siberia.lexer.isOperation
-import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.siberia.parsers.NPProgn
+import ru.DmN.siberia.utils.node.INodeInfo
 
 object NPGet : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
-        val info = INodeInfo.of(NodeParsedTypes.GET, ctx, token)
+        val info = INodeInfo.of(GET, ctx, token)
         val nameToken = parser.nextToken()!!
         return NPProgn.parse(parser, ctx) { it ->
             when (nameToken.type) {
@@ -62,11 +63,11 @@ object NPGet : INodeParser {
         return if (j == 0) {
             if (clazz)
                 nodeValueClass(info, parts[0])
-            else NodeNodesList(info.withType(NodeParsedTypes.GET), nodes.apply { add(0, nodeValue(info, parts[0])) })
+            else NodeNodesList(info.withType(GET), nodes.apply { add(0, nodeValue(info, parts[0])) })
         } else {
             val isStatic = static && j == 1
             NodeFMGet(
-                info.withType(NodeParsedTypes.FGET_B),
+                info.withType(FGET_B),
                 nodes,
                 parse(info, parts, j, nodes, static, clazz),
                 parts[j],

@@ -7,16 +7,15 @@ import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRClassOf : INodeProcessor<Node> {
     override fun calc(node: Node, processor: Processor, ctx: ProcessingContext): VirtualType =
         processor.tp.typeOf("java.lang.Class")
 
-    override fun process(node: Node, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
-        if (mode == ValType.VALUE)
+    override fun process(node: Node, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
+        if (valMode)
             NodeClassOf(node.info.withType(CLASS_OF_), processor.computeType((node as NodeNodesList).nodes[0], ctx).name)
         else null
 }

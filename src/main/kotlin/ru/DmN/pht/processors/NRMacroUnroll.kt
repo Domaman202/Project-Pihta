@@ -2,21 +2,20 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeMacroUtil
 import ru.DmN.pht.ast.NodeModifierNodesList
-import ru.DmN.pht.node.NodeTypes.PROGN_B_
 import ru.DmN.pht.processor.utils.macro
 import ru.DmN.pht.processor.utils.with
 import ru.DmN.pht.utils.computeList
 import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.utils.node.NodeTypes.PROGN_B_
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
 import java.util.*
 import kotlin.math.min
 
 object NRMacroUnroll : INodeProcessor<NodeMacroUtil> { // todo: calc
-    override fun process(node: NodeMacroUtil, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
+    override fun process(node: NodeMacroUtil, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node {
         val nodes = ArrayList<Node>()
         var maxIndex = Int.MAX_VALUE
         val names = ArrayList<Triple<List<Node>, String, UUID>>()
@@ -40,7 +39,7 @@ object NRMacroUnroll : INodeProcessor<NodeMacroUtil> { // todo: calc
                 }
                 val context = ctx.with(NRMacro.macroCtxOf(ctx, args))
                 node.nodes.stream().skip(1).forEach {
-                    nodes += processor.process(it, context, mode)!!
+                    nodes += processor.process(it, context, valMode)!!
                 }
             }
         }

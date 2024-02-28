@@ -1,11 +1,8 @@
 package ru.DmN.pht.ast
 
-import ru.DmN.pht.ast.IInlinableNode
-import ru.DmN.pht.ast.IOpenlyNode
-import ru.DmN.pht.ast.ISyncNode
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.node.INodeInfo
+import ru.DmN.siberia.utils.node.INodeInfo
 
 class NodeModifierNodesList(info: INodeInfo, nodes: MutableList<Node>) : NodeNodesList(info, nodes),
     IAbstractlyNode, IFinallyNode, IInlinableNode, IOpenlyNode, IStaticallyNode, ISyncNode {

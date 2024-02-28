@@ -1,21 +1,20 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeMacro
-import ru.DmN.pht.node.NodeParsedTypes
 import ru.DmN.pht.processor.ctx.MacroContext
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.processor.utils.isMacro
 import ru.DmN.pht.processor.utils.macro
 import ru.DmN.pht.processor.utils.with
 import ru.DmN.pht.utils.compute
+import ru.DmN.pht.utils.node.NodeParsedTypes
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.utils.SubMap
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType
 import java.util.*
 
 object NRMacro : IStdNodeProcessor<NodeMacro> {
@@ -24,9 +23,9 @@ object NRMacro : IStdNodeProcessor<NodeMacro> {
         return macroBodyNode(node, result)?.let { processor.calc(it, result.second) }
     }
 
-    override fun process(node: NodeMacro, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
+    override fun process(node: NodeMacro, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? {
         val result = macroCalc(node, ctx)
-        return macroBodyNode(node, result)?.let { processor.process(it.copy(), result.second, mode) }
+        return macroBodyNode(node, result)?.let { processor.process(it.copy(), result.second, valMode) }
     }
 
     override fun compute(node: NodeMacro, processor: Processor, ctx: ProcessingContext): Node {

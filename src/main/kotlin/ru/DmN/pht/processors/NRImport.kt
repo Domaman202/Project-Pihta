@@ -1,22 +1,21 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeImport
-import ru.DmN.pht.node.NodeTypes.IMPORT_
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.processor.utils.macros
+import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.computeList
 import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.utils.node.NodeTypes.IMPORT_
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.siberia.processor.utils.ProcessingStage.*
-import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
 
 object NRImport : INodeProcessor<NodeNodesList> {
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeImport? {
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeImport? {
         val gctx = ctx.global
         //
         val module = processor.computeString(node.nodes[0], ctx)

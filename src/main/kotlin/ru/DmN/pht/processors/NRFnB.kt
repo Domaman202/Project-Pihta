@@ -2,13 +2,13 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeFn
 import ru.DmN.pht.ast.NodeInlBodyA
-import ru.DmN.pht.node.NodeTypes.INL_BODY_A
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.utils.findLambdaMethod
+import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_A
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRFnB : IStdNodeProcessor<NodeFn>, IAdaptableProcessor<NodeFn>, IInlinableProcessor<NodeFn> {
     override fun calc(node: NodeFn, processor: Processor, ctx: ProcessingContext): VirtualType =

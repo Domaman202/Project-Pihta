@@ -1,28 +1,26 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.ast.NodeFSet
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.ast.NodeMCall.Type.STATIC
 import ru.DmN.pht.ast.NodeMCall.Type.VIRTUAL
 import ru.DmN.pht.ast.NodeSet
-import ru.DmN.pht.node.NodeTypes
-import ru.DmN.pht.node.NodeTypes.MCALL_
-import ru.DmN.pht.node.nodeGetOrName
-import ru.DmN.pht.node.nodeGetVariable
-import ru.DmN.pht.node.nodeValueClass
 import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.utils.forEach
+import ru.DmN.pht.utils.node.NodeTypes
+import ru.DmN.pht.utils.node.NodeTypes.MCALL_
+import ru.DmN.pht.utils.node.nodeGetOrName
+import ru.DmN.pht.utils.node.nodeGetVariable
+import ru.DmN.pht.utils.node.nodeValueClass
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.node.INodeInfo
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRSet : INodeProcessor<NodeSet> {
-    override fun process(node: NodeSet, processor: Processor, ctx: ProcessingContext, mode: ValType): Node {
+    override fun process(node: NodeSet, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node {
         val info = node.info
         val value = node.nodes.asSequence().processValues(processor, ctx).toMutableList()
         ctx.body[node.name]?.let { return NodeSet(info.withType(NodeTypes.SET_), value, node.name) }

@@ -1,13 +1,12 @@
 package ru.DmN.pht.utils
 
+import ru.DmN.pht.module.utils.Module
+import ru.DmN.pht.module.utils.Module.Companion.toRegularExpr
 import ru.DmN.pht.parsers.NPSA
-import ru.DmN.pht.Pihta
-import ru.DmN.siberia.node.INodeType
 import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.siberia.parsers.SimpleNP
 import ru.DmN.siberia.unparsers.NUDefault
-import ru.DmN.siberia.utils.Module
-import ru.DmN.siberia.utils.Module.Companion.toRegularExpr
+import ru.DmN.siberia.utils.node.INodeType
 
 fun Module.addNP(pattern: String, parser: INodeParser) {
     add(pattern.toRegularExpr(), parser)

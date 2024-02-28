@@ -3,7 +3,7 @@ package ru.DmN.pht.compiler.java.compilers
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.compiler.java.utils.method
-import ru.DmN.pht.node.NodeTypes.*
+import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.pht.utils.type
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.ast.NodeNodesList

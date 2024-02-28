@@ -1,44 +1,46 @@
 package ru.DmN.pht.parsers
 
 import ru.DmN.pht.ast.NodeValue
-import ru.DmN.pht.node.NodeTypes
+import ru.DmN.pht.ast.NodeValue.Type.*
+import ru.DmN.pht.utils.node.NodeTypes.VALUE
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
-import ru.DmN.siberia.node.INodeInfo
+import ru.DmN.siberia.lexer.Token.DefaultType
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
+import ru.DmN.siberia.utils.node.INodeInfo
 
 object NPValueB : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node? =
         token.text!!.let { text ->
             NodeValue(
-                INodeInfo.of(NodeTypes.VALUE, ctx, token),
+                INodeInfo.of(VALUE, ctx, token),
                 when (token.type) {
-                    Token.DefaultType.OPERATION -> {
+                    DefaultType.OPERATION -> {
                         parser.tokens.push(token)
                         return parser.get(ctx, "get-or-name!")!!.parse(parser, ctx, Token.operation(token.line, "get-or-name!"))
                     }
 
-                    Token.DefaultType.PRIMITIVE -> NodeValue.Type.PRIMITIVE
-                    Token.DefaultType.CLASS     -> {
+                    DefaultType.PRIMITIVE -> PRIMITIVE
+                    DefaultType.CLASS     -> {
                         if (text.contains("[/#]".toRegex()))
-                            return NPGet.parse(INodeInfo.of(NodeTypes.VALUE), token.text!!, mutableListOf(), static = true, klass = true)
-                        else NodeValue.Type.CLASS
+                            return NPGet.parse(INodeInfo.of(VALUE), token.text!!, mutableListOf(), static = true, klass = true)
+                        else CLASS
                     }
-                    Token.DefaultType.CLASS_WITH_GEN -> NodeValue.Type.CLASS_WITH_GEN
 
-                    Token.DefaultType.NAMING  -> NodeValue.Type.NAMING
-                    Token.DefaultType.NIL     -> NodeValue.Type.NIL
-                    Token.DefaultType.BOOLEAN -> NodeValue.Type.BOOLEAN
-                    Token.DefaultType.CHAR    -> NodeValue.Type.CHAR
-                    Token.DefaultType.INTEGER -> NodeValue.Type.INT
-                    Token.DefaultType.LONG    -> NodeValue.Type.LONG
-                    Token.DefaultType.FLOAT   -> NodeValue.Type.FLOAT
-                    Token.DefaultType.DOUBLE  -> NodeValue.Type.DOUBLE
-                    Token.DefaultType.STRING  -> NodeValue.Type.STRING
+                    DefaultType.CLASS_WITH_GEN -> CLASS_WITH_GEN
+                    DefaultType.NAMING  -> NAMING
+                    DefaultType.NIL     -> NIL
+                    DefaultType.BOOLEAN -> BOOLEAN
+                    DefaultType.CHAR    -> CHAR
+                    DefaultType.INTEGER -> INT
+                    DefaultType.LONG    -> LONG
+                    DefaultType.FLOAT   -> FLOAT
+                    DefaultType.DOUBLE  -> DOUBLE
+                    DefaultType.STRING  -> STRING
                     else -> throw RuntimeException()
-                }, if (token.type == Token.DefaultType.CLASS) {
+                }, if (token.type == DefaultType.CLASS) {
                     text.indexOf('/').let {
                         val i = text.indexOf('#')
                         if (it == -1) i

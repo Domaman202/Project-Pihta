@@ -2,32 +2,28 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.ast.NodeInlBodyB
-import ru.DmN.pht.node.NodeTypes
-import ru.DmN.pht.node.NodeTypes.DEFN_
-import ru.DmN.pht.node.nodeAs
 import ru.DmN.pht.processor.ctx.BodyContext
-import ru.DmN.pht.processor.ctx.GlobalContext
 import ru.DmN.pht.processor.utils.clazz
-import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.processor.utils.with
 import ru.DmN.pht.utils.*
+import ru.DmN.pht.utils.node.NodeTypes.DEFN_
+import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_A
+import ru.DmN.pht.utils.node.nodeAs
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.METHODS_BODY
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processor.utils.ValType.NO_VALUE
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.MethodModifiers
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualMethod.VirtualMethodImpl
-import ru.DmN.siberia.utils.VirtualType
-import ru.DmN.siberia.utils.VirtualType.VirtualTypeImpl
+import ru.DmN.siberia.utils.vtype.MethodModifiers
+import ru.DmN.siberia.utils.vtype.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualMethod.VirtualMethodImpl
+import ru.DmN.siberia.utils.vtype.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType.Companion.VOID
+import ru.DmN.siberia.utils.vtype.VirtualType.VirtualTypeImpl
 
 object NRDefn : INodeProcessor<NodeNodesList> {
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeDefn {
-        val gctx = ctx.global
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
         val type = ctx.clazz as VirtualTypeImpl
         //
         val gens = processor.computeListOr(node.nodes[0], ctx)
@@ -44,7 +40,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
             if (returnGen == null)
                 processor.computeType(node.nodes[1 + offset], ctx)
             else generics[returnGen]!!
-        val args = parseArguments(node.nodes[2 + offset], generics, processor, ctx, gctx)
+        val args = parseArguments(node.nodes[2 + offset], generics, processor, ctx)
         //
         val method = VirtualMethodImpl(
             type,
@@ -73,7 +69,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
             processor.stageManager.pushTask(METHODS_BODY) {
                 val context = ctx.with(method).with(BodyContext.of(method))
                 if (method.modifiers.inline)
-                    method.inline = NodeInlBodyB(node.info.withType(NodeTypes.INL_BODY_A), new.nodes.toMutableList(), method.rettype, context)
+                    method.inline = NodeInlBodyB(node.info.withType(INL_BODY_A), new.nodes.toMutableList(), method.rettype, context)
                 processNodes(method, new, processor, context)
             }
         }
@@ -82,8 +78,8 @@ object NRDefn : INodeProcessor<NodeNodesList> {
 
     private fun processNodes(method: VirtualMethod, new: NodeNodesList, processor: Processor, ctx: ProcessingContext) {
         var i = 0
-        while (i < new.nodes.size.let { if (method.rettype != VirtualType.VOID) it - 1 else it }) {
-            val it = processor.process(new.nodes[i], ctx, NO_VALUE)
+        while (i < new.nodes.size.let { if (method.rettype != VOID) it - 1 else it }) {
+            val it = processor.process(new.nodes[i], ctx, false)
             if (it == null) {
                 new.nodes.removeAt(i)
                 i--
@@ -91,17 +87,17 @@ object NRDefn : INodeProcessor<NodeNodesList> {
             i++
         }
         //
-        if (new.nodes.isNotEmpty() && method.rettype != VirtualType.VOID) {
+        if (new.nodes.isNotEmpty() && method.rettype != VOID) {
             new.nodes[new.nodes.lastIndex] = NRAs.process(
                 nodeAs(new.info, new.nodes.last(), method.rettype.name),
                 processor,
                 ctx,
-                ValType.VALUE
+                true
             )!!
         }
     }
 
-    fun parseArguments(list: Node, generics: Map<String, VirtualType>, processor: Processor, ctx: ProcessingContext, gctx: GlobalContext): Triple<MutableList<VirtualType>, MutableList<String>, MutableList<String?>> {
+    fun parseArguments(list: Node, generics: Map<String, VirtualType>, processor: Processor, ctx: ProcessingContext): Triple<MutableList<VirtualType>, MutableList<String>, MutableList<String?>> {
         val argsc = ArrayList<VirtualType>()
         val argsn = ArrayList<String>()
         val argsg = ArrayList<String?>()
@@ -116,7 +112,6 @@ object NRDefn : INodeProcessor<NodeNodesList> {
                     argsc += generics[generic]!!
                     argsg += generic
                 } else {
-//                    argsc += gctx.getType(type, processor.tp)
                     argsc += NRValue.computeType(type, processor, ctx)
                     argsg += null
                 }

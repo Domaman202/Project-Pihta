@@ -1,26 +1,26 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.processor.utils.MethodFindResultB
 import ru.DmN.pht.ast.NodeMCall
-import ru.DmN.pht.node.*
-import ru.DmN.pht.node.NodeParsedTypes.SHIFT_LEFT
-import ru.DmN.pht.node.NodeParsedTypes.SHIFT_RIGHT
-import ru.DmN.pht.node.NodeTypes.MCALL_
 import ru.DmN.pht.processor.utils.ICastable
+import ru.DmN.pht.processor.utils.MethodFindResultB
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.utils.adaptToType
+import ru.DmN.pht.utils.node.NodeParsedTypes.SHIFT_LEFT
+import ru.DmN.pht.utils.node.NodeParsedTypes.SHIFT_RIGHT
+import ru.DmN.pht.utils.node.NodeTypes.MCALL_
+import ru.DmN.pht.utils.node.nodeAs
+import ru.DmN.pht.utils.node.nodeValueClass
+import ru.DmN.pht.utils.node.processed
 import ru.DmN.pht.utils.processNodes
 import ru.DmN.pht.utils.text
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
-import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.node.INodeInfo
+import ru.DmN.siberia.utils.vtype.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualType
 import kotlin.math.min
 
 object NRMath : INodeProcessor<NodeNodesList> {
@@ -29,13 +29,13 @@ object NRMath : INodeProcessor<NodeNodesList> {
         return findExtend(firstType, node.text, node.nodes.drop(1), processor, ctx)?.first?.rettype ?: firstType
     }
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? {
-        val nodes = processor.processNodes(node, ctx, VALUE)
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? {
+        val nodes = processor.processNodes(node, ctx, true)
         val firstType = processor.calc(nodes[0], ctx)!!
         val result = getExtend(firstType, node.text, nodes.drop(1), processor, ctx)
         val info = node.info
         return if (result == null)
-            if (mode == VALUE)
+            if (valMode)
                 NodeNodesList(
                     info.processed,
                     (when (info.type) {
@@ -47,7 +47,7 @@ object NRMath : INodeProcessor<NodeNodesList> {
                                 nodeAs(info, it, firstType.name),
                                 processor,
                                 ctx,
-                                VALUE
+                                true
                             )!!
                         }
                     }).toMutableList()
@@ -78,5 +78,5 @@ object NRMath : INodeProcessor<NodeNodesList> {
     }
 
     fun findExtend(type: VirtualType, name: String, args: List<Node>, processor: Processor, ctx: ProcessingContext): Pair<VirtualMethod, Boolean>? =
-        ctx.global.getMethodVariants(type, name, args.map { ICastable.of(it, processor, ctx) }.toList()).firstOrNull()
+        ctx.global.getMethodVariants(type, name, args.map { ICastable.of(it, processor, ctx) }).firstOrNull()
 }

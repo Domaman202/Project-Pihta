@@ -1,11 +1,10 @@
 package ru.DmN.pht.ast
 
-import ru.DmN.pht.ast.IOpenlyNode
-import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.node.INodeInfo
-import ru.DmN.siberia.utils.VirtualField.VirtualFieldImpl
+import ru.DmN.siberia.ast.BaseNode
+import ru.DmN.siberia.utils.node.INodeInfo
+import ru.DmN.siberia.utils.vtype.VirtualField
 
-class NodeFieldB(info: INodeInfo, val fields: List<VirtualFieldImpl>) : Node(info), IStaticallyNode, IOpenlyNode, IFinallyNode {
+class NodeFieldB(info: INodeInfo, val fields: List<VirtualField.VirtualFieldImpl>) : BaseNode(info), IStaticallyNode, IOpenlyNode, IFinallyNode {
     override var static: Boolean = false
         set(value) { field = value; fields.stream().map { it.modifiers }.forEach { it.isStatic = value } }
     override var final: Boolean = false

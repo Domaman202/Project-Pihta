@@ -6,4 +6,4 @@
     (defn fac ^int [[i ^int]]
         (#fac . i 1))
     (app-fn
-        (println (#fac . 4))))
+        (println (#fac . 12))))

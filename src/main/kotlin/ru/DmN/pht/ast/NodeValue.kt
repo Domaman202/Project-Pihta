@@ -1,11 +1,11 @@
 package ru.DmN.pht.ast
 
-import ru.DmN.pht.node.NodeTypes
-import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.node.INodeInfo
+import ru.DmN.pht.utils.node.NodeTypes
+import ru.DmN.siberia.ast.BaseNode
 import ru.DmN.siberia.utils.indent
+import ru.DmN.siberia.utils.node.INodeInfo
 
-class NodeValue(info: INodeInfo, val vtype: Type, val value: String) : Node(info), IValueNode {
+class NodeValue(info: INodeInfo, val vtype: Type, val value: String) : BaseNode(info), IValueNode {
     fun getBoolean() =
         value.toBoolean()
     fun getChar() =

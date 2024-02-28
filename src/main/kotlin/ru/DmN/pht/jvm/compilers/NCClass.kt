@@ -8,7 +8,7 @@ import ru.DmN.pht.compiler.java.utils.classes
 import ru.DmN.pht.compiler.java.utils.method
 import ru.DmN.pht.compiler.java.utils.with
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
-import ru.DmN.pht.node.NodeTypes.*
+import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.CompilingStage

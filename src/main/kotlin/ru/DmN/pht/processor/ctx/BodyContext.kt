@@ -2,15 +2,11 @@ package ru.DmN.pht.processor.ctx
 
 import ru.DmN.siberia.utils.SubList
 import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualType
 import java.util.concurrent.atomic.AtomicInteger
 
-class BodyContext(
-    val children: MutableList<BodyContext>,
-    val variables: MutableList<Variable>,
-    val nvi: AtomicInteger
-) {
+class BodyContext(val children: MutableList<BodyContext>, val variables: MutableList<Variable>, val nvi: AtomicInteger) {
     fun copy(): BodyContext =
         BodyContext(ArrayList(children), ArrayList(variables), AtomicInteger(nvi.get()))
 

@@ -4,8 +4,8 @@ import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.utils.VTDynamic
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VTDynamic
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 interface ICastable {
     /**

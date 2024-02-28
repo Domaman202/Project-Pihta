@@ -1,24 +1,25 @@
+@file:SuppressWarnings("UNCHECKED_CAST")
 package ru.DmN.pht.compiler.java.utils
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
-import ru.DmN.pht.ctx.ContextKeys
-import ru.DmN.pht.processor.utils.LinkedClassesNode
-import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.compiler.java.ctx.BodyContext
 import ru.DmN.pht.compiler.java.ctx.ClassContext
 import ru.DmN.pht.compiler.java.ctx.MethodContext
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
+import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.pht.processor.utils.classes
 import ru.DmN.pht.processor.utils.isEnum
+import ru.DmN.pht.utils.ctx.ContextKeys
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.ctx.IContextCollection
-import ru.DmN.siberia.ctx.IContextKey
+import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.ctx.IContextCollection
+import ru.DmN.siberia.utils.ctx.IContextKey
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 fun Compiler.computeValue(node: Node, ctx: CompilationContext): Any? =
     this.get(ctx, node).let {
@@ -190,14 +191,14 @@ fun objectToPrimitive(variable: Variable, node: MethodVisitor): VirtualType? {
     val start = Label()
     node.visitLabel(start)
     return when (val type = variable.type().name) {
-        "java.lang.Boolean" -> objectToPrimitive(variable, node, type, VirtualType.BOOLEAN, 'Z')
-        "java.lang.Byte" -> objectToPrimitive(variable, node, type, VirtualType.BYTE, 'B')
-        "java.lang.Short" -> objectToPrimitive(variable, node, type, VirtualType.SHORT, 'S')
-        "java.lang.Character" -> objectToPrimitive(variable, node, type, VirtualType.CHAR, 'C')
-        "java.lang.Integer" -> objectToPrimitive(variable, node, type, VirtualType.INT, 'I')
-        "java.lang.Long" -> objectToPrimitive(variable, node, type, VirtualType.LONG, 'J')
-        "java.lang.Float" -> objectToPrimitive(variable, node, type, VirtualType.FLOAT, 'F')
-        "java.lang.Double" -> objectToPrimitive(variable, node, type, VirtualType.DOUBLE, 'D')
+        "java.lang.Boolean"     -> objectToPrimitive(variable, node, type, VirtualType.BOOLEAN, 'Z')
+        "java.lang.Byte"        -> objectToPrimitive(variable, node, type, VirtualType.BYTE, 'B')
+        "java.lang.Short"       -> objectToPrimitive(variable, node, type, VirtualType.SHORT, 'S')
+        "java.lang.Character"   -> objectToPrimitive(variable, node, type, VirtualType.CHAR, 'C')
+        "java.lang.Integer"     -> objectToPrimitive(variable, node, type, VirtualType.INT, 'I')
+        "java.lang.Long"        -> objectToPrimitive(variable, node, type, VirtualType.LONG, 'J')
+        "java.lang.Float"       -> objectToPrimitive(variable, node, type, VirtualType.FLOAT, 'F')
+        "java.lang.Double"      -> objectToPrimitive(variable, node, type, VirtualType.DOUBLE, 'D')
         else -> variable.type
     }
 }

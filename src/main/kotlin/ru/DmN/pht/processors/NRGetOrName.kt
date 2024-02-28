@@ -5,28 +5,27 @@ import ru.DmN.pht.ast.NodeGet.Type.THIS_FIELD
 import ru.DmN.pht.ast.NodeGet.Type.THIS_STATIC_FIELD
 import ru.DmN.pht.ast.NodeGetOrName
 import ru.DmN.pht.ast.NodeInlBodyA
-import ru.DmN.pht.node.NodeTypes.GET_
-import ru.DmN.pht.node.NodeTypes.INL_BODY_A
-import ru.DmN.pht.node.nodeTypesGet
 import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.utils.InlineVariable
 import ru.DmN.pht.utils.lenArgs
+import ru.DmN.pht.utils.node.NodeTypes.GET_
+import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_A
+import ru.DmN.pht.utils.node.nodeTypesGet
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.node.INodeInfo
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeGetOrName>, IInlinableProcessor<NodeGetOrName> {
     override fun calc(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): VirtualType? =
         calc(node.info, node.name, processor, ctx)
 
     fun calc(info: INodeInfo, name: String, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        processor.calc(NRGetB.process(info, name, mutableListOf(), processor, ctx, ValType.VALUE)!!, ctx)
+        processor.calc(NRGetB.process(info, name, mutableListOf(), processor, ctx, true)!!, ctx)
 
-    override fun process(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
-        NRGetB.process(node.info, node.name, mutableListOf(), processor, ctx, mode)
+    override fun process(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
+        NRGetB.process(node.info, node.name, mutableListOf(), processor, ctx, valMode)
 
     override fun computeInt(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Int =
         node.getValueAsString().toInt()

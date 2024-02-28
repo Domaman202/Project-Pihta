@@ -3,8 +3,10 @@ package ru.DmN.pht.processor.ctx
 import ru.DmN.pht.compiler.java.utils.MacroDefine
 import ru.DmN.pht.processor.utils.ICastable
 import ru.DmN.pht.processor.utils.getMethodVariants
-import ru.DmN.pht.utils.lenArgs
 import ru.DmN.siberia.utils.*
+import ru.DmN.siberia.utils.vtype.TypesProvider
+import ru.DmN.siberia.utils.vtype.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 class GlobalContext(
     val namespace: String = "",

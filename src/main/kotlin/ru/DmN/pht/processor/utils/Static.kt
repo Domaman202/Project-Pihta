@@ -7,7 +7,7 @@ import ru.DmN.pht.utils.isLiteral
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.utils.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualMethod
 
 enum class Static(val filter: (method: VirtualMethod) -> Boolean) {
     ANY({ true }),

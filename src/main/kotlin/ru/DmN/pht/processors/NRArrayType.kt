@@ -1,16 +1,14 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.node.nodeValueClass
 import ru.DmN.pht.utils.compute
 import ru.DmN.pht.utils.computeType
 import ru.DmN.pht.utils.isConstClass
+import ru.DmN.pht.utils.node.nodeValueClass
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processor.utils.ValType.VALUE
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRArrayType : IStdNodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? {
@@ -20,9 +18,9 @@ object NRArrayType : IStdNodeProcessor<NodeNodesList> {
         else processor.calc(type, ctx)?.arrayType
     }
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
-        if (mode == VALUE) {
-            val type = processor.process(node.nodes[0], ctx, VALUE)!!
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
+        if (valMode) {
+            val type = processor.process(node.nodes[0], ctx, true)!!
             if (type.isConstClass)
                 nodeValueClass(node.info, processor.computeType(type, ctx).arrayType.name)
             else processor.calc(type, ctx)?.let { nodeValueClass(node.info, it.arrayType.name) }

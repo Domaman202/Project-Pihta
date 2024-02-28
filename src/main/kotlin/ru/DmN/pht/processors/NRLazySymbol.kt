@@ -1,16 +1,14 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeLazySymbol
-import ru.DmN.pht.node.nodeValue
+import ru.DmN.pht.utils.node.nodeValue
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processor.utils.ValType.VALUE
 
 object NRLazySymbol : IStdNodeProcessor<NodeLazySymbol> {
-    override fun process(node: NodeLazySymbol, processor: Processor, ctx: ProcessingContext, mode: ValType): Node? =
-        if (mode == VALUE)
+    override fun process(node: NodeLazySymbol, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
+        if (valMode)
             nodeValue(node.info, computeString(node, processor, ctx))
         else null
 

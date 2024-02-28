@@ -8,7 +8,7 @@ import ru.DmN.pht.processor.utils.clazz
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRGetC : INodeProcessor<NodeGet> {
     override fun calc(node: NodeGet, processor: Processor, ctx: ProcessingContext): VirtualType =

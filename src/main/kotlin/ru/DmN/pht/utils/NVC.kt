@@ -2,10 +2,10 @@ package ru.DmN.pht.utils
 
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
-import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.VirtualField
-import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.compiler.java.utils.load
+import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.vtype.VirtualField
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 abstract class NVC {
     abstract val name: String

@@ -1,20 +1,16 @@
-package ru.DmN.pht.node
+package ru.DmN.pht.utils.node
 
-import ru.DmN.pht.ast.NodeTypedGet
-import ru.DmN.pht.ast.NodeGet
-import ru.DmN.pht.ast.NodeGetOrName
-import ru.DmN.pht.ast.NodeModifierNodesList
-import ru.DmN.pht.ast.NodeValue
+import ru.DmN.pht.ast.*
 import ru.DmN.pht.ast.NodeValue.Type.NIL
-import ru.DmN.pht.node.NodeParsedTypes.*
-import ru.DmN.pht.node.NodeTypes.*
 import ru.DmN.pht.utils.mapMutable
+import ru.DmN.pht.utils.node.NodeParsedTypes.*
+import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.ast.NodeUse
-import ru.DmN.siberia.node.INodeInfo
-import ru.DmN.siberia.node.NodeTypes.USE_CTX
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.node.INodeInfo
+import ru.DmN.siberia.utils.node.NodeTypes.USE_CTX
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 val INodeInfo.processed
     get() = this.withType((this.type as IParsedNodeType).processed)
@@ -47,7 +43,7 @@ fun nodeCcall(info: INodeInfo) =
     NodeNodesList(info.withType(CCALL))
 fun nodeCls(info: INodeInfo, name: String, parents: List<String>, nodes: List<Node>) =
     NodeNodesList(info.withType(CLS),
-        mutableListOf(nodeValue(info, name), nodeValn(info, parents.mapMutable { nodeValue(info, it) })).apply { addAll(nodes) })
+        mutableListOf<Node>(nodeValue(info, name), nodeValn(info, parents.mapMutable { nodeValue(info, it) })).apply { addAll(nodes) })
 fun nodeCls(info: INodeInfo, name: String, parent: String, node: Node) =
     nodeCls(info, name, listOf(parent), listOf(node))
 fun nodeCtor(info: INodeInfo, args: List<Pair<String, String>>, nodes: List<Node>) =
@@ -69,11 +65,11 @@ fun nodeDef(info: INodeInfo, name: String, value: Node) =
         mutableListOf(nodeValn(info, nodeValn(info, mutableListOf(nodeGetOrName(info, name), value)))))
 fun nodeDefn(info: INodeInfo, name: String, ret: String, args: List<Pair<String, String>>, nodes: List<Node>) =
     NodeNodesList(info.withType(DEFN),
-        mutableListOf(
+        mutableListOf<Node>(
             nodeValue(info, name),
             nodeValue(info, ret),
-            nodeValn(info, args.mapMutable { nodeValn(info, mutableListOf(nodeValue(info, it.first), nodeValueClass(info, it.second))) }))
-            .apply { addAll(nodes) })
+            nodeValn(info, args.mapMutable { nodeValn(info, mutableListOf(nodeValue(info, it.first), nodeValueClass(info, it.second))) })
+        ).apply { addAll(nodes) })
 fun nodeDefn(info: INodeInfo, name: String, ret: String, args: List<Pair<String, String>>, node: Node) =
     nodeDefn(info, name, ret, args, mutableListOf(node))
 fun nodeDefn(info: INodeInfo, name: String, ret: String, node: Node) =
@@ -124,7 +120,7 @@ fun nodePrintln(info: INodeInfo, message: String) =
 // o
 fun nodeObj(info: INodeInfo, name: String, parents: List<String>, nodes: List<Node>) =
     NodeNodesList(info.withType(OBJ),
-        mutableListOf(nodeValue(info, name), nodeValn(info, parents.mapMutable { nodeValue(info, it) })).apply { addAll(nodes) })
+        mutableListOf<Node>(nodeValue(info, name), nodeValn(info, parents.mapMutable { nodeValue(info, it) })).apply { addAll(nodes) })
 // t
 fun nodeThrow(info: INodeInfo, clazz: String) =
     NodeNodesList(info.withType(THROW), mutableListOf(nodeNew(info, clazz)))

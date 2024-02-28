@@ -1,6 +1,9 @@
 package ru.DmN.test
 
+import ru.DmN.pht.module.utils.Module
+import ru.DmN.pht.module.utils.ModulesProvider
 import ru.DmN.pht.std.module.ast.NodeModule
+import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.Processor
@@ -9,15 +12,12 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processor.utils.with
 import ru.DmN.siberia.processors.NRUseCtx.injectModules
 import ru.DmN.siberia.unparser.UnparsingContext
-import ru.DmN.siberia.utils.Module
-import ru.DmN.siberia.utils.ModulesProvider
-import ru.DmN.siberia.utils.TypesProvider
+import ru.DmN.siberia.utils.vtype.TypesProvider
 import java.io.File
 import java.io.FileOutputStream
 import java.net.URLClassLoader
@@ -26,7 +26,6 @@ import kotlin.test.assertEquals
 import ru.DmN.test.Module as SiberiaModule
 
 abstract class Module(val dir: String) {
-
     @Test
     open fun testPrint() {
         print()

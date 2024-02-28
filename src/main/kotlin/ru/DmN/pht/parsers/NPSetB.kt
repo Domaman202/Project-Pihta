@@ -4,23 +4,23 @@ import ru.DmN.pht.ast.NodeFMGet
 import ru.DmN.pht.ast.NodeFieldSet
 import ru.DmN.pht.ast.NodeGetOrName
 import ru.DmN.pht.ast.NodeSet
-import ru.DmN.pht.node.NodeParsedTypes
-import ru.DmN.pht.node.NodeTypes
-import ru.DmN.pht.node.nodeValueClass
+import ru.DmN.pht.utils.node.NodeParsedTypes.*
+import ru.DmN.pht.utils.node.NodeTypes.GET_OR_NAME
+import ru.DmN.pht.utils.node.nodeValueClass
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
-import ru.DmN.siberia.node.INodeInfo
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.siberia.parsers.NPProgn
+import ru.DmN.siberia.utils.node.INodeInfo
 
 object NPSetB : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val name = parser.nextToken()!!
         return NPProgn.parse(parser, ctx) {
             parse(
-                INodeInfo.of(NodeParsedTypes.SET_B),
+                INodeInfo.of(SET_B),
                 name.text!!,
                 when (name.type) {
                     Token.DefaultType.CLASS -> true
@@ -41,7 +41,7 @@ object NPSetB : INodeParser {
                 parts.last()
             )
         else NodeFieldSet(
-            info.withType(NodeParsedTypes.FSET_B),
+            info.withType(FSET_B),
             nodes,
             parse(info, parts, 1, static),
             parts.last(),
@@ -54,9 +54,9 @@ object NPSetB : INodeParser {
         return if (i + 1 == parts.size)
             if (static)
                 nodeValueClass(info, name)
-            else NodeGetOrName(info.withType(NodeTypes.GET_OR_NAME), name, false)
+            else NodeGetOrName(info.withType(GET_OR_NAME), name, false)
         else NodeFMGet(
-            info.withType(NodeParsedTypes.FGET_B),
+            info.withType(FGET_B),
             mutableListOf(),
             parse(info, parts, i + 1, static),
             name,

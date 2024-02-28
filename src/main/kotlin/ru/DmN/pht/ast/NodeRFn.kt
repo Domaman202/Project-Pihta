@@ -1,12 +1,13 @@
 package ru.DmN.pht.ast
 
+import ru.DmN.siberia.ast.BaseNode
 import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.node.INodeInfo
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.indent
+import ru.DmN.siberia.utils.node.INodeInfo
+import ru.DmN.siberia.utils.vtype.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualType
 
-class NodeRFn(info: INodeInfo, var type: VirtualType?, var lambda: VirtualMethod?, var instance: Node?, val name: String, var method: VirtualMethod?) : Node(info) {
+class NodeRFn(info: INodeInfo, var type: VirtualType?, var lambda: VirtualMethod?, var instance: Node?, val name: String, var method: VirtualMethod?) : BaseNode(info) {
     override fun copy(): NodeRFn =
         NodeRFn(info, type, lambda, instance, name, method)
 

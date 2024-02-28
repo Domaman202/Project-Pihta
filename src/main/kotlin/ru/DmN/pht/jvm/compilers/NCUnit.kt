@@ -1,13 +1,13 @@
 package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
-import ru.DmN.siberia.Compiler
-import ru.DmN.siberia.compilers.INodeCompiler
-import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.pht.compiler.java.utils.method
+import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.compilers.INodeCompiler
+import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NCUnit : INodeCompiler<Node> {
     override fun compile(node: Node, compiler: Compiler, ctx: CompilationContext) = Unit

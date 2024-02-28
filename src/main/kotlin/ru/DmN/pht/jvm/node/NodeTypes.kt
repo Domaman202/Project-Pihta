@@ -1,9 +1,9 @@
 package ru.DmN.pht.jvm.node
 
-import ru.DmN.siberia.node.INodeType
-import ru.DmN.siberia.node.NodeTypes.Type
-import ru.DmN.siberia.node.NodeTypes.Type.PARSED
-import ru.DmN.siberia.node.NodeTypes.Type.PROCESSED
+import ru.DmN.siberia.utils.node.INodeType
+import ru.DmN.siberia.utils.node.NodeTypes.Type
+import ru.DmN.siberia.utils.node.NodeTypes.Type.PARSED
+import ru.DmN.siberia.utils.node.NodeTypes.Type.PROCESSED
 
 enum class NodeTypes : INodeType {
     // c

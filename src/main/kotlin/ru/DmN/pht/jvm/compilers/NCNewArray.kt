@@ -1,14 +1,14 @@
 package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
-import ru.DmN.siberia.Compiler
-import ru.DmN.siberia.compilers.INodeCompiler
-import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.pht.ast.NodeNewArray
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.compiler.java.utils.method
-import ru.DmN.pht.ast.NodeNewArray
+import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.compilers.INodeCompiler
+import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NCNewArray : INodeCompiler<NodeNewArray> {
     override fun compileVal(node: NodeNewArray, compiler: Compiler, ctx: CompilationContext): Variable {

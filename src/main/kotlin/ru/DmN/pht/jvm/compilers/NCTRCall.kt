@@ -10,8 +10,8 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.VirtualType.Companion.DOUBLE
-import ru.DmN.siberia.utils.VirtualType.Companion.LONG
+import ru.DmN.siberia.utils.vtype.VirtualType.Companion.DOUBLE
+import ru.DmN.siberia.utils.vtype.VirtualType.Companion.LONG
 
 object NCTRCall : INodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext) {

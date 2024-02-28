@@ -1,9 +1,9 @@
-package ru.DmN.pht.utils
+package ru.DmN.pht.utils.vtype
 
 import ru.DmN.pht.utils.OrPair
-import ru.DmN.siberia.utils.VirtualField
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualField
+import ru.DmN.siberia.utils.vtype.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 // Virtual Type With Generics
 class VTWG(val type: VirtualType, val gens: Map<String, OrPair<VirtualType, String>>) : VirtualType() {

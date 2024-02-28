@@ -1,6 +1,6 @@
 package ru.DmN.pht.helper.node
 
-import ru.DmN.siberia.node.INodeType
+import ru.DmN.siberia.utils.node.INodeType
 
 enum class NodeTypes(override val operation: String) : INodeType {
     TYPES("types"),

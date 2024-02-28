@@ -1,21 +1,17 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeRFn
-import ru.DmN.pht.node.NodeTypes.RFN_
-import ru.DmN.pht.node.nodeMCall
-import ru.DmN.pht.node.nodeValueClass
 import ru.DmN.pht.processor.utils.classes
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.utils.*
+import ru.DmN.pht.utils.node.NodeTypes.RFN_
+import ru.DmN.pht.utils.node.nodeValueClass
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.processor.utils.ValType.NO_VALUE
-import ru.DmN.siberia.processor.utils.ValType.VALUE
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRRFn : INodeProcessor<NodeNodesList> { // todo: двусторонний calc для аргументов (вычисление расстояния до типа)
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
@@ -24,8 +20,8 @@ object NRRFn : INodeProcessor<NodeNodesList> { // todo: двусторонний
             processor.tp
         )
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeRFn? {
-        if (mode == NO_VALUE)
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeRFn? {
+        if (!valMode)
             return null
         val type =
             node.nodes[0].let {
@@ -37,7 +33,7 @@ object NRRFn : INodeProcessor<NodeNodesList> { // todo: двусторонний
             node.nodes[1].let {
                 if (it.isLiteral && processor.computeString(it, ctx) == ".")
                     null
-                else processor.process(it, ctx, VALUE)!!
+                else processor.process(it, ctx, true)!!
             }
         val name = processor.computeString(node.nodes[2], ctx)
         return NodeRFn(node.info.withType(RFN_), type, null, instance, name, null).process(processor, ctx)
@@ -52,15 +48,15 @@ object NRRFn : INodeProcessor<NodeNodesList> { // todo: двусторонний
                 if (instance!!.isConstClass)
                     findMethod(processor.computeType(instance!!, ctx), name, lambda!!, true)
                 else findMethod(processor.calc(instance!!, ctx)!!, name, lambda!!, false)
-            else ctx.classes
-                .asSequence()
-                .map { Pair(it, findMethodOrNull(it, name, lambda!!, true)) }
-                .filter { it.second != null }
-                .first()
-                .let {
-                    instance = nodeValueClass(info, it.first.name)
-                    it.second
-                }
+            else {
+                val pair = ctx.classes
+                    .asSequence()
+                    .map { Pair(it, findMethodOrNull(it, name, lambda!!, true)) }
+                    .filter { it.second != null }
+                    .first()
+                instance = nodeValueClass(info, pair.first.name)
+                pair.second
+            }
         return this
     }
 

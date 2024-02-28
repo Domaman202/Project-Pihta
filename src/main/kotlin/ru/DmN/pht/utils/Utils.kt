@@ -1,17 +1,17 @@
 package ru.DmN.pht.utils
 
-import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.pht.ast.IValueNode
 import ru.DmN.pht.processor.utils.ICastable
+import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.pht.processors.IStdNodeProcessor
+import ru.DmN.pht.utils.vtype.VTWG
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
-import ru.DmN.siberia.utils.VirtualMethod
-import ru.DmN.siberia.utils.VirtualType
 import ru.DmN.siberia.utils.klassOf
+import ru.DmN.siberia.utils.vtype.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 /**
  * Нормализация имени для jvm:
@@ -141,8 +141,8 @@ fun lenArgs(to: List<ICastable>, getter: (index: Int) -> VirtualType): Int {
     return j
 }
 
-fun Processor.processNodes(node: INodesList, ctx: ProcessingContext, mode: ValType): MutableList<Node> =
-    node.nodes.mapMutable { process(it, ctx, mode)!! }
+fun Processor.processNodes(node: INodesList, ctx: ProcessingContext, valMode: Boolean): MutableList<Node> =
+    node.nodes.mapMutable { process(it, ctx, valMode)!! }
 
 fun Processor.computeStringNodes(node: INodesList, ctx: ProcessingContext): List<String> =
     node.nodes.map { computeString(it, ctx) }

@@ -1,20 +1,19 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeCatch
-import ru.DmN.pht.node.NodeTypes.CATCH_
 import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.utils.body
 import ru.DmN.pht.processor.utils.with
 import ru.DmN.pht.utils.*
+import ru.DmN.pht.utils.node.NodeTypes.CATCH_
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ValType
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType
 import kotlin.streams.toList
 
 object NRCatch : INodeProcessor<NodeNodesList> {
@@ -23,7 +22,7 @@ object NRCatch : INodeProcessor<NodeNodesList> {
             processor.computeType(node.nodes[0], ctx)
         else null
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, mode: ValType): NodeCatch {
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeCatch {
         val bctx = ctx.body
         val info = node.info
         val offset =
@@ -48,10 +47,10 @@ object NRCatch : INodeProcessor<NodeNodesList> {
                                 addVariable(variable, type)
                             }
                         }),
-                        mode
+                        valMode
                     )
                 )
             }
-        ).apply { processNodesList(this, processor, ctx, mode) }
+        ).apply { processNodesList(this, processor, ctx, valMode) }
     }
 }

@@ -5,13 +5,13 @@ import ru.DmN.pht.ast.NodeIncDec
 import ru.DmN.pht.compiler.java.utils.body
 import ru.DmN.pht.compiler.java.utils.clazz
 import ru.DmN.pht.compiler.java.utils.method
-import ru.DmN.pht.node.NodeTypes.*
+import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.pht.utils.type
 import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NCIncDec : INodeCompiler<NodeIncDec> {
     override fun compile(node: NodeIncDec, compiler: Compiler, ctx: CompilationContext) {
