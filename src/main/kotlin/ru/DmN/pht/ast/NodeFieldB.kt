@@ -1,6 +1,8 @@
 package ru.DmN.pht.ast
 
+import ru.DmN.pht.utils.meta.MetadataKeys.*
 import ru.DmN.siberia.ast.BaseNode
+import ru.DmN.siberia.utils.meta.IMetadataKey
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualField
 
@@ -11,19 +13,19 @@ class NodeFieldB(info: INodeInfo, val fields: List<VirtualField.VirtualFieldImpl
         set(value) { field = value; fields.stream().map { it.modifiers }.forEach { it.isFinal = value } }
     override var open: Boolean = false
 
-//    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
-//        indent(indent).append('[').append(text).append(' ')
-//            .append(if (static) "(static)" else "(nostatic)").append(' ')
-//            .append(if (final) "(final)" else "(nofinal)")
-//        if (fields.isNotEmpty()) {
-//            fields.forEach {
-//                append('\n').indent(indent + 1).append("[\n")
-//                    .indent(indent + 2).append("name = ").append(it.name)
-//                    .append('\n').indent(indent + 2).append("type = ").append(it.type.name)
-//                append('\n').indent(indent + 1).append(']')
-//            }
-//            append('\n').indent(indent)
-//        }
-//        append(']')
-//    }
+    override fun setMetadata(key: IMetadataKey, value: Any?) {
+        when (key) {
+            FINAL  -> final  = value as Boolean
+            OPEN   -> open   = value as Boolean
+            STATIC -> static = value as Boolean
+        }
+    }
+
+    override fun getMetadata(key: IMetadataKey): Any? =
+        when (key) {
+            FINAL  -> final
+            OPEN   -> open
+            STATIC -> static
+            else   -> null
+        }
 }

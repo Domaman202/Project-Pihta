@@ -19,7 +19,6 @@ class NodeDef(info: INodeInfo, val variables: List<VariableOrField>, val isVaria
                     it.modifiers.isStatic = value
                 }
             }
-            visitMetadata(STATIC, value)
         }
 
     override var final: Boolean = false
@@ -30,13 +29,24 @@ class NodeDef(info: INodeInfo, val variables: List<VariableOrField>, val isVaria
                     it.modifiers.isFinal = value
                 }
             }
-            visitMetadata(FINAL, value)
         }
 
     override var open: Boolean = false
-        set(value) {
-            field = value
-            visitMetadata(OPEN, value)
+
+    override fun setMetadata(key: IMetadataKey, value: Any?) {
+        when (key) {
+            FINAL  -> final  = value as Boolean
+            OPEN   -> open   = value as Boolean
+            STATIC -> static = value as Boolean
+        }
+    }
+
+    override fun getMetadata(key: IMetadataKey): Any? =
+        when (key) {
+            FINAL  -> final
+            OPEN   -> open
+            STATIC -> static
+            else   -> null
         }
 
     override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
@@ -61,23 +71,6 @@ class NodeDef(info: INodeInfo, val variables: List<VariableOrField>, val isVaria
         }
         append(']')
     }
-
-    override fun setMetadata(key: IMetadataKey, value: Any?) {
-        when (key) {
-            FINAL  -> final  = value as Boolean
-            OPEN   -> open   = value as Boolean
-            STATIC -> static = value as Boolean
-            else -> super.setMetadata(key, value)
-        }
-    }
-
-    override fun getMetadata(key: IMetadataKey): Any? =
-        when (key) {
-            FINAL  -> final
-            OPEN   -> open
-            STATIC -> static
-            else -> super.getMetadata(key)
-        }
 
     class VariableOrField(val variable: Variable?, val field: VirtualFieldImpl?) {
         val name: String =

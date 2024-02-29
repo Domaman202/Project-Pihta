@@ -18,7 +18,6 @@ class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeI
                     it.abstract = value
                 }
             }
-            visitMetadata(ABSTRACT, value)
         }
         get() = type.isAbstract
 
@@ -30,7 +29,6 @@ class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeI
                     it.open = value
                 }
             }
-            visitMetadata(OPEN, value)
         }
         get() = !type.isFinal
 
@@ -38,7 +36,6 @@ class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeI
         when (key) {
             ABSTRACT -> abstract = value as Boolean
             OPEN     -> open     = value as Boolean
-            else     -> super.setMetadata(key, value)
         }
     }
 
@@ -46,7 +43,7 @@ class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeI
         when (key) {
             ABSTRACT -> abstract
             OPEN     -> open
-            else     -> super.getMetadata(key)
+            else     -> null
         }
 
     override fun copy(): NodeType =

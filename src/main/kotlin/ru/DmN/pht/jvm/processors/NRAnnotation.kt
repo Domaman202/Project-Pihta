@@ -1,5 +1,6 @@
 package ru.DmN.pht.jvm.processors
 
+import ru.DmN.pht.ast.NodeModifierNodesList
 import ru.DmN.pht.jvm.ast.NodeAnnotation
 import ru.DmN.pht.jvm.node.NodeTypes.ANN_ANN_
 import ru.DmN.pht.utils.computeList
@@ -8,18 +9,17 @@ import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.computeType
 import ru.DmN.siberia.Processor
 import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.processors.NRProgn
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object NRAnnotation : INodeProcessor<NodeNodesList> {
-    override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
+object NRAnnotation : INodeProcessor<NodeModifierNodesList> {
+    override fun calc(node: NodeModifierNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
         NRProgn.calc(node, processor, ctx)
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeAnnotation {
+    override fun process(node: NodeModifierNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeAnnotation {
         val args = HashMap<String?, Node>()
         val nodes = ArrayList<Node>()
         val new = NodeAnnotation(

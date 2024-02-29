@@ -1,6 +1,5 @@
 package ru.DmN.pht
 
-import ru.DmN.pht.ast.*
 import ru.DmN.pht.module.utils.Module
 import ru.DmN.pht.parser.utils.clearMacros
 import ru.DmN.pht.parser.utils.macros
@@ -15,6 +14,7 @@ import ru.DmN.pht.utils.addNP
 import ru.DmN.pht.utils.addSANP
 import ru.DmN.pht.utils.addSNP
 import ru.DmN.pht.utils.addSNU
+import ru.DmN.pht.utils.meta.MetadataKeys
 import ru.DmN.pht.utils.node.NodeParsedTypes.*
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.siberia.Compiler
@@ -619,12 +619,12 @@ object Pihta : Module("pht") {
         add(YIELD,         NRYield)
 
         // @
-        add(ANN_ABSTRACT, NRSA { it, _, _ -> if (it is IAbstractlyNode) it.abstract = true })
-        add(ANN_INLINE,   NRSA { it, _, _ -> if (it is IInlinableNode)  it.inline = true })
-        add(ANN_FINAL,    NRSA { it, _, _ -> if (it is IFinallyNode)    it.final = true })
-        add(ANN_OPEN,     NRSA { it, _, _ -> if (it is IOpenlyNode)     it.open = true })
-        add(ANN_STATIC,   NRSA { it, _, _ -> if (it is IStaticallyNode) it.static = true })
-        add(ANN_VARARGS,  NRSA { it, _, _ -> if (it is IVarargNode)     it.varargs = true })
+        add(ANN_ABSTRACT, NRSA { it, _, _ -> it.setMetadata(MetadataKeys.ABSTRACT, true) })
+        add(ANN_INLINE,   NRSA { it, _, _ -> it.setMetadata(MetadataKeys.INLINE,   true) })
+        add(ANN_FINAL,    NRSA { it, _, _ -> it.setMetadata(MetadataKeys.FINAL,    true) })
+        add(ANN_OPEN,     NRSA { it, _, _ -> it.setMetadata(MetadataKeys.OPEN,     true) })
+        add(ANN_STATIC,   NRSA { it, _, _ -> it.setMetadata(MetadataKeys.STATIC,   true) })
+        add(ANN_VARARGS,  NRSA { it, _, _ -> it.setMetadata(MetadataKeys.VARARG,   true) })
 
         // @@
         add(CT_IF_PLATFORM, NRIfPlatform)

@@ -1,9 +1,11 @@
 package ru.DmN.pht.ast
 
+import ru.DmN.siberia.ast.Node
+
 /**
  * Нода, которая может синхронизироваться.
  */
-interface ISyncNode {
+interface ISyncNode : Node {
     /**
      * Нода синхронизироваться?
      */

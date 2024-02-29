@@ -1,9 +1,11 @@
 package ru.DmN.pht.ast
 
+import ru.DmN.siberia.ast.Node
+
 /**
  * Нода значения.
  */
-interface IValueNode {
+interface IValueNode : Node {
     /**
      * Нода является литералом?
      */

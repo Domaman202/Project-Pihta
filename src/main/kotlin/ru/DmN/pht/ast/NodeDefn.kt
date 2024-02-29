@@ -11,45 +11,27 @@ import ru.DmN.siberia.utils.vtype.VirtualMethod
 class NodeDefn(info: INodeInfo, nodes: MutableList<Node>, val method: VirtualMethod) : NodeNodesList(info, nodes),
     IAbstractlyNode, IInlinableNode, IOpenlyNode, IStaticallyNode, ISyncNode, IVarargNode {
     override var abstract: Boolean
-        set(value) {
-            method.modifiers.abstract = value
-            visitMetadata(ABSTRACT, value)
-        }
+        set(value) { method.modifiers.abstract = value }
         get() = method.modifiers.abstract
 
     override var inline: Boolean
-        set(value) {
-            method.modifiers.inline = value
-            visitMetadata(INLINE, value)
-        }
+        set(value) { method.modifiers.inline = value }
         get() = method.modifiers.inline
 
     override var open: Boolean
-        set(value) {
-            method.modifiers.final = !value
-            visitMetadata(OPEN, value)
-        }
+        set(value) { method.modifiers.final = !value }
         get() = !method.modifiers.final
 
     override var static: Boolean
-        set(value) {
-            method.modifiers.static = value
-            visitMetadata(STATIC, value)
-        }
+        set(value) { method.modifiers.static = value }
         get() = method.modifiers.static
 
     override var sync: Boolean
-        set(value) {
-            method.modifiers.sync = value
-            visitMetadata(STATIC, value)
-        }
+        set(value) { method.modifiers.sync = value }
         get() = method.modifiers.sync
 
     override var varargs: Boolean
-        set(value) {
-            method.modifiers.varargs = value
-            visitMetadata(VARARG, value)
-        }
+        set(value) { method.modifiers.varargs = value }
         get() = method.modifiers.varargs
 
     override fun setMetadata(key: IMetadataKey, value: Any?) {
@@ -60,7 +42,6 @@ class NodeDefn(info: INodeInfo, nodes: MutableList<Node>, val method: VirtualMet
             STATIC   -> static   = value as Boolean
             SYNC     -> sync     = value as Boolean
             VARARG   -> varargs  = value as Boolean
-            else -> super.setMetadata(key, value)
         }
     }
 
@@ -72,7 +53,7 @@ class NodeDefn(info: INodeInfo, nodes: MutableList<Node>, val method: VirtualMet
             STATIC   -> static
             SYNC     -> sync
             VARARG   -> varargs
-            else -> super.getMetadata(key)
+            else     -> null
         }
 
     override fun copy(): NodeDefn =
