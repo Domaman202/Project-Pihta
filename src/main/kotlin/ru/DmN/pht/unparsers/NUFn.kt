@@ -12,14 +12,14 @@ object NUFn : INodeUnparser<NodeFn> {
     override fun unparse(node: NodeFn, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
             if (node.processed == null) {
-                append('(').append(node.operation).append(' ').append(node.source.type!!.nameWithGens).append(" [")
-                node.source.refs.forEachIndexed { i, it ->
+                append('(').append(node.operation).append(' ').append(node.type!!.nameWithGens).append(" [")
+                node.refs.forEachIndexed { i, it ->
                     if (i > 0)
                         append(' ')
                     append(it.name)
                 }
                 append("][")
-                node.source.args.forEachIndexed { i, it ->
+                node.args.forEachIndexed { i, it ->
                     if (i > 0)
                         append(' ')
                     append(it)
