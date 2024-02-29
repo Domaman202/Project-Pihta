@@ -7,7 +7,13 @@
 |	|	|	|	(name = TestA)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[PROGN_B_
+|	|	|	|	|	|	(meta:
+|	|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	|	)
 |	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	(meta:
+|	|	|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	|	(desc = setI(I)V)

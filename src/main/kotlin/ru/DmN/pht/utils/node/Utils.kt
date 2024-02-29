@@ -153,8 +153,8 @@ fun nodeWithGens(info: INodeInfo, node: Node, generics: Sequence<Node>) =
 
 // Аннотации
 fun nodeInline(info: INodeInfo, node: Node) =
-    NodeModifierNodesList(info.withType(ANN_INLINE), mutableListOf(node))
+    NodeMetaNodesList(info.withType(ANN_INLINE), mutableListOf(node))
 fun nodeStatic(info: INodeInfo, nodes: MutableList<Node>) =
-    NodeModifierNodesList(info.withType(ANN_STATIC), nodes)
+    NodeMetaNodesList(info.withType(ANN_STATIC), nodes)
 fun nodeStatic(info: INodeInfo, node: Node) =
     nodeStatic(info, mutableListOf(node))

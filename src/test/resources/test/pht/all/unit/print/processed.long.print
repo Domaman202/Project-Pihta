@@ -7,6 +7,9 @@
 |	|	|	(parents = [java.lang.Object])
 |	|	|	[ANN_STATIC_
 |	|	|	|	[ANN_STATIC_
+|	|	|	|	|	(meta:
+|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	)
 |	|	|	|	|	[DEFN_
 |	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	(name = main)

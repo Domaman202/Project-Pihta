@@ -1,7 +1,7 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeMacroUtil
-import ru.DmN.pht.ast.NodeModifierNodesList
+import ru.DmN.pht.ast.NodeMetaNodesList
 import ru.DmN.pht.processor.utils.macro
 import ru.DmN.pht.processor.utils.with
 import ru.DmN.pht.utils.computeList
@@ -43,6 +43,6 @@ object NRMacroUnroll : INodeProcessor<NodeMacroUtil> { // todo: calc
                 }
             }
         }
-        return NodeModifierNodesList(info.withType(PROGN_B_), nodes)
+        return NodeMetaNodesList(info.withType(PROGN_B_), nodes)
     }
 }

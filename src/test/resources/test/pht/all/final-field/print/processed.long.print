@@ -10,8 +10,19 @@
 |	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	[ANN_STATIC_
 |	|	|	|	|	|	[ANN_FINAL_
+|	|	|	|	|	|	|	(meta:
+|	|	|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	[ANN_FINAL_
+|	|	|	|	|	|	|	|	(meta:
+|	|	|	|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	|	|	|	|	[FINAL] true
+|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	|	(meta:
+|	|	|	|	|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	|	|	|	|	|	[FINAL] true
+|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	|	|	|	(name = getI)

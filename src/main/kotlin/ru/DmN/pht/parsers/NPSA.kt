@@ -1,6 +1,6 @@
 package ru.DmN.pht.parsers
 
-import ru.DmN.pht.ast.NodeModifierNodesList
+import ru.DmN.pht.ast.NodeMetaNodesList
 import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
@@ -12,5 +12,5 @@ import ru.DmN.siberia.utils.node.INodeType
 
 class NPSA(val type: INodeType) : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node =
-        NPProgn.parse(parser, ctx) { NodeModifierNodesList(INodeInfo.of(type, ctx, token), it) }
+        NPProgn.parse(parser, ctx) { NodeMetaNodesList(INodeInfo.of(type, ctx, token), it) }
 }

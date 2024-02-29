@@ -9,7 +9,7 @@ import ru.DmN.siberia.utils.meta.IMetadataKey
 import ru.DmN.siberia.utils.meta.MetadataContainer
 import ru.DmN.siberia.utils.node.INodeInfo
 
-class NodeModifierNodesList(info: INodeInfo, metadata: Lazy<MetadataContainer>, override val nodes: MutableList<Node>) : BaseMetaNode(info, metadata), INodesList {
+class NodeMetaNodesList(info: INodeInfo, metadata: Lazy<MetadataContainer>, override val nodes: MutableList<Node>) : BaseMetaNode(info, metadata), INodesList {
     constructor(info: INodeInfo) : this(info, lazy { MetadataContainer() }, mutableListOf())
     constructor(info: INodeInfo, nodes: MutableList<Node>) : this(info, lazy { MetadataContainer() }, nodes)
 
@@ -18,13 +18,14 @@ class NodeModifierNodesList(info: INodeInfo, metadata: Lazy<MetadataContainer>, 
         nodes.forEach { it.setMetadata(key, value) }
     }
 
-    override fun copy(): NodeModifierNodesList =
+    override fun copy(): NodeMetaNodesList =
         if (metadata.isInitialized())
-            NodeModifierNodesList(info, lazyOf(metadata.value.copy()), nodes.mapMutable { it.copy() })
-        else NodeModifierNodesList(info, metadata, nodes.mapMutable { it.copy() })
+            NodeMetaNodesList(info, lazyOf(metadata.value.copy()), nodes.mapMutable { it.copy() })
+        else NodeMetaNodesList(info, metadata, nodes.mapMutable { it.copy() })
 
     override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder {
         builder.indent(indent).append('[').append(info.type)
+        printMetadata(builder, indent)
         if (nodes.isNotEmpty())
             builder.append('\n')
         nodes.forEach { it.print(builder, indent + 1, short).append('\n') }

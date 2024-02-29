@@ -8,6 +8,9 @@
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[ANN_INLINE_
+|	|	|	|	|	|	(meta:
+|	|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	|	)
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(name = foo)
@@ -54,6 +57,9 @@
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[ANN_INLINE_
+|	|	|	|	|	|	(meta:
+|	|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	|	)
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(name = sum)
@@ -114,6 +120,9 @@
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[ANN_INLINE_
+|	|	|	|	|	|	(meta:
+|	|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	|	)
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(name = get)
@@ -333,6 +342,9 @@
 |	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[ANN_INLINE_
+|	|	|	|	|	|	(meta:
+|	|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	|	)
 |	|	|	|	|	|	[EFN_
 |	|	|	|	|	|	|	(type = extension method)
 |	|	|	|	|	|	|	(name = slava)

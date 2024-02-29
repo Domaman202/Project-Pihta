@@ -96,10 +96,10 @@ object NRFld : INodeProcessor<NodeFieldA> {
                 }
             }
         return processor.process(
-            NodeModifierNodesList(
+            NodeMetaNodesList(
                 info.withType(if (node.final) ANN_FINAL else PROGN_B),
                 mutableListOf(
-                    NodeModifierNodesList(
+                    NodeMetaNodesList(
                         info.withType(if (node.static) ANN_STATIC else PROGN_B),
                         body.apply { this += NodeFieldB(info.withType(FLD_), fields) }
                     )

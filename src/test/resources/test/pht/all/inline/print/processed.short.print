@@ -7,6 +7,9 @@
 |	|	|	|	(name = TestA)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[ANN_INLINE_
+|	|	|	|	|	|	(meta:
+|	|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	|	)
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = foo()Ljava/lang/String;)
@@ -44,6 +47,9 @@
 |	|	|	|	(name = TestB)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[ANN_INLINE_
+|	|	|	|	|	|	(meta:
+|	|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	|	)
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = sum(II)I)
@@ -90,6 +96,9 @@
 |	|	|	|	(name = TestC)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[ANN_INLINE_
+|	|	|	|	|	|	(meta:
+|	|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	|	)
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = get(Ljava/util/function/Supplier;)Ljava/lang/String;)
@@ -268,6 +277,9 @@
 |	|	|	|	(name = TestD)
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[ANN_INLINE_
+|	|	|	|	|	|	(meta:
+|	|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	|	)
 |	|	|	|	|	|	[EFN_
 |	|	|	|	|	|	|	(type = extension method)
 |	|	|	|	|	|	|	(desc = slava(Ljava/lang/String;)Ljava/lang/String;)
