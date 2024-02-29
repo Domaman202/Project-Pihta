@@ -94,7 +94,7 @@ class NodeModifierNodesList(info: INodeInfo, nodes: MutableList<Node>) : NodeNod
             STATIC   -> static   = value as Boolean
             SYNC     -> sync     = value as Boolean
             VARARG   -> varargs  = value as Boolean
-            else -> super.setMetadata(key, value)
+            else     -> super.setMetadata(key, value)
         }
     }
 
@@ -107,7 +107,7 @@ class NodeModifierNodesList(info: INodeInfo, nodes: MutableList<Node>) : NodeNod
             STATIC   -> static
             SYNC     -> sync
             VARARG   -> varargs
-            else -> super.getMetadata(key)
+            else     -> super.getMetadata(key)
         }
 
     override fun copy(): NodeModifierNodesList =

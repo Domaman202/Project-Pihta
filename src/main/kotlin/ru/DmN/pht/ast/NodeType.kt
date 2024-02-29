@@ -1,18 +1,53 @@
 package ru.DmN.pht.ast
 
+import ru.DmN.pht.utils.meta.MetadataKeys.ABSTRACT
+import ru.DmN.pht.utils.meta.MetadataKeys.OPEN
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.utils.indent
+import ru.DmN.siberia.utils.meta.IMetadataKey
 import ru.DmN.siberia.utils.node.INodeInfo
-import ru.DmN.siberia.utils.vtype.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType.VirtualTypeImpl
 
-class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualType.VirtualTypeImpl) : NodeNodesList(info, nodes), IAbstractlyNode, IOpenlyNode {
+class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeImpl) : NodeNodesList(info, nodes), IAbstractlyNode, IOpenlyNode {
     override var abstract: Boolean
+        set(value) {
+            type.isAbstract = value
+            nodes.forEach {
+                if (it is IAbstractlyNode) {
+                    it.abstract = value
+                }
+            }
+            visitMetadata(ABSTRACT, value)
+        }
         get() = type.isAbstract
-        set(value) { type.isAbstract = value }
+
     override var open: Boolean
+        set(value) {
+            type.isFinal = !value
+            nodes.forEach {
+                if (it is IOpenlyNode) {
+                    it.open = value
+                }
+            }
+            visitMetadata(OPEN, value)
+        }
         get() = !type.isFinal
-        set(value) { type.isFinal = !value }
+
+    override fun setMetadata(key: IMetadataKey, value: Any?) {
+        when (key) {
+            ABSTRACT -> abstract = value as Boolean
+            OPEN     -> open     = value as Boolean
+            else     -> super.setMetadata(key, value)
+        }
+    }
+
+    override fun getMetadata(key: IMetadataKey): Any? =
+        when (key) {
+            ABSTRACT -> abstract
+            OPEN     -> open
+            else     -> super.getMetadata(key)
+        }
 
     override fun copy(): NodeType =
         NodeType(info, copyNodes(), type)
