@@ -1,7 +1,6 @@
 package ru.DmN.pht.ast
 
-import ru.DmN.pht.utils.meta.MetadataKeys.ABSTRACT
-import ru.DmN.pht.utils.meta.MetadataKeys.OPEN
+import ru.DmN.pht.utils.meta.MetadataKeys.*
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.utils.indent
@@ -9,32 +8,24 @@ import ru.DmN.siberia.utils.meta.IMetadataKey
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualType.VirtualTypeImpl
 
-class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeImpl) : NodeNodesList(info, nodes), IAbstractlyNode, IOpenlyNode {
+class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeImpl) : NodeNodesList(info, nodes),
+    IAbstractlyNode, IFileNode, IOpenlyNode {
     override var abstract: Boolean
-        set(value) {
-            type.isAbstract = value
-            nodes.forEach {
-                if (it is IAbstractlyNode) {
-                    it.abstract = value
-                }
-            }
-        }
+        set(value) { type.isAbstract = value }
         get() = type.isAbstract
 
+    override var file: Boolean
+        set(value) { type.isFile = value }
+        get() = type.isFile
+
     override var open: Boolean
-        set(value) {
-            type.isFinal = !value
-            nodes.forEach {
-                if (it is IOpenlyNode) {
-                    it.open = value
-                }
-            }
-        }
+        set(value) { type.isFinal = !value }
         get() = !type.isFinal
 
     override fun setMetadata(key: IMetadataKey, value: Any?) {
         when (key) {
             ABSTRACT -> abstract = value as Boolean
+            FILE     -> file     = value as Boolean
             OPEN     -> open     = value as Boolean
         }
     }
@@ -42,6 +33,7 @@ class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeI
     override fun getMetadata(key: IMetadataKey): Any? =
         when (key) {
             ABSTRACT -> abstract
+            FILE     -> file
             OPEN     -> open
             else     -> null
         }

@@ -76,8 +76,6 @@ object Pihta : Module("pht") {
         addSNP(EQ)
         // f
         addSNP(FGET_A)
-        addSNP(FILE_CLS)
-        addSNP(FILE_FN)
         addNP("fld",          NPFld)
         addSNP(FN)
         addSNP(FOR)
@@ -168,6 +166,7 @@ object Pihta : Module("pht") {
 
         // @
         addSANP(ANN_ABSTRACT)
+        addSANP(ANN_FILE)
         addSANP(ANN_FINAL)
         addSANP(ANN_INLINE)
         addSANP(ANN_OPEN)
@@ -288,10 +287,6 @@ object Pihta : Module("pht") {
         addSNU(FGET_A)
         add(FGET_B,         NUFGetA)
         add(FGET_,          NUFGetB)
-        addSNU(FILE_CLS)
-        // FILE_CLS_
-        addSNU(FILE_FN)
-        // FILE_FN_
         addSNU(FLD)
         add(FLD_,           NUFld)
         addSNU(FN)
@@ -418,6 +413,8 @@ object Pihta : Module("pht") {
         // @
         addSNU(ANN_ABSTRACT)
         addSNU(ANN_ABSTRACT_)
+        addSNU(ANN_FILE)
+        addSNU(ANN_FILE_)
         addSNU(ANN_FINAL)
         addSNU(ANN_FINAL_)
         addSNU(ANN_INLINE)
@@ -496,8 +493,6 @@ object Pihta : Module("pht") {
         add(FGET_A,        NRFGetA)
         add(FGET_B,        NRFGetB)
         add(FGET_,         NRFGet)
-        add(FILE_CLS,      NRFileCls)
-        add(FILE_FN,       NRFileFn)
         add(FLD,           NRFld)
         add(FN,            NRFn)
         add(FN_,           NRFnB)
@@ -618,6 +613,7 @@ object Pihta : Module("pht") {
 
         // @
         add(ANN_ABSTRACT, NRSA { it, _, _ -> it.setMetadata(MetadataKeys.ABSTRACT, true) })
+        add(ANN_FILE,     NRSA { it, _, _ -> it.setMetadata(MetadataKeys.FILE,     true) })
         add(ANN_INLINE,   NRSA { it, _, _ -> it.setMetadata(MetadataKeys.INLINE,   true) })
         add(ANN_FINAL,    NRSA { it, _, _ -> it.setMetadata(MetadataKeys.FINAL,    true) })
         add(ANN_OPEN,     NRSA { it, _, _ -> it.setMetadata(MetadataKeys.OPEN,     true) })

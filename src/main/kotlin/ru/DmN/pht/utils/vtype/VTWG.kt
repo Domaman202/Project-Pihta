@@ -19,6 +19,8 @@ class VTWG(val type: VirtualType, val gens: Map<String, OrPair<VirtualType, Stri
         get() = type.isFinal
     override val isInterface: Boolean
         get() = type.isInterface
+    override val isFile: Boolean
+        get() = type.isFile
     override val methods: List<VirtualMethod>
         get() = type.methods
     override val name: String

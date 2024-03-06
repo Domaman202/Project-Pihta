@@ -53,10 +53,6 @@ enum class NodeTypes : INodeType {
     EQ_("eq", PROCESSED),
     // f
     FGET_("fget", PROCESSED),
-    FILE_CLS("file-cls", PARSED),
-    FILE_CLS_("file-cls", PROCESSED),
-    FILE_FN("file-fn", PARSED),
-    FILE_FN_("file-fn", PROCESSED),
     FLD("fld", PARSED),
     FLD_("fld", PROCESSED),
     FN_("fn", PROCESSED),
@@ -155,6 +151,7 @@ enum class NodeTypes : INodeType {
 
     // @
     ANN_ABSTRACT_("@abstract", PROCESSED),
+    ANN_FILE_("@file", PROCESSED),
     ANN_FINAL_("@final", PROCESSED),
     ANN_INLINE_("@inline", PROCESSED),
     ANN_OPEN_("@open", PROCESSED),

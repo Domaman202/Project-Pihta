@@ -9,10 +9,14 @@ import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 
 class NodeDefn(info: INodeInfo, nodes: MutableList<Node>, val method: VirtualMethod) : NodeNodesList(info, nodes),
-    IAbstractlyNode, IInlinableNode, IOpenlyNode, IStaticallyNode, ISyncNode, IVarargNode {
+    IAbstractlyNode, IFileNode, IInlinableNode, IOpenlyNode, IStaticallyNode, ISyncNode, IVarargNode {
     override var abstract: Boolean
         set(value) { method.modifiers.abstract = value }
         get() = method.modifiers.abstract
+
+    override var file: Boolean
+        set(value) { method.modifiers.file = value }
+        get() = method.modifiers.file
 
     override var inline: Boolean
         set(value) { method.modifiers.inline = value }
@@ -37,6 +41,7 @@ class NodeDefn(info: INodeInfo, nodes: MutableList<Node>, val method: VirtualMet
     override fun setMetadata(key: IMetadataKey, value: Any?) {
         when (key) {
             ABSTRACT -> abstract = value as Boolean
+            FILE     -> file     = value as Boolean
             INLINE   -> inline   = value as Boolean
             OPEN     -> open     = value as Boolean
             STATIC   -> static   = value as Boolean
@@ -48,6 +53,7 @@ class NodeDefn(info: INodeInfo, nodes: MutableList<Node>, val method: VirtualMet
     override fun getMetadata(key: IMetadataKey): Any? =
         when (key) {
             ABSTRACT -> abstract
+            FILE     -> file
             INLINE   -> inline
             OPEN     -> open
             STATIC   -> static

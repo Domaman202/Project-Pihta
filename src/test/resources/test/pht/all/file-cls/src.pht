@@ -1,3 +1,0 @@
-(file-cls
-    (defn foo ^String [] "Foo!")
-    (test-fn 0 (#foo .)))
