@@ -6,7 +6,7 @@ import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.computeType
 import ru.DmN.pht.utils.isConstClass
 import ru.DmN.pht.utils.node.NodeTypes
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor

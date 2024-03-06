@@ -15,13 +15,13 @@
 |	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	[ANN_FINAL_
 |	|	|	|	|	|	|	|	(meta:
-|	|	|	|	|	|	|	|	|	[STATIC] true
 |	|	|	|	|	|	|	|	|	[FINAL] true
+|	|	|	|	|	|	|	|	|	[STATIC] true
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	[ANN_STATIC_
 |	|	|	|	|	|	|	|	|	(meta:
-|	|	|	|	|	|	|	|	|	|	[STATIC] true
 |	|	|	|	|	|	|	|	|	|	[FINAL] true
+|	|	|	|	|	|	|	|	|	|	[STATIC] true
 |	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	|	|	|	(type = method)

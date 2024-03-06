@@ -5,7 +5,7 @@ import ru.DmN.pht.processor.utils.classes
 import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.processors.NRRFn.process
 import ru.DmN.pht.utils.*
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.VirtualMethod

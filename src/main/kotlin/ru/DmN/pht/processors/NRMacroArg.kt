@@ -4,7 +4,7 @@ import ru.DmN.pht.ast.NodeMacroUtil
 import ru.DmN.pht.processor.ctx.MacroContext
 import ru.DmN.pht.processor.utils.macro
 import ru.DmN.pht.utils.*
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.vtype.VirtualType

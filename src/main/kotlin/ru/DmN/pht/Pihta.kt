@@ -1,9 +1,8 @@
 package ru.DmN.pht
 
 import ru.DmN.pht.module.utils.Module
-import ru.DmN.pht.parser.utils.clearMacros
+import ru.DmN.pht.parser.ParserImpl
 import ru.DmN.pht.parser.utils.macros
-import ru.DmN.pht.parser.utils.phtParseNode
 import ru.DmN.pht.parsers.*
 import ru.DmN.pht.processor.ctx.GlobalContext
 import ru.DmN.pht.processor.utils.*
@@ -17,12 +16,11 @@ import ru.DmN.pht.utils.addSNU
 import ru.DmN.pht.utils.meta.MetadataKeys
 import ru.DmN.pht.utils.node.NodeParsedTypes.*
 import ru.DmN.pht.utils.node.NodeTypes.*
-import ru.DmN.siberia.Compiler
-import ru.DmN.siberia.Parser
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.parser.ctx.ParsingContext
-import ru.DmN.siberia.parser.utils.parsersPool
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processor.utils.platform
@@ -636,32 +634,21 @@ object Pihta : Module("pht") {
         add(CTC_NS_NAME,     NRCTSC { _, ctx -> ctx.global.namespace })
     }
 
-    override fun load(parser: Parser, ctx: ParsingContext, uses: MutableList<String>) {
+    override fun load(parser: Parser, ctx: ParsingContext, uses: MutableList<String>): Boolean {
         if (!ctx.loadedModules.contains(this)) {
             ctx.macros = Stack()
-            ctx.parsersPool.push(parser.parseNode)
-            parser.parseNode = { phtParseNode(it) }
             // Платформно-зависимые функции
             if (ctx.platform == JVM)
                 uses += "pht/jvm"
             //
             super.load(parser, ctx, uses)
+            return true
         }
+        return false
     }
 
-    override fun clear(parser: Parser, ctx: ParsingContext) {
-        if (ctx.loadedModules.contains(this)) {
-            parser.parseNode = ctx.parsersPool.pop()
-        }
-    }
-
-    override fun unload(parser: Parser, ctx: ParsingContext) {
-        if (ctx.loadedModules.contains(this)) {
-            ctx.clearMacros()
-            parser.parseNode = ctx.parsersPool.pop()
-            super.unload(parser, ctx)
-        }
-    }
+    override fun changeParser(parser: Parser, ctx: ParsingContext): Parser =
+        ParserImpl(parser)
 
     override fun load(processor: Processor, ctx: ProcessingContext, uses: MutableList<String>): Boolean {
         if (!ctx.loadedModules.contains(this)) {
@@ -675,7 +662,6 @@ object Pihta : Module("pht") {
 
     override fun load(compiler: Compiler, ctx: CompilationContext) {
         if (!ctx.loadedModules.contains(this)) {
-            // Контексты
             ctx.classes = LinkedClassesNode.LinkedClassesNodeStart as LinkedClassesNode<VirtualType>
             super.load(compiler, ctx)
         }

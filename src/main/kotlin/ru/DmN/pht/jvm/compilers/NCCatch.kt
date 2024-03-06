@@ -6,7 +6,7 @@ import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.ast.NodeCatch
 import ru.DmN.pht.compiler.java.ctx.BodyContext
 import ru.DmN.pht.compiler.java.utils.*
-import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler

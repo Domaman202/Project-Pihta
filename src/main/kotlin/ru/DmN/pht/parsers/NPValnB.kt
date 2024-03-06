@@ -1,11 +1,11 @@
 package ru.DmN.pht.parsers
 
 import ru.DmN.pht.utils.node.NodeParsedTypes.VALN
-import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.lexer.Token.DefaultType.*
+import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parser.utils.parseValue
 import ru.DmN.siberia.parsers.INodeParser
@@ -21,7 +21,7 @@ object NPValnB : INodeParser {
         while (tk != null && tk.type != CLOSE_CBRACKET) {
             nodes.add(
                 if (tk.type == OPEN_BRACKET || tk.type == OPEN_CBRACKET) {
-                    parser.tokens.push(tk)
+                    parser.pushToken(tk)
                     parser.parseNode(ctx)!!
                 } else parser.parseValue(ctx, tk)
             )

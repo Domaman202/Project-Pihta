@@ -2,7 +2,7 @@ package ru.DmN.pht.parsers
 
 import ru.DmN.pht.ast.NodeLazySymbol
 import ru.DmN.pht.utils.node.NodeTypes.LAZY_SYMBOL
-import ru.DmN.siberia.Parser
+import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.parser.ctx.ParsingContext

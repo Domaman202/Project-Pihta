@@ -5,7 +5,7 @@ import ru.DmN.pht.ast.NodeGet.Type.*
 import ru.DmN.pht.processor.utils.body
 import ru.DmN.pht.processor.utils.classes
 import ru.DmN.pht.processor.utils.clazz
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.VirtualType

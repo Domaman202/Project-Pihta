@@ -6,7 +6,7 @@ import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.computeList
 import ru.DmN.pht.utils.computeStringNodes
 import ru.DmN.pht.utils.node.NodeTypes.ALIAS_TYPE_
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext

@@ -5,7 +5,7 @@ import ru.DmN.pht.processor.utils.ICastable
 import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.pht.processors.IStdNodeProcessor
 import ru.DmN.pht.utils.vtype.VTWG
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext

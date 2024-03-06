@@ -1,7 +1,7 @@
 package ru.DmN.pht.parsers
 
 import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_B
-import ru.DmN.siberia.Parser
+import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token

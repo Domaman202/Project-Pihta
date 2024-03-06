@@ -1,7 +1,7 @@
 package ru.DmN.pht.jvm.compilers
 
 import ru.DmN.pht.compiler.java.utils.computeValue
-import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 

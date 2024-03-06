@@ -5,7 +5,7 @@ import ru.DmN.pht.compiler.java.utils.body
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.compiler.java.utils.method
 import ru.DmN.pht.compiler.java.utils.store
-import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler

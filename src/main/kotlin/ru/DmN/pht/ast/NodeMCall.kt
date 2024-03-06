@@ -25,10 +25,9 @@ class NodeMCall(
         indent(indent).append('[').append(info.type).append('\n')
             .indent(indent + 1).append("(method = ").append(method.name).append(method.desc).append(")\n")
             .indent(indent + 1).append("(instance:\n")
-        instance.print(builder, indent + 2, short).append('\n').indent(indent + 1).append(')')
+        instance.print(builder, indent + 2, short).append('\n').indent(indent + 1).append(')').append('\n').indent(indent)
         if (!short) {
-            append('\n').indent(indent + 1).append("(generic = ").append(generic).append(")\n")
-                .indent(indent + 1).append("(type = ").append(type).append(')')
+            indent(1).append("(generic = ").append(generic).append(")\n").indent(indent + 1).append("(type = ").append(type).append(')')
             if (nodes.isEmpty())
                 append('\n').indent(indent)
         }

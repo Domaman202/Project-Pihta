@@ -6,7 +6,7 @@ import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.compiler.java.compilers.NCDefn.visit
 import ru.DmN.pht.compiler.java.utils.clazz
 import ru.DmN.pht.utils.normalizeName
-import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.CompilingStage
 import ru.DmN.siberia.compilers.INodeCompiler

@@ -6,7 +6,7 @@ import ru.DmN.pht.ast.NodeValue
 import ru.DmN.pht.ast.NodeValue.Type.*
 import ru.DmN.pht.compiler.java.utils.method
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
-import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.desc

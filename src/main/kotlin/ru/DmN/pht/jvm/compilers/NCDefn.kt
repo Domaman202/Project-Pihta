@@ -12,7 +12,7 @@ import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.compiler.java.utils.with
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
 import ru.DmN.pht.utils.normalizeName
-import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.ctx.CompilationContext

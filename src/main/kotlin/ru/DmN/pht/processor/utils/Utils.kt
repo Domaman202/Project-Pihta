@@ -9,7 +9,7 @@ import ru.DmN.pht.processor.ctx.MacroContext
 import ru.DmN.pht.utils.compute
 import ru.DmN.pht.utils.ctx.ContextKeys
 import ru.DmN.pht.utils.lenArgs
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext

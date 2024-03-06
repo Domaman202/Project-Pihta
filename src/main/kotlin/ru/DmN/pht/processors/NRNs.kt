@@ -5,7 +5,7 @@ import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.processor.utils.with
 import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.node.NodeTypes.NS_
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.processNodesList

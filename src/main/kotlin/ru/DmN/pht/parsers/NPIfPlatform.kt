@@ -2,10 +2,10 @@ package ru.DmN.pht.parsers
 
 import ru.DmN.pht.ast.NodeIfPlatform
 import ru.DmN.pht.utils.node.NodeTypes.CT_IF_PLATFORM
-import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.lexer.Token.DefaultType.OPERATION
+import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.siberia.parsers.NPProgn
@@ -19,7 +19,7 @@ object NPIfPlatform : INodeParser {
             names.add(tk.text!!.uppercase())
             tk = parser.nextToken()!!
         }
-        parser.tokens.push(tk)
+        parser.pushToken(tk)
         return NPProgn.parse(parser, ctx) { NodeIfPlatform(INodeInfo.of(CT_IF_PLATFORM, ctx, token), it, names) }
     }
 }

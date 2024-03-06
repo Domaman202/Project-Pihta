@@ -7,7 +7,7 @@ import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.node.*
 import ru.DmN.pht.utils.node.NodeParsedTypes.INC_PRE
 import ru.DmN.pht.utils.node.NodeParsedTypes.LESS
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext

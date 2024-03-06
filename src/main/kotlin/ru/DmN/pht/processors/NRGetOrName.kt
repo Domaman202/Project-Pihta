@@ -11,7 +11,7 @@ import ru.DmN.pht.utils.lenArgs
 import ru.DmN.pht.utils.node.NodeTypes.GET_
 import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_A
 import ru.DmN.pht.utils.node.nodeTypesGet
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.node.INodeInfo

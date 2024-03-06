@@ -29,7 +29,8 @@
 |	|	|	|	|	|	|	|	(method = getName()Ljava/lang/String;)
 |	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	[CLASS_OF_ java.lang.Object]
-|	|	|	|	|	|	|	|	)]
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]

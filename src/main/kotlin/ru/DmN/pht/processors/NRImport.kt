@@ -7,7 +7,7 @@ import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.computeList
 import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.node.NodeTypes.IMPORT_
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.*

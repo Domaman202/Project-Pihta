@@ -5,7 +5,7 @@ import ru.DmN.pht.ast.NodeNamedList
 import ru.DmN.pht.compiler.java.utils.NamedBlockData
 import ru.DmN.pht.compiler.java.utils.method
 import ru.DmN.pht.compiler.java.utils.withNamedBlock
-import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.compilers.NCDefault

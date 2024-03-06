@@ -4,7 +4,7 @@ import ru.DmN.pht.ast.NodeNewArray
 import ru.DmN.pht.utils.compute
 import ru.DmN.pht.utils.computeType
 import ru.DmN.pht.utils.node.NodeTypes.NEW_ARRAY_
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor

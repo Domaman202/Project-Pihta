@@ -6,7 +6,7 @@ import ru.DmN.pht.ast.NodeCompare
 import ru.DmN.pht.compiler.java.utils.method
 import ru.DmN.pht.utils.node.NodeTypes
 import ru.DmN.pht.utils.node.nodeValue
-import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler

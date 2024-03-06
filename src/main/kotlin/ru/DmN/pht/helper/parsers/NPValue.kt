@@ -2,11 +2,11 @@ package ru.DmN.pht.helper.parsers
 
 import ru.DmN.pht.helper.ast.NodeValue
 import ru.DmN.pht.utils.node.NodeTypes
-import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.lexer.Token.DefaultType.OPERATION
 import ru.DmN.siberia.lexer.Token.DefaultType.STRING
+import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.siberia.utils.node.INodeInfo

@@ -1,9 +1,45 @@
-(app
-    (defn fac ^int [[i ^int][r ^int]]
-        (if (< i 1)
-            r
-            (trcall (- i 1) (* i r))))
-    (defn fac ^int [[i ^int]]
-        (#fac . i 1))
-    (app-fn
-        (println (#fac . 12))))
+(use-ctx pht pht/jvm
+	(progn
+		(@abstract
+			(cls
+				Test
+				[
+					^Object
+				]
+				(ctor
+					[]
+					(ccall))
+				(@abstract
+					(defn
+						foo
+						^String
+						[]))))
+		(cls
+			TestImpl
+			[
+				^Test
+			]
+			(ctor
+				[]
+				(ccall))
+			(defn
+				foo
+				^String
+				[]
+				"Foo!"))
+		(test-fn
+			0
+			^Test)
+		(test-fn
+			1
+			^TestImpl)
+		(test-fn
+			2
+			(new
+				^TestImpl))
+		(test-fn
+			3
+			(mcall
+				(new
+					^TestImpl)
+				foo))))

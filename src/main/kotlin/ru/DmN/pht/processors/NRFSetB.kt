@@ -12,7 +12,7 @@ import ru.DmN.pht.utils.node.NodeTypes.FSET_
 import ru.DmN.pht.utils.node.NodeTypes.MCALL_
 import ru.DmN.pht.utils.node.nodeValue
 import ru.DmN.pht.utils.node.nodeValueClass
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor

@@ -9,7 +9,7 @@ import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.node.*
 import ru.DmN.pht.utils.node.NodeTypes.FN_
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList

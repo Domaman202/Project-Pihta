@@ -5,7 +5,7 @@ import ru.DmN.pht.helper.ast.IValueNode
 import ru.DmN.pht.imports.Helper
 import ru.DmN.pht.utils.node.NodeTypes.IMPORT
 import ru.DmN.pht.utils.text
-import ru.DmN.siberia.Parser
+import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.parser.ctx.ParsingContext

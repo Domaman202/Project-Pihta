@@ -5,12 +5,12 @@ import ru.DmN.pht.utils.node.NodeParsedTypes.FGET_B
 import ru.DmN.pht.utils.node.NodeParsedTypes.GET
 import ru.DmN.pht.utils.node.nodeValue
 import ru.DmN.pht.utils.node.nodeValueClass
-import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.lexer.isNaming
 import ru.DmN.siberia.lexer.isOperation
+import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.siberia.parsers.NPProgn
@@ -38,7 +38,7 @@ object NPGet : INodeParser {
                     klass = false
                 )
                 Token.DefaultType.OPEN_BRACKET -> {
-                    parser.tokens.push(nameToken)
+                    parser.pushToken(nameToken)
                     NodeFMGet(
                         info,
                         it,

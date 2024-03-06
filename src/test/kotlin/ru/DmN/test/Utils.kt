@@ -4,18 +4,18 @@ import ru.DmN.pht.module.utils.Module
 import ru.DmN.pht.module.utils.ModulesProvider
 import ru.DmN.pht.std.module.ast.NodeModule
 import ru.DmN.pht.utils.Platforms.JVM
-import ru.DmN.siberia.Compiler
-import ru.DmN.siberia.Parser
-import ru.DmN.siberia.Processor
-import ru.DmN.siberia.Unparser
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.compiler.CompilerImpl
 import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.parser.ParserImpl
 import ru.DmN.siberia.parser.ctx.ParsingContext
+import ru.DmN.siberia.processor.ProcessorImpl
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processor.utils.with
 import ru.DmN.siberia.processors.NRUseCtx.injectModules
+import ru.DmN.siberia.unparser.UnparserImpl
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.utils.vtype.TypesProvider
 import java.io.File
@@ -49,18 +49,18 @@ abstract class Module(val dir: String) {
 
     fun unparse() {
         val mp = ModulesProvider.of(JVM)
-        val module = (Parser(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(JVM)) as NodeModule).module
+        val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(JVM)) as NodeModule).module
         module.init(JVM, mp)
         val tp = TypesProvider.of(JVM)
         File("dump/$dir/unparse/parsed").mkdirs()
         FileOutputStream("dump/$dir/unparse/parsed/unparse.pht").use { out ->
-            val unparser = Unparser(mp, 1024*1024)
+            val unparser = UnparserImpl(mp, 1024*1024)
             val uctx = UnparsingContext.base().apply { this.platform = JVM }
             module.nodes.forEach { unparser.unparse(it, uctx, 0) }
             out.write(unparser.out.toString().toByteArray())
         }
         val processed = ArrayList<Node>()
-        val processor = Processor(mp, tp)
+        val processor = ProcessorImpl(mp, tp)
         mp.injectModules(
             mutableListOf(module.name),
             processed,
@@ -71,7 +71,7 @@ abstract class Module(val dir: String) {
         processor.stageManager.runAll()
         File("dump/$dir/unparse/processed").mkdirs()
         FileOutputStream("dump/$dir/unparse/processed/unparse.pht").use { out ->
-            val unparser = Unparser(mp, 1024*1024)
+            val unparser = UnparserImpl(mp, 1024*1024)
             val uctx = UnparsingContext.base().apply { this.platform = JVM }
             processed.forEach { unparser.unparse(it, uctx, 0) }
             out.write(unparser.out.toString().toByteArray())
@@ -86,7 +86,7 @@ abstract class Module(val dir: String) {
 
     private fun print() {
         val mp = ModulesProvider.of(JVM)
-        val module = (Parser(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(JVM)) as NodeModule).module
+        val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(JVM)) as NodeModule).module
         module.init(JVM, mp)
         val tp = TypesProvider.of(JVM)
         File("dump/$dir/print").mkdirs()
@@ -101,7 +101,7 @@ abstract class Module(val dir: String) {
             }
         }
         val processed = ArrayList<Node>()
-        val processor = Processor(mp, tp)
+        val processor = ProcessorImpl(mp, tp)
         mp.injectModules(
             mutableListOf(module.name),
             processed,
@@ -131,11 +131,11 @@ abstract class Module(val dir: String) {
 
     fun compile() {
         val mp = ModulesProvider.of(JVM)
-        val module = (Parser(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(JVM)) as NodeModule).module
+        val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(JVM)) as NodeModule).module
         module.init(JVM, mp)
         val tp = TypesProvider.of(JVM)
         val processed = ArrayList<Node>()
-        val processor = Processor(mp, tp)
+        val processor = ProcessorImpl(mp, tp)
         mp.injectModules(
             mutableListOf(module.name),
             processed,
@@ -144,7 +144,7 @@ abstract class Module(val dir: String) {
             ProcessingContext.base().with(JVM).apply { this.module = module }
         )
         processor.stageManager.runAll()
-        val compiler = Compiler(mp, tp)
+        val compiler = CompilerImpl(mp, tp)
         val ctx = CompilationContext.base().apply { this.platform = JVM }
         processed.forEach { compiler.compile(it, ctx) }
         compiler.stageManager.runAll()

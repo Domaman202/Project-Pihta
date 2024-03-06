@@ -6,7 +6,7 @@ import ru.DmN.pht.jvm.ast.NodeSync
 import ru.DmN.pht.compiler.java.utils.body
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.compiler.java.utils.method
-import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.compilers.NCDefault

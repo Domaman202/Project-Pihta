@@ -6,7 +6,7 @@ import ru.DmN.pht.processors.NRMCall.findMethod
 import ru.DmN.pht.utils.computeType
 import ru.DmN.pht.utils.node.NodeTypes.NEW_
 import ru.DmN.pht.utils.processNodes
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor

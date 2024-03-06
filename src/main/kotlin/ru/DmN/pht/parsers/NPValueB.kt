@@ -3,10 +3,10 @@ package ru.DmN.pht.parsers
 import ru.DmN.pht.ast.NodeValue
 import ru.DmN.pht.ast.NodeValue.Type.*
 import ru.DmN.pht.utils.node.NodeTypes.VALUE
-import ru.DmN.siberia.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.lexer.Token.DefaultType
+import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.siberia.utils.node.INodeInfo
@@ -18,7 +18,7 @@ object NPValueB : INodeParser {
                 INodeInfo.of(VALUE, ctx, token),
                 when (token.type) {
                     DefaultType.OPERATION -> {
-                        parser.tokens.push(token)
+                        parser.pushToken(token)
                         return parser.get(ctx, "get-or-name!")!!.parse(parser, ctx, Token.operation(token.line, "get-or-name!"))
                     }
 

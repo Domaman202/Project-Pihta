@@ -4,7 +4,7 @@ import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.utils.nameWithGenerics
 import ru.DmN.pht.utils.nameWithGens
 import ru.DmN.pht.unparsers.NUDefn.unparseGenerics
-import ru.DmN.siberia.Unparser
+import ru.DmN.siberia.unparser.Unparser
 import ru.DmN.siberia.unparser.UnparsingContext
 import ru.DmN.siberia.unparsers.INodeUnparser
 import ru.DmN.siberia.unparsers.NUDefault

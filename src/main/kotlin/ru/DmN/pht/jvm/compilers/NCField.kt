@@ -6,7 +6,7 @@ import ru.DmN.pht.ast.NodeFieldB
 import ru.DmN.pht.compiler.java.utils.clazz
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
 import ru.DmN.pht.utils.normalizeName
-import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 
 object NCField : IStdNodeCompiler<NodeFieldB, List<FieldNode>, Nothing> {

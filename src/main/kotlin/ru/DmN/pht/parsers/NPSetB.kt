@@ -7,7 +7,7 @@ import ru.DmN.pht.ast.NodeSet
 import ru.DmN.pht.utils.node.NodeParsedTypes.*
 import ru.DmN.pht.utils.node.NodeTypes.GET_OR_NAME
 import ru.DmN.pht.utils.node.nodeValueClass
-import ru.DmN.siberia.Parser
+import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.parser.ctx.ParsingContext

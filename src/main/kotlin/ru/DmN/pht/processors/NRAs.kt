@@ -4,7 +4,7 @@ import ru.DmN.pht.ast.NodeIsAs
 import ru.DmN.pht.utils.computeType
 import ru.DmN.pht.utils.node.NodeTypes.AS_
 import ru.DmN.pht.utils.vtype.VTWG
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext

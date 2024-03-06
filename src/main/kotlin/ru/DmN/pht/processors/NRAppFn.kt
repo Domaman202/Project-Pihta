@@ -5,7 +5,7 @@ import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.node.nodeCls
 import ru.DmN.pht.utils.node.nodeDefn
 import ru.DmN.pht.utils.node.nodeStatic
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext

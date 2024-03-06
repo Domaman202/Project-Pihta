@@ -1,7 +1,7 @@
 package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Label
-import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.compiler.ctx.CompilationContext

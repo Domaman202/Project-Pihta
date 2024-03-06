@@ -2,7 +2,7 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.utils.node.NodeTypes.ASET_
 import ru.DmN.pht.utils.processNodes
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor

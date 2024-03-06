@@ -3,8 +3,8 @@ package ru.DmN.pht.helper.parsers
 import ru.DmN.pht.helper.ast.IValueNode
 import ru.DmN.pht.helper.ast.NodeArgument
 import ru.DmN.pht.helper.node.NodeTypes
-import ru.DmN.siberia.Parser
 import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.siberia.utils.node.INodeInfo

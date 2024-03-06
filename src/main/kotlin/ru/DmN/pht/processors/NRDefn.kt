@@ -9,7 +9,7 @@ import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.node.NodeTypes.DEFN_
 import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_A
 import ru.DmN.pht.utils.node.nodeAs
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext

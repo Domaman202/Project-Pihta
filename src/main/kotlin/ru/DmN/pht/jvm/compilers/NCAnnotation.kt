@@ -5,8 +5,8 @@ import org.objectweb.asm.FieldVisitor
 import org.objectweb.asm.MethodVisitor
 import ru.DmN.pht.compiler.java.utils.computeValue
 import ru.DmN.pht.jvm.ast.NodeAnnotation
-import ru.DmN.siberia.Compiler
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable
@@ -55,13 +55,10 @@ object NCAnnotation : INodeCompiler<NodeAnnotation> {
         }
         //
         val names = node.type!!.methods
-        node.arguments.entries.asSequence()
-            .mapIndexed { i, it ->
-                Pair(
-                    it.key ?: names[i].name,
-                    compiler.computeValue(it.value, ctx)
-                )
-            }.forEachIndexed { i, it ->
+        node.arguments.entries
+            .asSequence()
+            .mapIndexed { i, it -> Pair(it.key ?: names[i].name, compiler.computeValue(it.value, ctx)) }
+            .forEachIndexed { i, it ->
                 val name = it.first
                 val value = it.second
                 if (value is Array<*>) {

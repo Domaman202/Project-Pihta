@@ -7,7 +7,7 @@ import ru.DmN.pht.compiler.java.utils.clazz
 import ru.DmN.pht.compiler.java.utils.method
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.pht.utils.type
-import ru.DmN.siberia.Compiler
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable

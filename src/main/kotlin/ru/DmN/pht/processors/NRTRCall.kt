@@ -3,7 +3,7 @@ package ru.DmN.pht.processors
 import ru.DmN.pht.processor.utils.method
 import ru.DmN.pht.utils.node.NodeTypes.TRCALL_
 import ru.DmN.pht.utils.processNodes
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext

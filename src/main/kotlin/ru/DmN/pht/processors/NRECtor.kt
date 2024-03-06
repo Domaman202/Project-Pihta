@@ -7,7 +7,7 @@ import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.processor.utils.with
 import ru.DmN.pht.utils.node.NodeParsedTypes
 import ru.DmN.pht.utils.type
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.METHODS_BODY

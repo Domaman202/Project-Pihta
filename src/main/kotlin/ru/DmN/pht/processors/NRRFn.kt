@@ -6,7 +6,7 @@ import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.node.NodeTypes.RFN_
 import ru.DmN.pht.utils.node.nodeValueClass
-import ru.DmN.siberia.Processor
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
