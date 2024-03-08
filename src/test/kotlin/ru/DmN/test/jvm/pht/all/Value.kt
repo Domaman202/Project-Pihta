@@ -4,7 +4,7 @@ import ru.DmN.test.jvm.TestModule
 import kotlin.test.assertEquals
 
 class Value : TestModule("test/pht/all/value") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         assertEquals(test(0), null)
         assertEquals(test(1), 12)

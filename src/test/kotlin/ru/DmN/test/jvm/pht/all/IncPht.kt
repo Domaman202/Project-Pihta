@@ -5,7 +5,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class IncPht : TestModule("test/pht/all/inc-pht") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         assertEquals(test(0), "Внешний вставленный код!")
     }

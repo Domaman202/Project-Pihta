@@ -4,7 +4,7 @@ import ru.DmN.test.jvm.TestModule
 import kotlin.test.assertEquals
 
 class DefVar : TestModule("test/pht/all/def-var") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         assertEquals(test(0), 12)
         assertEquals(test(1), 21L)

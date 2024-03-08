@@ -8,7 +8,7 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class Interface : TestModule("test/pht/all/interface") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         (test(0) as Klass).let {
             assertEquals(it.name, "ITest")

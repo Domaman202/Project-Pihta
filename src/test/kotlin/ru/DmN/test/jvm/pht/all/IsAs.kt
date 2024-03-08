@@ -4,7 +4,7 @@ import ru.DmN.test.jvm.TestModule
 import kotlin.test.assertEquals
 
 class IsAs : TestModule("test/pht/all/is-as") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         assertEquals(test(0), true)
         assertEquals(test(1), false)

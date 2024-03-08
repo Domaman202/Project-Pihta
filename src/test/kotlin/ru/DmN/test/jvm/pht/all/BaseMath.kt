@@ -4,7 +4,7 @@ import ru.DmN.test.jvm.TestModule
 import kotlin.test.assertEquals
 
 class BaseMath : TestModule("test/pht/all/base-math") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         for (i in 0..1) {
             assertEquals(test(0 + i * 8), 33)

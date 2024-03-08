@@ -4,7 +4,7 @@ import ru.DmN.test.jvm.TestModule
 import kotlin.test.assertEquals
 
 class IncDec : TestModule("test/pht/all/inc-dec") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         assertEquals(test(0), 1)
         assertEquals(test(1), 1)

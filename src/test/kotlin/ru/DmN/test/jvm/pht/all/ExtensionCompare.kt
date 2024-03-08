@@ -4,7 +4,7 @@ import ru.DmN.test.jvm.TestModule
 import kotlin.test.assertEquals
 
 class ExtensionCompare : TestModule("test/pht/all/extension-compare") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         assertEquals(test(0), "great")
         assertEquals(test(1), "great-or-eq")

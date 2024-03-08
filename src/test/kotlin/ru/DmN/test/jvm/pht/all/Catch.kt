@@ -5,7 +5,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFails
 
 class Catch : TestModule("test/pht/all/catch") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         assertEquals(test(0), 21)
         assertEquals(test(1), 12)

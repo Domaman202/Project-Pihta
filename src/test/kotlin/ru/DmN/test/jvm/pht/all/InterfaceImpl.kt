@@ -9,7 +9,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class InterfaceImpl : TestModule("test/pht/all/interface-impl") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         (test(0) as Klass).let { it ->
             it.methods.find { it.name == "foo" }.let {

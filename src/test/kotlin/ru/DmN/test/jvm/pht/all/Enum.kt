@@ -5,7 +5,7 @@ import kotlin.Enum
 import kotlin.test.assertEquals
 
 class Enum : TestModule("test/pht/all/enum") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         assertEquals((test(0) as Enum<*>).ordinal, 0)
         assertEquals((test(0) as Enum<*>).name, "RED")

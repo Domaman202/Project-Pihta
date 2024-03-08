@@ -4,7 +4,7 @@ import ru.DmN.test.jvm.TestModule
 import kotlin.test.assertEquals
 
 class Fn : TestModule("test/pht/all/fn") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         test(0)
         test(1)

@@ -4,7 +4,7 @@ import ru.DmN.test.jvm.TestModule
 import kotlin.test.assertEquals
 
 class RFn : TestModule("test/pht/all/rfn") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         test(0)
         test(1)

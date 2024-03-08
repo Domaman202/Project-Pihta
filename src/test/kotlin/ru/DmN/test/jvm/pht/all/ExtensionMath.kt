@@ -4,7 +4,7 @@ import ru.DmN.test.jvm.TestModule
 import kotlin.test.assertEquals
 
 class ExtensionMath : TestModule("test/pht/all/extension-math") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         assertEquals(test(0), "Слава России")
         assertEquals(test(1), "ЛолКек")

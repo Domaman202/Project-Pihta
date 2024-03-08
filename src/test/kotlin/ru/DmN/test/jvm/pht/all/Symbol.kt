@@ -8,7 +8,7 @@ class Symbol : TestModule("test/pht/all/symbol") {
     override fun testPrint() = Unit
     override fun testUnparse() = Unit
 
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         assertNotEquals(test(0), test(1))
         assertEquals(test(2), test(3))

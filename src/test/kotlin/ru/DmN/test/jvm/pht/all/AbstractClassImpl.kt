@@ -9,7 +9,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class AbstractClassImpl : TestModule("test/pht/all/abstract-class-impl") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         (test(0) as Klass).let { it ->
             assertTrue(Modifier.isAbstract(it.modifiers))

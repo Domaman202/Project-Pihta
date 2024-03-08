@@ -7,7 +7,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class OpenFinalClass : TestModule("test/pht/all/open-final-class") {
-    override fun TestModule.compileTest() {
+    override fun compileTest() {
         compile()
         assertFalse(Modifier.isFinal((test(0) as Klass).modifiers))
         assertTrue(Modifier.isFinal((test(1) as Klass).modifiers))
