@@ -5,15 +5,15 @@ import ru.DmN.pht.ast.NodeFieldSet
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.ast.NodeMCall.Type.VIRTUAL
 import ru.DmN.pht.ast.NodeValue
+import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.utils.Static
-import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.node.NodeTypes.FSET_
 import ru.DmN.pht.utils.node.NodeTypes.MCALL_
 import ru.DmN.pht.utils.node.nodeValue
 import ru.DmN.pht.utils.node.nodeValueClass
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.VTDynamic

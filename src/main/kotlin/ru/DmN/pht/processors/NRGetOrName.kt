@@ -5,14 +5,18 @@ import ru.DmN.pht.ast.NodeGet.Type.THIS_FIELD
 import ru.DmN.pht.ast.NodeGet.Type.THIS_STATIC_FIELD
 import ru.DmN.pht.ast.NodeGetOrName
 import ru.DmN.pht.ast.NodeInlBodyA
-import ru.DmN.pht.processor.utils.*
+import ru.DmN.pht.processor.ctx.body
+import ru.DmN.pht.processor.ctx.classes
+import ru.DmN.pht.processor.ctx.clazz
+import ru.DmN.pht.processor.ctx.method
+import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.utils.InlineVariable
 import ru.DmN.pht.utils.lenArgs
 import ru.DmN.pht.utils.node.NodeTypes.GET_
 import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_A
 import ru.DmN.pht.utils.node.nodeTypesGet
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualType
@@ -81,7 +85,8 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
                     node.name,
                     if (field.modifiers.isStatic)
                         THIS_STATIC_FIELD
-                    else THIS_FIELD
+                    else THIS_FIELD,
+                    field.type
                 )
             }
             1 -> node

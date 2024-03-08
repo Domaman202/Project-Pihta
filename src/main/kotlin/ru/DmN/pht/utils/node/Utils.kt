@@ -77,14 +77,14 @@ fun nodeDefn(info: INodeInfo, name: String, ret: String, node: Node) =
 fun nodeDefn(info: INodeInfo, name: String, ret: String, nodes: MutableList<Node>) =
     nodeDefn(info, name, ret, emptyList(), nodes)
 // f
-fun nodeInitFld(info: INodeInfo, name: String) =
+fun nodeInitFld(info: INodeInfo, name: String, type: VirtualType) =
     NodeNodesList(info.withType(FSET_A),
-        mutableListOf(nodeGetVariable(info, "this"), nodeGetOrName(info, name), nodeGetOrName(info, name)))
+        mutableListOf(nodeGetVariable(info, "this", type), nodeGetOrName(info, name), nodeGetOrName(info, name)))
 // g
 fun nodeGetOrName(info: INodeInfo, name: String) =
     NodeGetOrName(info.withType(GET_OR_NAME), name, false)
-fun nodeGetVariable(info: INodeInfo, name: String) =
-    NodeGet(info.withType(GET_), name, NodeGet.Type.VARIABLE)
+fun nodeGetVariable(info: INodeInfo, name: String, type: VirtualType) =
+    NodeGet(info.withType(GET_), name, NodeGet.Type.VARIABLE, type)
 // i
 fun nodeInlDef(info: INodeInfo, fields: List<Pair<String, Node>>) =
     NodeNodesList(info.withType(INL_DEF),

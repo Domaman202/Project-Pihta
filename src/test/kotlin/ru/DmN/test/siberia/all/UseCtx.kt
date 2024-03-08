@@ -1,5 +1,5 @@
 package ru.DmN.test.siberia.all
 
-import ru.DmN.test.Module
+import ru.DmN.test.TestModule
 
-class UseCtx : Module("test/siberia/all/use-ctx")
+class UseCtx : TestModule("test/siberia/all/use-ctx")

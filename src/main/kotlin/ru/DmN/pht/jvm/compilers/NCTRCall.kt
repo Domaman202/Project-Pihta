@@ -1,12 +1,12 @@
 package ru.DmN.pht.jvm.compilers
 
 import org.objectweb.asm.Opcodes
-import ru.DmN.pht.compiler.java.utils.body
 import ru.DmN.pht.compiler.java.utils.load
-import ru.DmN.pht.compiler.java.utils.method
 import ru.DmN.pht.compiler.java.utils.store
-import ru.DmN.siberia.compiler.Compiler
+import ru.DmN.pht.jvm.compiler.ctx.body
+import ru.DmN.pht.jvm.compiler.ctx.method
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable

@@ -1,10 +1,13 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeRFn
-import ru.DmN.pht.processor.utils.classes
-import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.processor.ctx.classes
+import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processors.NRRFn.process
-import ru.DmN.pht.utils.*
+import ru.DmN.pht.utils.computeType
+import ru.DmN.pht.utils.findLambdaMethodOrNull
+import ru.DmN.pht.utils.isConstClass
+import ru.DmN.pht.utils.lenArgsB
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor

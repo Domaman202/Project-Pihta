@@ -22,7 +22,7 @@ enum class ContextKeys : IContextKey {
      * (Processor)
      * Список классов контекста (исключая текущий).
      *
-     * (Compiler)
+     * (JVM Compiler)
      * Список скомпилированных классов.
      */
     CLASSES,
@@ -55,5 +55,11 @@ enum class ContextKeys : IContextKey {
     /**
      * Список макросов.
      */
-    MACROS
+    MACROS,
+
+    /**
+     * (C++ Compiler)
+     * Выхлоп компиляции.
+     */
+    OUTPUT
 }

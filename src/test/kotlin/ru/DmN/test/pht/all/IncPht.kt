@@ -1,11 +1,11 @@
 package ru.DmN.test.pht.all
 
-import ru.DmN.test.Module
+import ru.DmN.test.TestModule
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class IncPht : Module("test/pht/all/inc-pht") {
-    override fun Module.compileTest() {
+class IncPht : TestModule("test/pht/all/inc-pht") {
+    override fun TestModule.compileTest() {
         compile()
         assertEquals(test(0), "Внешний вставленный код!")
     }
@@ -14,6 +14,6 @@ class IncPht : Module("test/pht/all/inc-pht") {
     override fun testUnparse() {
         unparse()
         unparseCheck()
-        (object : Module("${dir}/unparse/processed") { }).compileTest()
+        (object : TestModule("${dir}/unparse/processed") { }).compileTest()
     }
 }

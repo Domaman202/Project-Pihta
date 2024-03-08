@@ -1,10 +1,10 @@
 package ru.DmN.test.pht.all
 
-import ru.DmN.test.Module
+import ru.DmN.test.TestModule
 import kotlin.test.assertEquals
 
-class BaseMath : Module("test/pht/all/base-math") {
-    override fun Module.compileTest() {
+class BaseMath : TestModule("test/pht/all/base-math") {
+    override fun TestModule.compileTest() {
         compile()
         for (i in 0..1) {
             assertEquals(test(0 + i * 8), 33)

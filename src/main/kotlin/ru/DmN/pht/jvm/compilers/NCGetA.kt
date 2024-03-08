@@ -1,17 +1,17 @@
 package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
-import ru.DmN.siberia.compiler.Compiler
-import ru.DmN.siberia.compilers.INodeCompiler
-import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.utils.Variable
-import ru.DmN.pht.compiler.java.utils.body
-import ru.DmN.pht.compiler.java.utils.clazz
-import ru.DmN.pht.compiler.java.utils.method
 import ru.DmN.pht.ast.NodeGet
 import ru.DmN.pht.ast.NodeGet.Type.*
-import ru.DmN.pht.processor.utils.classes
+import ru.DmN.pht.jvm.compiler.ctx.body
+import ru.DmN.pht.jvm.compiler.ctx.clazz
+import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.processor.ctx.classes
 import ru.DmN.pht.utils.normalizeName
+import ru.DmN.siberia.compiler.Compiler
+import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.compilers.INodeCompiler
+import ru.DmN.siberia.utils.Variable
 
 object NCGetA : INodeCompiler<NodeGet> {
     override fun compileVal(node: NodeGet, compiler: Compiler, ctx: CompilationContext): Variable {

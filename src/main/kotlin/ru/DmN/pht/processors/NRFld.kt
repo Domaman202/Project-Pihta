@@ -1,8 +1,8 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.*
-import ru.DmN.pht.processor.utils.clazz
-import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.processor.ctx.clazz
+import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.utils.computeList
 import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.node.NodeParsedTypes.*
@@ -12,8 +12,8 @@ import ru.DmN.pht.utils.node.nodeDefn
 import ru.DmN.pht.utils.node.nodeGetOrName
 import ru.DmN.pht.utils.node.nodeGetVariable
 import ru.DmN.pht.utils.node.nodeValueClass
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.FieldModifiers
@@ -60,7 +60,7 @@ object NRFld : INodeProcessor<NodeFieldA> {
                                 else NodeFieldSet(
                                     info.withType(FSET_B),
                                     mutableListOf(nodeGetOrName(info, name)),
-                                    nodeGetVariable(info, "this"),
+                                    nodeGetVariable(info, "this", clazz),
                                     name,
                                     static = false,
                                     native = true
@@ -86,7 +86,7 @@ object NRFld : INodeProcessor<NodeFieldA> {
                             else NodeFMGet(
                                 info.withType(FGET_B),
                                 mutableListOf(),
-                                nodeGetVariable(info, "this"),
+                                nodeGetVariable(info, "this", clazz),
                                 name,
                                 static = false,
                                 native = true

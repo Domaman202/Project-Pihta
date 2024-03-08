@@ -29,6 +29,7 @@ enum class NodeTypes : INodeType {
     // c
     CATCH_("catch", PROCESSED),
     CCALL("ccall", PARSED),
+    CCALL_("ccall", PROCESSED),
     CLS_("cls", PROCESSED),
     COND("cond", PARSED),
     CONTINUE_("continue", PROCESSED),
@@ -104,8 +105,8 @@ enum class NodeTypes : INodeType {
     OBJ_("obj", PROCESSED),
     OR_("or", PROCESSED),
     // p
-    PRINT("print", PARSED),
-    PRINTLN("println", PARSED),
+    PRINT_("print", PROCESSED),
+    PRINTLN_("println", PROCESSED),
     PROGN_B("progn-", PARSED),
     PROGN_B_("progn-", PROCESSED),
     // r

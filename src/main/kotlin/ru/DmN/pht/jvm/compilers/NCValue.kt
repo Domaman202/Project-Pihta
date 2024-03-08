@@ -4,7 +4,7 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Type
 import ru.DmN.pht.ast.NodeValue
 import ru.DmN.pht.ast.NodeValue.Type.*
-import ru.DmN.pht.compiler.java.utils.method
+import ru.DmN.pht.jvm.compiler.ctx.method
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext

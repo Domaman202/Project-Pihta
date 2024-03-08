@@ -3,8 +3,9 @@ package ru.DmN.pht.ast
 import ru.DmN.siberia.ast.BaseNode
 import ru.DmN.siberia.utils.indent
 import ru.DmN.siberia.utils.node.INodeInfo
+import ru.DmN.siberia.utils.vtype.VirtualType
 
-class NodeGet(info: INodeInfo, val name: String, val type: Type) : BaseNode(info) {
+class NodeGet(info: INodeInfo, val name: String, val type: Type, val vtype: VirtualType) : BaseNode(info) {
     override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type)
         if (short)

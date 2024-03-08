@@ -1,10 +1,10 @@
 package ru.DmN.test.pht.all
 
-import ru.DmN.test.Module
+import ru.DmN.test.TestModule
 import kotlin.test.assertEquals
 
-class ExtensionCompare : Module("test/pht/all/extension-compare") {
-    override fun Module.compileTest() {
+class ExtensionCompare : TestModule("test/pht/all/extension-compare") {
+    override fun TestModule.compileTest() {
         compile()
         assertEquals(test(0), "great")
         assertEquals(test(1), "great-or-eq")

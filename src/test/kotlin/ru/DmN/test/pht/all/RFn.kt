@@ -1,10 +1,10 @@
 package ru.DmN.test.pht.all
 
-import ru.DmN.test.Module
+import ru.DmN.test.TestModule
 import kotlin.test.assertEquals
 
-class RFn : Module("test/pht/all/rfn") {
-    override fun Module.compileTest() {
+class RFn : TestModule("test/pht/all/rfn") {
+    override fun TestModule.compileTest() {
         compile()
         test(0)
         test(1)

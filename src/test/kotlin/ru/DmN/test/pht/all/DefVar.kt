@@ -1,10 +1,10 @@
 package ru.DmN.test.pht.all
 
-import ru.DmN.test.Module
+import ru.DmN.test.TestModule
 import kotlin.test.assertEquals
 
-class DefVar : Module("test/pht/all/def-var") {
-    override fun Module.compileTest() {
+class DefVar : TestModule("test/pht/all/def-var") {
+    override fun TestModule.compileTest() {
         compile()
         assertEquals(test(0), 12)
         assertEquals(test(1), 21L)

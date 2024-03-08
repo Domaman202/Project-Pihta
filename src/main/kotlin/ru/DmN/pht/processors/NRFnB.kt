@@ -2,11 +2,11 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeFn
 import ru.DmN.pht.ast.NodeInlBodyA
-import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.utils.findLambdaMethod
 import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_A
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.vtype.VirtualType
 

@@ -2,11 +2,10 @@ package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.ast.NodeIncDec
-import ru.DmN.pht.compiler.java.utils.body
-import ru.DmN.pht.compiler.java.utils.clazz
-import ru.DmN.pht.compiler.java.utils.method
+import ru.DmN.pht.jvm.compiler.ctx.body
+import ru.DmN.pht.jvm.compiler.ctx.clazz
+import ru.DmN.pht.jvm.compiler.ctx.method
 import ru.DmN.pht.utils.node.NodeTypes.*
-import ru.DmN.pht.utils.type
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
@@ -16,7 +15,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 object NCIncDec : INodeCompiler<NodeIncDec> {
     override fun compile(node: NodeIncDec, compiler: Compiler, ctx: CompilationContext) {
         ctx.method.node.run {
-            val operation = node.type
+            val operation = node.info.type
             val variable = ctx.body[node.name]
             if (variable == null) {
                 val clazz = ctx.clazz.clazz
@@ -88,7 +87,7 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
 
     override fun compileVal(node: NodeIncDec, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.run {
-            val operation = node.type
+            val operation = node.info.type
             val variable = ctx.body[node.name]
             if (variable == null) {
                 val clazz = ctx.clazz.clazz

@@ -2,17 +2,17 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeFn
 import ru.DmN.pht.ast.NodeInlBodyA
-import ru.DmN.pht.processor.utils.body
-import ru.DmN.pht.processor.utils.clazz
-import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.processor.ctx.body
+import ru.DmN.pht.processor.ctx.clazz
+import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.node.*
 import ru.DmN.pht.utils.node.NodeTypes.FN_
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.FINALIZATION
 import ru.DmN.siberia.processor.utils.platform
@@ -82,7 +82,7 @@ object NRFn : INodeProcessor<NodeNodesList>, IInlinableProcessor<NodeNodesList> 
             val ctorBody = mutableListOf<Node>(nodeCcall(info))
             val ctorArgs = node.refs.map {
                 fields += Pair(it.name, it.type.name)
-                ctorBody += nodeInitFld(info, it.name)
+                ctorBody += nodeInitFld(info, it.name, type)
                 Pair(it.name, it.type.name)
             }
             node.processed = mutableListOf(

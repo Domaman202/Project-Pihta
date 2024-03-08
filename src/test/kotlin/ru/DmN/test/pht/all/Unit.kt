@@ -1,5 +1,5 @@
 package ru.DmN.test.pht.all
 
-import ru.DmN.test.Module
+import ru.DmN.test.TestModule
 
-class Unit : Module("test/pht/all/unit")
+class Unit : TestModule("test/pht/all/unit")

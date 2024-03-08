@@ -5,15 +5,20 @@ import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.ast.NodeMCall.Type.STATIC
 import ru.DmN.pht.ast.NodeMCall.Type.VIRTUAL
 import ru.DmN.pht.ast.NodeSet
-import ru.DmN.pht.processor.utils.*
+import ru.DmN.pht.processor.ctx.body
+import ru.DmN.pht.processor.ctx.classes
+import ru.DmN.pht.processor.ctx.clazz
+import ru.DmN.pht.processor.ctx.method
+import ru.DmN.pht.processor.utils.Static
+import ru.DmN.pht.processor.utils.processValues
 import ru.DmN.pht.utils.forEach
 import ru.DmN.pht.utils.node.NodeTypes
 import ru.DmN.pht.utils.node.NodeTypes.MCALL_
 import ru.DmN.pht.utils.node.nodeGetOrName
 import ru.DmN.pht.utils.node.nodeGetVariable
 import ru.DmN.pht.utils.node.nodeValueClass
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.node.INodeInfo
@@ -38,7 +43,7 @@ object NRSet : INodeProcessor<NodeSet> {
 
     private fun findSetter(info: INodeInfo, type: VirtualType, name: String, values: List<Node>, allowVirtual: Boolean, processor: Processor, ctx: ProcessingContext): Node? {
         if (allowVirtual)
-            findSetter(info, type, name, nodeGetVariable(info, "this"), values, VIRTUAL, processor, ctx)?.let { return it }
+            findSetter(info, type, name, nodeGetVariable(info, "this", type), values, VIRTUAL, processor, ctx)?.let { return it }
         return findSetter(info, type, name, nodeValueClass(info, type.name), values, STATIC, processor, ctx)
     }
 

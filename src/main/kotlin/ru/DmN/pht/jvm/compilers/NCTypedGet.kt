@@ -1,7 +1,7 @@
 package ru.DmN.pht.jvm.compilers
 
 import ru.DmN.pht.ast.NodeTypedGet
-import ru.DmN.pht.compiler.java.utils.body
+import ru.DmN.pht.jvm.compiler.ctx.body
 import ru.DmN.pht.utils.normalizeName
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext

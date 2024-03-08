@@ -4,8 +4,7 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.compiler.java.compilers.NCDefn.visit
-import ru.DmN.pht.compiler.java.utils.clazz
-import ru.DmN.pht.utils.normalizeName
+import ru.DmN.pht.jvm.compiler.ctx.clazz
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.CompilingStage

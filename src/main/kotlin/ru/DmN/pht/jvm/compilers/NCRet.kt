@@ -1,10 +1,10 @@
 package ru.DmN.pht.compiler.java.compilers
 
 import ru.DmN.pht.compiler.java.utils.load
-import ru.DmN.pht.compiler.java.utils.method
-import ru.DmN.pht.compiler.java.utils.returnHook
-import ru.DmN.siberia.compiler.Compiler
+import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.compiler.ctx.returnHook
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable

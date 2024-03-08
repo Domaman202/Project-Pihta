@@ -1,11 +1,10 @@
 package ru.DmN.test.pht.all
 
-import ru.DmN.test.Module
-import kotlin.test.assertEquals
+import ru.DmN.test.TestModule
 import kotlin.test.assertFails
 
-class Unrealized : Module("test/pht/all/unrealized") {
-    override fun Module.compileTest() {
+class Unrealized : TestModule("test/pht/all/unrealized") {
+    override fun TestModule.compileTest() {
         compile()
         assertFails {
             test(0)

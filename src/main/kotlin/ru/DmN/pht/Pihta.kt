@@ -1,13 +1,14 @@
 package ru.DmN.pht
 
-import ru.DmN.pht.module.utils.Module
+import ru.DmN.pht.jvm.node.NodeTypes.ANN_SYNC_
 import ru.DmN.pht.parser.ParserImpl
 import ru.DmN.pht.parser.utils.macros
 import ru.DmN.pht.parsers.*
-import ru.DmN.pht.processor.ctx.GlobalContext
-import ru.DmN.pht.processor.utils.*
+import ru.DmN.pht.processor.ctx.*
+import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.pht.processors.*
 import ru.DmN.pht.unparsers.*
+import ru.DmN.pht.utils.Platforms.CPP
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.addNP
 import ru.DmN.pht.utils.addSANP
@@ -18,6 +19,8 @@ import ru.DmN.pht.utils.node.NodeParsedTypes.*
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.compiler.utils.ModuleCompilers
+import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.processor.Processor
@@ -25,13 +28,14 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.NRProgn
+import ru.DmN.siberia.utils.IPlatform.UNIVERSAL
 import ru.DmN.siberia.utils.node.NodeTypes.PROGN
 import ru.DmN.siberia.utils.vtype.VirtualType
 import java.util.*
-import ru.DmN.pht.processor.utils.macros as macros_list
+import ru.DmN.pht.processor.ctx.macros as macros_list
 import ru.DmN.pht.processors.NRProgn as NRPrognA
 
-object Pihta : Module("pht") {
+object Pihta : ModuleCompilers("pht", UNIVERSAL) {
     private fun initParsers() {
         // a
         addSNP(ADD)
@@ -630,12 +634,28 @@ object Pihta : Module("pht") {
         add(CTC_NS_NAME,     NRCTSC { _, ctx -> ctx.global.namespace })
     }
 
+    private fun initCompilers() {
+        // p
+        add(PROGN_B_,     NCDefault)
+
+        // @
+        add(ANN_ABSTRACT_, NCDefault)
+        add(ANN_FINAL_,    NCDefault)
+        add(ANN_INLINE_,   NCDefault)
+        add(ANN_OPEN_,     NCDefault)
+        add(ANN_STATIC_,   NCDefault)
+        add(ANN_SYNC_,     NCDefault)
+        add(ANN_VARARGS_,  NCDefault)
+    }
+
     override fun load(parser: Parser, ctx: ParsingContext, uses: MutableList<String>): Boolean {
         if (!ctx.loadedModules.contains(this)) {
             ctx.macros = Stack()
             // Платформно-зависимые функции
-            if (ctx.platform == JVM)
-                uses += "pht/jvm"
+            when (ctx.platform) {
+                JVM -> uses += "pht/jvm"
+                CPP -> uses += "pht/cpp"
+            }
             //
             super.load(parser, ctx, uses)
             return true
@@ -667,5 +687,6 @@ object Pihta : Module("pht") {
         initParsers()
         initUnparsers()
         initProcessors()
+        initCompilers()
     }
 }

@@ -1,16 +1,12 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeMacro
-import ru.DmN.pht.processor.ctx.MacroContext
-import ru.DmN.pht.processor.utils.global
-import ru.DmN.pht.processor.utils.isMacro
-import ru.DmN.pht.processor.utils.macro
-import ru.DmN.pht.processor.utils.with
+import ru.DmN.pht.processor.ctx.*
 import ru.DmN.pht.utils.compute
 import ru.DmN.pht.utils.node.NodeParsedTypes
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.utils.SubMap

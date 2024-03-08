@@ -1,24 +1,13 @@
-@file:SuppressWarnings("UNCHECKED_CAST")
 package ru.DmN.pht.compiler.java.utils
 
 import org.objectweb.asm.Label
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
-import org.objectweb.asm.tree.ClassNode
-import ru.DmN.pht.compiler.java.ctx.BodyContext
-import ru.DmN.pht.compiler.java.ctx.ClassContext
-import ru.DmN.pht.compiler.java.ctx.MethodContext
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
-import ru.DmN.pht.processor.utils.LinkedClassesNode
-import ru.DmN.pht.processor.utils.classes
-import ru.DmN.pht.processor.utils.isEnum
-import ru.DmN.pht.utils.ctx.ContextKeys
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.ctx.IContextCollection
-import ru.DmN.siberia.utils.ctx.IContextKey
 import ru.DmN.siberia.utils.vtype.VirtualType
 
 fun Compiler.computeValue(node: Node, ctx: CompilationContext): Any? =
@@ -27,45 +16,6 @@ fun Compiler.computeValue(node: Node, ctx: CompilationContext): Any? =
             (it as IStdNodeCompiler<Node, *, *>).computeValue(node, this, ctx)
         else throw UnsupportedOperationException()
     }
-
-fun <T : IContextCollection<T>> T.with(ctx: ClassContext) =
-    this.with(ContextKeys.CLASS, ctx).apply { this.classes = LinkedClassesNode(this.classes, ctx.clazz) }
-fun <T : IContextCollection<T>> T.with(ctx: MethodContext) =
-    this.with(ContextKeys.METHOD, ctx)
-fun <T : IContextCollection<T>> T.with(ctx: BodyContext) =
-    this.with(ContextKeys.BODY, ctx)
-fun <T : IContextCollection<T>> T.withNamedBlock(name: String, ctx: NamedBlockData) =
-    this.with(ContextKeys.NAMED_BLOCKS, (this.namedBlocksOrNull?.let { HashMap(it) } ?: HashMap<String, NamedBlockData>()).apply { this[name] = ctx })
-fun <T : IContextCollection<T>> T.with(hook: () -> Unit) =
-    this.with(ContextKeys.RETURN_HOOK, hook)
-
-fun IContextCollection<*>.isClass() =
-    contexts.containsKey(ContextKeys.CLASS) || isEnum()
-fun IContextCollection<*>.isMethod() =
-    contexts.containsKey(ContextKeys.METHOD)
-fun IContextCollection<*>.isBody() =
-    contexts.containsKey(ContextKeys.BODY)
-
-var MutableMap<IContextKey, Any?>.classes
-    set(value) { this[ContextKeys.CLASSES] = value }
-    get() = this[ContextKeys.CLASSES] as MutableMap<String, ClassNode>
-val IContextCollection<*>.clazz
-    get() = contexts[ContextKeys.CLASS] as ClassContext
-val IContextCollection<*>.method
-    get() = contexts[ContextKeys.METHOD] as MethodContext
-val IContextCollection<*>.body
-    get() = bodyOrNull!!
-val IContextCollection<*>.bodyOrNull
-    get() = contexts[ContextKeys.BODY] as BodyContext?
-fun IContextCollection<*>.getNamedBlock(name: String) =
-    this.namedBlocks[name]!!
-val IContextCollection<*>.namedBlocks
-    get() = this.namedBlocksOrNull!!
-val IContextCollection<*>.namedBlocksOrNull
-    get() = contexts[ContextKeys.NAMED_BLOCKS] as MutableMap<String, NamedBlockData>?
-var IContextCollection<*>.returnHook
-    set(value) { contexts[ContextKeys.RETURN_HOOK] = value }
-    get() = contexts[ContextKeys.RETURN_HOOK] as () -> Unit
 
 fun load(variable: Variable, node: MethodVisitor) {
     if (!variable.tmp) {

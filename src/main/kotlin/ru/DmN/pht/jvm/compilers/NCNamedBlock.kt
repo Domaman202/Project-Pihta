@@ -3,8 +3,8 @@ package ru.DmN.pht.compiler.java.compilers
 import org.objectweb.asm.Label
 import ru.DmN.pht.ast.NodeNamedList
 import ru.DmN.pht.compiler.java.utils.NamedBlockData
-import ru.DmN.pht.compiler.java.utils.method
-import ru.DmN.pht.compiler.java.utils.withNamedBlock
+import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.compiler.ctx.with
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
@@ -22,7 +22,7 @@ object NCNamedBlock : INodeCompiler<NodeNamedList> {
         val start = Label()
         val stop = Label()
         ctx.method.node.visitLabel(start)
-        val result = compile(ctx.withNamedBlock(node.name, NamedBlockData(start, stop)))
+        val result = compile(ctx.with(node.name, NamedBlockData(start, stop)))
         ctx.method.node.visitLabel(stop)
         return result
     }

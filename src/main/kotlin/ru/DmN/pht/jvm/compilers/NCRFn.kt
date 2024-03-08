@@ -6,7 +6,7 @@ import org.objectweb.asm.Opcodes.H_INVOKEVIRTUAL
 import org.objectweb.asm.Type
 import ru.DmN.pht.ast.NodeRFn
 import ru.DmN.pht.compiler.java.utils.load
-import ru.DmN.pht.compiler.java.utils.method
+import ru.DmN.pht.jvm.compiler.ctx.method
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
@@ -56,7 +56,7 @@ object NCRFn : INodeCompiler<NodeRFn> {
                             declName,
                             name,
                             desc,
-                            declaringClass!!.isInterface
+                            declaringClass.isInterface
                         ),
                         Type.getType(desc),
                     )

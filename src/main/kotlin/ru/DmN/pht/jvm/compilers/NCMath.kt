@@ -1,35 +1,34 @@
 package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
+import ru.DmN.pht.ast.NodeMath
 import ru.DmN.pht.compiler.java.utils.load
-import ru.DmN.pht.compiler.java.utils.method
+import ru.DmN.pht.jvm.compiler.ctx.method
 import ru.DmN.pht.utils.node.NodeTypes.*
-import ru.DmN.pht.utils.type
 import ru.DmN.siberia.compiler.Compiler
-import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable
 
-object NCMath : INodeCompiler<NodeNodesList> {
-    override fun compileVal(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Variable {
+object NCMath : INodeCompiler<NodeMath> {
+    override fun compileVal(node: NodeMath, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.run {
-            val type = compiler.compileVal(node.nodes[0], ctx).apply { load(this, this@run) }.type()
-            if (node.type == NEG_)
-                visitInsn(calcOperation(node, type.name))
+            load(compiler.compileVal(node.nodes[0], ctx), this)
+            if (node.info.type == NEG_)
+                visitInsn(calcOperation(node, node.type.name))
             else {
-                val operation = calcOperation(node, type.name)
+                val operation = calcOperation(node, node.type.name)
                 node.nodes.drop(1).forEach {
                     load(compiler.compileVal(it, ctx), this)
                     visitInsn(operation)
                 }
             }
-            return Variable.tmp(node, type)
+            return Variable.tmp(node, node.type)
         }
     }
 
-    private fun calcOperation(node: NodeNodesList, type: String) =
-        when (node.type) {
+    private fun calcOperation(node: NodeMath, type: String) =
+        when (node.info.type) {
             ADD_ -> Opcodes.IADD + calcOffsetMath(type)
             SUB_ -> Opcodes.ISUB + calcOffsetMath(type)
             MUL_ -> Opcodes.IMUL + calcOffsetMath(type)

@@ -2,11 +2,11 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.ast.NodeMCall.Type.STATIC
-import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.utils.node.NodeTypes.MCALL_
 import ru.DmN.pht.utils.node.nodeValueClass
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor

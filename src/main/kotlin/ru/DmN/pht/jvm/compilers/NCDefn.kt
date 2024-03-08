@@ -7,14 +7,14 @@ import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.compiler.java.ctx.BodyContext
 import ru.DmN.pht.compiler.java.ctx.MethodContext
-import ru.DmN.pht.compiler.java.utils.clazz
 import ru.DmN.pht.compiler.java.utils.load
-import ru.DmN.pht.compiler.java.utils.with
+import ru.DmN.pht.jvm.compiler.ctx.clazz
+import ru.DmN.pht.jvm.compiler.ctx.with
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
 import ru.DmN.pht.utils.normalizeName
-import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.CompilingStage
 import ru.DmN.siberia.compilers.NCDefault

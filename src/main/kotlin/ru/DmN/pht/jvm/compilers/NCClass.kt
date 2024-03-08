@@ -4,9 +4,9 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import ru.DmN.pht.ast.NodeType
 import ru.DmN.pht.compiler.java.ctx.ClassContext
-import ru.DmN.pht.compiler.java.utils.classes
-import ru.DmN.pht.compiler.java.utils.method
-import ru.DmN.pht.compiler.java.utils.with
+import ru.DmN.pht.jvm.compiler.ctx.classes
+import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.compiler.ctx.with
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.siberia.compiler.Compiler

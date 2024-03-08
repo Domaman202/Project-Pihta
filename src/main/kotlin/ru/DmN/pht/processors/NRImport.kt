@@ -1,14 +1,15 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeImport
-import ru.DmN.pht.processor.utils.global
-import ru.DmN.pht.processor.utils.macros
+import ru.DmN.pht.processor.ctx.global
+import ru.DmN.pht.processor.ctx.macros
+import ru.DmN.pht.utils.Platforms.CPP
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.computeList
 import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.node.NodeTypes.IMPORT_
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.*
 import ru.DmN.siberia.processor.utils.platform
@@ -66,7 +67,7 @@ object NRImport : INodeProcessor<NodeNodesList> {
         }
 
         return when (ctx.platform) {
-            JVM -> null
+            JVM, CPP -> null
             else -> NodeImport(node.info.withType(IMPORT_), module, data)
         }
     }

@@ -1,11 +1,10 @@
 package ru.DmN.test.pht.all
 
-import ru.DmN.test.Module
-import kotlin.test.Test
+import ru.DmN.test.TestModule
 import kotlin.test.assertEquals
 
-class Cond : Module("test/pht/all/cond") {
-    override fun Module.compileTest() {
+class Cond : TestModule("test/pht/all/cond") {
+    override fun TestModule.compileTest() {
         compile()
         assertEquals(test(0), "МРБ")
     }

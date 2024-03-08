@@ -2,13 +2,13 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeCatch
 import ru.DmN.pht.processor.ctx.BodyContext
-import ru.DmN.pht.processor.utils.body
-import ru.DmN.pht.processor.utils.with
+import ru.DmN.pht.processor.ctx.body
+import ru.DmN.pht.processor.ctx.with
 import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.node.NodeTypes.CATCH_
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processor.utils.processNodesList

@@ -1,3 +1,4 @@
+@file:Suppress("UNCHECKED_CAST")
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeFGet
@@ -5,15 +6,14 @@ import ru.DmN.pht.ast.NodeInlBodyA
 import ru.DmN.pht.ast.NodeInlBodyB
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.ast.NodeMCall.Type.*
-import ru.DmN.pht.processor.ctx.BodyContext
-import ru.DmN.pht.processor.ctx.GlobalContext
+import ru.DmN.pht.processor.ctx.*
 import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.node.*
 import ru.DmN.pht.utils.vtype.VTWG
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.FINALIZATION
 import ru.DmN.siberia.processors.INodeProcessor
@@ -155,7 +155,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      */
     private fun getInstance(result: MethodFindResultA, instance: Node, processor: Processor, ctx: ProcessingContext) =
         if (result.type == SUPER)
-            nodeGetVariable(instance.info, "this")
+            nodeGetVariable(instance.info, "this", result.method.declaringClass)
         else {
             if (result.type == VIRTUAL && instance.isConstClass)
                 nodeGetInstance(result, instance, processor, ctx)

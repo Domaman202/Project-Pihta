@@ -4,9 +4,9 @@ import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.compiler.java.utils.bytecodeCast
 import ru.DmN.pht.compiler.java.utils.load
-import ru.DmN.pht.compiler.java.utils.method
-import ru.DmN.siberia.compiler.Compiler
+import ru.DmN.pht.jvm.compiler.ctx.method
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable

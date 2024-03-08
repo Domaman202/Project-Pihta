@@ -1,16 +1,16 @@
 package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Label
+import ru.DmN.pht.compiler.java.ctx.BodyContext
+import ru.DmN.pht.jvm.compiler.ctx.bodyOrNull
+import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.compiler.ctx.with
+import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.Compiler
+import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.compilers.NCDefault
-import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.utils.Variable
-import ru.DmN.pht.compiler.java.ctx.BodyContext
-import ru.DmN.pht.compiler.java.utils.bodyOrNull
-import ru.DmN.pht.compiler.java.utils.method
-import ru.DmN.pht.compiler.java.utils.with
 
 object NCBody : INodeCompiler<NodeNodesList> {
     override fun compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext) =

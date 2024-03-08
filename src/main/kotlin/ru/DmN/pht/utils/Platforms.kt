@@ -3,6 +3,7 @@ package ru.DmN.pht.utils
 import ru.DmN.pht.jvm.utils.JRTP
 import ru.DmN.siberia.utils.IPlatform
 import ru.DmN.siberia.utils.vtype.TypesProvider
+import ru.DmN.siberia.utils.vtype.TypesProvider.VoidTypesProvider
 
 /**
  * Стандартные целевые платформы.
@@ -16,13 +17,20 @@ enum class Platforms : IPlatform {
     /**
      * Lua
      */
-    LUA;
+    LUA,
+
+    /**
+     * C++
+     */
+    CPP;
 
     companion object {
         init {
             IPlatform.PLATFORMS += JVM
+            IPlatform.PLATFORMS += CPP
             IPlatform.PLATFORMS += LUA
             TypesProvider.add(JVM, JRTP())
+            TypesProvider.add(CPP, VoidTypesProvider())
         }
     }
 }

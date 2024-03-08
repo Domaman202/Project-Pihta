@@ -20,8 +20,11 @@ class JRTP : TypesProvider() {
     override fun typeOf(name: String): VirtualType =
         types[name.hashCode()] ?: addType(klassOf(name))
 
+    override fun typeOfOrNull(name: String): VirtualType? =
+        try { typeOf(name) } catch (_: ClassNotFoundException) { null }
+
     private fun typeOf(klass: Klass): VirtualType =
-        types[klass.name.hashCode()] ?: addType(klass)
+        typeOfOrNull(klass.name) ?: addType(klass)
 
     private fun addType(klass: Klass): VirtualType {
         val parents: MutableList<VirtualType> = ArrayList()

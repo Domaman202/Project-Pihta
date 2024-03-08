@@ -1,11 +1,11 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.processor.utils.method
+import ru.DmN.pht.processor.ctx.method
 import ru.DmN.pht.utils.node.NodeTypes.RET_
 import ru.DmN.pht.utils.node.nodeAs
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 

@@ -1,10 +1,10 @@
 package ru.DmN.test.pht.all
 
-import ru.DmN.test.Module
+import ru.DmN.test.TestModule
 import kotlin.test.assertEquals
 
-class MCallAdv : Module("test/pht/all/mcall-adv") {
-    override fun Module.compileTest() {
+class MCallAdv : TestModule("test/pht/all/mcall-adv") {
+    override fun TestModule.compileTest() {
         compile()
         assertEquals(test(0), "Foo!")
         assertEquals(test(1), "Foo static!")

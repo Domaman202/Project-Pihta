@@ -1,22 +1,13 @@
 @file:Suppress("NOTHING_TO_INLINE")
 package ru.DmN.pht.processor.utils
 
-import ru.DmN.pht.compiler.java.utils.MacroDefine
-import ru.DmN.pht.processor.ctx.BodyContext
-import ru.DmN.pht.processor.ctx.EnumContext
-import ru.DmN.pht.processor.ctx.GlobalContext
-import ru.DmN.pht.processor.ctx.MacroContext
 import ru.DmN.pht.utils.compute
-import ru.DmN.pht.utils.ctx.ContextKeys
 import ru.DmN.pht.utils.lenArgs
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.utils.ctx.IContextCollection
-import ru.DmN.siberia.utils.ctx.IContextKey
 import ru.DmN.siberia.utils.vtype.VirtualMethod
-import ru.DmN.siberia.utils.vtype.VirtualType
 
 fun getMethodVariants(variants: Sequence<VirtualMethod>, args: List<ICastable>): Sequence<Pair<VirtualMethod, Boolean>> =
     variants
@@ -57,68 +48,3 @@ inline fun sliceInsert(list: MutableList<Any?>, index: Int, elements: List<Any?>
     elements.forEachIndexed { i, it -> list[index + i] = it }
     right.forEachIndexed { i, it -> list[index + i + elements.size] = it }
 }
-
-inline fun <T : IContextCollection<T>> T.with(ctx: GlobalContext) =
-    this.with(ContextKeys.GLOBAL, ctx)
-inline fun <T : IContextCollection<T>> T.with(ctx: EnumContext) =
-    this.with(ContextKeys.ENUM, ctx).apply {
-        this.clazz = ctx.type
-        this.classes = LinkedClassesNode(this.classes, ctx.type)
-        this.methodOrNull = null
-        this.bodyOrNull = null
-    }
-inline fun <T : IContextCollection<T>> T.with(ctx: VirtualType) =
-    this.with(ContextKeys.CLASS, ctx).apply {
-        this.classes = LinkedClassesNode(this.classes, ctx)
-        this.methodOrNull = null
-        this.bodyOrNull = null
-    }
-inline fun <T : IContextCollection<T>> T.with(ctx: VirtualMethod?) =
-    this.with(ContextKeys.METHOD, ctx)
-inline fun <T : IContextCollection<T>> T.with(ctx: BodyContext) =
-    this.with(ContextKeys.BODY, ctx)
-inline fun <T : IContextCollection<T>> T.with(ctx: MacroContext) =
-    this.with(ContextKeys.MACRO, ctx)
-
-inline fun IContextCollection<*>.isEnum() =
-    contexts.containsKey(ContextKeys.ENUM)
-inline fun IContextCollection<*>.isClass() =
-    contexts.containsKey(ContextKeys.CLASS) || isEnum()
-inline fun IContextCollection<*>.isMethod() =
-    this.methodOrNull != null
-inline fun IContextCollection<*>.isBody() =
-    this.bodyOrNull != null
-inline fun IContextCollection<*>.isMacro() =
-    contexts.containsKey(ContextKeys.MACRO)
-
-inline var IContextCollection<*>.global
-    set(value) { contexts[ContextKeys.GLOBAL] = value }
-    get() = contexts[ContextKeys.GLOBAL] as GlobalContext
-inline val IContextCollection<*>.enum
-    get() = contexts[ContextKeys.ENUM] as EnumContext
-inline var IContextCollection<*>.clazz
-    set(value) { contexts[ContextKeys.CLASS] = value }
-    get() = this.clazzOrNull!!
-inline var IContextCollection<*>.classes
-    set(value) { contexts[ContextKeys.CLASSES] = value }
-    get() = contexts[ContextKeys.CLASSES] as LinkedClassesNode<VirtualType>
-inline val IContextCollection<*>.clazzOrNull
-    get() = contexts[ContextKeys.CLASS] as VirtualType?
-inline var IContextCollection<*>.method
-    set(value) { this.methodOrNull = value }
-    get() = this.methodOrNull!!
-inline var IContextCollection<*>.methodOrNull
-    set(value) { contexts[ContextKeys.METHOD] = value }
-    get() = contexts[ContextKeys.METHOD] as VirtualMethod?
-inline var IContextCollection<*>.body
-    set(value) { this.bodyOrNull = value }
-    get() = this.bodyOrNull!!
-inline var IContextCollection<*>.bodyOrNull
-    set(value) { contexts[ContextKeys.BODY] = value }
-    get() = contexts[ContextKeys.BODY] as BodyContext?
-inline val IContextCollection<*>.macro
-    get() = contexts[ContextKeys.MACRO] as MacroContext
-
-inline var MutableMap<IContextKey, Any?>.macros
-    set(value) { this[ContextKeys.MACROS] = value }
-    get() = this[ContextKeys.MACROS] as MutableMap<String, MutableList<MacroDefine>>

@@ -1,12 +1,12 @@
 package ru.DmN.test.pht.all
 
 import ru.DmN.siberia.utils.Klass
-import ru.DmN.test.Module
+import ru.DmN.test.TestModule
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class Class : Module("test/pht/all/class") {
-    override fun Module.compileTest() {
+class Class : TestModule("test/pht/all/class") {
+    override fun TestModule.compileTest() {
         compile()
         (test(0) as Klass).let {
             assertEquals(it.name, "Test")

@@ -5,7 +5,13 @@ import ru.DmN.pht.ast.NodeGet.Type.*
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.ast.NodeMCall.Type.STATIC
 import ru.DmN.pht.ast.NodeMCall.Type.VIRTUAL
-import ru.DmN.pht.processor.utils.*
+import ru.DmN.pht.processor.ctx.body
+import ru.DmN.pht.processor.ctx.classes
+import ru.DmN.pht.processor.ctx.clazz
+import ru.DmN.pht.processor.ctx.method
+import ru.DmN.pht.processor.utils.Static
+import ru.DmN.pht.processor.utils.computeValues
+import ru.DmN.pht.processor.utils.processValues
 import ru.DmN.pht.utils.InlineVariable
 import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.forEach
@@ -13,9 +19,9 @@ import ru.DmN.pht.utils.node.NodeTypes.GET_
 import ru.DmN.pht.utils.node.NodeTypes.MCALL_
 import ru.DmN.pht.utils.node.nodeGetVariable
 import ru.DmN.pht.utils.node.nodeValueClass
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.node.INodeInfo
@@ -48,27 +54,30 @@ object NRGetB : INodeProcessor<NodeNodesList> {
             return if (valMode)
                 if (it is InlineVariable)
                     processor.process(it.value, ctx, true)
-                else NodeGet(info.withType(GET_), name, VARIABLE)
+                else NodeGet(info.withType(GET_), name, VARIABLE, it.type())
             else null
         }
         val clazz = ctx.clazz
         ctx.classes.forEach(clazz) { it -> findGetter(info, it, name, nodes, !ctx.method.modifiers.static, processor, ctx)?.let { return it } }
         if (nodes.isNotEmpty())
             throw RuntimeException("DEBUG")
-        return if (valMode)
+        return if (valMode) {
+            val field = clazz.fields.find { it.name == name }
+                ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == name } }.first()!!
             NodeGet(
                 info.withType(GET_),
                 name,
-                if ((clazz.fields.find { it.name == name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == name } }.first()!!).modifiers.isStatic)
+                if (field.modifiers.isStatic)
                     THIS_STATIC_FIELD
-                else THIS_FIELD
+                else THIS_FIELD,
+                field.type
             )
-        else null
+        } else null
     }
 
     fun findGetter(info: INodeInfo, type: VirtualType, name: String, nodes: List<Node>, allowVirtual: Boolean, processor: Processor, ctx: ProcessingContext): Node? { // todo: static / no static
         if (allowVirtual)
-            findGetter(info, type, name, nodeGetVariable(info, "this"), nodes, VIRTUAL, processor, ctx)?.let { return it }
+            findGetter(info, type, name, nodeGetVariable(info, "this", type), nodes, VIRTUAL, processor, ctx)?.let { return it }
         return findGetter(info, type, name, nodeValueClass(info, type.name), nodes, STATIC, processor, ctx)
     }
 

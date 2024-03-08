@@ -3,7 +3,7 @@ package ru.DmN.pht.jvm
 import org.objectweb.asm.ClassWriter
 import ru.DmN.pht.ast.ISyncNode
 import ru.DmN.pht.compiler.java.compilers.*
-import ru.DmN.pht.compiler.java.utils.classes
+import ru.DmN.pht.jvm.compiler.ctx.classes
 import ru.DmN.pht.jvm.compilers.*
 import ru.DmN.pht.jvm.node.NodeParsedTypes.*
 import ru.DmN.pht.jvm.node.NodeTypes.*
@@ -139,8 +139,6 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         // o
         add(OBJ_,         NCClass)
         add(OR_,          NCMath)
-        // p
-        add(PROGN_B_,     NCDefault)
         // r
         add(REM_,         NCMath)
         add(RET_,         NCRet)
@@ -163,44 +161,39 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(XOR_,         NCMath)
 
         // @
-        add(ANN_ABSTRACT_, NCDefault)
         add(ANN_ANN_,      NCAnnotation)
-        add(ANN_FINAL_,    NCDefault)
-        add(ANN_INLINE_,   NCDefault)
         add(ANN_LIST_,     NCList)
-        add(ANN_OPEN_,     NCDefault)
-        add(ANN_STATIC_,   NCDefault)
-        add(ANN_SYNC_,     NCDefault)
-        add(ANN_VARARGS_,  NCDefault)
     }
 
     override fun load(compiler: Compiler, ctx: CompilationContext) {
-        // Контексты
-        compiler.contexts.classes = HashMap()
-        // Финализация
-        compiler.finalizers.add { dir ->
-            compiler.contexts.classes.values.forEach {
-                if (it.name.contains('/'))
-                    File("$dir/${it.name.substring(0, it.name.lastIndexOf('/'))}").mkdirs()
-                FileOutputStream("$dir/${it.name}.class").use { stream ->
-                    val writer =
-                        try {
-                            val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
-                            it.accept(writer)
-                            writer
-                        } catch (_: ArrayIndexOutOfBoundsException) {
-                            println("Внимание: класс '${it.name}' скомпилирован без просчёта фреймов.")
-                            val writer = ClassWriter(ClassWriter.COMPUTE_MAXS)
-                            it.accept(writer)
-                            writer
-                        }
-                    val b = writer.toByteArray()
-                    stream.write(b)
+        if (!ctx.loadedModules.contains(this)) {
+            // Контексты
+            compiler.contexts.classes = HashMap()
+            // Финализация
+            compiler.finalizers.add { dir ->
+                compiler.contexts.classes.values.forEach {
+                    if (it.name.contains('/'))
+                        File("$dir/${it.name.substring(0, it.name.lastIndexOf('/'))}").mkdirs()
+                    FileOutputStream("$dir/${it.name}.class").use { stream ->
+                        val writer =
+                            try {
+                                val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
+                                it.accept(writer)
+                                writer
+                            } catch (_: ArrayIndexOutOfBoundsException) {
+                                println("Внимание: класс '${it.name}' скомпилирован без просчёта фреймов.")
+                                val writer = ClassWriter(ClassWriter.COMPUTE_MAXS)
+                                it.accept(writer)
+                                writer
+                            }
+                        val b = writer.toByteArray()
+                        stream.write(b)
+                    }
                 }
             }
+            //
+            super.load(compiler, ctx)
         }
-        //
-        super.load(compiler, ctx)
     }
 
     init {

@@ -1,12 +1,10 @@
 package ru.DmN.test.siberia.all
 
-import ru.DmN.test.Module
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import ru.DmN.test.TestModule
 import kotlin.test.assertTrue
 
-class Export : Module("test/siberia/all/export") {
-    override fun Module.compileTest() {
+class Export : TestModule("test/siberia/all/export") {
+    override fun TestModule.compileTest() {
         compile()
         assertTrue((test(0) as String).contains("export"))
         assertTrue((test(1) as String).contains("helper"))

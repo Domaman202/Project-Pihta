@@ -3,7 +3,7 @@ package ru.DmN.pht.compiler.java.compilers
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.FieldNode
 import ru.DmN.pht.ast.NodeFieldB
-import ru.DmN.pht.compiler.java.utils.clazz
+import ru.DmN.pht.jvm.compiler.ctx.clazz
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
 import ru.DmN.pht.utils.normalizeName
 import ru.DmN.siberia.compiler.Compiler

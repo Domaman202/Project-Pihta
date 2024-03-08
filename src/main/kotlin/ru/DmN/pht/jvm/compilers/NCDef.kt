@@ -2,7 +2,11 @@ package ru.DmN.pht.compiler.java.compilers
 
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.ast.NodeDef
-import ru.DmN.pht.compiler.java.utils.*
+import ru.DmN.pht.compiler.java.utils.load
+import ru.DmN.pht.compiler.java.utils.storeCast
+import ru.DmN.pht.jvm.compiler.ctx.body
+import ru.DmN.pht.jvm.compiler.ctx.clazz
+import ru.DmN.pht.jvm.compiler.ctx.method
 import ru.DmN.pht.utils.normalizeName
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext

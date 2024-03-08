@@ -1,11 +1,11 @@
 package ru.DmN.test.pht.all
 
-import ru.DmN.test.Module
+import ru.DmN.test.TestModule
 import kotlin.Enum
 import kotlin.test.assertEquals
 
-class Enum : Module("test/pht/all/enum") {
-    override fun Module.compileTest() {
+class Enum : TestModule("test/pht/all/enum") {
+    override fun TestModule.compileTest() {
         compile()
         assertEquals((test(0) as Enum<*>).ordinal, 0)
         assertEquals((test(0) as Enum<*>).name, "RED")

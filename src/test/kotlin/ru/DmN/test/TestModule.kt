@@ -23,9 +23,9 @@ import java.io.FileOutputStream
 import java.net.URLClassLoader
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import ru.DmN.test.Module as SiberiaModule
+import ru.DmN.test.TestModule as SiberiaModule
 
-abstract class Module(val dir: String) {
+abstract class TestModule(val dir: String) {
     @Test
     open fun testPrint() {
         print()

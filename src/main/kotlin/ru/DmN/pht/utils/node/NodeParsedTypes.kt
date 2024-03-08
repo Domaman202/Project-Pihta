@@ -2,6 +2,7 @@ package ru.DmN.pht.utils.node
 
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.siberia.utils.node.INodeType
+import ru.DmN.siberia.utils.node.NodeTypes
 
 enum class NodeParsedTypes(override val operation: String, override val processed: INodeType) : IParsedNodeType {
     // a
@@ -59,6 +60,9 @@ enum class NodeParsedTypes(override val operation: String, override val processe
     // o
     OBJ("obj", OBJ_),
     OR("or", OR_),
+    // p
+    PRINT("print", PRINT_),
+    PRINTLN("println", PRINTLN_),
     // r
     REM("rem", REM_),
     RET("ret", RET_),

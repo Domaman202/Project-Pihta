@@ -1,11 +1,13 @@
 package ru.DmN.pht.processors
 
+import ru.DmN.pht.processor.utils.processValue
 import ru.DmN.pht.utils.Platforms.JVM
+import ru.DmN.pht.utils.node.NodeTypes.CCALL_
 import ru.DmN.pht.utils.node.nodeMCall
 import ru.DmN.pht.utils.node.nodeName
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
@@ -23,6 +25,6 @@ object NRCCall : INodeProcessor<NodeNodesList> {
                 NRMCall.process(nodeMCall(info, nodeName(info, "super"), "<init>", node.nodes), processor, ctx, valMode)
             }
 
-            else -> node
+            else -> NodeNodesList(node.info.withType(CCALL_), node.nodes).apply { processValue(this, processor, ctx) }
         }
 }

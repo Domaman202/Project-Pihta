@@ -1,10 +1,10 @@
 package ru.DmN.test.pht.all
 
-import ru.DmN.test.Module
+import ru.DmN.test.TestModule
 import kotlin.test.assertEquals
 
-class IncDec : Module("test/pht/all/inc-dec") {
-    override fun Module.compileTest() {
+class IncDec : TestModule("test/pht/all/inc-dec") {
+    override fun TestModule.compileTest() {
         compile()
         assertEquals(test(0), 1)
         assertEquals(test(1), 1)

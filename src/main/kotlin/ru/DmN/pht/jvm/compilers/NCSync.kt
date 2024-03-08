@@ -2,10 +2,10 @@ package ru.DmN.pht.jvm.compilers
 
 import jdk.internal.org.objectweb.asm.Opcodes
 import org.objectweb.asm.Label
-import ru.DmN.pht.jvm.ast.NodeSync
-import ru.DmN.pht.compiler.java.utils.body
 import ru.DmN.pht.compiler.java.utils.load
-import ru.DmN.pht.compiler.java.utils.method
+import ru.DmN.pht.jvm.ast.NodeSync
+import ru.DmN.pht.jvm.compiler.ctx.body
+import ru.DmN.pht.jvm.compiler.ctx.method
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler

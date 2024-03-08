@@ -1,14 +1,14 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeIsAs
-import ru.DmN.pht.processor.utils.global
+import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.node.NodeTypes.IS_
 import ru.DmN.pht.utils.node.nodeValue
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
@@ -33,7 +33,7 @@ object NRIs : INodeProcessor<NodeNodesList> {
                         else false
                     else if (value?.isPrimitive == true)
                         false
-                    else return NodeIsAs(node.info.withType(IS_), mutableListOf(processor.process(node.nodes[1], ctx, true)!!), ctx.global.getType(type, processor.tp))
+                    else return NodeIsAs(node.info.withType(IS_), mutableListOf(processor.process(node.nodes[1], ctx, true)!!), value!!, ctx.global.getType(type, processor.tp))
                 )
             }
 

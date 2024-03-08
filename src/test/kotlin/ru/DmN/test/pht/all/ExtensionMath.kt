@@ -1,11 +1,10 @@
 package ru.DmN.test.pht.all
 
-import ru.DmN.test.Module
-import kotlin.test.Test
+import ru.DmN.test.TestModule
 import kotlin.test.assertEquals
 
-class ExtensionMath : Module("test/pht/all/extension-math") {
-    override fun Module.compileTest() {
+class ExtensionMath : TestModule("test/pht/all/extension-math") {
+    override fun TestModule.compileTest() {
         compile()
         assertEquals(test(0), "Слава России")
         assertEquals(test(1), "ЛолКек")

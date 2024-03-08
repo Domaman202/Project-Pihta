@@ -1,9 +1,10 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeMCall
+import ru.DmN.pht.ast.NodeMath
+import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.utils.ICastable
 import ru.DmN.pht.processor.utils.MethodFindResultB
-import ru.DmN.pht.processor.utils.global
 import ru.DmN.pht.utils.adaptToType
 import ru.DmN.pht.utils.node.NodeParsedTypes.SHIFT_LEFT
 import ru.DmN.pht.utils.node.NodeParsedTypes.SHIFT_RIGHT
@@ -13,9 +14,9 @@ import ru.DmN.pht.utils.node.nodeValueClass
 import ru.DmN.pht.utils.node.processed
 import ru.DmN.pht.utils.processNodes
 import ru.DmN.pht.utils.text
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.node.INodeInfo
@@ -36,7 +37,7 @@ object NRMath : INodeProcessor<NodeNodesList> {
         val info = node.info
         return if (result == null)
             if (valMode)
-                NodeNodesList(
+                NodeMath(
                     info.processed,
                     (when (info.type) {
                         SHIFT_LEFT,
@@ -50,7 +51,8 @@ object NRMath : INodeProcessor<NodeNodesList> {
                                 true
                             )!!
                         }
-                    }).toMutableList()
+                    }).toMutableList(),
+                    firstType
                 )
             else null
         else NodeMCall(

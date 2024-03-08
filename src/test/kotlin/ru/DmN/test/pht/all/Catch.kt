@@ -1,11 +1,11 @@
 package ru.DmN.test.pht.all
 
-import ru.DmN.test.Module
+import ru.DmN.test.TestModule
 import kotlin.test.assertEquals
 import kotlin.test.assertFails
 
-class Catch : Module("test/pht/all/catch") {
-    override fun Module.compileTest() {
+class Catch : TestModule("test/pht/all/catch") {
+    override fun TestModule.compileTest() {
         compile()
         assertEquals(test(0), 21)
         assertEquals(test(1), 12)

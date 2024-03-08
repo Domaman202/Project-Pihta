@@ -1,15 +1,15 @@
 package ru.DmN.test.pht.all
 
 import ru.DmN.siberia.utils.Klass
-import ru.DmN.test.Module
+import ru.DmN.test.TestModule
 import java.lang.reflect.Modifier
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
-class InterfaceImpl : Module("test/pht/all/interface-impl") {
-    override fun Module.compileTest() {
+class InterfaceImpl : TestModule("test/pht/all/interface-impl") {
+    override fun TestModule.compileTest() {
         compile()
         (test(0) as Klass).let { it ->
             it.methods.find { it.name == "foo" }.let {

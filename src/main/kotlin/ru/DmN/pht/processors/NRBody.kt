@@ -2,11 +2,11 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeBody
 import ru.DmN.pht.processor.ctx.BodyContext
-import ru.DmN.pht.processor.utils.bodyOrNull
-import ru.DmN.pht.processor.utils.with
+import ru.DmN.pht.processor.ctx.bodyOrNull
+import ru.DmN.pht.processor.ctx.with
 import ru.DmN.pht.utils.node.NodeTypes.BODY_
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor

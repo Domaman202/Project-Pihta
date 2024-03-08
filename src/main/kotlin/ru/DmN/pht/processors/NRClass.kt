@@ -1,13 +1,13 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeType
-import ru.DmN.pht.processor.utils.global
-import ru.DmN.pht.processor.utils.with
+import ru.DmN.pht.processor.ctx.global
+import ru.DmN.pht.processor.ctx.with
 import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.node.NodeParsedTypes
 import ru.DmN.pht.utils.node.processed
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.TYPES_DEFINE
 import ru.DmN.siberia.processor.utils.ProcessingStage.TYPES_PREDEFINE
