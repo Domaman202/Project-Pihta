@@ -42,7 +42,7 @@ object JvmCommands {
     val ALL_COMMANDS = listOf(MODULE_RUN, MODULE_RUN_TEST)
 
     @JvmStatic
-    fun moduleRunTest(console: Console, vararg  args: Any?) {
+    fun moduleRunTest(console: Console, vararg args: Any?) {
         val index = args[0] as Int
         //
         console.println("Запуск...")

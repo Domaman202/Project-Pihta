@@ -14,6 +14,6 @@ class IncPht : TestModule("test/pht/all/inc-pht") {
     override fun testUnparse() {
         unparse()
         unparseCheck()
-        (object : TestModule("${dir}/unparse/processed") { }).compileTest()
+        (object : TestModule("${dir}/test/unparse/processed") { }).compileTest()
     }
 }

@@ -36,8 +36,8 @@ abstract class TestModule(val dir: String) {
     open fun testUnparse() {
         unparse()
         unparseCheck()
-        (object : SiberiaModule("${dir}/unparse/parsed") { }).compileTest()
-        (object : SiberiaModule("${dir}/unparse/processed") { }).compileTest()
+        (object : SiberiaModule("${dir}/test/unparse/parsed") { }).compileTest()
+        (object : SiberiaModule("${dir}/test/unparse/processed") { }).compileTest()
     }
 
     @Test
@@ -158,5 +158,5 @@ abstract class TestModule(val dir: String) {
     private fun readDumpFile(file: String) =
         File("dump/$dir/$file").readText()
     private fun readTestFile(file: String) =
-        String(Module::class.java.getResourceAsStream("/$dir/$file")!!.readBytes())
+        String(Module::class.java.getResourceAsStream("/$dir/test/$file")!!.readBytes())
 }

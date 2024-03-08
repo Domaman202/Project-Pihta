@@ -1,0 +1,6 @@
+(module
+    (name "test/siberia/all/module-uses/test/unparse/processed")
+    (version "1.0.0")
+    (author "DomamaN202")
+    (deps ["pht"])
+    (src ["unparse.pht"]))
