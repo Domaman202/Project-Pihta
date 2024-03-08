@@ -1,0 +1,5 @@
+(use-ctx pht pht/jvm
+	(use-ctx test/siberia/export/helper
+		(test-fn
+			0
+			(*module-name*))))

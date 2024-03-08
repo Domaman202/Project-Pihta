@@ -33,6 +33,7 @@ object TestCommands {
 
     @JvmStatic
     fun testUpdateUnparse(console: Console, vararg args: Any?) {
+        println("Начало обновления тестовых данных 'де-парсинга'.")
         forEachTests { dir, path ->
             val src = File("dump/$path/unparse")
             if (src.exists()) {
@@ -52,10 +53,12 @@ object TestCommands {
                 src.copyRecursively(dist, true)
             }
         }
+        println("Обновление тестовых данных 'де-парсинга' завершено.")
     }
 
     @JvmStatic
     fun testUpdatePrint(console: Console, vararg args: Any?) {
+        println("Начало обновления тестовых данных 'печати'.")
         forEachTests { dir, path ->
             val src = File("dump/$path/print")
             if (src.exists()) {
@@ -64,6 +67,7 @@ object TestCommands {
                 src.copyRecursively(dist, true)
             }
         }
+        println("Обновление тестовых данных 'печати' завершено.")
     }
 
     fun forEachTests(dir: File = File("src/test/resources/test"), offset: Int = dir.length().toInt() - 1, block: (File, String) -> Unit) {

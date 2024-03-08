@@ -1,0 +1,7 @@
+(use-ctx pht pht/jvm
+	(use-ctx test/siberia/export/helper
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						"test/siberia/export"))))))
