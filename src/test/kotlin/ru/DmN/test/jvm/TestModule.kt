@@ -16,7 +16,7 @@ abstract class TestModule(dir: String) : TestModuleBase(dir, JVM) {
     }
 
     fun test(id: Int): Any? =
-        URLClassLoader(arrayOf(File(dumpDir).toURI().toURL())).loadClass("Test$id").getMethod("test").invoke(null)
+        URLClassLoader(arrayOf(File("dump/$dir").toURI().toURL())).loadClass("Test$id").getMethod("test").invoke(null)
 
     companion object {
         fun of(dir: String) = object : TestModule(dir) { }

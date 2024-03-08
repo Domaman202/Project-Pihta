@@ -1,0 +1,7 @@
+(module
+    (name "test/pht/jvm/annotation")
+    (version "1.0.0")
+    (author "DomamaN202")
+    (deps ["pht"])
+    (uses ["pht"])
+    (src ["src.pht"]))

@@ -63,8 +63,8 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
         val ctx = CompilationContext.base().apply { this.platform = this@TestModuleBase.platform }
         processed.forEach { compiler.compile(it, ctx) }
         compiler.stageManager.runAll()
-        File(dumpDir).mkdirs()
-        compiler.finalizers.forEach { it(dumpDir) }
+        File("dump/$dir").mkdirs()
+        compiler.finalizers.forEach { it("dump/$dir") }
     }
 
     fun unparse() {
@@ -72,8 +72,8 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
         val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(platform)) as NodeModule).module
         module.init(platform, mp)
         val tp = TypesProvider.of(platform)
-        File("$dumpDir/unparse/parsed").mkdirs()
-        FileOutputStream("$dumpDir/unparse/parsed/unparse.pht").use { out ->
+        File("dump/$dir/unparse/parsed").mkdirs()
+        FileOutputStream("dump/$dir/unparse/parsed/unparse.pht").use { out ->
             val unparser = UnparserImpl(mp, 1024*1024)
             val uctx = UnparsingContext.base().apply { this.platform = this@TestModuleBase.platform }
             module.nodes.forEach { unparser.unparse(it, uctx, 0) }
@@ -89,8 +89,8 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
             ProcessingContext.base().with(platform).apply { this.module = module }
         )
         processor.stageManager.runAll()
-        File("$dumpDir/unparse/processed").mkdirs()
-        FileOutputStream("$dumpDir/unparse/processed/unparse.pht").use { out ->
+        File("dump/$dir/unparse/processed").mkdirs()
+        FileOutputStream("dump/$dir/unparse/processed/unparse.pht").use { out ->
             val unparser = UnparserImpl(mp, 1024*1024)
             val uctx = UnparsingContext.base().apply { this.platform = this@TestModuleBase.platform }
             processed.forEach { unparser.unparse(it, uctx, 0) }
@@ -108,9 +108,9 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
         val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(platform)) as NodeModule).module
         module.init(platform, mp)
         val tp = TypesProvider.of(platform)
-        File("$dumpDir/print").mkdirs()
-        FileOutputStream("$dumpDir/print/parsed.short.print").use { short ->
-            FileOutputStream("$dumpDir/print/parsed.long.print").use { long ->
+        File("dump/$dir/print").mkdirs()
+        FileOutputStream("dump/$dir/print/parsed.short.print").use { short ->
+            FileOutputStream("dump/$dir/print/parsed.long.print").use { long ->
                 module.nodes.forEach {
                     short.write(it.print(true).toByteArray())
                     short.write('\n'.code)
@@ -129,8 +129,8 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
             ProcessingContext.base().with(platform).apply { this.module = module }
         )
         processor.stageManager.runAll()
-        FileOutputStream("$dumpDir/print/processed.short.print").use { short ->
-            FileOutputStream("$dumpDir/print/processed.long.print").use { long ->
+        FileOutputStream("dump/$dir/print/processed.short.print").use { short ->
+            FileOutputStream("dump/$dir/print/processed.long.print").use { long ->
                 processed.forEach {
                     short.write(it.print(true).toByteArray())
                     short.write('\n'.code)
@@ -149,10 +149,7 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
     }
 
     private fun readDumpFile(file: String) =
-        File("$dumpDir/$file").readText()
+        File("dump/$dir/$file").readText()
     private fun readTestFile(file: String) =
         String(Module::class.java.getResourceAsStream("/$dir/test/$file")!!.readBytes())
-
-    protected val dumpDir: String
-        get() = "dump/${platform.name.lowercase()}/$dir"
 }

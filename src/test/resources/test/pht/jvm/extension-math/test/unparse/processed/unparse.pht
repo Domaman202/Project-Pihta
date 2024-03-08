@@ -1,0 +1,70 @@
+(use-ctx pht pht/jvm
+	(progn
+		(cls [] App [^java.lang.Object]
+			(@static
+				(efn [] ^java.lang.String sub ^java.lang.String [[other ^java.lang.String]]
+					(mcall
+						(get this)
+						add
+						(body
+							(def [
+								[(array-type ^java.lang.Object) pht$tmp$16871 (new-array ^java.lang.Object 1)]])
+							(aset
+								(get pht$tmp$16871)
+								0
+								(get other))
+							(get pht$tmp$16871))))
+				(efn [] ^java.lang.String mul ^java.lang.String []
+					"mul")
+				(efn [] ^java.lang.String div ^java.lang.String []
+					"div")
+				(efn [] ^java.lang.String rem ^java.lang.String []
+					"rem")))
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							"Слава"
+							add
+							(body
+								(def [
+									[(array-type ^java.lang.Object) pht$tmp$16875 (new-array ^java.lang.Object 2)]])
+								(aset
+									(get pht$tmp$16875)
+									0
+									" ")
+								(aset
+									(get pht$tmp$16875)
+									1
+									"России")
+								(get pht$tmp$16875)))))))
+		(cls [] Test1 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							"Лол"
+							sub
+							"Кек")))))
+		(cls [] Test2 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							""
+							mul)))))
+		(cls [] Test3 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							""
+							div)))))
+		(cls [] Test4 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(mcall
+							""
+							rem)))))))

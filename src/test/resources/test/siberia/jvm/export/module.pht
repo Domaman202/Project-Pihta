@@ -1,0 +1,7 @@
+(module
+    (name "test/siberia/jvm/export")
+    (version "1.0.0")
+    (author "DomamaN202")
+    (deps ["pht" "test/siberia/jvm/export/helper"])
+    (uses ["pht"])
+    (src ["src.pht"]))

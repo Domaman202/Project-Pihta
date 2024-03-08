@@ -7,6 +7,17 @@ import java.io.File
 import java.util.*
 
 object TestCommands {
+    val TEST_CLEAR = Command(
+        "test-clear",
+        "tc",
+        "Тест",
+        "Очистка тестовых данных",
+        "Удаляет все данные тестов у всех тестов.",
+        emptyList(),
+        BaseCommands::alviseAvailable,
+        TestCommands::testClear
+    )
+
     val TEST_UPDATE_PRINT = Command(
         "test-update-print",
         "tup",
@@ -29,7 +40,7 @@ object TestCommands {
         TestCommands::testUpdateUnparse
     )
 
-    val ALL_COMMANDS = listOf(TEST_UPDATE_PRINT, TEST_UPDATE_UNPARSE)
+    val ALL_COMMANDS = listOf(TEST_CLEAR, TEST_UPDATE_PRINT, TEST_UPDATE_UNPARSE)
 
     @JvmStatic
     fun testUpdateUnparse(console: Console, vararg args: Any?) {
@@ -38,6 +49,8 @@ object TestCommands {
             val src = File("dump/$path/unparse")
             if (src.exists()) {
                 val dist = File(dir, "test/unparse")
+                dist.deleteOnExit()
+                src.copyRecursively(dist, true)
                 dist.listFiles()!!.forEach {
                     it.mkdirs()
                     File(it, "module.pht").writeText("""
@@ -49,8 +62,6 @@ object TestCommands {
                             (src ["unparse.pht"]))
                     """.trimIndent())
                 }
-                dist.deleteOnExit()
-                src.copyRecursively(dist, true)
             }
         }
         println("Обновление тестовых данных 'де-парсинга' завершено.")
@@ -68,6 +79,16 @@ object TestCommands {
             }
         }
         println("Обновление тестовых данных 'печати' завершено.")
+    }
+
+    @JvmStatic
+    fun testClear(console: Console, vararg args: Any?) {
+        println("Начало очистки всех тестовых данных.")
+        forEachTests { dir, _ ->
+            println(dir)
+            File(dir, "test").deleteRecursively()
+        }
+        println("Очистка всех тестовых данных завершено.")
     }
 
     fun forEachTests(dir: File = File("src/test/resources/test"), offset: Int = dir.length().toInt() - 1, block: (File, String) -> Unit) {
