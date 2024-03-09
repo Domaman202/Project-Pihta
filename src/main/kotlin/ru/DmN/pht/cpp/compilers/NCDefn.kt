@@ -19,17 +19,23 @@ object NCDefn : ICppNRCompiler<NodeDefn> {
             else {
                 if (modifiers.static)
                     append("static ")
+                if (modifiers.abstract || !modifiers.final)
+                    append("virtual ")
                 append(rettype.name()).append(' ').append(name)
                 insertArgs(this)
-                append(" {\n")
-                val context = ctx.with(this)
-                if (rettype == VOID)
-                    compile(node as INodesList, compiler, context)
+                if (modifiers.abstract)
+                    append(" = 0;\n")
                 else {
-                    append("return ")
-                    compileVal(node as INodesList, compiler, context).load(this@compile)
+                    append(" {\n")
+                    val context = ctx.with(this)
+                    if (rettype == VOID)
+                        compile(node as INodesList, compiler, context)
+                    else {
+                        append("return ")
+                        compileVal(node as INodesList, compiler, context).load(this@compile)
+                    }
+                    append("}\n")
                 }
-                append("}\n")
             }
         }
     }

@@ -8,6 +8,4 @@
 
 #include "pht.hpp"
 
-auto gc = dmn::pht::gc();
-
 #endif //__MAIN_HPP__

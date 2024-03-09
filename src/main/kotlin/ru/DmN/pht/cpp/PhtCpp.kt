@@ -1,6 +1,6 @@
 package ru.DmN.pht.cpp
 
-import ru.DmN.pht.compiler.cpp.compilers.NCClass
+import ru.DmN.pht.compiler.cpp.compilers.NCCls
 import ru.DmN.pht.cpp.compiler.ctx.out
 import ru.DmN.pht.cpp.compiler.ctx.tests
 import ru.DmN.pht.cpp.compilers.*
@@ -39,7 +39,7 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
         // b
         // c
         add(CCALL_,       NCCCall)
-        add(CLS_,         NCClass)
+        add(CLS_,         NCCls)
         add(CTOR_,        NCCtor)
         add(CYCLE_,       NCCycle)
         // d
@@ -50,6 +50,7 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
         // e
         add(EQ_,          NCMath)
         // f
+        add(FGET_,        NCFGet)
         // g
         add(GET_,         NCGet)
         add(GREAT_,       NCMath)
@@ -58,6 +59,7 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
         add(IF_,          NCIf)
         add(INC_PRE_,     NCIncDec)
         add(INC_POST_,    NCIncDec)
+        add(ITF_,         NCItf)
         // l
         add(LESS_,        NCMath)
         add(LESS_OR_EQ_,  NCMath)
@@ -70,6 +72,7 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
         add(NOT_,         NCMath)
         add(NOT_EQ_,      NCMath)
         // o
+        add(OBJ_,         NCObj)
         add(OR_,          NCMath)
         // p
         add(PRINT_,       NCPrint)

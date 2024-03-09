@@ -158,7 +158,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             nodeGetVariable(instance.info, "this", result.method.declaringClass)
         else {
             if (result.type == VIRTUAL && instance.isConstClass)
-                nodeGetInstance(result, instance, processor, ctx)
+                nodeGetInstance(instance, processor, ctx)
             else {
                 val np = processor.get(instance, ctx)
                 if (instance.isLiteral && (np as IStdNodeProcessor<Node>).computeString(instance, processor, ctx) == ".")
@@ -169,7 +169,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                             else throw RuntimeException()
                         }
 
-                        STATIC -> nodeGetInstance(result, instance, processor, ctx)
+                        STATIC -> nodeGetInstance(instance, processor, ctx)
                         else -> throw RuntimeException()
                     }
                 else if (np is IAdaptableProcessor<*>)
@@ -181,15 +181,13 @@ object NRMCall : INodeProcessor<NodeNodesList> {
     /**
      * Создаёт ноду получения INSTANCE от класса в котором определён метод.
      *
-     * @param result Результат поиска метода.
      * @param instance Нода instance из MCALL.
      * @param processor Обработчик.
      * @param ctx Контекст обработки.
      */
-    private fun nodeGetInstance(result: MethodFindResultA, instance: Node, processor: Processor, ctx: ProcessingContext): Node {
+    private fun nodeGetInstance(instance: Node, processor: Processor, ctx: ProcessingContext): Node {
         val type = processor.computeType(instance, ctx)
-        val name = result.method.declaringClass.name
-        return if (name.endsWith("\$Companion")) {
+        return if (type.name.endsWith("\$Companion")) {
             NodeFGet(
                 instance.info.withType(NodeTypes.FGET_),
                 mutableListOf(nodeValueClass(instance.info, type.name)),
@@ -199,7 +197,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             )
         } else NodeFGet(
             instance.info.withType(NodeTypes.FGET_),
-            mutableListOf(nodeValueClass(instance.info, name)),
+            mutableListOf(nodeValueClass(instance.info, type.name)),
             "INSTANCE",
             NodeFGet.Type.STATIC,
             type

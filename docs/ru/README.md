@@ -78,3 +78,4 @@ fun String.log() = println(this)
 - [ ] JavaScript
 - [ ] Python
 - [ ] Rave
+- [X] C++

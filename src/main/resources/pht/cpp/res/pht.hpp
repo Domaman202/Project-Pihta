@@ -40,19 +40,28 @@ namespace dmn::pht {
 
         /// Стандартный конструктор.
         object() = default;
+
+        /// Функция перевода объекта в строку.
+        virtual std::string toString() {
+            return std::string(typeid(this).name())+"("+std::to_string((uintptr_t)this)+")";
+        }
     };
 
     template<class T, typename std::enable_if<std::is_base_of<object, T>::value>::type* = nullptr>
     class auto_ptr {
     private:
-        object* ref;
+        T* ref;
     public:
         explicit auto_ptr(T* ref) : ref(ref) {
-            this->ref->links_count++;
+            reinterpret_cast<object*>(ref)->links_count++;
         }
 
         ~auto_ptr() {
-            ref->links_count--;
+            reinterpret_cast<object*>(ref)->links_count--;
+        }
+
+        T* operator->() {
+            return ref;
         }
     };
 
@@ -72,6 +81,14 @@ namespace dmn::pht {
                 collect();
             auto ref = new T(args...);
             list.push_back(ref);
+            return ref;
+        }
+
+        /// Создание нового статического объекта.
+        template<class T, typename...A, typename std::enable_if<std::is_base_of<object, T>::value>::type* = nullptr>
+        T* alloc_static(A...args) {
+            auto ref = alloc<T>(args...);
+            reinterpret_cast<object*>(ref)->links_count++;
             return ref;
         }
 
@@ -121,5 +138,24 @@ namespace dmn::pht {
     };
 }
 
+auto gc = dmn::pht::gc();
+
+namespace dmn::pht {
+    template<typename T>
+    class primitive : public object {
+    protected:
+        const T value;
+    public:
+        explicit primitive(T value) : value(value) { }
+
+        inline T toPrimitive() const {
+            return value;
+        }
+
+        std::string toString() override {
+            return std::to_string(value);
+        }
+    };
+}
 
 #endif //__PHT_HPP__
