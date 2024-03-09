@@ -1,0 +1,8 @@
+(progn
+    (app-fn)
+    (test-fn 0 nil)
+    (test-fn 1 12)
+    (test-fn 2 21.33)
+    (test-fn 3 44f)
+    (test-fn 4 202l)
+    (test-fn 5 "Текст"))

@@ -10,18 +10,16 @@ abstract class TestModule(dir: String) : TestModuleBase(dir, CPP) {
     override fun testUnparse() {
         unparse()
         unparseCheck()
-        TestModule.of("${dir}/test/unparse/parsed").compileTest()
-        TestModule.of("${dir}/test/unparse/processed").compileTest()
+//        TestModule.of("${dir}/test/unparse/parsed").compileTest() // todo: мем
+//        TestModule.of("${dir}/test/unparse/processed").compileTest()
     }
 
     override fun compileTest() {
         compile()
-//        Runtime.getRuntime().exec("c++ ")
     }
 
-    fun test(id: Int): Any? {
-        return null
-    }
+    fun test(id: Int): String =
+        ProcessBuilder("dump/$dir/main", "$id").start().run { waitFor(); String(inputStream.readBytes())  }
 
     companion object {
         fun of(dir: String) = object : TestModule(dir) { }

@@ -191,7 +191,7 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
                 FileOutputStream("$dir/main.hpp").use { it.write(PhtCpp.getModuleFile("res/main.hpp").toByteArray()) }
                 FileOutputStream("$dir/pht.hpp").use { it.write(PhtCpp.getModuleFile("res/pht.hpp").toByteArray()) }
                 //
-                Runtime.getRuntime().exec("c++ dump/main.cpp -o dump/main").run {
+                Runtime.getRuntime().exec("c++ $dir/main.cpp -o $dir/main").run {
                     waitFor()
                     val err = String(errorStream.readBytes())
                     if (err.isNotEmpty()) {

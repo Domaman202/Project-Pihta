@@ -365,7 +365,9 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(OR_)
         // p
         addSNU(PRINT)
+        addSNU(PRINT_)
         addSNU(PRINTLN)
+        addSNU(PRINTLN_)
         addSNU(PROGN_B)
         addSNU(PROGN_B_)
         // r

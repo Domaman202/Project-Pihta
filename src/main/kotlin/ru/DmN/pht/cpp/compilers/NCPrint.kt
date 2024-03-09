@@ -11,10 +11,13 @@ object NCPrint : ICppNRCompiler<NodeNodesList> {
         append("std::cout")
         node.nodes.forEach {
             append("<<")
+            append(' ')
+            val i = length
             compiler.compileVal(it, ctx).run {
                 load(this@compile)
                 if (type?.isPrimitive == false) {
-                    append("->toString()")
+                    replace(i, i, "dmn::pht::object::toString(")
+                    append(')')
                 }
             }
         }

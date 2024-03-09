@@ -45,6 +45,13 @@ namespace dmn::pht {
         virtual std::string toString() {
             return std::string(typeid(this).name())+"("+std::to_string((uintptr_t)this)+")";
         }
+
+        /// Функция перевода указателя объекта в строку.
+        static std::string toString(object* ptr) {
+            if (ptr == nullptr)
+                return "nullptr";
+            return ptr->toString();
+        }
     };
 
     template<class T, typename std::enable_if<std::is_base_of<object, T>::value>::type* = nullptr>
