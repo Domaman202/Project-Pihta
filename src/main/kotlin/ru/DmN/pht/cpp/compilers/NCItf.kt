@@ -1,6 +1,7 @@
 package ru.DmN.pht.cpp.compilers
 
 import ru.DmN.pht.ast.NodeType
+import ru.DmN.pht.compiler.cpp.compilers.NCCls.compileTail
 import ru.DmN.pht.cpp.compiler.utils.name
 import ru.DmN.pht.processor.ctx.with
 import ru.DmN.siberia.compiler.Compiler
@@ -26,6 +27,7 @@ object NCItf : ICppNRCompiler<NodeType> {
                 compiler.compile(it, context)
             }
             append("};\n\n")
+            compileTail(node, compiler, ctx)
         }
     }
 }

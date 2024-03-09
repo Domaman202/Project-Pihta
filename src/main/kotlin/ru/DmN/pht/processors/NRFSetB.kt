@@ -10,6 +10,7 @@ import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.node.NodeTypes.FSET_
 import ru.DmN.pht.utils.node.NodeTypes.MCALL_
+import ru.DmN.pht.utils.node.nodeAs
 import ru.DmN.pht.utils.node.nodeValue
 import ru.DmN.pht.utils.node.nodeValueClass
 import ru.DmN.siberia.ast.Node
@@ -60,13 +61,14 @@ object NRFSetB : INodeProcessor<NodeFieldSet> {
                     VIRTUAL
                 )
             } else findSetter(type, node.name, node.nodes, if (node.static) Static.STATIC else Static.NO_STATIC, processor, ctx)
-        return if (result == null)
+        return if (result == null) {
+            val field = type.fields.find { it.name == node.name }!!
             NodeFSet(
                 info.withType(FSET_),
-                mutableListOf(instance, processor.process(node.nodes.first(), ctx, true)!!),
-                type.fields.find { it.name == node.name }!!
+                mutableListOf(instance, NRAs.process(nodeAs(info, node.nodes.first(), field.type.name), processor, ctx, true)!!),
+                field
             )
-        else NodeMCall(
+        } else NodeMCall(
             info.withType(MCALL_),
             NRMCall.processArguments(info, processor, ctx, result.method, node.nodes, result.compression),
             null,

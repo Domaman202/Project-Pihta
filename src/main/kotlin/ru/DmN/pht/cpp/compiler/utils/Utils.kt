@@ -38,7 +38,7 @@ fun VirtualType.name() =
 fun VirtualType.nameType() =
     if (isPrimitive)
         name()
-    else name() + "*"
+    else "dmn::pht::auto_ptr<${name()}>"
 
 fun Variable.load(builder: StringBuilder) {
     if (!tmp) {

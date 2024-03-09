@@ -51,6 +51,7 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
         add(EQ_,          NCMath)
         // f
         add(FGET_,        NCFGet)
+        add(FSET_,        NCFSet)
         // g
         add(GET_,         NCGet)
         add(GREAT_,       NCMath)

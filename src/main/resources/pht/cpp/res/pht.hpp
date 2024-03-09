@@ -50,18 +50,40 @@ namespace dmn::pht {
     template<class T, typename std::enable_if<std::is_base_of<object, T>::value>::type* = nullptr>
     class auto_ptr {
     private:
+        /// Ссылка.
         T* ref;
     public:
+        /// Конструктор для быстрой инициализации.
+        explicit auto_ptr() : ref(nullptr) { }
+        /// Конструктор для полной инициализации.
         explicit auto_ptr(T* ref) : ref(ref) {
-            reinterpret_cast<object*>(ref)->links_count++;
+            if (ref) {
+                reinterpret_cast<object *>(ref)->links_count++;
+            }
         }
 
+        /// Деструктор.
         ~auto_ptr() {
-            reinterpret_cast<object*>(ref)->links_count--;
+            if (ref) {
+                reinterpret_cast<object *>(ref)->links_count--;
+            }
         }
 
-        T* operator->() {
+        /// Получение ссылки.
+        T* get() const {
             return ref;
+        }
+
+        /// Доступ к полям и методам ссылки.
+        T* operator->() const {
+            return ref;
+        }
+
+        /// Присваивание.
+        template<class I, typename std::enable_if<std::is_base_of<object, I>::value>::type* = nullptr>
+        auto_ptr& operator=(const auto_ptr<I> ptr) {
+            this->ref = ptr.get();
+            return *this;
         }
     };
 
@@ -81,14 +103,6 @@ namespace dmn::pht {
                 collect();
             auto ref = new T(args...);
             list.push_back(ref);
-            return ref;
-        }
-
-        /// Создание нового статического объекта.
-        template<class T, typename...A, typename std::enable_if<std::is_base_of<object, T>::value>::type* = nullptr>
-        T* alloc_static(A...args) {
-            auto ref = alloc<T>(args...);
-            reinterpret_cast<object*>(ref)->links_count++;
             return ref;
         }
 
@@ -148,7 +162,39 @@ namespace dmn::pht {
     public:
         explicit primitive(T value) : value(value) { }
 
-        inline T toPrimitive() const {
+        virtual bool toBool() const {
+            return value;
+        }
+
+        virtual int8_t toByte() const {
+            return value;
+        }
+
+        virtual int16_t toShort() const {
+            return value;
+        }
+
+        virtual char16_t toChar() const {
+            return value;
+        }
+
+        virtual int32_t toInt() const {
+            return value;
+        }
+
+        virtual int64_t toLong() const {
+            return value;
+        }
+
+        virtual float toFloat() const {
+            return value;
+        }
+
+        virtual double toDouble() const {
+            return value;
+        }
+
+        virtual T toPrimitive() const {
             return value;
         }
 

@@ -1,9 +1,5 @@
-(use-ctx pht
-    (itf IFoo [] (@abstract
-        (defn foo ^void [])))
-    (obj FooImpl [^Object ^IFoo]
-        (ctor [] (ccall))
-        (defn foo ^void []
-            (println "Foo!")))
+(app
+    (def [[i ^Object]])
     (app-fn
-        (#foo ^FooImpl)))
+        (set ^App/i 21l)
+        (println (as ^long ^App/i))))
