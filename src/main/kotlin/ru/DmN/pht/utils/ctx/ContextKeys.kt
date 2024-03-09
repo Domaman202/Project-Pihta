@@ -33,6 +33,12 @@ enum class ContextKeys : IContextKey {
     METHOD,
 
     /**
+     * (C++ Compiler)
+     * Количество тестов.
+     */
+    TESTS,
+
+    /**
      * Тело.
      */
     BODY,

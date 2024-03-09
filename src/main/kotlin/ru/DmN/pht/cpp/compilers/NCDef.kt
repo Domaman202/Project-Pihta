@@ -6,7 +6,7 @@ import ru.DmN.pht.cpp.compiler.utils.nameType
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 
-object NCDef : ICppCompiler<NodeDef> {
+object NCDef : ICppNRCompiler<NodeDef> {
     override fun StringBuilder.compile(node: NodeDef, compiler: Compiler, ctx: CompilationContext) {
         if (node.isVariable) {
             node.variables.forEach {

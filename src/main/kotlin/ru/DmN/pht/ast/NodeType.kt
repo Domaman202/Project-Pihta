@@ -9,7 +9,7 @@ import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualType.VirtualTypeImpl
 
 class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeImpl) : NodeNodesList(info, nodes),
-    IAbstractlyNode, IFileNode, IOpenlyNode {
+    IAbstractlyNode, IFileNode, IOpenlyNode, ITestableNode {
     override var abstract: Boolean
         set(value) { type.isAbstract = value }
         get() = type.isAbstract
@@ -22,11 +22,14 @@ class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeI
         set(value) { type.isFinal = !value }
         get() = !type.isFinal
 
+    override var test: Boolean = false
+
     override fun setMetadata(key: IMetadataKey, value: Any?) {
         when (key) {
             ABSTRACT -> abstract = value as Boolean
             FILE     -> file     = value as Boolean
             OPEN     -> open     = value as Boolean
+            TEST     -> test     = value as Boolean
         }
     }
 
@@ -35,6 +38,7 @@ class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeI
             ABSTRACT -> abstract
             FILE     -> file
             OPEN     -> open
+            TEST     -> test
             else     -> null
         }
 

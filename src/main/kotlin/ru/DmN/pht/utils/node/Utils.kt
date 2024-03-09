@@ -114,9 +114,10 @@ fun nodeNewArray(info: INodeInfo, type: String, size: Int) =
     NodeNodesList(info.withType(NEW_ARRAY),
         mutableListOf(nodeValueClass(info, type), nodeValue(info, size)))
 // p
+fun nodePrintln(info: INodeInfo, message: MutableList<Node>) =
+    NodeNodesList(info.withType(PRINTLN), message)
 fun nodePrintln(info: INodeInfo, message: String) =
-    NodeNodesList(info.withType(PRINTLN),
-        mutableListOf(nodeValue(info, message)))
+    nodePrintln(info, mutableListOf(nodeValue(info, message)))
 // o
 fun nodeObj(info: INodeInfo, name: String, parents: List<String>, nodes: List<Node>) =
     NodeNodesList(info.withType(OBJ),
@@ -158,3 +159,5 @@ fun nodeStatic(info: INodeInfo, nodes: MutableList<Node>) =
     NodeMetaNodesList(info.withType(ANN_STATIC), nodes)
 fun nodeStatic(info: INodeInfo, node: Node) =
     nodeStatic(info, mutableListOf(node))
+fun nodeTest(info: INodeInfo, node: Node) =
+    NodeMetaNodesList(info.withType(ANN_TEST), mutableListOf(node))

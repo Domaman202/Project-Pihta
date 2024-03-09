@@ -2,12 +2,12 @@ package ru.DmN.pht.compiler.cpp.compilers
 
 import ru.DmN.pht.ast.NodeType
 import ru.DmN.pht.cpp.compiler.utils.name
-import ru.DmN.pht.cpp.compilers.ICppCompiler
+import ru.DmN.pht.cpp.compilers.ICppNRCompiler
 import ru.DmN.pht.processor.ctx.with
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 
-object NCClass : ICppCompiler<NodeType> {
+object NCClass : ICppNRCompiler<NodeType> {
     override fun StringBuilder.compile(node: NodeType, compiler: Compiler, ctx: CompilationContext) {
         node.type.run {
             if (isFile)

@@ -2,6 +2,7 @@ package ru.DmN.pht.cpp
 
 import ru.DmN.pht.compiler.cpp.compilers.NCClass
 import ru.DmN.pht.cpp.compiler.ctx.out
+import ru.DmN.pht.cpp.compiler.ctx.tests
 import ru.DmN.pht.cpp.compilers.*
 import ru.DmN.pht.cpp.utils.VTString
 import ru.DmN.pht.utils.Platforms.CPP
@@ -12,6 +13,7 @@ import ru.DmN.siberia.compiler.utils.ModuleCompilers
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.vtype.MethodModifiers
+import ru.DmN.siberia.utils.vtype.VTDynamic
 import ru.DmN.siberia.utils.vtype.VirtualMethod.VirtualMethodImpl
 import ru.DmN.siberia.utils.vtype.VirtualType
 import ru.DmN.siberia.utils.vtype.VirtualType.VirtualTypeImpl
@@ -84,10 +86,14 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
         add(VALUE,        NCValue)
         // x
         add(XOR_,         NCMath)
+
+        // @
+        add(ANN_TEST_,    NCTest)
     }
 
     override fun load(processor: Processor, ctx: ProcessingContext, uses: MutableList<String>): Boolean {
         if (!ctx.loadedModules.contains(this)) {
+            processor.tp += VTDynamic
             processor.tp += VTString
             val tObject = VirtualTypeImpl("dmn.pht.object").apply {
                 methods += VirtualMethodImpl(
@@ -167,15 +173,27 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
         if (!ctx.loadedModules.contains(this)) {
             // Контексты
             compiler.contexts.out = StringBuilder()
+            compiler.contexts.tests = 0
             // Финализация
             compiler.finalizers.add { dir ->
                 FileOutputStream("$dir/main.cpp").use { stream ->
                     stream.write("#include \"main.hpp\"\n\n".toByteArray())
                     stream.write(compiler.contexts.out.toString().toByteArray())
-                    stream.write("int main() {\nApp::main();\n}".toByteArray())
+                    stream.write("int main(int argc, char *argv[]) {\nif (argc == 1)\nApp::main();\nelse {\nint i = std::stoi(argv[1]);\n".toByteArray())
+                    for (i in 0 until compiler.contexts.tests)
+                        stream.write("if (i == $i) Test$i::test();\n".toByteArray())
+                    stream.write("}\n}".toByteArray())
                 }
                 FileOutputStream("$dir/main.hpp").use { it.write(PhtCpp.getModuleFile("res/main.hpp").toByteArray()) }
                 FileOutputStream("$dir/pht.hpp").use { it.write(PhtCpp.getModuleFile("res/pht.hpp").toByteArray()) }
+                //
+                Runtime.getRuntime().exec("c++ dump/main.cpp -o dump/main").run {
+                    waitFor()
+                    val err = String(errorStream.readBytes())
+                    if (err.isNotEmpty()) {
+                        throw RuntimeException("\n$err")
+                    }
+                }
             }
             //
             super.load(compiler, ctx)

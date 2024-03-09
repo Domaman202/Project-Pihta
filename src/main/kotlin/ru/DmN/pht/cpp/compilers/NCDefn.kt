@@ -11,7 +11,7 @@ import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType.Companion.VOID
 
-object NCDefn : ICppCompiler<NodeDefn> {
+object NCDefn : ICppNRCompiler<NodeDefn> {
     override fun StringBuilder.compile(node: NodeDefn, compiler: Compiler, ctx: CompilationContext) {
         node.method.run {
             if (modifiers.file)
@@ -24,7 +24,7 @@ object NCDefn : ICppCompiler<NodeDefn> {
                 append(" {\n")
                 val context = ctx.with(this)
                 if (rettype == VOID)
-                    compile(node as INodesList, compiler, ctx)
+                    compile(node as INodesList, compiler, context)
                 else {
                     append("return ")
                     compileVal(node as INodesList, compiler, context).load(this@compile)

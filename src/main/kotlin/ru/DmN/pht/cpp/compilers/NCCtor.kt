@@ -9,7 +9,7 @@ import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 
-object NCCtor : ICppCompiler<NodeDefn> {
+object NCCtor : ICppNRCompiler<NodeDefn> {
     override fun StringBuilder.compile(node: NodeDefn, compiler: Compiler, ctx: CompilationContext) {
         node.method.run {
             append(declaringClass.simpleName)

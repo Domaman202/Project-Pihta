@@ -1,6 +1,5 @@
 package ru.DmN.pht
 
-import ru.DmN.pht.jvm.node.NodeTypes.ANN_SYNC_
 import ru.DmN.pht.parser.ParserImpl
 import ru.DmN.pht.parser.utils.macros
 import ru.DmN.pht.parsers.*
@@ -175,6 +174,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSANP(ANN_INLINE)
         addSANP(ANN_OPEN)
         addSANP(ANN_STATIC)
+        addSANP(ANN_TEST)
         addSANP(ANN_VARARGS)
 
         // @@
@@ -427,6 +427,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(ANN_OPEN_)
         addSNU(ANN_STATIC)
         addSNU(ANN_STATIC_)
+        addSNU(ANN_TEST)
+        addSNU(ANN_TEST_)
         addSNU(ANN_VARARGS)
         addSNU(ANN_VARARGS_)
 
@@ -622,10 +624,11 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(ANN_FINAL,    NRSA { it, _, _ -> it.setMetadata(MetadataKeys.FINAL,    true) })
         add(ANN_OPEN,     NRSA { it, _, _ -> it.setMetadata(MetadataKeys.OPEN,     true) })
         add(ANN_STATIC,   NRSA { it, _, _ -> it.setMetadata(MetadataKeys.STATIC,   true) })
+        add(ANN_TEST,     NRSA { it, _, _ -> it.setMetadata(MetadataKeys.TEST,     true) })
         add(ANN_VARARGS,  NRSA { it, _, _ -> it.setMetadata(MetadataKeys.VARARG,   true) })
 
         // @@
-        add(CT_IF_PLATFORM, NRIfPlatform)
+        add(CT_IF_PLATFORM,  NRIfPlatform)
 
         // *
         add(CTC_MODULE_NAME, NRCTSC { _, ctx -> ctx.module.name })
@@ -644,7 +647,6 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(ANN_INLINE_,   NCDefault)
         add(ANN_OPEN_,     NCDefault)
         add(ANN_STATIC_,   NCDefault)
-        add(ANN_SYNC_,     NCDefault)
         add(ANN_VARARGS_,  NCDefault)
     }
 

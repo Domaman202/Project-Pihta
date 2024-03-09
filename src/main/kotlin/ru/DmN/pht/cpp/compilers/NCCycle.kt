@@ -5,7 +5,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 
-object NCCycle : ICppCompiler<NodeNodesList> {
+object NCCycle : ICppNRCompiler<NodeNodesList> {
     override fun StringBuilder.compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext) {
         append("while (")
         compiler.compileVal(node.nodes[0], ctx).load(this)

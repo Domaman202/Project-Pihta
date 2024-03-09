@@ -10,5 +10,6 @@ enum class MetadataKeys : IMetadataKey {
     OPEN,
     STATIC,
     SYNC,
+    TEST,
     VARARG
 }

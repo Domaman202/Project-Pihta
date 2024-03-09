@@ -163,6 +163,8 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         // @
         add(ANN_ANN_,      NCAnnotation)
         add(ANN_LIST_,     NCList)
+        add(ANN_SYNC_,     NCDefault)
+        add(ANN_TEST_,     NCDefault)
     }
 
     override fun load(compiler: Compiler, ctx: CompilationContext) {

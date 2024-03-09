@@ -7,7 +7,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 
-object NCCCall : ICppCompiler<NodeNodesList> {
+object NCCCall : ICppNRCompiler<NodeNodesList> {
     override fun StringBuilder.compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext) {
         append("new (this) ").append(ctx.method.declaringClass.superclass!!.name())
         compileArgs(node, compiler, ctx)

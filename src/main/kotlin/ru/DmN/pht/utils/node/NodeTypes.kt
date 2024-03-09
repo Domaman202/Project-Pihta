@@ -157,6 +157,7 @@ enum class NodeTypes : INodeType {
     ANN_INLINE_("@inline", PROCESSED),
     ANN_OPEN_("@open", PROCESSED),
     ANN_STATIC_("@static", PROCESSED),
+    ANN_TEST_("@test", PROCESSED),
     ANN_VARARGS_("@varargs", PROCESSED),
 
     // @@
