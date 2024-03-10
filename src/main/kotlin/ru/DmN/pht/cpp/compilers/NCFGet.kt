@@ -9,6 +9,8 @@ import ru.DmN.siberia.utils.Variable
 
 object NCFGet : ICppNRCompiler<NodeFGet> {
     override fun StringBuilder.compileVal(node: NodeFGet, compiler: Compiler, ctx: CompilationContext): Variable {
+        append(' ')
+        val i = length
         val static: Boolean
         when (node.type) {
             NodeFGet.Type.UNKNOWN -> throw UnsupportedOperationException()
@@ -24,6 +26,11 @@ object NCFGet : ICppNRCompiler<NodeFGet> {
                 static = false
             }
         }
-        return Variable.tmp(node, node.vtype.fields.find { it.name == node.name && it.modifiers.isStatic == static }!!.type)
+        val type = node.vtype.fields.find { it.name == node.name && it.modifiers.isStatic == static }!!.type
+        if (!type.isPrimitive) {
+            replace(i, i, "dmn::pht::auto_ptr(")
+            append(")")
+        }
+        return Variable.tmp(node, type)
     }
 }

@@ -35,6 +35,11 @@ fun String.normalizeName(): String =
 fun VirtualType.name() =
     name.replace(".", "::")
 
+fun VirtualType.nameStaticType() =
+    if (isPrimitive)
+        name()
+    else "${name()}*"
+
 fun VirtualType.nameType() =
     if (isPrimitive)
         name()

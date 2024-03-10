@@ -17,7 +17,7 @@ object NCPrint : ICppNRCompiler<NodeNodesList> {
                 load(this@compile)
                 if (type?.isPrimitive == false) {
                     replace(i, i, "dmn::pht::object::toString(")
-                    append(')')
+                    append(".get())")
                 }
             }
         }

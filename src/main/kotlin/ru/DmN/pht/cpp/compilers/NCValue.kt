@@ -10,7 +10,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 object NCValue : ICppCompiler<NodeValue> {
     override fun StringBuilder.compileVal(node: NodeValue, compiler: Compiler, ctx: CompilationContext): Variable {
         when (node.vtype) {
-            NIL    -> append("nullptr")
+            NIL    -> append("dmn::pht::auto_ptr<dmn::pht::object>(nullptr)")
             CHAR   -> append('\'').append(node.value).append('\'')
             STRING -> append('"').append(node.value).append('"')
             else   -> append(node.value)

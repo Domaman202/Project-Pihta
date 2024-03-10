@@ -27,10 +27,6 @@ namespace dmn::pht {
     protected:
         /// Поколение сборки мусора.
         uint8_t age = 0;
-        /// Установка поколения сборки мусора.
-        virtual void set_age(uint8_t value) {
-            this->age = value;
-        }
 
         /// Конструктор-костыль.
         explicit object(nullptr_t) { };
@@ -40,6 +36,11 @@ namespace dmn::pht {
 
         /// Стандартный конструктор.
         object() = default;
+
+        /// Установка поколения сборки мусора.
+        virtual void set_age(uint8_t value) {
+            this->age = value;
+        }
 
         /// Функция перевода объекта в строку.
         virtual std::string toString() {

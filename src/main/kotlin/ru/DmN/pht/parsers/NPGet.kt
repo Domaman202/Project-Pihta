@@ -18,38 +18,40 @@ import ru.DmN.siberia.utils.node.INodeInfo
 
 object NPGet : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
-        val info = INodeInfo.of(GET, ctx, token)
         val nameToken = parser.nextToken()!!
-        return NPProgn.parse(parser, ctx) { it ->
-            when (nameToken.type) {
-                Token.DefaultType.CLASS -> parse(
-                    info,
-                    nameToken.text!!,
-                    it,
-                    static = true,
-                    klass = true
-                )
-                Token.DefaultType.STRING,
-                Token.DefaultType.OPERATION -> parse(
-                    info,
-                    nameToken.text!!,
-                    it,
-                    static = false,
-                    klass = false
-                )
-                Token.DefaultType.OPEN_BRACKET -> {
-                    parser.pushToken(nameToken)
-                    NodeFMGet(
-                        info,
-                        it,
-                        parser.parseNode(ctx)!!,
-                        parser.nextToken()!!.let { if (it.isOperation() || it.isNaming()) it else throw RuntimeException() }.text!!,
-                        false
-                    )
-                }
+        return NPProgn.parse(parser, ctx) { parse(nameToken, it, parser, ctx, token) }
+    }
 
-                else -> throw RuntimeException()
+    fun parse(nameToken: Token, nodes: MutableList<Node>, parser: Parser, ctx: ParsingContext, token: Token): Node {
+        val info = INodeInfo.of(GET, ctx, token)
+        return when (nameToken.type) {
+            Token.DefaultType.CLASS -> parse(
+                info,
+                nameToken.text!!,
+                nodes,
+                static = true,
+                klass = true
+            )
+            Token.DefaultType.STRING,
+            Token.DefaultType.OPERATION -> parse(
+                info,
+                nameToken.text!!,
+                nodes,
+                static = false,
+                klass = false
+            )
+            Token.DefaultType.OPEN_BRACKET -> {
+                parser.pushToken(nameToken)
+                NodeFMGet(
+                    info,
+                    nodes,
+                    parser.parseNode(ctx)!!,
+                    parser.nextToken()!!.let { if (it.isOperation() || it.isNaming()) it else throw RuntimeException() }.text!!,
+                    false
+                )
             }
+
+            else -> throw RuntimeException()
         }
     }
 

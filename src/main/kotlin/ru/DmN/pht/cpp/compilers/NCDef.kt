@@ -2,6 +2,7 @@ package ru.DmN.pht.cpp.compilers
 
 import ru.DmN.pht.ast.NodeDef
 import ru.DmN.pht.cpp.compiler.utils.load
+import ru.DmN.pht.cpp.compiler.utils.nameStaticType
 import ru.DmN.pht.cpp.compiler.utils.nameType
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
@@ -19,8 +20,9 @@ object NCDef : ICppNRCompiler<NodeDef> {
         } else {
             node.variables.forEach {
                 if (node.static)
-                    append("static ")
-                append(it.type.nameType()).append(' ').append(it.name).append(";\n")
+                    append("static ").append(it.type.nameType())
+                else append(it.type.nameStaticType())
+                append(' ').append(it.name).append(";\n")
             }
         }
     }

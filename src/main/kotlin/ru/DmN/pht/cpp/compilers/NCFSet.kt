@@ -16,7 +16,9 @@ object NCFSet : ICppNRCompiler<NodeFSet> {
                 append("->").append(name)
             }
             append(" = ")
-            compiler.compileVal(node.nodes[1], ctx).load(this@compile)
+            if (compiler.compileVal(node.nodes[1], ctx).apply { load(this@compile) }.type?.isPrimitive != true) {
+                append(".get()")
+            }
         }
     }
 }
