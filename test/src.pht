@@ -1,9 +1,3 @@
-(progn
-    (cls Test [^Object]
-        (ctor [] (ccall))
-        (def [[o ^Object]]))
-    (app-fn
-        (def [[test (new ^Test)]])
-        (set test/o (new ^Object))
-        (def [[o test/o]])
-        (println o)))
+(app-fn
+    (def [[o (new ^Object)]])
+    (println o))
