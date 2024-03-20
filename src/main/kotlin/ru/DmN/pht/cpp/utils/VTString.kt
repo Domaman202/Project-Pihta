@@ -24,7 +24,4 @@ object VTString : VirtualType() {
         get() = false
     override val isFile: Boolean
         get() = false
-    //
-    override val generics: MutableMap<String, VirtualType>
-        get() = HashMap()
 }

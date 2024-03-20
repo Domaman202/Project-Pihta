@@ -16,6 +16,7 @@ import ru.DmN.pht.utils.addSNU
 import ru.DmN.pht.utils.meta.MetadataKeys
 import ru.DmN.pht.utils.node.NodeParsedTypes.*
 import ru.DmN.pht.utils.node.NodeTypes.*
+import ru.DmN.pht.utils.vtype.VTDynamic
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.ModuleCompilers
@@ -672,6 +673,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
 
     override fun load(processor: Processor, ctx: ProcessingContext, uses: MutableList<String>): Boolean {
         if (!ctx.loadedModules.contains(this)) {
+            processor.tp += VTDynamic
             processor.contexts.macros_list = HashMap()
             ctx.global = GlobalContext()
             ctx.classes = LinkedClassesNode.LinkedClassesNodeStart as LinkedClassesNode<VirtualType>

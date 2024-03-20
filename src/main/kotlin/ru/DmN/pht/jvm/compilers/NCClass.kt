@@ -8,6 +8,7 @@ import ru.DmN.pht.jvm.compiler.ctx.classes
 import ru.DmN.pht.jvm.compiler.ctx.method
 import ru.DmN.pht.jvm.compiler.ctx.with
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
+import ru.DmN.pht.jvm.utils.vtype.*
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
@@ -40,10 +41,10 @@ object NCClass : IStdNodeCompiler<NodeType, ClassNode, Nothing> {
                                 else it + Opcodes.ACC_FINAL
                         }
                     },
-                    node.type.className,
+                    node.type.jvmName,
                     node.type.signature,
-                    node.type.superclass?.className ?: "java/lang/Object",
-                    node.type.interfaces.map { it.className }.toTypedArray()
+                    node.type.superclass?.jvmName ?: "java/lang/Object",
+                    node.type.interfaces.map { it.jvmName }.toTypedArray()
                 )
             }
             compiler.stageManager.pushTask(CompilingStage.TYPES_DEFINE) {
@@ -87,7 +88,7 @@ object NCClass : IStdNodeCompiler<NodeType, ClassNode, Nothing> {
     override fun compileValAsm(node: NodeType, compiler: Compiler, ctx: CompilationContext): Pair<Variable, ClassNode> =
         Pair(Variable.tmp(node, node.type), compileAsm(node, compiler, ctx)).apply {
             compiler.stageManager.pushTask(CompilingStage.METHODS_BODY) {
-                ctx.method.node.visitFieldInsn(Opcodes.GETSTATIC, node.type.className, "INSTANCE", node.type.desc)
+                ctx.method.node.visitFieldInsn(Opcodes.GETSTATIC, node.type.jvmName, "INSTANCE", node.type.desc)
             }
         }
 

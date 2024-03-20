@@ -4,6 +4,8 @@ import org.objectweb.asm.Label
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
+import ru.DmN.pht.jvm.utils.vtype.desc
+import ru.DmN.pht.jvm.utils.vtype.jvmName
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
@@ -133,7 +135,7 @@ fun primitiveToObject(variable: Variable, node: MethodVisitor): VirtualType? {
 }
 
 private fun primitiveToObject(node: MethodVisitor, input: Char, type: VirtualType): VirtualType {
-    node.visitMethodInsn(Opcodes.INVOKESTATIC, type.className, "valueOf", "($input)${type.desc}", false)
+    node.visitMethodInsn(Opcodes.INVOKESTATIC, type.jvmName, "valueOf", "($input)${type.desc}", false)
     return type
 }
 

@@ -11,6 +11,9 @@ import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.jvm.compiler.ctx.clazz
 import ru.DmN.pht.jvm.compiler.ctx.with
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
+import ru.DmN.pht.jvm.utils.vtype.desc
+import ru.DmN.pht.jvm.utils.vtype.jvmName
+import ru.DmN.pht.jvm.utils.vtype.signature
 import ru.DmN.pht.utils.normalizeName
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
@@ -66,7 +69,7 @@ object NCDefn : IStdNodeCompiler<NodeDefn, MethodNode, Nothing> {
                                 load(it.name, id++, this)
                                 val target = method.argsc[i]
                                 if (!it.isPrimitive && !target.isPrimitive)
-                                    visitTypeInsn(Opcodes.CHECKCAST, target.className)
+                                    visitTypeInsn(Opcodes.CHECKCAST, target.jvmName)
                                 if (it == VirtualType.FLOAT || it == VirtualType.DOUBLE) {
                                     id++
                                 }

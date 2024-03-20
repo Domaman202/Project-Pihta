@@ -8,6 +8,7 @@ import ru.DmN.pht.processor.ctx.isBody
 import ru.DmN.pht.processor.utils.Variable
 import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.node.NodeTypes.DEF_
+import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
@@ -16,7 +17,6 @@ import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.FieldModifiers
 import ru.DmN.siberia.utils.vtype.VirtualField.VirtualFieldImpl
 import ru.DmN.siberia.utils.vtype.VirtualType
-import ru.DmN.siberia.utils.vtype.VirtualType.VirtualTypeImpl
 
 object NRDef : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDef {
@@ -50,7 +50,7 @@ object NRDef : INodeProcessor<NodeNodesList> {
                 )
             }
         } else {
-            val clazz = ctx.clazz as VirtualTypeImpl
+            val clazz = ctx.clazz as PhtVirtualType.Impl
             processor.computeList(node.nodes[0], ctx).map { processor.computeList(it, ctx) }.forEach {
                 val name = processor.computeString(it[0], ctx)
                 val type = processor.computeType(it[1], ctx)

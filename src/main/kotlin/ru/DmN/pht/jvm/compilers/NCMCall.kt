@@ -5,6 +5,8 @@ import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.utils.vtype.desc
+import ru.DmN.pht.jvm.utils.vtype.jvmName
 import ru.DmN.pht.utils.normalizeName
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
@@ -38,7 +40,7 @@ object NCMCall : INodeCompiler<NodeMCall> {
                     else if (node.type == NodeMCall.Type.SUPER)
                         Opcodes.INVOKESPECIAL
                     else Opcodes.INVOKEVIRTUAL,
-                    declaringClass.className,
+                    declaringClass.jvmName,
                     name.normalizeName(),
                     desc,
                     declaringClass.isInterface

@@ -6,6 +6,8 @@ import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.pht.processor.ctx.with
 import ru.DmN.pht.utils.node.NodeParsedTypes
 import ru.DmN.pht.utils.type
+import ru.DmN.pht.utils.vtype.PhtVirtualMethod
+import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -13,17 +15,15 @@ import ru.DmN.siberia.processor.utils.ProcessingStage.METHODS_BODY
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.MethodModifiers
-import ru.DmN.siberia.utils.vtype.VirtualMethod.VirtualMethodImpl
-import ru.DmN.siberia.utils.vtype.VirtualType
 import ru.DmN.siberia.utils.vtype.VirtualType.Companion.VOID
 
 object NRCtor : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
-        val type = ctx.clazz as VirtualType.VirtualTypeImpl
+        val type = ctx.clazz as PhtVirtualType.Impl
         //
         val args = NRDefn.parseArguments(node.nodes[0], type.generics, processor, ctx)
         //
-        val method = VirtualMethodImpl(
+        val method = PhtVirtualMethod.Impl(
             type,
             "<init>",
             VOID,

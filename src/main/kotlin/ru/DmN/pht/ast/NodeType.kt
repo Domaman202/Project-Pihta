@@ -1,14 +1,14 @@
 package ru.DmN.pht.ast
 
 import ru.DmN.pht.utils.meta.MetadataKeys.*
+import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.utils.indent
 import ru.DmN.siberia.utils.meta.IMetadataKey
 import ru.DmN.siberia.utils.node.INodeInfo
-import ru.DmN.siberia.utils.vtype.VirtualType.VirtualTypeImpl
 
-class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualTypeImpl) : NodeNodesList(info, nodes),
+class NodeType(info: INodeInfo, nodes: MutableList<Node>, val type: PhtVirtualType.Impl) : NodeNodesList(info, nodes),
     IAbstractlyNode, IFileNode, IOpenlyNode, ITestableNode {
     override var abstract: Boolean
         set(value) { type.isAbstract = value }

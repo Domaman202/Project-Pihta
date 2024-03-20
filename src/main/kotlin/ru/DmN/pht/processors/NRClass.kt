@@ -6,6 +6,7 @@ import ru.DmN.pht.processor.ctx.with
 import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.node.NodeParsedTypes
 import ru.DmN.pht.utils.node.processed
+import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -15,7 +16,6 @@ import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.FieldModifiers
 import ru.DmN.siberia.utils.vtype.VirtualField.VirtualFieldImpl
-import ru.DmN.siberia.utils.vtype.VirtualType.VirtualTypeImpl
 
 object NRClass : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeType {
@@ -23,8 +23,7 @@ object NRClass : INodeProcessor<NodeNodesList> {
         //
         val generics = processor.computeListOr(node.nodes[0], ctx)
         val offset = if (generics == null) 0 else 1
-        val type =
-            VirtualTypeImpl(gctx.name(processor.computeString(node.nodes[offset], ctx)), isFinal = true)
+        val type = PhtVirtualType.Impl(gctx.name(processor.computeString(node.nodes[offset], ctx)), isFinal = true)
         //
         when (node.type) {
             NodeParsedTypes.OBJ -> type.fields += VirtualFieldImpl(

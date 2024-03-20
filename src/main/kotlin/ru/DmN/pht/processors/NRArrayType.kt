@@ -4,9 +4,10 @@ import ru.DmN.pht.utils.compute
 import ru.DmN.pht.utils.computeType
 import ru.DmN.pht.utils.isConstClass
 import ru.DmN.pht.utils.node.nodeValueClass
-import ru.DmN.siberia.processor.Processor
+import ru.DmN.pht.utils.vtype.arrayType
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.vtype.VirtualType
 

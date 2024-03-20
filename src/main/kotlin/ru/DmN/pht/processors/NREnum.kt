@@ -10,6 +10,7 @@ import ru.DmN.pht.utils.computeListOr
 import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.computeType
 import ru.DmN.pht.utils.node.*
+import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
@@ -18,7 +19,6 @@ import ru.DmN.siberia.processor.utils.ProcessingStage.*
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.vtype.VirtualType.VirtualTypeImpl
 
 object NREnum : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node {
@@ -26,7 +26,7 @@ object NREnum : INodeProcessor<NodeNodesList> {
         //
         val generics = processor.computeListOr(node.nodes[0], ctx)
         val offset = if (generics == null) 0 else 1
-        val type = VirtualTypeImpl(gctx.name(processor.computeString(node.nodes[offset], ctx,)))
+        val type = PhtVirtualType.Impl(gctx.name(processor.computeString(node.nodes[offset], ctx,)))
         processor.tp.types[type.name.hashCode()] = type
         //
         val info = node.info

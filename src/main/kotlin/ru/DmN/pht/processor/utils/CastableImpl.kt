@@ -1,7 +1,7 @@
 package ru.DmN.pht.processor.utils
 
 import ru.DmN.pht.utils.lenArgs
-import ru.DmN.siberia.utils.vtype.VTDynamic
+import ru.DmN.pht.utils.vtype.VTDynamic
 import ru.DmN.siberia.utils.vtype.VirtualType
 
 data class CastableImpl(val type: VirtualType) : ICastable {

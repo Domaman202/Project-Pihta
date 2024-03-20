@@ -5,6 +5,8 @@ import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.compiler.java.compilers.NCDefn.visit
 import ru.DmN.pht.jvm.compiler.ctx.clazz
+import ru.DmN.pht.jvm.utils.vtype.desc
+import ru.DmN.pht.jvm.utils.vtype.signature
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.CompilingStage

@@ -4,6 +4,8 @@ import org.objectweb.asm.Opcodes
 import ru.DmN.pht.ast.NodeNewArray
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.utils.vtype.jvmName
+import ru.DmN.pht.utils.vtype.arrayType
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
@@ -29,7 +31,7 @@ object NCNewArray : INodeCompiler<NodeNewArray> {
                         else -> throw RuntimeException()
                     }
                 )
-            } else visitTypeInsn(Opcodes.ANEWARRAY, node.type.className)
+            } else visitTypeInsn(Opcodes.ANEWARRAY, node.type.jvmName)
         }
         return Variable.tmp(node, node.type.arrayType)
     }

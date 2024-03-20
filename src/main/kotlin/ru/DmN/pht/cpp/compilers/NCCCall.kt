@@ -2,6 +2,7 @@ package ru.DmN.pht.cpp.compilers
 
 import ru.DmN.pht.cpp.compiler.utils.name
 import ru.DmN.pht.cpp.compilers.NCMCall.compileArgs
+import ru.DmN.pht.jvm.utils.vtype.superclass
 import ru.DmN.pht.processor.ctx.method
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.Compiler

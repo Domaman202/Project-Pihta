@@ -4,9 +4,11 @@ import ru.DmN.pht.ast.NodeType
 import ru.DmN.pht.cpp.compiler.utils.name
 import ru.DmN.pht.cpp.compiler.utils.nameType
 import ru.DmN.pht.cpp.compilers.ICppNRCompiler
+import ru.DmN.pht.jvm.utils.vtype.superclass
 import ru.DmN.pht.processor.ctx.with
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.utils.vtype.simpleName
 
 object NCCls : ICppNRCompiler<NodeType> {
     override fun StringBuilder.compile(node: NodeType, compiler: Compiler, ctx: CompilationContext) {

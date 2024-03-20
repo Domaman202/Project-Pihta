@@ -1,6 +1,7 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeNewArray
+import ru.DmN.pht.utils.vtype.arrayType
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor

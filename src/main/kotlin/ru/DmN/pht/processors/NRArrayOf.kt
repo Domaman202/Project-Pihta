@@ -2,6 +2,7 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.utils.node.*
+import ru.DmN.pht.utils.vtype.arrayType
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor

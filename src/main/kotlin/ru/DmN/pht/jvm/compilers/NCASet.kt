@@ -5,6 +5,7 @@ import org.objectweb.asm.Opcodes
 import ru.DmN.pht.compiler.java.utils.bytecodeCast
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.utils.vtype.jvmName
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
@@ -40,7 +41,7 @@ object NCASet : INodeCompiler<NodeNodesList> {
         val componentType = arr.type().componentType!!
         if (value.type().isPrimitive)
             bytecodeCast(value.type().name, componentType.name, this)
-        else visitTypeInsn(Opcodes.CHECKCAST, componentType.className)
+        else visitTypeInsn(Opcodes.CHECKCAST, componentType.jvmName)
         visitAStore(arr)
     }
 

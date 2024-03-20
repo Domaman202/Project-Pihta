@@ -3,6 +3,7 @@ package ru.DmN.pht.compiler.java.compilers
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.ast.NodeEField
 import ru.DmN.pht.jvm.compiler.ctx.clazz
+import ru.DmN.pht.jvm.utils.vtype.desc
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler

@@ -9,6 +9,8 @@ import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.node.NodeTypes.DEFN_
 import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_A
 import ru.DmN.pht.utils.node.nodeAs
+import ru.DmN.pht.utils.vtype.PhtVirtualMethod
+import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
@@ -17,14 +19,12 @@ import ru.DmN.siberia.processor.utils.ProcessingStage.METHODS_BODY
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.MethodModifiers
 import ru.DmN.siberia.utils.vtype.VirtualMethod
-import ru.DmN.siberia.utils.vtype.VirtualMethod.VirtualMethodImpl
 import ru.DmN.siberia.utils.vtype.VirtualType
 import ru.DmN.siberia.utils.vtype.VirtualType.Companion.VOID
-import ru.DmN.siberia.utils.vtype.VirtualType.VirtualTypeImpl
 
 object NRDefn : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
-        val type = ctx.clazz as VirtualTypeImpl
+        val type = ctx.clazz as PhtVirtualType.Impl
         //
         val gens = processor.computeListOr(node.nodes[0], ctx)
         val offset = if (gens == null) 0 else 1
@@ -42,7 +42,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
             else generics[returnGen]!!
         val args = parseArguments(node.nodes[2 + offset], generics, processor, ctx)
         //
-        val method = VirtualMethodImpl(
+        val method = PhtVirtualMethod.Impl(
             type,
             name,
             returnType,

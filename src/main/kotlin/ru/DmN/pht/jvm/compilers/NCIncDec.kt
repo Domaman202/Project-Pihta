@@ -5,6 +5,8 @@ import ru.DmN.pht.ast.NodeIncDec
 import ru.DmN.pht.jvm.compiler.ctx.body
 import ru.DmN.pht.jvm.compiler.ctx.clazz
 import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.utils.vtype.desc
+import ru.DmN.pht.jvm.utils.vtype.jvmName
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
@@ -21,10 +23,10 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
                 val clazz = ctx.clazz.clazz
                 val field = clazz.fields.find { it.name == node.name }!!
                 if (field.modifiers.isStatic)
-                    visitFieldInsn(Opcodes.GETSTATIC, clazz.className, field.name, field.desc)
+                    visitFieldInsn(Opcodes.GETSTATIC, clazz.jvmName, field.name, field.desc)
                 else {
                     visitVarInsn(Opcodes.ALOAD, 0)
-                    visitFieldInsn(Opcodes.GETFIELD, clazz.className, field.name, field.desc)
+                    visitFieldInsn(Opcodes.GETFIELD, clazz.jvmName, field.name, field.desc)
                 }
                 when (field.type) {
                     VirtualType.BOOLEAN,
@@ -66,11 +68,11 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
                     else -> throw UnsupportedOperationException()
                 }
                 if (field.modifiers.isStatic)
-                    visitFieldInsn(Opcodes.PUTSTATIC, clazz.className, field.name, field.desc)
+                    visitFieldInsn(Opcodes.PUTSTATIC, clazz.jvmName, field.name, field.desc)
                 else {
                     visitVarInsn(Opcodes.ALOAD, 0)
                     visitInsn(Opcodes.SWAP)
-                    visitFieldInsn(Opcodes.PUTFIELD, clazz.className, field.name, field.desc)
+                    visitFieldInsn(Opcodes.PUTFIELD, clazz.jvmName, field.name, field.desc)
                 }
             } else {
                 visitIincInsn(
@@ -93,10 +95,10 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
                 val clazz = ctx.clazz.clazz
                 val field = clazz.fields.find { it.name == node.name }!!
                 if (field.modifiers.isStatic)
-                    visitFieldInsn(Opcodes.GETSTATIC, clazz.className, field.name, field.desc)
+                    visitFieldInsn(Opcodes.GETSTATIC, clazz.jvmName, field.name, field.desc)
                 else {
                     visitVarInsn(Opcodes.ALOAD, 0)
-                    visitFieldInsn(Opcodes.GETFIELD, clazz.className, field.name, field.desc)
+                    visitFieldInsn(Opcodes.GETFIELD, clazz.jvmName, field.name, field.desc)
                 }
                 if (operation == INC_POST_ || operation == DEC_POST_)
                     visitInsn(Opcodes.DUP)
@@ -142,11 +144,11 @@ object NCIncDec : INodeCompiler<NodeIncDec> {
                 if (operation == INC_PRE_ || operation == DEC_PRE_)
                     visitInsn(Opcodes.DUP)
                 if (field.modifiers.isStatic)
-                    visitFieldInsn(Opcodes.PUTSTATIC, clazz.className, field.name, field.desc)
+                    visitFieldInsn(Opcodes.PUTSTATIC, clazz.jvmName, field.name, field.desc)
                 else {
                     visitVarInsn(Opcodes.ALOAD, 0)
                     visitInsn(Opcodes.SWAP)
-                    visitFieldInsn(Opcodes.PUTFIELD, clazz.className, field.name, field.desc)
+                    visitFieldInsn(Opcodes.PUTFIELD, clazz.jvmName, field.name, field.desc)
                 }
             } else {
                 val id = variable.id

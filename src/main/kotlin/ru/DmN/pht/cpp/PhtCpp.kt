@@ -7,16 +7,15 @@ import ru.DmN.pht.cpp.compilers.*
 import ru.DmN.pht.cpp.utils.VTString
 import ru.DmN.pht.utils.Platforms.CPP
 import ru.DmN.pht.utils.node.NodeTypes.*
+import ru.DmN.pht.utils.vtype.PhtVirtualMethod
+import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.ModuleCompilers
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.vtype.MethodModifiers
-import ru.DmN.siberia.utils.vtype.VTDynamic
-import ru.DmN.siberia.utils.vtype.VirtualMethod.VirtualMethodImpl
 import ru.DmN.siberia.utils.vtype.VirtualType
-import ru.DmN.siberia.utils.vtype.VirtualType.VirtualTypeImpl
 import java.io.FileOutputStream
 
 object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
@@ -97,10 +96,9 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
 
     override fun load(processor: Processor, ctx: ProcessingContext, uses: MutableList<String>): Boolean {
         if (!ctx.loadedModules.contains(this)) {
-            processor.tp += VTDynamic
             processor.tp += VTString
-            val tObject = VirtualTypeImpl("dmn.pht.object").apply {
-                methods += VirtualMethodImpl(
+            val tObject = PhtVirtualType.Impl("dmn.pht.object").apply {
+                methods += PhtVirtualMethod.Impl(
                     this,
                     "<init>",
                     VirtualType.VOID,
@@ -113,7 +111,7 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
                     null,
                     emptyMap()
                 )
-                methods += VirtualMethodImpl(
+                methods += PhtVirtualMethod.Impl(
                     this,
                     "toString",
                     VTString,
@@ -128,9 +126,9 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
                 )
             }
             processor.tp += tObject
-            processor.tp += VirtualTypeImpl("dmn.pht.integer").apply {
+            processor.tp += PhtVirtualType.Impl("dmn.pht.integer").apply {
                 parents += tObject
-                methods += VirtualMethodImpl(
+                methods += PhtVirtualMethod.Impl(
                     this,
                     "<init>",
                     VirtualType.VOID,
@@ -143,7 +141,7 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
                     null,
                     emptyMap()
                 )
-                methods += VirtualMethodImpl(
+                methods += PhtVirtualMethod.Impl(
                     this,
                     "toPrimitive",
                     VirtualType.INT,
@@ -157,7 +155,7 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
                     emptyMap()
                 )
             }
-            processor.tp += VirtualTypeImpl("Class") // Костыль
+            processor.tp += PhtVirtualType.Impl("Class") // Костыль
             processor.tp += VirtualType.VOID
             processor.tp += VirtualType.BOOLEAN
             processor.tp += VirtualType.BYTE

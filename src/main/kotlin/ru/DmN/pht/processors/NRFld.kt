@@ -12,18 +12,18 @@ import ru.DmN.pht.utils.node.nodeDefn
 import ru.DmN.pht.utils.node.nodeGetOrName
 import ru.DmN.pht.utils.node.nodeGetVariable
 import ru.DmN.pht.utils.node.nodeValueClass
+import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.FieldModifiers
 import ru.DmN.siberia.utils.vtype.VirtualField.VirtualFieldImpl
-import ru.DmN.siberia.utils.vtype.VirtualType.VirtualTypeImpl
 
 object NRFld : INodeProcessor<NodeFieldA> {
     override fun process(node: NodeFieldA, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? {
         val gctx = ctx.global
-        val clazz = ctx.clazz as VirtualTypeImpl
+        val clazz = ctx.clazz as PhtVirtualType.Impl
         val body = ArrayList<Node>()
         val fields = ArrayList<VirtualFieldImpl>()
         val info = node.info

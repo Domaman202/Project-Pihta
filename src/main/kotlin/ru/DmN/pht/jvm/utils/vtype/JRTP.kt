@@ -1,9 +1,11 @@
-package ru.DmN.pht.jvm.utils
+package ru.DmN.pht.jvm.utils.vtype
 
 import ru.DmN.siberia.utils.Klass
 import ru.DmN.siberia.utils.klassOf
-import ru.DmN.siberia.utils.vtype.*
-import ru.DmN.siberia.utils.vtype.VirtualType.VirtualTypeImpl
+import ru.DmN.siberia.utils.vtype.TypesProvider
+import ru.DmN.siberia.utils.vtype.VirtualField
+import ru.DmN.siberia.utils.vtype.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualType
 import java.lang.reflect.Modifier
 import java.util.*
 
@@ -13,10 +15,6 @@ import java.util.*
  * Предоставляет типы путём получения классов из ClassLoader-а.
  */
 class JRTP : TypesProvider() {
-    init {
-        this += VTDynamic
-    }
-
     override fun typeOf(name: String): VirtualType =
         types[name.hashCode()] ?: addType(klassOf(name))
 
@@ -32,14 +30,14 @@ class JRTP : TypesProvider() {
         Arrays.stream(klass.interfaces).map { typeOf(it.name) }.forEach(parents::add)
         val fields = ArrayList<VirtualField>()
         val methods = ArrayList<VirtualMethod>()
-        return VirtualTypeImpl(
+        return JavaVirtualTypeImpl(
             klass.name,
             parents,
             fields,
             methods,
-            componentType = klass.componentType?.let(::typeOf),
-            isInterface = klass.isInterface,
-            isFinal = Modifier.isFinal(klass.modifiers) || klass.isEnum
+            klass.componentType?.let(::typeOf),
+            klass.isInterface,
+            Modifier.isFinal(klass.modifiers) || klass.isEnum
         ).apply {
             this@JRTP += this
             fields += klass.declaredFields.map { VirtualField.of(::typeOf, it) }

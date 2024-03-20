@@ -13,11 +13,11 @@ import ru.DmN.pht.utils.node.NodeTypes.MCALL_
 import ru.DmN.pht.utils.node.nodeAs
 import ru.DmN.pht.utils.node.nodeValue
 import ru.DmN.pht.utils.node.nodeValueClass
+import ru.DmN.pht.utils.vtype.VTDynamic
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.vtype.VTDynamic
 import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRFSetB : INodeProcessor<NodeFieldSet> {

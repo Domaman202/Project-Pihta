@@ -6,11 +6,14 @@ import ru.DmN.pht.ast.NodeInlBodyA
 import ru.DmN.pht.ast.NodeInlBodyB
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.ast.NodeMCall.Type.*
+import ru.DmN.pht.jvm.utils.vtype.desc
+import ru.DmN.pht.jvm.utils.vtype.superclass
 import ru.DmN.pht.processor.ctx.*
 import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.node.*
-import ru.DmN.pht.utils.vtype.VTWG
+import ru.DmN.pht.utils.vtype.VTDynamic
+import ru.DmN.pht.utils.vtype.VTWithGenerics
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
@@ -18,7 +21,6 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.FINALIZATION
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.node.INodeInfo
-import ru.DmN.siberia.utils.vtype.VTDynamic
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
 
@@ -39,7 +41,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
     fun calc(result: MethodFindResultA, instance: Node, processor: Processor, ctx: ProcessingContext): VirtualType {
         result.method.retgen ?: return result.method.rettype.let { rt ->
             processor.calc(getInstance(result, instance, processor, ctx), ctx).let { it ->
-                if (rt is VTWG && it is VTWG)
+                if (rt is VTWithGenerics && it is VTWithGenerics)
                     rt.with(it.gens.filter { it.value.isFirst }.map { Pair(it.key, it.value.first()) }.toMap())
                 else rt
             }
@@ -47,7 +49,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         return result.generics
             ?: getGensFromArgs(result, processor, ctx)[result.method.retgen]
             ?: processor.calc(getInstance(result, instance, processor, ctx), ctx).let {
-                if (it is VTWG) {
+                if (it is VTWithGenerics) {
                     val gen = it.gens[result.method.retgen]!!
                     if (gen.isFirst)
                         gen.first()

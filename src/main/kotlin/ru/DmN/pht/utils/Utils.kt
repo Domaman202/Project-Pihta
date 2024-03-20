@@ -1,13 +1,15 @@
 package ru.DmN.pht.utils
 
 import ru.DmN.pht.ast.IValueNode
+import ru.DmN.pht.jvm.utils.vtype.generics
+import ru.DmN.pht.jvm.utils.vtype.superclass
 import ru.DmN.pht.processor.utils.ICastable
 import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.pht.processors.IStdNodeProcessor
-import ru.DmN.pht.utils.vtype.VTWG
-import ru.DmN.siberia.processor.Processor
+import ru.DmN.pht.utils.vtype.VTWithGenerics
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.klassOf
 import ru.DmN.siberia.utils.vtype.VirtualMethod
@@ -63,16 +65,16 @@ val VirtualType.nameWithGenerics: String
 
 val VirtualType.nameWithGens: String
     get() =
-        if (this is VTWG)
+        if (this is VTWithGenerics)
             this.nameWithGens
         else if (this.isArray)
             "(array-type ${this.componentType!!.nameWithGens})"
         else "^${this.name}"
 
-val VTWG.nameWithGens: String
+val VTWithGenerics.nameWithGens: String
     get() {
         if (isArray)
-            return "(array-type ${if (componentType is VTWG) (componentType!! as VTWG).nameWithGens else componentType!!.nameWithGenerics})"
+            return "(array-type ${if (componentType is VTWithGenerics) (componentType!! as VTWithGenerics).nameWithGens else componentType!!.nameWithGenerics})"
         if (generics.isEmpty())
             return "^$name"
         val sb = StringBuilder()

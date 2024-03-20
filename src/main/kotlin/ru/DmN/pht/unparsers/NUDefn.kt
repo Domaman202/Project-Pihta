@@ -1,6 +1,7 @@
 package ru.DmN.pht.unparsers
 
 import ru.DmN.pht.ast.NodeDefn
+import ru.DmN.pht.jvm.utils.vtype.generics
 import ru.DmN.pht.utils.nameWithGenerics
 import ru.DmN.pht.utils.nameWithGens
 import ru.DmN.siberia.unparser.Unparser

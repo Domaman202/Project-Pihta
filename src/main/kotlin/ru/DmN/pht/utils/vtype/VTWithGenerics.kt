@@ -1,12 +1,13 @@
 package ru.DmN.pht.utils.vtype
 
+import ru.DmN.pht.jvm.utils.vtype.generics
 import ru.DmN.pht.utils.OrPair
 import ru.DmN.siberia.utils.vtype.VirtualField
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
 
 // Virtual Type With Generics
-class VTWG(val type: VirtualType, val gens: Map<String, OrPair<VirtualType, String>>) : VirtualType() {
+class VTWithGenerics(val type: VirtualType, val gens: Map<String, OrPair<VirtualType, String>>) : PhtVirtualType() {
     override val componentType: VirtualType?
         get() = type.componentType
     override val fields: List<VirtualField>
@@ -28,8 +29,8 @@ class VTWG(val type: VirtualType, val gens: Map<String, OrPair<VirtualType, Stri
     override val parents: List<VirtualType>
         get() = type.parents
 
-    fun with(generics: Map<String, VirtualType>): VTWG =
-        VTWG(type, gens.map { (k, v) -> Pair(k, OrPair.first<VirtualType, String>(if (!v.isFirst) generics[v.second()]!! else v as VirtualType)) }.toMap())
+    fun with(generics: Map<String, VirtualType>): VTWithGenerics =
+        VTWithGenerics(type, gens.map { (k, v) -> Pair(k, OrPair.first<VirtualType, String>(if (!v.isFirst) generics[v.second()]!! else v as VirtualType)) }.toMap())
 
     override fun toString(): String {
             if (generics.isEmpty())

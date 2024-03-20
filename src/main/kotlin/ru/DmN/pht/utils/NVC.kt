@@ -3,6 +3,8 @@ package ru.DmN.pht.utils
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.compiler.java.utils.load
+import ru.DmN.pht.jvm.utils.vtype.desc
+import ru.DmN.pht.jvm.utils.vtype.jvmName
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.vtype.VirtualField
 import ru.DmN.siberia.utils.vtype.VirtualType
@@ -39,7 +41,7 @@ abstract class NVC {
             get() = this.field.type
 
         override fun load(node: MethodNode, i: Int) {
-            node.visitFieldInsn(if (field.modifiers.isStatic) Opcodes.GETSTATIC else Opcodes.GETFIELD, field.declaringClass.className, field.name, field.desc)
+            node.visitFieldInsn(if (field.modifiers.isStatic) Opcodes.GETSTATIC else Opcodes.GETFIELD, field.declaringClass.jvmName, field.name, field.desc)
         }
     }
 }

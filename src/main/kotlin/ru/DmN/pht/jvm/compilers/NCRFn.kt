@@ -7,6 +7,8 @@ import org.objectweb.asm.Type
 import ru.DmN.pht.ast.NodeRFn
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.utils.vtype.desc
+import ru.DmN.pht.jvm.utils.vtype.jvmName
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
@@ -16,11 +18,11 @@ object NCRFn : INodeCompiler<NodeRFn> {
     override fun compileVal(node: NodeRFn, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.apply {
             node.method!!.run {
-                val declName = declaringClass.className
+                val declName = declaringClass.jvmName
                 if (modifiers.static) {
                     visitInvokeDynamicInsn(
                         node.lambda!!.name,
-                        "()L${node.type!!.className};",
+                        "()L${node.type!!.jvmName};",
                         Handle(
                             H_INVOKESTATIC,
                             "java/lang/invoke/LambdaMetafactory",
@@ -42,7 +44,7 @@ object NCRFn : INodeCompiler<NodeRFn> {
                     load(compiler.compileVal(node.instance!!, ctx), this@apply)
                     visitInvokeDynamicInsn(
                         node.lambda!!.name,
-                        "(L${declName};)L${node.type!!.className};",
+                        "(L${declName};)L${node.type!!.jvmName};",
                         Handle(
                             H_INVOKESTATIC,
                             "java/lang/invoke/LambdaMetafactory",

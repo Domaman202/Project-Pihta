@@ -5,6 +5,7 @@ import org.objectweb.asm.tree.FieldNode
 import ru.DmN.pht.ast.NodeFieldB
 import ru.DmN.pht.jvm.compiler.ctx.clazz
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
+import ru.DmN.pht.jvm.utils.vtype.desc
 import ru.DmN.pht.utils.normalizeName
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext

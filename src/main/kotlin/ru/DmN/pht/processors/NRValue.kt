@@ -4,7 +4,8 @@ import ru.DmN.pht.ast.NodeValue
 import ru.DmN.pht.ast.NodeValue.Type.*
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.utils.OrPair
-import ru.DmN.pht.utils.vtype.VTWG
+import ru.DmN.pht.utils.vtype.PhtVirtualType
+import ru.DmN.pht.utils.vtype.VTWithGenerics
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -48,7 +49,7 @@ object NRValue : IStdNodeProcessor<NodeValue> {
         if (gs == -1)
             return ctx.global.getType(value, processor.tp)
         val gctx = ctx.global
-        val type = gctx.getType(value.substring(0, gs), processor.tp)
+        val type = gctx.getType(value.substring(0, gs), processor.tp) as PhtVirtualType
         val iter = type.generics.keys.iterator()
         val generics = HashMap<String, OrPair<VirtualType, String>>()
         var s = value.substring(gs)
@@ -62,7 +63,7 @@ object NRValue : IStdNodeProcessor<NodeValue> {
                 break
             s = s.substring(i + 1)
         }
-        return VTWG(type, generics)
+        return VTWithGenerics(type, generics)
     }
 
     override fun computeTypeWithGens(gens: Map<String, VirtualType>, node: NodeValue, processor: Processor, ctx: ProcessingContext): VirtualType {
@@ -70,7 +71,7 @@ object NRValue : IStdNodeProcessor<NodeValue> {
         if (gs == -1)
             return ctx.global.getType(node.value, processor.tp)
         val gctx = ctx.global
-        val type = gctx.getType(node.value.substring(0, gs), processor.tp)
+        val type = gctx.getType(node.value.substring(0, gs), processor.tp) as PhtVirtualType
         val iter = type.generics.keys.iterator()
         val generics = HashMap<String, OrPair<VirtualType, String>>()
         var s = node.value.substring(gs)
@@ -85,7 +86,7 @@ object NRValue : IStdNodeProcessor<NodeValue> {
                 break
             s = s.substring(i + 1)
         }
-        return VTWG(type, generics)
+        return VTWithGenerics(type, generics)
     }
 
     override fun computeGenericType(node: NodeValue, processor: Processor, ctx: ProcessingContext): String? =

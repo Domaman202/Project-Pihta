@@ -6,6 +6,8 @@ import ru.DmN.pht.ast.NodeGet.Type.*
 import ru.DmN.pht.jvm.compiler.ctx.body
 import ru.DmN.pht.jvm.compiler.ctx.clazz
 import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.utils.vtype.desc
+import ru.DmN.pht.jvm.utils.vtype.jvmName
 import ru.DmN.pht.processor.ctx.classes
 import ru.DmN.pht.utils.normalizeName
 import ru.DmN.siberia.compiler.Compiler
@@ -23,7 +25,7 @@ object NCGetA : INodeCompiler<NodeGet> {
                 val field = ctx.clazz.clazz.fields.find { it.name == name }!!
                 visitFieldInsn(
                     Opcodes.GETFIELD,
-                    field.declaringClass.className,
+                    field.declaringClass.jvmName,
                     name,
                     field.desc
                 )
@@ -34,7 +36,7 @@ object NCGetA : INodeCompiler<NodeGet> {
                 val field = ctx.clazz.clazz.fields.find { it.name == name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == name } }.first()!!
                 visitFieldInsn(
                     Opcodes.GETSTATIC,
-                    field.declaringClass.className,
+                    field.declaringClass.jvmName,
                     name,
                     field.desc
                 )

@@ -1,14 +1,16 @@
 package ru.DmN.pht.ast
 
+import ru.DmN.pht.jvm.utils.vtype.desc
+import ru.DmN.pht.jvm.utils.vtype.signature
 import ru.DmN.pht.utils.meta.MetadataKeys.*
+import ru.DmN.pht.utils.vtype.PhtVirtualMethod
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.utils.indent
 import ru.DmN.siberia.utils.meta.IMetadataKey
 import ru.DmN.siberia.utils.node.INodeInfo
-import ru.DmN.siberia.utils.vtype.VirtualMethod
 
-class NodeDefn(info: INodeInfo, nodes: MutableList<Node>, val method: VirtualMethod) : NodeNodesList(info, nodes),
+class NodeDefn(info: INodeInfo, nodes: MutableList<Node>, val method: PhtVirtualMethod.Impl) : NodeNodesList(info, nodes),
     IAbstractlyNode, IFileNode, IInlinableNode, IOpenlyNode, IStaticallyNode, ISyncNode, IVarargNode {
     override var abstract: Boolean
         set(value) { method.modifiers.abstract = value }
