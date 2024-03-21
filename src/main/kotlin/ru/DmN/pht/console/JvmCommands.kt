@@ -74,6 +74,6 @@ object JvmCommands {
         console.isModule && console.platform == JVM
 
     @JvmStatic
-    fun getAppClass() =
+    fun getAppClass(): Class<*> =
         Class.forName("App", true, URLClassLoader(arrayOf(File("dump").toURI().toURL())))
 }

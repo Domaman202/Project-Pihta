@@ -31,7 +31,7 @@
 |	|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	(name = pht$tmp$16871)
-|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.Object;)
+|	|	|	|	|	|	|	|	|	|	(type = [java.lang.Object)
 |	|	|	|	|	|	|	|	|	|	[NEW_ARRAY_
 |	|	|	|	|	|	|	|	|	|	|	(type = java.lang.Object)
 |	|	|	|	|	|	|	|	|	|	|	(size:
@@ -127,7 +127,7 @@
 |	|	|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$16875)
-|	|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.Object;)
+|	|	|	|	|	|	|	|	|	|	|	(type = [java.lang.Object)
 |	|	|	|	|	|	|	|	|	|	|	[NEW_ARRAY_
 |	|	|	|	|	|	|	|	|	|	|	|	(type = java.lang.Object)
 |	|	|	|	|	|	|	|	|	|	|	|	(size:

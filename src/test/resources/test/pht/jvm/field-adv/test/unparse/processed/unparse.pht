@@ -34,7 +34,7 @@
 						add
 						(body
 							(def [
-								[(array-type ^java.lang.Object) pht$tmp$13409 (new-array ^java.lang.Object 3)]])
+								[^[java.lang.Object pht$tmp$13409 (new-array ^java.lang.Object 3)]])
 							(aset
 								(get pht$tmp$13409)
 								0
@@ -54,7 +54,7 @@
 						add
 						(body
 							(def [
-								[(array-type ^java.lang.Object) pht$tmp$13411 (new-array ^java.lang.Object 4)]])
+								[^[java.lang.Object pht$tmp$13411 (new-array ^java.lang.Object 4)]])
 							(aset
 								(get pht$tmp$13411)
 								0

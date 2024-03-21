@@ -1,3 +1,2 @@
-(test-fn 0
-    (def [[o (new ^Object)]])
-    (println o))
+(app-fn
+    (println ^[String))

@@ -1,5 +1,6 @@
 package ru.DmN.pht.processor.utils
 
+import ru.DmN.pht.utils.vtype.isArray
 import ru.DmN.siberia.utils.vtype.VirtualType
 
 object CastableDynamicImpl : ICastable {

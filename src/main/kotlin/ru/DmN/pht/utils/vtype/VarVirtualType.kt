@@ -1,33 +1,28 @@
 package ru.DmN.pht.utils.vtype
 
-import ru.DmN.pht.jvm.utils.vtype.IJvmVirtualType
 import ru.DmN.siberia.utils.vtype.VirtualField
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object VTDynamic : PhtVirtualType(), IJvmVirtualType {
+open class VarVirtualType(val type: PhtVirtualType) : PhtVirtualType() {
     override val name: String
-        get() = "dynamic"
-    override val VirtualType.jvmName: String
-        get() = "java/lang/Object"
+        get() = type.name
     override val parents: List<VirtualType>
-        get() = emptyList()
+        get() = type.parents
     override val fields: List<VirtualField>
-        get() = emptyList()
+        get() = type.fields
     override val methods: List<VirtualMethod>
-        get() = emptyList()
+        get() = type.methods
     override val componentType: VirtualType?
-        get() = null
+        get() = type.componentType
     override val isInterface: Boolean
-        get() = false
+        get() = type.isInterface
     override val isAbstract: Boolean
-        get() = false
+        get() = type.isAbstract
     override val isFinal: Boolean
-        get() = false
+        get() = type.isFinal
     override val isFile: Boolean
-        get() = false
+        get() = type.isFile
     override val generics: Map<String, VirtualType>
-        get() = emptyMap()
-    override val isPrimitive: Boolean
-        get() = false
+        get() = type.generics
 }

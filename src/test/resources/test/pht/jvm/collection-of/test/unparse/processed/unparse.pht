@@ -6,7 +6,7 @@
 					(as ^dynamic
 						(body
 							(def [
-								[(array-type ^int) pht$tmp$38433 (new-array ^int 3)]])
+								[^[int pht$tmp$38433 (new-array ^int 3)]])
 							(aset
 								(get pht$tmp$38433)
 								0
@@ -26,7 +26,7 @@
 					(as ^dynamic
 						(body
 							(def [
-								[(array-type ^long) pht$tmp$29203 (new-array ^long 3)]])
+								[^[long pht$tmp$29203 (new-array ^long 3)]])
 							(aset
 								(get pht$tmp$29203)
 								0
@@ -48,10 +48,10 @@
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mcall
-							(as (array-type ^java.lang.Object)
+							(as ^[java.lang.Object
 								(body
 									(def [
-										[(array-type ^java.lang.Object) pht$tmp$29204 (new-array ^java.lang.Object 2)]])
+										[^[java.lang.Object pht$tmp$29204 (new-array ^java.lang.Object 2)]])
 									(aset
 										(get pht$tmp$29204)
 										0

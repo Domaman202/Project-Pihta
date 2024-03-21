@@ -33,7 +33,7 @@
 |	|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	(name = pht$tmp$6341)
-|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.String;)
+|	|	|	|	|	|	|	|	|	|	(type = [java.lang.String)
 |	|	|	|	|	|	|	|	|	|	[GET_
 |	|	|	|	|	|	|	|	|	|	|	(name = arr)
 |	|	|	|	|	|	|	|	|	|	|	(type = var)
@@ -151,7 +151,7 @@
 |	|	|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$43325)
-|	|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.String;)
+|	|	|	|	|	|	|	|	|	|	|	(type = [java.lang.String)
 |	|	|	|	|	|	|	|	|	|	|	[NEW_ARRAY_
 |	|	|	|	|	|	|	|	|	|	|	|	(type = java.lang.String)
 |	|	|	|	|	|	|	|	|	|	|	|	(size:

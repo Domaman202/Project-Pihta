@@ -7,7 +7,9 @@ import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.compiler.java.utils.objectToPrimitive
 import ru.DmN.pht.compiler.java.utils.primitiveToObject
 import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.utils.vtype.desc
 import ru.DmN.pht.jvm.utils.vtype.jvmName
+import ru.DmN.pht.utils.vtype.isArray
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
@@ -29,7 +31,7 @@ object NCAs : INodeCompiler<NodeIsAs> {
                     objectToPrimitive(value, this)
                 else {
                     load(value, this)
-                    visitTypeInsn(Opcodes.CHECKCAST, to.jvmName)
+                    visitTypeInsn(Opcodes.CHECKCAST, if (to.isArray) to.desc else to.jvmName)
                 }
             }
         }

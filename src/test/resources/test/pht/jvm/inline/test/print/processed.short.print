@@ -308,7 +308,7 @@
 |	|	|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$34983)
-|	|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.Object;)
+|	|	|	|	|	|	|	|	|	|	|	(type = [java.lang.Object)
 |	|	|	|	|	|	|	|	|	|	|	[NEW_ARRAY_
 |	|	|	|	|	|	|	|	|	|	|	|	(type = java.lang.Object)
 |	|	|	|	|	|	|	|	|	|	|	|	(size:

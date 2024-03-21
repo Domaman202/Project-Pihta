@@ -19,7 +19,7 @@
 |	|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	(name = pht$tmp$38433)
-|	|	|	|	|	|	|	|	|	|	(type = [I)
+|	|	|	|	|	|	|	|	|	|	(type = [int)
 |	|	|	|	|	|	|	|	|	|	[NEW_ARRAY_
 |	|	|	|	|	|	|	|	|	|	|	(type = int)
 |	|	|	|	|	|	|	|	|	|	|	(size:
@@ -99,7 +99,7 @@
 |	|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	(name = pht$tmp$29203)
-|	|	|	|	|	|	|	|	|	|	(type = [J)
+|	|	|	|	|	|	|	|	|	|	(type = [long)
 |	|	|	|	|	|	|	|	|	|	[NEW_ARRAY_
 |	|	|	|	|	|	|	|	|	|	|	(type = long)
 |	|	|	|	|	|	|	|	|	|	|	(size:
@@ -188,19 +188,19 @@
 |	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	(value = '[Ljava.lang.Object;')
+|	|	|	|	|	|	|	|	|	|	(value = '[java.lang.Object')
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	(generic = VT(java.util.List))
 |	|	|	|	|	|	|	|	(type = EXTEND)
 |	|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	|	(type = VT([Ljava.lang.Object;))
+|	|	|	|	|	|	|	|	|	(type = VT([java.lang.Object))
 |	|	|	|	|	|	|	|	|	[BODY_
 |	|	|	|	|	|	|	|	|	|	[DEF_
 |	|	|	|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$29204)
-|	|	|	|	|	|	|	|	|	|	|	|	(type = [Ljava.lang.Object;)
+|	|	|	|	|	|	|	|	|	|	|	|	(type = [java.lang.Object)
 |	|	|	|	|	|	|	|	|	|	|	|	[NEW_ARRAY_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = java.lang.Object)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(size:

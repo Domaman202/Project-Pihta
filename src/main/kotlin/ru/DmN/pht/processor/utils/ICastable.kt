@@ -24,7 +24,7 @@ interface ICastable {
             processor.get(node, ctx).let {
                 if (it is IAdaptableProcessor<*>)
                     CastableAdaptImpl(node, it as IAdaptableProcessor<Node>, processor, ctx)
-                else of(processor.tp.typeOf(processor.calc(node, ctx)!!.name))
+                else of(processor.calc(node, ctx)!!)
             }
     }
 }

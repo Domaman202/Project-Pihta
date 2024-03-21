@@ -13,7 +13,7 @@ import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.node.*
 import ru.DmN.pht.utils.vtype.VTDynamic
-import ru.DmN.pht.utils.vtype.VTWithGenerics
+import ru.DmN.pht.utils.vtype.VVTWithGenerics
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
@@ -41,7 +41,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
     fun calc(result: MethodFindResultA, instance: Node, processor: Processor, ctx: ProcessingContext): VirtualType {
         result.method.retgen ?: return result.method.rettype.let { rt ->
             processor.calc(getInstance(result, instance, processor, ctx), ctx).let { it ->
-                if (rt is VTWithGenerics && it is VTWithGenerics)
+                if (rt is VVTWithGenerics && it is VVTWithGenerics)
                     rt.with(it.gens.filter { it.value.isFirst }.map { Pair(it.key, it.value.first()) }.toMap())
                 else rt
             }
@@ -49,7 +49,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         return result.generics
             ?: getGensFromArgs(result, processor, ctx)[result.method.retgen]
             ?: processor.calc(getInstance(result, instance, processor, ctx), ctx).let {
-                if (it is VTWithGenerics) {
+                if (it is VVTWithGenerics) {
                     val gen = it.gens[result.method.retgen]!!
                     if (gen.isFirst)
                         gen.first()

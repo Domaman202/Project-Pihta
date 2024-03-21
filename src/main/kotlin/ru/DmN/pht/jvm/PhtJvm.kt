@@ -12,9 +12,9 @@ import ru.DmN.pht.jvm.processors.NRClassOf
 import ru.DmN.pht.jvm.processors.NRList
 import ru.DmN.pht.jvm.processors.NRSync
 import ru.DmN.pht.jvm.unparsers.NUAnnotation
+import ru.DmN.pht.jvm.unparsers.NUClassOf
+import ru.DmN.pht.jvm.unparsers.NUSync
 import ru.DmN.pht.processors.NRSA
-import ru.DmN.pht.unparsers.NUClassOf
-import ru.DmN.pht.unparsers.NUSync
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.addSANP
 import ru.DmN.pht.utils.addSNP
@@ -182,7 +182,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
                                 val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
                                 it.accept(writer)
                                 writer
-                            } catch (_: ArrayIndexOutOfBoundsException) {
+                            } catch (_: Exception) {
                                 println("Внимание: класс '${it.name}' скомпилирован без просчёта фреймов.")
                                 val writer = ClassWriter(ClassWriter.COMPUTE_MAXS)
                                 it.accept(writer)

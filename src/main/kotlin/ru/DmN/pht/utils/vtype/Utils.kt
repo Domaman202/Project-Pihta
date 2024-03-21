@@ -1,10 +1,15 @@
 package ru.DmN.pht.utils.vtype
 
-import ru.DmN.pht.jvm.utils.vtype.desc
 import ru.DmN.siberia.utils.vtype.VirtualType
+
+/**
+ * Тип является массивом?
+ */
+inline val VirtualType.isArray: Boolean
+    get() = this is VVTArray
 
 /**
  * Тип массива из элементов данного типа.
  */
-val VirtualType.arrayType: VirtualType
-    get() = PhtVirtualType.Impl("[${this.desc.replace('/', '.')}", componentType = this)
+inline val VirtualType.arrayType: VVTArray
+    get() = VVTArray(this as PhtVirtualType)

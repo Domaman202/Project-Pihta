@@ -13,7 +13,7 @@ import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.vtype.VirtualType
 
 fun Compiler.computeValue(node: Node, ctx: CompilationContext): Any? =
-    this.get(ctx, node).let {
+    get(ctx, node).let {
         if (it is IStdNodeCompiler<*, *, *>)
             (it as IStdNodeCompiler<Node, *, *>).computeValue(node, this, ctx)
         else throw UnsupportedOperationException()

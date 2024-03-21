@@ -16,6 +16,6 @@ object NRClassOf : INodeProcessor<Node> {
 
     override fun process(node: Node, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
         if (valMode)
-            NodeClassOf(node.info.withType(CLASS_OF_), processor.computeType((node as NodeNodesList).nodes[0], ctx).name)
+            NodeClassOf(node.info.withType(CLASS_OF_), processor.computeType((node as NodeNodesList).nodes[0], ctx))
         else null
 }

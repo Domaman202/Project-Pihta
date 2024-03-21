@@ -4,6 +4,7 @@ import ru.DmN.pht.compiler.java.utils.MacroDefine
 import ru.DmN.pht.processor.utils.ICastable
 import ru.DmN.pht.processor.utils.getMethodVariants
 import ru.DmN.pht.utils.vtype.arrayType
+import ru.DmN.pht.utils.vtype.isArray
 import ru.DmN.siberia.utils.SubList
 import ru.DmN.siberia.utils.SubMap
 import ru.DmN.siberia.utils.vtype.TypesProvider
@@ -64,8 +65,13 @@ class GlobalContext(
         name.let { if (name.contains('.')) name else aliases[name] }
 
     fun getType(name: String, tp: TypesProvider): VirtualType {
-        if (name.contains('.'))
-            return tp.typeOf(name)
+        if (name.contains('.')) {
+            try {
+                return tp.typeOf(name)
+            } catch (e: ClassNotFoundException) {
+                throw e
+            }
+        }
         tp.typeOfOrNull(name)?.let { return it }
         aliases[name]?.let { return tp.typeOf(it) }
         for (i in imports.indices)

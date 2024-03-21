@@ -3,8 +3,8 @@
 		(@static
 			(defn [] test ^dynamic []
 				(def [
-					[(array-type ^int) arr-a (new-array ^int 10)]
-					[(array-type ^int) arr-b (new-array ^int 10)]])
+					[^[int arr-a (new-array ^int 10)]
+					[^[int arr-b (new-array ^int 10)]])
 				(body
 					(def [
 						[^int i 0]])

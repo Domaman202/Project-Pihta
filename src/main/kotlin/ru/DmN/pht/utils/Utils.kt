@@ -6,7 +6,7 @@ import ru.DmN.pht.jvm.utils.vtype.superclass
 import ru.DmN.pht.processor.utils.ICastable
 import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.pht.processors.IStdNodeProcessor
-import ru.DmN.pht.utils.vtype.VTWithGenerics
+import ru.DmN.pht.utils.vtype.VVTWithGenerics
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.Processor
@@ -25,10 +25,10 @@ fun String.normalizeName(): String =
     if (this.contains('-')) {
         val sb = StringBuilder()
         var i = 0
-        while (i < this.length) {
+        while (i < length) {
             sb.append(
                 when (val c = this[i]) {
-                    '-' -> if (i == this.lastIndex) '_' else this[++i].uppercase()
+                    '-' -> if (i == lastIndex) '_' else this[++i].uppercase()
                     else -> c
                 }
             )
@@ -49,8 +49,6 @@ fun <T> sequenceOf(nullable: Collection<T>?, iterable: Iterable<T>): Sequence<T>
 
 val VirtualType.nameWithGenerics: String
     get() {
-        if (isArray)
-            return "(array-type ${componentType!!.nameWithGenerics})"
         if (generics.isEmpty())
             return "^$name"
         val sb = StringBuilder()
@@ -65,16 +63,12 @@ val VirtualType.nameWithGenerics: String
 
 val VirtualType.nameWithGens: String
     get() =
-        if (this is VTWithGenerics)
-            this.nameWithGens
-        else if (this.isArray)
-            "(array-type ${this.componentType!!.nameWithGens})"
-        else "^${this.name}"
+        if (this is VVTWithGenerics)
+            nameWithGens
+        else "^$name"
 
-val VTWithGenerics.nameWithGens: String
+val VVTWithGenerics.nameWithGens: String
     get() {
-        if (isArray)
-            return "(array-type ${if (componentType is VTWithGenerics) (componentType!! as VTWithGenerics).nameWithGens else componentType!!.nameWithGenerics})"
         if (generics.isEmpty())
             return "^$name"
         val sb = StringBuilder()
@@ -90,7 +84,7 @@ val VTWithGenerics.nameWithGens: String
     }
 
 inline fun <T, R> List<T>.mapIndexedMutable(transform: (Int, T) -> R): MutableList<R> {
-    val list = ArrayList<R>(this.size)
+    val list = ArrayList<R>(size)
     var i = 0
     for (it in this)
         list.add(transform(i++, it))
@@ -98,20 +92,20 @@ inline fun <T, R> List<T>.mapIndexedMutable(transform: (Int, T) -> R): MutableLi
 }
 
 inline fun <T, R> List<T>.mapMutable(transform: (T) -> R): MutableList<R> {
-    val list = ArrayList<R>(this.size)
+    val list = ArrayList<R>(size)
     for (it in this)
         list.add(transform(it))
     return list
 }
 
 val Node.text
-    get() = this.type.operation
+    get() = type.operation
 val Node.type
-    get() = this.info.type
+    get() = info.type
 val Node.isLiteral
-    get() = if (this is IValueNode) this.isLiteral() else false
+    get() = if (this is IValueNode) isLiteral() else false
 val Node.isConstClass
-    get() = if (this is IValueNode) this.isConstClass() else false
+    get() = if (this is IValueNode) isConstClass() else false
 val Node.valueAsString
     get() = (this as IValueNode).getValueAsString()
 
@@ -150,78 +144,78 @@ fun Processor.computeStringNodes(node: INodesList, ctx: ProcessingContext): List
     node.nodes.map { computeString(it, ctx) }
 
 fun Processor.compute(node: Node, ctx: ProcessingContext): Node =
-    this.get(node, ctx).let {
+    get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.compute(node, this, ctx)
         else node
     }
 
 fun Processor.computeList(node: Node, ctx: ProcessingContext): List<Node> =
-    this.computeListOr(node, ctx)!!
+    computeListOr(node, ctx)!!
 
 fun Processor.computeListOr(node: Node, ctx: ProcessingContext): List<Node>? =
-    this.get(node, ctx).let {
+    get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeList(node, this, ctx)
         else null
     }
 
 fun Processor.computeType(node: Node, ctx: ProcessingContext): VirtualType =
-    this.computeTypeOr(node, ctx)!!
+    computeTypeOr(node, ctx)!!
 
 fun Processor.computeTypeOr(node: Node, ctx: ProcessingContext): VirtualType? =
-    this.get(node, ctx).let {
+    get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeType(node, this, ctx)
         else throw UnsupportedOperationException()
     }
 
 fun Processor.computeTypeWithGens(gens: Map<String, VirtualType>, node: Node, ctx: ProcessingContext): VirtualType =
-    this.computeTypeWithGensOr(gens, node, ctx)!!
+    computeTypeWithGensOr(gens, node, ctx)!!
 
 fun Processor.computeTypeWithGensOr(gens: Map<String, VirtualType>, node: Node, ctx: ProcessingContext): VirtualType? =
-    this.get(node, ctx).let {
+    get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeTypeWithGens(gens, node, this, ctx)
         else throw UnsupportedOperationException()
     }
 
 fun Processor.computeTypesOr(node: Node, ctx: ProcessingContext): List<VirtualType>? =
-    this.get(node, ctx).let {
+    get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeTypes(node, this, ctx)
         else null
     }
 
 fun Processor.computeGenericType(node: Node, ctx: ProcessingContext): String? =
-    this.get(node, ctx).let {
+    get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeGenericType(node, this, ctx)
         else throw UnsupportedOperationException()
     }
 
 fun Processor.computeString(node: Node, ctx: ProcessingContext): String =
-    this.computeStringOr(node, ctx)!!
+    computeStringOr(node, ctx)!!
 
 fun Processor.computeStringOr(node: Node, ctx: ProcessingContext): String? =
-    this.get(node, ctx).let {
+    get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeString(node, this, ctx)
         else throw UnsupportedOperationException()
     }
 
 fun Processor.computeInt(node: Node, ctx: ProcessingContext): Int =
-    this.computeIntOr(node, ctx)!!
+    computeIntOr(node, ctx)!!
 
 fun Processor.computeIntOr(node: Node, ctx: ProcessingContext): Int? =
-    this.get(node, ctx).let {
+    get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeInt(node, this, ctx)
         else throw UnsupportedOperationException()
     }
 
 fun Processor.adaptToType(type: VirtualType, node: Node, ctx: ProcessingContext): Node =
-    this.get(node, ctx).let {
+    get(node, ctx).let {
         if (it is IAdaptableProcessor<*>)
             (it as IAdaptableProcessor<Node>).adaptToType(type, node, this, ctx)
         else node

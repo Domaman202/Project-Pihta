@@ -6,6 +6,7 @@ import org.objectweb.asm.MethodVisitor
 import ru.DmN.pht.compiler.java.utils.computeValue
 import ru.DmN.pht.jvm.ast.NodeAnnotation
 import ru.DmN.pht.jvm.utils.vtype.desc
+import ru.DmN.pht.utils.vtype.isArray
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext

@@ -2,14 +2,14 @@
 	(progn
 		(cls [] StringExtends [^java.lang.Object]
 			(@varargs
-				(efn [] ^java.lang.String sub ^java.lang.String [[arr (array-type ^java.lang.String)]]
+				(efn [] ^java.lang.String sub ^java.lang.String [[arr ^[java.lang.String]]
 					(progn
 						(def [
 							[^java.lang.StringBuilder str (new ^java.lang.StringBuilder
 									(get this))]])
 						(body
 							(def [
-								[(array-type ^java.lang.String) pht$tmp$6341 (get arr)]])
+								[^[java.lang.String pht$tmp$6341 (get arr)]])
 							(def [
 								[^int pht$tmp$12682 0]])
 							(cycle
@@ -38,7 +38,7 @@
 							sub
 							(body
 								(def [
-									[(array-type ^java.lang.String) pht$tmp$43325 (new-array ^java.lang.String 1)]])
+									[^[java.lang.String pht$tmp$43325 (new-array ^java.lang.String 1)]])
 								(aset
 									(get pht$tmp$43325)
 									0
