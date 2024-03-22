@@ -3,6 +3,8 @@ package ru.DmN.pht.cpp.compilers
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.ast.NodeMCall.Type.*
 import ru.DmN.pht.cpp.compiler.utils.load
+import ru.DmN.pht.cpp.utils.vtype.isAutoPointer
+import ru.DmN.pht.cpp.utils.vtype.isPointer
 import ru.DmN.pht.cpp.utils.vtype.normalizedName
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.Compiler
@@ -18,8 +20,8 @@ object NCMCall : ICppCompiler<NodeMCall> {
                 EXTEND  -> TODO()
                 STATIC  -> append(declaringClass.normalizedName()).append("::")
                 VIRTUAL -> {
-                    compiler.compileVal(node.instance, ctx).load(this@compileVal)
-                    append("->")
+                    val type = compiler.compileVal(node.instance, ctx).apply { load(this@compileVal) }.type
+                    append(if (type != null && (type.isPointer || type.isAutoPointer)) "->" else ".")
                 }
                 SUPER -> TODO()
             }
