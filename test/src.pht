@@ -1,3 +1,2 @@
 (app-fn
-    (println (#toString (new ^Object)))
-    (println (#toString (new ^$Object))))
+    (println (unparse (typeof (new ^$Object)))))

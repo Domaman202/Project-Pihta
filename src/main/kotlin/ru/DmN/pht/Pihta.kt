@@ -154,6 +154,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(TYPEOF)
         // u
         addNP("unit",   NPUnit)
+        addSNP(UNPARSE)
         addSNP(UNREALIZED)
         // v
         addSNP(VALN)
@@ -406,6 +407,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(TYPEOF)
         // u
         add(UNIT,           NUUnit)
+        addSNU(UNPARSE)
         addSNU(UNREALIZED)
         // v
         add(VALN,           NUValn)
@@ -606,6 +608,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(TYPEOF,        NRTypeof)
         // u
         add(UNIT,          NRUnit)
+        add(UNPARSE,       NRUnparse)
         add(UNREALIZED,    NRUnrealized)
         // v
         add(VALN,          NRValn)

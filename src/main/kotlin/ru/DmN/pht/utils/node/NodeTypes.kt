@@ -138,6 +138,7 @@ enum class NodeTypes : INodeType {
     TYPEOF("typeof", PARSED),
     // u
     UNIT("unit", PROCESSED),
+    UNPARSE("unparse", PARSED),
     UNREALIZED("unrealized", PARSED),
     // v
     VALN_("valn", PROCESSED),
