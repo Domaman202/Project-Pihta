@@ -4,6 +4,8 @@ package ru.DmN.pht.processor.ctx
 import ru.DmN.pht.compiler.java.utils.MacroDefine
 import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.pht.utils.ctx.ContextKeys
+import ru.DmN.siberia.processor.Processor
+import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.ctx.IContextCollection
 import ru.DmN.siberia.utils.ctx.IContextKey
 import ru.DmN.siberia.utils.vtype.VirtualMethod
@@ -69,6 +71,9 @@ inline var IContextCollection<*>.bodyOrNull
     get() = contexts[ContextKeys.BODY] as BodyContext?
 inline val IContextCollection<*>.macro
     get() = contexts[ContextKeys.MACRO] as MacroContext
+var IContextCollection<*>.getType
+    set(value) { contexts[ContextKeys.GET_TYPE] = value }
+    inline get() = contexts[ContextKeys.GET_TYPE] as (name: String, processor: Processor, ctx: ProcessingContext) -> VirtualType
 
 inline var MutableMap<IContextKey, Any?>.macros
     set(value) { this[ContextKeys.MACROS] = value }

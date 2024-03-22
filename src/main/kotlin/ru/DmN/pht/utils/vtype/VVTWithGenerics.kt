@@ -3,7 +3,7 @@ package ru.DmN.pht.utils.vtype
 import ru.DmN.pht.utils.OrPair
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-// Virtual Type With Generics
+// Variable Virtual Type With Generics
 class VVTWithGenerics(type: PhtVirtualType, val gens: Map<String, OrPair<VirtualType, String>>) : VarVirtualType(type) {
     fun with(generics: Map<String, VirtualType>): VVTWithGenerics =
         VVTWithGenerics(type, gens.map { (k, v) -> Pair(k, OrPair.first<VirtualType, String>(if (!v.isFirst) generics[v.second()]!! else v.first!!)) }.toMap())

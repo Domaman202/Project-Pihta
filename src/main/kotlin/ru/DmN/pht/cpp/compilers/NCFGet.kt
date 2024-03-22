@@ -2,7 +2,7 @@ package ru.DmN.pht.cpp.compilers
 
 import ru.DmN.pht.ast.NodeFGet
 import ru.DmN.pht.cpp.compiler.utils.load
-import ru.DmN.pht.cpp.compiler.utils.name
+import ru.DmN.pht.cpp.utils.vtype.normalizedName
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.utils.Variable
@@ -15,7 +15,7 @@ object NCFGet : ICppNRCompiler<NodeFGet> {
         when (node.type) {
             NodeFGet.Type.UNKNOWN -> throw UnsupportedOperationException()
             NodeFGet.Type.STATIC -> {
-                append(node.vtype.name()).append("::").append(node.name)
+                append(node.vtype.normalizedName()).append("::").append(node.name)
                 if (node.name == "INSTANCE")
                     append("()")
                 static = true

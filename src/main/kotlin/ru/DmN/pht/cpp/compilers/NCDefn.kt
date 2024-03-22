@@ -2,7 +2,7 @@ package ru.DmN.pht.cpp.compilers
 
 import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.cpp.compiler.utils.load
-import ru.DmN.pht.cpp.compiler.utils.name
+import ru.DmN.pht.cpp.utils.vtype.normalizedName
 import ru.DmN.pht.processor.ctx.with
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.compiler.Compiler
@@ -21,7 +21,7 @@ object NCDefn : ICppNRCompiler<NodeDefn> {
                     append("static ")
                 if (modifiers.abstract || !modifiers.final)
                     append("virtual ")
-                append(rettype.name()).append(' ').append(name)
+                append(rettype.normalizedName()).append(' ').append(name)
                 insertArgs(this)
                 if (modifiers.abstract)
                     append(" = 0;\n")
@@ -62,7 +62,7 @@ object NCDefn : ICppNRCompiler<NodeDefn> {
         method.argsc.forEachIndexed { i, it ->
             if (i > 0)
                 append(", ")
-            append(it.name()).append(' ').append(method.argsn[i])
+            append(it.normalizedName()).append(' ').append(method.argsn[i])
         }
         append(')')
     }

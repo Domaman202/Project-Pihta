@@ -12,4 +12,4 @@ inline val VirtualType.isArray: Boolean
  * Тип массива из элементов данного типа.
  */
 inline val VirtualType.arrayType: VVTArray
-    get() = VVTArray(this as PhtVirtualType)
+    get() = VVTArray(PhtVirtualType.of(this))

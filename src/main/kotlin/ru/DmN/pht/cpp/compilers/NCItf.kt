@@ -2,7 +2,7 @@ package ru.DmN.pht.cpp.compilers
 
 import ru.DmN.pht.ast.NodeType
 import ru.DmN.pht.compiler.cpp.compilers.NCCls.compileTail
-import ru.DmN.pht.cpp.compiler.utils.name
+import ru.DmN.pht.cpp.utils.vtype.normalizedName
 import ru.DmN.pht.processor.ctx.with
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
@@ -16,7 +16,7 @@ object NCItf : ICppNRCompiler<NodeType> {
                 parents.forEachIndexed { i, it ->
                     if (i > 0)
                         append(", ")
-                    append(it.name())
+                    append(it.normalizedName())
                 }
             }
             append(" {\n")
@@ -27,7 +27,7 @@ object NCItf : ICppNRCompiler<NodeType> {
                 compiler.compile(it, context)
             }
             append("};\n\n")
-            compileTail(node, compiler, ctx)
+            compileTail(node)
         }
     }
 }

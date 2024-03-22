@@ -1,4 +1,4 @@
-package ru.DmN.pht.cpp.utils
+package ru.DmN.pht.cpp.utils.vtype
 
 import ru.DmN.siberia.utils.vtype.VirtualField
 import ru.DmN.siberia.utils.vtype.VirtualMethod

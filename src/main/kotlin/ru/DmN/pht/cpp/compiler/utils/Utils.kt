@@ -4,7 +4,6 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.vtype.VirtualType
 
 /**
  * Нормализация имени для c++:
@@ -30,20 +29,6 @@ fun String.normalizeName(): String =
         }
         sb.toString()
     } else this
-
-
-fun VirtualType.name() =
-    name.replace(".", "::")
-
-fun VirtualType.nameStaticType() =
-    if (isPrimitive)
-        name()
-    else "${name()}*"
-
-fun VirtualType.nameType() =
-    if (isPrimitive)
-        name()
-    else "dmn::pht::auto_ptr<${name()}>"
 
 fun Variable.load(builder: StringBuilder) {
     if (!tmp) {

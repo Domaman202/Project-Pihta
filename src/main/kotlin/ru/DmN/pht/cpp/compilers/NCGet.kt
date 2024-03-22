@@ -1,7 +1,7 @@
 package ru.DmN.pht.cpp.compilers
 
 import ru.DmN.pht.ast.NodeGet
-import ru.DmN.pht.cpp.compiler.utils.name
+import ru.DmN.pht.cpp.utils.vtype.normalizedName
 import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
@@ -16,7 +16,7 @@ object NCGet : ICppCompiler<NodeGet> {
                 Variable.tmp(node, node.vtype)
             }
             NodeGet.Type.THIS_STATIC_FIELD -> {
-                append(ctx.clazz.name()).append("::").append(node.name)
+                append(ctx.clazz.normalizedName()).append("::").append(node.name)
                 Variable.tmp(node, node.vtype)
             }
         }

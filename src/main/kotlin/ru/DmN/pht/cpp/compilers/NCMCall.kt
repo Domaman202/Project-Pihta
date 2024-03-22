@@ -3,7 +3,7 @@ package ru.DmN.pht.cpp.compilers
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.ast.NodeMCall.Type.*
 import ru.DmN.pht.cpp.compiler.utils.load
-import ru.DmN.pht.cpp.compiler.utils.name
+import ru.DmN.pht.cpp.utils.vtype.normalizedName
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
@@ -16,7 +16,7 @@ object NCMCall : ICppCompiler<NodeMCall> {
                 UNKNOWN,
                 DYNAMIC -> throw UnsupportedOperationException()
                 EXTEND  -> TODO()
-                STATIC  -> append(declaringClass.name()).append("::")
+                STATIC  -> append(declaringClass.normalizedName()).append("::")
                 VIRTUAL -> {
                     compiler.compileVal(node.instance, ctx).load(this@compileVal)
                     append("->")

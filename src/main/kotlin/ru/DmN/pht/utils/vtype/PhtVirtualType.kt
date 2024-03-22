@@ -26,4 +26,34 @@ abstract class PhtVirtualType : VirtualType() {
         //
         override var generics: MutableMap<String, VirtualType> = HashMap()
     ) : PhtVirtualType()
+
+    class Decorator(val type: VirtualType) : PhtVirtualType() {
+        override val name: String
+            get() = type.name
+        override val parents: List<VirtualType>
+            get() = type.parents
+        override val fields: List<VirtualField>
+            get() = type.fields
+        override val methods: List<VirtualMethod>
+            get() = type.methods
+        override val componentType: VirtualType?
+            get() = type.componentType
+        override val isInterface: Boolean
+            get() = type.isInterface
+        override val isAbstract: Boolean
+            get() = type.isAbstract
+        override val isFinal: Boolean
+            get() = type.isFinal
+        override val isFile: Boolean
+            get() = type.isFile
+        override val generics: Map<String, VirtualType>
+            get() = emptyMap()
+    }
+
+    companion object {
+        fun of(type: VirtualType) =
+            if (type is PhtVirtualType)
+                type
+            else Decorator(type)
+    }
 }

@@ -67,5 +67,12 @@ enum class ContextKeys : IContextKey {
      * (C++ Compiler)
      * Выхлоп компиляции.
      */
-    OUTPUT
+    OUTPUT,
+
+    /**
+     * (Processor)
+     *
+     * Функция получения типа из строки с учётом префиксов.
+     */
+    GET_TYPE
 }

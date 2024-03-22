@@ -123,9 +123,9 @@ namespace dmn::pht {
         /// Сборка мусора.
         void collect() {
             // dump
-            #ifdef PHT_GC_DUMP_PRE_COLLECT
+#ifdef PHT_GC_DUMP_PRE_COLLECT
             dump("PRE COLLECT");
-            #endif
+#endif
             //
             age++;
             // Первый цикл прохода (пометка)
@@ -143,9 +143,9 @@ namespace dmn::pht {
                 } else ++iter;
             }
             // dump
-            #ifdef PHT_GC_DUMP_POST_COLLECT
+#ifdef PHT_GC_DUMP_POST_COLLECT
             dump("POST COLLECT");
-            #endif
+#endif
         }
 
         /// dump
@@ -158,11 +158,7 @@ namespace dmn::pht {
 #endif
         }
     };
-}
 
-auto gc = dmn::pht::gc();
-
-namespace dmn::pht {
     template<typename T>
     class primitive : public object {
     protected:
@@ -210,6 +206,27 @@ namespace dmn::pht {
             return std::to_string(value);
         }
     };
+
+    class utils {
+    public:
+        static std::string toString(object obj) {
+            return obj.toString();
+        }
+
+        static std::string toString(object* obj) {
+            if (obj)
+                return obj->toString();
+            return "nullptr";
+        }
+
+        static std::string toString(auto_ptr<object> ptr) {
+            if (ptr.get())
+                return ptr->toString();
+            return "nullptr";
+        }
+    };
 }
+
+auto gc = dmn::pht::gc();
 
 #endif //__PHT_HPP__

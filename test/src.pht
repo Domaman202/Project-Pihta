@@ -1,2 +1,5 @@
 (app-fn
-    (println ^[String))
+    (def [[^Object o (new ^Object)]])
+    (println o)
+    (println nil)
+    (println 123))

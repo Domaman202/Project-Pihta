@@ -4,7 +4,9 @@ import ru.DmN.pht.compiler.cpp.compilers.NCCls
 import ru.DmN.pht.cpp.compiler.ctx.out
 import ru.DmN.pht.cpp.compiler.ctx.tests
 import ru.DmN.pht.cpp.compilers.*
-import ru.DmN.pht.cpp.utils.VTString
+import ru.DmN.pht.cpp.processors.NRValue
+import ru.DmN.pht.cpp.utils.vtype.VTString
+import ru.DmN.pht.processor.ctx.getType
 import ru.DmN.pht.utils.Platforms.CPP
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.pht.utils.vtype.PhtVirtualMethod
@@ -28,14 +30,14 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
     }
 
     private fun initProcessors() {
-
+        // v
+        add(VALUE, NRValue)
     }
 
     private fun initCompilers() {
         // a
         add(ADD_,         NCMath)
         add(AS_,          NCAs)
-        // b
         // c
         add(CCALL_,       NCCCall)
         add(CLS_,         NCCls)
@@ -83,8 +85,6 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
         add(SUB_,         NCMath)
         add(SHIFT_LEFT_,  NCMath)
         add(SHIFT_RIGHT_, NCMath)
-        // t
-        // u
         // v
         add(VALUE,        NCValue)
         // x
@@ -165,6 +165,8 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
             processor.tp += VirtualType.LONG
             processor.tp += VirtualType.FLOAT
             processor.tp += VirtualType.DOUBLE
+            //
+            ctx.getType = NRValue::getType
             //
             super.load(processor, ctx, uses)
         }
