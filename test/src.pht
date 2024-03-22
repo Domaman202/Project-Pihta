@@ -2,4 +2,5 @@
     (def [[^Object o (new ^Object)]])
     (println o)
     (println nil)
-    (println 123))
+    (println 123)
+    (println (new ^$Object)))
