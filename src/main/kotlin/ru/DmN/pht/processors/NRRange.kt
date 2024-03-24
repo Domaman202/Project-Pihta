@@ -14,7 +14,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRRange : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType("java.util.Iterator", processor.tp)
+        ctx.global.getType("java.util.Iterator")
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeNodesList? =
         if (valMode) {
@@ -24,10 +24,7 @@ object NRRange : INodeProcessor<NodeNodesList> {
                 node.nodes,
                 null,
                 nodeValueClass(info, "ru.DmN.pht.utils.IteratorUtils"),
-                ctx.global.getType(
-                    "ru.DmN.pht.utils.IteratorUtils",
-                    processor.tp
-                ).methods.find { it.name == "range" }!!,
+                ctx.global.getType("ru.DmN.pht.utils.IteratorUtils").methods.find { it.name == "range" }!!,
                 STATIC
             )
             processNodesList(it, processor, ctx, true)

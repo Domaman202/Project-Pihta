@@ -14,6 +14,7 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.klassOf
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
+import java.util.stream.Stream
 
 /**
  * Нормализация имени для jvm:
@@ -36,6 +37,9 @@ fun String.normalizeName(): String =
         }
         sb.toString()
     } else this
+
+inline fun <K, V> Stream<Pair<K, V>>.toMap(): MutableMap<K, V> =
+    HashMap<K, V>().apply { this@toMap.forEach { (k, v) -> set(k, v) } }
 
 inline fun <T> Iterable<T>.forEach(first: T, block: (T) -> Unit) {
     block(first)

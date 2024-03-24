@@ -9,11 +9,10 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 
 object NRApp : INodeProcessor<NodeNodesList> {
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node {
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? {
         val info = node.info
-        return NRClass.process(
+        return processor.process(
             nodeCls(info, "App", "Object", nodeStatic(info, node.nodes)),
-            processor,
             ctx,
             valMode
         )

@@ -50,7 +50,7 @@ object NRImport : INodeProcessor<NodeNodesList> {
 
         processor.stageManager.pushTask(EXTENSIONS_IMPORT) {
             data["extensions"]?.forEach { it ->
-                gctx.getType(it, processor.tp).methods
+                gctx.getType(it).methods
                     .stream()
                     .filter { it.modifiers.extension }
                     .forEach { gctx.getExtensions(it.extension!!) += it }
@@ -59,7 +59,7 @@ object NRImport : INodeProcessor<NodeNodesList> {
                 val i = it.lastIndexOf('.')
                 val name = it.substring(i + 1)
                 val methods = gctx.methods.getOrPut(name) { ArrayList() }
-                val list = gctx.getType(it.substring(0, i), processor.tp).methods
+                val list = gctx.getType(it.substring(0, i)).methods
                 if (name == "*")
                     methods.addAll(list)
                 else list.stream().filter { it.name == name }.forEach { methods.add(it) }

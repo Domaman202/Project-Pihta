@@ -18,7 +18,6 @@ import ru.DmN.siberia.processor.utils.ProcessingStage.METHODS_BODY
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.MethodModifiers
-import ru.DmN.siberia.utils.vtype.VirtualType.Companion.VOID
 
 object NREFn : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
@@ -71,7 +70,7 @@ object NREFn : INodeProcessor<NodeNodesList> {
                 new,
                 processor,
                 context,
-                method.rettype != VOID
+                method.rettype != ctx.global.getType("void")
             )
         }
         //

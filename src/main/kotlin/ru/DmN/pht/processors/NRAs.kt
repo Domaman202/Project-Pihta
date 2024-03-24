@@ -19,7 +19,7 @@ object NRAs : IStdNodeProcessor<NodeNodesList> {
         if (valMode) {
             val from = processor.calc(node.nodes[1], ctx)
             val to = calc(node, processor, ctx)
-            if (to !is VVTWithGenerics && from?.isAssignableFrom(to) == true || from == VOID || from == null)
+            if (from == null || from == VOID || to !is VVTWithGenerics && from.isAssignableFrom(to))
                 processor.process(node.nodes[1], ctx, true)
             else NodeIsAs(node.info.withType(AS_), mutableListOf(processor.process(node.nodes[1], ctx, true)!!), from, to)
         } else null

@@ -14,7 +14,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRListOf : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType("List", processor.tp)
+        ctx.global.getType("List")
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
         if (valMode)

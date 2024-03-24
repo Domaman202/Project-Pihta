@@ -14,7 +14,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
  */
 class NRCTSC(val const: (processor: Processor, ctx: ProcessingContext) -> String) : INodeProcessor<Node> {
     override fun calc(node: Node, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType("String", processor.tp)
+        ctx.global.getType("String")
 
     override fun process(node: Node, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeValue =
         nodeValue(node.info, const(processor, ctx))

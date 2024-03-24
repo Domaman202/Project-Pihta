@@ -678,7 +678,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         if (!ctx.loadedModules.contains(this)) {
             processor.tp += VTDynamic
             processor.contexts.macros_list = HashMap()
-            ctx.global = GlobalContext()
+            ctx.global = GlobalContext(processor.tp)
             ctx.classes = LinkedClassesNode.LinkedClassesNodeStart as LinkedClassesNode<VirtualType>
             ctx.getType = NRValue::getType
             return super.load(processor, ctx, uses)

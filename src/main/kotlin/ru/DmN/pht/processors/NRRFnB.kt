@@ -16,7 +16,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRRFnB : INodeProcessor<NodeRFn>, IAdaptableProcessor<NodeRFn> {
     override fun calc(node: NodeRFn, processor: Processor, ctx: ProcessingContext): VirtualType =
-        node.type ?: ctx.global.getType("Any", processor.tp)
+        node.type ?: ctx.global.getType("Any")
 
     override fun adaptableTo(type: VirtualType, node: NodeRFn, processor: Processor, ctx: ProcessingContext): Int {
         val name = node.name

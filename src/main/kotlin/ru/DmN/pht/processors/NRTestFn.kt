@@ -12,11 +12,11 @@ import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
 
 object NRTestFn : INodeProcessor<NodeNodesList> {
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node =
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
         when (ctx.platform) {
             JVM -> {
                 val info = node.info
-                NRClass.process(
+                processor.process(
                     nodeCls(
                         info,
                         "Test${processor.computeString(node.nodes[0], ctx)}",
@@ -31,7 +31,6 @@ object NRTestFn : INodeProcessor<NodeNodesList> {
                             )
                         )
                     ),
-                    processor,
                     ctx,
                     false
                 )

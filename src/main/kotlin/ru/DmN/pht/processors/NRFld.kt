@@ -32,7 +32,7 @@ object NRFld : INodeProcessor<NodeFieldA> {
                 VirtualFieldImpl(
                     clazz,
                     it[0],
-                    gctx.getType(it[1], processor.tp),
+                    gctx.getType(it[1]),
                     FieldModifiers(
                         isFinal = node.final,
                         isStatic = node.static,

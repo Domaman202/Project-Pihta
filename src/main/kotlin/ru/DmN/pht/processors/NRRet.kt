@@ -17,9 +17,8 @@ object NRRet : INodeProcessor<NodeNodesList> {
         else NodeNodesList(
             info.withType(RET_),
             mutableListOf(
-                NRAs.process(
+                processor.process(
                     nodeAs(info, processor.process(node.nodes[0], ctx, true)!!, ctx.method.rettype.name),
-                    processor,
                     ctx,
                     true
                 )!!

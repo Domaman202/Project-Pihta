@@ -12,7 +12,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRFnB : IStdNodeProcessor<NodeFn>, IAdaptableProcessor<NodeFn>, IInlinableProcessor<NodeFn> {
     override fun calc(node: NodeFn, processor: Processor, ctx: ProcessingContext): VirtualType =
-        node.type ?: ctx.global.getType("Any", processor.tp)
+        node.type ?: ctx.global.getType("Any")
 
     override fun adaptableTo(type: VirtualType, node: NodeFn, processor: Processor, ctx: ProcessingContext): Int =
         if (node.type == null)

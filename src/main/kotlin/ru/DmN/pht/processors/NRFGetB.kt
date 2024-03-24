@@ -81,7 +81,7 @@ object NRFGetB : INodeProcessor<NodeFMGet> {
             val result =
                 if (type == VTDynamic)
                     NRMCall.findMethod(
-                        ctx.global.getType("ru.DmN.pht.utils.DynamicUtils", processor.tp),
+                        ctx.global.getType("ru.DmN.pht.utils.DynamicUtils"),
                         "invokeGetter",
                         node.nodes,
                         Static.ANY,

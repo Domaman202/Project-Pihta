@@ -11,15 +11,14 @@ import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
 
 object NRUnrealized : INodeProcessor<NodeNodesList> {
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node =
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
         when (ctx.platform) {
-            JVM -> NRThrow.process(
+            JVM -> processor.process(
                 nodeThrow(
                     node.info,
                     "java.lang.RuntimeException",
                     listOf(nodeValue(node.info, "Функция не реализована для вашей платформы."))
                 ),
-                processor,
                 ctx,
                 false
             )

@@ -3,6 +3,7 @@ package ru.DmN.pht.processors
 import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.ctx.clazz
+import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.ctx.with
 import ru.DmN.pht.utils.node.NodeParsedTypes
 import ru.DmN.pht.utils.type
@@ -15,7 +16,6 @@ import ru.DmN.siberia.processor.utils.ProcessingStage.METHODS_BODY
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.MethodModifiers
-import ru.DmN.siberia.utils.vtype.VirtualType.Companion.VOID
 
 object NRCtor : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
@@ -26,7 +26,7 @@ object NRCtor : INodeProcessor<NodeNodesList> {
         val method = PhtVirtualMethod.Impl(
             type,
             "<init>",
-            VOID,
+            ctx.global.getType("void"),
             null,
             args.first,
             args.second,

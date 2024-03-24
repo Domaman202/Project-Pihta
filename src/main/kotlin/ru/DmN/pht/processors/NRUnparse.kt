@@ -13,7 +13,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRUnparse : IStdNodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType("String", processor.tp)
+        ctx.global.getType("String")
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeValue =
         nodeValue(node.info, computeString(NRProgn.process(node, processor, ctx, true), processor, ctx))

@@ -50,9 +50,9 @@ object NRValue : IStdNodeProcessor<NodeValue> {
     fun getType(name: String, processor: Processor, ctx: ProcessingContext): VirtualType =
         if (name.length > 2)
             when (name.first()) {
-                '[' -> ctx.global.getType(name.substring(1), processor.tp).arrayType
-                '$' -> ctx.global.getType(name.substring(1), processor.tp)
-                else -> VVTAutoPointer(PhtVirtualType.of(ctx.global.getType(name, processor.tp)))
+                '[' -> ctx.global.getType(name.substring(1)).arrayType
+                '$' -> ctx.global.getType(name.substring(1))
+                else -> VVTAutoPointer(PhtVirtualType.of(ctx.global.getType(name)))
             }
-        else VVTAutoPointer(PhtVirtualType.of(ctx.global.getType(name, processor.tp)))
+        else VVTAutoPointer(PhtVirtualType.of(ctx.global.getType(name)))
 }

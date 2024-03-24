@@ -29,7 +29,7 @@ object NRValue : IStdNodeProcessor<NodeValue> {
                 PRIMITIVE,
                 CLASS,
                 CLASS_WITH_GEN  -> "Class"
-            }, processor.tp
+            }
         )
 
     override fun process(node: NodeValue, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node =
@@ -98,6 +98,6 @@ object NRValue : IStdNodeProcessor<NodeValue> {
 
     fun getType(name: String, processor: Processor, ctx: ProcessingContext): VirtualType =
         if (name.startsWith('[') && name.length > 2)
-            ctx.global.getType(name.substring(1), processor.tp).arrayType
-        else ctx.global.getType(name, processor.tp)
+            ctx.global.getType(name.substring(1)).arrayType
+        else ctx.global.getType(name)
 }

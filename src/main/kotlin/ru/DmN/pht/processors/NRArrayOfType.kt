@@ -20,7 +20,7 @@ object NRArrayOfType : INodeProcessor<NodeNodesList> {
             val info = node.info
             val tmp = Variable.tmp(node)
             val type = processor.computeString(node.nodes[0], ctx)
-            NRBody.process(
+            processor.process(
                 nodeBody(info, ArrayList<Node>().apply {
                     this.add(nodeDef(info, tmp, nodeNewArray(info, type, node.nodes.size - 1)))
                     this.addAll(
@@ -28,7 +28,6 @@ object NRArrayOfType : INodeProcessor<NodeNodesList> {
                             .mapIndexed { i, it -> nodeASet(info, tmp, i, nodeAs(info, it, type)) })
                     this.add(nodeGetOrName(info, tmp))
                 }),
-                processor,
                 ctx,
                 true
             )

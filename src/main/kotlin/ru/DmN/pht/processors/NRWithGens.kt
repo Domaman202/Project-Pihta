@@ -4,6 +4,7 @@ import ru.DmN.pht.jvm.utils.vtype.generics
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.utils.OrPair
 import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.utils.toMap
 import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.pht.utils.vtype.VVTWithGenerics
 import ru.DmN.siberia.ast.Node
@@ -24,11 +25,9 @@ object NRWithGens : INodeProcessor<NodeNodesList> {
         val gctx = ctx.global
         val iter = type.generics.keys.iterator()
         return this.nodes
-            .asSequence()
-            .drop(1)
-            .map { processor.computeString(it, ctx) }
-            .map { gctx.getType(it, processor.tp) }
-            .map { Pair(iter.next(), OrPair.first<VirtualType, String>(it)) }
+            .stream()
+            .skip(1)
+            .map { Pair(iter.next(), OrPair.first<VirtualType, String>(gctx.getType(processor.computeString(it, ctx)))) }
             .toMap()
     }
 }

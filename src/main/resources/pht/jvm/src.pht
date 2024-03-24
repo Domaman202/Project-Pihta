@@ -140,6 +140,9 @@
                 java.lang.Object
                 java.lang.String
                 java.lang.Integer]]])
+        (import "kotlin" [
+            [types [
+                kotlin.Unit]]])
         (alias-type [[Object Any]])
         (import "pht/jvm" [
             [extensions [

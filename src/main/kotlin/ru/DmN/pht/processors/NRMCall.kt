@@ -222,24 +222,23 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             if (overflow > 0)
                 args.dropLast(overflow).toMutableList().apply {
                     add(
-                        NRArrayOfType.process(
+                        processor.process(
                             nodeArrayOfType(
                                 info,
                                 method.argsc.last().componentType!!.name,
                                 args.drop(args.size - overflow)
                             ),
-                            processor,
                             ctx,
                             true
                         )!!
                     )
                 }
-            else (args + NRNewArray.process(nodeNewArray(info, method.argsc.last().name.substring(1), 0), processor, ctx, true)!!).toMutableList()
+            else (args + processor.process(nodeNewArray(info, method.argsc.last().name.substring(1), 0), ctx, true)!!).toMutableList()
         } else { args }.mapIndexedMutable { i, it ->
             val np = processor.get(it, ctx)
             if (np is IAdaptableProcessor<*>)
                 (np as IAdaptableProcessor<Node>).adaptToType(method.argsc[i], it, processor, ctx)
-            else { it }.let { NRAs.process(nodeAs(info, it, method.argsc[i].name), processor, ctx, true)!! }
+            else { it }.let { processor.process(nodeAs(info, it, method.argsc[i].name), ctx, true)!! }
         }
 
     /**
@@ -259,7 +258,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             val gs = it.indexOf('<')
             if (gs < 1)
                 return@let it
-            generic = gctx.getType(it.substring(gs + 2, it.length - 1), processor.tp)
+            generic = gctx.getType(it.substring(gs + 2, it.length - 1))
             it.substring(0, gs)
         }
         val args = node.nodes.asSequence().drop(2).map { processor.process(it, ctx, true)!! }.toList()
@@ -325,7 +324,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
 
         return if (clazz == VTDynamic) {
             findMethod(
-                ctx.global.getType("ru.DmN.pht.utils.DynamicUtils", processor.tp),
+                ctx.global.getType("ru.DmN.pht.utils.DynamicUtils"),
                 "invokeMethod",
                 node.nodes.map { processor.process(it, ctx, true)!! },
                 Static.ANY,
@@ -359,13 +358,13 @@ object NRMCall : INodeProcessor<NodeNodesList> {
     private fun getCallTypeAndType(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, gctx: GlobalContext): Pair<NodeMCall.Type, VirtualType> =
         node.nodes[0].let {
             if (it.isConstClass)
-                Pair(STATIC, gctx.getType(it.valueAsString, processor.tp))
+                Pair(STATIC, gctx.getType(it.valueAsString))
             else if (it.isLiteral) {
                 when (processor.computeString(it, ctx)) {
-                    "." -> Pair(UNKNOWN, ctx.clazz)
-                    "this" -> Pair(VIRTUAL, processor.calc(it, ctx)!!)
+                    "."     -> Pair(UNKNOWN, ctx.clazz)
+                    "this"  -> Pair(VIRTUAL, processor.calc(it, ctx)!!)
                     "super" -> Pair(SUPER, ctx.clazz.superclass!!)
-                    else -> Pair(UNKNOWN, processor.calc(it, ctx)!!)
+                    else    -> Pair(UNKNOWN, processor.calc(it, ctx)!!)
                 }
             } else Pair(UNKNOWN, processor.calc(it, ctx)!!)
         }

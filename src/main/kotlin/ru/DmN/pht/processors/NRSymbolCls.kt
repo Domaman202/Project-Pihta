@@ -11,7 +11,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRSymbolCls : IStdNodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType("Class", processor.tp)
+        ctx.global.getType("Class")
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
         if (valMode)
@@ -22,5 +22,5 @@ object NRSymbolCls : IStdNodeProcessor<NodeNodesList> {
         node.nodes.asSequence().map { processor.computeString(it, ctx) }.reduce { acc, s -> acc + s }
 
     override fun computeType(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType(computeString(node, processor, ctx), processor.tp)
+        ctx.global.getType(computeString(node, processor, ctx))
 }

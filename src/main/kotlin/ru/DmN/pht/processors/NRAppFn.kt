@@ -11,11 +11,11 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 
 object NRAppFn : INodeProcessor<NodeNodesList> {
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node {
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? {
         val info = node.info
         val fn = nodeStatic(info, nodeDefn(info, "main", "void", node.nodes))
         return if (ctx.clazzOrNull?.name == "App")
-            processor.process(fn, ctx, valMode)!!
-        else NRClass.process(nodeCls(info, "App", "Object", fn), processor, ctx, valMode)
+            processor.process(fn, ctx, valMode)
+        else processor.process(nodeCls(info, "App", "Object", fn), ctx, valMode)
     }
 }

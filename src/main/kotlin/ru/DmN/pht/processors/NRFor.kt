@@ -16,7 +16,7 @@ import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.Variable
 
 object NRFor : INodeProcessor<NodeNodesList> {
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node =
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
         when (ctx.platform) {
             JVM -> {
                 val info = node.info
@@ -26,7 +26,7 @@ object NRFor : INodeProcessor<NodeNodesList> {
                 if (type.componentType == null) {
                     val iter = Variable.tmp(node, 1)
                     val code = ArrayList<Node>()
-                    code += if (type.isAssignableFrom(ctx.global.getType("Iterable", processor.tp)))
+                    code += if (type.isAssignableFrom(ctx.global.getType("Iterable")))
                         nodeDef(info, iter, nodeMCall(info, nodes[1], "iterator", listOf()))
                     else nodeDef(info, iter, nodes[1])
                     code += nodeCycle(
@@ -38,11 +38,11 @@ object NRFor : INodeProcessor<NodeNodesList> {
                             else nodeDef(info, name, nodeMCall(info, nodeGetOrName(info, iter), "next", emptyList()))
                         ) + node.nodes.drop(1)
                     )
-                    NRBody.process(nodeBody(info, code), processor, ctx, valMode)
+                    processor.process(nodeBody(info, code), ctx, valMode)
                 } else {
                     val arr = Variable.tmp(node, 1)
                     val i = Variable.tmp(node, 2)
-                    NRBody.process(
+                    processor.process(
                         nodeBody(
                             info,
                             mutableListOf(
@@ -66,7 +66,6 @@ object NRFor : INodeProcessor<NodeNodesList> {
                                 )
                             )
                         ),
-                        processor,
                         ctx,
                         valMode
                     )

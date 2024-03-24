@@ -14,11 +14,10 @@ import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.isPrimitive
 import ru.DmN.siberia.utils.vtype.VirtualType
-import ru.DmN.siberia.utils.vtype.VirtualType.Companion.BOOLEAN
 
 object NRIs : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        BOOLEAN
+        ctx.global.getType("boolean")
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node {
         return when (ctx.platform) {
@@ -33,7 +32,7 @@ object NRIs : INodeProcessor<NodeNodesList> {
                         else false
                     else if (value?.isPrimitive == true)
                         false
-                    else return NodeIsAs(node.info.withType(IS_), mutableListOf(processor.process(node.nodes[1], ctx, true)!!), value!!, ctx.global.getType(type, processor.tp))
+                    else return NodeIsAs(node.info.withType(IS_), mutableListOf(processor.process(node.nodes[1], ctx, true)!!), value!!, ctx.global.getType(type))
                 )
             }
 

@@ -42,11 +42,9 @@ object NRMath : INodeProcessor<NodeNodesList> {
                     (when (info.type) {
                         SHIFT_LEFT,
                         SHIFT_RIGHT -> nodes
-
                         else -> nodes.map {
-                            NRAs.process(
+                            processor.process(
                                 nodeAs(info, it, firstType.name),
-                                processor,
                                 ctx,
                                 true
                             )!!

@@ -1,5 +1,6 @@
 package ru.DmN.pht.processors
 
+import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.utils.processValue
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.node.NodeTypes.CCALL_
@@ -12,17 +13,16 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.VirtualType
-import ru.DmN.siberia.utils.vtype.VirtualType.Companion.VOID
 
 object NRCCall : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        VOID
+        ctx.global.getType("void")
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node =
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
         when (ctx.platform) {
             JVM -> {
                 val info = node.info
-                NRMCall.process(nodeMCall(info, nodeName(info, "super"), "<init>", node.nodes), processor, ctx, valMode)
+                processor.process(nodeMCall(info, nodeName(info, "super"), "<init>", node.nodes), ctx, valMode)
             }
 
             else -> NodeNodesList(node.info.withType(CCALL_), node.nodes).apply { processValue(this, processor, ctx) }

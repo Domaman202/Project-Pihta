@@ -12,6 +12,7 @@ import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
 
 class GlobalContext(
+    val tp: TypesProvider,
     val namespace: String = "",
     val aliases: MutableMap<String, String> = HashMap(),
     val imports: MutableList<String> = ArrayList(),
@@ -21,6 +22,7 @@ class GlobalContext(
 ) {
     fun with(namespace: String) =
         GlobalContext(
+            tp,
             namespace,
             SubMap(aliases),
             SubList(imports),
@@ -31,6 +33,7 @@ class GlobalContext(
 
     fun combineWith(context: GlobalContext) =
         GlobalContext(
+            tp,
             namespace,
             SubMap(aliases, context.aliases),
             SubList(imports, context.imports),
@@ -64,7 +67,7 @@ class GlobalContext(
     fun getTypeName(name: String): String? =
         name.let { if (name.contains('.')) name else aliases[name] }
 
-    fun getType(name: String, tp: TypesProvider): VirtualType {
+    fun getType(name: String): VirtualType {
         if (name.contains('.')) {
             try {
                 return tp.typeOf(name)

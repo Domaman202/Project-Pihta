@@ -4,6 +4,7 @@ import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.ast.NodeInlBodyB
 import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.ctx.clazz
+import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.ctx.with
 import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.node.NodeTypes.DEFN_
@@ -20,7 +21,6 @@ import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.MethodModifiers
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
-import ru.DmN.siberia.utils.vtype.VirtualType.Companion.VOID
 
 object NRDefn : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
@@ -77,8 +77,10 @@ object NRDefn : INodeProcessor<NodeNodesList> {
     }
 
     private fun processNodes(method: VirtualMethod, new: NodeNodesList, processor: Processor, ctx: ProcessingContext) {
+        val void = ctx.global.getType("void")
+        //
         var i = 0
-        while (i < new.nodes.size.let { if (method.rettype != VOID) it - 1 else it }) {
+        while (i < new.nodes.size.let { if (method.rettype != void) it - 1 else it }) {
             val it = processor.process(new.nodes[i], ctx, false)
             if (it == null) {
                 new.nodes.removeAt(i)
@@ -87,7 +89,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
             i++
         }
         //
-        if (new.nodes.isNotEmpty() && method.rettype != VOID) {
+        if (new.nodes.isNotEmpty() && method.rettype != void) {
             new.nodes[new.nodes.lastIndex] = NRAs.process(
                 nodeAs(new.info, new.nodes.last(), method.rettype.name),
                 processor,

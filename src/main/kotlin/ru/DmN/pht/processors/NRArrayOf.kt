@@ -15,11 +15,11 @@ object NRArrayOf : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
         elementType(node, processor, ctx).arrayType
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeNodesList? =
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
         if (valMode) {
             val info = node.info
             val tmp = Variable.tmp(node)
-            NRBody.process(
+            processor.process(
                 nodeBody(info, ArrayList<Node>().apply {
                     this.add(
                         nodeDef(
@@ -31,7 +31,6 @@ object NRArrayOf : INodeProcessor<NodeNodesList> {
                     this.addAll(node.nodes.mapIndexed { i, it -> nodeASet(info, tmp, i, it) })
                     this.add(nodeGetOrName(info, tmp))
                 }),
-                processor,
                 ctx,
                 true
             )
@@ -39,6 +38,6 @@ object NRArrayOf : INodeProcessor<NodeNodesList> {
 
     private fun elementType(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
         if (node.nodes.isEmpty())
-            ctx.global.getType("Any", processor.tp)
+            ctx.global.getType("Any")
         else processor.calc(node.nodes[0], ctx)!!
 }

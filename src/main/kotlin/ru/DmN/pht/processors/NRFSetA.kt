@@ -14,7 +14,7 @@ object NRFSetA : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeFSet {
         val instance =
             if (node.nodes[0].isConstClass)
-                ctx.global.getType(processor.computeString(node.nodes[0], ctx), processor.tp)
+                ctx.global.getType(processor.computeString(node.nodes[0], ctx))
             else processor.calc(node.nodes[0], ctx)!!
         val name = processor.computeString(node.nodes[1], ctx)
         return NodeFSet(

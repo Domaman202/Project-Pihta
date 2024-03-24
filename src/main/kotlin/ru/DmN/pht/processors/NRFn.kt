@@ -24,14 +24,14 @@ import kotlin.math.absoluteValue
 
 object NRFn : INodeProcessor<NodeNodesList>, IInlinableProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType(if (node.nodes[0].isConstClass) processor.computeString(node.nodes[0], ctx) else "Any", processor.tp)
+        ctx.global.getType(if (node.nodes[0].isConstClass) processor.computeString(node.nodes[0], ctx) else "Any")
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeFn {
         val gctx = ctx.global
         val cctx = ctx.clazz
         val bctx = ctx.body
         val offset = if (node.nodes[0].isConstClass) 1 else 0
-        val type = if (offset == 1) gctx.getType(node.nodes[0].valueAsString, processor.tp) else null
+        val type = if (offset == 1) gctx.getType(node.nodes[0].valueAsString) else null
         val refs = processor.computeStringNodes(processor.compute(node.nodes[offset], ctx) as INodesList, ctx)
             .map { ref -> bctx[ref]?.let { NVC.of(it) } ?: NVC.of(cctx.fields.find { it.name == ref }!!) }
         val args = processor.computeStringNodes(processor.compute(node.nodes[offset + 1], ctx) as INodesList, ctx)
@@ -63,7 +63,7 @@ object NRFn : INodeProcessor<NodeNodesList>, IInlinableProcessor<NodeNodesList> 
         )
         if (node.refs.isEmpty()) {
             node.processed = mutableListOf(
-                NRClass.process(
+                processor.process(
                     nodeObj(
                         info,
                         node.name,
@@ -72,10 +72,9 @@ object NRFn : INodeProcessor<NodeNodesList>, IInlinableProcessor<NodeNodesList> 
                         else listOf(type.name),
                         listOf(defnNode)
                     ),
-                    processor,
                     ctx,
                     true
-                )
+                )!!
             )
         } else {
             val fields = mutableListOf<Pair<String, String>>()

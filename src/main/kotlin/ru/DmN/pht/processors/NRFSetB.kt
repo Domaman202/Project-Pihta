@@ -31,14 +31,14 @@ object NRFSetB : INodeProcessor<NodeFieldSet> {
             }
         val type =
             if (node.static)
-                ctx.global.getType((instance as NodeValue).value, processor.tp)
+                ctx.global.getType((instance as NodeValue).value)
             else processor.calc(node.instance, ctx)!!
         val result =
             if (node.native)
                 null
             else if (type == VTDynamic) {
                 val result = NRMCall.findMethod(
-                    ctx.global.getType("ru.DmN.pht.utils.DynamicUtils", processor.tp),
+                    ctx.global.getType("ru.DmN.pht.utils.DynamicUtils"),
                     "invokeSetter",
                     node.nodes,
                     Static.ANY,
@@ -65,7 +65,7 @@ object NRFSetB : INodeProcessor<NodeFieldSet> {
             val field = type.fields.find { it.name == node.name }!!
             NodeFSet(
                 info.withType(FSET_),
-                mutableListOf(instance, NRAs.process(nodeAs(info, node.nodes.first(), field.type.name), processor, ctx, true)!!),
+                mutableListOf(instance, processor.process(nodeAs(info, node.nodes.first(), field.type.name), ctx, true)!!),
                 field
             )
         } else NodeMCall(

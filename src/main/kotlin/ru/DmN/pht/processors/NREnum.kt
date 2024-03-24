@@ -63,7 +63,7 @@ object NREnum : INodeProcessor<NodeNodesList> {
                                                         info.withType(NodeTypes.FSET_),
                                                         mutableListOf(
                                                             nodeValueClass(info, type.name),
-                                                            NRNew.process(
+                                                            processor.process(
                                                                 nodeNew(
                                                                     info,
                                                                     type.name,
@@ -72,10 +72,9 @@ object NREnum : INodeProcessor<NodeNodesList> {
                                                                         nodeValue(info, i)
                                                                     ) + it.args
                                                                 ),
-                                                                processor,
                                                                 ctx,
                                                                 true
-                                                            )
+                                                            )!!
                                                         ),
                                                         type.fields.find { f -> f.name == it.name }!!
                                                     )
