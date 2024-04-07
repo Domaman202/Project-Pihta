@@ -160,6 +160,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(VALN)
         addNP("valn!",  NPValnB)
         addSNP(VALN_REPEAT)
+        addSNP(VALN_SIZE)
         addNP("value",  NPValueA)
         addNP("value!", NPValueB)
         // w
@@ -413,6 +414,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(VALN,           NUValn)
         add(VALN_,          NUValn)
         addSNU(VALN_REPEAT)
+        addSNU(VALN_SIZE)
         add(VALUE,          NUValue)
         // w
         addSNU(WITH_GENS)
@@ -614,6 +616,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(VALN,          NRValn)
         add(VALN_,         NRValn)
         add(VALN_REPEAT,   NRValnRepeat)
+        add(VALN_SIZE,     NRValnSize)
         add(VALUE,         NRValue)
         // w
         add(WITH_GENS,     NRWithGens)

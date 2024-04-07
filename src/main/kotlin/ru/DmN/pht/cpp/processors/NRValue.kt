@@ -2,6 +2,7 @@ package ru.DmN.pht.cpp.processors
 
 import ru.DmN.pht.ast.NodeValue
 import ru.DmN.pht.ast.NodeValue.Type.*
+import ru.DmN.pht.cpp.utils.vtype.VTClass
 import ru.DmN.pht.cpp.utils.vtype.VTString
 import ru.DmN.pht.cpp.utils.vtype.VVTAutoPointer
 import ru.DmN.pht.cpp.utils.vtype.VVTPointer
@@ -18,14 +19,16 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 object NRValue : IStdNodeProcessor<NodeValue> {
     override fun calc(node: NodeValue, processor: Processor, ctx: ProcessingContext): VirtualType =
         when (node.vtype) {
-            NIL -> VVTPointer(PhtVirtualType.of(VirtualType.VOID))
-            BOOLEAN -> VirtualType.BOOLEAN
-            CHAR -> VirtualType.CHAR
-            INT -> VirtualType.INT
-            LONG -> VirtualType.LONG
-            FLOAT -> VirtualType.FLOAT
-            DOUBLE -> VirtualType.DOUBLE
-            STRING -> VTString
+            NIL             -> VVTPointer(PhtVirtualType.of(VirtualType.VOID))
+            BOOLEAN         -> VirtualType.BOOLEAN
+            CHAR            -> VirtualType.CHAR
+            INT             -> VirtualType.INT
+            LONG            -> VirtualType.LONG
+            FLOAT           -> VirtualType.FLOAT
+            DOUBLE          -> VirtualType.DOUBLE
+            STRING          -> VTString
+            CLASS,
+            CLASS_WITH_GEN  -> VTClass
             else -> throw UnsupportedOperationException()
         }
 

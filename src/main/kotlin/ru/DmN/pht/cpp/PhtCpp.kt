@@ -5,19 +5,16 @@ import ru.DmN.pht.cpp.compiler.ctx.out
 import ru.DmN.pht.cpp.compiler.ctx.tests
 import ru.DmN.pht.cpp.compilers.*
 import ru.DmN.pht.cpp.processors.NRValue
-import ru.DmN.pht.cpp.utils.node.NodeParsedTypes
 import ru.DmN.pht.cpp.utils.node.NodeParsedTypes.ANN_NATIVE
-import ru.DmN.pht.cpp.utils.node.NodeTypes
 import ru.DmN.pht.cpp.utils.node.NodeTypes.ANN_NATIVE_
+import ru.DmN.pht.cpp.utils.vtype.VTClass
 import ru.DmN.pht.cpp.utils.vtype.VTString
 import ru.DmN.pht.processor.ctx.getType
 import ru.DmN.pht.processors.NRSA
 import ru.DmN.pht.utils.Platforms.CPP
 import ru.DmN.pht.utils.addSANP
-import ru.DmN.pht.utils.addSNP
 import ru.DmN.pht.utils.addSNU
 import ru.DmN.pht.utils.meta.MetadataKeys
-import ru.DmN.pht.utils.node.NodeParsedTypes.ANN_VARARGS
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.pht.utils.vtype.PhtVirtualMethod
 import ru.DmN.pht.utils.vtype.PhtVirtualType
@@ -173,7 +170,7 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
                     emptyMap()
                 )
             }
-            processor.tp += PhtVirtualType.Impl("Class") // Костыль
+            processor.tp += VTClass
             processor.tp += VirtualType.VOID
             processor.tp += VirtualType.BOOLEAN
             processor.tp += VirtualType.BYTE

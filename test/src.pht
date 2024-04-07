@@ -1,6 +1,7 @@
-(progn
+(use-ctx pht
     (@native
-    (cls Test [^Object]))
-
+    (cls ^Test [] (@static
+        (defn foo ^void []
+            (println "Foo!")))))
     (app-fn
-        (println "Слава России!")))
+        (#foo ^Test)))

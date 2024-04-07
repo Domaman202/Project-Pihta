@@ -143,6 +143,7 @@ enum class NodeTypes : INodeType {
     // v
     VALN_("valn", PROCESSED),
     VALN_REPEAT("valn-repeat", PARSED),
+    VALN_SIZE("valn-size", PARSED),
     VALUE("value", true, true),
     // w
     WITH_GENS("with-gens", PARSED),
