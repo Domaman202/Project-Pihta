@@ -674,6 +674,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
     override fun changeParser(parser: Parser, ctx: ParsingContext): Parser =
         ParserImpl(parser)
 
+    @Suppress("UNCHECKED_CAST")
     override fun load(processor: Processor, ctx: ProcessingContext, uses: MutableList<String>): Boolean {
         if (!ctx.loadedModules.contains(this)) {
             processor.tp += VTDynamic
@@ -685,7 +686,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         }
         return false
     }
-
+    @Suppress("UNCHECKED_CAST")
     override fun load(compiler: Compiler, ctx: CompilationContext) {
         if (!ctx.loadedModules.contains(this)) {
             ctx.classes = LinkedClassesNode.LinkedClassesNodeStart as LinkedClassesNode<VirtualType>

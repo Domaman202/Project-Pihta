@@ -2,12 +2,12 @@ package ru.DmN.pht.utils.node
 
 import ru.DmN.pht.ast.*
 import ru.DmN.pht.ast.NodeValue.Type.NIL
-import ru.DmN.pht.utils.mapMutable
 import ru.DmN.pht.utils.node.NodeParsedTypes.*
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.ast.NodeUse
+import ru.DmN.siberia.utils.mapMutable
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.node.NodeTypes.USE_CTX
 import ru.DmN.siberia.utils.vtype.VirtualType

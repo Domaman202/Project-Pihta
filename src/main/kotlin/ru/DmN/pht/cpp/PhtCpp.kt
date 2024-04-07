@@ -5,15 +5,26 @@ import ru.DmN.pht.cpp.compiler.ctx.out
 import ru.DmN.pht.cpp.compiler.ctx.tests
 import ru.DmN.pht.cpp.compilers.*
 import ru.DmN.pht.cpp.processors.NRValue
+import ru.DmN.pht.cpp.utils.node.NodeParsedTypes
+import ru.DmN.pht.cpp.utils.node.NodeParsedTypes.ANN_NATIVE
+import ru.DmN.pht.cpp.utils.node.NodeTypes
+import ru.DmN.pht.cpp.utils.node.NodeTypes.ANN_NATIVE_
 import ru.DmN.pht.cpp.utils.vtype.VTString
 import ru.DmN.pht.processor.ctx.getType
+import ru.DmN.pht.processors.NRSA
 import ru.DmN.pht.utils.Platforms.CPP
+import ru.DmN.pht.utils.addSANP
+import ru.DmN.pht.utils.addSNP
+import ru.DmN.pht.utils.addSNU
+import ru.DmN.pht.utils.meta.MetadataKeys
+import ru.DmN.pht.utils.node.NodeParsedTypes.ANN_VARARGS
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.pht.utils.vtype.PhtVirtualMethod
 import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.ModuleCompilers
+import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.vtype.MethodModifiers
@@ -22,16 +33,22 @@ import java.io.FileOutputStream
 
 object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
     private fun initParsers() {
-
+        // @
+        addSANP(ANN_NATIVE)
     }
 
     private fun initUnparsers() {
-
+        // @
+        addSNU(ANN_NATIVE)
+        addSNU(ANN_NATIVE_)
     }
 
     private fun initProcessors() {
         // v
         add(VALUE, NRValue)
+
+        // @
+        add(ANN_NATIVE, NRSA { it, _, _ -> it.setMetadata(MetadataKeys.NATIVE, true) })
     }
 
     private fun initCompilers() {
@@ -91,6 +108,7 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
         add(XOR_,         NCMath)
 
         // @
+        add(ANN_NATIVE_,  NCDefault)
         add(ANN_TEST_,    NCTest)
     }
 

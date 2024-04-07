@@ -1,3 +1,4 @@
+@file:Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
 package ru.DmN.pht.parser.utils
 
 import ru.DmN.pht.utils.ctx.ContextKeys
@@ -7,9 +8,11 @@ import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.utils.ctx.IContextCollection
 import java.util.*
 
-fun IContextCollection<*>.clearMacros() {
-    this.contexts.remove(ContextKeys.MACROS)
-}
+
+inline fun Parser.parseMacro(ctx: ParsingContext, token: Token) =
+    get(ctx, "macro")!!.parse(this, ctx, token)
+inline fun Parser.parseMCall(ctx: ParsingContext, token: Token) =
+    get(ctx, "mcall!")!!.parse(this, ctx, token)
 
 var IContextCollection<*>.macros
     set(value) { this.contexts[ContextKeys.MACROS] = value }

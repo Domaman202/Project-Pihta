@@ -1,7 +1,7 @@
 package ru.DmN.pht
 
-import ru.DmN.pht.console.CppCommands
-import ru.DmN.pht.console.JvmCommands
+import ru.DmN.pht.cpp.console.CppCommands
+import ru.DmN.pht.jvm.console.JvmCommands
 import ru.DmN.pht.utils.Platforms
 import ru.DmN.siberia.console.BaseCommands
 import ru.DmN.siberia.console.BaseConsole

@@ -1,2 +1,6 @@
-(app-fn
-    (println (unparse (typeof (new ^$Object)))))
+(progn
+    (@native
+    (cls Test [^Object]))
+
+    (app-fn
+        (println "Слава России!")))

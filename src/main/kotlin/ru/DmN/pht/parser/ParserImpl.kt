@@ -1,6 +1,8 @@
 package ru.DmN.pht.parser
 
 import ru.DmN.pht.module.utils.ModulesProvider
+import ru.DmN.pht.parser.utils.parseMCall
+import ru.DmN.pht.parser.utils.parseMacro
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Lexer
 import ru.DmN.siberia.lexer.Token

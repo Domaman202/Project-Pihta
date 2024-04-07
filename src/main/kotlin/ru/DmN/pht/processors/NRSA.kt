@@ -1,13 +1,13 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeMetaNodesList
-import ru.DmN.pht.utils.mapMutable
 import ru.DmN.pht.utils.node.processed
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.utils.mapMutable
 
 /***
  * Simple Annotation

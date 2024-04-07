@@ -1,3 +1,4 @@
+@file:Suppress("NOTHING_TO_INLINE", "UNCHECKED_CAST")
 package ru.DmN.pht.utils
 
 import ru.DmN.pht.ast.IValueNode
@@ -12,6 +13,7 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.klassOf
+import ru.DmN.siberia.utils.mapMutable
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
 import java.util.stream.Stream
@@ -92,13 +94,6 @@ inline fun <T, R> List<T>.mapIndexedMutable(transform: (Int, T) -> R): MutableLi
     var i = 0
     for (it in this)
         list.add(transform(i++, it))
-    return list
-}
-
-inline fun <T, R> List<T>.mapMutable(transform: (T) -> R): MutableList<R> {
-    val list = ArrayList<R>(size)
-    for (it in this)
-        list.add(transform(it))
     return list
 }
 

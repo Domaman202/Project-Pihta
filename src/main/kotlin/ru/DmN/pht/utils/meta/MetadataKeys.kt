@@ -7,6 +7,7 @@ enum class MetadataKeys : IMetadataKey {
     FILE,
     FINAL,
     INLINE,
+    NATIVE,
     OPEN,
     STATIC,
     SYNC,

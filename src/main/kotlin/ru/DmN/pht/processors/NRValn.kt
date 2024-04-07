@@ -1,11 +1,11 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.utils.mapMutable
 import ru.DmN.pht.utils.node.NodeTypes.VALN_
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
+import ru.DmN.siberia.utils.mapMutable
 
 object NRValn : IStdNodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeNodesList =

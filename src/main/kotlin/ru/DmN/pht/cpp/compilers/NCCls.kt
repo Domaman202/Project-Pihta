@@ -5,6 +5,7 @@ import ru.DmN.pht.cpp.compilers.ICppNRCompiler
 import ru.DmN.pht.cpp.utils.vtype.normalizedName
 import ru.DmN.pht.jvm.utils.vtype.superclass
 import ru.DmN.pht.processor.ctx.with
+import ru.DmN.pht.utils.meta.MetadataKeys
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.utils.vtype.simpleName
@@ -18,13 +19,15 @@ object NCCls : ICppNRCompiler<NodeType> {
                 compiler.compile(it, ctx)
             }
         else {
-            compileHead(node, compiler, ctx)
+            if (node.getMetadata(MetadataKeys.NATIVE) == true)
+                compileHeadUniversal(node, compiler, ctx)
+            else compileHeadPht(node, compiler, ctx)
             append("};\n\n")
             compileTail(node)
         }
     }
 
-    fun StringBuilder.compileHead(node: NodeType, compiler: Compiler, ctx: CompilationContext) {
+    private fun StringBuilder.compileHeadUniversal(node: NodeType, compiler: Compiler, ctx: CompilationContext) {
         node.type.run {
             append("class ").append(name).append(" : public ")
             parents.forEachIndexed { i, it ->
@@ -39,6 +42,12 @@ object NCCls : ICppNRCompiler<NodeType> {
                     append('\n')
                 compiler.compile(it, context)
             }
+        }
+    }
+
+    fun StringBuilder.compileHeadPht(node: NodeType, compiler: Compiler, ctx: CompilationContext) {
+        node.type.run {
+            compileHeadUniversal(node, compiler, ctx)
             append("protected:\nexplicit ").append(simpleName).append("(nullptr_t) : ").append(superclass!!.normalizedName())
                 .append("(nullptr) { }\n")
             val fields = fields.filter { !(it.type.isPrimitive || it.modifiers.isStatic) }
