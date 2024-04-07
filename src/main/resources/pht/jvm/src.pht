@@ -37,7 +37,8 @@
             (universal-array-extends [^boolean ^byte ^short ^char ^int ^long ^float ^double ^Any]))
 
         (cls StringExtends [^Object]
-            (@varargs (efn ^String add ^String [[arr (array-type ^Any)]] (progn
+            (@varargs
+            (efn ^String add ^String [[arr (array-type ^Any)]] (progn
                 (def [[str (new ^StringBuilder this)]])
                 (for [e arr]
                     (#append str (#toString ^java.util.Objects e)))
@@ -47,26 +48,28 @@
         (cls StdOut [^Object] (@static
             (def-macro defn-print-as-int [types]
                 (macro-unroll [[type types]]
-                    (defn print ^void [[msg (macro-arg type)]]
-                        (#print ^System/out (as ^int msg)))
-                    (defn println ^void [[msg (macro-arg type)]]
-                        (#println ^System/out (as ^int msg)))
-                    (@varargs
-                        (defn print ^void [[msg (array-type (macro-arg type))]]
-                            (#print ^System/out (#contentToString msg)))
-                        (defn println ^void [[msg (array-type (macro-arg type))]]
-                            (#println ^System/out (#contentToString msg))))))
+                    (@inline
+                        (defn print ^void [[msg (macro-arg type)]]
+                            (#print ^System/out (as ^int msg)))
+                        (defn println ^void [[msg (macro-arg type)]]
+                            (#println ^System/out (as ^int msg)))
+                        (@varargs
+                            (defn print ^void [[msg (array-type (macro-arg type))]]
+                                (#print ^System/out (#contentToString msg)))
+                            (defn println ^void [[msg (array-type (macro-arg type))]]
+                                (#println ^System/out (#contentToString msg)))))))
             (def-macro defn-print [types]
                 (macro-unroll [[type types]]
-                    (defn print ^void [[msg (macro-arg type)]]
-                        (#print ^System/out msg))
-                    (defn println ^void [[msg (macro-arg type)]]
-                        (#println ^System/out msg))
-                    (@varargs
-                        (defn print ^void [[msg (array-type (macro-arg type))]]
-                            (#print ^System/out (#contentToString msg)))
-                        (defn println ^void [[msg (array-type (macro-arg type))]]
-                            (#println ^System/out (#contentToString msg))))))
+                    (@inline
+                        (defn print ^void [[msg (macro-arg type)]]
+                            (#print ^System/out msg))
+                        (defn println ^void [[msg (macro-arg type)]]
+                            (#println ^System/out msg))
+                        (@varargs
+                            (defn print ^void [[msg (array-type (macro-arg type))]]
+                                (#print ^System/out (#contentToString msg)))
+                            (defn println ^void [[msg (array-type (macro-arg type))]]
+                                (#println ^System/out (#contentToString msg)))))))
             (defn println ^void []
                 (#println ^System/out))
             (defn-print         [^boolean ^char ^int ^long ^float ^double ^Any])

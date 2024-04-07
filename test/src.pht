@@ -1,7 +1,8 @@
-(use-ctx pht
-    (@native
-    (cls ^Test [] (@static
-        (defn foo ^void []
-            (println "Foo!")))))
+(progn
+    (import "java" [[types [java.util.function.Supplier]]])
+    (cls TestC [^Object] (@static
+        (@inline
+        (defn get ^String [[getter ^Supplier]]
+            (#get getter)))))
     (app-fn
-        (#foo ^Test)))
+        (println (#get ^TestC (fn ^Supplier [][] "Сало!")))))

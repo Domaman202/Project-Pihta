@@ -120,7 +120,7 @@ fun lenArgs(from: List<VirtualType>, to: List<ICastable>, varargs: Boolean): Pai
         val j = lenArgs(to) { from[it] }
         if (i < j)
             Pair(j, false)
-        else Pair(i, false)
+        else Pair(i, true)
     } else if (from.size != to.size)
         Pair(-1, false)
     else Pair(lenArgs(to) { from[it] }, false)

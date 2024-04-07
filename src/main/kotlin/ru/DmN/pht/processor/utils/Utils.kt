@@ -1,13 +1,29 @@
-@file:Suppress("NOTHING_TO_INLINE")
+@file:Suppress("NOTHING_TO_INLINE", "UNCHECKED_CAST")
 package ru.DmN.pht.processor.utils
 
+import ru.DmN.pht.module.utils.Module
 import ru.DmN.pht.utils.compute
 import ru.DmN.pht.utils.lenArgs
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
+import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.VirtualMethod
+
+/**
+ * Возвращает обработчик нод из прошлых (вышестоящих) модулей.
+ */
+fun Processor.getOther(node: Node, ctx: ProcessingContext, module: Module): INodeProcessor<Node> {
+    val iter = ctx.loadedModules.iterator()
+    while (iter.hasNext())
+        if (iter.next() == module)
+            break
+    val type = node.info.type
+    if (iter.hasNext())
+        iter.forEach { it -> it.processors[type]?.let { return it as INodeProcessor<Node> } }
+    throw RuntimeException("Processor for \"$type\" not founded!")
+}
 
 fun getMethodVariants(variants: Sequence<VirtualMethod>, args: List<ICastable>): Sequence<Pair<VirtualMethod, Boolean>> =
     variants

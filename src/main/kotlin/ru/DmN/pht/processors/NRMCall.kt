@@ -12,6 +12,7 @@ import ru.DmN.pht.processor.ctx.*
 import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.node.*
+import ru.DmN.pht.utils.node.NodeTypes.FGET_
 import ru.DmN.pht.utils.vtype.VTDynamic
 import ru.DmN.pht.utils.vtype.VVTWithGenerics
 import ru.DmN.siberia.ast.Node
@@ -66,41 +67,47 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         val generics = calc(result, node, processor, ctx)
         val method = result.method
         //
-        val new = if (method.extension == null) {
-            val instance2 = processor.process(instance1, ctx, true)!!
-            NodeMCall(
-                info.processed,
-                processArguments(info, processor, ctx, method, result.args, result.compression),
-                generics,
-                instance2,
-                method,
-                when (result.type) {
-                    UNKNOWN ->
-                        if (method.modifiers.static)
-                            STATIC
-                        else VIRTUAL
+        lateinit var arguments: List<Node>
+        val new =
+            if (method.extension == null) {
+                arguments = processArguments(info, processor, ctx, method, result.args, result.compression)
+                val instance2 = processor.process(instance1, ctx, true)!!
+                NodeMCall(
+                    info.processed,
+                    arguments,
+                    generics,
+                    instance2,
+                    method,
+                    when (result.type) {
+                        UNKNOWN ->
+                            if (method.modifiers.static)
+                                STATIC
+                            else VIRTUAL
 
-                    else -> result.type
-                }
-            )
-        } else NodeMCall(
-            node.info.processed,
-            processArguments(
-                node.info,
-                processor,
-                ctx,
-                method,
-                listOf(instance1) + result.args,
-                result.compression
-            ),
-            generics,
-            nodeValueClass(node.info, method.extension!!.name),
-            method,
-            EXTEND
-        )
+                        else -> result.type
+                    }
+                )
+            } else {
+                arguments = processArguments(
+                    node.info,
+                    processor,
+                    ctx,
+                    method,
+                    listOf(instance1) + result.args,
+                    result.compression
+                )
+                NodeMCall(
+                    node.info.processed,
+                    arguments,
+                    generics,
+                    nodeValueClass(node.info, method.extension!!.name),
+                    method,
+                    EXTEND
+                )
+            }
         //
         processor.stageManager.pushTask(FINALIZATION) {
-            finalize(method, result.args, instance1, new, processor, ctx, valMode)
+            finalize(method, arguments, instance1, new, processor, ctx, valMode)
         }
         //
         return new
@@ -112,12 +119,12 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 method.inline!!.copy()
             else {
                 val np = processor.get(instance, ctx)
-                if (np is IInlinableProcessor<*> && (np as IInlinableProcessor<Node>).isInlinable(instance, processor, ctx))
-                    np.inline(instance, processor, ctx)
+                if (np is IInlinableProcessor<*> && (np as IInlinableProcessor<Node>).isInlinable(instance, processor, ctx) && (node.method.modifiers.inline || node.method.declaringClass.isInterface))
+                    np.inline(instance, processor, ctx) // todo: Проверка что это именно подстановка лямбды.
                 else return
             }.run {
                 this as NodeInlBodyA
-                val context = if (this is NodeInlBodyB) this.ctx else ctx
+                val context = if (this is NodeInlBodyB) this.ctx else ctx // todo: maybe inline?
                 val bctx = BodyContext.of(ctx.body)
                 method.argsn.asSequence().let {
                     if (method.extension == null)
@@ -191,14 +198,14 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         val type = processor.computeType(instance, ctx)
         return if (type.name.endsWith("\$Companion")) {
             NodeFGet(
-                instance.info.withType(NodeTypes.FGET_),
+                instance.info.withType(FGET_),
                 mutableListOf(nodeValueClass(instance.info, type.name)),
                 "Companion",
                 NodeFGet.Type.STATIC,
                 type
             )
         } else NodeFGet(
-            instance.info.withType(NodeTypes.FGET_),
+            instance.info.withType(FGET_),
             mutableListOf(nodeValueClass(instance.info, type.name)),
             "INSTANCE",
             NodeFGet.Type.STATIC,
@@ -404,7 +411,9 @@ object NRMCall : INodeProcessor<NodeNodesList> {
     private fun makeFindResultB(args: List<Node>, find: Sequence<Pair<VirtualMethod, Boolean>>, static: Static, processor: Processor, ctx: ProcessingContext): MethodFindResultB? {
         val result = find.filter { static.filter(it.first) }.firstOrNull() ?: return null
         return MethodFindResultB(
-            args.mapIndexed { i, it -> processor.adaptToType(result.first.argsc[i], it, ctx) }.toList(),
+            if (result.second)
+                args
+            else args.mapIndexed { i, it -> processor.adaptToType(result.first.argsc[i], it, ctx) },
             result.first,
             result.second
         )
