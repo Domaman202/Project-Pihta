@@ -2,8 +2,8 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeSet
 import ru.DmN.pht.processor.ctx.body
+import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.processor.utils.processValues
-import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.node.NodeTypes.SET_
 import ru.DmN.pht.utils.node.nodeDef
 import ru.DmN.siberia.ast.Node

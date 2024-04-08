@@ -1,11 +1,11 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeInlBodyA
-import ru.DmN.pht.utils.computeType
+import ru.DmN.pht.processor.utils.computeType
+import ru.DmN.pht.processor.utils.processNodes
 import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_
-import ru.DmN.pht.utils.processNodes
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.VirtualType

@@ -8,7 +8,7 @@ import ru.DmN.pht.ast.NodeMCall.Type.VIRTUAL
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.utils.MethodFindResultB
 import ru.DmN.pht.processor.utils.Static
-import ru.DmN.pht.utils.computeType
+import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.pht.utils.node.NodeTypes.FGET_
 import ru.DmN.pht.utils.node.NodeTypes.MCALL_
 import ru.DmN.pht.utils.node.nodeValue

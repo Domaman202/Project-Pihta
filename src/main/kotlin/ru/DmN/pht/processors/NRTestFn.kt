@@ -1,8 +1,8 @@
 package ru.DmN.pht.processors
 
+import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.Platforms.CPP
 import ru.DmN.pht.utils.Platforms.JVM
-import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.node.*
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList

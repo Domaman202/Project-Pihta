@@ -5,18 +5,19 @@ import ru.DmN.pht.ast.IValueNode
 import ru.DmN.pht.jvm.utils.vtype.generics
 import ru.DmN.pht.jvm.utils.vtype.superclass
 import ru.DmN.pht.processor.utils.ICastable
-import ru.DmN.pht.processors.IAdaptableProcessor
-import ru.DmN.pht.processors.IStdNodeProcessor
 import ru.DmN.pht.utils.vtype.VVTWithGenerics
-import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
-import ru.DmN.siberia.processor.Processor
-import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.klassOf
-import ru.DmN.siberia.utils.mapMutable
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
 import java.util.stream.Stream
+
+inline fun <T> List<T>.dropMutable(count: Int): MutableList<T> {
+    val new = ArrayList<T>(this.size - count)
+    for (i in count until this.size)
+        new += this[i]
+    return new
+}
 
 /**
  * Нормализация имени для jvm:
@@ -135,90 +136,6 @@ fun lenArgs(to: List<ICastable>, getter: (index: Int) -> VirtualType): Int {
     }
     return j
 }
-
-fun Processor.processNodes(node: INodesList, ctx: ProcessingContext, valMode: Boolean): MutableList<Node> =
-    node.nodes.mapMutable { process(it, ctx, valMode)!! }
-
-fun Processor.computeStringNodes(node: INodesList, ctx: ProcessingContext): List<String> =
-    node.nodes.map { computeString(it, ctx) }
-
-fun Processor.compute(node: Node, ctx: ProcessingContext): Node =
-    get(node, ctx).let {
-        if (it is IStdNodeProcessor<Node>)
-            it.compute(node, this, ctx)
-        else node
-    }
-
-fun Processor.computeList(node: Node, ctx: ProcessingContext): List<Node> =
-    computeListOr(node, ctx)!!
-
-fun Processor.computeListOr(node: Node, ctx: ProcessingContext): List<Node>? =
-    get(node, ctx).let {
-        if (it is IStdNodeProcessor<Node>)
-            it.computeList(node, this, ctx)
-        else null
-    }
-
-fun Processor.computeType(node: Node, ctx: ProcessingContext): VirtualType =
-    computeTypeOr(node, ctx)!!
-
-fun Processor.computeTypeOr(node: Node, ctx: ProcessingContext): VirtualType? =
-    get(node, ctx).let {
-        if (it is IStdNodeProcessor<Node>)
-            it.computeType(node, this, ctx)
-        else throw UnsupportedOperationException()
-    }
-
-fun Processor.computeTypeWithGens(gens: Map<String, VirtualType>, node: Node, ctx: ProcessingContext): VirtualType =
-    computeTypeWithGensOr(gens, node, ctx)!!
-
-fun Processor.computeTypeWithGensOr(gens: Map<String, VirtualType>, node: Node, ctx: ProcessingContext): VirtualType? =
-    get(node, ctx).let {
-        if (it is IStdNodeProcessor<Node>)
-            it.computeTypeWithGens(gens, node, this, ctx)
-        else throw UnsupportedOperationException()
-    }
-
-fun Processor.computeTypesOr(node: Node, ctx: ProcessingContext): List<VirtualType>? =
-    get(node, ctx).let {
-        if (it is IStdNodeProcessor<Node>)
-            it.computeTypes(node, this, ctx)
-        else null
-    }
-
-fun Processor.computeGenericType(node: Node, ctx: ProcessingContext): String? =
-    get(node, ctx).let {
-        if (it is IStdNodeProcessor<Node>)
-            it.computeGenericType(node, this, ctx)
-        else throw UnsupportedOperationException()
-    }
-
-fun Processor.computeString(node: Node, ctx: ProcessingContext): String =
-    computeStringOr(node, ctx)!!
-
-fun Processor.computeStringOr(node: Node, ctx: ProcessingContext): String? =
-    get(node, ctx).let {
-        if (it is IStdNodeProcessor<Node>)
-            it.computeString(node, this, ctx)
-        else throw UnsupportedOperationException()
-    }
-
-fun Processor.computeInt(node: Node, ctx: ProcessingContext): Int =
-    computeIntOr(node, ctx)!!
-
-fun Processor.computeIntOr(node: Node, ctx: ProcessingContext): Int? =
-    get(node, ctx).let {
-        if (it is IStdNodeProcessor<Node>)
-            it.computeInt(node, this, ctx)
-        else throw UnsupportedOperationException()
-    }
-
-fun Processor.adaptToType(type: VirtualType, node: Node, ctx: ProcessingContext): Node =
-    get(node, ctx).let {
-        if (it is IAdaptableProcessor<*>)
-            (it as IAdaptableProcessor<Node>).adaptToType(type, node, this, ctx)
-        else node
-    }
 
 fun VirtualType.ofPrimitive(): String = when (name) {
     "void" -> ("java.lang.Void")

@@ -6,7 +6,11 @@ import ru.DmN.pht.processor.ctx.body
 import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.pht.processor.ctx.isBody
 import ru.DmN.pht.processor.utils.Variable
-import ru.DmN.pht.utils.*
+import ru.DmN.pht.processor.utils.computeList
+import ru.DmN.pht.processor.utils.computeString
+import ru.DmN.pht.processor.utils.computeType
+import ru.DmN.pht.utils.isConstClass
+import ru.DmN.pht.utils.isLiteral
 import ru.DmN.pht.utils.node.NodeTypes.DEF_
 import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.ast.Node

@@ -2,9 +2,9 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.ctx.body
+import ru.DmN.pht.processor.utils.computeList
+import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.InlineVariable
-import ru.DmN.pht.utils.computeList
-import ru.DmN.pht.utils.computeString
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor

@@ -3,8 +3,8 @@ package ru.DmN.pht.processors
 import ru.DmN.pht.ast.*
 import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.pht.processor.ctx.global
-import ru.DmN.pht.utils.computeList
-import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.processor.utils.computeList
+import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.node.NodeParsedTypes.*
 import ru.DmN.pht.utils.node.NodeTypes.FLD_
 import ru.DmN.pht.utils.node.NodeTypes.PROGN_B

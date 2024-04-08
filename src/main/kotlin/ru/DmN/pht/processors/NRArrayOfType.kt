@@ -1,6 +1,6 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.node.*
 import ru.DmN.pht.utils.vtype.arrayType
 import ru.DmN.siberia.ast.Node

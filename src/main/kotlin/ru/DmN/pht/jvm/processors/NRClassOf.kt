@@ -2,7 +2,7 @@ package ru.DmN.pht.jvm.processors
 
 import ru.DmN.pht.ast.NodeClassOf
 import ru.DmN.pht.jvm.node.NodeTypes.CLASS_OF_
-import ru.DmN.pht.utils.computeType
+import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor

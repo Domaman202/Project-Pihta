@@ -3,9 +3,13 @@ package ru.DmN.pht.processors
 import ru.DmN.pht.ast.NodeType
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.ctx.with
-import ru.DmN.pht.utils.*
+import ru.DmN.pht.processor.utils.computeList
+import ru.DmN.pht.processor.utils.computeListOr
+import ru.DmN.pht.processor.utils.computeString
+import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.pht.utils.node.NodeParsedTypes
 import ru.DmN.pht.utils.node.processed
+import ru.DmN.pht.utils.type
 import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
@@ -40,6 +44,7 @@ object NRClass : INodeProcessor<NodeNodesList> {
         processor.stageManager.pushTask(TYPES_PREDEFINE) {
             val context = ctx.with(type)
             processor.computeList(processor.process(node.nodes[1 + offset], context, true)!!, context)
+                .stream()
                 .map { processor.computeType(it, context) }
                 .forEach { type.parents += it }
             generics?.forEach {

@@ -1,8 +1,8 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.processor.ctx.method
+import ru.DmN.pht.processor.utils.processNodes
 import ru.DmN.pht.utils.node.NodeTypes.TRCALL_
-import ru.DmN.pht.utils.processNodes
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor

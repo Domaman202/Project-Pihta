@@ -2,8 +2,8 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.jvm.utils.vtype.generics
 import ru.DmN.pht.processor.ctx.global
+import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.OrPair
-import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.toMap
 import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.pht.utils.vtype.VVTWithGenerics

@@ -4,9 +4,13 @@ import ru.DmN.pht.ast.NodeCatch
 import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.ctx.body
 import ru.DmN.pht.processor.ctx.with
-import ru.DmN.pht.utils.*
+import ru.DmN.pht.processor.utils.compute
+import ru.DmN.pht.processor.utils.computeList
+import ru.DmN.pht.processor.utils.computeString
+import ru.DmN.pht.processor.utils.computeType
+import ru.DmN.pht.utils.dropMutable
+import ru.DmN.pht.utils.isConstClass
 import ru.DmN.pht.utils.node.NodeTypes.CATCH_
-import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -14,7 +18,6 @@ import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.VirtualType
-import kotlin.streams.toList
 
 object NRCatch : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
@@ -31,7 +34,7 @@ object NRCatch : INodeProcessor<NodeNodesList> {
             else 0
         return NodeCatch(
             info.withType(CATCH_),
-            node.nodes.stream().skip(offset + 1L).toList() as MutableList<Node>,
+            node.nodes.dropMutable(offset + 1),
             if (offset == 1) processor.computeType(node.nodes[0], ctx) else null,
             processor.computeList(node.nodes[offset], ctx).map {
                 val catcher = processor.computeList(it, ctx)
@@ -41,7 +44,7 @@ object NRCatch : INodeProcessor<NodeNodesList> {
                     variable,
                     type,
                     processor.process(
-                        nodeProgn(info, catcher.drop(2).toMutableList()),
+                        nodeProgn(info, catcher.dropMutable(2)),
                         ctx.with(BodyContext.of(bctx).apply {
                             if (variable != "_") {
                                 addVariable(variable, type)

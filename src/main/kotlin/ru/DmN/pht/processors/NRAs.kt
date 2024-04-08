@@ -1,7 +1,7 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeIsAs
-import ru.DmN.pht.utils.computeType
+import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.pht.utils.node.NodeTypes.AS_
 import ru.DmN.pht.utils.vtype.VVTWithGenerics
 import ru.DmN.siberia.ast.Node

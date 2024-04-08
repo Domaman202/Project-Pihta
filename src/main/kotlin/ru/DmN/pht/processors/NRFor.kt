@@ -1,9 +1,9 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.processor.ctx.global
+import ru.DmN.pht.processor.utils.computeList
+import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.Platforms.JVM
-import ru.DmN.pht.utils.computeList
-import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.node.*
 import ru.DmN.pht.utils.node.NodeParsedTypes.INC_PRE
 import ru.DmN.pht.utils.node.NodeParsedTypes.LESS

@@ -1,12 +1,12 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeInner
-import ru.DmN.pht.utils.computeList
-import ru.DmN.pht.utils.computeString
-import ru.DmN.pht.utils.computeType
+import ru.DmN.pht.processor.utils.computeList
+import ru.DmN.pht.processor.utils.computeString
+import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.pht.utils.node.NodeTypes.INNER_
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 

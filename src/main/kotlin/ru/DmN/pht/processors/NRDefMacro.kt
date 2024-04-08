@@ -4,8 +4,8 @@ import ru.DmN.pht.ast.NodeDefMacro
 import ru.DmN.pht.compiler.java.utils.MacroDefine
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.ctx.macros
-import ru.DmN.pht.utils.computeList
-import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.processor.utils.computeList
+import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext

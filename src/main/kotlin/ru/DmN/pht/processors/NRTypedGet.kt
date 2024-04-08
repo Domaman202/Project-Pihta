@@ -1,11 +1,11 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeTypedGet
-import ru.DmN.pht.utils.computeString
-import ru.DmN.pht.utils.computeType
+import ru.DmN.pht.processor.utils.computeString
+import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.pht.utils.node.NodeTypes.TYPED_GET_
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.VirtualType

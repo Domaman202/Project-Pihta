@@ -1,9 +1,9 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.utils.computeInt
-import ru.DmN.siberia.processor.Processor
+import ru.DmN.pht.processor.utils.computeInt
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processors.NRProgn

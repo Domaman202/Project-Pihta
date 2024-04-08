@@ -5,6 +5,9 @@ import ru.DmN.pht.ast.NodeInlBodyA
 import ru.DmN.pht.processor.ctx.body
 import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.pht.processor.ctx.global
+import ru.DmN.pht.processor.utils.compute
+import ru.DmN.pht.processor.utils.computeString
+import ru.DmN.pht.processor.utils.computeStringNodes
 import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.node.*

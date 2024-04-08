@@ -10,6 +10,7 @@ import ru.DmN.pht.processor.ctx.classes
 import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.pht.processor.ctx.method
 import ru.DmN.pht.processor.utils.Static
+import ru.DmN.pht.processor.utils.inline
 import ru.DmN.pht.utils.InlineVariable
 import ru.DmN.pht.utils.lenArgs
 import ru.DmN.pht.utils.node.NodeTypes.GET_
@@ -95,19 +96,8 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
     }
 
     override fun isInlinable(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Boolean =
-        ctx.body[node.name]?.let { it is InlineVariable } == true
+        ctx.body[node.name]?.let { it is InlineVariable && processor.get(it.value, ctx).let { np -> if (np is IInlinableProcessor<Node>) np.isInlinable(it.value, processor, ctx) else false } } == true
 
-    override fun inline(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Node {
-        val n = (ctx.body[node.name] as InlineVariable).value
-        val np = processor.get(n, ctx)
-        return NodeInlBodyA(
-            node.info.withType(INL_BODY_A),
-            mutableListOf(
-                if (np is IInlinableProcessor<*> && (np as IInlinableProcessor<Node>).isInlinable(n, processor, ctx))
-                    np.inline(n, processor, ctx)
-                else n
-            ),
-            null
-        )
-    }
+    override fun inline(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Node =
+        NodeInlBodyA(node.info.withType(INL_BODY_A), mutableListOf((ctx.body[node.name] as InlineVariable).value.let { processor.inline(it, it, ctx) }), null)
 }

@@ -4,8 +4,8 @@ import ru.DmN.pht.ast.NodeMacroUtil
 import ru.DmN.pht.ast.NodeMetaNodesList
 import ru.DmN.pht.processor.ctx.macro
 import ru.DmN.pht.processor.ctx.with
-import ru.DmN.pht.utils.computeList
-import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.processor.utils.computeList
+import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.node.NodeTypes.PROGN_B_
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.Processor

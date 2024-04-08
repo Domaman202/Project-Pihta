@@ -2,12 +2,12 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeFGet
 import ru.DmN.pht.ast.NodeFGet.Type.*
-import ru.DmN.pht.utils.computeString
-import ru.DmN.pht.utils.computeType
+import ru.DmN.pht.processor.utils.computeString
+import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.pht.utils.isConstClass
 import ru.DmN.pht.utils.node.NodeTypes
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.VirtualField

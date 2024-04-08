@@ -2,7 +2,7 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeFSet
 import ru.DmN.pht.processor.ctx.global
-import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.isConstClass
 import ru.DmN.pht.utils.node.NodeTypes.FSET_
 import ru.DmN.siberia.ast.NodeNodesList

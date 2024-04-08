@@ -1,10 +1,10 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeNamedList
-import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.node.processed
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor

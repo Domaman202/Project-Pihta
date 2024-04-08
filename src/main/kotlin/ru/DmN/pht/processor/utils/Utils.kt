@@ -1,15 +1,126 @@
 @file:Suppress("NOTHING_TO_INLINE", "UNCHECKED_CAST")
 package ru.DmN.pht.processor.utils
 
+import ru.DmN.pht.ast.NodeGetOrName
 import ru.DmN.pht.module.utils.Module
-import ru.DmN.pht.utils.compute
+import ru.DmN.pht.processors.IAdaptableProcessor
+import ru.DmN.pht.processors.IInlinableProcessor
+import ru.DmN.pht.processors.IStdNodeProcessor
 import ru.DmN.pht.utils.lenArgs
+import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.utils.mapMutable
 import ru.DmN.siberia.utils.vtype.VirtualMethod
+import ru.DmN.siberia.utils.vtype.VirtualType
+
+fun Processor.isInlinable(node: NodeGetOrName, ctx: ProcessingContext): Boolean =
+    get(node, ctx).let {
+        if (it is IInlinableProcessor<Node>)
+            it.isInlinable(node, this, ctx)
+        else false
+    }
+
+fun Processor.inline(node: NodeGetOrName, ctx: ProcessingContext): Node =
+    get(node, ctx).let {
+        if (it is IInlinableProcessor<Node>)
+            it.inline(node, this, ctx)
+        else throw UnsupportedOperationException()
+    }
+
+inline fun <T : Node?> Processor.inline(node: Node, other: T, ctx: ProcessingContext): T =
+    get(node, ctx).let {
+        if (it is IInlinableProcessor<Node> && it.isInlinable(node, this, ctx))
+            it.inline(node, this, ctx) as T
+        else other
+    }
+
+fun Processor.processNodes(node: INodesList, ctx: ProcessingContext, valMode: Boolean): MutableList<Node> =
+    node.nodes.mapMutable { process(it, ctx, valMode)!! }
+
+fun Processor.computeStringNodes(node: INodesList, ctx: ProcessingContext): List<String> =
+    node.nodes.map { computeString(it, ctx) }
+
+fun Processor.compute(node: Node, ctx: ProcessingContext): Node =
+    get(node, ctx).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.compute(node, this, ctx)
+        else node
+    }
+
+fun Processor.computeList(node: Node, ctx: ProcessingContext): List<Node> =
+    computeListOr(node, ctx)!!
+
+fun Processor.computeListOr(node: Node, ctx: ProcessingContext): List<Node>? =
+    get(node, ctx).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.computeList(node, this, ctx)
+        else null
+    }
+
+fun Processor.computeType(node: Node, ctx: ProcessingContext): VirtualType =
+    computeTypeOr(node, ctx)!!
+
+fun Processor.computeTypeOr(node: Node, ctx: ProcessingContext): VirtualType? =
+    get(node, ctx).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.computeType(node, this, ctx)
+        else throw UnsupportedOperationException()
+    }
+
+fun Processor.computeTypeWithGens(gens: Map<String, VirtualType>, node: Node, ctx: ProcessingContext): VirtualType =
+    computeTypeWithGensOr(gens, node, ctx)!!
+
+fun Processor.computeTypeWithGensOr(gens: Map<String, VirtualType>, node: Node, ctx: ProcessingContext): VirtualType? =
+    get(node, ctx).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.computeTypeWithGens(gens, node, this, ctx)
+        else throw UnsupportedOperationException()
+    }
+
+fun Processor.computeTypesOr(node: Node, ctx: ProcessingContext): List<VirtualType>? =
+    get(node, ctx).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.computeTypes(node, this, ctx)
+        else null
+    }
+
+fun Processor.computeGenericType(node: Node, ctx: ProcessingContext): String? =
+    get(node, ctx).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.computeGenericType(node, this, ctx)
+        else throw UnsupportedOperationException()
+    }
+
+fun Processor.computeString(node: Node, ctx: ProcessingContext): String =
+    computeStringOr(node, ctx)!!
+
+fun Processor.computeStringOr(node: Node, ctx: ProcessingContext): String? =
+    get(node, ctx).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.computeString(node, this, ctx)
+        else throw UnsupportedOperationException()
+    }
+
+fun Processor.computeInt(node: Node, ctx: ProcessingContext): Int =
+    computeIntOr(node, ctx)!!
+
+fun Processor.computeIntOr(node: Node, ctx: ProcessingContext): Int? =
+    get(node, ctx).let {
+        if (it is IStdNodeProcessor<Node>)
+            it.computeInt(node, this, ctx)
+        else throw UnsupportedOperationException()
+    }
+
+fun Processor.adaptToType(type: VirtualType, node: Node, ctx: ProcessingContext): Node =
+    get(node, ctx).let {
+        if (it is IAdaptableProcessor<Node>)
+            it.adaptToType(type, node, this, ctx)
+        else node
+    }
 
 /**
  * Возвращает обработчик нод из прошлых (вышестоящих) модулей.
@@ -57,7 +168,8 @@ fun <T : NodeNodesList> processNoValue(node: T, processor: Processor, ctx: Proce
     return node
 }
 
-inline fun sliceInsert(list: MutableList<Any?>, index: Int, elements: List<Any?>) {
+inline fun <T> sliceInsert(list: MutableList<T>, index: Int, elements: List<T>) {
+    list as MutableList<T?>
     val right = list.subList(index + 1, list.size).toList()
     for (i in list.size until elements.size + index + right.size)
         list.add(null)

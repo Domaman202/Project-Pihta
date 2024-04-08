@@ -10,10 +10,10 @@ import ru.DmN.pht.processor.ctx.classes
 import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.pht.processor.ctx.method
 import ru.DmN.pht.processor.utils.Static
+import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.processor.utils.computeValues
 import ru.DmN.pht.processor.utils.processValues
 import ru.DmN.pht.utils.InlineVariable
-import ru.DmN.pht.utils.computeString
 import ru.DmN.pht.utils.forEach
 import ru.DmN.pht.utils.node.NodeTypes.GET_
 import ru.DmN.pht.utils.node.NodeTypes.MCALL_

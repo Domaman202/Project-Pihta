@@ -6,7 +6,7 @@ import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.ctx.with
-import ru.DmN.pht.utils.*
+import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.utils.node.NodeTypes.EFN_
 import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_A
 import ru.DmN.pht.utils.vtype.PhtVirtualMethod

@@ -4,8 +4,8 @@ import ru.DmN.pht.ast.NodeEField
 import ru.DmN.pht.processor.ctx.EnumConstContext
 import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.pht.processor.ctx.enum
-import ru.DmN.pht.utils.computeList
-import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.processor.utils.computeList
+import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.node.NodeTypes.EFLD_
 import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.ast.Node

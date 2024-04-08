@@ -2,7 +2,7 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeFGet
 import ru.DmN.pht.ast.NodeFGet.Type.*
-import ru.DmN.pht.utils.computeType
+import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
@@ -18,9 +18,10 @@ object NRFGet : INodeProcessor<NodeFGet> {
         }
         return (if (node.type == STATIC) processor.computeType(node.nodes[0], ctx) else processor.calc(node.nodes[0], ctx)!!)
             .fields
-            .asSequence()
-            .filter{ it.name == node.name && filter(it) }
-            .first()
+            .stream()
+            .filter { it.name == node.name && filter(it) }
+            .findFirst()
+            .get()
             .type
     }
 }

@@ -1,7 +1,7 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.processor.ctx.global
-import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.node.nodeValue
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList

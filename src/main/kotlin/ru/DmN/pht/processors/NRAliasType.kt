@@ -2,10 +2,10 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.helper.ast.NodeAliasType
 import ru.DmN.pht.processor.ctx.global
+import ru.DmN.pht.processor.utils.computeList
+import ru.DmN.pht.processor.utils.computeStringNodes
 import ru.DmN.pht.utils.Platforms.CPP
 import ru.DmN.pht.utils.Platforms.JVM
-import ru.DmN.pht.utils.computeList
-import ru.DmN.pht.utils.computeStringNodes
 import ru.DmN.pht.utils.node.NodeTypes.ALIAS_TYPE_
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.NodeNodesList

@@ -115,16 +115,8 @@ object NRMCall : INodeProcessor<NodeNodesList> {
 
     private fun finalize(method: VirtualMethod, args: List<Node>, instance: Node, node: NodeMCall, processor: Processor, ctx: ProcessingContext, valMode: Boolean) {
         node.inline =
-            if (method.inline != null)
-                method.inline!!.copy()
-            else {
-                val np = processor.get(instance, ctx)
-                if (np is IInlinableProcessor<*> && (np as IInlinableProcessor<Node>).isInlinable(instance, processor, ctx) && (node.method.modifiers.inline || node.method.declaringClass.isInterface))
-                    np.inline(instance, processor, ctx) // todo: Проверка что это именно подстановка лямбды.
-                else return
-            }.run {
+            (method.inline?.copy() ?: processor.inline<Node?>(instance, null, ctx) ?: return).run {
                 this as NodeInlBodyA
-                val context = if (this is NodeInlBodyB) this.ctx else ctx // todo: maybe inline?
                 val bctx = BodyContext.of(ctx.body)
                 method.argsn.asSequence().let {
                     if (method.extension == null)
@@ -134,7 +126,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                         it.drop(1)
                     }
                 }.forEachIndexed { i, it -> NRInlDef.process(it, args[i], bctx) }
-                processor.process(this, context.with(bctx), valMode)
+                processor.process(this, (if (this is NodeInlBodyB) this.ctx else ctx).with(bctx), valMode)
             }
     }
 

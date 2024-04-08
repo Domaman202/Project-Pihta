@@ -5,14 +5,14 @@ import ru.DmN.pht.ast.NodeMath
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.utils.ICastable
 import ru.DmN.pht.processor.utils.MethodFindResultB
-import ru.DmN.pht.utils.adaptToType
+import ru.DmN.pht.processor.utils.adaptToType
+import ru.DmN.pht.processor.utils.processNodes
 import ru.DmN.pht.utils.node.NodeParsedTypes.SHIFT_LEFT
 import ru.DmN.pht.utils.node.NodeParsedTypes.SHIFT_RIGHT
 import ru.DmN.pht.utils.node.NodeTypes.MCALL_
 import ru.DmN.pht.utils.node.nodeAs
 import ru.DmN.pht.utils.node.nodeValueClass
 import ru.DmN.pht.utils.node.processed
-import ru.DmN.pht.utils.processNodes
 import ru.DmN.pht.utils.text
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList

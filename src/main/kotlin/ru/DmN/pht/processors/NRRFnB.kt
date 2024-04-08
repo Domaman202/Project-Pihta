@@ -3,8 +3,8 @@ package ru.DmN.pht.processors
 import ru.DmN.pht.ast.NodeRFn
 import ru.DmN.pht.processor.ctx.classes
 import ru.DmN.pht.processor.ctx.global
+import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.pht.processors.NRRFn.process
-import ru.DmN.pht.utils.computeType
 import ru.DmN.pht.utils.findLambdaMethodOrNull
 import ru.DmN.pht.utils.isConstClass
 import ru.DmN.pht.utils.lenArgsB

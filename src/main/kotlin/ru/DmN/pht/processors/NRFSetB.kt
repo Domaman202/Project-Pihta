@@ -7,7 +7,7 @@ import ru.DmN.pht.ast.NodeMCall.Type.VIRTUAL
 import ru.DmN.pht.ast.NodeValue
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.utils.Static
-import ru.DmN.pht.utils.computeString
+import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.node.NodeTypes.FSET_
 import ru.DmN.pht.utils.node.NodeTypes.MCALL_
 import ru.DmN.pht.utils.node.nodeAs

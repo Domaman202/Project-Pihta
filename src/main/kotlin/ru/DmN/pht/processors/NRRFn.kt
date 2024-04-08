@@ -3,7 +3,12 @@ package ru.DmN.pht.processors
 import ru.DmN.pht.ast.NodeRFn
 import ru.DmN.pht.processor.ctx.classes
 import ru.DmN.pht.processor.ctx.global
-import ru.DmN.pht.utils.*
+import ru.DmN.pht.processor.utils.computeString
+import ru.DmN.pht.processor.utils.computeType
+import ru.DmN.pht.utils.findLambdaMethod
+import ru.DmN.pht.utils.isConstClass
+import ru.DmN.pht.utils.isLiteral
+import ru.DmN.pht.utils.lenArgsB
 import ru.DmN.pht.utils.node.NodeTypes.RFN_
 import ru.DmN.pht.utils.node.nodeValueClass
 import ru.DmN.siberia.ast.NodeNodesList

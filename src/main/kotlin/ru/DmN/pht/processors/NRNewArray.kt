@@ -1,8 +1,8 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeNewArray
-import ru.DmN.pht.utils.compute
-import ru.DmN.pht.utils.computeType
+import ru.DmN.pht.processor.utils.compute
+import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.pht.utils.node.NodeTypes.NEW_ARRAY_
 import ru.DmN.pht.utils.vtype.arrayType
 import ru.DmN.siberia.ast.NodeNodesList
