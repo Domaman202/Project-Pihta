@@ -141,7 +141,7 @@ object NCDefn : IStdNodeCompiler<NodeDefn, MethodNode, Nothing> {
         body.variables.let { if (it is SubList) it.list else it }.forEach {
             visitLocalVariable(
                 it.name,
-                it.type!!.desc,
+                it.type.desc,
                 null,
                 body.start,
                 body.stop,

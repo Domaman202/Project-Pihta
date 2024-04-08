@@ -15,7 +15,7 @@ class BodyContext(
 ) : Iterable<BodyContext> {
     lateinit var stop: Label
 
-    fun add(name: String, type: VirtualType?): Variable =
+    fun add(name: String, type: VirtualType): Variable =
         Variable(name, type, lvi.getAndIncrement(), false).apply {
             variables += this
             if (type == VirtualType.LONG || type == VirtualType.DOUBLE) {

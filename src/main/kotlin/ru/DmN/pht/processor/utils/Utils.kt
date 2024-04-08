@@ -17,13 +17,6 @@ import ru.DmN.siberia.utils.mapMutable
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-fun Processor.isInlinable(node: NodeGetOrName, ctx: ProcessingContext): Boolean =
-    get(node, ctx).let {
-        if (it is IInlinableProcessor<Node>)
-            it.isInlinable(node, this, ctx)
-        else false
-    }
-
 fun Processor.inline(node: NodeGetOrName, ctx: ProcessingContext): Node =
     get(node, ctx).let {
         if (it is IInlinableProcessor<Node>)
@@ -68,16 +61,6 @@ fun Processor.computeTypeOr(node: Node, ctx: ProcessingContext): VirtualType? =
     get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeType(node, this, ctx)
-        else throw UnsupportedOperationException()
-    }
-
-fun Processor.computeTypeWithGens(gens: Map<String, VirtualType>, node: Node, ctx: ProcessingContext): VirtualType =
-    computeTypeWithGensOr(gens, node, ctx)!!
-
-fun Processor.computeTypeWithGensOr(gens: Map<String, VirtualType>, node: Node, ctx: ProcessingContext): VirtualType? =
-    get(node, ctx).let {
-        if (it is IStdNodeProcessor<Node>)
-            it.computeTypeWithGens(gens, node, this, ctx)
         else throw UnsupportedOperationException()
     }
 

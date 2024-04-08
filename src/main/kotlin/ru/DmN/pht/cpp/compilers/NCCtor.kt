@@ -6,10 +6,10 @@ import ru.DmN.pht.cpp.compilers.NCDefn.insertArgs
 import ru.DmN.pht.cpp.utils.vtype.normalizedName
 import ru.DmN.pht.jvm.utils.vtype.superclass
 import ru.DmN.pht.processor.ctx.with
+import ru.DmN.pht.utils.vtype.simpleName
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.utils.vtype.simpleName
 
 object NCCtor : ICppNRCompiler<NodeDefn> {
     override fun StringBuilder.compile(node: NodeDefn, compiler: Compiler, ctx: CompilationContext) {

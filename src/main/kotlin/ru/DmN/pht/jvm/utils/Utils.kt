@@ -21,7 +21,7 @@ fun Compiler.computeValue(node: Node, ctx: CompilationContext): Any? =
 
 fun load(variable: Variable, node: MethodVisitor) {
     if (!variable.tmp) {
-        load(variable.type?.name, variable.id, node)
+        load(variable.type.name, variable.id, node)
     }
 }
 
@@ -40,7 +40,7 @@ fun load(type: String?, id: Int, node: MethodVisitor) {
 }
 
 fun storeCast(variable: Variable, from: VirtualType, node: MethodVisitor) {
-    val to = variable.type()
+    val to = variable.type
     val tmp = Variable("tmp$${variable.hashCode() + from.hashCode()}", from, -1, true)
     if (from.isPrimitive != to.isPrimitive)
         if (to.isPrimitive)
@@ -48,13 +48,13 @@ fun storeCast(variable: Variable, from: VirtualType, node: MethodVisitor) {
         else
             primitiveToObject(tmp, node)
     else if (from.isPrimitive && to.isPrimitive)
-        bytecodeCast(tmp.type().name, to.name, node)
+        bytecodeCast(tmp.type.name, to.name, node)
     store(variable, node)
 }
 
 fun store(variable: Variable, node: MethodVisitor) {
     if (!variable.tmp) {
-        store(variable.type().name, variable.id, node)
+        store(variable.type.name, variable.id, node)
     }
 }
 
@@ -121,7 +121,7 @@ fun primitiveToObject(variable: Variable, node: MethodVisitor): VirtualType? {
     val start = Label()
     node.visitLabel(start)
     load(variable, node)
-    return when (variable.type().name) {
+    return when (variable.type.name) {
         "boolean"   -> primitiveToObject(node, 'Z', VirtualType.ofKlass("java.lang.Boolean"))
         "byte"      -> primitiveToObject(node, 'B', VirtualType.ofKlass("java.lang.Byte"))
         "short"     -> primitiveToObject(node, 'S', VirtualType.ofKlass("java.lang.Short"))
@@ -130,7 +130,7 @@ fun primitiveToObject(variable: Variable, node: MethodVisitor): VirtualType? {
         "long"      -> primitiveToObject(node, 'J', VirtualType.ofKlass("java.lang.Long"))
         "float"     -> primitiveToObject(node, 'F', VirtualType.ofKlass("java.lang.Float"))
         "double"    -> primitiveToObject(node, 'D', VirtualType.ofKlass("java.lang.Double"))
-        else -> variable.type
+        else        -> variable.type
     }
 }
 
@@ -142,7 +142,7 @@ private fun primitiveToObject(node: MethodVisitor, input: Char, type: VirtualTyp
 fun objectToPrimitive(variable: Variable, node: MethodVisitor): VirtualType? {
     val start = Label()
     node.visitLabel(start)
-    return when (val type = variable.type().name) {
+    return when (val type = variable.type.name) {
         "java.lang.Boolean"     -> objectToPrimitive(variable, node, type, VirtualType.BOOLEAN, 'Z')
         "java.lang.Byte"        -> objectToPrimitive(variable, node, type, VirtualType.BYTE, 'B')
         "java.lang.Short"       -> objectToPrimitive(variable, node, type, VirtualType.SHORT, 'S')
@@ -151,7 +151,7 @@ fun objectToPrimitive(variable: Variable, node: MethodVisitor): VirtualType? {
         "java.lang.Long"        -> objectToPrimitive(variable, node, type, VirtualType.LONG, 'J')
         "java.lang.Float"       -> objectToPrimitive(variable, node, type, VirtualType.FLOAT, 'F')
         "java.lang.Double"      -> objectToPrimitive(variable, node, type, VirtualType.DOUBLE, 'D')
-        else -> variable.type
+        else                    -> variable.type
     }
 }
 

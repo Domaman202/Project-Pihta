@@ -33,12 +33,6 @@ inline fun <T : IContextCollection<T>> T.with(ctx: BodyContext) =
 inline fun <T : IContextCollection<T>> T.with(ctx: MacroContext) =
     this.with(ContextKeys.MACRO, ctx)
 
-inline fun IContextCollection<*>.isEnum() =
-    contexts.containsKey(ContextKeys.ENUM)
-inline fun IContextCollection<*>.isClass() =
-    contexts.containsKey(ContextKeys.CLASS) || isEnum()
-inline fun IContextCollection<*>.isMethod() =
-    this.methodOrNull != null
 inline fun IContextCollection<*>.isBody() =
     this.bodyOrNull != null
 inline fun IContextCollection<*>.isMacro() =

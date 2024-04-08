@@ -6,9 +6,9 @@ import ru.DmN.pht.cpp.utils.vtype.normalizedName
 import ru.DmN.pht.jvm.utils.vtype.superclass
 import ru.DmN.pht.processor.ctx.with
 import ru.DmN.pht.utils.meta.MetadataKeys
+import ru.DmN.pht.utils.vtype.simpleName
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.utils.vtype.simpleName
 
 object NCCls : ICppNRCompiler<NodeType> {
     override fun StringBuilder.compile(node: NodeType, compiler: Compiler, ctx: CompilationContext) {

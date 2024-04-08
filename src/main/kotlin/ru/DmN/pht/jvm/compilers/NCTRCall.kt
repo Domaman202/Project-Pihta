@@ -24,7 +24,7 @@ object NCTRCall : INodeCompiler<NodeNodesList> {
                 .asSequence()
                 .map { compiler.compileVal(it, ctx) }
                 .onEach { load(it, this) }
-                .map { it.type() }
+                .map { it.type }
                 .onEach { if (this == LONG || this == DOUBLE) i += 2 else i++ }
                 .toList()
                 .forEach {

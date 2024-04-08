@@ -23,7 +23,7 @@ object NCDef : INodeCompiler<NodeDef> {
                     it.value?.let {
                         val value = compiler.compileVal(it, ctx)
                         load(value, this)
-                        storeCast(variable, value.type(), this)
+                        storeCast(variable, value.type, this)
                     }
                 }
             }

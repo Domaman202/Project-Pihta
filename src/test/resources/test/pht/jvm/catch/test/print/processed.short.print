@@ -126,34 +126,37 @@
 |	|	|	|	|	[DEFN_
 |	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	[CATCH_
-|	|	|	|	|	|	|	(catchers:
-|	|	|	|	|	|	|	|	[
-|	|	|	|	|	|	|	|	|	(var = e)
-|	|	|	|	|	|	|	|	|	(exception = java.lang.RuntimeException)
-|	|	|	|	|	|	|	|	|	[PROGN_
-|	|	|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
-|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_ var e]
-|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[CATCH_
+|	|	|	|	|	|	|	|	(catchers:
+|	|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	|	(var = e)
+|	|	|	|	|	|	|	|	|	|	(exception = java.lang.RuntimeException)
+|	|	|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_ var e]
+|	|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	[
-|	|	|	|	|	|	|	|	|	(var = _)
-|	|	|	|	|	|	|	|	|	(exception = java.lang.Exception)
-|	|	|	|	|	|	|	|	|	[PROGN_
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = NIL)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	|	(var = _)
+|	|	|	|	|	|	|	|	|	|	(exception = java.lang.Exception)
+|	|	|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = NIL)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	[THROW_
-|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	(type = VT(java.lang.RuntimeException))
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	[THROW_
+|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.RuntimeException))
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]

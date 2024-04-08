@@ -16,6 +16,7 @@ import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NCCatch : INodeCompiler<NodeCatch> {
     override fun compile(node: NodeCatch, compiler: Compiler, ctx: CompilationContext) =
@@ -28,7 +29,7 @@ object NCCatch : INodeCompiler<NodeCatch> {
             { load(NCDefault.compileVal(node, compiler, ctx), it) },
             { it, context, mctx -> load(compiler.compileVal(it, context), mctx) }
         )
-        return Variable.tmp(node, node.type)
+        return Variable.tmp(node, node.type ?: VirtualType.VOID)
     }
 
 

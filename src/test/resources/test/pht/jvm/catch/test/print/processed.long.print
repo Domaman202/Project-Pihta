@@ -141,40 +141,43 @@
 |	|	|	|	|	|	(name = test)
 |	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
 |	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[CATCH_
-|	|	|	|	|	|	|	(catchers:
-|	|	|	|	|	|	|	|	[
-|	|	|	|	|	|	|	|	|	(var = e)
-|	|	|	|	|	|	|	|	|	(exception = java.lang.RuntimeException)
-|	|	|	|	|	|	|	|	|	[PROGN_
-|	|	|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
-|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[GET_
-|	|	|	|	|	|	|	|	|	|	|	|	|	(name = e)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = var)
-|	|	|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
-|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[CATCH_
+|	|	|	|	|	|	|	|	(catchers:
+|	|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	|	(var = e)
+|	|	|	|	|	|	|	|	|	|	(exception = java.lang.RuntimeException)
+|	|	|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	|	|	(method = toString()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(name = e)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
+|	|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
+|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	[
-|	|	|	|	|	|	|	|	|	(var = _)
-|	|	|	|	|	|	|	|	|	(exception = java.lang.Exception)
-|	|	|	|	|	|	|	|	|	[PROGN_
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = NIL)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	|	(var = _)
+|	|	|	|	|	|	|	|	|	|	(exception = java.lang.Exception)
+|	|	|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = NIL)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	[THROW_
-|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	(type = VT(java.lang.RuntimeException))
-|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	[THROW_
+|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.RuntimeException))
+|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]

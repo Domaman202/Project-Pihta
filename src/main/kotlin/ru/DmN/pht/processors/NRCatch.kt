@@ -35,7 +35,7 @@ object NRCatch : INodeProcessor<NodeNodesList> {
         return NodeCatch(
             info.withType(CATCH_),
             node.nodes.dropMutable(offset + 1),
-            if (offset == 1) processor.computeType(node.nodes[0], ctx) else null,
+            if (valMode && offset == 1) processor.computeType(node.nodes[0], ctx) else null,
             processor.computeList(node.nodes[offset], ctx).map {
                 val catcher = processor.computeList(it, ctx)
                 val variable = processor.computeString(catcher[0], ctx)

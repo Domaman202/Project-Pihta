@@ -1,6 +1,8 @@
 package ru.DmN.pht.parsers
 
 import ru.DmN.pht.ast.NodeFMGet
+import ru.DmN.pht.parser.utils.isNaming
+import ru.DmN.pht.parser.utils.isOperation
 import ru.DmN.pht.utils.node.NodeParsedTypes.FGET_B
 import ru.DmN.pht.utils.node.NodeParsedTypes.GET
 import ru.DmN.pht.utils.node.nodeValue
@@ -8,8 +10,6 @@ import ru.DmN.pht.utils.node.nodeValueClass
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.lexer.Token
-import ru.DmN.siberia.lexer.isNaming
-import ru.DmN.siberia.lexer.isOperation
 import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser

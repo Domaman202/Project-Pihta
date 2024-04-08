@@ -21,7 +21,7 @@ object NCIf : INodeCompiler<NodeNodesList> {
     override fun compileVal(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Variable {
         var type: VirtualType? = null
         insertIf(node, { type = compiler.compileVal(it, ctx).apply { load(this, ctx.method.node) }.type }, compiler, ctx)
-        return Variable.tmp(node, type)
+        return Variable.tmp(node, type!!)
     }
 
     private fun insertIf(node: NodeNodesList, compile: (Node) -> Unit, compiler: Compiler, ctx: CompilationContext) {

@@ -27,7 +27,7 @@ abstract class NVC {
         override val name: String
             get() = variable.name
         override val type: VirtualType
-            get() = variable.type()
+            get() = variable.type
 
         override fun load(node: MethodNode, i: Int) {
             load(if (i == -1) variable else Variable(variable.name, variable.type, i, false), node)

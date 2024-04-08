@@ -9,6 +9,7 @@ import ru.DmN.pht.compiler.java.utils.primitiveToObject
 import ru.DmN.pht.jvm.compiler.ctx.method
 import ru.DmN.pht.jvm.utils.vtype.desc
 import ru.DmN.pht.jvm.utils.vtype.jvmName
+import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.utils.vtype.isArray
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
@@ -19,7 +20,7 @@ object NCAs : INodeCompiler<NodeIsAs> {
     override fun compileVal(node: NodeIsAs, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.run {
             val value = compiler.compileVal(node.nodes[0], ctx)
-            val of = value.type()
+            val of = value.type ?: ctx.global.getType("Any")
             val to = node.type
             if (of.isPrimitive) {
                 if (to.isPrimitive) {

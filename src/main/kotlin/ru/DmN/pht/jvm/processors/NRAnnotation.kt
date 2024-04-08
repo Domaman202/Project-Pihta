@@ -2,7 +2,7 @@ package ru.DmN.pht.jvm.processors
 
 import ru.DmN.pht.ast.NodeMetaNodesList
 import ru.DmN.pht.jvm.ast.NodeAnnotation
-import ru.DmN.pht.jvm.node.NodeTypes.ANN_ANN_
+import ru.DmN.pht.jvm.utils.node.NodeTypes.ANN_ANN_
 import ru.DmN.pht.processor.utils.computeList
 import ru.DmN.pht.processor.utils.computeListOr
 import ru.DmN.pht.processor.utils.computeString

@@ -1,6 +1,6 @@
 package ru.DmN.pht.jvm.processors
 
-import ru.DmN.pht.jvm.node.NodeTypes.ANN_LIST_
+import ru.DmN.pht.jvm.utils.node.NodeTypes.ANN_LIST_
 import ru.DmN.pht.processor.utils.processValue
 import ru.DmN.pht.utils.vtype.arrayType
 import ru.DmN.siberia.ast.NodeNodesList

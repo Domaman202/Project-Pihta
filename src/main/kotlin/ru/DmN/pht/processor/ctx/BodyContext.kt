@@ -13,7 +13,7 @@ class BodyContext(val children: MutableList<BodyContext>, val variables: Mutable
     operator fun get(name: String) =
         variables.find { it.name == name }
 
-    fun addVariable(name: String, type: VirtualType?, tmp: Boolean = false): Variable =
+    fun addVariable(name: String, type: VirtualType, tmp: Boolean = false): Variable =
         Variable(name, type, nvi.getAndIncrement(), tmp).apply { variables += this }
 
     companion object {

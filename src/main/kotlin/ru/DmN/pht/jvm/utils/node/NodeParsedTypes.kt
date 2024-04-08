@@ -1,6 +1,6 @@
-package ru.DmN.pht.jvm.node
+package ru.DmN.pht.jvm.utils.node
 
-import ru.DmN.pht.jvm.node.NodeTypes.*
+import ru.DmN.pht.jvm.utils.node.NodeTypes.*
 import ru.DmN.pht.utils.node.IParsedNodeType
 import ru.DmN.siberia.utils.node.INodeType
 

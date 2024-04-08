@@ -20,7 +20,7 @@
                 [_ ^Exception        (unit)]]
             (throw (new ^Error))))
     (test-fn 3
-        (catch [
+        (catch ^String [
                 [e ^RuntimeException (#toString e)]
                 [_ ^Exception        nil]]
             (throw (new ^RuntimeException)))))

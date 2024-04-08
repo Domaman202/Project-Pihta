@@ -2,7 +2,6 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeFGet
-import ru.DmN.pht.ast.NodeInlBodyA
 import ru.DmN.pht.ast.NodeInlBodyB
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.ast.NodeMCall.Type.*
@@ -116,7 +115,6 @@ object NRMCall : INodeProcessor<NodeNodesList> {
     private fun finalize(method: VirtualMethod, args: List<Node>, instance: Node, node: NodeMCall, processor: Processor, ctx: ProcessingContext, valMode: Boolean) {
         node.inline =
             (method.inline?.copy() ?: processor.inline<Node?>(instance, null, ctx) ?: return).run {
-                this as NodeInlBodyA
                 val bctx = BodyContext.of(ctx.body)
                 method.argsn.asSequence().let {
                     if (method.extension == null)

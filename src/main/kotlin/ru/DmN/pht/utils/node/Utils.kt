@@ -153,8 +153,6 @@ fun nodeWithGens(info: INodeInfo, node: Node, generics: Sequence<Node>) =
         mutableListOf(node).apply { this.addAll(generics) })
 
 // Аннотации
-fun nodeInline(info: INodeInfo, node: Node) =
-    NodeMetaNodesList(info.withType(ANN_INLINE), mutableListOf(node))
 fun nodeStatic(info: INodeInfo, nodes: MutableList<Node>) =
     NodeMetaNodesList(info.withType(ANN_STATIC), nodes)
 fun nodeStatic(info: INodeInfo, node: Node) =

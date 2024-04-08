@@ -1,4 +1,4 @@
-package ru.DmN.pht.jvm.node
+package ru.DmN.pht.jvm.utils.node
 
 import ru.DmN.siberia.utils.node.INodeType
 import ru.DmN.siberia.utils.node.NodeTypes.Type

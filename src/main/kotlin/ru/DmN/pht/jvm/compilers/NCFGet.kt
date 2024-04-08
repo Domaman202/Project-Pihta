@@ -23,7 +23,7 @@ object NCFGet : INodeCompiler<NodeFGet> {
                 }
 
                 NodeFGet.Type.INSTANCE -> {
-                    val clazz = compiler.compileVal(node.nodes[0], ctx).apply { load(this, this@run) }.type()
+                    val clazz = compiler.compileVal(node.nodes[0], ctx).apply { load(this, this@run) }.type
                     val field = clazz.fields.asSequence().filter { !it.modifiers.isStatic }.filter { it.name == node.name }.first()
                     visitFieldInsn(Opcodes.GETFIELD, clazz.jvmName, node.name, field.desc)
                     Variable.tmp(node, field.type)

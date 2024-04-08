@@ -15,7 +15,7 @@ object NCSet : INodeCompiler<NodeSet> {
         ctx.method.node.run {
             val value = compiler.compileVal(node.nodes[0], ctx)
             load(value, this)
-            storeCast(ctx.body[node.name.normalizeName()]!!, value.type(), this)
+            storeCast(ctx.body[node.name.normalizeName()]!!, value.type, this)
         }
     }
 }

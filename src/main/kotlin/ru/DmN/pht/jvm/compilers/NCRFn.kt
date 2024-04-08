@@ -65,6 +65,6 @@ object NCRFn : INodeCompiler<NodeRFn> {
                 }
             }
         }
-        return Variable.tmp(node, node.type)
+        return Variable.tmp(node, node.type!!)
     }
 }

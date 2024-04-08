@@ -41,14 +41,15 @@
 		(cls [] Test3 [^java.lang.Object]
 			(@static
 				(defn [] test ^dynamic []
-					(catch [
-						[e ^java.lang.RuntimeException
-							(progn
-								(mcall
-									(get e)
-									toString))]
-						[_ ^java.lang.Exception
-							(progn
-								nil)]]
-						(throw
-							(new ^java.lang.RuntimeException))))))))
+					(as ^dynamic
+						(catch ^java.lang.String [
+							[e ^java.lang.RuntimeException
+								(progn
+									(mcall
+										(get e)
+										toString))]
+							[_ ^java.lang.Exception
+								(progn
+									nil)]]
+							(throw
+								(new ^java.lang.RuntimeException)))))))))

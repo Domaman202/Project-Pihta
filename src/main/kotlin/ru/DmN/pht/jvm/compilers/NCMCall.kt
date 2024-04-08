@@ -50,7 +50,7 @@ object NCMCall : INodeCompiler<NodeMCall> {
         } else {
             val result = compiler.compileVal(node.inline!!, ctx)
             load(result, mnode)
-            Pair(mnode, result.type())
+            Pair(mnode, result.type)
         }
     }
 }

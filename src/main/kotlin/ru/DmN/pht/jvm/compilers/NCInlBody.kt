@@ -33,6 +33,6 @@ object NCInlBody : INodeCompiler<NodeInlBodyA> {
             load(NCDefault.compileVal(node, compiler, ctx.with { visitJumpInsn(Opcodes.GOTO, endLabel) }), this)
             visitLabel(endLabel)
         }
-        return Variable.tmp(node, node.type)
+        return Variable.tmp(node, node.type!!)
     }
 }

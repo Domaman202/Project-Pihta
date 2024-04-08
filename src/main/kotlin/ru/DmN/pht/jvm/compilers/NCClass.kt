@@ -7,6 +7,7 @@ import ru.DmN.pht.compiler.java.ctx.ClassContext
 import ru.DmN.pht.jvm.compiler.ctx.classes
 import ru.DmN.pht.jvm.compiler.ctx.method
 import ru.DmN.pht.jvm.compiler.ctx.with
+import ru.DmN.pht.jvm.compiler.utils.desc
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
 import ru.DmN.pht.jvm.utils.vtype.*
 import ru.DmN.pht.utils.node.NodeTypes.*
@@ -15,7 +16,6 @@ import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.CompilingStage
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.Variable
-import ru.DmN.siberia.utils.desc
 
 object NCClass : IStdNodeCompiler<NodeType, ClassNode, Nothing> {
     override fun compile(node: NodeType, compiler: Compiler, ctx: CompilationContext) {

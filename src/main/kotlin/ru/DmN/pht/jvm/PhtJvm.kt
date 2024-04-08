@@ -5,8 +5,8 @@ import ru.DmN.pht.ast.ISyncNode
 import ru.DmN.pht.compiler.java.compilers.*
 import ru.DmN.pht.jvm.compiler.ctx.classes
 import ru.DmN.pht.jvm.compilers.*
-import ru.DmN.pht.jvm.node.NodeParsedTypes.*
-import ru.DmN.pht.jvm.node.NodeTypes.*
+import ru.DmN.pht.jvm.utils.node.NodeParsedTypes.*
+import ru.DmN.pht.jvm.utils.node.NodeTypes.*
 import ru.DmN.pht.jvm.processors.NRAnnotation
 import ru.DmN.pht.jvm.processors.NRClassOf
 import ru.DmN.pht.jvm.processors.NRList

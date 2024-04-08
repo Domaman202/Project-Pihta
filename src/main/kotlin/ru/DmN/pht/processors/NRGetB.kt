@@ -54,7 +54,7 @@ object NRGetB : INodeProcessor<NodeNodesList> {
             return if (valMode)
                 if (it is InlineVariable)
                     processor.process(it.value, ctx, true)
-                else NodeGet(info.withType(GET_), name, VARIABLE, it.type())
+                else NodeGet(info.withType(GET_), name, VARIABLE, it.type)
             else null
         }
         val clazz = ctx.clazz

@@ -13,7 +13,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 object NRGetC : INodeProcessor<NodeGet> {
     override fun calc(node: NodeGet, processor: Processor, ctx: ProcessingContext): VirtualType =
         when (node.type) {
-            VARIABLE -> ctx.body[node.name]!!.type()
+            VARIABLE -> ctx.body[node.name]!!.type
             THIS_FIELD -> (ctx.clazz.fields.find { !it.modifiers.isStatic && it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { !it.modifiers.isStatic && it.name == node.name } }.first()!!).type
             THIS_STATIC_FIELD -> (ctx.clazz.fields.find { it.modifiers.isStatic && it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.modifiers.isStatic && it.name == node.name } }.first()!!).type
         }

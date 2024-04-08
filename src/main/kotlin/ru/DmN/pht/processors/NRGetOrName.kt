@@ -45,7 +45,7 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
         ctx.body.variables
             .asSequence()
             .filter { it.name == node.name }
-            .map { it.type() }
+            .map { it.type }
             .toList()
 
     override fun computeGenericType(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): String? =
@@ -64,7 +64,7 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
         if (variable.isPresent)
             return variable.get()
         if (node.name == "super")
-            return lenArgs(ctx.body["this"]!!.type(), type)
+            return lenArgs(ctx.body["this"]!!.type, type)
         NRFGetB.findGetter(ctx.clazz, node.name, emptyList(), if (ctx.method.modifiers.static) Static.STATIC else Static.ANY, processor, ctx)?.let { return lenArgs(it.method.rettype, type) }
         return lenArgs((ctx.clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first() ?: return -1).type, type)
     }

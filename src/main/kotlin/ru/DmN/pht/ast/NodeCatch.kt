@@ -6,7 +6,7 @@ import ru.DmN.siberia.utils.indent
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-class NodeCatch(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualType?, val catchers: List<Triple<String, VirtualType, Node?>>) : NodeNodesList(info, nodes) {
+class NodeCatch(info: INodeInfo, nodes: MutableList<Node>, var type: VirtualType?, val catchers: List<Triple<String, VirtualType, Node?>>) : NodeNodesList(info, nodes) {
     override fun copy(): NodeCatch =
         NodeCatch(info, copyNodes(), type, catchers)
 

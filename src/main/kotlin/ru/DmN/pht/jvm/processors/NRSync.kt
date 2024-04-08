@@ -1,7 +1,7 @@
 package ru.DmN.pht.jvm.processors
 
 import ru.DmN.pht.jvm.ast.NodeSync
-import ru.DmN.pht.jvm.node.NodeTypes.SYNC_
+import ru.DmN.pht.jvm.utils.node.NodeTypes.SYNC_
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext

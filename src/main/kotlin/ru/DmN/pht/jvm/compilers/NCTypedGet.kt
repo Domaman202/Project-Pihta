@@ -11,6 +11,6 @@ import ru.DmN.siberia.utils.Variable
 object NCTypedGet : INodeCompiler<NodeTypedGet> {
     override fun compileVal(node: NodeTypedGet, compiler: Compiler, ctx: CompilationContext): Variable {
         val name = node.name.normalizeName()
-        return ctx.body.variables.find { it.type() == node.type && it.name == name }!!
+        return ctx.body.variables.find { it.type == node.type && it.name == name }!!
     }
 }

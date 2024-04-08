@@ -15,7 +15,7 @@ object NCAGet : INodeCompiler<NodeAGet> {
         ctx.method.node.run {
             val arr = compiler.compileVal(node.arr, ctx)
             load(arr, this)
-            val type = arr.type().componentType!!
+            val type = arr.type.componentType!!
             load(compiler.compileVal(node.index, ctx), this)
             visitInsn(
                 when (type) {

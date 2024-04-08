@@ -38,16 +38,16 @@ object NCASet : INodeCompiler<NodeNodesList> {
         }
 
     private fun MethodVisitor.visitAStore(arr: Variable, value: Variable) {
-        val componentType = arr.type().componentType!!
-        if (value.type().isPrimitive)
-            bytecodeCast(value.type().name, componentType.name, this)
+        val componentType = arr.type.componentType!!
+        if (value.type.isPrimitive)
+            bytecodeCast(value.type.name, componentType.name, this)
         else visitTypeInsn(Opcodes.CHECKCAST, componentType.jvmName)
         visitAStore(arr)
     }
 
     private fun MethodVisitor.visitAStore(arr: Variable) {
         visitInsn(
-            when (arr.type().componentType) {
+            when (arr.type.componentType) {
                 VirtualType.BOOLEAN,
                 VirtualType.BYTE,   -> Opcodes.BASTORE
                 VirtualType.SHORT   -> Opcodes.SASTORE

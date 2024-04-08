@@ -18,10 +18,10 @@ object NCFSet : INodeCompiler<NodeFSet> {
                     Opcodes.PUTSTATIC,
                     node.field.declaringClass.jvmName,
                     node.field.name,
-                    compiler.compileVal(node.nodes[1], ctx).apply { load(this, this@run) }.type().desc
+                    compiler.compileVal(node.nodes[1], ctx).apply { load(this, this@run) }.type.desc
                 )
             else {
-                val types = node.nodes.map { compiler.compileVal(it, ctx).apply { load(this, this@run) }.type() }
+                val types = node.nodes.map { compiler.compileVal(it, ctx).apply { load(this, this@run) }.type }
                 visitFieldInsn(Opcodes.PUTFIELD, node.field.declaringClass.jvmName, node.field.name, types[1].desc)
             }
         }

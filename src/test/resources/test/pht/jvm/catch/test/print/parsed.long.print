@@ -175,6 +175,10 @@
 |	|	|	|	(value = '3')
 |	|	|	]
 |	|	|	[CATCH
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'String')
+|	|	|	|	]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[GET_OR_NAME
