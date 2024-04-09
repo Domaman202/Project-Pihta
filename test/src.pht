@@ -1,11 +1,9 @@
-(progn
-    (import "java" [
-        [types [
-            java.lang.Exception
-            java.lang.RuntimeException
-            java.lang.Error]]])
-    (test-fn 0
-        (catch ^int [
-                [_ ^RuntimeException 12]
-                [_ ^Exception        21]]
-            (throw (new ^Exception)))))
+(app-fn
+    (def [[dmn 12]])
+    (println dmn)
+    (named-block first-block
+        (def [[dmn 21]])
+        (println dmn)
+        (named-block second-block
+            (def [[dmn 33]])
+            (println dmn@first-block))))

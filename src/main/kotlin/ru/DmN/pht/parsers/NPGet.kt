@@ -5,6 +5,7 @@ import ru.DmN.pht.parser.utils.isNaming
 import ru.DmN.pht.parser.utils.isOperation
 import ru.DmN.pht.utils.node.NodeParsedTypes.FGET_B
 import ru.DmN.pht.utils.node.NodeParsedTypes.GET
+import ru.DmN.pht.utils.node.nodeBGet
 import ru.DmN.pht.utils.node.nodeValue
 import ru.DmN.pht.utils.node.nodeValueClass
 import ru.DmN.siberia.ast.Node
@@ -56,7 +57,7 @@ object NPGet : INodeParser {
     }
 
     fun parse(info: INodeInfo, name: String, nodes: MutableList<Node>, static: Boolean, klass: Boolean): Node {
-        val parts = name.split("/", "#") as MutableList<String>
+        val parts = name.split('/')
         return parse(info, parts, parts.size, nodes, static, klass)
     }
 
@@ -65,7 +66,13 @@ object NPGet : INodeParser {
         return if (j == 0) {
             if (clazz)
                 nodeValueClass(info, parts[0])
-            else NodeNodesList(info.withType(GET), nodes.apply { add(0, nodeValue(info, parts[0])) })
+            else {
+                val first = parts[0]
+                val k = first.indexOf('@')
+                if (k > -1)
+                    nodeBGet(info, first.substring(0, k), first.substring(k + 1))
+                else NodeNodesList(info.withType(GET), nodes.apply { add(0, nodeValue(info, first)) })
+            }
         } else {
             val isStatic = static && j == 1
             NodeFMGet(

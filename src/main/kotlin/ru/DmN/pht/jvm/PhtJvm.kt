@@ -5,8 +5,6 @@ import ru.DmN.pht.ast.ISyncNode
 import ru.DmN.pht.compiler.java.compilers.*
 import ru.DmN.pht.jvm.compiler.ctx.classes
 import ru.DmN.pht.jvm.compilers.*
-import ru.DmN.pht.jvm.utils.node.NodeParsedTypes.*
-import ru.DmN.pht.jvm.utils.node.NodeTypes.*
 import ru.DmN.pht.jvm.processors.NRAnnotation
 import ru.DmN.pht.jvm.processors.NRClassOf
 import ru.DmN.pht.jvm.processors.NRList
@@ -14,6 +12,8 @@ import ru.DmN.pht.jvm.processors.NRSync
 import ru.DmN.pht.jvm.unparsers.NUAnnotation
 import ru.DmN.pht.jvm.unparsers.NUClassOf
 import ru.DmN.pht.jvm.unparsers.NUSync
+import ru.DmN.pht.jvm.utils.node.NodeParsedTypes.*
+import ru.DmN.pht.jvm.utils.node.NodeTypes.*
 import ru.DmN.pht.processors.NRSA
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.addSANP
@@ -84,6 +84,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(AS_,          NCAs)
         add(ASET_,        NCASet)
         // b
+        add(BGET_,        NCBGet)
         add(BODY_,        NCBody)
         add(BREAK_,       NCBreak)
         // c
@@ -111,7 +112,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(FN_,          NCDefault)
         add(FSET_,        NCFSet)
         // g
-        add(GET_,         NCGetA)
+        add(GET_,         NCGet)
         add(GREAT_,       NCCompare)
         add(GREAT_OR_EQ_, NCCompare)
         // i

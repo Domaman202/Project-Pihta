@@ -15,6 +15,7 @@ import ru.DmN.pht.jvm.utils.vtype.desc
 import ru.DmN.pht.jvm.utils.vtype.jvmName
 import ru.DmN.pht.jvm.utils.vtype.signature
 import ru.DmN.pht.utils.normalizeName
+import ru.DmN.pht.utils.uniqueName
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.Compiler
@@ -140,7 +141,7 @@ object NCDefn : IStdNodeCompiler<NodeDefn, MethodNode, Nothing> {
     private fun MethodNode.visit(body: BodyContext) {
         body.variables.let { if (it is SubList) it.list else it }.forEach {
             visitLocalVariable(
-                it.name,
+                it.uniqueName,
                 it.type.desc,
                 null,
                 body.start,

@@ -11,6 +11,7 @@ enum class NodeParsedTypes(override val operation: String, override val processe
     AS("as", AS_),
     ASET("aset", ASET_),
     // b
+    BGET("bget", BGET_),
     BODY("body", BODY_),
     BREAK("break", BREAK_),
     // c

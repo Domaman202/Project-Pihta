@@ -17,7 +17,7 @@ object NPGetOrName : INodeParser {
         return when (val text = tk.text!!) {
             ".", "super" -> NodeGetOrName(INodeInfo.of(NAME, ctx, token), text, false)
             else -> {
-                if (tk.text!!.contains("[/#]".toRegex()))
+                if (tk.text!!.contains("[/@]".toRegex()))
                     NPGet.parse(tk, mutableListOf(), parser, ctx, Token.operation(tk.line, "get!"))
                 else NodeGetOrName(INodeInfo.of(GET_OR_NAME, ctx, token), text, false)
             }

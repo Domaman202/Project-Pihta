@@ -52,6 +52,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(AS_GENS)
         addSNP(ASET)
         // b
+        addSNP(BGET)
         addSNP(BODY)
         addSNP(BREAK)
         // c
@@ -248,6 +249,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(ASET)
         addSNU(ASET_)
         // b
+        addSNU(BGET)
+        addSNU(BGET_)
         addSNU(BODY)
         addSNU(BODY_)
         addSNU(BREAK)
@@ -471,6 +474,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(ASET,          NRASet)
         add(ASET_,         NRASet)
         // b
+        add(BGET,          NRBGet)
+        add(BGET_,         NRBGetB)
         add(BODY,          NRBody)
         add(BODY_,         NRBody)
         add(BREAK,         NRBreakContinue)

@@ -36,6 +36,8 @@ fun nodeASet(info: INodeInfo, name: String, index: Int, value: Node) =
     NodeNodesList(info.withType(ASET),
         mutableListOf(nodeGetOrName(info, name), nodeValue(info, index), value))
 // b
+fun nodeBGet(info: INodeInfo, name: String, block: String) =
+    NodeNodesList(info.withType(BGET), mutableListOf(nodeValue(info, name), nodeValue(info, block)))
 fun nodeBody(info: INodeInfo, nodes: MutableList<Node>) =
     NodeNodesList(info.withType(BODY), nodes)
 // c

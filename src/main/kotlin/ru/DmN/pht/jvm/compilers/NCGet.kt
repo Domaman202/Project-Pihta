@@ -15,7 +15,7 @@ import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable
 
-object NCGetA : INodeCompiler<NodeGet> {
+object NCGet : INodeCompiler<NodeGet> {
     override fun compileVal(node: NodeGet, compiler: Compiler, ctx: CompilationContext): Variable {
         val name = node.name.normalizeName()
         return when (node.type) {

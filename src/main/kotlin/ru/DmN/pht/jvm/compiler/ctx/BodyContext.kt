@@ -17,7 +17,7 @@ class BodyContext(
 
     fun add(name: String, type: VirtualType): Variable =
         Variable(name, type, lvi.getAndIncrement(), false).apply {
-            variables += this
+            variables.add(0, this)
             if (type == VirtualType.LONG || type == VirtualType.DOUBLE) {
                 lvi.incrementAndGet()
             }

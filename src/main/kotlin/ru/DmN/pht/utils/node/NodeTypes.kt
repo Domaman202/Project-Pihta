@@ -24,6 +24,7 @@ enum class NodeTypes : INodeType {
     AS_GENS("as-gens", PARSED),
     ASET_("aset", PROCESSED),
     // b
+    BGET_("bget", PROCESSED),
     BODY_("body", PROCESSED),
     BREAK_("break", PROCESSED),
     // c

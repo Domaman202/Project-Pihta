@@ -7,10 +7,21 @@ import ru.DmN.pht.jvm.utils.vtype.superclass
 import ru.DmN.pht.processor.utils.ICastable
 import ru.DmN.pht.utils.vtype.VVTWithGenerics
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.klassOf
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
 import java.util.stream.Stream
+
+inline val Variable.uniqueName
+    get() = "$name$$id"
+
+inline fun <T> List<T>.dropLastMutable(count: Int): MutableList<T> {
+    val new = ArrayList<T>(this.size - count)
+    for (i in 0 until this.size - count)
+        new += this[i]
+    return new
+}
 
 inline fun <T> List<T>.dropMutable(count: Int): MutableList<T> {
     val new = ArrayList<T>(this.size - count)
@@ -20,7 +31,7 @@ inline fun <T> List<T>.dropMutable(count: Int): MutableList<T> {
 }
 
 /**
- * Нормализация имени для jvm:
+ * Нормализация имён:
  *
  * "set-value" -> "setValue"
  * "set-" -> "set_"
