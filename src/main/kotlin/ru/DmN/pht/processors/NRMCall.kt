@@ -20,6 +20,7 @@ import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.FINALIZATION
 import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.utils.exception.MessageException
 import ru.DmN.siberia.utils.exception.pushTask
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualMethod
@@ -416,6 +417,6 @@ object NRMCall : INodeProcessor<NodeNodesList> {
     fun throwMNF(type: VirtualType, name: String, args: List<VirtualType?>): Nothing {
         val desc = StringBuilder()
         args.forEach { desc.append(it?.desc) }
-        throw RuntimeException("Method '$name($desc)${type.desc}' not founded!")
+        throw MessageException(null, "Метод '$name($desc)${type.desc}' не найден!")
     }
 }

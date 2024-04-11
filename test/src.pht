@@ -1,2 +1,2 @@
 (app-fn
-    (debug))
+    (println xxxxx))

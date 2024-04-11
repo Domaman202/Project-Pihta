@@ -16,11 +16,11 @@ object NPGetOrName : INodeParser {
     override fun parse(parser: Parser, ctx: ParsingContext, token: Token): Node {
         val tk = parser.nextOperation()
         return when (val text = tk.text!!) {
-            ".", "super" -> NodeGetOrName(INodeInfo.of(NAME, ctx, token), text, false)
+            ".", "super" -> NodeGetOrName(INodeInfo.of(NAME, ctx, tk), text, false)
             else -> {
                 if (tk.text!!.contains("[/@]".toRegex()))
-                    NPGet.parse(tk, mutableListOf(), parser, ctx, Token(tk.line, tk.ptr, OPERATION, "get!"))
-                else NodeGetOrName(INodeInfo.of(GET_OR_NAME, ctx, token), text, false)
+                    NPGet.parse(tk, mutableListOf(), parser, ctx, Token(tk.line, tk.ptr, OPERATION, "get!")) // todo: Почему просто не передавать tk?
+                else NodeGetOrName(INodeInfo.of(GET_OR_NAME, ctx, tk), text, false)
             }
         }
     }

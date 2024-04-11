@@ -12,6 +12,7 @@ import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.exception.MessageException
 import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRBGet : INodeProcessor<NodeNodesList> {
@@ -29,7 +30,7 @@ object NRBGet : INodeProcessor<NodeNodesList> {
         var bctx: BodyContext? = ctx.body
         while (!(bctx is NamedBodyContext && bctx.name == block)) {
             if (bctx == null)
-                throw RuntimeException("Variable `$name` in block `$block` not founded!")
+                throw MessageException(null, "Переменная '$name' в блоке '$block' не найдена!")
             bctx = bctx.parent
         }
         return bctx[name]!!

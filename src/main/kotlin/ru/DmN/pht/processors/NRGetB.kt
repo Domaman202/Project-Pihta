@@ -24,6 +24,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.utils.exception.MessageException
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualType
 
@@ -62,8 +63,10 @@ object NRGetB : INodeProcessor<NodeNodesList> {
         if (nodes.isNotEmpty())
             throw RuntimeException("DEBUG")
         return if (valMode) {
-            val field = clazz.fields.find { it.name == name }
-                ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == name } }.first()!!
+            val field =
+                clazz.fields.find { it.name == name }
+                    ?: ctx.classes.iterator().let { iter -> if (iter.hasNext()) iter.next().fields.find { it.name == name } else null }
+                    ?: throw MessageException(null, "Переменная '$name' не найдена!")
             NodeGet(
                 info.withType(GET_),
                 name,

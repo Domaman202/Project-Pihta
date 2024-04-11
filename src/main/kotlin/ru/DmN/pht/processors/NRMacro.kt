@@ -10,6 +10,7 @@ import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.utils.SubMap
+import ru.DmN.siberia.utils.exception.MessageException
 import ru.DmN.siberia.utils.vtype.VirtualType
 import java.util.*
 
@@ -39,7 +40,7 @@ object NRMacro : IStdNodeProcessor<NodeMacro> {
     private fun macroCalc(node: NodeMacro, ctx: ProcessingContext): Pair<List<Node>, ProcessingContext> {
         val gctx = ctx.global
         //
-        val macro = gctx.macros.find { it.name == node.name } ?: throw RuntimeException("Macro '${node.name}' not founded!")
+        val macro = gctx.macros.find { it.name == node.name } ?: throw MessageException(null, "Макрос '${node.name}' не найден!")
         val args = HashMap<Pair<UUID, String>, Node>()
         //
         if (macro.args.size == node.nodes.size)

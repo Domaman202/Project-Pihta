@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "ru.DmN.pht"
-version = "1.23.0"
+version = "1.23.1"
 
 repositories {
     mavenCentral()
@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    api("ru.DmN.siberia:Project-Siberia:1.18.4")
+    api("ru.DmN.siberia:Project-Siberia:1.18.9")
     implementation(kotlin("reflect"))
     implementation("org.ow2.asm:asm:9.5")
     implementation("org.ow2.asm:asm-tree:9.5")
