@@ -1,6 +1,0 @@
-(module
-    (name "test/pht/jvm/field-adv/test/unparse/parsed")
-    (version "1.0.0")
-    (author "DomamaN202")
-    (deps ["pht"])
-    (src ["unparse.pht"]))

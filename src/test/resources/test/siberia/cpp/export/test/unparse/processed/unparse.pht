@@ -1,0 +1,6 @@
+(use-ctx pht pht/cpp
+	(use-ctx test/siberia/cpp/export/helper
+		(cls [] Test0 [^dmn.pht.object]
+			(@static
+				(defn [] test ^void []
+					"test/siberia/cpp/export")))))

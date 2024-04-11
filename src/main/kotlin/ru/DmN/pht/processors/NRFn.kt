@@ -9,9 +9,9 @@ import ru.DmN.pht.processor.utils.compute
 import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.processor.utils.computeStringNodes
 import ru.DmN.pht.utils.*
-import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.node.*
 import ru.DmN.pht.utils.node.NodeTypes.FN_
+import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_A
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -21,6 +21,8 @@ import ru.DmN.siberia.processor.utils.ProcessingStage.FINALIZATION
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.utils.IPlatform.UNIVERSAL
+import ru.DmN.siberia.utils.exception.pushTask
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualType
 import kotlin.math.absoluteValue
@@ -40,8 +42,8 @@ object NRFn : INodeProcessor<NodeNodesList>, IInlinableProcessor<NodeNodesList> 
         val args = processor.computeStringNodes(processor.compute(node.nodes[offset + 1], ctx) as INodesList, ctx)
         val body = LazyProcessValueList(node, processor, ctx).drop(offset + 2)
         val new = NodeFn(node.info.withType(FN_), body, type, args, gctx.name("PhtLambda\$${node.info.hashCode().absoluteValue}"), refs)
-        if (ctx.platform == JVM) {
-            processor.stageManager.pushTask(FINALIZATION) {
+        if (ctx.platform != UNIVERSAL) {
+            processor.pushTask(FINALIZATION, node) {
                 finalize(node.info, new, processor, ctx)
             }
         }
@@ -52,7 +54,7 @@ object NRFn : INodeProcessor<NodeNodesList>, IInlinableProcessor<NodeNodesList> 
         true
 
     override fun inline(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): Node =
-        NodeInlBodyA(node.info.withType(NodeTypes.INL_BODY_A), node.nodes.drop(3).toMutableList(), null)
+        NodeInlBodyA(node.info.withType(INL_BODY_A), node.nodes.drop(3).toMutableList(), null)
 
     private fun finalize(info: INodeInfo, node: NodeFn, processor: Processor, ctx: ProcessingContext) {
         val type = node.type!!

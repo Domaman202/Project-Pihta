@@ -13,9 +13,10 @@ import ru.DmN.pht.jvm.utils.vtype.*
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.compiler.utils.CompilingStage
+import ru.DmN.siberia.compiler.utils.CompilingStage.*
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.exception.pushTask
 
 object NCClass : IStdNodeCompiler<NodeType, ClassNode, Nothing> {
     override fun compile(node: NodeType, compiler: Compiler, ctx: CompilationContext) {
@@ -27,7 +28,7 @@ object NCClass : IStdNodeCompiler<NodeType, ClassNode, Nothing> {
 
     override fun compileAsm(node: NodeType, compiler: Compiler, ctx: CompilationContext): ClassNode =
         ClassNode().apply {
-            compiler.stageManager.pushTask(CompilingStage.TYPES_PREDEFINE) {
+            compiler.pushTask(TYPES_PREDEFINE, node) {
                 compiler.contexts.classes[node.type.name] = this
                 visit(
                     jcv,
@@ -47,7 +48,7 @@ object NCClass : IStdNodeCompiler<NodeType, ClassNode, Nothing> {
                     node.type.interfaces.map { it.jvmName }.toTypedArray()
                 )
             }
-            compiler.stageManager.pushTask(CompilingStage.TYPES_DEFINE) {
+            compiler.pushTask(TYPES_DEFINE, node) {
                 if (node.info.type == OBJ_) {
                     visitField(
                         Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC + Opcodes.ACC_FINAL,
@@ -87,7 +88,7 @@ object NCClass : IStdNodeCompiler<NodeType, ClassNode, Nothing> {
 
     override fun compileValAsm(node: NodeType, compiler: Compiler, ctx: CompilationContext): Pair<Variable, ClassNode> =
         Pair(Variable.tmp(node, node.type), compileAsm(node, compiler, ctx)).apply {
-            compiler.stageManager.pushTask(CompilingStage.METHODS_BODY) {
+            compiler.pushTask(METHODS_BODY, node) {
                 ctx.method.node.visitFieldInsn(Opcodes.GETSTATIC, node.type.jvmName, "INSTANCE", node.type.desc)
             }
         }

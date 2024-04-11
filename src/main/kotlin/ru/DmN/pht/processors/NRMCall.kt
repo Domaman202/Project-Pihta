@@ -20,6 +20,7 @@ import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.FINALIZATION
 import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.utils.exception.pushTask
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
@@ -105,7 +106,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 )
             }
         //
-        processor.stageManager.pushTask(FINALIZATION) {
+        processor.pushTask(FINALIZATION, node) {
             finalize(method, arguments, instance1, new, processor, ctx, valMode)
         }
         //

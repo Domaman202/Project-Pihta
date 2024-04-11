@@ -15,6 +15,7 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.METHODS_BODY
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.utils.exception.pushTask
 import ru.DmN.siberia.utils.vtype.MethodModifiers
 
 object NRECtor : INodeProcessor<NodeNodesList> {
@@ -46,7 +47,7 @@ object NRECtor : INodeProcessor<NodeNodesList> {
         type.methods += method
         //
         val new = NodeDefn(node.info.withType((node.type as NodeParsedTypes).processed), node.nodes.drop(1).toMutableList(), method)
-        processor.stageManager.pushTask(METHODS_BODY) {
+        processor.pushTask(METHODS_BODY, node) {
             processNodesList(new, processor, ctx.with(method).with(BodyContext.of(method)), false)
         }
         return new

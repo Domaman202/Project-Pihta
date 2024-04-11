@@ -203,8 +203,8 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
                         stream.write("if (i == $i) Test$i::test();\n".toByteArray())
                     stream.write("}\n}".toByteArray())
                 }
-                FileOutputStream("$dir/main.hpp").use { it.write(PhtCpp.getModuleFile("res/main.hpp").toByteArray()) }
-                FileOutputStream("$dir/pht.hpp").use { it.write(PhtCpp.getModuleFile("res/pht.hpp").toByteArray()) }
+                FileOutputStream("$dir/main.hpp").use { it.write(PhtCpp.getModuleFile("res/main.hpp").readBytes()) }
+                FileOutputStream("$dir/pht.hpp").use { it.write(PhtCpp.getModuleFile("res/pht.hpp").readBytes()) }
                 //
                 Runtime.getRuntime().exec("c++ $dir/main.cpp -o $dir/main").run {
                     waitFor()

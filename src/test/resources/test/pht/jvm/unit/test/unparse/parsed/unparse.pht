@@ -1,5 +1,0 @@
-(use-ctx pht pht/jvm
-	(app
-		(app-fn
-			(unit))
-		(unit)))

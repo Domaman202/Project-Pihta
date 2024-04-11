@@ -1,8 +1,0 @@
-(use-ctx pht pht/jvm
-	(progn
-		(itf
-			ITest
-			[])
-		(test-fn
-			0
-			^ITest)))

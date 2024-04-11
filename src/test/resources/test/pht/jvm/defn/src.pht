@@ -1,3 +1,0 @@
-(progn
-    (app (defn sum ^int [[a ^int][b ^int][c ^int]] (+ a b c)))
-    (test-fn 0 (#sum ^App 1 2 3)))

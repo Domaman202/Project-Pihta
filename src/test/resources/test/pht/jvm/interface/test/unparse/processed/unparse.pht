@@ -1,8 +1,0 @@
-(use-ctx pht pht/jvm
-	(progn
-		(itf [] ITest [])
-		(cls [] Test0 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						^ITest))))))

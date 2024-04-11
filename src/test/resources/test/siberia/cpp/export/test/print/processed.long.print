@@ -1,0 +1,51 @@
+[USE_CTX_
+|	(modules = pht pht/cpp)
+|	(NODES:
+|	|	[USE_CTX_
+|	|	|	(modules = test/siberia/cpp/export/helper)
+|	|	|	(NODES:
+|	|	|	|	[CLS_
+|	|	|	|	|	(type = final class)
+|	|	|	|	|	(name = Test0)
+|	|	|	|	|	(parents = [dmn.pht.object])
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	(value = 'test/siberia/cpp/export')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	)
+|	|	|	(EXPORTS:
+|	|	|	|	[PROGN_
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = Test2)
+|	|	|	|	|	|	(parents = [dmn.pht.object])
+|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	(value = 'test/siberia/cpp/export')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	)
+|	|	]
+|	)
+|	(EXPORTS:
+|	|	[PROGN_]
+|	)
+]

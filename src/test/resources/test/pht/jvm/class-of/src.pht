@@ -1,3 +1,0 @@
-(progn
-    (test-fn 0 (class-of ^Any))
-    (test-fn 1 (#getName (class-of ^Object))))

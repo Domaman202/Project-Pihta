@@ -1,4 +1,0 @@
-(progn
-    (alias-type [[Object obj] [String str]])
-    (test-fn 0 ^obj)
-    (test-fn 1 ^str))

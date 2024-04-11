@@ -10,7 +10,9 @@ import ru.DmN.siberia.lexer.Token.DefaultType.*
 import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.parser.ParserImpl
 import ru.DmN.siberia.parser.ctx.ParsingContext
-import ru.DmN.siberia.parser.utils.*
+import ru.DmN.siberia.parser.utils.parseProgn
+import ru.DmN.siberia.parser.utils.parseValn
+import ru.DmN.siberia.parser.utils.parseValue
 import java.util.*
 
 class ParserImpl(lexer: Lexer, mp: ModulesProvider, tokens: Stack<Token?>) : ParserImpl(lexer, mp, tokens) {
@@ -31,7 +33,7 @@ class ParserImpl(lexer: Lexer, mp: ModulesProvider, tokens: Stack<Token?>) : Par
                         val parser = get(ctx, token.text!!)
                         if (parser == null) {
                             pushToken(token)
-                            parseMacro(ctx, Token(token.line, OPERATION, "macro"))
+                            parseMacro(ctx, Token(token.line, token.ptr, OPERATION, "macro"))
                         } else parser.parse(this, ctx, token)
                     }
                     NAMING -> {

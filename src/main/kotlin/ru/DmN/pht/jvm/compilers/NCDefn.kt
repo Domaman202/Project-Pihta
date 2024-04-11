@@ -20,9 +20,10 @@ import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.compiler.utils.CompilingStage
+import ru.DmN.siberia.compiler.utils.CompilingStage.METHODS_BODY
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.utils.SubList
+import ru.DmN.siberia.utils.exception.pushTask
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
 
@@ -53,7 +54,7 @@ object NCDefn : IStdNodeCompiler<NodeDefn, MethodNode, Nothing> {
         ) as MethodNode
         //
         if (!node.abstract) {
-            compiler.stageManager.pushTask(CompilingStage.METHODS_BODY) {
+            compiler.pushTask(METHODS_BODY, node) {
                 mnode.visit(node, method, compiler, ctx)
                 if (method.argsg.asSequence().filterNotNull().any()) {
                     findOtherMethods(method, name).forEach { it ->

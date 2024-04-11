@@ -1,7 +1,0 @@
-(use-ctx pht pht/jvm
-	(cls [] Test0 [^java.lang.Object]
-		(@static
-			(defn [] test ^dynamic []
-				(throw
-					(new ^java.lang.RuntimeException
-						"Функция не реализована для вашей платформы."))))))

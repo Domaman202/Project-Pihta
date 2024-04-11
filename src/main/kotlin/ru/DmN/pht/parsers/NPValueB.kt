@@ -6,6 +6,7 @@ import ru.DmN.pht.utils.node.NodeTypes.VALUE
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
 import ru.DmN.siberia.lexer.Token.DefaultType
+import ru.DmN.siberia.lexer.Token.DefaultType.OPERATION
 import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
@@ -17,9 +18,9 @@ object NPValueB : INodeParser {
             NodeValue(
                 INodeInfo.of(VALUE, ctx, token),
                 when (token.type) {
-                    DefaultType.OPERATION -> {
+                    OPERATION -> {
                         parser.pushToken(token)
-                        return parser.get(ctx, "get-or-name!")!!.parse(parser, ctx, Token.operation(token.line, "get-or-name!"))
+                        return parser.get(ctx, "get-or-name!")!!.parse(parser, ctx, Token(token.line, token.ptr, OPERATION, "get-or-name!"))
                     }
 
                     DefaultType.PRIMITIVE -> PRIMITIVE

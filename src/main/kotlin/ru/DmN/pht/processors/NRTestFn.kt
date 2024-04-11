@@ -3,7 +3,10 @@ package ru.DmN.pht.processors
 import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.Platforms.CPP
 import ru.DmN.pht.utils.Platforms.JVM
-import ru.DmN.pht.utils.node.*
+import ru.DmN.pht.utils.dropMutable
+import ru.DmN.pht.utils.node.nodeCls
+import ru.DmN.pht.utils.node.nodeDefn
+import ru.DmN.pht.utils.node.nodeStatic
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
@@ -13,9 +16,10 @@ import ru.DmN.siberia.processors.INodeProcessor
 
 object NRTestFn : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
-        when (ctx.platform) {
-            JVM -> {
+        when (val platform = ctx.platform) {
+            JVM, CPP -> {
                 val info = node.info
+                println(info.print { NRTestFn::class.java.getResourceAsStream("/$it")!! })
                 processor.process(
                     nodeCls(
                         info,
@@ -26,42 +30,14 @@ object NRTestFn : INodeProcessor<NodeNodesList> {
                             nodeDefn(
                                 info,
                                 "test",
-                                "dynamic",
-                                node.nodes.drop(1).toMutableList()
+                                if (platform == JVM) "dynamic" else "void",
+                                node.nodes.dropMutable(1)
                             )
                         )
                     ),
                     ctx,
                     false
                 )
-            }
-
-            CPP -> {
-                val info = node.info
-                processor.process(
-                    nodeTest(
-                        info,
-                        nodeCls(
-                            info,
-                            "Test${processor.computeString(node.nodes[0], ctx)}",
-                            "Object",
-                            nodeStatic(
-                                info,
-                                nodeDefn(
-                                    info,
-                                    "test",
-                                    "void",
-                                    nodePrintln(
-                                        info,
-                                        node.nodes.drop(1).toMutableList()
-                                    )
-                                )
-                            )
-                        )
-                    ),
-                    ctx,
-                    false
-                )!!
             }
 
             else -> node

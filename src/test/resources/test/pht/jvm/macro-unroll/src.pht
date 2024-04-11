@@ -1,8 +1,0 @@
-(test-fn 0
-    (def [[i 0] [j 0]])
-    (def-macro test [argsA argsB]
-        (macro-unroll [[a argsA] [b argsB]]
-            (set i (+ i (macro-arg a)))
-            (set j (+ j (macro-arg b)))))
-    (test [222 -222 -222] [333 333 333])
-    (+ i j))

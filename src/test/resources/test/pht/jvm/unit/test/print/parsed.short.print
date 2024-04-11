@@ -1,9 +1,0 @@
-[USE_CTX
-|	(modules = pht pht/jvm)
-|	[APP
-|	|	[APP_FN
-|	|	|	[UNIT]
-|	|	]
-|	|	[UNIT]
-|	]
-]

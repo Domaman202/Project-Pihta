@@ -6,6 +6,7 @@ import ru.DmN.pht.utils.node.NodeTypes.GET_OR_NAME
 import ru.DmN.pht.utils.node.NodeTypes.NAME
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.lexer.Token.DefaultType.OPERATION
 import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
@@ -18,7 +19,7 @@ object NPGetOrName : INodeParser {
             ".", "super" -> NodeGetOrName(INodeInfo.of(NAME, ctx, token), text, false)
             else -> {
                 if (tk.text!!.contains("[/@]".toRegex()))
-                    NPGet.parse(tk, mutableListOf(), parser, ctx, Token.operation(tk.line, "get!"))
+                    NPGet.parse(tk, mutableListOf(), parser, ctx, Token(tk.line, tk.ptr, OPERATION, "get!"))
                 else NodeGetOrName(INodeInfo.of(GET_OR_NAME, ctx, token), text, false)
             }
         }

@@ -10,9 +10,10 @@ import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ProcessingStage
+import ru.DmN.siberia.processor.utils.ProcessingStage.METHODS_BODY
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.processors.NRProgn
+import ru.DmN.siberia.utils.exception.pushTask
 import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRAnnotation : INodeProcessor<NodeMetaNodesList> {
@@ -29,7 +30,7 @@ object NRAnnotation : INodeProcessor<NodeMetaNodesList> {
             args
         )
         //
-        processor.stageManager.pushTask(ProcessingStage.METHODS_BODY) {
+        processor.pushTask(METHODS_BODY, node) {
             processor.computeList(node.nodes[1], ctx)
                 .map { it ->
                     processor.computeListOr(it, ctx)?.let {

@@ -19,6 +19,7 @@ import ru.DmN.siberia.processor.utils.ProcessingStage.*
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.utils.exception.pushTask
 import ru.DmN.siberia.utils.mapMutable
 
 object NREnum : INodeProcessor<NodeNodesList> {
@@ -32,7 +33,7 @@ object NREnum : INodeProcessor<NodeNodesList> {
         //
         val info = node.info
         val new = NodeType(info.withType(NodeTypes.ENUM_), node.nodes.drop(2 + offset).toMutableList(), type)
-        processor.stageManager.pushTask(TYPES_PREDEFINE) {
+        processor.pushTask(TYPES_PREDEFINE, node) {
             type.parents =
                 processor.computeList(processor.process(node.nodes[1 + offset], ctx, true)!!, ctx)
                     .mapMutable { processor.computeType(it, ctx) }
@@ -40,11 +41,11 @@ object NREnum : INodeProcessor<NodeNodesList> {
                 val generic = processor.computeList(it, ctx)
                 type.generics += Pair(processor.computeString(generic[0], ctx), processor.computeType(generic[1], ctx))
             }
-            processor.stageManager.pushTask(TYPES_DEFINE) {
+            processor.pushTask(TYPES_DEFINE, node) {
                 val ectx = EnumContext(type)
                 val context = ctx.with(ectx)
                 processNodesList(new, processor, context, false)
-                processor.stageManager.pushTask(METHODS_BODY) {
+                processor.pushTask(METHODS_BODY, node) {
                     if (type.methods.find { it.name == "<clinit>" } == null) {
                         new.nodes += processor.process(
                             nodeStatic(

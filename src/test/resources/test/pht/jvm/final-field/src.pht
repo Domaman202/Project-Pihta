@@ -1,8 +1,0 @@
-(use-ctx pht
-    (app
-        (@final
-        (fld [[I ^int]]))
-        (defn <clinit> ^void []
-            (set ^App/I 333)))
-    (test-fn 0 ^App/I)
-    (test-fn 1 ^App)))

@@ -1,9 +1,2 @@
 (app-fn
-    (def [[dmn 12]])
-    (println dmn)
-    (named-block first-block
-        (def [[dmn 21]])
-        (println dmn)
-        (named-block second-block
-            (def [[dmn 33]])
-            (println dmn@first-block))))
+    (debug))

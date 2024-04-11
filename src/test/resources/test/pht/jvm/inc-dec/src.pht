@@ -1,7 +1,0 @@
-(progn
-    (test-fn 0 (def [[i 0]]) (++   i))
-    (test-fn 1 (def [[i 0]]) (inc  i))
-    (test-fn 2 (def [[i 0]]) (inc- i))
-    (test-fn 3 (def [[i 0]]) (--   i))
-    (test-fn 4 (def [[i 0]]) (dec  i))
-    (test-fn 5 (def [[i 0]]) (dec- i)))

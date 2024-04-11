@@ -14,11 +14,12 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.TYPES_IMPORT
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.utils.exception.pushTask
 
 object NRAliasType : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeAliasType? {
         val imports = processor.computeList(node.nodes[0], ctx).map { val pair = processor.computeStringNodes(it as INodesList, ctx); Pair(pair[0], pair[1]) }
-        processor.stageManager.pushTask(TYPES_IMPORT) {
+        processor.pushTask(TYPES_IMPORT, node) {
             val gctx = ctx.global
             imports.forEach {
                 gctx.aliases[it.second] = gctx.getTypeName(it.first) ?: it.first

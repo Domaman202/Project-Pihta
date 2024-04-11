@@ -1,0 +1,21 @@
+[USE_CTX_
+|	(modules = pht pht/cpp)
+|	(NODES:
+|	|	[CLS_
+|	|	|	(type = final class)
+|	|	|	(name = App)
+|	|	|	(parents = [dmn.pht.object])
+|	|	|	[ANN_STATIC_
+|	|	|	|	[DEFN_
+|	|	|	|	|	(type = method)
+|	|	|	|	|	(name = main)
+|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	(sign = null)
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	)
+|	(EXPORTS:
+|	|	[PROGN_]
+|	)
+]
