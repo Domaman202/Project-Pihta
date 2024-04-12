@@ -1,5 +1,6 @@
 package ru.DmN.pht.processors
 
+import ru.DmN.pht.processor.ctx.getType
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.node.nodeValueClass
@@ -15,12 +16,12 @@ object NRSymbolCls : IStdNodeProcessor<NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
         if (valMode)
-            nodeValueClass(node.info, computeString(node, processor, ctx))
+            nodeValueClass(node.info, computeType(node, processor, ctx).cname)
         else null
 
     override fun computeString(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): String =
         node.nodes.asSequence().map { processor.computeString(it, ctx) }.reduce { acc, s -> acc + s }
 
     override fun computeType(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType(computeString(node, processor, ctx))
+        ctx.getType(computeString(node, processor, ctx), processor, ctx)
 }

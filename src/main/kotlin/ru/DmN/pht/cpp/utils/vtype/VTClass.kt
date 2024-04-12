@@ -13,8 +13,6 @@ object VTClass : VirtualType() {
     override val fields: MutableList<VirtualField> = ArrayList()
     override val methods: MutableList<VirtualMethod> = ArrayList()
     //
-    override val isPrimitive: Boolean
-        get() = false
     override val componentType: VirtualType?
         get() = null
     //
@@ -25,5 +23,7 @@ object VTClass : VirtualType() {
     override val isFinal: Boolean
         get() = false
     override val isFile: Boolean
+        get() = false
+    override val isPrimitive: Boolean
         get() = false
 }

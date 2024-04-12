@@ -1,2 +1,6 @@
-(app-fn
-    (println xxxxx))
+(app
+    (defn foo ^void [[o ^!Object]]
+        (println o))
+    (app-fn
+        (def [[^?Object o (new ^Object)]])
+        (#foo . (null-check o))))

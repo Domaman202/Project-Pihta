@@ -5,9 +5,7 @@ import ru.DmN.pht.ast.NodeValue.Type.*
 import ru.DmN.pht.processor.ctx.getType
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.utils.OrPair
-import ru.DmN.pht.utils.vtype.PhtVirtualType
-import ru.DmN.pht.utils.vtype.VVTWithGenerics
-import ru.DmN.pht.utils.vtype.arrayType
+import ru.DmN.pht.utils.vtype.*
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -97,7 +95,12 @@ object NRValue : IStdNodeProcessor<NodeValue> {
         else null
 
     fun getType(name: String, processor: Processor, ctx: ProcessingContext): VirtualType =
-        if (name.startsWith('[') && name.length > 2)
-            ctx.global.getType(name.substring(1)).arrayType
+        if (name.length > 2)
+            when (name[0]) {
+                '?' -> getType(name.substring(1), processor, ctx).nullableType
+                '!' -> getType(name.substring(1), processor, ctx).notNullType
+                '[' -> getType(name.substring(1), processor, ctx).arrayType
+                else -> ctx.global.getType(name)
+            }
         else ctx.global.getType(name)
 }

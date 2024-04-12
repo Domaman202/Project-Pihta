@@ -11,7 +11,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
  * Имя в представлении JVM.
  */
 inline val VirtualType.jvmName: String
-    get() = if (this is IJvmVirtualType) jvmName else name.replace('.', '/')
+    get() = if (this is IJvmVirtualType) jvmName else cname.replace('.', '/')
 
 /**
  * Родительский класс, если тип это класс, иначе null.
@@ -32,7 +32,7 @@ val VirtualType.desc: String
     get() =
         if (this.isArray)
             "[${componentType!!.desc}"
-        else when (name) {
+        else when (cname) {
             "void" -> "V"
             "boolean" -> "Z"
             "byte" -> "B"

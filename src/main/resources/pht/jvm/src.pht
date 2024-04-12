@@ -137,12 +137,14 @@
                         offset)))))
 
     (export
+        (comment "Импорт базовых типов")
         (import "java" [
             [types [
                 java.lang.Class
                 java.lang.Object
                 java.lang.String
-                java.lang.Integer]]])
+                java.lang.Integer
+                java.lang.NullPointerException]]])
         (import "kotlin" [
             [types [
                 kotlin.Unit]]])
@@ -151,4 +153,10 @@
             [extensions [
                 ru.DmN.pht.ArrayExtends
                 ru.DmN.pht.StringExtends
-                ru.DmN.pht.math.MathExtends]]])))
+                ru.DmN.pht.math.MathExtends]]])
+
+        (comment "Определение макро-инструкций")
+        (def-macro null-check [o]
+            (if (= o nil)
+                (throw (new ^NullPointerException))
+                (as (not-null-type (typeof o)) (as (clr-null-type (typeof o)) o))))))

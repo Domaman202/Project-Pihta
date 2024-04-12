@@ -1,6 +1,6 @@
 package ru.DmN.pht.ast
 
-import ru.DmN.pht.utils.node.NodeTypes
+import ru.DmN.pht.utils.node.NodeTypes.VALUE
 import ru.DmN.siberia.ast.BaseNode
 import ru.DmN.siberia.utils.indent
 import ru.DmN.siberia.utils.node.INodeInfo
@@ -48,6 +48,6 @@ class NodeValue(info: INodeInfo, val vtype: Type, val value: String) : BaseNode(
 
     companion object {
         fun of(info: INodeInfo, vtype: Type, value: String) =
-            NodeValue(info.withType(NodeTypes.VALUE), vtype, value)
+            NodeValue(info.withType(VALUE), vtype, value)
     }
 }

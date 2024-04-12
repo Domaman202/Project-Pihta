@@ -4,17 +4,17 @@ import ru.DmN.pht.processor.utils.compute
 import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.pht.utils.isConstClass
 import ru.DmN.pht.utils.node.nodeValueClass
-import ru.DmN.pht.utils.vtype.arrayType
+import ru.DmN.pht.utils.vtype.clearNullType
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object NRArrayType : IStdNodeProcessor<NodeNodesList> {
+object NRClearNullType : IStdNodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? {
         val type = processor.compute(node.nodes[0], ctx)
-        return (if (type.isConstClass) processor.computeType(type, ctx) else processor.calc(type, ctx))?.arrayType
+        return (if (type.isConstClass) processor.computeType(type, ctx) else processor.calc(type, ctx))?.clearNullType
     }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =

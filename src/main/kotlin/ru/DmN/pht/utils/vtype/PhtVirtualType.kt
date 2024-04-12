@@ -6,7 +6,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 abstract class PhtVirtualType : VirtualType() {
     /**
-     * Generic's (Name / Type)
+     * Generic's (Name / Type).
      */
     abstract val generics: Map<String, VirtualType>
 
@@ -30,6 +30,8 @@ abstract class PhtVirtualType : VirtualType() {
     class Decorator(val type: VirtualType) : PhtVirtualType() {
         override val name: String
             get() = type.name
+        override val cname: String
+            get() = type.cname
         override val parents: List<VirtualType>
             get() = type.parents
         override val fields: List<VirtualField>

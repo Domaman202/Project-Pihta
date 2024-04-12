@@ -4,7 +4,7 @@ import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.utils.vtype.VirtualType
 
 fun VirtualType.normalizedName() =
-    name.replace(".", "::")
+    cname.replace(".", "::")
 fun VirtualType.defineName() =
     if (this is VVTAutoPointer)
         "dmn::pht::auto_ptr<${normalizedName()}>"

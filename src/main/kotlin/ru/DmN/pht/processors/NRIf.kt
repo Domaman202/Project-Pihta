@@ -1,9 +1,10 @@
 package ru.DmN.pht.processors
 
+import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.utils.node.NodeTypes.IF_
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.VirtualType
@@ -11,7 +12,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 object NRIf : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
         if (node.nodes.size == 3)
-            processor.calc(node.nodes[1], ctx)
+            processor.calc(node.nodes[1], ctx).let { if (it == ctx.global.getType("void")) processor.calc(node.nodes[2], ctx) else it }
         else null
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node {

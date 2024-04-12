@@ -13,12 +13,18 @@ import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.node.INodeType
-import ru.DmN.siberia.utils.vtype.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType.Companion.BOOLEAN
+import ru.DmN.siberia.utils.vtype.VirtualType.Companion.BYTE
+import ru.DmN.siberia.utils.vtype.VirtualType.Companion.CHAR
+import ru.DmN.siberia.utils.vtype.VirtualType.Companion.DOUBLE
+import ru.DmN.siberia.utils.vtype.VirtualType.Companion.FLOAT
+import ru.DmN.siberia.utils.vtype.VirtualType.Companion.INT
+import ru.DmN.siberia.utils.vtype.VirtualType.Companion.SHORT
 
 object NCCompare : INodeCompiler<NodeNodesList> {
     override fun compileVal(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Variable {
         insertIf(node.type, node.nodes, { ctx.method.node.visitInsn(Opcodes.ICONST_1) }, { ctx.method.node.visitInsn(Opcodes.ICONST_0) }, compiler, ctx)
-        return Variable.tmp(node, VirtualType.BOOLEAN)
+        return Variable.tmp(node, BOOLEAN)
     }
 
     fun insertIf(operation: INodeType, nodes: List<Node>, ifInsert: () -> Unit, elseInsert: () -> Unit, compiler: Compiler, ctx: CompilationContext) {
@@ -31,56 +37,68 @@ object NCCompare : INodeCompiler<NodeNodesList> {
             val exitLabel = Label()
             when (operation) {
                 NOT_ -> when (type) {
-                    VirtualType.BOOLEAN -> visitInsn(Opcodes.INEG)
-                    else -> throw RuntimeException()
+                    BOOLEAN -> visitInsn(Opcodes.INEG)
+                    else -> throw UnsupportedOperationException()
                 }
                 EQ_ -> when (type) {
-                    VirtualType.BOOLEAN,
-                    VirtualType.BYTE,
-                    VirtualType.SHORT,
-                    VirtualType.CHAR,
-                    VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPEQ, ifLabel)
-                    else -> throw RuntimeException()
+                    BOOLEAN,
+                    BYTE,
+                    SHORT,
+                    CHAR,
+                    INT    -> visitJumpInsn(Opcodes.IF_ICMPEQ, ifLabel)
+                    FLOAT,
+                    DOUBLE -> throw UnsupportedOperationException() // todo:
+                    else   -> visitJumpInsn(Opcodes.IF_ACMPEQ, ifLabel)
                 }
                 NOT_EQ_ -> when (type) {
-                    VirtualType.BOOLEAN,
-                    VirtualType.BYTE,
-                    VirtualType.SHORT,
-                    VirtualType.CHAR,
-                    VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPNE, ifLabel)
-                    else -> throw RuntimeException()
+                    BOOLEAN,
+                    BYTE,
+                    SHORT,
+                    CHAR,
+                    INT    -> visitJumpInsn(Opcodes.IF_ICMPNE, ifLabel)
+                    FLOAT,
+                    DOUBLE -> throw UnsupportedOperationException() // todo:
+                    else   -> visitJumpInsn(Opcodes.IF_ACMPNE, ifLabel)
                 }
                 GREAT_ -> when (type) {
-                    VirtualType.BOOLEAN,
-                    VirtualType.BYTE,
-                    VirtualType.SHORT,
-                    VirtualType.CHAR,
-                    VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPGT, ifLabel)
-                    else -> throw RuntimeException()
+                    BOOLEAN,
+                    BYTE,
+                    SHORT,
+                    CHAR,
+                    INT    -> visitJumpInsn(Opcodes.IF_ICMPGT, ifLabel)
+                    FLOAT,
+                    DOUBLE -> throw UnsupportedOperationException() // todo:
+                    else   -> throw RuntimeException()
                 }
                 GREAT_OR_EQ_ -> when (type) {
-                    VirtualType.BOOLEAN,
-                    VirtualType.BYTE,
-                    VirtualType.SHORT,
-                    VirtualType.CHAR,
-                    VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPGE, ifLabel)
-                    else -> throw RuntimeException()
+                    BOOLEAN,
+                    BYTE,
+                    SHORT,
+                    CHAR,
+                    INT    -> visitJumpInsn(Opcodes.IF_ICMPGE, ifLabel)
+                    FLOAT,
+                    DOUBLE -> throw UnsupportedOperationException() // todo:
+                    else   -> throw RuntimeException()
                 }
                 LESS_ -> when (type) {
-                    VirtualType.BOOLEAN,
-                    VirtualType.BYTE,
-                    VirtualType.SHORT,
-                    VirtualType.CHAR,
-                    VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPLT, ifLabel)
-                    else -> throw RuntimeException()
+                    BOOLEAN,
+                    BYTE,
+                    SHORT,
+                    CHAR,
+                    INT    -> visitJumpInsn(Opcodes.IF_ICMPLT, ifLabel)
+                    FLOAT,
+                    DOUBLE -> throw UnsupportedOperationException() // todo:
+                    else   -> throw RuntimeException()
                 }
                 LESS_OR_EQ_ -> when (type) {
-                    VirtualType.BOOLEAN,
-                    VirtualType.BYTE,
-                    VirtualType.SHORT,
-                    VirtualType.CHAR,
-                    VirtualType.INT -> visitJumpInsn(Opcodes.IF_ICMPLE, ifLabel)
-                    else -> throw RuntimeException()
+                    BOOLEAN,
+                    BYTE,
+                    SHORT,
+                    CHAR,
+                    INT    -> visitJumpInsn(Opcodes.IF_ICMPLE, ifLabel)
+                    FLOAT,
+                    DOUBLE -> throw UnsupportedOperationException() // todo:
+                    else   -> throw RuntimeException()
                 }
                 else -> throw RuntimeException("Unknown operation \"$operation\"!")
             }

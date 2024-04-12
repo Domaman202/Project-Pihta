@@ -7,6 +7,8 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 open class VarVirtualType(val type: PhtVirtualType) : PhtVirtualType() {
     override val name: String
         get() = type.name
+    override val cname: String
+        get() = type.cname
     override val parents: List<VirtualType>
         get() = type.parents
     override val fields: List<VirtualField>
