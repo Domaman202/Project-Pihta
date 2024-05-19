@@ -231,6 +231,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         "return"        to "ret"
         "ref-func"      to "rfn"
         // t
+        "test-func"     to "test-fn"
         "tailrec-call"  to "trcall"
         "typed-get"     to "tget"
 

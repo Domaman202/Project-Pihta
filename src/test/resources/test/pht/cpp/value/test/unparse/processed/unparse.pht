@@ -35,7 +35,7 @@
 				(@static
 					(defn [] test ^void []
 						(println
-							@)))))
+							'@')))))
 		(@test
 			(cls [] Test6 [^dmn.pht.object]
 				(@static
@@ -77,7 +77,7 @@
 				(@static
 					(defn [] test ^void []
 						(println
-							@)))))
+							'@')))))
 		(@test
 			(cls [] Test13 [^dmn.pht.object]
 				(@static

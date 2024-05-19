@@ -8,7 +8,7 @@
     (test-fn 6 "Текст")
     (test-fn 7 ^Object)
     (test-fn 8 ^java.util.List<^Object>)
-    (test-fn 9 (value nil))
+    (test-fn 9  (value nil))
     (test-fn 10 (value 12))
     (test-fn 11 (value 21.33))
     (test-fn 12 (value 44f))

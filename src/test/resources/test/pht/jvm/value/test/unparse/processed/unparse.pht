@@ -35,7 +35,7 @@
 				(@static
 					(defn [] test ^dynamic []
 						(as ^dynamic
-							@)))))
+							'@')))))
 		(@test
 			(cls [] Test6 [^java.lang.Object]
 				(@static
@@ -89,7 +89,7 @@
 				(@static
 					(defn [] test ^dynamic []
 						(as ^dynamic
-							@)))))
+							'@')))))
 		(@test
 			(cls [] Test15 [^java.lang.Object]
 				(@static

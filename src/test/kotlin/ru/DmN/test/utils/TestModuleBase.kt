@@ -6,6 +6,7 @@ import ru.DmN.pht.std.module.ast.NodeModule
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.CompilerImpl
 import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.console.BuildCommands
 import ru.DmN.siberia.console.BuildCommands.provider
 import ru.DmN.siberia.parser.ParserImpl
 import ru.DmN.siberia.parser.ctx.ParsingContext
@@ -62,26 +63,35 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
         compile()
 
     fun compile() {
-        val mp = ModulesProvider.of(platform)
-        val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(platform, "$dir/module.pht")) as NodeModule).module
-        module.init(platform, mp)
-        val tp = TypesProvider.of(platform)
-        val processed = ArrayList<Node>()
-        val processor = ProcessorImpl(mp, tp)
-        mp.injectModules(
-            mutableListOf(module.name),
-            processed,
-            processed,
-            processor,
-            ProcessingContext.base().with(platform).apply { this.module = module }
-        )
-        processor.stageManager.runAll()
-        val compiler = CompilerImpl(mp, tp)
-        val ctx = CompilationContext.base().apply { this.platform = this@TestModuleBase.platform }
-        processed.forEach { compiler.compile(it, ctx) }
-        compiler.stageManager.runAll()
-        File("dump/$dir").mkdirs()
-        compiler.finalizers.forEach { it("dump/$dir") }
+        try {
+            val mp = ModulesProvider.of(platform)
+            val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(
+                ParsingContext.module(
+                    platform,
+                    "$dir/module.pht"
+                )
+            ) as NodeModule).module
+            module.init(platform, mp)
+            val tp = TypesProvider.of(platform)
+            val processed = ArrayList<Node>()
+            val processor = ProcessorImpl(mp, tp)
+            mp.injectModules(
+                mutableListOf(module.name),
+                processed,
+                processed,
+                processor,
+                ProcessingContext.base().with(platform).apply { this.module = module }
+            )
+            processor.stageManager.runAll()
+            val compiler = CompilerImpl(mp, tp)
+            val ctx = CompilationContext.base().apply { this.platform = this@TestModuleBase.platform }
+            processed.forEach { compiler.compile(it, ctx) }
+            compiler.stageManager.runAll()
+            File("dump/$dir").mkdirs()
+            compiler.finalizers.forEach { it("dump/$dir") }
+        } catch (e: BaseException) {
+            throw WrappedException(e, BuildCommands::provider)
+        }
     }
 
     fun unparse() {

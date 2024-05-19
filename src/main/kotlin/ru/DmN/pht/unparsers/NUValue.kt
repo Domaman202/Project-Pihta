@@ -11,10 +11,7 @@ object NUValue : INodeUnparser<NodeValue> {
     override fun unparse(node: NodeValue, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
             when (node.vtype) {
-                STRING -> append('"').append(node.value).append('"')
-                PRIMITIVE,
-                CLASS,
-                CLASS_WITH_GEN -> append('^').append(node.value)
+                CHAR -> append('\'').append(node.value).append('\'')
                 LONG -> {
                     append(node.value)
                     if (!(node.value.endsWith('l') || node.value.endsWith('L'))) {
@@ -35,6 +32,8 @@ object NUValue : INodeUnparser<NodeValue> {
                         append(".0")
                     }
                 }
+                STRING -> append('"').append(node.value).append('"')
+                PRIMITIVE, CLASS, CLASS_WITH_GEN -> append('^').append(node.value)
                 else -> append(node.value)
             }
         }

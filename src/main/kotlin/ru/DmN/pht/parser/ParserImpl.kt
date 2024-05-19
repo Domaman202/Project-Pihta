@@ -44,16 +44,8 @@ class ParserImpl(lexer: Lexer, mp: ModulesProvider, tokens: Stack<Token?>) : Par
                 }
             }
             OPEN_CBRACKET -> parseValn(ctx, startToken)
-            OPERATION,
-            PRIMITIVE,
-            CLASS,
-            NAMING,
-            NIL,
-            STRING,
-            INTEGER,
-            FLOAT,
-            DOUBLE,
-            BOOLEAN -> parseValue(ctx, startToken)
+            OPERATION, PRIMITIVE, CLASS, NAMING,
+            NIL, BOOLEAN, CHAR, INTEGER, LONG, FLOAT, DOUBLE, STRING -> parseValue(ctx, startToken)
             else -> {
                 pushToken(startToken)
                 null
