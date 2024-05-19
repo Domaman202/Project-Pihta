@@ -58,6 +58,7 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
         add(CTOR_,        NCCtor)
         add(CYCLE_,       NCCycle)
         // d
+        add(DEBUG,        NCDebug)
         add(DEC_PRE_,     NCIncDec)
         add(DEC_POST_,    NCIncDec)
         add(DEF_,         NCDef)
@@ -195,14 +196,17 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
             compiler.contexts.tests = 0
             // Финализация
             compiler.finalizers.add { dir ->
-                FileOutputStream("$dir/main.cpp").use { stream ->
-                    stream.write("#include \"main.hpp\"\n\n".toByteArray())
-                    stream.write(compiler.contexts.out.toString().toByteArray())
-                    stream.write("int main(int argc, char *argv[]) {\nif (argc == 1)\nApp::main();\nelse {\nint i = std::stoi(argv[1]);\n".toByteArray())
-                    for (i in 0 until compiler.contexts.tests)
-                        stream.write("if (i == $i) Test$i::test();\n".toByteArray())
-                    stream.write("}\n}".toByteArray())
-                }
+                val sb = StringBuilder()
+                sb.append("#include \"main.hpp\"\n\n")
+                sb.append(compiler.contexts.out)
+                sb.append("int main(int argc, char *argv[]) {\nif (argc == 1) {\n")
+                if (compiler.tp.types.contains("App".hashCode()))
+                    sb.append("App::main();")
+                sb.append("}\nelse {\nint i = std::stoi(argv[1]);\n")
+                for (i in 0 until compiler.contexts.tests)
+                    sb.append("if (i == $i) Test$i::test();\n")
+                sb.append("}\n}")
+                FileOutputStream("$dir/main.cpp").use { it.write(sb.toString().toByteArray()) }
                 FileOutputStream("$dir/main.hpp").use { it.write(PhtCpp.getModuleFile("res/main.hpp").readBytes()) }
                 FileOutputStream("$dir/pht.hpp").use { it.write(PhtCpp.getModuleFile("res/pht.hpp").readBytes()) }
                 //

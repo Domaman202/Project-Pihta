@@ -3,7 +3,7 @@ package ru.DmN.pht.processors
 import ru.DmN.pht.ast.NodeNewArray
 import ru.DmN.pht.processor.utils.compute
 import ru.DmN.pht.processor.utils.computeType
-import ru.DmN.pht.utils.node.NodeTypes.NEW_ARRAY_
+import ru.DmN.pht.utils.node.NodeTypes.NEW_ARR_
 import ru.DmN.pht.utils.vtype.arrayType
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
@@ -18,7 +18,7 @@ object NRNewArray : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeNewArray? =
         if (valMode)
             NodeNewArray(
-                node.info.withType(NEW_ARRAY_),
+                node.info.withType(NEW_ARR_),
                 processor.computeType(node.nodes[0], ctx),
                 processor.compute(node.nodes[1], ctx)
             )

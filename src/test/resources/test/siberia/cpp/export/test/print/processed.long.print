@@ -4,29 +4,10 @@
 |	|	[USE_CTX_
 |	|	|	(modules = test/siberia/cpp/export/helper)
 |	|	|	(NODES:
-|	|	|	|	[CLS_
-|	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = Test0)
-|	|	|	|	|	(parents = [dmn.pht.object])
-|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(name = test)
-|	|	|	|	|	|	|	(desc = ()V)
-|	|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	(value = 'test/siberia/cpp/export')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	)
-|	|	|	(EXPORTS:
-|	|	|	|	[PROGN_
+|	|	|	|	[ANN_TEST_
 |	|	|	|	|	[CLS_
 |	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	(name = Test2)
+|	|	|	|	|	|	(name = Test0)
 |	|	|	|	|	|	(parents = [dmn.pht.object])
 |	|	|	|	|	|	[ANN_STATIC_
 |	|	|	|	|	|	|	[DEFN_
@@ -34,9 +15,58 @@
 |	|	|	|	|	|	|	|	(name = test)
 |	|	|	|	|	|	|	|	(desc = ()V)
 |	|	|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	(value = 'test/siberia/cpp/export')
+|	|	|	|	|	|	|	|	[PRINTLN_
+|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	(value = 'test/siberia/cpp/export')
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	)
+|	|	|	(EXPORTS:
+|	|	|	|	[PROGN_]
+|	|	|	|	[PROGN_
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test3)
+|	|	|	|	|	|	|	(parents = [dmn.pht.object])
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	[PRINTLN_
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'test/siberia/cpp/export')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test4)
+|	|	|	|	|	|	|	(parents = [dmn.pht.object])
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	[PRINTLN_
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'test/siberia/cpp/export')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]

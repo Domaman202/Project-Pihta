@@ -1,7 +1,7 @@
 package ru.DmN.pht.jvm.processors
 
 import ru.DmN.pht.jvm.ast.NodeSync
-import ru.DmN.pht.jvm.utils.node.NodeTypes.SYNC_
+import ru.DmN.pht.jvm.utils.node.NodeTypes.SBLOCK_
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -15,6 +15,6 @@ object NRSync : INodeProcessor<NodeNodesList> {
         NRProgn.calc(node, processor, ctx)
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeSync =
-        NodeSync(node.info.withType(SYNC_), node.nodes.drop(1).toMutableList(), processor.process(node.nodes[0], ctx, true)!!)
+        NodeSync(node.info.withType(SBLOCK_), node.nodes.drop(1).toMutableList(), processor.process(node.nodes[0], ctx, true)!!)
             .apply { processNodesList(this, processor, ctx, valMode) }
 }

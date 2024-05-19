@@ -7,6 +7,10 @@ import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable
 
 interface IStdNodeCompiler<T : Node, A, V> : INodeCompiler<T> {
+    fun isSafe(node: T, compiler: Compiler, ctx: CompilationContext): Boolean {
+        return true
+    }
+
     fun compileAsm(node: T, compiler: Compiler, ctx: CompilationContext): A {
         throw UnsupportedOperationException()
     }

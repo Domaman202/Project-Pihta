@@ -4,9 +4,7 @@ import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.Platforms.CPP
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.dropMutable
-import ru.DmN.pht.utils.node.nodeCls
-import ru.DmN.pht.utils.node.nodeDefn
-import ru.DmN.pht.utils.node.nodeStatic
+import ru.DmN.pht.utils.node.*
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
@@ -19,19 +17,21 @@ object NRTestFn : INodeProcessor<NodeNodesList> {
         when (val platform = ctx.platform) {
             JVM, CPP -> {
                 val info = node.info
-                println(info.print { NRTestFn::class.java.getResourceAsStream("/$it")!! })
                 processor.process(
-                    nodeCls(
+                    nodeTest(
                         info,
-                        "Test${processor.computeString(node.nodes[0], ctx)}",
-                        "Object",
-                        nodeStatic(
+                        nodeCls(
                             info,
-                            nodeDefn(
+                            "Test${processor.computeString(node.nodes[0], ctx)}",
+                            "Object",
+                            nodeStatic(
                                 info,
-                                "test",
-                                if (platform == JVM) "dynamic" else "void",
-                                node.nodes.dropMutable(1)
+                                nodeDefn(
+                                    info,
+                                    "test",
+                                    if (platform == JVM) "dynamic" else "void",
+                                    node.nodes.dropMutable(1).let { if (platform == CPP) mutableListOf(nodePrintln(info, it)) else it }
+                                )
                             )
                         )
                     ),

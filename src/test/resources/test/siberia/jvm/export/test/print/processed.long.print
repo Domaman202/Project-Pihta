@@ -4,32 +4,10 @@
 |	|	[USE_CTX_
 |	|	|	(modules = test/siberia/jvm/export/helper)
 |	|	|	(NODES:
-|	|	|	|	[CLS_
-|	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = Test0)
-|	|	|	|	|	(parents = [java.lang.Object])
-|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(name = test)
-|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
-|	|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	(value = 'test/siberia/jvm/export')
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	)
-|	|	|	(EXPORTS:
-|	|	|	|	[PROGN_
+|	|	|	|	[ANN_TEST_
 |	|	|	|	|	[CLS_
 |	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	(name = Test2)
+|	|	|	|	|	|	(name = Test0)
 |	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	[ANN_STATIC_
 |	|	|	|	|	|	|	[DEFN_
@@ -49,9 +27,62 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	)
+|	|	|	(EXPORTS:
+|	|	|	|	[PROGN_]
+|	|	|	|	[PROGN_
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test3)
+|	|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'test/siberia/jvm/export')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test4)
+|	|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'test/siberia/jvm/export')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	)
 |	|	]
 |	)
 |	(EXPORTS:
-|	|	[PROGN_]
+|	|	[PROGN_
+|	|	|	[PROGN_
+|	|	|	|	[PROGN_]
+|	|	|	]
+|	|	]
 |	)
 ]

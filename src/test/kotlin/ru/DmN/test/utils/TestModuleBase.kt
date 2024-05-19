@@ -6,6 +6,7 @@ import ru.DmN.pht.std.module.ast.NodeModule
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.CompilerImpl
 import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.console.BuildCommands.provider
 import ru.DmN.siberia.parser.ParserImpl
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.processor.ProcessorImpl
@@ -17,6 +18,7 @@ import ru.DmN.siberia.processors.NRUseCtx.injectModules
 import ru.DmN.siberia.unparser.UnparserImpl
 import ru.DmN.siberia.unparser.ctx.UnparsingContext
 import ru.DmN.siberia.utils.IPlatform
+import ru.DmN.siberia.utils.exception.BaseException
 import ru.DmN.siberia.utils.vtype.TypesProvider
 import java.io.File
 import java.io.FileOutputStream
@@ -26,19 +28,34 @@ import kotlin.test.assertEquals
 abstract class TestModuleBase(val dir: String, private val platform: IPlatform) {
     @Test
     fun testCompile() {
-        compileTest()
+        try {
+            compileTest()
+        } catch (e: BaseException) {
+            println(e.print(::provider))
+            throw Error()
+        }
     }
 
     @Test
     open fun testUnparse() {
-        unparse()
-        unparseCheck()
+        try {
+            unparse()
+            unparseCheck()
+        } catch (e: BaseException) {
+            println(e.print(::provider))
+            throw Error()
+        }
     }
 
     @Test
     open fun testPrint() {
-        print()
-        printCheck()
+        try {
+            print()
+            printCheck()
+        } catch (e: BaseException) {
+            println(e.print(::provider))
+            throw Error()
+        }
     }
 
     open fun compileTest() =
@@ -46,7 +63,7 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
 
     fun compile() {
         val mp = ModulesProvider.of(platform)
-        val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(platform)) as NodeModule).module
+        val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(platform, "$dir/module.pht")) as NodeModule).module
         module.init(platform, mp)
         val tp = TypesProvider.of(platform)
         val processed = ArrayList<Node>()
@@ -69,7 +86,7 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
 
     fun unparse() {
         val mp = ModulesProvider.of(platform)
-        val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(platform)) as NodeModule).module
+        val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(platform, "$dir/module.pht")) as NodeModule).module
         module.init(platform, mp)
         val tp = TypesProvider.of(platform)
         File("dump/$dir/unparse/parsed").mkdirs()
@@ -105,7 +122,7 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
 
     private fun print() {
         val mp = ModulesProvider.of(platform)
-        val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(platform)) as NodeModule).module
+        val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(platform, "$dir/module.pht")) as NodeModule).module
         module.init(platform, mp)
         val tp = TypesProvider.of(platform)
         File("dump/$dir/print").mkdirs()

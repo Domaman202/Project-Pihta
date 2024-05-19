@@ -1,7 +1,7 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.processor.ctx.global
-import ru.DmN.pht.utils.node.NodeTypes.ARRAY_SIZE_
+import ru.DmN.pht.utils.node.NodeTypes.ARR_SIZE_
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
@@ -15,6 +15,6 @@ object NRArraySize : INodeProcessor<NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
         if (valMode)
-            NodeNodesList(node.info.withType(ARRAY_SIZE_), mutableListOf(processor.process(node.nodes[0], ctx, true)!!))
+            NodeNodesList(node.info.withType(ARR_SIZE_), mutableListOf(processor.process(node.nodes[0], ctx, true)!!))
         else null
 }

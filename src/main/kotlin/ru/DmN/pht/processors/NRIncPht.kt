@@ -11,5 +11,12 @@ import ru.DmN.siberia.processors.INodeProcessor
 
 object NRIncPht : INodeProcessor<NodeIncPht> {
     override fun process(node: NodeIncPht, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
-        processor.process(ParserImpl(ctx.module.getModuleFile(processor.computeString(node.nodes[0], ctx)), processor.mp).parseNode(node.ctx)!!, ctx, valMode)
+        processor.process(
+            ParserImpl(
+                "(use-ctx pht ${String(ctx.module.getModuleFile(processor.computeString(node.nodes[0], ctx)).readBytes())})",
+                processor.mp
+            ).parseNode(node.ctx)!!,
+            ctx,
+            valMode
+        )
 }

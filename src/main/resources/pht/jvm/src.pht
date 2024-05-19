@@ -12,21 +12,21 @@
     (ns ru.DmN.pht
         (cls ArrayExtends [^Object]
             (def-macro toList [type]
-                (efn (array-type (macro-arg type)) toList ^List [] (progn
+                (efn (arr-type (macro-arg type)) toList ^List [] (progn
                     (def [[list (new ^ArrayList)]])
                     (for [e this]
                         (#add list e))
                     list)))
             (def-macro contentToString [type]
-                (efn (array-type (macro-arg type)) contentToString ^String [] (progn
+                (efn (arr-type (macro-arg type)) contentToString ^String [] (progn
                     (def [[str (new ^StringBuilder)]])
                     (#append str '[')
-                    (def [[i (- (array-size this) 1)]])
+                    (def [[i (- (arr-size this) 1)]])
                     (cycle (> i 0)
                         (#append str (aget this i))
                         (#append str ' ')
                         (set i (- i 1)))
-                    (if (> (array-size this) 0)
+                    (if (> (arr-size this) 0)
                         (#append str (aget this 0)))
                     (#append str ']')
                     (#toString str))))
@@ -38,7 +38,7 @@
 
         (cls StringExtends [^Object]
             (@varargs
-            (efn ^String add ^String [[arr (array-type ^Any)]] (progn
+            (efn ^String add ^String [[arr (arr-type ^Any)]] (progn
                 (def [[str (new ^StringBuilder this)]])
                 (for [e arr]
                     (#append str (#toString ^java.util.Objects e)))
@@ -54,9 +54,9 @@
                         (defn println ^void [[msg (macro-arg type)]]
                             (#println ^System/out (as ^int msg)))
                         (@varargs
-                            (defn print ^void [[msg (array-type (macro-arg type))]]
+                            (defn print ^void [[msg (arr-type (macro-arg type))]]
                                 (#print ^System/out (#contentToString msg)))
-                            (defn println ^void [[msg (array-type (macro-arg type))]]
+                            (defn println ^void [[msg (arr-type (macro-arg type))]]
                                 (#println ^System/out (#contentToString msg)))))))
             (def-macro defn-print [types]
                 (macro-unroll [[type types]]
@@ -66,9 +66,9 @@
                         (defn println ^void [[msg (macro-arg type)]]
                             (#println ^System/out msg))
                         (@varargs
-                            (defn print ^void [[msg (array-type (macro-arg type))]]
+                            (defn print ^void [[msg (arr-type (macro-arg type))]]
                                 (#print ^System/out (#contentToString msg)))
-                            (defn println ^void [[msg (array-type (macro-arg type))]]
+                            (defn println ^void [[msg (arr-type (macro-arg type))]]
                                 (#println ^System/out (#contentToString msg)))))))
             (defn println ^void []
                 (#println ^System/out))

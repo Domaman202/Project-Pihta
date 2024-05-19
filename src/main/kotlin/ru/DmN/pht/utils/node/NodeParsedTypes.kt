@@ -2,90 +2,89 @@ package ru.DmN.pht.utils.node
 
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.siberia.utils.node.INodeType
-import ru.DmN.siberia.utils.node.NodeTypes
 
 enum class NodeParsedTypes(override val operation: String, override val processed: INodeType) : IParsedNodeType {
     // a
-    ADD("add", ADD_),
-    AND("and", AND_),
-    AS("as", AS_),
-    ASET("aset", ASET_),
+    ADD("add", ADD_),                           // add          // +
+    AND("and", AND_),                           // and          // &
+    AS("as", AS_),                              // as
+    ASET("aset", ASET_),                        // arr-set
     // b
-    BGET("bget", BGET_),
-    BODY("body", BODY_),
-    BREAK("break", BREAK_),
+    BGET("bget", BGET_),                        // block-get
+    BLOCK("block", BLOCK_),                     // block
+    BREAK("break", BREAK_),                     // break
     // c
-    CATCH("catch", CATCH_),
-    CLS("cls", CLS_),
-    CONTINUE("continue", CONTINUE_),
-    CTOR("ctor", CTOR_),
-    CYCLE("cycle", CYCLE_),
-    DEC_PRE("dec", DEC_PRE_),
-    DEC_POST("dec-", DEC_POST_),
-    DEFN("defn", DEFN_),
-    DIV("div", DIV_),
+    CATCH("catch", CATCH_),                     // catch
+    CLS("cls", CLS_),                           // class
+    CONTINUE("continue", CONTINUE_),            // continue
+    CTOR("ctor", CTOR_),                        // def-ctor
+    CYCLE("cycle", CYCLE_),                     // cycle
+    DEC_PRE("dec", DEC_PRE_),                   // dec          // --
+    DEC_POST("dec-", DEC_POST_),                // dec-
+    DEFN("defn", DEFN_),                        // def-func
+    DIV("div", DIV_),                           // div          // /
     // e
-    ECTOR("ector", ECTOR_),
-    EFLD("efld", EFLD_),
-    EFN("efn", EFN_),
-    EQ("eq", EQ_),
+    ECTOR("ector", ECTOR_),                     // def-enum-ctor
+    EFLD("efld", EFLD_),                        // enum-fld
+    EFN("efn", EFN_),                           // def-ext-func
+    EQ("eq", EQ_),                              // eq           // =
     // f
-    FGET_A("fget", FGET_),
-    FGET_B("fget", FGET_),
-    FN("fn", FN_),
-    FSET_A("fset", FSET_),
-    FSET_B("fset", FSET_),
+    FGET_A("fget", FGET_),                      // fld-get
+    FGET_B("fget", FGET_),                      // fld-get
+    FN("fn", FN_),                              // lambda
+    FSET_A("fset", FSET_),                      // fld-set
+    FSET_B("fset", FSET_),                      // fld-set
     // g
-    GET("get", GET_),
-    GREAT("great", GREAT_),
-    GREAT_OR_EQ("great-or-eq", GREAT_OR_EQ_),
+    GET("get", GET_),                           // get
+    GREAT("great", GREAT_),                     // great        // >
+    GREAT_OR_EQ("gt-or-eq", GREAT_OR_EQ_),      // gt-or-eq     // >=
     // i
-    INC_PRE("inc", INC_PRE_),
-    INC_POST("inc-", INC_POST_),
-    IS("is", IS_),
-    ITF("itf", ITF_),
+    INC_PRE("inc", INC_PRE_),                   // inc // ++
+    INC_POST("inc-", INC_POST_),                // inc-
+    IS("is", IS_),                              // is
+    ITF("itf", ITF_),                           // interface
     // l
-    LESS("less", LESS_),
-    LESS_OR_EQ("less-or-eq", LESS_OR_EQ_),
+    LESS("less", LESS_),                        // less         // <
+    LESS_OR_EQ("ls-or-eq", LESS_OR_EQ_),        // ls-or-eq     // <=
     // m
-    MCALL("mcall", MCALL_),
-    MUL("mul", MUL_),
+    MCALL("mcall", MCALL_),                     // method-call
+    MUL("mul", MUL_),                           // mul          // *
     // n
-    NAMED_BLOCK("named-block", NAMED_BLOCK_),
-    NEG("neg", NEG_),
-    NEW("new", NEW_),
-    NEW_ARRAY("new-array", NEW_ARRAY_),
-    NOT("not", NOT_),
-    NOT_EQ("not-eq", NOT_EQ_),
-    NS("ns", NS_),
+    NBLOCK("nblock", NBLOCK_),                  // named-block
+    NEG("neg", NEG_),                           // neg
+    NEW("new", NEW_),                           // new
+    NEW_ARR("new-arr", NEW_ARR_),               // new-arr
+    NOT("not", NOT_),                           // not          // !
+    NOT_EQ("not-eq", NOT_EQ_),                  // not-eq       // !=
+    NS("ns", NS_),                              // ns
     // o
-    OBJ("obj", OBJ_),
-    OR("or", OR_),
+    OBJ("obj", OBJ_),                           // object
+    OR("or", OR_),                              // or           // |
     // p
-    PRINT("print", PRINT_),
-    PRINTLN("println", PRINTLN_),
+    PRINT("print", PRINT_),                     // print
+    PRINTLN("println", PRINTLN_),               // println
     // r
-    REM("rem", REM_),
-    RET("ret", RET_),
+    REM("rem", REM_),                           // rem
+    RET("ret", RET_),                           // ret
     // s
-    SET_B("set!", SET_),
-    SHIFT_LEFT("shift-left", SHIFT_LEFT_),
-    SHIFT_RIGHT("shift-right", SHIFT_RIGHT_),
-    SUB("sub", SUB_),
+    SET_B("set!", SET_),                        // set
+    SHIFT_LEFT("shift-left", SHIFT_LEFT_),      // shift-left   // <<
+    SHIFT_RIGHT("shift-right", SHIFT_RIGHT_),   // shift-right  // >>
+    SUB("sub", SUB_),                           // sub          // -
     // v
-    VALN("valn", VALN_),
+    VALN("valn", VALN_),                        // valn
     // x
-    XOR("xor", XOR_),
+    XOR("xor", XOR_),                           // xor
 
     // @
-    ANN_ABSTRACT("@abstract", ANN_ABSTRACT_),
-    ANN_FILE("@file", ANN_FILE_),
-    ANN_FINAL("@final", ANN_FINAL_),
-    ANN_INLINE("@inline", ANN_INLINE_),
-    ANN_OPEN("@open", ANN_OPEN_),
-    ANN_STATIC("@static", ANN_STATIC_),
-    ANN_TEST("@test", ANN_TEST_),
-    ANN_VARARGS("@varargs", ANN_VARARGS_);
+    ANN_ABSTRACT("@abstract", ANN_ABSTRACT_),   // @abstract
+    ANN_FILE("@file", ANN_FILE_),               // @file
+    ANN_FINAL("@final", ANN_FINAL_),            // @final
+    ANN_INLINE("@inline", ANN_INLINE_),         // @inline
+    ANN_OPEN("@open", ANN_OPEN_),               // @open
+    ANN_STATIC("@static", ANN_STATIC_),         // @static
+    ANN_TEST("@test", ANN_TEST_),               // @test
+    ANN_VARARGS("@varargs", ANN_VARARGS_);      // @varargs
 
     override val processable: Boolean
         get() = true

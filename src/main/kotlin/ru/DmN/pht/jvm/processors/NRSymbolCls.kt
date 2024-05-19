@@ -1,8 +1,9 @@
-package ru.DmN.pht.processors
+package ru.DmN.pht.jvm.processors
 
 import ru.DmN.pht.processor.ctx.getType
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.utils.computeString
+import ru.DmN.pht.processors.IStdNodeProcessor
 import ru.DmN.pht.utils.node.nodeValueClass
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList

@@ -5,10 +5,7 @@ import ru.DmN.pht.ast.ISyncNode
 import ru.DmN.pht.compiler.java.compilers.*
 import ru.DmN.pht.jvm.compiler.ctx.classes
 import ru.DmN.pht.jvm.compilers.*
-import ru.DmN.pht.jvm.processors.NRAnnotation
-import ru.DmN.pht.jvm.processors.NRClassOf
-import ru.DmN.pht.jvm.processors.NRList
-import ru.DmN.pht.jvm.processors.NRSync
+import ru.DmN.pht.jvm.processors.*
 import ru.DmN.pht.jvm.unparsers.NUAnnotation
 import ru.DmN.pht.jvm.unparsers.NUClassOf
 import ru.DmN.pht.jvm.unparsers.NUSync
@@ -31,9 +28,10 @@ import java.io.FileOutputStream
 object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
     private fun initParsers() {
         // c
-        addSNP(CLASS_OF)
+        addSNP(CLS_OF)
         // s
-        addSNP(SYNC)
+        addSNP(SBLOCK)
+        addSNP(SYMBOL_CLS)
 
         // @
         addSANP(ANN_ANN)
@@ -43,15 +41,16 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
 
     private fun initUnparsers() {
         // c
-        addSNU(CLASS_OF)
-        add(CLASS_OF_, NUClassOf)
+        addSNU(CLS_OF)
+        add(CLS_OF_,  NUClassOf)
         // s
-        addSNU(SYNC)
-        add(SYNC_,     NUSync)
+        addSNU(SBLOCK)
+        add(SBLOCK_,  NUSync)
+        addSNU(SYMBOL_CLS)
 
         // @
         addSNU(ANN_ANN)
-        add(ANN_ANN_,  NUAnnotation)
+        add(ANN_ANN_, NUAnnotation)
         addSNU(ANN_LIST)
         addSNU(ANN_LIST_)
         addSNU(ANN_SYNC)
@@ -60,11 +59,12 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
 
     private fun initProcessors() {
         // c
-        add(CLASS_OF,  NRClassOf)
-        add(CLASS_OF_, NRClassOf)
+        add(CLS_OF,      NRClassOf)
+        add(CLS_OF_,     NRClassOf)
         // s
-        add(SYNC,      NRSync)
-        add(SYNC_,     NRProgn)
+        add(SBLOCK,      NRSync)
+        add(SBLOCK_,     NRProgn)
+        add(SYMBOL_CLS,  NRSymbolCls)
 
         // @
         add(ANN_ANN,   NRAnnotation)
@@ -80,16 +80,16 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(AGET_,        NCAGet)
         add(ALIAS_TYPE_,  NCSkip)
         add(AND_,         NCMath)
-        add(ARRAY_SIZE_,  NCArraySize)
+        add(ARR_SIZE_,    NCArraySize)
         add(AS_,          NCAs)
         add(ASET_,        NCASet)
         // b
         add(BGET_,        NCBGet)
-        add(BODY_,        NCBody)
+        add(BLOCK_,        NCBody)
         add(BREAK_,       NCBreak)
         // c
         add(CATCH_,       NCCatch)
-        add(CLASS_OF_,    NCClassOf)
+        add(CLS_OF_,      NCClassOf)
         add(CLS_,         NCClass)
         add(CONTINUE_,    NCContinue)
         add(CTOR_,        NCDefn)
@@ -130,10 +130,10 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(MCALL_,       NCMCall)
         add(MUL_,         NCMath)
         // n
-        add(NAMED_BLOCK_, NCNamedBlock)
+        add(NBLOCK_,      NCNamedBlock)
         add(NEG_,         NCMath)
         add(NEW_,         NCNew)
-        add(NEW_ARRAY_,   NCNewArray)
+        add(NEW_ARR_,     NCNewArray)
         add(NOT_,         NCCompare)
         add(NOT_EQ_,      NCCompare)
         add(NS_,          NCDefault)
@@ -149,11 +149,11 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(SHIFT_LEFT_,  NCMath)
         add(SHIFT_RIGHT_, NCMath)
         add(SUB_,         NCMath)
-        add(SYNC_,        NCSync)
+        add(SBLOCK_,      NCSync)
         // t
         add(THROW_,       NCThrow)
         add(TRCALL_,      NCTRCall)
-        add(TYPED_GET_,   NCTypedGet)
+        add(TGET_,        NCTypedGet)
         // u
         add(UNIT,         NCUnit)
         // v

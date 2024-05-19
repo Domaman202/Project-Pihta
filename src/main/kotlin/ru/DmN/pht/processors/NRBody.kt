@@ -4,7 +4,7 @@ import ru.DmN.pht.ast.NodeBody
 import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.ctx.bodyOrNull
 import ru.DmN.pht.processor.ctx.with
-import ru.DmN.pht.utils.node.NodeTypes.BODY_
+import ru.DmN.pht.utils.node.NodeTypes.BLOCK_
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -22,7 +22,7 @@ object NRBody : INodeProcessor<NodeNodesList> {
         }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeNodesList =
-        NodeBody(node.info.withType(BODY_), node.copyNodes()).apply { processNodesList(this, processor, ctx(this, ctx), valMode) }
+        NodeBody(node.info.withType(BLOCK_), node.copyNodes()).apply { processNodesList(this, processor, ctx(this, ctx), valMode) }
 
     private fun ctx(node: NodeBody, ctx: ProcessingContext): ProcessingContext =
         ctx.with(node.ctx ?: BodyContext.of(ctx.bodyOrNull).apply { node.ctx = this })

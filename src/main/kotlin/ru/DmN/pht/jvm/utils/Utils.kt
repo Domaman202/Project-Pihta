@@ -12,10 +12,17 @@ import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.vtype.VirtualType
 
+fun Compiler.isSafe(node: Node, ctx: CompilationContext): Boolean =
+    get(ctx, node).let {
+        if (it is IStdNodeCompiler<Node, *, *>)
+            return it.isSafe(node, this, ctx)
+        return true
+    }
+
 fun Compiler.computeValue(node: Node, ctx: CompilationContext): Any? =
     get(ctx, node).let {
-        if (it is IStdNodeCompiler<*, *, *>)
-            (it as IStdNodeCompiler<Node, *, *>).computeValue(node, this, ctx)
+        if (it is IStdNodeCompiler<Node, *, *>)
+            it.computeValue(node, this, ctx)
         else throw UnsupportedOperationException()
     }
 

@@ -44,23 +44,23 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(AND)
         addSNP(APP)
         addSNP(APP_FN)
-        addSNP(ARRAY_OF)
-        addSNP(ARRAY_OF_TYPE)
-        addSNP(ARRAY_SIZE)
-        addSNP(ARRAY_TYPE)
+        addSNP(ARR_OF)
+        addSNP(ARR_OF_TYPE)
+        addSNP(ARR_SIZE)
+        addSNP(ARR_TYPE)
         addSNP(AS)
         addSNP(AS_GENS)
         addSNP(ASET)
         // b
         addSNP(BGET)
-        addSNP(BODY)
+        addSNP(BLOCK)
         addSNP(BREAK)
         // c
         addSNP(CATCH)
         addSNP(CCALL)
         addSNP(CLR_NULL_TYPE)
         addSNP(CLS)
-        addSNP(COMPONENT_TYPE)
+        addSNP(COMP_TYPE)
         addNP("comment",      NPComment)
         addSNP(COND)
         addSNP(CONTINUE)
@@ -117,22 +117,22 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addNP("mcall!",       NPMCallB)
         addSNP(MUL)
         // n
-        addSNP(NAMED_BLOCK)
+        addSNP(NBLOCK)
         addSNP(NEG)
         addSNP(NEW)
-        addSNP(NEW_ARRAY)
+        addSNP(NEW_ARR)
         addSNP(NOT)
         addSNP(NOT_EQ)
         addSNP(NOT_NULL_TYPE)
         addSNP(NS)
-        addSNP(NULLABLE_TYPE)
+        addSNP(NULL_TYPE)
         // o
         addSNP(OBJ)
         addSNP(OR)
         // p
         addSNP(PRINT)
         addSNP(PRINTLN)
-        addNP("progn-", NPPrognB)
+        addNP("progn-",       NPPrognB)
         // r
         addSNP(RAND_SYMBOL)
         addSNP(RANGE)
@@ -142,32 +142,31 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(ROLL_LEFT)
         addSNP(ROLL_RIGHT)
         // s
-        addNP("set",    NPSetA)
-        addNP("set!",   NPSetB)
+        addNP("set",          NPSetA)
+        addNP("set!",         NPSetB)
         addSNP(SHIFT_LEFT)
         addSNP(SHIFT_RIGHT)
-        addNP("skip",   NPSkip)
+        addNP("skip",         NPSkip)
         addSNP(SUB)
         addSNP(SYMBOL)
         addSNP(SYMBOL_INT)
-        addSNP(SYMBOL_CLS)
         // t
         addSNP(TEST_FN)
         addSNP(THROW)
         addSNP(TRCALL)
-        addSNP(TYPED_GET)
-        addSNP(TYPEOF)
+        addSNP(TGET)
+        addSNP(TYPE_OF)
         // u
-        addNP("unit",   NPUnit)
+        addNP("unit",         NPUnit)
         addSNP(UNPARSE)
         addSNP(UNREALIZED)
         // v
         addSNP(VALN)
-        addNP("valn!",  NPValnB)
+        addNP("valn!",        NPValnB)
         addSNP(VALN_REPEAT)
         addSNP(VALN_SIZE)
-        addNP("value",  NPValueA)
-        addNP("value!", NPValueB)
+        addNP("value",        NPValueA)
+        addNP("value!",       NPValueB)
         // w
         addSNP(WITH_GENS)
         // x
@@ -193,6 +192,47 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(CTC_TYPE_NAME)
         addSNP(CTC_FN_NAME)
         addSNP(CTC_NS_NAME)
+
+        // Длинные аналоги
+
+        // a
+        "arr-get"       to "aget"
+        "app-class"     to "app"
+        "app-func"      to "app-fn"
+        "arr-set"       to "aset"
+        // b
+        "block-get"     to "bget"
+        // c
+        "ctor-call"     to "ccall"
+        "class"         to "cls"
+        "condition"     to "cond"
+        "def-ctor"      to "ctor"
+        // d
+        "def-or-set"    to "def-set"
+        "def-func"      to "defn"
+        // e
+        "enum-ctor"     to "ector"
+        "enum-fld"      to "efld"
+        "def-ext-func"  to "efn"
+        // f
+        "fld-get"       to "fget"
+        "field"         to "field"
+        "lambda"        to "fn"
+        "fld-set"       to "fset"
+        // i
+        "interface"     to "itf"
+        // m
+        "method-call"   to "mcall"
+        // n
+        "named-block"   to "nblock"
+        // o
+        "object"        to "obj"
+        // r
+        "return"        to "ret"
+        "ref-func"      to "rfn"
+        // t
+        "tailrec-call"  to "trcall"
+        "typed-get"     to "tget"
 
         // Символьные аналоги
 
@@ -242,11 +282,11 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(AND_)
         addSNU(APP)
         addSNU(APP_FN)
-        addSNU(ARRAY_OF)
-        addSNU(ARRAY_OF_TYPE)
-        addSNU(ARRAY_SIZE)
-        addSNU(ARRAY_SIZE_)
-        addSNU(ARRAY_TYPE)
+        addSNU(ARR_OF)
+        addSNU(ARR_OF_TYPE)
+        addSNU(ARR_SIZE)
+        addSNU(ARR_SIZE_)
+        addSNU(ARR_TYPE)
         addSNU(AS)
         add(AS_,            NUIsAs)
         addSNU(AS_GENS)
@@ -255,8 +295,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         // b
         addSNU(BGET)
         addSNU(BGET_)
-        addSNU(BODY)
-        addSNU(BODY_)
+        addSNU(BLOCK)
+        addSNU(BLOCK_)
         addSNU(BREAK)
         add(BREAK_,         NUNamedBlock)
         // c
@@ -265,7 +305,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(CCALL)
         addSNU(CLR_NULL_TYPE)
         addSNU(CLS)
-        addSNU(COMPONENT_TYPE)
+        addSNU(COMP_TYPE)
         add(CLS_,           NUClass)
         addSNU(COND)
         addSNU(CONTINUE)
@@ -356,14 +396,14 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(MUL_)
         // n
         add(NAME,           NUGetOrName)
-        addSNU(NAMED_BLOCK)
-        add(NAMED_BLOCK_,   NUNamedBlock)
+        addSNU(NBLOCK)
+        add(NBLOCK_,        NUNamedBlock)
         addSNU(NEG)
         addSNU(NEG_)
         addSNU(NEW)
         add(NEW_,           NUNew)
-        addSNU(NEW_ARRAY)
-        add(NEW_ARRAY_,     NUNewArray)
+        addSNU(NEW_ARR)
+        add(NEW_ARR_,       NUNewArray)
         addSNU(NOT)
         addSNU(NOT_)
         addSNU(NOT_EQ)
@@ -371,7 +411,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(NOT_NULL_TYPE)
         addSNU(NS)
         add(NS_,            NUNs)
-        addSNU(NULLABLE_TYPE)
+        addSNU(NULL_TYPE)
         // o
         addSNU(OBJ)
         add(OBJ_,           NUClass)
@@ -403,20 +443,20 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(SHIFT_LEFT_)
         addSNU(SHIFT_RIGHT)
         addSNU(SHIFT_RIGHT_)
+        addSNU(SKIP)
         addSNU(SUB)
         addSNU(SUB_)
         addSNU(SYMBOL)
         addSNU(SYMBOL_INT)
-        addSNU(SYMBOL_CLS)
         // t
         addSNU(TEST_FN)
         addSNU(THROW)
         addSNU(THROW_)
         addSNU(TRCALL)
         addSNU(TRCALL_)
-        addSNU(TYPED_GET)
-        add(TYPED_GET_,     NUTypedGet)
-        addSNU(TYPEOF)
+        addSNU(TGET)
+        add(TGET_,          NUTypedGet)
+        addSNU(TYPE_OF)
         // u
         add(UNIT,           NUUnit)
         addSNU(UNPARSE)
@@ -471,11 +511,11 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(AND_,          NRMathB)
         add(APP,           NRApp)
         add(APP_FN,        NRAppFn)
-        add(ARRAY_OF,      NRArrayOf)
-        add(ARRAY_OF_TYPE, NRArrayOfType)
-        add(ARRAY_SIZE,    NRArraySize)
-        add(ARRAY_SIZE_,   NRArraySize)
-        add(ARRAY_TYPE,    NRArrayType)
+        add(ARR_OF,        NRArrayOf)
+        add(ARR_OF_TYPE,   NRArrayOfType)
+        add(ARR_SIZE,      NRArraySize)
+        add(ARR_SIZE_,     NRArraySize)
+        add(ARR_TYPE,      NRArrayType)
         add(AS,            NRAs)
         add(AS_,           NRAsB)
         add(AS_GENS,       NRAsGens)
@@ -484,8 +524,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         // b
         add(BGET,          NRBGet)
         add(BGET_,         NRBGetB)
-        add(BODY,          NRBody)
-        add(BODY_,         NRBody)
+        add(BLOCK,         NRBody)
+        add(BLOCK_,        NRBody)
         add(BREAK,         NRBreakContinue)
         //
         add(CATCH,         NRCatch)
@@ -493,7 +533,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(CCALL,         NRCCall)
         add(CLR_NULL_TYPE, NRClearNullType)
         add(CLS,           NRClass)
-        add(COMPONENT_TYPE,NRComponentType)
+        add(COMP_TYPE,     NRComponentType)
         add(COND,          NRCond)
         add(CONTINUE,      NRBreakContinue)
         add(CTOR,          NRCtor)
@@ -570,14 +610,14 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(MUL_,          NRMathB)
         // n
         add(NAME,          NRGetOrName)
-        add(NAMED_BLOCK,   NRNamedList)
-        add(NAMED_BLOCK_,  NRProgn)
+        add(NBLOCK,        NRNamedList)
+        add(NBLOCK_,       NRProgn)
         add(NEG,           NRMath)
         add(NEG_,          NRMathB)
         add(NEW,           NRNew)
         add(NEW_,          NRNewB)
-        add(NEW_ARRAY,     NRNewArray)
-        add(NEW_ARRAY_,    NRNewArrayB)
+        add(NEW_ARR,       NRNewArray)
+        add(NEW_ARR_,      NRNewArrayB)
         add(NOT,           NRCompare)
         add(NOT_,          NRCompareB)
         add(NOT_EQ,        NRCompare)
@@ -585,7 +625,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(NOT_NULL_TYPE, NRNotNullType)
         add(NS,            NRNs)
         add(NS_,           NRNs)
-        add(NULLABLE_TYPE, NRNullableType)
+        add(NULL_TYPE,     NRNullableType)
         // o
         add(OBJ,           NRObj)
         add(OBJ_,          NRObjB)
@@ -616,16 +656,15 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(SUB_,          NRMathB)
         add(SYMBOL,        NRSymbol)
         add(SYMBOL_INT,    NRSymbolInt)
-        add(SYMBOL_CLS,    NRSymbolCls)
         // t
         add(TEST_FN,       NRTestFn)
         add(THROW,         NRThrow)
         add(THROW_,        NRThrow)
         add(TRCALL,        NRTRCall)
         add(TRCALL_,       NRTRCall)
-        add(TYPED_GET,     NRTypedGet)
-        add(TYPED_GET_,    NRTypedGetB)
-        add(TYPEOF,        NRTypeof)
+        add(TGET,          NRTypedGet)
+        add(TGET_,         NRTypedGetB)
+        add(TYPE_OF,       NRTypeof)
         // u
         add(UNIT,          NRUnit)
         add(UNPARSE,       NRUnparse)
@@ -666,7 +705,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
 
     private fun initCompilers() {
         // p
-        add(PROGN_B_,     NCDefault)
+        add(PROGN_B_,      NCDefault)
 
         // @
         add(ANN_ABSTRACT_, NCDefault)

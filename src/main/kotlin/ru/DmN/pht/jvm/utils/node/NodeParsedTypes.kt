@@ -6,9 +6,9 @@ import ru.DmN.siberia.utils.node.INodeType
 
 enum class NodeParsedTypes(override val operation: String, override val processed: INodeType) : IParsedNodeType {
     // @
-    ANN_ANN("@annotation", ANN_ANN_),
-    ANN_LIST("@list", ANN_LIST_),
-    ANN_SYNC("@synchronized", ANN_SYNC_);
+    ANN_ANN("@annotation", ANN_ANN_), // @annotation
+    ANN_LIST("@list", ANN_LIST_),     // @list
+    ANN_SYNC("@sync", ANN_SYNC_);     // @synchronized
 
     override val processable: Boolean
         get() = true

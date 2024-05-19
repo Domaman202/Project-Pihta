@@ -7,16 +7,17 @@ import ru.DmN.siberia.utils.node.NodeTypes.Type.PROCESSED
 
 enum class NodeTypes : INodeType {
     // c
-    CLASS_OF("class-of", PARSED),
-    CLASS_OF_("class-of", PROCESSED),
+    CLS_OF("cls-of", PARSED),           // class-of
+    CLS_OF_("cls-of", PROCESSED),       // class-of
     // s
-    SYNC("sync", PARSED),
-    SYNC_("sync", PROCESSED),
+    SBLOCK("sblock", PARSED),           // sync-block
+    SBLOCK_("sblock", PROCESSED),       // sync-block
+    SYMBOL_CLS("symbol-cls", PARSED),   // symbol-cls
 
     // @
-    ANN_ANN_("@annotation", PROCESSED),
-    ANN_LIST_("@list", PROCESSED),
-    ANN_SYNC_("@synchronized", PROCESSED);
+    ANN_ANN_("@ann", PROCESSED),        // @annotation
+    ANN_LIST_("@list", PROCESSED),      // @list
+    ANN_SYNC_("@sync", PROCESSED);      // @sync
 
     override val operation: String
     override val processable: Boolean

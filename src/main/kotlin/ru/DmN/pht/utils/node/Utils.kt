@@ -20,12 +20,12 @@ fun nodeAGet(info: INodeInfo, name: String, index: String) =
     NodeNodesList(info.withType(AGET),
         mutableListOf(nodeGetOrName(info, name), nodeGetOrName(info, index)))
 fun nodeArrayOf(info: INodeInfo, elements: MutableList<Node>) =
-    NodeNodesList(info.withType(ARRAY_OF), elements)
+    NodeNodesList(info.withType(ARR_OF), elements)
 fun nodeArrayOfType(info: INodeInfo, type: String, elements: List<Node>) =
-    NodeNodesList(info.withType(ARRAY_OF_TYPE),
+    NodeNodesList(info.withType(ARR_OF_TYPE),
         mutableListOf<Node>(nodeValueClass(info, type)).apply { addAll(elements) })
 fun nodeArraySize(info: INodeInfo, name: String) =
-    NodeNodesList(info.withType(ARRAY_SIZE),
+    NodeNodesList(info.withType(ARR_SIZE),
         mutableListOf(nodeGetOrName(info, name)))
 fun nodeAs(info: INodeInfo, node: Node, type: String) =
     NodeNodesList(info.withType(AS),
@@ -39,7 +39,7 @@ fun nodeASet(info: INodeInfo, name: String, index: Int, value: Node) =
 fun nodeBGet(info: INodeInfo, name: String, block: String) =
     NodeNodesList(info.withType(BGET), mutableListOf(nodeValue(info, name), nodeValue(info, block)))
 fun nodeBody(info: INodeInfo, nodes: MutableList<Node>) =
-    NodeNodesList(info.withType(BODY), nodes)
+    NodeNodesList(info.withType(BLOCK), nodes)
 // c
 fun nodeCcall(info: INodeInfo) =
     NodeNodesList(info.withType(CCALL))
@@ -113,7 +113,7 @@ fun nodeNew(info: INodeInfo, type: String, args: List<Node>) =
     NodeNodesList(info.withType(NEW),
         mutableListOf<Node>(nodeValueClass(info, type)).apply { addAll(args) })
 fun nodeNewArray(info: INodeInfo, type: String, size: Int) =
-    NodeNodesList(info.withType(NEW_ARRAY),
+    NodeNodesList(info.withType(NEW_ARR),
         mutableListOf(nodeValueClass(info, type), nodeValue(info, size)))
 // p
 fun nodePrintln(info: INodeInfo, message: MutableList<Node>) =
@@ -124,13 +124,16 @@ fun nodePrintln(info: INodeInfo, message: String) =
 fun nodeObj(info: INodeInfo, name: String, parents: List<String>, nodes: List<Node>) =
     NodeNodesList(info.withType(OBJ),
         mutableListOf<Node>(nodeValue(info, name), nodeValn(info, parents.mapMutable { nodeValue(info, it) })).apply { addAll(nodes) })
+// s
+fun nodeVarSet(info: INodeInfo, name: String, value: Node) =
+    NodeSet(info.withType(SET_B), mutableListOf(value), name)
 // t
 fun nodeThrow(info: INodeInfo, clazz: String) =
     NodeNodesList(info.withType(THROW), mutableListOf(nodeNew(info, clazz)))
 fun nodeThrow(info: INodeInfo, clazz: String, args: List<Node>) =
     NodeNodesList(info.withType(THROW), mutableListOf(nodeNew(info, clazz, args)))
 fun nodeTypesGet(info: INodeInfo, name: String, type: VirtualType) =
-    NodeTypedGet(info.withType(TYPED_GET_), name, type)
+    NodeTypedGet(info.withType(TGET_), name, type)
 // u
 fun nodeUseCtx(info: INodeInfo, name: String, body: Node) =
     NodeUse(info.withType(USE_CTX), mutableListOf(body), mutableListOf(name))
