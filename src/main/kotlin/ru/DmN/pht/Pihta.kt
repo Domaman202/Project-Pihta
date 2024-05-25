@@ -239,6 +239,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
 
         // a
         "+"  to "add"
+        "&"  to "and"
         // d
         "--" to "dec"
         "/"  to "div"
@@ -255,8 +256,10 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         // m
         "*"  to "mul"
         // n
-        "!"  to "not"
+        "!"  to "not" // todo: fix
         "!=" to "not-eq"
+        // o
+        "|"  to "or" // todo: fix
         // r
         "%"  to "rem"
         "->" to "roll-left"
@@ -470,7 +473,10 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(VALUE,          NUValue)
         // w
         addSNU(WITH_GENS)
+        // x
         addSNU(XOR)
+        addSNU(XOR_)
+        // y
         addSNU(YIELD)
 
         // @
@@ -619,7 +625,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(NEW_,          NRNewB)
         add(NEW_ARR,       NRNewArray)
         add(NEW_ARR_,      NRNewArrayB)
-        add(NOT,           NRCompare)
+        add(NOT,           NRNot)
         add(NOT_,          NRCompareB)
         add(NOT_EQ,        NRCompare)
         add(NOT_EQ_,       NRCompareB)

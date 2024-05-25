@@ -85,7 +85,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(ASET_,        NCASet)
         // b
         add(BGET_,        NCBGet)
-        add(BLOCK_,        NCBody)
+        add(BLOCK_,       NCBody)
         add(BREAK_,       NCBreak)
         // c
         add(CATCH_,       NCCatch)
@@ -134,7 +134,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(NEG_,         NCMath)
         add(NEW_,         NCNew)
         add(NEW_ARR_,     NCNewArray)
-        add(NOT_,         NCCompare)
+        add(NOT_,         NCNot)
         add(NOT_EQ_,      NCCompare)
         add(NS_,          NCDefault)
         // o

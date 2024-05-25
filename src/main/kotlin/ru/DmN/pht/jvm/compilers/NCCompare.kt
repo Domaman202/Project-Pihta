@@ -38,7 +38,7 @@ object NCCompare : INodeCompiler<NodeNodesList> {
             when (operation) {
                 NOT_ -> when (type) {
                     BOOLEAN -> visitInsn(Opcodes.INEG)
-                    else -> throw UnsupportedOperationException()
+                    else    -> throw UnsupportedOperationException()
                 }
                 EQ_ -> when (type) {
                     BOOLEAN,

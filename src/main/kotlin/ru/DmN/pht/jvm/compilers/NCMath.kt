@@ -5,36 +5,42 @@ import ru.DmN.pht.ast.NodeMath
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.jvm.compiler.ctx.method
 import ru.DmN.pht.utils.node.NodeTypes.*
+import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NCMath : INodeCompiler<NodeMath> {
-    override fun compileVal(node: NodeMath, compiler: Compiler, ctx: CompilationContext): Variable {
+    override fun compileVal(node: NodeMath, compiler: Compiler, ctx: CompilationContext): Variable =
+        compileVal(node, node.type, compiler, ctx)
+
+    fun compileVal(node: NodeNodesList, type: VirtualType, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.run {
             load(compiler.compileVal(node.nodes[0], ctx), this)
             if (node.info.type == NEG_)
-                visitInsn(calcOperation(node, node.type.name))
+                visitInsn(calcOperation(node, type.name))
             else {
-                val operation = calcOperation(node, node.type.name)
+                val operation = calcOperation(node, type.name)
                 node.nodes.drop(1).forEach {
                     load(compiler.compileVal(it, ctx), this)
                     visitInsn(operation)
                 }
             }
-            return Variable.tmp(node, node.type)
+            return Variable.tmp(node, type)
         }
     }
 
-    private fun calcOperation(node: NodeMath, type: String) =
+    private fun calcOperation(node: NodeNodesList, type: String) =
         when (node.info.type) {
             ADD_ -> Opcodes.IADD + calcOffsetMath(type)
             SUB_ -> Opcodes.ISUB + calcOffsetMath(type)
             MUL_ -> Opcodes.IMUL + calcOffsetMath(type)
             DIV_ -> Opcodes.IDIV + calcOffsetMath(type)
             REM_ -> Opcodes.IREM + calcOffsetMath(type)
-            NEG_ -> Opcodes.INEG + calcOffsetMath(type)
+            NEG_,
+            NOT_ -> Opcodes.INEG + calcOffsetMath(type)
             AND_ -> Opcodes.IAND + calcOffsetAndOr(type)
             OR_  -> Opcodes.IOR  + calcOffsetAndOr(type)
             XOR_ -> Opcodes.IXOR + calcOffsetXorShift(type)

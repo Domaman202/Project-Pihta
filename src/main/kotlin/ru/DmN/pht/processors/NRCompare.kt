@@ -21,13 +21,16 @@ object NRCompare : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
         NRMath.findExtend(processor.calc(node.nodes[0], ctx)!!, node.text, node.nodes.drop(1), processor, ctx)?.first?.rettype ?: ctx.global.getType("boolean")
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? {
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
+        process(node, { NodeCompare(node.info.processed, node.nodes) }, processor, ctx, valMode)
+
+    inline fun process(node: NodeNodesList, ctor: (type: VirtualType) -> NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? {
         val nodes = processor.processNodes(node, ctx, true)
         val firstType = processor.calc(nodes[0], ctx)!!
         val result = NRMath.getExtend(firstType, node.text, nodes.drop(1), processor, ctx)
         return if (result == null)
             if (valMode)
-                processValue(NodeCompare(node.info.processed, node.nodes), processor, ctx)
+                processValue(ctor(firstType), processor, ctx)
             else null
         else {
             val info = node.info
