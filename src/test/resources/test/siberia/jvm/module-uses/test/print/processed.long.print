@@ -9,7 +9,7 @@
 |	|	|	|	[DEFN_
 |	|	|	|	|	(type = method)
 |	|	|	|	|	(name = main)
-|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	(desc = ([Ljava/lang/String;)V)
 |	|	|	|	|	(sign = null)
 |	|	|	|	]
 |	|	|	]

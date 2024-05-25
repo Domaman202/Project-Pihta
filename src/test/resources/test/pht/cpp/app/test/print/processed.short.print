@@ -1,0 +1,26 @@
+[USE_CTX_
+|	(modules = pht pht/cpp)
+|	(NODES:
+|	|	[CLS_
+|	|	|	(type = final class)
+|	|	|	(name = App)
+|	|	|	[ANN_STATIC_
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	(meta:
+|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	)
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = main()V)
+|	|	|	|	|	|	[PRINTLN_
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	(value = 'Слава России!')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	)
+]

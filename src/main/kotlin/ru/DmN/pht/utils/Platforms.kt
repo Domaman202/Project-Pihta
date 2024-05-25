@@ -29,8 +29,8 @@ enum class Platforms : IPlatform {
             IPlatform.PLATFORMS += JVM
             IPlatform.PLATFORMS += CPP
             IPlatform.PLATFORMS += LUA
-            TypesProvider.add(JVM, JRTP())
-            TypesProvider.add(CPP, VoidTypesProvider())
+            TypesProvider.add(JVM, ::JRTP)
+            TypesProvider.add(CPP, ::VoidTypesProvider)
         }
     }
 }

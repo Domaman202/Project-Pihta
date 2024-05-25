@@ -13,9 +13,11 @@ abstract class TestModule(dir: String) : TestModuleBase(dir, CPP) {
         of("${dir}/test/unparse/processed").compileTest()
     }
 
-    override fun compileTest() {
+    override fun compileTest(): Unit =
         compile()
-    }
+
+    fun test(): String =
+        ProcessBuilder("dump/$dir/main").start().run { waitFor(); String(inputStream.readBytes())  }
 
     fun test(id: Int): String =
         ProcessBuilder("dump/$dir/main", "$id").start().run { waitFor(); String(inputStream.readBytes())  }

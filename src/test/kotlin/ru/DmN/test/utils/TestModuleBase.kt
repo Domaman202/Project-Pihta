@@ -59,7 +59,7 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
         }
     }
 
-    open fun compileTest() =
+    open fun compileTest(): Unit =
         compile()
 
     fun compile() {
@@ -175,8 +175,8 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
         assertEquals(readDumpFile("print/processed.long.print"),    readTestFile("print/processed.long.print"), "processed.long.print")
     }
 
-    private fun readDumpFile(file: String) =
+    private fun readDumpFile(file: String): String =
         File("dump/$dir/$file").readText()
-    private fun readTestFile(file: String) =
+    private fun readTestFile(file: String): String =
         String(Module::class.java.getResourceAsStream("/$dir/test/$file")!!.readBytes())
 }

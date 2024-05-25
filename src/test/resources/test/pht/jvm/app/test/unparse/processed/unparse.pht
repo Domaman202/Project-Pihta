@@ -1,0 +1,12 @@
+(use-ctx pht pht/jvm
+	(cls [] App [^java.lang.Object]
+		(@static
+			(@static
+				(defn [] main ^void [[args ^[java.lang.String]]
+					(inl-body ^void
+						(mcall
+							(fget
+								^java.lang.System
+								out)
+							println
+							"Слава России!")))))))

@@ -15,6 +15,9 @@ abstract class TestModule(dir: String) : TestModuleBase(dir, JVM) {
         of("${dir}/test/unparse/processed").compileTest()
     }
 
+    fun test(): String =
+        ProcessBuilder("java", "-cp", "dump/$dir", "App").start().run { waitFor(); String(inputStream.readBytes())  }
+
     fun test(id: Int): Any? =
         URLClassLoader(arrayOf(File("dump/$dir").toURI().toURL())).loadClass("Test$id").getMethod("test").invoke(null)
 

@@ -1,0 +1,5 @@
+(use-ctx pht pht/cpp
+	(app
+		(app-fn
+			(println
+				"Слава России!"))))

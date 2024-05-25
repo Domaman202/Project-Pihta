@@ -24,3 +24,6 @@ object ConsoleImpl : BaseConsole() {
         Platforms
     }
 }
+
+// -p jvm -m test -mc -mr
+// -tup -tuu

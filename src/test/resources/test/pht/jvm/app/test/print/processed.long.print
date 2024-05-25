@@ -1,0 +1,45 @@
+[USE_CTX_
+|	(modules = pht pht/jvm)
+|	(NODES:
+|	|	[CLS_
+|	|	|	(type = final class)
+|	|	|	(name = App)
+|	|	|	(parents = [java.lang.Object])
+|	|	|	[ANN_STATIC_
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	(meta:
+|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	)
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(name = main)
+|	|	|	|	|	|	(desc = ([Ljava/lang/String;)V)
+|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	(method = println(Ljava/lang/Object;)V)
+|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = 'ru.DmN.pht.io.StdOut')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	|	(type = STATIC)
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	(value = 'Слава России!')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	)
+|	(EXPORTS:
+|	|	[PROGN_
+|	|	|	[PROGN_
+|	|	|	|	[PROGN_]
+|	|	|	]
+|	|	]
+|	)
+]

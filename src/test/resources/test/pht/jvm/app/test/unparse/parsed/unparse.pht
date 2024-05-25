@@ -1,0 +1,5 @@
+(use-ctx pht pht/jvm
+	(app
+		(app-fn
+			(println
+				"Слава России!"))))

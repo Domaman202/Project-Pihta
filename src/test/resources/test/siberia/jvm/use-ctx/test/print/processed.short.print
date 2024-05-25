@@ -8,7 +8,7 @@
 |	|	|	|	[ANN_STATIC_
 |	|	|	|	|	[DEFN_
 |	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(desc = main()V)
+|	|	|	|	|	|	(desc = main([Ljava/lang/String;)V)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
