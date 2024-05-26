@@ -24,7 +24,7 @@ object ModuleRun : Command(
     override fun action(console: Console, vararg args: Any?) {
         console.println("Запуск...")
         try {
-            console.println(getAppClass().getMethod("main").invoke(null))
+            console.println(getAppClass().getMethod("main", Array<String>::class.java).invoke(null, emptyArray<String>()))
             console.println("Запуск окончен успешно!")
         } catch (t: Throwable) {
             console.println("Запуск окончен с ошибками:")

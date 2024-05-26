@@ -1,1 +1,1 @@
-(test-fn 0 test)
+(test-fn 0 (cls-of ^String))

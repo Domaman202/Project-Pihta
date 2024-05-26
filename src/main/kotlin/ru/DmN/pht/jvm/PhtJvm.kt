@@ -11,6 +11,7 @@ import ru.DmN.pht.jvm.unparsers.NUClassOf
 import ru.DmN.pht.jvm.unparsers.NUSync
 import ru.DmN.pht.jvm.utils.node.NodeParsedTypes.*
 import ru.DmN.pht.jvm.utils.node.NodeTypes.*
+import ru.DmN.pht.parsers.NPNodeAlias
 import ru.DmN.pht.processors.NRSA
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.addSANP
@@ -37,6 +38,17 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         addSANP(ANN_ANN)
         addSANP(ANN_LIST)
         addSANP(ANN_SYNC)
+
+        // Длинные аналоги
+
+        // c
+        "class-of"   to "cls-of"
+        // s
+        "sync-block" to "sblock"
+    }
+
+    private infix fun String.to(alias: String) {
+        add(this.toRegularExpr(), NPNodeAlias(alias))
     }
 
     private fun initUnparsers() {

@@ -1,0 +1,7 @@
+(use-ctx pht pht/jvm
+	(@test
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(as ^dynamic
+						(cls-of ^java.lang.String)))))))

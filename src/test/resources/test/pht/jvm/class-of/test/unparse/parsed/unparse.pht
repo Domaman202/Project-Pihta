@@ -1,0 +1,5 @@
+(use-ctx pht pht/jvm
+	(test-fn
+		0
+		(cls-of
+			^String)))

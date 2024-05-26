@@ -1,1 +1,1 @@
-(test-xxx)
+(app-fn (println (cls-of ^Object)))
