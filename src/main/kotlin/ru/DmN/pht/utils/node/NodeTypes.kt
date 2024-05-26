@@ -89,7 +89,8 @@ enum class NodeTypes : INodeType {
     LESS_OR_EQ_("ls-or-eq", PROCESSED),                 // ls-or-eq
     LIST_OF("list-of", PARSED),                         // list-of
     // m
-    MACRO("macro", PARSED),                             // macro
+    MACRO_A("macro", PARSED),                           // macro
+    MACRO_B("macro", PARSED),                           // macro!
     MACRO_ARG("macro-arg", PARSED),                     // macro-arg
     MACRO_INLINE("macro-inline", PARSED),               // macro-inline
     MACRO_UNROLL("macro-unroll", PARSED),               // macro-unroll

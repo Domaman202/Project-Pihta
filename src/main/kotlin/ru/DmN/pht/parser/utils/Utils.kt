@@ -20,7 +20,7 @@ inline fun Token.isNaming() =
     type == NAMING
 
 inline fun Parser.parseMacro(ctx: ParsingContext, token: Token) =
-    get(ctx, "macro")!!.parse(this, ctx, token)
+    get(ctx, "macro!")!!.parse(this, ctx, token)
 inline fun Parser.parseMCall(ctx: ParsingContext, token: Token) =
     get(ctx, "mcall!")!!.parse(this, ctx, token)
 

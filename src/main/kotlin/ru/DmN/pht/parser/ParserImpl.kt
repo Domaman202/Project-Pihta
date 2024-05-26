@@ -31,10 +31,9 @@ class ParserImpl(lexer: Lexer, mp: ModulesProvider, tokens: Stack<Token?>) : Par
                     OPEN_CBRACKET -> parseValn(ctx, startToken)
                     OPERATION -> {
                         val parser = get(ctx, token.text!!)
-                        if (parser == null) {
-                            pushToken(token)
-                            parseMacro(ctx, Token(token.line, token.ptr, OPERATION, "macro"))
-                        } else parser.parse(this, ctx, token)
+                        if (parser == null)
+                            parseMacro(ctx, token)
+                        else parser.parse(this, ctx, token)
                     }
                     NAMING -> {
                         pushToken(token)

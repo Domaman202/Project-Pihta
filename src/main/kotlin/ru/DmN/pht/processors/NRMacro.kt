@@ -4,15 +4,22 @@ import ru.DmN.pht.ast.NodeMacro
 import ru.DmN.pht.processor.ctx.*
 import ru.DmN.pht.processor.utils.compute
 import ru.DmN.pht.utils.node.NodeParsedTypes
+import ru.DmN.pht.utils.node.NodeTypes.MACRO_A
+import ru.DmN.pht.utils.type
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.utils.SubMap
-import ru.DmN.siberia.utils.exception.MessageException
+import ru.DmN.siberia.utils.exception.BaseException
+import ru.DmN.siberia.utils.exception.NoCatherWrappedException
+import ru.DmN.siberia.utils.node.NodeInfoImpl
+import ru.DmN.siberia.utils.node.TokenInfoImpl
 import ru.DmN.siberia.utils.vtype.VirtualType
+import java.io.InputStream
 import java.util.*
+import java.util.function.Function
 
 object NRMacro : IStdNodeProcessor<NodeMacro> {
     override fun calc(node: NodeMacro, processor: Processor, ctx: ProcessingContext): VirtualType? {
@@ -40,7 +47,7 @@ object NRMacro : IStdNodeProcessor<NodeMacro> {
     private fun macroCalc(node: NodeMacro, ctx: ProcessingContext): Pair<List<Node>, ProcessingContext> {
         val gctx = ctx.global
         //
-        val macro = gctx.macros.find { it.name == node.name } ?: throw MessageException(null, "Макрос '${node.name}' не найден!")
+        val macro = gctx.macros.find { it.name == node.name } ?: throwMacroNotFounded(node.name, node)
         val args = HashMap<Pair<UUID, String>, Node>()
         //
         if (macro.args.size == node.nodes.size)
@@ -53,15 +60,32 @@ object NRMacro : IStdNodeProcessor<NodeMacro> {
             )
         }
         //
-        return Pair(
-            macro.body,
-            ctx.with(macro.ctx.combineWith(gctx)).with(macroCtxOf(ctx, args))
-        )
+        return Pair(macro.body, ctx.with(macro.ctx.combineWith(gctx)).with(macroCtxOf(ctx, args)))
     }
 
     fun macroCtxOf(ctx: ProcessingContext, args: MutableMap<Pair<UUID, String>, Node>): MacroContext {
         return if (ctx.isMacro())
             MacroContext(SubMap(ctx.macro.args, args))
         else MacroContext(args)
+    }
+
+    private fun throwMacroNotFounded(name: String, node: NodeMacro): Nothing {
+        val ti = node.info.ti as TokenInfoImpl
+        throw NoCatherWrappedException(MacroNotFoundedException(node.type == MACRO_A, name, ti.file, ti.line, ti.symbol, ti.length))
+    }
+
+    private class MacroNotFoundedException(
+        private val operation: Boolean,
+        private val name: String,
+        private val file: String,
+        private val line: Int,
+        private val symbol: Int,
+        private val length: Int
+    ) : BaseException(null) {
+        override fun print(sb: StringBuilder, provider: Function<String, InputStream>?): StringBuilder =
+            sb.append('[').append(file).append(", ").append(line.inc()).append(", ").append(symbol.inc()).append("]\n")
+                .append(NodeInfoImpl.readLine(line, provider!!.apply(file))).append('\n')
+                .append(" ".repeat(symbol)).append('^').append("~".repeat((if (operation) length else name.length).dec())).append('\n')
+                .append("Макрос '$name' не найден!")
     }
 }

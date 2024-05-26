@@ -109,7 +109,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(LESS_OR_EQ)
         addSNP(LIST_OF)
         // m
-        addNP("macro",        NPMacro)
+        addNP("macro",        NPMacroA)
+        addNP("macro!",       NPMacroB)
         addNP("macro-arg",    NPMacroArg)
         addNP("macro-inline", NPMacroInline)
         addNP("macro-unroll", NPMacroUnroll)
@@ -256,10 +257,10 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         // m
         "*"  to "mul"
         // n
-        "!"  to "not" // todo: fix
+        "!"  to "not"
         "!=" to "not-eq"
         // o
-        "|"  to "or" // todo: fix
+        "|"  to "or"
         // r
         "%"  to "rem"
         "->" to "roll-left"
@@ -390,7 +391,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(LESS_OR_EQ_)
         addSNU(LIST_OF)
         // m
-        add(MACRO,          NUMacro)
+        add(MACRO_A,        NUMacro)
+        add(MACRO_B,        NUMacro)
         addSNU(MACRO_ARG)
         addSNU(MACRO_INLINE)
         addSNU(MACRO_UNROLL)
@@ -607,7 +609,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(LESS_OR_EQ_,   NRCompareB)
         add(LIST_OF,       NRListOf)
         // m
-        add(MACRO,         NRMacro)
+        add(MACRO_A,       NRMacro)
+        add(MACRO_B,       NRMacro)
         add(MACRO_ARG,     NRMacroArg)
         add(MACRO_INLINE,  NRMacroInline)
         add(MACRO_UNROLL,  NRMacroUnroll)
