@@ -1,0 +1,26 @@
+(progn
+    (import "java" [
+        [types [
+            java.lang.Exception
+            java.lang.RuntimeException
+            java.lang.Error]]])
+    (test-fn 0
+        (catch ^int [
+                [_ ^RuntimeException 12]
+                [_ ^Exception        21]]
+            (throw (new ^Exception))))
+    (test-fn 1
+        (catch ^int [
+                [_ ^RuntimeException 12]
+                [_ ^Exception        21]]
+            (throw (new ^RuntimeException))))
+    (test-fn 2
+        (catch [
+                [_ ^RuntimeException (unit)]
+                [_ ^Exception        (unit)]]
+            (throw (new ^Error))))
+    (test-fn 3
+        (catch ^String [
+                [e ^RuntimeException (#toString e)]
+                [_ ^Exception        nil]]
+            (throw (new ^RuntimeException)))))

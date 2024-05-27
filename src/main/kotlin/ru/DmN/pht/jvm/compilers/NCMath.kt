@@ -4,15 +4,15 @@ import org.objectweb.asm.Opcodes
 import ru.DmN.pht.ast.NodeMath
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.compilers.IValueNodeCompiler
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object NCMath : INodeCompiler<NodeMath> {
+object NCMath : IValueNodeCompiler<NodeMath> {
     override fun compileVal(node: NodeMath, compiler: Compiler, ctx: CompilationContext): Variable =
         compileVal(node, node.type, compiler, ctx)
 

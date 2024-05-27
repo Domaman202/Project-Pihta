@@ -6,16 +6,16 @@ import ru.DmN.pht.ast.NodeGet.Type.*
 import ru.DmN.pht.jvm.compiler.ctx.body
 import ru.DmN.pht.jvm.compiler.ctx.clazz
 import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.compilers.IValueNodeCompiler
 import ru.DmN.pht.jvm.utils.vtype.desc
 import ru.DmN.pht.jvm.utils.vtype.jvmName
 import ru.DmN.pht.processor.ctx.classes
 import ru.DmN.pht.utils.normalizeName
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable
 
-object NCGet : INodeCompiler<NodeGet> {
+object NCGet : IValueNodeCompiler<NodeGet> {
     override fun compileVal(node: NodeGet, compiler: Compiler, ctx: CompilationContext): Variable {
         val name = node.name.normalizeName()
         return when (node.type) {

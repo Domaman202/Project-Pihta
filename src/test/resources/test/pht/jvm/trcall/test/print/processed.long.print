@@ -1,0 +1,124 @@
+[USE_CTX_
+|	(modules = pht pht/jvm)
+|	(NODES:
+|	|	[CLS_
+|	|	|	(type = final class)
+|	|	|	(name = App)
+|	|	|	(parents = [java.lang.Object])
+|	|	|	[ANN_STATIC_
+|	|	|	|	[DEFN_
+|	|	|	|	|	(type = method)
+|	|	|	|	|	(name = fac)
+|	|	|	|	|	(desc = (II)I)
+|	|	|	|	|	(sign = null)
+|	|	|	|	|	[IF_
+|	|	|	|	|	|	[LESS_
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '1')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	(name = r)
+|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[TRCALL_
+|	|	|	|	|	|	|	[SUB_
+|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	(value = '1')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[MUL_
+|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	(name = r)
+|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[DEFN_
+|	|	|	|	|	(type = method)
+|	|	|	|	|	(name = fac)
+|	|	|	|	|	(desc = (I)I)
+|	|	|	|	|	(sign = null)
+|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	(method = fac(II)I)
+|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	(value = 'App')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	)
+|	|	|	|	|	|	(generic = VT(int))
+|	|	|	|	|	|	(type = STATIC)
+|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	(value = '1')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[ANN_TEST_
+|	|	|	|	|	(meta:
+|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	)
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = Test0)
+|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	(method = fac(I)I)
+|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = 'App')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	(generic = VT(int))
+|	|	|	|	|	|	|	|	|	|	(type = STATIC)
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	(value = '4')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	)
+|	(EXPORTS:
+|	|	[PROGN_
+|	|	|	[PROGN_
+|	|	|	|	[PROGN_]
+|	|	|	]
+|	|	]
+|	)
+]

@@ -1,0 +1,24 @@
+(use-ctx pht pht/jvm
+	(cls [] App [^java.lang.Object]
+		(@static
+			(defn [] main ^void [[args ^[java.lang.String]]
+				(block
+					(def [
+						[^int i 12]])
+					(inl-body ^void
+						(mcall
+							(fget
+								^java.lang.System
+								out)
+							println
+							(get i))))
+				(block
+					(def [
+						[^int i 21]])
+					(inl-body ^void
+						(mcall
+							(fget
+								^java.lang.System
+								out)
+							println
+							(get i))))))))

@@ -10,7 +10,8 @@ import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NCUnit : INodeCompiler<Node> {
-    override fun compile(node: Node, compiler: Compiler, ctx: CompilationContext) = Unit
+    override fun compile(node: Node, compiler: Compiler, ctx: CompilationContext) =
+        Unit
 
     override fun compileVal(node: Node, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.visitFieldInsn(Opcodes.GETSTATIC, "kotlin/Unit", "INSTANCE", "Lkotlin/Unit;")

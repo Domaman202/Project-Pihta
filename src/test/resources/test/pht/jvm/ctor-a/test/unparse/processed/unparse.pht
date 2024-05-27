@@ -1,0 +1,13 @@
+(use-ctx pht pht/jvm
+	(progn
+		(cls [] TestA [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>)))
+		(@test
+			(cls [] Test0 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(as ^dynamic
+							(new ^TestA))))))))

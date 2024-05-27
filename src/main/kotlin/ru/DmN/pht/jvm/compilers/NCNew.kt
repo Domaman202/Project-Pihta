@@ -4,14 +4,14 @@ import org.objectweb.asm.Opcodes
 import ru.DmN.pht.ast.NodeNew
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.compilers.IValueNodeCompiler
 import ru.DmN.pht.jvm.utils.vtype.desc
 import ru.DmN.pht.jvm.utils.vtype.jvmName
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable
 
-object NCNew : INodeCompiler<NodeNew> {
+object NCNew : IValueNodeCompiler<NodeNew> {
     override fun compileVal(node: NodeNew, compiler: Compiler, ctx: CompilationContext): Variable {
         node.ctor.run {
             val type = declaringClass.jvmName

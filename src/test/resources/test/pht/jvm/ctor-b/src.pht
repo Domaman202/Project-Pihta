@@ -1,0 +1,11 @@
+(progn
+    (@open
+    (cls TestA [^Object]
+        (ctor [[i ^int]]
+            (ccall)
+            (println i))))
+    (cls TestB [^TestA]
+        (ctor [[i ^int]] (ccall i)))
+    (app-fn
+        (new ^TestA 202)
+        (new ^TestB 203)))

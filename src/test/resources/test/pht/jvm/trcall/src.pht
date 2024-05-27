@@ -1,0 +1,8 @@
+(app
+    (defn fac ^int [[i ^int][r ^int]]
+        (if (< i 1)
+            r
+            (trcall (- i 1) (* i r))))
+    (defn fac ^int [[i ^int]]
+        (#fac . i 1))
+    (test-fn 0 (#fac . 4)))

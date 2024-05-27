@@ -1,0 +1,4 @@
+(progn
+    (cls TestA [^Object]
+        (ctor [] (ccall)))
+    (test-fn 0 (new ^TestA)))

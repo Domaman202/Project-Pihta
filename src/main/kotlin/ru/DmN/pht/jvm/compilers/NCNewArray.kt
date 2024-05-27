@@ -4,15 +4,15 @@ import org.objectweb.asm.Opcodes
 import ru.DmN.pht.ast.NodeNewArray
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.compilers.IValueNodeCompiler
 import ru.DmN.pht.jvm.utils.vtype.jvmName
 import ru.DmN.pht.utils.vtype.arrayType
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object NCNewArray : INodeCompiler<NodeNewArray> {
+object NCNewArray : IValueNodeCompiler<NodeNewArray> {
     override fun compileVal(node: NodeNewArray, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.run {
             load(compiler.compileVal(node.size, ctx), this)

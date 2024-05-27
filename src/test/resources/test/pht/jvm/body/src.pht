@@ -1,0 +1,7 @@
+(app-fn
+    (block
+        (def [[i 12]])
+        (println i))
+    (block
+        (def [[i 21]])
+        (println i)))

@@ -1,0 +1,108 @@
+[USE_CTX_
+|	(modules = pht pht/jvm)
+|	(NODES:
+|	|	[PROGN_
+|	|	|	[ANN_OPEN_
+|	|	|	|	[CLS_
+|	|	|	|	|	(type = open class)
+|	|	|	|	|	(name = TestA)
+|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	[CTOR_
+|	|	|	|	|	|	(type = constructor)
+|	|	|	|	|	|	(name = <init>)
+|	|	|	|	|	|	(desc = (I)V)
+|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	(method = <init>()V)
+|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	|	(type = SUPER)
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	(method = println(I)V)
+|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = 'ru.DmN.pht.io.StdOut')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	|	(type = STATIC)
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = TestB)
+|	|	|	|	(parents = [TestA])
+|	|	|	|	[CTOR_
+|	|	|	|	|	(type = constructor)
+|	|	|	|	|	(name = <init>)
+|	|	|	|	|	(desc = (I)V)
+|	|	|	|	|	(sign = null)
+|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	(method = <init>(I)V)
+|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	)
+|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	(type = SUPER)
+|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = App)
+|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(name = main)
+|	|	|	|	|	|	(desc = ([Ljava/lang/String;)V)
+|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	(type = VT(TestA))
+|	|	|	|	|	|	|	(ctor = (I)V)
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '202')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	(type = VT(TestB))
+|	|	|	|	|	|	|	(ctor = (I)V)
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '203')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	)
+|	(EXPORTS:
+|	|	[PROGN_
+|	|	|	[PROGN_
+|	|	|	|	[PROGN_]
+|	|	|	]
+|	|	]
+|	)
+]

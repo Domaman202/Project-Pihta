@@ -4,13 +4,13 @@ import org.objectweb.asm.Label
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.jvm.compiler.ctx.method
+import ru.DmN.pht.jvm.compilers.IValueNodeCompiler
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.pht.utils.type
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.node.INodeType
 import ru.DmN.siberia.utils.vtype.VirtualType.Companion.BOOLEAN
@@ -21,7 +21,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType.Companion.FLOAT
 import ru.DmN.siberia.utils.vtype.VirtualType.Companion.INT
 import ru.DmN.siberia.utils.vtype.VirtualType.Companion.SHORT
 
-object NCCompare : INodeCompiler<NodeNodesList> {
+object NCCompare : IValueNodeCompiler<NodeNodesList> {
     override fun compileVal(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext): Variable {
         insertIf(node.type, node.nodes, { ctx.method.node.visitInsn(Opcodes.ICONST_1) }, { ctx.method.node.visitInsn(Opcodes.ICONST_0) }, compiler, ctx)
         return Variable.tmp(node, BOOLEAN)

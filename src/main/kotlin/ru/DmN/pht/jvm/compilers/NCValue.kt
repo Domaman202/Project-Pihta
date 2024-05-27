@@ -7,12 +7,13 @@ import ru.DmN.pht.ast.NodeValue.Type.*
 import ru.DmN.pht.jvm.compiler.ctx.method
 import ru.DmN.pht.jvm.compiler.utils.desc
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
+import ru.DmN.pht.jvm.compilers.IValueNodeCompiler
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object NCValue : IStdNodeCompiler<NodeValue, Nothing, Any?> {
+object NCValue : IValueNodeCompiler<NodeValue>, IStdNodeCompiler<NodeValue, Nothing, Any?> {
     override fun compileVal(node: NodeValue, compiler: Compiler, ctx: CompilationContext): Variable =
         Variable.tmp(
             node,

@@ -1,0 +1,41 @@
+(use-ctx pht pht/jvm
+	(progn
+		(@test
+			(cls [] Test0 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(def [
+							[^int i 0]])
+						(nblock CycleBlock
+							(cycle
+								(less
+									(get i)
+									10)
+								(if
+									(great
+										(get i)
+										5)
+									(break CycleBlock))
+								(inc i)))
+						(as ^dynamic
+							(get i))))))
+		(@test
+			(cls [] Test1 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(def [
+							[^int i 0]])
+						(nblock CycleBlock
+							(cycle
+								(less
+									(get i)
+									10)
+								(inc i)
+								(if
+									(less
+										(get i)
+										5)
+									(continue CycleBlock))
+								(break CycleBlock)))
+						(as ^dynamic
+							(get i))))))))

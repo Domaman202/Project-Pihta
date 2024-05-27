@@ -11,10 +11,9 @@ import ru.DmN.pht.jvm.utils.vtype.desc
 import ru.DmN.pht.jvm.utils.vtype.jvmName
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
-import ru.DmN.siberia.compilers.INodeCompiler
 import ru.DmN.siberia.utils.Variable
 
-object NCRFn : INodeCompiler<NodeRFn> {
+object NCRFn : IValueNodeCompiler<NodeRFn> {
     override fun compileVal(node: NodeRFn, compiler: Compiler, ctx: CompilationContext): Variable {
         ctx.method.node.apply {
             node.method!!.run {

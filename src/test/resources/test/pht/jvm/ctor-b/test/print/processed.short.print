@@ -1,0 +1,74 @@
+[USE_CTX_
+|	(modules = pht pht/jvm)
+|	(NODES:
+|	|	[PROGN_
+|	|	|	[ANN_OPEN_
+|	|	|	|	[CLS_
+|	|	|	|	|	(type = open class)
+|	|	|	|	|	(name = TestA)
+|	|	|	|	|	[CTOR_
+|	|	|	|	|	|	(type = constructor)
+|	|	|	|	|	|	(desc = <init>(I)V)
+|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	(method = <init>()V)
+|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	[GET_ var this]
+|	|	|	|	|	|	|	)
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	(method = println(I)V)
+|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = 'ru.DmN.pht.io.StdOut')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	)
+|	|	|	|	|	|	
+|	|	|	|	|	|	|	[GET_ var i]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = TestB)
+|	|	|	|	[CTOR_
+|	|	|	|	|	(type = constructor)
+|	|	|	|	|	(desc = <init>(I)V)
+|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	(method = <init>(I)V)
+|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	[GET_ var this]
+|	|	|	|	|	|	)
+|	|	|	|	|	
+|	|	|	|	|	|	[GET_ var i]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = App)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = main([Ljava/lang/String;)V)
+|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	(type = VT(TestA))
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '202')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	(type = VT(TestB))
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '203')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	)
+]

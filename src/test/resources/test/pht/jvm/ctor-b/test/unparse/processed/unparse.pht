@@ -1,0 +1,28 @@
+(use-ctx pht pht/jvm
+	(progn
+		(@open
+			(cls [] TestA [^java.lang.Object]
+				(ctor [[i ^int]]
+					(mcall
+						super
+						<init>)
+					(inl-body ^void
+						(mcall
+							(fget
+								^java.lang.System
+								out)
+							println
+							(get i))))))
+		(cls [] TestB [^TestA]
+			(ctor [[i ^int]]
+				(mcall
+					super
+					<init>
+					(get i))))
+		(cls [] App [^java.lang.Object]
+			(@static
+				(defn [] main ^void [[args ^[java.lang.String]]
+					(new ^TestA
+						202)
+					(new ^TestB
+						203))))))
