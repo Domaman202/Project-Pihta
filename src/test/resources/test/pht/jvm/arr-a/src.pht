@@ -1,0 +1,14 @@
+(progn
+    (test-fn 0
+        (new-arr ^int 4))
+    (test-fn 1
+        (def [[arr (new-arr ^int 4)]])
+        (aset arr 0 12)
+        (aset arr 1 21)
+        arr)
+    (test-fn 2
+        (def [[arr (new-arr ^int 4)]])
+        (aset arr 0 12)
+        (aset arr 1 21)
+        (aset arr 3 33)
+        (aget arr 3)))

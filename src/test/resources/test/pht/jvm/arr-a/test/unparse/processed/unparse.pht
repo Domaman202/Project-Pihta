@@ -1,0 +1,46 @@
+(use-ctx pht pht/jvm
+	(progn
+		(@test
+			(cls [] Test0 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(as ^dynamic
+							(new-arr ^int 4))))))
+		(@test
+			(cls [] Test1 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(def [
+							[^[int arr (new-arr ^int 4)]])
+						(aset
+							(get arr)
+							0
+							12)
+						(aset
+							(get arr)
+							1
+							21)
+						(as ^dynamic
+							(get arr))))))
+		(@test
+			(cls [] Test2 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(def [
+							[^[int arr (new-arr ^int 4)]])
+						(aset
+							(get arr)
+							0
+							12)
+						(aset
+							(get arr)
+							1
+							21)
+						(aset
+							(get arr)
+							3
+							33)
+						(as ^dynamic
+							(aget
+								(get arr)
+								3))))))))

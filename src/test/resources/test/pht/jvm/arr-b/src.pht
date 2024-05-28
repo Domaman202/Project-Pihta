@@ -1,0 +1,5 @@
+(progn
+    (test-fn 0
+        (arr-of 12 21 33))
+    (test-fn 1
+        (arr-of-type ^float 202 203 213)))
