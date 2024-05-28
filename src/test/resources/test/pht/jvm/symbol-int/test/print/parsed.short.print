@@ -1,0 +1,21 @@
+[USE_CTX
+|	(modules = pht pht/jvm)
+|	[TEST_FN
+|	|	[VALUE
+|	|	|	(type = INT)
+|	|	|	(value = '0')
+|	|	]
+|	|	[ADD
+|	|	|	[SYMBOL_INT
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = '12')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '21')
+|	|	|	]
+|	|	]
+|	]
+]

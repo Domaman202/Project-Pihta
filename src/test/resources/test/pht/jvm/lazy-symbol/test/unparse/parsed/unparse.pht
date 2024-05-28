@@ -1,0 +1,13 @@
+(use-ctx pht pht/jvm
+	(progn
+		(def-macro
+			m-test
+			[]
+			(lazy-symbol
+				(rand-symbol)))
+		(test-fn
+			0
+			(macro m-test))
+		(test-fn
+			1
+			(macro m-test))))

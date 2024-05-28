@@ -1,0 +1,12 @@
+(use-ctx pht pht/jvm
+	(progn
+		(@test
+			(cls [] Test0 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						"1838428802"))))
+		(@test
+			(cls [] Test1 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						"1838428802"))))))

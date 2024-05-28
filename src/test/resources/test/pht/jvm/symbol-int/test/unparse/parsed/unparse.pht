@@ -1,0 +1,7 @@
+(use-ctx pht pht/jvm
+	(test-fn
+		0
+		(add
+			(symbol-int
+				"12")
+			21)))

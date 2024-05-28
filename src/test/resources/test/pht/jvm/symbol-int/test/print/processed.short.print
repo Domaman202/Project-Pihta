@@ -1,0 +1,30 @@
+[USE_CTX_
+|	(modules = pht pht/jvm)
+|	(NODES:
+|	|	[ANN_TEST_
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = Test0)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	[ADD_
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	)
+]

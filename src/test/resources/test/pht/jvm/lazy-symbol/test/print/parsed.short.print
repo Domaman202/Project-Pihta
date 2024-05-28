@@ -1,0 +1,29 @@
+[USE_CTX
+|	(modules = pht pht/jvm)
+|	[PROGN
+|	|	[DEF_MACRO
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'm-test')
+|	|	|	]
+|	|	|	[VALN]
+|	|	|	[LAZY_SYMBOL
+|	|	|	|	[RAND_SYMBOL]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[MACRO_B]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '1')
+|	|	|	]
+|	|	|	[MACRO_B]
+|	|	]
+|	]
+]
