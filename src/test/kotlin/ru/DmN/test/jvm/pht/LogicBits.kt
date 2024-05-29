@@ -3,7 +3,7 @@ package ru.DmN.test.jvm.pht
 import ru.DmN.test.jvm.TestModule
 import kotlin.test.assertEquals
 
-class LogicBits: TestModule("test/pht/jvm/logic-bits") {
+class LogicBits : TestModule("test/pht/jvm/logic-bits") {
     override fun compileTest() {
         compile()
         assertEquals(test(0), false)

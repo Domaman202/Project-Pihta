@@ -1,0 +1,11 @@
+(use-ctx pht pht/jvm
+	(progn
+		(test-fn
+			0
+			(arr-type
+				^Object))
+		(test-fn
+			1
+			(comp-type
+				(arr-type
+					^Object)))))

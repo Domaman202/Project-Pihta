@@ -1,0 +1,10 @@
+(progn
+    (test-fn 0 (is ^int   33))
+    (test-fn 1 (is ^float 33))
+
+    (test-fn 2 (is ^int    (new ^Object)))
+    (test-fn 3 (is ^Object 33))
+
+    (test-fn 4 (is ^Object (new ^Object)))
+    (test-fn 5 (is ^Object "Test"))
+    (test-fn 6 (is ^String (new ^Object))))

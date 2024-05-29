@@ -1,0 +1,12 @@
+(use-ctx pht pht/jvm
+	(progn
+		(alias-type
+			[
+				[
+					Object
+					object
+				]
+			])
+		(test-fn
+			0
+			^object)))
