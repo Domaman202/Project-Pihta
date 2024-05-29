@@ -1,0 +1,7 @@
+(progn
+    (test-fn 0 (=  1 1))
+    (test-fn 1 (!= 1 2))
+    (test-fn 2 (>  1 0))
+    (test-fn 3 (>= 1 1))
+    (test-fn 4 (<  1 2))
+    (test-fn 5 (<= 1 2)))

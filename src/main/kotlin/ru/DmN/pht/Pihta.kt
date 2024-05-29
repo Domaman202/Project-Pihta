@@ -249,12 +249,12 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         "="  to "eq"
         // g
         ">"  to "great"
-        ">=" to "great-or-eq"
+        ">=" to "gt-or-eq"
         // i
         "++" to "inc"
         // l
         "<"  to "less"
-        "<=" to "less-or-eq"
+        "<=" to "ls-or-eq"
         // m
         "*"  to "mul"
         // n
