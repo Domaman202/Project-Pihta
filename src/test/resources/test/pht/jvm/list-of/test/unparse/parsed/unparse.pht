@@ -1,0 +1,7 @@
+(use-ctx pht pht/jvm
+	(test-fn
+		0
+		(list-of
+			"Слава"
+			"Великой"
+			"России")))

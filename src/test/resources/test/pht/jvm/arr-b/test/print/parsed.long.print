@@ -26,6 +26,28 @@
 |	|	|	|	(type = INT)
 |	|	|	|	(value = '1')
 |	|	|	]
+|	|	|	[ARR_SIZE
+|	|	|	|	[ARR_OF
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '202')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '203')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '213')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '2')
+|	|	|	]
 |	|	|	[ARR_OF_TYPE
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = CLASS)

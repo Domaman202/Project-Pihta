@@ -122,14 +122,11 @@ enum class NodeTypes : INodeType {
     RET_("ret", PROCESSED),                             // return
     RFN("rfn", PARSED),                                 // ref-func
     RFN_("rfn", PROCESSED),                             // ref-func
-    ROLL_LEFT("roll-left", PARSED),                     // roll-left
-    ROLL_RIGHT("roll-right", PARSED),                   // roll-right
     // s
     SET_A("set", PARSED),                               // set
     SET_("set!", PROCESSED),                            // set
     SHIFT_LEFT_("shift-left", PROCESSED),               // shift-left       // <<
     SHIFT_RIGHT_("shift-right", PROCESSED),             // shift-right      // >>
-    SKIP("skip", false, false),     // skip
     SUB_("sub", PROCESSED),                             // sub              // -
     SYMBOL("symbol", PARSED),                           // symbol
     SYMBOL_INT("symbol-int", PARSED),                   // symbol-int
@@ -170,6 +167,9 @@ enum class NodeTypes : INodeType {
 
     // @@
     CT_IF_PLATFORM("@@if-platform", PARSED),            // @@if-platform
+    CT_ROLL_LEFT("@@roll-left", PARSED),                // @@roll-left      // <-
+    CT_ROLL_RIGHT("@@roll-right", PARSED),              // @@roll-right     // ->
+    CT_SKIP("@@skip", true, true),  // @@skip
 
     // *
     CTC_MODULE_NAME("*module-name*", PARSED),           // *module-name*

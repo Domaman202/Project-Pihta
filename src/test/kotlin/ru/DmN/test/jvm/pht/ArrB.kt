@@ -7,6 +7,7 @@ class ArrB: TestModule("test/pht/jvm/arr-b") {
     override fun compileTest() {
         compile()
         assertEquals((test(0) as IntArray).contentToString(), "[12, 21, 33]")
-        assertEquals((test(1) as FloatArray).contentToString(), "[202.0, 203.0, 213.0]")
+        assertEquals(test(1), 3)
+        assertEquals((test(2) as FloatArray).contentToString(), "[202.0, 203.0, 213.0]")
     }
 }

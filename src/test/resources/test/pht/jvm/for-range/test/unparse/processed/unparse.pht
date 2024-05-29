@@ -1,0 +1,30 @@
+(use-ctx pht pht/jvm
+	(progn
+		(@test
+			(cls [] Test0 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(def [
+							[^int j 0]])
+						(block
+							(def [
+								[^java.util.Iterator<^java.lang.Object> pht$tmp$52426 (mcall
+										^ru.DmN.pht.utils.IteratorUtils
+										range
+										0
+										10)]])
+							(cycle
+								(mcall
+									(get pht$tmp$52426)
+									hasNext)
+								(def [
+									[^java.lang.Object i (mcall
+											(get pht$tmp$52426)
+											next)]])
+								(set! j
+									(add
+										(get j)
+										(as ^int
+											(get i))))))
+						(as ^dynamic
+							(get j))))))))

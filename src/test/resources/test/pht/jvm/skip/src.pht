@@ -1,0 +1,7 @@
+(progn
+    (test-fn 0
+        (@@skip (ret 123))
+        321)
+    (test-fn 1
+        (-> (ret 666) (@@skip))
+        777))

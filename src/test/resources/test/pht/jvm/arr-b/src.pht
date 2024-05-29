@@ -2,4 +2,6 @@
     (test-fn 0
         (arr-of 12 21 33))
     (test-fn 1
+        (arr-size (arr-of 202 203 213)))
+    (test-fn 2
         (arr-of-type ^float 202 203 213)))

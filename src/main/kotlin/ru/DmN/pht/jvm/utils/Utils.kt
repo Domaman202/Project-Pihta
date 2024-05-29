@@ -1,6 +1,5 @@
 package ru.DmN.pht.compiler.java.utils
 
-import org.objectweb.asm.Label
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 import ru.DmN.pht.jvm.compilers.IStdNodeCompiler
@@ -125,8 +124,6 @@ fun bytecodeCast(from: String, to: String, node: MethodVisitor) {
 }
 
 fun primitiveToObject(variable: Variable, node: MethodVisitor): VirtualType? {
-    val start = Label()
-    node.visitLabel(start)
     load(variable, node)
     return when (variable.type.name) {
         "boolean"   -> primitiveToObject(node, 'Z', VirtualType.ofKlass("java.lang.Boolean"))
@@ -146,23 +143,40 @@ private fun primitiveToObject(node: MethodVisitor, input: Char, type: VirtualTyp
     return type
 }
 
-fun objectToPrimitive(variable: Variable, node: MethodVisitor): VirtualType? {
-    val start = Label()
-    node.visitLabel(start)
-    return when (val type = variable.type.name) {
-        "java.lang.Boolean"     -> objectToPrimitive(variable, node, type, VirtualType.BOOLEAN, 'Z')
-        "java.lang.Byte"        -> objectToPrimitive(variable, node, type, VirtualType.BYTE, 'B')
-        "java.lang.Short"       -> objectToPrimitive(variable, node, type, VirtualType.SHORT, 'S')
-        "java.lang.Character"   -> objectToPrimitive(variable, node, type, VirtualType.CHAR, 'C')
-        "java.lang.Integer"     -> objectToPrimitive(variable, node, type, VirtualType.INT, 'I')
-        "java.lang.Long"        -> objectToPrimitive(variable, node, type, VirtualType.LONG, 'J')
-        "java.lang.Float"       -> objectToPrimitive(variable, node, type, VirtualType.FLOAT, 'F')
-        "java.lang.Double"      -> objectToPrimitive(variable, node, type, VirtualType.DOUBLE, 'D')
+fun objectToPrimitive(variable: Variable, node: MethodVisitor): VirtualType =
+    when (val type = variable.type.name) {
+        "java.lang.Boolean"     -> objectToPrimitive0(variable, node, type, VirtualType.BOOLEAN,'Z')
+        "java.lang.Byte"        -> objectToPrimitive0(variable, node, type, VirtualType.BYTE,   'B')
+        "java.lang.Short"       -> objectToPrimitive0(variable, node, type, VirtualType.SHORT,  'S')
+        "java.lang.Character"   -> objectToPrimitive0(variable, node, type, VirtualType.CHAR,   'C')
+        "java.lang.Integer"     -> objectToPrimitive0(variable, node, type, VirtualType.INT,    'I')
+        "java.lang.Long"        -> objectToPrimitive0(variable, node, type, VirtualType.LONG,   'J')
+        "java.lang.Float"       -> objectToPrimitive0(variable, node, type, VirtualType.FLOAT,  'F')
+        "java.lang.Double"      -> objectToPrimitive0(variable, node, type, VirtualType.DOUBLE, 'D')
         else                    -> variable.type
+    }
+
+fun objectToPrimitive(variable: Variable, to: VirtualType, node: MethodVisitor) {
+    load(variable, node)
+    when (to) {
+        VirtualType.BOOLEAN -> objectToPrimitive1(node, "java/lang/Boolean",   "boolean",'Z')
+        VirtualType.BYTE    -> objectToPrimitive1(node, "java/lang/Byte",      "byte",   'B')
+        VirtualType.SHORT   -> objectToPrimitive1(node, "java/lang/Short",     "short",  'S')
+        VirtualType.CHAR    -> objectToPrimitive1(node, "java/lang/Character", "char",   'C')
+        VirtualType.INT     -> objectToPrimitive1(node, "java/lang/Integer",   "int",    'I')
+        VirtualType.LONG    -> objectToPrimitive1(node, "java/lang/Long",      "long",   'J')
+        VirtualType.FLOAT   -> objectToPrimitive1(node, "java/lang/Float",     "float",  'F')
+        VirtualType.DOUBLE  -> objectToPrimitive1(node, "java/lang/Double",    "double", 'D')
+        else                -> variable.type
     }
 }
 
-private fun objectToPrimitive(variable: Variable, node: MethodVisitor, owner: String, name: VirtualType, rettype: Char): VirtualType {
+private fun objectToPrimitive1(node: MethodVisitor, owner: String, name: String, rettype: Char) {
+    node.visitTypeInsn(Opcodes.CHECKCAST, owner)
+    node.visitMethodInsn(Opcodes.INVOKEVIRTUAL, owner, "${name}Value", "()$rettype", false)
+}
+
+private fun objectToPrimitive0(variable: Variable, node: MethodVisitor, owner: String, name: VirtualType, rettype: Char): VirtualType {
     load(variable, node)
     node.visitMethodInsn(Opcodes.INVOKESTATIC, owner.replace('.', '/'), "${name}Value", "()$rettype", false)
     return name

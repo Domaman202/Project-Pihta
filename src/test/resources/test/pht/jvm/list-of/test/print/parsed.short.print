@@ -1,0 +1,23 @@
+[USE_CTX
+|	(modules = pht pht/jvm)
+|	[TEST_FN
+|	|	[VALUE
+|	|	|	(type = INT)
+|	|	|	(value = '0')
+|	|	]
+|	|	[LIST_OF
+|	|	|	[VALUE
+|	|	|	|	(type = STRING)
+|	|	|	|	(value = 'Слава')
+|	|	|	]
+|	|	|	[VALUE
+|	|	|	|	(type = STRING)
+|	|	|	|	(value = 'Великой')
+|	|	|	]
+|	|	|	[VALUE
+|	|	|	|	(type = STRING)
+|	|	|	|	(value = 'России')
+|	|	|	]
+|	|	]
+|	]
+]

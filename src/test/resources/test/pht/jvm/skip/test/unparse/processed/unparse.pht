@@ -1,0 +1,16 @@
+(use-ctx pht pht/jvm
+	(progn
+		(@test
+			(cls [] Test0 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(@@skip)
+						(as ^dynamic
+							321)))))
+		(@test
+			(cls [] Test1 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(@@skip)
+						(as ^dynamic
+							777)))))))

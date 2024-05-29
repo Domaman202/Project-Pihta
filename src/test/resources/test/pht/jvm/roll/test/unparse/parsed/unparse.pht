@@ -1,0 +1,14 @@
+(use-ctx pht pht/jvm
+	(progn
+		(test-fn
+			0
+			(@@roll-left
+				(div)
+				8
+				4))
+		(test-fn
+			1
+			(@@roll-right
+				8
+				4
+				(mul)))))

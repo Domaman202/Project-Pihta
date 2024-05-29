@@ -8,6 +8,13 @@
 				33))
 		(test-fn
 			1
+			(arr-size
+				(arr-of
+					202
+					203
+					213)))
+		(test-fn
+			2
 			(arr-of-type
 				^float
 				202

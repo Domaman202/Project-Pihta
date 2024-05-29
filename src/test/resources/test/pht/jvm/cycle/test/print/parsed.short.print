@@ -1,0 +1,45 @@
+[USE_CTX
+|	(modules = pht pht/jvm)
+|	[TEST_FN
+|	|	[VALUE
+|	|	|	(type = INT)
+|	|	|	(value = '0')
+|	|	]
+|	|	[DEF
+|	|	|	[VALN
+|	|	|	|	[VALN
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '0')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[CYCLE
+|	|	|	[LESS
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'i')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '10')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[INC_PRE
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'i')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[GET_OR_NAME
+|	|	|	(type = NO-STATIC)
+|	|	|	(text = 'i')
+|	|	]
+|	]
+]

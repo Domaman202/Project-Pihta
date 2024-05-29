@@ -16,6 +16,12 @@ import java.util.stream.Stream
 inline val Variable.uniqueName
     get() = "$name$$id"
 
+inline fun <T> List<T>.dropForEach(count: Int, block: (T) -> Unit) {
+    for (i in count until size) {
+        block(this[i])
+    }
+}
+
 inline fun <T> List<T>.dropLastMutable(count: Int): MutableList<T> {
     val new = ArrayList<T>(this.size - count)
     for (i in 0 until this.size - count)

@@ -1,5 +1,6 @@
 package ru.DmN.pht
 
+import ru.DmN.pht.compiler.java.compilers.NCSkip
 import ru.DmN.pht.parser.ParserImpl
 import ru.DmN.pht.parser.utils.macros
 import ru.DmN.pht.parsers.*
@@ -140,14 +141,11 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(REM)
         addSNP(RET)
         addSNP(RFN)
-        addSNP(ROLL_LEFT)
-        addSNP(ROLL_RIGHT)
         // s
         addNP("set",          NPSetA)
         addNP("set!",         NPSetB)
         addSNP(SHIFT_LEFT)
         addSNP(SHIFT_RIGHT)
-        addNP("skip",         NPSkip)
         addSNP(SUB)
         addSNP(SYMBOL)
         addSNP(SYMBOL_INT)
@@ -187,6 +185,9 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
 
         // @@
         addNP("@@if-platform", NPIfPlatform)
+        addSNP(CT_ROLL_LEFT)
+        addSNP(CT_ROLL_RIGHT)
+        addNP("@@skip",        NPSkip)
 
         // *
         addSNP(CTC_MODULE_NAME)
@@ -263,8 +264,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         "|"  to "or"
         // r
         "%"  to "rem"
-        "->" to "roll-left"
-        "<-" to "roll-right"
+        "<-" to "@@roll-left"
+        "->" to "@@roll-right"
         // s
         "<<" to "shift-left"
         ">>" to "shift-right"
@@ -439,8 +440,6 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(RET_)
         addSNU(RFN)
         add(RFN_,           NURFn)
-        addSNU(ROLL_LEFT)
-        addSNU(ROLL_RIGHT)
         // s
         addSNU(SET_A)
         add(SET_B,          NUSetB)
@@ -449,7 +448,6 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(SHIFT_LEFT_)
         addSNU(SHIFT_RIGHT)
         addSNU(SHIFT_RIGHT_)
-        addSNU(SKIP)
         addSNU(SUB)
         addSNU(SUB_)
         addSNU(SYMBOL)
@@ -501,6 +499,9 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
 
         // @@
         add(CT_IF_PLATFORM, NUIfPlatform)
+        addSNU(CT_ROLL_LEFT)
+        addSNU(CT_ROLL_RIGHT)
+        add(CT_SKIP,           NUSkip)
 
         // *
         addSNU(CTC_MODULE_NAME)
@@ -654,8 +655,6 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(RET,           NRRet)
         add(RFN,           NRRFn)
         add(RFN_,          NRRFnB)
-        add(ROLL_LEFT,     NRRollLeft)
-        add(ROLL_RIGHT,    NRRollRight)
         // s
         add(SET_B,         NRSet)
         add(SHIFT_LEFT,    NRMath)
@@ -704,7 +703,10 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(ANN_VARARGS,  NRSA { it, _, _ -> it.setMetadata(MetadataKeys.VARARG,   true) })
 
         // @@
-        add(CT_IF_PLATFORM,  NRIfPlatform)
+        add(CT_IF_PLATFORM, NRIfPlatform)
+        add(CT_ROLL_LEFT,   NRRollLeft)
+        add(CT_ROLL_RIGHT,  NRRollRight)
+        add(CT_SKIP,        NRSkip)
 
         // *
         add(CTC_MODULE_NAME, NRCTSC { _, ctx -> ctx.module.name })
@@ -724,6 +726,9 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(ANN_OPEN_,     NCDefault)
         add(ANN_STATIC_,   NCDefault)
         add(ANN_VARARGS_,  NCDefault)
+
+        // @@
+        add(CT_SKIP,       NCSkip)
     }
 
     override fun load(parser: Parser, ctx: ParsingContext, uses: MutableList<String>): Boolean {
