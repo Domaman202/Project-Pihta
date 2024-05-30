@@ -7,12 +7,14 @@
 						(as ^dynamic
 							(div
 								8
-								4))))))
+								4
+								2))))))
 		(@test
 			(cls [] Test1 [^java.lang.Object]
 				(@static
 					(defn [] test ^dynamic []
 						(as ^dynamic
 							(mul
+								2
 								4
 								8))))))))

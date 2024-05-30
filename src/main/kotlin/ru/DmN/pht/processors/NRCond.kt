@@ -12,10 +12,12 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRCond : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        processor.calc(processor.computeList(processor.computeList(node.nodes[0], ctx)[0], ctx)[0], ctx)
+        (processor.computeList(node.nodes[0], ctx).firstOrNull()?.let { processor.computeList(it, ctx)[0] } ?: node.nodes.lastOrNull())?.let { processor.calc(it, ctx) }
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node {
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? {
         val iter = processor.computeList(node.nodes[0], ctx).map { processor.computeList(it, ctx).toMutableList() }.iterator()
+        if (!iter.hasNext())
+            return node.nodes.lastOrNull()?.let { processor.process(it, ctx, valMode) }
         val info = node.info
         val first = nodeIf(info, iter, processor, ctx, valMode)
         var last = first
@@ -24,9 +26,10 @@ object NRCond : INodeProcessor<NodeNodesList> {
             last.nodes += expr
             last = expr
         }
+        node.nodes.lastOrNull()?.let { last.nodes += it }
         return first
     }
 
-    private fun nodeIf(info: INodeInfo, iter: Iterator<MutableList<Node>>, processor: Processor, ctx: ProcessingContext, valMode: Boolean) =
+    private fun nodeIf(info: INodeInfo, iter: Iterator<MutableList<Node>>, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeNodesList =
         processor.process(nodeIf(info, iter.next()), ctx, valMode) as NodeNodesList
 }

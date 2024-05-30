@@ -1,0 +1,14 @@
+(progn
+    (cls TestA [^Object] (@static
+        (def [[i ^int]])))
+    (test-fn 0
+        (set ^TestA/i 12)
+        ^TestA/i)
+
+    (cls TestB [^Object]
+        (ctor [] (ccall))
+        (def [[i ^int]]))
+    (test-fn 1
+        (def [[o (new ^TestB)]])
+        (set o/i 21)
+        o/i))

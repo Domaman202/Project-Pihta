@@ -3,12 +3,14 @@
 		(test-fn
 			0
 			(@@roll-left
-				(div)
-				8
-				4))
+				(div
+					8
+					4)
+				2))
 		(test-fn
 			1
 			(@@roll-right
 				8
 				4
-				(mul)))))
+				(mul
+					2)))))

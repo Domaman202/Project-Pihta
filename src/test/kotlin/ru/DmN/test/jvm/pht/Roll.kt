@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 class Roll : TestModule("test/pht/jvm/roll") {
     override fun compileTest() {
         compile()
-        assertEquals(test(0), 2)
-        assertEquals(test(1), 32)
+        assertEquals(test(0), 1)
+        assertEquals(test(1), 64)
     }
 }

@@ -1,5 +1,2 @@
 (app-fn
-    (def [[j 0]])
-    (for [i (range 0 10)]
-        (set j (* j i)))
-    (println j))
+    (def [[^double i 12]]))
