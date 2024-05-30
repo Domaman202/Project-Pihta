@@ -4,7 +4,6 @@ import ru.DmN.pht.ast.NodeGet
 import ru.DmN.pht.ast.NodeGet.Type.THIS_FIELD
 import ru.DmN.pht.ast.NodeGet.Type.THIS_STATIC_FIELD
 import ru.DmN.pht.ast.NodeGetOrName
-import ru.DmN.pht.ast.NodeInlBodyA
 import ru.DmN.pht.processor.ctx.body
 import ru.DmN.pht.processor.ctx.classes
 import ru.DmN.pht.processor.ctx.clazz
@@ -14,7 +13,6 @@ import ru.DmN.pht.processor.utils.inline
 import ru.DmN.pht.utils.InlineVariable
 import ru.DmN.pht.utils.lenArgs
 import ru.DmN.pht.utils.node.NodeTypes.GET_
-import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_A
 import ru.DmN.pht.utils.node.nodeTypesGet
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.Processor
@@ -53,7 +51,12 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
             node.name.substring(0, node.name.length - 1)
         else null
 
-    override fun adaptableTo(type: VirtualType, node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Int {
+    override fun adaptableTo(
+        type: VirtualType,
+        node: NodeGetOrName,
+        processor: Processor,
+        ctx: ProcessingContext
+    ): Int {
         val variable = ctx.body.variables
             .stream()
             .filter { it.name == node.name }
@@ -65,11 +68,24 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
             return variable.get()
         if (node.name == "super")
             return lenArgs(ctx.body["this"]!!.type, type)
-        NRFGetB.findGetter(ctx.clazz, node.name, emptyList(), if (ctx.method.modifiers.static) Static.STATIC else Static.ANY, processor, ctx)?.let { return lenArgs(it.method.rettype, type) }
-        return lenArgs((ctx.clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first() ?: return -1).type, type)
+        NRFGetB.findGetter(
+            ctx.clazz,
+            node.name,
+            emptyList(),
+            if (ctx.method.modifiers.static) Static.STATIC else Static.ANY,
+            processor,
+            ctx
+        )?.let { return lenArgs(it.method.rettype, type) }
+        return lenArgs((ctx.clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence()
+            .map { it -> it.fields.find { it.name == node.name } }.first() ?: return -1).type, type)
     }
 
-    override fun adaptToType(type: VirtualType, node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Node {
+    override fun adaptToType(
+        type: VirtualType,
+        node: NodeGetOrName,
+        processor: Processor,
+        ctx: ProcessingContext
+    ): Node {
         return when (ctx.body.variables.count {
             if (it.name == node.name)
                 if (it is InlineVariable)
@@ -79,8 +95,17 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
         }) {
             0 -> {
                 val clazz = ctx.clazz
-                NRGetB.findGetter(node.info, clazz, node.name, emptyList(), !ctx.method.modifiers.static, processor, ctx)?.let { return it }
-                val field = clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == node.name } }.first()!!
+                NRGetB.findGetter(
+                    node.info,
+                    clazz,
+                    node.name,
+                    emptyList(),
+                    !ctx.method.modifiers.static,
+                    processor,
+                    ctx
+                )?.let { return it }
+                val field = clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence()
+                    .map { it -> it.fields.find { it.name == node.name } }.first()!!
                 NodeGet(
                     node.info.withType(GET_),
                     node.name,
@@ -90,14 +115,18 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
                     field.type
                 )
             }
+
             1 -> node
             else -> nodeTypesGet(node.info, node.name, type)
         }
     }
 
     override fun isInlinable(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Boolean =
-        ctx.body[node.name]?.let { it is InlineVariable && processor.get(it.value, ctx).let { np -> if (np is IInlinableProcessor<Node>) np.isInlinable(it.value, processor, ctx) else false } } == true
+        ctx.body[node.name]?.let {
+            it is InlineVariable && processor.get(it.value, ctx)
+                .let { np -> if (np is IInlinableProcessor<Node>) np.isInlinable(it.value, processor, ctx) else false }
+        } == true
 
-    override fun inline(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Node =
-        NodeInlBodyA(node.info.withType(INL_BODY_A), mutableListOf((ctx.body[node.name] as InlineVariable).value.let { processor.inline(it, it, ctx) }), null)
+    override fun inline(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Pair<List<String>, Node> =
+        (ctx.body[node.name] as InlineVariable).value.let { processor.inline(it, it, ctx) }
 }

@@ -8,5 +8,5 @@ import ru.DmN.siberia.processors.INodeProcessor
 interface IInlinableProcessor<T : Node> : INodeProcessor<T> {
     fun isInlinable(node: T, processor: Processor, ctx: ProcessingContext): Boolean
 
-    fun inline(node: T, processor: Processor, ctx: ProcessingContext): Node
+    fun inline(node: T, processor: Processor, ctx: ProcessingContext): Pair<List<String>, Node>
 }

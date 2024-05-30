@@ -1,0 +1,13 @@
+(progn
+    (import java [[types [java.util.function.Supplier java.util.function.Function]]])
+    (test-fn 0
+        (#get (fn ^Supplier [][] "Арен брат, с днюхой!")))
+    (test-fn 1
+        (def [[i 12][j 21]])
+        (#get (fn ^Supplier [i j][] (+ i j))))
+    (test-fn 2
+        (def [[i 12][j 21]])
+        (#get (fn ^Supplier [i j][] (+ i j))))
+    (test-fn 3
+        (def [[i 12][j 21]])
+        (#apply (fn ^Function [i j][k] (+ i j k)) (as ^Object 33))))

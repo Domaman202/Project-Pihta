@@ -53,8 +53,11 @@ object NRFn : INodeProcessor<NodeNodesList>, IInlinableProcessor<NodeNodesList> 
     override fun isInlinable(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): Boolean =
         true
 
-    override fun inline(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): Node =
-        NodeInlBodyA(node.info.withType(INL_BODY_A), node.nodes.drop(3).toMutableList(), null)
+    override fun inline(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): Pair<List<String>, Node> =
+        Pair(
+            processor.computeStringNodes(node.nodes[if (node.nodes[0].isConstClass) 2 else 1] as INodesList, ctx),
+            NodeInlBodyA(node.info.withType(INL_BODY_A), node.nodes.dropMutable(3), node.nodes.lastOrNull()?.let { processor.calc(it, ctx) })
+        )
 
     private fun finalize(info: INodeInfo, node: NodeFn, processor: Processor, ctx: ProcessingContext) {
         val type = node.type!!
@@ -64,7 +67,9 @@ object NRFn : INodeProcessor<NodeNodesList>, IInlinableProcessor<NodeNodesList> 
             method.name,
             method.rettype.name,
             method.argsn.mapIndexed { i, it -> Pair(it, method.argsc[i].name) },
-            node.source
+            node.source.apply {
+                add(0, nodeInlDef(info, method.argsn.mapIndexed { i, it -> Pair(node.args[i], nodeGetVariable(info, it, method.argsc[i])) }))
+            }
         )
         if (node.refs.isEmpty()) {
             node.processed = mutableListOf(

@@ -5,6 +5,7 @@ import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.ast.NodeDefn
+import ru.DmN.pht.compiler.java.compilers.NCAs.visitCast
 import ru.DmN.pht.compiler.java.ctx.BodyContext
 import ru.DmN.pht.compiler.java.ctx.MethodContext
 import ru.DmN.pht.compiler.java.utils.load
@@ -114,7 +115,10 @@ object NCDefn : IStdNodeCompiler<NodeDefn, MethodNode, Nothing> {
             val variable = NCDefault.compileVal(node as Node, compiler, context)
             if (variable.type == VirtualType.VOID)
                 visitFieldInsn(Opcodes.GETSTATIC, "kotlin/Unit", "INSTANCE", "Lkotlin/Unit;")
-            else load(variable, this)
+            else {
+//                load(variable, this)
+                visitCast(variable, method.rettype)
+            }
             visitReturn(this, method.rettype)
         }
         val stop = Label()

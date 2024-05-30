@@ -29,6 +29,6 @@ object NRFnB : IStdNodeProcessor<NodeFn>, IAdaptableProcessor<NodeFn>, IInlinabl
     override fun isInlinable(node: NodeFn, processor: Processor, ctx: ProcessingContext): Boolean =
         true
 
-    override fun inline(node: NodeFn, processor: Processor, ctx: ProcessingContext): Node =
-        NodeInlBodyA(node.info.withType(INL_BODY_A), node.source.toMutableList(), calc(node, processor, ctx))
+    override fun inline(node: NodeFn, processor: Processor, ctx: ProcessingContext): Pair<List<String>, Node> =
+        Pair(node.args, NodeInlBodyA(node.info.withType(INL_BODY_A), node.source.toMutableList(), calc(node, processor, ctx)))
 }

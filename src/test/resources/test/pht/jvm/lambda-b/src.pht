@@ -1,0 +1,21 @@
+(progn
+    (import java [[types [java.util.function.Supplier java.util.function.Function]]])
+
+    (cls TestA [^Object] (@static
+        (defn call ^Object [[lambda ^Supplier]]
+            (#get lambda))))
+    (test-fn 0
+        (#call ^TestA (fn [][] "Glory To Russia!")))
+    (test-fn 1
+        (def [[i 44][j 88]])
+        (#call ^TestA (fn [i j][] (+ i j))))
+    (test-fn 2
+        (def [[i 44][j 88]])
+        (#call ^TestA (fn [i j][] (+ i j))))
+
+    (cls TestB [^Object] (@static
+        (defn call ^Object [[lambda ^Function]]
+            (#apply lambda (as ^Object 44)))))
+    (test-fn 3
+        (def [[i 44][j 88]])
+        (#call ^TestB (fn [i j][k] (+ i j k)))))

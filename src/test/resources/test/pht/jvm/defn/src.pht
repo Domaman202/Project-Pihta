@@ -1,0 +1,14 @@
+(progn
+    (cls TestA [^Object] (@static
+        (defn add ^int [[a ^int][b ^int]]
+            (+ a b))))
+    (test-fn 0 (#add ^TestA 12 21))
+
+    (cls TestB [^Object]
+        (def [[value ^int]])
+        (ctor []
+            (ccall)
+            (set this/value 20))
+        (defn sub ^int [[other ^int]]
+            (- value other)))
+    (test-fn 1 (#sub (new ^TestB) 5)))

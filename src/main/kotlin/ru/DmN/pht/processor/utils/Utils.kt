@@ -17,18 +17,18 @@ import ru.DmN.siberia.utils.mapMutable
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-fun Processor.inline(node: NodeGetOrName, ctx: ProcessingContext): Node =
+fun Processor.inline(node: NodeGetOrName, ctx: ProcessingContext): Pair<List<String>, Node> =
     get(node, ctx).let {
         if (it is IInlinableProcessor<Node>)
             it.inline(node, this, ctx)
         else throw UnsupportedOperationException()
     }
 
-inline fun <T : Node?> Processor.inline(node: Node, other: T, ctx: ProcessingContext): T =
+inline fun <T : Node?> Processor.inline(node: Node, other: T, ctx: ProcessingContext): Pair<List<String>, T> =
     get(node, ctx).let {
         if (it is IInlinableProcessor<Node> && it.isInlinable(node, this, ctx))
-            it.inline(node, this, ctx) as T
-        else other
+            it.inline(node, this, ctx) as Pair<List<String>, T>
+        else Pair(emptyList(), other)
     }
 
 fun Processor.processNodes(node: INodesList, ctx: ProcessingContext, valMode: Boolean): MutableList<Node> =

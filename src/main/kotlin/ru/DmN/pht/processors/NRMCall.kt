@@ -90,7 +90,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 )
             } else {
                 arguments = processArguments(
-                    node.info,
+                    info,
                     processor,
                     ctx,
                     method,
@@ -98,10 +98,10 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                     result.compression
                 )
                 NodeMCall(
-                    node.info.processed,
+                    info.processed,
                     arguments,
                     generics,
-                    nodeValueClass(node.info, method.extension!!.name),
+                    nodeValueClass(info, method.extension!!.name),
                     method,
                     EXTEND
                 )
@@ -115,19 +115,19 @@ object NRMCall : INodeProcessor<NodeNodesList> {
     }
 
     private fun finalize(method: VirtualMethod, args: List<Node>, instance: Node, node: NodeMCall, processor: Processor, ctx: ProcessingContext, valMode: Boolean) {
-        node.inline =
-            (method.inline?.copy() ?: processor.inline<Node?>(instance, null, ctx) ?: return).run {
-                val bctx = BodyContext.of(ctx.body)
-                method.argsn.asSequence().let {
-                    if (method.extension == null)
-                        it
-                    else {
-                        NRInlDef.process("this", instance, bctx)
-                        it.drop(1)
-                    }
-                }.forEachIndexed { i, it -> NRInlDef.process(it, args[i], bctx) }
-                processor.process(this, (if (this is NodeInlBodyB) this.ctx else ctx).with(bctx), valMode)
-            }
+        var names: List<String>? = null
+        (method.inline?.copy() ?: processor.inline<Node?>(instance, null, ctx).let { names = it.first; it.second } ?: return).run {
+            val bctx = BodyContext.of(ctx.body)
+            (names ?: method.argsn).asSequence().let {
+                if (method.extension == null)
+                    it
+                else {
+                    NRInlDef.process("this", instance, bctx)
+                    it.drop(1)
+                }
+            }.forEachIndexed { i, it -> NRInlDef.process(it, args[i], bctx) }
+            node.inline = processor.process(nodeAs(info, this, method.rettype.name), (if (this is NodeInlBodyB) this.ctx else ctx).with(bctx), valMode)
+        }
     }
 
     /**

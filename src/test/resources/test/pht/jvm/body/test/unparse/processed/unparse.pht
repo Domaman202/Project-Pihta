@@ -5,20 +5,14 @@
 				(block
 					(def [
 						[^int i 12]])
-					(inl-body ^void
-						(mcall
-							(fget
-								^java.lang.System
-								out)
-							println
-							(get i))))
+					(mcall
+						^ru.DmN.pht.io.StdOut
+						println
+						(get i)))
 				(block
 					(def [
 						[^int i 21]])
-					(inl-body ^void
-						(mcall
-							(fget
-								^java.lang.System
-								out)
-							println
-							(get i))))))))
+					(mcall
+						^ru.DmN.pht.io.StdOut
+						println
+						(get i)))))))

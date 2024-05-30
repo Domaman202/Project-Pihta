@@ -1,2 +1,7 @@
-(app-fn
-    (def [[^double i 12]]))
+(progn
+    (import java [[types [java.util.function.Supplier]]])
+    (cls TestA [^Object] (@static
+        (defn call ^Object [[lambda ^Supplier]]
+            (#get lambda))))
+    (app-fn
+        (println (#call ^TestA (fn [][] "Арен брат, с днюхой!")))))

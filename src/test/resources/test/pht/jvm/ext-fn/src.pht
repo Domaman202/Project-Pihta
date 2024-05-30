@@ -1,0 +1,5 @@
+(progn
+    (cls Utils [^Object]
+        (efn ^String hello ^String []
+            (+ "Hello, " this "!")))
+    (test-fn 0 (#hello "Vasya")))

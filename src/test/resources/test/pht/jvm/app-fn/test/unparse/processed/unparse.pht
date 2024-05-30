@@ -2,10 +2,7 @@
 	(cls [] App [^java.lang.Object]
 		(@static
 			(defn [] main ^void [[args ^[java.lang.String]]
-				(inl-body ^void
-					(mcall
-						(fget
-							^java.lang.System
-							out)
-						println
-						"Слава России!"))))))
+				(mcall
+					^ru.DmN.pht.io.StdOut
+					println
+					"Слава России!")))))

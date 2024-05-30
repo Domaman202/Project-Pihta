@@ -1,0 +1,138 @@
+(use-ctx pht pht/jvm
+	(progn
+		(cls [] TestA [^java.lang.Object]
+			(@static
+				(defn [] call ^java.lang.Object [[lambda ^java.util.function.Supplier]]
+					(mcall
+						(get lambda)
+						get))))
+		(@test
+			(cls [] Test0 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(as ^dynamic
+							(mcall
+								^TestA
+								call
+								(progn
+									(obj [] PhtLambda$1599372383 [^java.lang.Object ^java.util.function.Supplier]
+										(defn [] get ^java.lang.Object []
+											"Glory To Russia!")))))))))
+		(@test
+			(cls [] Test1 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(def [
+							[^int i 44]
+							[^int j 88]])
+						(as ^dynamic
+							(mcall
+								^TestA
+								call
+								(progn
+									(cls [] PhtLambda$1599376227 [^java.lang.Object ^java.util.function.Supplier]
+										(def [
+											[i ^int]
+											[j ^int]])
+										(ctor [[i ^int][j ^int]]
+											(mcall
+												super
+												<init>)
+											(fset
+												(get this)
+												i
+												(get i))
+											(fset
+												(get this)
+												j
+												(get j)))
+										(defn [] get ^java.lang.Object []
+											(as ^java.lang.Object
+												(add
+													(get i)
+													(get j)))))
+									(new ^PhtLambda$1599376227
+										(get i)
+										(get j)))))))))
+		(@test
+			(cls [] Test2 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(def [
+							[^int i 44]
+							[^int j 88]])
+						(as ^dynamic
+							(mcall
+								^TestA
+								call
+								(progn
+									(cls [] PhtLambda$1599380071 [^java.lang.Object ^java.util.function.Supplier]
+										(def [
+											[i ^int]
+											[j ^int]])
+										(ctor [[i ^int][j ^int]]
+											(mcall
+												super
+												<init>)
+											(fset
+												(get this)
+												i
+												(get i))
+											(fset
+												(get this)
+												j
+												(get j)))
+										(defn [] get ^java.lang.Object []
+											(as ^java.lang.Object
+												(add
+													(get i)
+													(get j)))))
+									(new ^PhtLambda$1599380071
+										(get i)
+										(get j)))))))))
+		(cls [] TestB [^java.lang.Object]
+			(@static
+				(defn [] call ^java.lang.Object [[lambda ^java.util.function.Function]]
+					(mcall
+						(get lambda)
+						apply
+						(as ^java.lang.Object
+							44)))))
+		(@test
+			(cls [] Test3 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(def [
+							[^int i 44]
+							[^int j 88]])
+						(as ^dynamic
+							(mcall
+								^TestB
+								call
+								(progn
+									(cls [] PhtLambda$1599387759 [^java.lang.Object ^java.util.function.Function]
+										(def [
+											[i ^int]
+											[j ^int]])
+										(ctor [[i ^int][j ^int]]
+											(mcall
+												super
+												<init>)
+											(fset
+												(get this)
+												i
+												(get i))
+											(fset
+												(get this)
+												j
+												(get j)))
+										(defn [] apply ^java.lang.Object [[arg0 ^java.lang.Object]]
+											(as ^java.lang.Object
+												(add
+													(get i)
+													(get j)
+													(as ^int
+														(get arg0))))))
+									(new ^PhtLambda$1599387759
+										(get i)
+										(get j)))))))))))
