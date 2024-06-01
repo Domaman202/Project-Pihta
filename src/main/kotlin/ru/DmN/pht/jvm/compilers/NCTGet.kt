@@ -7,7 +7,7 @@ import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.utils.Variable
 
-object NCTypedGet : IValueNodeCompiler<NodeTGet> {
+object NCTGet : IValueNodeCompiler<NodeTGet> {
     override fun compileVal(node: NodeTGet, compiler: Compiler, ctx: CompilationContext): Variable {
         val name = node.name.normalizeName()
         return ctx.body.variables.find { it.type == node.type && it.name == name }!!

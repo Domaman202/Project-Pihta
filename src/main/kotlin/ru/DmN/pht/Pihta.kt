@@ -409,7 +409,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         // n
         add(NAME,           NUGetOrName)
         addSNU(NB)
-        add(NB_,        NUNamedBlock)
+        add(NB_,            NUNamedBlock)
         addSNU(NEG)
         addSNU(NEG_)
         addSNU(NEW)
@@ -506,7 +506,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(CT_IF_PLATFORM, NUIfPlatform)
         addSNU(CT_ROLL_LEFT)
         addSNU(CT_ROLL_RIGHT)
-        add(CT_SKIP,           NUSkip)
+        add(CT_SKIP,        NUSkip)
 
         // *
         addSNU(CTC_MODULE_NAME)
@@ -627,8 +627,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(MUL_,          NRMathB)
         // n
         add(NAME,          NRGetOrName)
-        add(NB,        NRNamedList)
-        add(NB_,       NRProgn)
+        add(NB,            NRNamedList)
+        add(NB_,           NRProgn)
         add(NEG,           NRMath)
         add(NEG_,          NRMathB)
         add(NEW,           NRNew)
@@ -678,8 +678,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(THROW_,        NRThrow)
         add(TRCALL,        NRTRCall)
         add(TRCALL_,       NRTRCall)
-        add(TGET,          NRTypedGet)
-        add(TGET_,         NRTypedGetB)
+        add(TGET,          NRTGet)
+        add(TGET_,         NRTGetB)
         add(TYPE_OF,       NRTypeof)
         // u
         add(UNIT,          NRUnit)

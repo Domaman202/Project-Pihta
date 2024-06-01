@@ -166,7 +166,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         // t
         add(THROW_,       NCThrow)
         add(TRCALL_,      NCTRCall)
-        add(TGET_,        NCTypedGet)
+        add(TGET_,        NCTGet)
         // u
         add(UNIT,         NCUnit)
         // v
