@@ -1,17 +1,7 @@
 (progn
     (import java [[types [java.util.function.Supplier]]])
-
-    (cls TestCaller [^Object] (@static
-        (defn call ^Object [[lambda ^Supplier]]
-            (#get lambda))))
-
-    (cls TestProvider [^Object]
-        (ctor []
-            (ccall))
+    (cls TestProvider [^Object] (@static
         (defn foo ^Object []
-            "Foo!")
-        (defn call ^Object []
-            (#call ^TestCaller (rfn . . foo))))
-
+            "Foo!")))
     (app-fn
-        (println (#call (new ^TestProvider)))))
+        (println (#get (as ^Supplier (rfn . ^TestProvider foo))))))

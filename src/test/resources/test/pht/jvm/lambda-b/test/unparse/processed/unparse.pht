@@ -15,7 +15,7 @@
 								^TestA
 								call
 								(progn
-									(obj [] PhtLambda$1599372383 [^java.lang.Object ^java.util.function.Supplier]
+									(obj [] PhtLambda$1599375655 [^java.lang.Object ^java.util.function.Supplier]
 										(defn [] get ^java.lang.Object []
 											"Glory To Russia!")))))))))
 		(@test
@@ -30,7 +30,7 @@
 								^TestA
 								call
 								(progn
-									(cls [] PhtLambda$1599376227 [^java.lang.Object ^java.util.function.Supplier]
+									(cls [] PhtLambda$1599379499 [^java.lang.Object ^java.util.function.Supplier]
 										(def [
 											[i ^int]
 											[j ^int]])
@@ -51,7 +51,7 @@
 												(add
 													(get i)
 													(get j)))))
-									(new ^PhtLambda$1599376227
+									(new ^PhtLambda$1599379499
 										(get i)
 										(get j)))))))))
 		(@test
@@ -66,7 +66,7 @@
 								^TestA
 								call
 								(progn
-									(cls [] PhtLambda$1599380071 [^java.lang.Object ^java.util.function.Supplier]
+									(cls [] PhtLambda$1599383343 [^java.lang.Object ^java.util.function.Supplier]
 										(def [
 											[i ^int]
 											[j ^int]])
@@ -87,7 +87,7 @@
 												(add
 													(get i)
 													(get j)))))
-									(new ^PhtLambda$1599380071
+									(new ^PhtLambda$1599383343
 										(get i)
 										(get j)))))))))
 		(cls [] TestB [^java.lang.Object]
@@ -110,7 +110,7 @@
 								^TestB
 								call
 								(progn
-									(cls [] PhtLambda$1599387759 [^java.lang.Object ^java.util.function.Function]
+									(cls [] PhtLambda$1599391031 [^java.lang.Object ^java.util.function.Function]
 										(def [
 											[i ^int]
 											[j ^int]])
@@ -133,6 +133,6 @@
 													(get j)
 													(as ^int
 														(get arg0))))))
-									(new ^PhtLambda$1599387759
+									(new ^PhtLambda$1599391031
 										(get i)
 										(get j)))))))))))

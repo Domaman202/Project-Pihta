@@ -39,15 +39,6 @@
 					^String
 					[]
 					"Auto-Type Foo!")))
-		(test-fn
-			0
-			(mcall
-				^Caller
-				call
-				(rfn
-					.
-					^TestA
-					foo)))
 		(cls
 			TestB
 			[
@@ -62,7 +53,26 @@
 				[]
 				"Auto-Type Instanced Foo!"))
 		(test-fn
+			0
+			(mcall
+				^Caller
+				call
+				(rfn
+					.
+					^TestA
+					foo)))
+		(test-fn
 			1
+			(mcall
+				(as
+					^Supplier
+					(rfn
+						.
+						^TestA
+						foo))
+				get))
+		(test-fn
+			2
 			(mcall
 				^Caller
 				call
@@ -70,4 +80,15 @@
 					.
 					(new
 						^TestB)
-					foo)))))
+					foo)))
+		(test-fn
+			3
+			(mcall
+				(as
+					^Supplier
+					(rfn
+						.
+						(new
+							^TestB)
+						foo))
+				get))))

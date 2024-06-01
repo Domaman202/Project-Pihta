@@ -17,14 +17,6 @@
 						(rfn ^java.util.function.Supplier
 							^TestA
 							foo)))))
-		(@test
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(mcall
-								^TestA
-								call))))))
 		(cls [] TestB [^java.lang.Object]
 			(ctor []
 				(mcall
@@ -39,6 +31,14 @@
 					(rfn ^java.util.function.Supplier
 						(get this)
 						foo))))
+		(@test
+			(cls [] Test0 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(as ^dynamic
+							(mcall
+								^TestA
+								call))))))
 		(@test
 			(cls [] Test1 [^java.lang.Object]
 				(@static

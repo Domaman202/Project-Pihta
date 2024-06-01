@@ -7,6 +7,8 @@ class RefFuncB : TestModule("test/pht/jvm/ref-func-b") {
     override fun compileTest() {
         compile()
         assertEquals(test(0), "Auto-Type Foo!")
-        assertEquals(test(1), "Auto-Type Instanced Foo!")
+        assertEquals(test(1), "Auto-Type Foo!")
+        assertEquals(test(2), "Auto-Type Instanced Foo!")
+        assertEquals(test(3), "Auto-Type Instanced Foo!")
     }
 }

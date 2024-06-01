@@ -1,4 +1,3 @@
-@file:Suppress("NOTHING_TO_INLINE")
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeIsAs
@@ -19,22 +18,21 @@ object NRAs : IStdNodeProcessor<NodeNodesList> {
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
         if (valMode) {
-            val from = processor.calc(node.nodes[1], ctx)
+            val value = processor.process(node.nodes[1], ctx, true)!!
+            val np = processor.get(value, ctx)
+            val from = np.calc(value, processor, ctx)
             val to = calc(node, processor, ctx)
+            //
             if (from == null || from == VOID)
-                inline(node, processor, ctx)
+                value
             else if (from.isAssignableFrom(to))
                 if (from is VVTNullable && to is VVTNullable)
                     if (from.nullable == to.nullable || to.nullable)
-                        inline(node, processor, ctx)
+                        value
                     else throw MessageException(null, "Приведение типа 'nullable' к типу 'not-null'!")
-                else inline(node, processor, ctx)
-            else cast(node, from, to, processor, ctx)
+                else value
+            else if (np is IAdaptableProcessor<Node> && np.adaptType.cast)
+                np.adaptToType(to, value, processor, ctx)
+            else NodeIsAs(node.info.withType(AS_), mutableListOf(value), from, to)
         } else null
-
-    private inline fun inline(node: NodeNodesList, processor: Processor, ctx: ProcessingContext) =
-        processor.process(node.nodes[1], ctx, true)
-
-    private inline fun cast(node: NodeNodesList, from: VirtualType, to: VirtualType, processor: Processor, ctx: ProcessingContext) =
-        NodeIsAs(node.info.withType(AS_), mutableListOf(processor.process(node.nodes[1], ctx, true)!!), from, to)
 }

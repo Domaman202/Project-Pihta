@@ -5,21 +5,20 @@
 				(defn [] test ^dynamic []
 					(as ^dynamic
 						(mcall
-							(as ^[java.lang.Object
-								(block
-									(def [
-										[^[java.lang.Object pht$tmp$25978 (new-arr ^java.lang.Object 3)]])
-									(aset
-										(get pht$tmp$25978)
-										0
-										"Слава")
-									(aset
-										(get pht$tmp$25978)
-										1
-										"Великой")
-									(aset
-										(get pht$tmp$25978)
-										2
-										"России")
-									(get pht$tmp$25978)))
+							(block
+								(def [
+									[^[java.lang.Object pht$tmp$25978 (new-arr ^java.lang.Object 3)]])
+								(aset
+									(get pht$tmp$25978)
+									0
+									"Слава")
+								(aset
+									(get pht$tmp$25978)
+									1
+									"Великой")
+								(aset
+									(get pht$tmp$25978)
+									2
+									"России")
+								(get pht$tmp$25978))
 							toList)))))))

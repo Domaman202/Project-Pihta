@@ -10,6 +10,7 @@ import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.pht.processor.ctx.method
 import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.processor.utils.inline
+import ru.DmN.pht.processors.IAdaptableProcessor.Type.ARGUMENT
 import ru.DmN.pht.utils.InlineVariable
 import ru.DmN.pht.utils.lenArgs
 import ru.DmN.pht.utils.node.NodeTypes.GET_
@@ -51,12 +52,10 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
             node.name.substring(0, node.name.length - 1)
         else null
 
-    override fun adaptableTo(
-        type: VirtualType,
-        node: NodeGetOrName,
-        processor: Processor,
-        ctx: ProcessingContext
-    ): Int {
+    override val adaptType: IAdaptableProcessor.Type
+        get() = ARGUMENT
+
+    override fun adaptableTo(type: VirtualType, node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Int {
         val variable = ctx.body.variables
             .stream()
             .filter { it.name == node.name }

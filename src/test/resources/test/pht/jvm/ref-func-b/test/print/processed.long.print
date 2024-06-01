@@ -43,6 +43,38 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = TestB)
+|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	[CTOR_
+|	|	|	|	|	(type = constructor)
+|	|	|	|	|	(name = <init>)
+|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	(sign = null)
+|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	(method = <init>()V)
+|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	)
+|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	(type = SUPER)
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[DEFN_
+|	|	|	|	|	(type = method)
+|	|	|	|	|	(name = foo)
+|	|	|	|	|	(desc = ()Ljava/lang/String;)
+|	|	|	|	|	(sign = null)
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	(value = 'Auto-Type Instanced Foo!')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
 |	|	|	[ANN_TEST_
 |	|	|	|	[CLS_
 |	|	|	|	|	(type = final class)
@@ -84,42 +116,47 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[CLS_
-|	|	|	|	(type = final class)
-|	|	|	|	(name = TestB)
-|	|	|	|	(parents = [java.lang.Object])
-|	|	|	|	[CTOR_
-|	|	|	|	|	(type = constructor)
-|	|	|	|	|	(name = <init>)
-|	|	|	|	|	(desc = ()V)
-|	|	|	|	|	(sign = null)
-|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	(method = <init>()V)
-|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_
-|	|	|	|	|	|	|	|	(name = this)
-|	|	|	|	|	|	|	|	(type = var)
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	(type = final class)
+|	|	|	|	|	(name = Test1)
+|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
+|	|	|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
+|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
-|	|	|	|	|	|	)
-|	|	|	|	|	|	(generic = VT(void))
-|	|	|	|	|	|	(type = SUPER)
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[DEFN_
-|	|	|	|	|	(type = method)
-|	|	|	|	|	(name = foo)
-|	|	|	|	|	(desc = ()Ljava/lang/String;)
-|	|	|	|	|	(sign = null)
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'Auto-Type Instanced Foo!')
+|	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[ANN_TEST_
 |	|	|	|	[CLS_
 |	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = Test1)
+|	|	|	|	|	(name = Test2)
 |	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	[ANN_STATIC_
 |	|	|	|	|	|	[DEFN_
@@ -151,6 +188,43 @@
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	(type = final class)
+|	|	|	|	|	(name = Test3)
+|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
+|	|	|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestB))
+|	|	|	|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
+|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]

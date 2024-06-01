@@ -58,30 +58,6 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[ANN_TEST_
-|	|	|	|	[CLS_
-|	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = Test0)
-|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	(method = call()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
 |	|	|	[CLS_
 |	|	|	|	(type = final class)
 |	|	|	|	(name = TestB)
@@ -123,6 +99,30 @@
 |	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	|	)
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	(type = final class)
+|	|	|	|	|	(name = Test0)
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	(method = call()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]

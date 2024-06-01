@@ -50,11 +50,6 @@
 							^Supplier
 							.
 							foo)))))
-		(test-fn
-			0
-			(mcall
-				^TestA
-				call))
 		(cls
 			TestB
 			[
@@ -79,6 +74,11 @@
 						^Supplier
 						.
 						foo))))
+		(test-fn
+			0
+			(mcall
+				^TestA
+				call))
 		(test-fn
 			1
 			(mcall

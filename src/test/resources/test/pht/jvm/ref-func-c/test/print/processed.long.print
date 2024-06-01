@@ -72,35 +72,6 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[ANN_TEST_
-|	|	|	|	[CLS_
-|	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = Test0)
-|	|	|	|	|	(parents = [java.lang.Object])
-|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(name = test)
-|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
-|	|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	(method = call()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
 |	|	|	[CLS_
 |	|	|	|	(type = final class)
 |	|	|	|	(name = TestB)
@@ -158,6 +129,35 @@
 |	|	|	|	|	|	|	|	|	(type = var)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	)
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	(type = final class)
+|	|	|	|	|	(name = Test0)
+|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	(method = call()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
+|	|	|	|	|	|	|	|	|	(type = STATIC)
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]

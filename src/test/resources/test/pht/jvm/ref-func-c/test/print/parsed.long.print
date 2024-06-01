@@ -131,22 +131,6 @@
 |	|	|	|	]
 |	|	|	]
 |	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '0')
-|	|	|	]
-|	|	|	[MCALL
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'TestA')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	(value = 'call')
-|	|	|	|	]
-|	|	|	]
-|	|	]
 |	|	[CLS
 |	|	|	[GET_OR_NAME
 |	|	|	|	(type = NO-STATIC)
@@ -210,6 +194,22 @@
 |	|	|	|	|	|	|	(text = 'foo')
 |	|	|	|	|	|	]
 |	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[MCALL
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'TestA')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	(value = 'call')
 |	|	|	|	]
 |	|	|	]
 |	|	]

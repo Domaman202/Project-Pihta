@@ -49,12 +49,19 @@
 						(rfn
 							.
 							.
-							foo)))))
-		(test-fn
-			0
-			(mcall
-				^TestA
-				call))
+							foo)))
+				(defn
+					call-as
+					^Object
+					[]
+					(mcall
+						(as
+							^Supplier
+							(rfn
+								.
+								.
+								foo))
+						get))))
 		(cls
 			TestB
 			[
@@ -78,10 +85,38 @@
 					(rfn
 						.
 						.
-						foo))))
+						foo)))
+			(defn
+				call-as
+				^Object
+				[]
+				(mcall
+					(as
+						^Supplier
+						(rfn
+							.
+							.
+							foo))
+					get)))
+		(test-fn
+			0
+			(mcall
+				^TestA
+				call))
 		(test-fn
 			1
 			(mcall
+				^TestA
+				call-as))
+		(test-fn
+			2
+			(mcall
 				(new
 					^TestB)
-				call))))
+				call))
+		(test-fn
+			3
+			(mcall
+				(new
+					^TestB)
+				call-as))))

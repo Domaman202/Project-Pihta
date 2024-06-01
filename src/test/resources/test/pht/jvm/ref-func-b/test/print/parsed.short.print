@@ -96,36 +96,6 @@
 |	|	|	|	]
 |	|	|	]
 |	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '0')
-|	|	|	]
-|	|	|	[MCALL
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'Caller')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	(value = 'call')
-|	|	|	|	]
-|	|	|	|	[RFN
-|	|	|	|	|	[NAME
-|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = '.')
-|	|	|	|	|	]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'TestA')
-|	|	|	|	|	]
-|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'foo')
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	]
 |	|	[CLS
 |	|	|	[GET_OR_NAME
 |	|	|	|	(type = NO-STATIC)
@@ -160,7 +130,69 @@
 |	|	[TEST_FN
 |	|	|	[VALUE
 |	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[MCALL
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'Caller')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	(value = 'call')
+|	|	|	|	]
+|	|	|	|	[RFN
+|	|	|	|	|	[NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = '.')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	]
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'foo')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
 |	|	|	|	(value = '1')
+|	|	|	]
+|	|	|	[MCALL
+|	|	|	|	[AS
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'Supplier')
+|	|	|	|	|	]
+|	|	|	|	|	[RFN
+|	|	|	|	|	|	[NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = '.')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'foo')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	(value = 'get')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '2')
 |	|	|	]
 |	|	|	[MCALL
 |	|	|	|	[VALUE
@@ -186,6 +218,40 @@
 |	|	|	|	|	|	(type = NO-STATIC)
 |	|	|	|	|	|	(text = 'foo')
 |	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '3')
+|	|	|	]
+|	|	|	[MCALL
+|	|	|	|	[AS
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'Supplier')
+|	|	|	|	|	]
+|	|	|	|	|	[RFN
+|	|	|	|	|	|	[NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = '.')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[NEW
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	(value = 'TestB')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'foo')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	(value = 'get')
 |	|	|	|	]
 |	|	|	]
 |	|	]
