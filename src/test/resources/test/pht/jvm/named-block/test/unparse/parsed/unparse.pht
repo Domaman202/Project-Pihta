@@ -9,7 +9,7 @@
 						0
 					]
 				])
-			(nblock
+			(nb
 				CycleBlock
 				(cycle
 					(less
@@ -33,7 +33,7 @@
 						0
 					]
 				])
-			(nblock
+			(nb
 				CycleBlock
 				(cycle
 					(less
@@ -49,4 +49,32 @@
 							CycleBlock))
 					(break
 						CycleBlock)))
-			i)))
+			i)
+		(test-fn
+			2
+			(nb
+				A
+				(def
+					[
+						[
+							i
+							12
+						]
+					])
+				(nb
+					B
+					(def
+						[
+							[
+								i
+								21
+							]
+						])
+					(bset
+						"i"
+						"A"
+						33)
+					(ret
+						(bget
+							"i"
+							"A")))))))

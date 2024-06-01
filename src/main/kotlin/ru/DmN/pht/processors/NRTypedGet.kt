@@ -1,6 +1,6 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.ast.NodeTypedGet
+import ru.DmN.pht.ast.NodeTGet
 import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.pht.utils.node.NodeTypes.TGET_
@@ -14,6 +14,6 @@ object NRTypedGet : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
         processor.computeType(node.nodes[0], ctx)
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeTypedGet =
-        NodeTypedGet(node.info.withType(TGET_), processor.computeString(node.nodes[1], ctx), processor.computeType(node.nodes[0], ctx))
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeTGet =
+        NodeTGet(node.info.withType(TGET_), processor.computeString(node.nodes[1], ctx), processor.computeType(node.nodes[0], ctx))
 }

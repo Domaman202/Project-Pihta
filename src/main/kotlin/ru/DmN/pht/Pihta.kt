@@ -54,6 +54,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(ASET)
         // b
         addSNP(BGET)
+        addSNP(BSET)
         addSNP(BLOCK)
         addSNP(BREAK)
         // c
@@ -119,7 +120,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addNP("mcall!",       NPMCallB)
         addSNP(MUL)
         // n
-        addSNP(NBLOCK)
+        addSNP(NB)
         addSNP(NEG)
         addSNP(NEW)
         addSNP(NEW_ARR)
@@ -204,6 +205,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         "arr-set"       to "aset"
         // b
         "block-get"     to "bget"
+        "block-set"     to "bset"
         // c
         "ctor-call"     to "ccall"
         "class"         to "cls"
@@ -226,7 +228,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         // m
         "method-call"   to "mcall"
         // n
-        "named-block"   to "nblock"
+        "named-block"   to "nb"
+        "namespace"     to "ns"
         // o
         "object"        to "obj"
         // r
@@ -300,7 +303,9 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(ASET_)
         // b
         addSNU(BGET)
-        addSNU(BGET_)
+        add(BGET_,          NUBGet)
+        addSNU(BSET)
+        add(BSET_,          NUBSet)
         addSNU(BLOCK)
         addSNU(BLOCK_)
         addSNU(BREAK)
@@ -403,8 +408,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(MUL_)
         // n
         add(NAME,           NUGetOrName)
-        addSNU(NBLOCK)
-        add(NBLOCK_,        NUNamedBlock)
+        addSNU(NB)
+        add(NB_,        NUNamedBlock)
         addSNU(NEG)
         addSNU(NEG_)
         addSNU(NEW)
@@ -459,7 +464,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(TRCALL)
         addSNU(TRCALL_)
         addSNU(TGET)
-        add(TGET_,          NUTypedGet)
+        add(TGET_,          NUTGet)
         addSNU(TYPE_OF)
         // u
         add(UNIT,           NUUnit)
@@ -534,6 +539,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         // b
         add(BGET,          NRBGet)
         add(BGET_,         NRBGetB)
+        add(BSET,          NRBSet)
         add(BLOCK,         NRBody)
         add(BLOCK_,        NRBody)
         add(BREAK,         NRBreakContinue)
@@ -621,8 +627,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(MUL_,          NRMathB)
         // n
         add(NAME,          NRGetOrName)
-        add(NBLOCK,        NRNamedList)
-        add(NBLOCK_,       NRProgn)
+        add(NB,        NRNamedList)
+        add(NB_,       NRProgn)
         add(NEG,           NRMath)
         add(NEG_,          NRMathB)
         add(NEW,           NRNew)
@@ -653,6 +659,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(REM,           NRMath)
         add(REM_,          NRMathB)
         add(RET,           NRRet)
+        add(RET_,          NRRet)
         add(RFN,           NRRFn)
         add(RFN_,          NRRFnB)
         // s

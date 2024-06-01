@@ -1,0 +1,5 @@
+(progn
+    (namespace ru.DmN.test
+        (cls Test [^Object] (@static
+            (defn glory-to-Putin ^String [] "Слава Владимиру Путину!"))))
+    (test-fn 0 (#glory-to-Putin ^ru.DmN.test.Test)))

@@ -1,0 +1,20 @@
+(use-ctx pht pht/jvm
+	(progn
+		(ns
+			ru.DmN.test
+			(cls
+				Test
+				[
+					^Object
+				]
+				(@static
+					(defn
+						glory-to-Putin
+						^String
+						[]
+						"Слава Владимиру Путину!"))))
+		(test-fn
+			0
+			(mcall
+				^ru.DmN.test.Test
+				glory-to-Putin))))

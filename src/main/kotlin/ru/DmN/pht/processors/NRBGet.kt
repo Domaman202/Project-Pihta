@@ -6,7 +6,6 @@ import ru.DmN.pht.processor.ctx.NamedBodyContext
 import ru.DmN.pht.processor.ctx.body
 import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.node.NodeTypes.BGET_
-import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -17,14 +16,14 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRBGet : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        find(node, processor, ctx).type
+        find(node, processor, ctx).second.type
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeBGet? =
         if (valMode)
-            NodeBGet(node.info.withType(BGET_), find(node, processor, ctx))
+            find(node, processor, ctx).let { NodeBGet(node.info.withType(BGET_), it.first, it.second) }
         else null
 
-    private fun find(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): Variable {
+    fun find(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): Pair<String, Variable> {
         val name = processor.computeString(node.nodes[0], ctx)
         val block = processor.computeString(node.nodes[1], ctx)
         var bctx: BodyContext? = ctx.body
@@ -33,6 +32,6 @@ object NRBGet : INodeProcessor<NodeNodesList> {
                 throw MessageException(null, "Переменная '$name' в блоке '$block' не найдена!")
             bctx = bctx.parent
         }
-        return bctx[name]!!
+        return Pair(block, bctx[name]!!)
     }
 }

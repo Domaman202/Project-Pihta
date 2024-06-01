@@ -7,6 +7,7 @@
                     (break CycleBlock))
                 (++ i)))
         i)
+
     (test-fn 1
         (def [[i 0]])
         (named-block CycleBlock
@@ -15,4 +16,12 @@
                 (if (< i 5)
                     (continue CycleBlock))
                 (break CycleBlock)))
-        i))
+        i)
+
+    (test-fn 2
+        (named-block A
+            (def [[i 12]])
+            (named-block B
+                (def [[i 21]])
+                (set i@A 33)
+                (ret i@A)))))

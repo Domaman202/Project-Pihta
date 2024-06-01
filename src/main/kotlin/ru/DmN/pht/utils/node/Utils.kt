@@ -38,6 +38,8 @@ fun nodeASet(info: INodeInfo, name: String, index: Int, value: Node) =
 // b
 fun nodeBGet(info: INodeInfo, name: String, block: String) =
     NodeNodesList(info.withType(BGET), mutableListOf(nodeValue(info, name), nodeValue(info, block)))
+fun nodeBSet(info: INodeInfo, name: String, block: String, nodes: MutableList<Node>) =
+    NodeNodesList(info.withType(BSET), nodes.apply { add(0, nodeValue(info, block)); add(0, nodeValue(info, name)) })
 fun nodeBody(info: INodeInfo, nodes: MutableList<Node>) =
     NodeNodesList(info.withType(BLOCK), nodes)
 // c
@@ -133,7 +135,7 @@ fun nodeThrow(info: INodeInfo, clazz: String) =
 fun nodeThrow(info: INodeInfo, clazz: String, args: List<Node>) =
     NodeNodesList(info.withType(THROW), mutableListOf(nodeNew(info, clazz, args)))
 fun nodeTypesGet(info: INodeInfo, name: String, type: VirtualType) =
-    NodeTypedGet(info.withType(TGET_), name, type)
+    NodeTGet(info.withType(TGET_), name, type)
 // u
 fun nodeUseCtx(info: INodeInfo, name: String, body: Node) =
     NodeUse(info.withType(USE_CTX), mutableListOf(body), mutableListOf(name))

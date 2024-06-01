@@ -6,7 +6,7 @@
 					(defn [] test ^dynamic []
 						(def [
 							[^int i 0]])
-						(nblock CycleBlock
+						(nb CycleBlock
 							(cycle
 								(less
 									(get i)
@@ -25,7 +25,7 @@
 					(defn [] test ^dynamic []
 						(def [
 							[^int i 0]])
-						(nblock CycleBlock
+						(nb CycleBlock
 							(cycle
 								(less
 									(get i)
@@ -38,4 +38,19 @@
 									(continue CycleBlock))
 								(break CycleBlock)))
 						(as ^dynamic
-							(get i))))))))
+							(get i))))))
+		(@test
+			(cls [] Test2 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(nb A
+							(def [
+								[^int i 12]])
+							(nb B
+								(def [
+									[^int i 21]])
+								(bset i A
+									33)
+								(ret
+									(as ^dynamic
+										(bget i A)))))))))))

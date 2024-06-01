@@ -30,7 +30,7 @@ object NRSet : INodeProcessor<NodeSet> {
         val classes = ctx.classes
         val static = !ctx.method.modifiers.static
         classes.forEach { it -> findSetter(info, it, node.name, value, static, processor, ctx)?.let { return it } }
-        val field =  classes.firstNotNullOf { it -> it.fields.find { it.name == node.name } }
+        val field = classes.firstNotNullOf { it -> it.fields.find { it.name == node.name } }
         return NodeFSet(
             info.withType(NodeTypes.FSET_),
             mutableListOf<Node>(if (field.modifiers.isStatic) nodeValueClass(info, field.declaringClass.name) else nodeGetOrName(info, node.name)).apply { addAll(value) },

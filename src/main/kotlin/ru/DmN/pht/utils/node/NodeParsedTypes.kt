@@ -11,6 +11,7 @@ enum class NodeParsedTypes(override val operation: String, override val processe
     ASET("aset", ASET_),                        // arr-set
     // b
     BGET("bget", BGET_),                        // block-get
+    BSET("bset", BSET_),                        // block-set
     BLOCK("block", BLOCK_),                     // block
     BREAK("break", BREAK_),                     // break
     // c
@@ -50,7 +51,7 @@ enum class NodeParsedTypes(override val operation: String, override val processe
     MCALL("mcall", MCALL_),                     // method-call
     MUL("mul", MUL_),                           // mul          // *
     // n
-    NBLOCK("nblock", NBLOCK_),                  // named-block
+    NB("nb", NB_),                              // named-block
     NEG("neg", NEG_),                           // neg
     NEW("new", NEW_),                           // new
     NEW_ARR("new-arr", NEW_ARR_),               // new-arr

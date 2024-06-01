@@ -20,7 +20,7 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[NBLOCK
+|	|	|	[NB
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
 |	|	|	|	|	(text = 'CycleBlock')
@@ -86,7 +86,7 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[NBLOCK
+|	|	|	[NB
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
 |	|	|	|	|	(text = 'CycleBlock')
@@ -137,6 +137,78 @@
 |	|	|	[GET_OR_NAME
 |	|	|	|	(type = NO-STATIC)
 |	|	|	|	(text = 'i')
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '2')
+|	|	|	]
+|	|	|	[NB
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'A')
+|	|	|	|	]
+|	|	|	|	[DEF
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[NB
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'B')
+|	|	|	|	|	]
+|	|	|	|	|	[DEF
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[BSET
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	(value = 'i')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	(value = 'A')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	(value = '33')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[RET
+|	|	|	|	|	|	[BGET
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	(value = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	(value = 'A')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
 |	|	|	]
 |	|	]
 |	]

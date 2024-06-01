@@ -25,6 +25,7 @@ enum class NodeTypes : INodeType {
     ASET_("aset", PROCESSED),                           // arr-set
     // b
     BGET_("bget", PROCESSED),                           // block-get
+    BSET_("bset", PROCESSED),                           // block-set
     BLOCK_("block", PROCESSED),                         // block
     BREAK_("break", PROCESSED),                         // break
     // c
@@ -98,7 +99,7 @@ enum class NodeTypes : INodeType {
     MUL_("mul", PROCESSED),                             // mul              // *
     // n
     NAME("name", PROCESSED),                            // name
-    NBLOCK_("nblock", PROCESSED),                       // named-block
+    NB_("nb", PROCESSED),                               // named-block
     NEG_("neg", PROCESSED),                             // neg
     NEW_("new", PROCESSED),                             // new
     NEW_ARR_("new-arr", PROCESSED),                     // new-arr

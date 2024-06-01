@@ -8,5 +8,6 @@ class NamedBlock : TestModule("test/pht/jvm/named-block") {
         compile()
         assertEquals(test(0), 6)
         assertEquals(test(1), 5)
+        assertEquals(test(2), 33)
     }
 }

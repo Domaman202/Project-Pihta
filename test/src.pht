@@ -1,7 +1,7 @@
-(progn
-    (import java [[types [java.util.function.Supplier]]])
-    (cls TestProvider [^Object] (@static
-        (defn foo ^Object []
-            "Foo!")))
-    (app-fn
-        (println (#get (as ^Supplier (rfn . ^TestProvider foo))))))
+(app-fn
+    (nb A
+        (def [[i 12]])
+        (nb B
+            (def [[i 21]])
+            (set i@A 33)
+            (println i@A))))

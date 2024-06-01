@@ -6,10 +6,11 @@ import ru.DmN.pht.ast.NodeGetOrName
 import ru.DmN.pht.ast.NodeSet
 import ru.DmN.pht.utils.node.NodeParsedTypes.*
 import ru.DmN.pht.utils.node.NodeTypes.GET_OR_NAME
+import ru.DmN.pht.utils.node.nodeBSet
 import ru.DmN.pht.utils.node.nodeValueClass
-import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.lexer.Token
+import ru.DmN.siberia.parser.Parser
 import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.parsers.INodeParser
 import ru.DmN.siberia.parsers.NPProgn
@@ -34,13 +35,12 @@ object NPSetB : INodeParser {
 
     private fun parse(info: INodeInfo, name: String, static: Boolean, nodes: MutableList<Node>): Node {
         val parts = name.split("/")
-        return if (parts.size == 1)
-            NodeSet(
-                info,
-                nodes,
-                parts.last()
-            )
-        else NodeFieldSet(
+        return if (parts.size == 1) {
+            val j = name.indexOf('@')
+            if (j > -1)
+                nodeBSet(info, name.substring(0, j), name.substring(j + 1), nodes)
+            else NodeSet(info, nodes, parts.last())
+        } else NodeFieldSet(
             info.withType(FSET_B),
             nodes,
             parse(info, parts, 1, static),
