@@ -1,0 +1,238 @@
+[USE_CTX_
+|	(modules = pht pht/jvm)
+|	(NODES:
+|	|	[PROGN_
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = TestA)
+|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	[UNIT]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	(type = final class)
+|	|	|	|	|	(name = Test0)
+|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = foo()V)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	|	|	(type = STATIC)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = TestB)
+|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	[CTOR_
+|	|	|	|	|	(type = constructor)
+|	|	|	|	|	(name = <init>)
+|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	(sign = null)
+|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	(method = <init>()V)
+|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	)
+|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	(type = SUPER)
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[DEFN_
+|	|	|	|	|	(type = method)
+|	|	|	|	|	(name = foo)
+|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	(sign = null)
+|	|	|	|	|	[UNIT]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	(type = final class)
+|	|	|	|	|	(name = Test1)
+|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = foo()V)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	(type = VT(TestB))
+|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	|	|	(type = VIRTUAL)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = TestC)
+|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	[UNIT]
+|	|	|	|	|	]
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(name = call)
+|	|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	(method = foo()V)
+|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = 'TestC')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	|	(type = STATIC)
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	(type = final class)
+|	|	|	|	|	(name = Test2)
+|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = call()V)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	(value = 'TestC')
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	|	|	(type = STATIC)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = TestD)
+|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	[CTOR_
+|	|	|	|	|	(type = constructor)
+|	|	|	|	|	(name = <init>)
+|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	(sign = null)
+|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	(method = <init>()V)
+|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	)
+|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	(type = SUPER)
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[DEFN_
+|	|	|	|	|	(type = method)
+|	|	|	|	|	(name = foo)
+|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	(sign = null)
+|	|	|	|	|	[UNIT]
+|	|	|	|	]
+|	|	|	|	[DEFN_
+|	|	|	|	|	(type = method)
+|	|	|	|	|	(name = call)
+|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	(sign = null)
+|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	(method = foo()V)
+|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	)
+|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	(type = VIRTUAL)
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	(type = final class)
+|	|	|	|	|	(name = Test3)
+|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = call()V)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	(type = VT(TestD))
+|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	|	|	(type = VIRTUAL)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	)
+|	(EXPORTS:
+|	|	[PROGN_
+|	|	|	[PROGN_
+|	|	|	|	[PROGN_]
+|	|	|	]
+|	|	]
+|	)
+]

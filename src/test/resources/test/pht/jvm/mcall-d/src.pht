@@ -1,0 +1,20 @@
+(progn
+    (cls TestA [^Object] (@static
+        (defn foo ^int [[i ^int]] (+ i 5))))
+    (test-fn 0 (#foo ^TestA 5))
+
+    (cls TestB [^Object]
+        (ctor [] (ccall))
+        (defn foo ^int [[i ^int]] (+ i 15)))
+    (test-fn 1 (#foo (new ^TestB) 10))
+
+    (cls TestC [^Object] (@static
+        (defn foo ^int [[i ^int]] (- i 5))
+        (defn call ^int [[i ^int]] (#foo . i))))
+    (test-fn 2 (#call ^TestC 35))
+
+    (cls TestD [^Object]
+        (ctor [] (ccall))
+        (defn foo ^int [[i ^int]] (- i 15))
+        (defn call ^int [[i ^int]] (#foo . i)))
+    (test-fn 3 (#call (new ^TestD) 65)))

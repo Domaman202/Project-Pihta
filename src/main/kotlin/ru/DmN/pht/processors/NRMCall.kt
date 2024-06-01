@@ -167,7 +167,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                         UNKNOWN -> result.method.run {
                             if (modifiers.static)
                                 nodeValueClass(instance.info, declaringClass.name)
-                            else throw RuntimeException()
+                            else nodeGetVariable(instance.info, "this", declaringClass)
                         }
 
                         STATIC -> nodeGetInstance(instance, processor, ctx)
