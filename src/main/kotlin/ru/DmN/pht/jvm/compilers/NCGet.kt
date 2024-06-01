@@ -33,7 +33,7 @@ object NCGet : IValueNodeCompiler<NodeGet> {
             }
 
             THIS_STATIC_FIELD -> ctx.method.node.run {
-                val field = ctx.clazz.clazz.fields.find { it.name == name } ?: ctx.classes.asSequence().map { it -> it.fields.find { it.name == name } }.first()!!
+                val field = ctx.classes.firstNotNullOf { it -> it.fields.find { it.name == name } }
                 visitFieldInsn(
                     Opcodes.GETSTATIC,
                     field.declaringClass.jvmName,

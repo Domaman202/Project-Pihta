@@ -7,14 +7,12 @@ import ru.DmN.pht.ast.NodeMCall.Type.STATIC
 import ru.DmN.pht.ast.NodeMCall.Type.VIRTUAL
 import ru.DmN.pht.processor.ctx.body
 import ru.DmN.pht.processor.ctx.classes
-import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.pht.processor.ctx.method
 import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.processor.utils.computeValues
 import ru.DmN.pht.processor.utils.processValues
 import ru.DmN.pht.utils.InlineVariable
-import ru.DmN.pht.utils.forEach
 import ru.DmN.pht.utils.node.NodeTypes.GET_
 import ru.DmN.pht.utils.node.NodeTypes.MCALL_
 import ru.DmN.pht.utils.node.nodeGetVariable
@@ -58,15 +56,13 @@ object NRGetB : INodeProcessor<NodeNodesList> {
                 else NodeGet(info.withType(GET_), name, VARIABLE, it.type)
             else null
         }
-        val clazz = ctx.clazz
-        ctx.classes.forEach(clazz) { it -> findGetter(info, it, name, nodes, !ctx.method.modifiers.static, processor, ctx)?.let { return it } }
+        val classes = ctx.classes
+        classes.forEach{ it -> findGetter(info, it, name, nodes, !ctx.method.modifiers.static, processor, ctx)?.let { return it } }
         if (nodes.isNotEmpty())
             throw RuntimeException("DEBUG")
         return if (valMode) {
-            val field =
-                clazz.fields.find { it.name == name }
-                    ?: ctx.classes.iterator().let { iter -> if (iter.hasNext()) iter.next().fields.find { it.name == name } else null }
-                    ?: throw MessageException(null, "Переменная '$name' не найдена!")
+            val field = classes.firstNotNullOfOrNull { it -> it.fields.find { it.name == name } }
+                ?: throw MessageException(null, "Переменная '$name' не найдена!")
             NodeGet(
                 info.withType(GET_),
                 name,

@@ -16,6 +16,9 @@ import java.util.stream.Stream
 inline val Variable.uniqueName
     get() = "$name$$id"
 
+fun <T> Iterable<T>.asSequenceWith(first: T): Sequence<T> =
+    FirstElementSequence(this, first)
+
 inline fun <T> List<T>.dropForEach(count: Int, block: (T) -> Unit) {
     for (i in count until size) {
         block(this[i])

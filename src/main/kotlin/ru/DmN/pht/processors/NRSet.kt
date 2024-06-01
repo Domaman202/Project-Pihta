@@ -7,11 +7,9 @@ import ru.DmN.pht.ast.NodeMCall.Type.VIRTUAL
 import ru.DmN.pht.ast.NodeSet
 import ru.DmN.pht.processor.ctx.body
 import ru.DmN.pht.processor.ctx.classes
-import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.pht.processor.ctx.method
 import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.processor.utils.processValues
-import ru.DmN.pht.utils.forEach
 import ru.DmN.pht.utils.node.NodeTypes
 import ru.DmN.pht.utils.node.NodeTypes.MCALL_
 import ru.DmN.pht.utils.node.nodeGetOrName
@@ -29,11 +27,10 @@ object NRSet : INodeProcessor<NodeSet> {
         val info = node.info
         val value = node.nodes.asSequence().processValues(processor, ctx).toMutableList()
         ctx.body[node.name]?.let { return NodeSet(info.withType(NodeTypes.SET_), value, node.name) }
-        val clazz = ctx.clazz
-        ctx.classes.forEach(clazz) { it ->
-            findSetter(info, it, node.name, value, !ctx.method.modifiers.static, processor, ctx)?.let { return it }
-        }
-        val field = clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence().map { it -> it.fields    .find { it.name == node.name } }.first()!!
+        val classes = ctx.classes
+        val static = !ctx.method.modifiers.static
+        classes.forEach { it -> findSetter(info, it, node.name, value, static, processor, ctx)?.let { return it } }
+        val field =  classes.firstNotNullOf { it -> it.fields.find { it.name == node.name } }
         return NodeFSet(
             info.withType(NodeTypes.FSET_),
             mutableListOf<Node>(if (field.modifiers.isStatic) nodeValueClass(info, field.declaringClass.name) else nodeGetOrName(info, node.name)).apply { addAll(value) },

@@ -76,8 +76,7 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
             processor,
             ctx
         )?.let { return lenArgs(it.method.rettype, type) }
-        return lenArgs((ctx.clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence()
-            .map { it -> it.fields.find { it.name == node.name } }.first() ?: return -1).type, type)
+        return lenArgs((ctx.classes.firstNotNullOfOrNull { it -> it.fields.find { it.name == node.name } } ?: return -1).type, type)
     }
 
     override fun adaptToType(
@@ -104,8 +103,7 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
                     processor,
                     ctx
                 )?.let { return it }
-                val field = clazz.fields.find { it.name == node.name } ?: ctx.classes.asSequence()
-                    .map { it -> it.fields.find { it.name == node.name } }.first()!!
+                val field = ctx.classes.firstNotNullOf { it -> it.fields.find { it.name == node.name } }
                 NodeGet(
                     node.info.withType(GET_),
                     node.name,

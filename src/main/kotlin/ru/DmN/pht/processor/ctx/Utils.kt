@@ -41,14 +41,16 @@ inline fun IContextCollection<*>.isMacro() =
 inline var IContextCollection<*>.global
     set(value) { contexts[ContextKeys.GLOBAL] = value }
     get() = contexts[ContextKeys.GLOBAL] as GlobalContext
+inline val IContextCollection<*>.classes_seq
+    get() = (contexts[ContextKeys.CLASSES] as LinkedClassesNode<VirtualType>).asSequence()
+inline var IContextCollection<*>.classes
+    set(value) { contexts[ContextKeys.CLASSES] = value }
+    get() = contexts[ContextKeys.CLASSES] as LinkedClassesNode<VirtualType>
 inline val IContextCollection<*>.enum
     get() = contexts[ContextKeys.ENUM] as EnumContext
 inline var IContextCollection<*>.clazz
     set(value) { contexts[ContextKeys.CLASS] = value }
     get() = this.clazzOrNull!!
-inline var IContextCollection<*>.classes
-    set(value) { contexts[ContextKeys.CLASSES] = value }
-    get() = contexts[ContextKeys.CLASSES] as LinkedClassesNode<VirtualType>
 inline val IContextCollection<*>.clazzOrNull
     get() = contexts[ContextKeys.CLASS] as VirtualType?
 inline var IContextCollection<*>.method

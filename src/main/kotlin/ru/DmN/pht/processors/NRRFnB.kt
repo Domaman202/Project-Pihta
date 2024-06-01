@@ -1,13 +1,17 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeRFn
-import ru.DmN.pht.processor.ctx.classes
+import ru.DmN.pht.processor.ctx.classes_seq
+import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.pht.processor.ctx.global
+import ru.DmN.pht.processor.ctx.method
 import ru.DmN.pht.processor.utils.computeType
+import ru.DmN.pht.processors.NRRFn.findMethodOrNull
 import ru.DmN.pht.processors.NRRFn.process
 import ru.DmN.pht.utils.findLambdaMethodOrNull
 import ru.DmN.pht.utils.isConstClass
 import ru.DmN.pht.utils.lenArgsB
+import ru.DmN.pht.utils.node.nodeGetVariable
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
@@ -31,14 +35,24 @@ object NRRFnB : INodeProcessor<NodeRFn>, IAdaptableProcessor<NodeRFn> {
                 lambda,
                 static
             )
-        } else ctx.classes
-            .asSequence()
-            .map { NRRFn.findMethodOrNull(it, name, lambda, true) }
-            .filterNotNull()
-            .map { it.argsc.asSequence().mapIndexed { i, t -> lenArgsB(t, lambda.argsc[i]) }.sum() }
-            .sorted()
-            .firstOrNull()
-            ?: -1
+        } else {
+            if (!ctx.method.modifiers.static) {
+                findMethodOrNull(processor.calc(nodeGetVariable(node.info, "this", ctx.clazz), ctx)!!, name, lambda, false)
+                    ?.argsc
+                    ?.asSequence()
+                    ?.mapIndexed { i, t -> lenArgsB(t, lambda.argsc[i]) }
+                    ?.sum()
+                    ?.let { if (it > -1) return it }
+            }
+            //
+            ctx.classes_seq
+                .map { findMethodOrNull(it, name, lambda, true) }
+                .filterNotNull()
+                .map { it.argsc.asSequence().mapIndexed { i, t -> lenArgsB(t, lambda.argsc[i]) }.sum() }
+                .sorted()
+                .firstOrNull()
+                ?: -1
+        }
     }
 
     override fun adaptToType(type: VirtualType, node: NodeRFn, processor: Processor, ctx: ProcessingContext): NodeRFn =

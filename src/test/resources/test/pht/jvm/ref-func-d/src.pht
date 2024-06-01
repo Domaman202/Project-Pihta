@@ -1,0 +1,17 @@
+(progn
+    (import java [[types [java.util.function.Supplier]]])
+    (cls Caller [^Object] (@static
+        (defn call ^Object [[ref ^Supplier]] (#get ref))))
+
+    (cls TestA [^Object] (@static
+        (defn foo ^String [] "Auto Foo!")
+        (defn call ^Object [] (#call ^Caller (rfn . . foo)))))
+    (test-fn 0
+        (#call ^TestA))
+
+    (cls TestB [^Object]
+        (ctor [] (ccall))
+        (defn foo ^String [] "Auto Instanced Foo!")
+        (defn call ^Object [] (#call ^Caller (rfn . . foo))))
+    (test-fn 1
+        (#call (new ^TestB))))

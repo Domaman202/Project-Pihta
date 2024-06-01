@@ -1,0 +1,14 @@
+(progn
+    (import java [[types [java.util.function.Supplier]]])
+
+    (cls TestA [^Object] (@static
+        (defn foo ^String [] "Foo!")))
+    (test-fn 0
+        (#get (rfn ^Supplier ^TestA foo)))
+
+    (cls TestB [^Object]
+        (ctor [] (ccall))
+        (defn foo ^String [] "Instanced Foo!"))
+    (test-fn 1
+        (def [[o (new ^TestB)]])
+        (#get (rfn ^Supplier o foo))))

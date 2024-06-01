@@ -263,6 +263,8 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         val args = node.nodes.asSequence().drop(2).map { processor.process(it, ctx, true)!! }.toList()
         //
         // Class / Instance
+//        if (name == "call")
+//            println(ICastable.of(args[0], processor, ctx).castableTo(ctx.getType("java.util.function.Supplier", processor, ctx)))
         var result = findMethodOrNull(pair.second, name, args, static, node, processor, ctx)
         // Companion Object
         if (result == null) {

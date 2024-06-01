@@ -1,0 +1,153 @@
+[USE_CTX
+|	(modules = pht pht/jvm)
+|	[PROGN
+|	|	[IMPORT
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'java')
+|	|	|	]
+|	|	|	[VALN
+|	|	|	|	[VALN
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'types')
+|	|	|	|	|	]
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'java.util.function.Supplier')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[CLS
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'TestA')
+|	|	|	]
+|	|	|	[VALN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'Object')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_STATIC
+|	|	|	|	[DEFN
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'foo')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	]
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	(value = 'Foo!')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[MCALL
+|	|	|	|	[RFN
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'Supplier')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	]
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'foo')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	(value = 'get')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[CLS
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'TestB')
+|	|	|	]
+|	|	|	[VALN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'Object')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CTOR
+|	|	|	|	[VALN]
+|	|	|	|	[CCALL]
+|	|	|	]
+|	|	|	[DEFN
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'foo')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'String')
+|	|	|	|	]
+|	|	|	|	[VALN]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'Instanced Foo!')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '1')
+|	|	|	]
+|	|	|	[DEF
+|	|	|	|	[VALN
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'o')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[NEW
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	(value = 'TestB')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[MCALL
+|	|	|	|	[RFN
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'Supplier')
+|	|	|	|	|	]
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'o')
+|	|	|	|	|	]
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'foo')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	(value = 'get')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	]
+]

@@ -19,13 +19,13 @@ open class LinkedClassesNode<T> : Iterable<T> {
             var node = this@LinkedClassesNode
 
             override fun next(): T {
-                node = node.prev
                 val value = node.element
+                node = node.prev
                 return value
             }
 
             override fun hasNext(): Boolean =
-                node.prev != LinkedClassesNodeStart
+                node != LinkedClassesNodeStart
         }
 
     object LinkedClassesNodeStart : LinkedClassesNode<Unit>(Unit)
