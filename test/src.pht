@@ -1,7 +1,2 @@
 (app-fn
-    (nb A
-        (def [[i 12]])
-        (nb B
-            (def [[i 21]])
-            (set i@A 33)
-            (println i@A))))
+    (println (as ^!String nil)))

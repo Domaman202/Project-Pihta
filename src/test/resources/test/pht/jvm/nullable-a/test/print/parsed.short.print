@@ -1,0 +1,53 @@
+[USE_CTX
+|	(modules = pht pht/jvm)
+|	[PROGN
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[AS
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = '?String')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = NIL)
+|	|	|	|	|	(value = 'nil')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '1')
+|	|	|	]
+|	|	|	[AS
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'String')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = NIL)
+|	|	|	|	|	(value = 'nil')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '2')
+|	|	|	]
+|	|	|	[AS
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = '!String')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = NIL)
+|	|	|	|	|	(value = 'nil')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	]
+]

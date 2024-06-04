@@ -12,9 +12,12 @@
 |	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
 |	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	(type = NIL)
-|	|	|	|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	(type = NIL)
+|	|	|	|	|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
@@ -165,8 +168,8 @@
 |	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	(type = CLASS_WITH_GEN)
-|	|	|	|	|	|	|	|	|	(value = 'java.util.List<^Object>')
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = 'java.util.List')
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
@@ -183,9 +186,12 @@
 |	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
 |	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	(type = NIL)
-|	|	|	|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	(type = NIL)
+|	|	|	|	|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]

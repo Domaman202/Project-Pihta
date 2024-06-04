@@ -1,0 +1,4 @@
+(progn
+    (test-fn 0 (as ^?String nil))
+    (test-fn 1 (as ^String  nil))
+    (test-fn 2 (as ^!String nil)))

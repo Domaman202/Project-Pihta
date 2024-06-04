@@ -26,13 +26,22 @@ object NRAs : IStdNodeProcessor<NodeNodesList> {
             if (from == null || from == VOID)
                 value
             else if (from.isAssignableFrom(to))
-                if (from is VVTNullable && to is VVTNullable)
-                    if (from.nullable == to.nullable || to.nullable)
-                        value
-                    else throw MessageException(null, "Приведение типа 'nullable' к типу 'not-null'!")
-                else value
+                checkNullable(node, from, to) { value }
             else if (np is IAdaptableProcessor<Node> && np.adaptType.cast)
                 np.adaptToType(to, value, processor, ctx)
-            else NodeIsAs(node.info.withType(AS_), mutableListOf(value), from, to)
+            else checkNullable(node, from, to) { cast(node, value, from ,to) }
         } else null
+
+    private inline fun checkNullable(node: Node, from: VirtualType, to: VirtualType, block: () -> Node) =
+        if (from is VVTNullable)
+            if (to is VVTNullable)
+                if (from.nullable == to.nullable || to.nullable)
+                    block()
+                else throw MessageException(null, "Приведение типа 'nullable' к типу 'not-null'!")
+            else cast(node, block(), from, to)
+        else block()
+
+    @Suppress("NOTHING_TO_INLINE")
+    private inline fun cast(node: Node, value: Node, from: VirtualType, to: VirtualType) =
+        NodeIsAs(node.info.withType(AS_), mutableListOf(value), from, to)
 }

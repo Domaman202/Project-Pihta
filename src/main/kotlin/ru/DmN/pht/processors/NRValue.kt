@@ -12,10 +12,10 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRValue : IStdNodeProcessor<NodeValue> {
-    override fun calc(node: NodeValue, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType(
+    override fun calc(node: NodeValue, processor: Processor, ctx: ProcessingContext): VirtualType {
+        return ctx.global.getType(
             when (node.vtype) {
-                NIL             -> "Any"
+                NIL             -> return ctx.global.getType("Any").nullableType
                 BOOLEAN         -> "boolean"
                 CHAR            -> "char"
                 INT             -> "int"
@@ -29,11 +29,15 @@ object NRValue : IStdNodeProcessor<NodeValue> {
                 CLASS_WITH_GEN  -> "Class"
             }
         )
+    }
 
     override fun process(node: NodeValue, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node =
-        if (node.vtype == CLASS)
-            NodeValue(node.info, CLASS, computeType(node, processor, ctx).name)
-        else node
+        when (node.vtype) {
+            PRIMITIVE,
+            CLASS,
+            CLASS_WITH_GEN -> NodeValue(node.info, CLASS, computeType(node, processor, ctx).name)
+            else -> node
+        }
 
     override fun computeInt(node: NodeValue, processor: Processor, ctx: ProcessingContext): Int =
         node.getInt()

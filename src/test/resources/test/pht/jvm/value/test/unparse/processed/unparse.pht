@@ -5,7 +5,8 @@
 				(@static
 					(defn [] test ^dynamic []
 						(as ^dynamic
-							nil)))))
+							(as ^dynamic
+								nil))))))
 		(@test
 			(cls [] Test1 [^java.lang.Object]
 				(@static
@@ -53,13 +54,14 @@
 				(@static
 					(defn [] test ^dynamic []
 						(as ^dynamic
-							^java.util.List<^Object>)))))
+							^java.util.List)))))
 		(@test
 			(cls [] Test9 [^java.lang.Object]
 				(@static
 					(defn [] test ^dynamic []
 						(as ^dynamic
-							nil)))))
+							(as ^dynamic
+								nil))))))
 		(@test
 			(cls [] Test10 [^java.lang.Object]
 				(@static

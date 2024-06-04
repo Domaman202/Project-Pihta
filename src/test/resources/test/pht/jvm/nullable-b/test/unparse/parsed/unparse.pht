@@ -1,0 +1,31 @@
+(use-ctx pht pht/jvm
+	(progn
+		(def-macro
+			null-check
+			[
+				o
+			]
+			(if
+				(eq
+					(macro-arg
+						o)
+					nil)
+				(throw
+					(new
+						^NullPointerException))
+				(as
+					(not-null-type
+						(type-of
+							(macro-arg
+								o)))
+					(as
+						(clr-null-type
+							(type-of
+								(macro-arg
+									o)))
+						(macro-arg
+							o)))))
+		(test-fn
+			0
+			(macro null-check
+				nil))))

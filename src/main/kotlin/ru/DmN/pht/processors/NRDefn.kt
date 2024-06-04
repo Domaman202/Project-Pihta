@@ -7,6 +7,7 @@ import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.ctx.with
 import ru.DmN.pht.processor.utils.*
+import ru.DmN.pht.utils.dropMutable
 import ru.DmN.pht.utils.node.NodeTypes.DEFN_
 import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_A
 import ru.DmN.pht.utils.node.nodeAs
@@ -61,27 +62,31 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         val new = NodeDefn(
             node.info.withType(DEFN_),
             if (node.nodes.size > 3 + offset)
-                node.nodes.drop(3 + offset).toMutableList()
+                node.nodes.dropMutable(3 + offset)
             else ArrayList(),
             method
         )
         //
         if (node.nodes.size > 3) {
             processor.pushTask(METHODS_BODY, node) {
+                val info = new.info
+                val ret = method.rettype
+                val void = ret != ctx.global.getType("void")
+                //
+                if (void)
+                    new.nodes[new.nodes.lastIndex] = nodeAs(info, new.nodes.last(), ret.name)
                 val context = ctx.with(method).with(BodyContext.of(method))
                 if (method.modifiers.inline)
-                    method.inline = NodeInlBodyB(node.info.withType(INL_BODY_A), new.nodes.toMutableList(), method.rettype, context)
-                processNodes(method, new, processor, context)
+                    method.inline = NodeInlBodyB(info.withType(INL_BODY_A), new.copyNodes(), ret, context)
+                processNodes(method, void, new, processor, context)
             }
         }
         return new
     }
 
-    private fun processNodes(method: VirtualMethod, new: NodeNodesList, processor: Processor, ctx: ProcessingContext) {
-        val void = ctx.global.getType("void")
-        //
+    private fun processNodes(method: VirtualMethod, void: Boolean, new: NodeNodesList, processor: Processor, ctx: ProcessingContext) {
         var i = 0
-        while (i < new.nodes.size.let { if (method.rettype != void) it - 1 else it }) {
+        while (i < new.nodes.size.let { if (void) it - 1 else it }) {
             val it = processor.process(new.nodes[i], ctx, false)
             if (it == null) {
                 new.nodes.removeAt(i)
@@ -90,7 +95,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
             i++
         }
         //
-        if (new.nodes.isNotEmpty() && method.rettype != void) {
+        if (new.nodes.isNotEmpty() && void) {
             new.nodes[new.nodes.lastIndex] = NRAs.process(
                 nodeAs(new.info, new.nodes.last(), method.rettype.name),
                 processor,
