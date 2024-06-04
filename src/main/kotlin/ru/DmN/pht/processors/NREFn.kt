@@ -26,7 +26,7 @@ object NREFn : INodeProcessor<NodeNodesList> {
         //
         val gens = processor.computeListOr(node.nodes[0], ctx)
         val offset = if (gens == null) 0 else 1
-        val generics = type.generics.toMutableMap()
+        val generics = type.genericsDefine.toMutableMap()
         gens?.forEach {
             val generic = processor.computeList(it, ctx)
             generics[processor.computeString(generic[0], ctx)] = processor.computeType(generic[1], ctx)
@@ -39,7 +39,7 @@ object NREFn : INodeProcessor<NodeNodesList> {
             if (returnGen == null)
                 processor.computeType(node.nodes[2 + offset], ctx)
             else generics[returnGen]!!
-        val args = NRDefn.parseArguments(node.nodes[3 + offset], generics, processor, ctx)
+        val args = NRDefn.parseArguments(node.nodes[3 + offset], type.name, generics, processor, ctx)
         //
         args.first.add(0, extend)
         args.second.add(0, "this")

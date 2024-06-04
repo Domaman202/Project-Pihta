@@ -22,7 +22,7 @@ object NRECtor : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
         val type = ctx.clazz as PhtVirtualType.Impl
         //
-        val args = NRDefn.parseArguments(node.nodes[0], type.generics, processor, ctx)
+        val args = NRDefn.parseArguments(node.nodes[0], type.name, type.genericsDefine, processor, ctx)
         //
         args.first.add(0, ctx.global.getType("int"))
         args.first.add(0, ctx.global.getType("String"))
@@ -42,7 +42,7 @@ object NRECtor : INodeProcessor<NodeNodesList> {
             MethodModifiers(ctor = true),
             null,
             null,
-            type.generics
+            type.genericsDefine
         )
         type.methods += method
         //

@@ -1,6 +1,6 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.jvm.utils.vtype.generics
+import ru.DmN.pht.jvm.utils.vtype.genericsDefine
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.OrPair
@@ -23,7 +23,7 @@ object NRWithGens : INodeProcessor<NodeNodesList> {
 
     private fun NodeNodesList.generics(type: VirtualType, processor: Processor, ctx: ProcessingContext): Map<String, OrPair<VirtualType, String>> {
         val gctx = ctx.global
-        val iter = type.generics.keys.iterator()
+        val iter = type.genericsDefine.keys.iterator()
         return this.nodes
             .stream()
             .skip(1)

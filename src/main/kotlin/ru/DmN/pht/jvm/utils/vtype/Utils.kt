@@ -51,19 +51,25 @@ val VirtualType.desc: String
  */
 val VirtualType.signature: String?
     get() =
-        if (generics.isEmpty())
+        if (genericsDefine.isEmpty())
             null
         else {
             val sb = StringBuilder().append('<')
-            generics.forEach { (k, v) -> sb.append(k).append(':').append(v.desc) }
+            genericsDefine.forEach { (k, v) -> sb.append(k).append(':').append(v.desc) }
             sb.append('>').append(superclass!!.desc).toString()
         }
 
 /**
  * Generic's (Name / Type)
  */
-val VirtualType.generics: Map<String, VirtualType>
-    get() = if (this is PhtVirtualType) generics else emptyMap()
+val VirtualType.genericsDefine: Map<String, VirtualType>
+    get() = if (this is PhtVirtualType) genericsDefine else emptyMap()
+
+/**
+ * Mapping of generic's to parents (This / Parent)
+ */
+val VirtualType.genericsMap: Map<String, String>
+    get() = if (this is PhtVirtualType) genericsMap else emptyMap()
 
 /**
  * Дескриптор.
@@ -97,7 +103,7 @@ val VirtualMethod.signature: String?
         else {
             val sb = StringBuilder()
             if (!modifiers.static) {
-                val list = generics.entries.drop(declaringClass.generics.size)
+                val list = generics.entries.drop(declaringClass.genericsDefine.size)
                 if (list.isNotEmpty()) {
                     sb.append('<')
                     list.forEach {

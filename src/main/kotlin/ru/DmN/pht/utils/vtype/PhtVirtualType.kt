@@ -8,7 +8,12 @@ abstract class PhtVirtualType : VirtualType() {
     /**
      * Generic's (Name / Type).
      */
-    abstract val generics: Map<String, VirtualType>
+    abstract val genericsDefine: Map<String, VirtualType>
+
+    /**
+     * Mapping of generic's to parents (This / Parent)
+     */
+    abstract val genericsMap: Map<String, String>
 
     open class Impl(
         override var name: String,
@@ -24,7 +29,8 @@ abstract class PhtVirtualType : VirtualType() {
         override var isFinal: Boolean = false,
         override var isFile: Boolean = false,
         //
-        override var generics: MutableMap<String, VirtualType> = HashMap()
+        override var genericsDefine: MutableMap<String, VirtualType> = HashMap(),
+        override val genericsMap: MutableMap<String, String> = HashMap()
     ) : PhtVirtualType()
 
     class Decorator(val type: VirtualType) : PhtVirtualType() {
@@ -48,7 +54,9 @@ abstract class PhtVirtualType : VirtualType() {
             get() = type.isFinal
         override val isFile: Boolean
             get() = type.isFile
-        override val generics: Map<String, VirtualType>
+        override val genericsDefine: Map<String, VirtualType>
+            get() = emptyMap()
+        override val genericsMap: Map<String, String>
             get() = emptyMap()
     }
 

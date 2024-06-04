@@ -26,8 +26,10 @@ object VTDynamic : PhtVirtualType(), IJvmVirtualType {
         get() = false
     override val isFile: Boolean
         get() = false
-    override val generics: Map<String, VirtualType>
-        get() = emptyMap()
     override val isPrimitive: Boolean
         get() = false
+    override val genericsDefine: Map<String, VirtualType>
+        get() = emptyMap()
+    override val genericsMap: Map<String, String>
+        get() = emptyMap()
 }

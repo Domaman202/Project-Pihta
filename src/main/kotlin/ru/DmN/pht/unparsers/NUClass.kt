@@ -14,7 +14,8 @@ object NUClass : INodeUnparser<NodeType> {
     override fun unparse(node: NodeType, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
             append('(').append(node.operation).append(" [")
-            node.type.generics.entries.forEach { append('[').append(it.key).append(' ').append(it.value.nameWithGenerics).append(']') }
+            node.type.genericsDefine.entries
+                .forEach { append('[').append(it.key).append(' ').append(it.value.nameWithGenerics).append(']') }
             append("] ").append(node.type.simpleName).append(" [")
             node.type.parents.forEachIndexed { i, it ->
                 if (i > 0)

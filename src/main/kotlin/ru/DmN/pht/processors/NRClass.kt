@@ -11,6 +11,7 @@ import ru.DmN.pht.utils.node.NodeParsedTypes
 import ru.DmN.pht.utils.node.processed
 import ru.DmN.pht.utils.type
 import ru.DmN.pht.utils.vtype.PhtVirtualType
+import ru.DmN.pht.utils.vtype.VVTWithGenerics
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -28,7 +29,8 @@ object NRClass : INodeProcessor<NodeNodesList> {
         //
         val generics = processor.computeListOr(node.nodes[0], ctx)
         val offset = if (generics == null) 0 else 1
-        val type = PhtVirtualType.Impl(gctx.name(processor.computeString(node.nodes[offset], ctx)), isFinal = true)
+        val name = gctx.name(processor.computeString(node.nodes[offset], ctx))
+        val type = PhtVirtualType.Impl(name, isFinal = true)
         //
         when (node.type) {
             NodeParsedTypes.OBJ -> type.fields += VirtualFieldImpl(
@@ -39,21 +41,33 @@ object NRClass : INodeProcessor<NodeNodesList> {
             )
             NodeParsedTypes.ITF -> type.isInterface = true
         }
-        processor.tp.types[type.name.hashCode()] = type
+        processor.tp.types[name.hashCode()] = type
         //
         val new = NodeType(node.info.processed, node.nodes.drop(2 + offset).toMutableList(), type)
         processor.pushTask(TYPES_PREDEFINE, node) {
-            val context = ctx.with(type)
-            processor.computeList(processor.process(node.nodes[1 + offset], context, true)!!, context)
-                .stream()
-                .map { processor.computeType(it, context) }
-                .forEach { type.parents += it }
             generics?.forEach {
                 val generic = processor.computeList(it, ctx)
-                type.generics += Pair(processor.computeString(generic[0], ctx), processor.computeType(generic[1], ctx))
+                type.genericsDefine += Pair(
+                    "${processor.computeString(generic[0], ctx)}$$name",
+                    processor.computeType(generic[1], ctx)
+                )
             }
+            //
+            processor.computeList(node.nodes[1 + offset], ctx).forEach { it ->
+                type.parents += processor.computeType(it, ctx).apply {
+                    if (this is VVTWithGenerics) {
+                        this.genericsData.forEach {
+                            val value = it.value
+                            if (value.isFirst)
+                                type.genericsDefine[it.key] = value.first()
+                            else type.genericsMap[it.key] = "${value.second()}$$name"
+                        }
+                    }
+                }
+            }
+            //
             processor.pushTask(TYPES_DEFINE, node) {
-                processNodesList(new, processor, context, valMode)
+                processNodesList(new, processor, ctx.with(type), valMode)
             }
         }
         return new

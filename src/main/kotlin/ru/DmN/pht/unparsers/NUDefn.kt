@@ -1,11 +1,10 @@
 package ru.DmN.pht.unparsers
 
 import ru.DmN.pht.ast.NodeDefn
-import ru.DmN.pht.jvm.utils.vtype.generics
+import ru.DmN.pht.jvm.utils.vtype.genericsDefine
 import ru.DmN.pht.utils.nameWithGenerics
 import ru.DmN.pht.utils.nameWithGens
 import ru.DmN.siberia.unparser.Unparser
-
 import ru.DmN.siberia.unparser.ctx.UnparsingContext
 import ru.DmN.siberia.unparsers.INodeUnparser
 import ru.DmN.siberia.unparsers.NUDefault
@@ -35,7 +34,7 @@ object NUDefn : INodeUnparser<NodeDefn> {
     fun unparseGenerics(node: NodeDefn, unparser: Unparser) {
         unparser.out.apply {
             append(" [")
-            node.method.generics.entries.stream().skip(node.method.declaringClass.generics.size.toLong())
+            node.method.generics.entries.stream().skip(node.method.declaringClass.genericsDefine.size.toLong())
                 .forEach { append('[').append(it.key).append(' ').append(it.value.nameWithGenerics).append(']') }
             append("] ")
         }

@@ -25,6 +25,8 @@ open class VarVirtualType(val type: PhtVirtualType) : PhtVirtualType() {
         get() = type.isFinal
     override val isFile: Boolean
         get() = type.isFile
-    override val generics: Map<String, VirtualType>
-        get() = type.generics
+    override val genericsDefine: Map<String, VirtualType>
+        get() = type.genericsDefine
+    override val genericsMap: Map<String, String>
+        get() = type.genericsMap
 }

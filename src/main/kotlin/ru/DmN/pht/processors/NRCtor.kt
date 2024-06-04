@@ -5,6 +5,7 @@ import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.ctx.with
+import ru.DmN.pht.utils.dropMutable
 import ru.DmN.pht.utils.node.NodeParsedTypes
 import ru.DmN.pht.utils.type
 import ru.DmN.pht.utils.vtype.PhtVirtualMethod
@@ -22,7 +23,7 @@ object NRCtor : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
         val type = ctx.clazz as PhtVirtualType.Impl
         //
-        val args = NRDefn.parseArguments(node.nodes[0], type.generics, processor, ctx)
+        val args = NRDefn.parseArguments(node.nodes[0], type.name, type.genericsDefine, processor, ctx)
         //
         val method = PhtVirtualMethod.Impl(
             type,
@@ -35,11 +36,11 @@ object NRCtor : INodeProcessor<NodeNodesList> {
             MethodModifiers(ctor = true),
             null,
             null,
-            type.generics
+            type.genericsDefine
         )
         type.methods += method
         //
-        val new = NodeDefn(node.info.withType((node.type as NodeParsedTypes).processed), node.nodes.drop(1).toMutableList(), method)
+        val new = NodeDefn(node.info.withType((node.type as NodeParsedTypes).processed), node.nodes.dropMutable(1), method)
         processor.pushTask(METHODS_BODY, node) {
             processNodesList(new, processor, ctx.with(method).with(BodyContext.of(method)), false)
         }

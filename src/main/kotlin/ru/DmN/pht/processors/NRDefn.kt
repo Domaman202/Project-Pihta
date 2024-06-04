@@ -30,19 +30,19 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         //
         val gens = processor.computeListOr(node.nodes[0], ctx)
         val offset = if (gens == null) 0 else 1
-        val generics = type.generics.toMutableMap()
+        val generics = type.genericsDefine.toMutableMap()
         gens?.forEach {
             val generic = processor.computeList(it, ctx)
             generics[processor.computeString(generic[0], ctx)] = processor.computeType(generic[1], ctx)
         }
         //
         val name = processor.computeString(node.nodes[offset], ctx)
-        val returnGen = processor.computeGenericType(node.nodes[1 + offset], ctx)
+        val returnGen = processor.computeGenericType(node.nodes[1 + offset], ctx)?.let { "$it$${type.name}" }
         val returnType =
             if (returnGen == null)
                 processor.computeType(node.nodes[1 + offset], ctx)
             else generics[returnGen]!!
-        val args = parseArguments(node.nodes[2 + offset], generics, processor, ctx)
+        val args = parseArguments(node.nodes[2 + offset], type.name, generics, processor, ctx)
         //
         val method = PhtVirtualMethod.Impl(
             type,
@@ -105,7 +105,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         }
     }
 
-    fun parseArguments(list: Node, generics: Map<String, VirtualType>, processor: Processor, ctx: ProcessingContext): Triple<MutableList<VirtualType>, MutableList<String>, MutableList<String?>> {
+    fun parseArguments(list: Node, decl: String, generics: Map<String, VirtualType>, processor: Processor, ctx: ProcessingContext): Triple<MutableList<VirtualType>, MutableList<String>, MutableList<String?>> {
         val argsc = ArrayList<VirtualType>()
         val argsn = ArrayList<String>()
         val argsg = ArrayList<String?>()
@@ -118,7 +118,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
                 if (type.endsWith('^')) {
                     val generic = type.substring(0, type.length - 1)
                     argsc += generics[generic]!!
-                    argsg += generic
+                    argsg += "$decl$$generic"
                 } else {
                     argsc += NRValue.computeType(type, processor, ctx)
                     argsg += null

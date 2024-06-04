@@ -2,7 +2,7 @@
 package ru.DmN.pht.utils
 
 import ru.DmN.pht.ast.IValueNode
-import ru.DmN.pht.jvm.utils.vtype.generics
+import ru.DmN.pht.jvm.utils.vtype.genericsDefine
 import ru.DmN.pht.jvm.utils.vtype.superclass
 import ru.DmN.pht.processor.utils.ICastable
 import ru.DmN.pht.utils.vtype.VVTWithGenerics
@@ -76,12 +76,12 @@ fun <T> sequenceOf(nullable: Collection<T>?, iterable: Iterable<T>): Sequence<T>
 
 val VirtualType.nameWithGenerics: String
     get() {
-        if (generics.isEmpty())
+        if (genericsDefine.isEmpty())
             return "^$name"
         val sb = StringBuilder()
-        generics.values.forEachIndexed { i, it ->
+        genericsDefine.values.forEachIndexed { i, it ->
             sb.append('^').append(it.name)
-            if (i != generics.size - 1) {
+            if (i != genericsDefine.size - 1) {
                 sb.append(", ")
             }
         }
@@ -96,14 +96,14 @@ val VirtualType.nameWithGens: String
 
 val VVTWithGenerics.nameWithGens: String
     get() {
-        if (generics.isEmpty())
+        if (genericsDefine.isEmpty())
             return "^$name"
         val sb = StringBuilder()
-        gens.values.forEachIndexed { i, it ->
+        genericsData.values.forEachIndexed { i, it ->
             if (it.isFirst)
                 sb.append(it.first().nameWithGens)
             else sb.append(it.second()).append('^')
-            if (i != gens.size - 1) {
+            if (i != genericsData.size - 1) {
                 sb.append(", ")
             }
         }

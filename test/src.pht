@@ -1,2 +1,11 @@
-(app-fn
-    (println (as ^!String nil)))
+(use-ctx pht
+    (cls [[T ^Object]] TestA [^Object]
+        (ctor [] (ccall))
+        (defn foo T^ [] nil))
+    (cls [[T ^Object]] TestB [^TestA<T^>]
+            (ctor [] (ccall)))
+    (cls [[T ^Object]] TestC [^TestB<T^>]
+            (ctor [] (ccall)))
+    (app-fn
+        (println (type-of (#foo<^String> (new ^TestA))))
+        (println (type-of (#foo (new ^TestA<^Class>))))))

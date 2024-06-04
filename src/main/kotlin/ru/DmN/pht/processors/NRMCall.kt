@@ -44,7 +44,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         result.method.retgen ?: return result.method.rettype.let { rt ->
             processor.calc(getInstance(result, instance, processor, ctx), ctx).let { it ->
                 if (rt is VVTWithGenerics && it is VVTWithGenerics)
-                    rt.with(it.gens.filter { it.value.isFirst }.map { Pair(it.key, it.value.first()) }.toMap())
+                    rt.with(it.genericsData.filter { it.value.isFirst }.map { Pair(it.key, it.value.first()) }.toMap())
                 else rt
             }
         }
@@ -52,10 +52,10 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             ?: getGensFromArgs(result, processor, ctx)[result.method.retgen]
             ?: processor.calc(getInstance(result, instance, processor, ctx), ctx).let {
                 if (it is VVTWithGenerics) {
-                    val gen = it.gens[result.method.retgen]!!
+                    val gen = it.genericsData[result.method.retgen]!!
                     if (gen.isFirst)
                         gen.first()
-                    else it.generics[gen.second()]!!
+                    else it.genericsDefine[gen.second()]!!
                 } else result.method.rettype
             }
     }

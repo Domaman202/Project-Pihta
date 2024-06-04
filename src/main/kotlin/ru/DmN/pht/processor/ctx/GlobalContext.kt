@@ -7,6 +7,7 @@ import ru.DmN.pht.utils.vtype.arrayType
 import ru.DmN.pht.utils.vtype.isArray
 import ru.DmN.siberia.utils.SubList
 import ru.DmN.siberia.utils.SubMap
+import ru.DmN.siberia.utils.exception.MessageException
 import ru.DmN.siberia.utils.vtype.TypesProvider
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
@@ -79,6 +80,6 @@ class GlobalContext(
         aliases[name]?.let { return tp.typeOf(it) }
         for (i in imports.indices)
             tp.typeOfOrNull("${imports[i]}.$name")?.let { return it }
-        throw ClassNotFoundException(name)
+        throw MessageException(null, "Класс '$name' не найден!")
     }
 }

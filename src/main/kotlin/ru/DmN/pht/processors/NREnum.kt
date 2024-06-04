@@ -39,7 +39,7 @@ object NREnum : INodeProcessor<NodeNodesList> {
                     .mapMutable { processor.computeType(it, ctx) }
             generics?.forEach {
                 val generic = processor.computeList(it, ctx)
-                type.generics += Pair(processor.computeString(generic[0], ctx), processor.computeType(generic[1], ctx))
+                type.genericsDefine += Pair(processor.computeString(generic[0], ctx), processor.computeType(generic[1], ctx))
             }
             processor.pushTask(TYPES_DEFINE, node) {
                 val ectx = EnumContext(type)
