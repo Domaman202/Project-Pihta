@@ -27,22 +27,27 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 object NRDefn : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
         val type = ctx.clazz as PhtVirtualType.Impl
+        val typeName = type.name
         //
         val gens = processor.computeListOr(node.nodes[0], ctx)
         val offset = if (gens == null) 0 else 1
+        val name = processor.computeString(node.nodes[offset], ctx)
+        //
         val generics = type.genericsDefine.toMutableMap()
         gens?.forEach {
             val generic = processor.computeList(it, ctx)
-            generics[processor.computeString(generic[0], ctx)] = processor.computeType(generic[1], ctx)
+            generics += Pair(
+                "${processor.computeString(generic[0], ctx)}$$typeName",
+                processor.computeType(generic[1], ctx)
+            )
         }
         //
-        val name = processor.computeString(node.nodes[offset], ctx)
-        val returnGen = processor.computeGenericType(node.nodes[1 + offset], ctx)?.let { "$it$${type.name}" }
+        val returnGen = processor.computeGenericType(node.nodes[1 + offset], ctx)?.let { "$it$$typeName" }
         val returnType =
             if (returnGen == null)
                 processor.computeType(node.nodes[1 + offset], ctx)
             else generics[returnGen]!!
-        val args = parseArguments(node.nodes[2 + offset], type.name, generics, processor, ctx)
+        val args = parseArguments(node.nodes[2 + offset], typeName, generics, processor, ctx)
         //
         val method = PhtVirtualMethod.Impl(
             type,
@@ -118,7 +123,7 @@ object NRDefn : INodeProcessor<NodeNodesList> {
                 if (type.endsWith('^')) {
                     val generic = type.substring(0, type.length - 1)
                     argsc += generics[generic]!!
-                    argsg += "$decl$$generic"
+                    argsg += "$generic$$decl"
                 } else {
                     argsc += NRValue.computeType(type, processor, ctx)
                     argsg += null

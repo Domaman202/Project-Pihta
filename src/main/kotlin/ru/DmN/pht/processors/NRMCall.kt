@@ -6,6 +6,7 @@ import ru.DmN.pht.ast.NodeInlBodyB
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.ast.NodeMCall.Type.*
 import ru.DmN.pht.jvm.utils.vtype.desc
+import ru.DmN.pht.jvm.utils.vtype.generics
 import ru.DmN.pht.jvm.utils.vtype.superclass
 import ru.DmN.pht.processor.ctx.*
 import ru.DmN.pht.processor.utils.*
@@ -41,7 +42,9 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      * @param ctx Контекст обработки.
      */
     fun calc(result: MethodFindResultA, instance: Node, processor: Processor, ctx: ProcessingContext): VirtualType {
-        result.method.retgen ?: return result.method.rettype.let { rt ->
+        val method = result.method
+        val retgen = method.retgen
+        retgen ?: return method.rettype.let { rt ->
             processor.calc(getInstance(result, instance, processor, ctx), ctx).let { it ->
                 if (rt is VVTWithGenerics && it is VVTWithGenerics)
                     rt.with(it.genericsData.filter { it.value.isFirst }.map { Pair(it.key, it.value.first()) }.toMap())
@@ -49,14 +52,16 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             }
         }
         return result.generics
-            ?: getGensFromArgs(result, processor, ctx)[result.method.retgen]
+            ?: getGensFromArgs(result, processor, ctx)[retgen]
             ?: processor.calc(getInstance(result, instance, processor, ctx), ctx).let {
                 if (it is VVTWithGenerics) {
-                    val gen = it.genericsData[result.method.retgen]!!
-                    if (gen.isFirst)
-                        gen.first()
-                    else it.genericsDefine[gen.second()]!!
-                } else result.method.rettype
+                    val res = it.genericsData[retgen]
+                    if (res == null)
+                        method.generics[retgen]!!
+                    else if (res.isFirst)
+                        res.first()
+                    else it.genericsDefine[res.second()]!!
+                } else method.rettype
             }
     }
 

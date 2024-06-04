@@ -3,9 +3,10 @@
         (ctor [] (ccall))
         (defn foo T^ [] nil))
     (cls [[T ^Object]] TestB [^TestA<T^>]
-            (ctor [] (ccall)))
+        (ctor [] (ccall)))
     (cls [[T ^Object]] TestC [^TestB<T^>]
-            (ctor [] (ccall)))
+        (ctor [] (ccall))
+        (defn [[E ^Object]] bar E^ [] nil))
     (app-fn
         (println (type-of (#foo<^String> (new ^TestA))))
-        (println (type-of (#foo (new ^TestA<^Class>))))))
+        (println (type-of (#bar (new ^TestC<^Class>))))))
