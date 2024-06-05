@@ -23,13 +23,17 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRRFn : INodeProcessor<NodeNodesList> { // todo: двусторонний calc для аргументов (вычисление расстояния до типа)
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType(if (node.nodes[0].isConstClass) processor.computeString(node.nodes[0], ctx) else "Any")
+        node.nodes[0].let {
+            if (processor.computeString(it, ctx) == ".")
+                ctx.global.getType("Any")
+            else processor.computeType(it, ctx)
+        }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeRFn? =
         if (valMode) NodeRFn(
             node.info.withType(RFN_),
             node.nodes[0].let {
-                if (it.isLiteral && processor.computeString(it, ctx) == ".")
+                if (processor.computeString(it, ctx) == ".")
                     null
                 else processor.computeType(it, ctx)
             },

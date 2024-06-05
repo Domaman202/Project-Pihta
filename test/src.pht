@@ -1,12 +1,5 @@
-(use-ctx pht
-    (cls [[T ^Object]] TestA [^Object]
-        (ctor [] (ccall))
-        (defn foo T^ [] nil))
-    (cls [[T ^Object]] TestB [^TestA<T^>]
-        (ctor [] (ccall)))
-    (cls [[T ^Object]] TestC [^TestB<T^>]
-        (ctor [] (ccall))
-        (defn [[E ^Object]] bar E^ [] nil))
-    (app-fn
-        (println (type-of (#foo<^String> (new ^TestA))))
-        (println (type-of (#bar (new ^TestC<^Class>))))))
+(progn
+    (import java [[types [java.util.function.Supplier]]])
+    (app
+        (defn foo ^String [] "Foo!")
+        (app-fn (println (type-of (rfn ^Supplier<^Object> ^App foo)))))

@@ -22,7 +22,7 @@
 |	|	|	|	|	|	|	|	|	|	(value = '[java.lang.Object')
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	(generic = VT(java.util.List))
+|	|	|	|	|	|	|	|	(generic = VTWG(java.util.List<java.lang.Object>))
 |	|	|	|	|	|	|	|	(type = EXTEND)
 |	|	|	|	|	|	|	|	[BLOCK_
 |	|	|	|	|	|	|	|	|	[DEF_

@@ -2,7 +2,7 @@
 	(progn
 		(cls [] Caller [^java.lang.Object]
 			(@static
-				(defn [] call ^java.lang.Object [[ref ^java.util.function.Supplier]]
+				(defn [] call ^java.lang.Object [[ref ^java.util.function.Supplier<^java.lang.Object>]]
 					(mcall
 						(get ref)
 						get))))
@@ -25,7 +25,7 @@
 							(mcall
 								^Caller
 								call
-								(rfn ^java.util.function.Supplier
+								(rfn ^java.util.function.Supplier<^java.lang.Object>
 									^TestA
 									foo)))))))
 		(@test
@@ -34,7 +34,7 @@
 					(defn [] test ^dynamic []
 						(as ^dynamic
 							(mcall
-								(rfn ^java.util.function.Supplier
+								(rfn ^java.util.function.Supplier<^java.lang.Object>
 									^TestA
 									foo)
 								get))))))
@@ -46,7 +46,7 @@
 							(mcall
 								^Caller
 								call
-								(rfn ^java.util.function.Supplier
+								(rfn ^java.util.function.Supplier<^java.lang.Object>
 									(new ^TestB)
 									foo)))))))
 		(@test
@@ -55,7 +55,7 @@
 					(defn [] test ^dynamic []
 						(as ^dynamic
 							(mcall
-								(rfn ^java.util.function.Supplier
+								(rfn ^java.util.function.Supplier<^java.lang.Object>
 									(new ^TestB)
 									foo)
 								get))))))))

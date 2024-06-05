@@ -10,7 +10,7 @@
 					(defn [] test ^dynamic []
 						(as ^dynamic
 							(mcall
-								(rfn ^java.util.function.Supplier
+								(rfn ^java.util.function.Supplier<^java.lang.Object>
 									^TestA
 									foo)
 								get))))))
@@ -29,7 +29,7 @@
 							[^TestB o (new ^TestB)]])
 						(as ^dynamic
 							(mcall
-								(rfn ^java.util.function.Supplier
+								(rfn ^java.util.function.Supplier<^java.lang.Object>
 									(get o)
 									foo)
 								get))))))))

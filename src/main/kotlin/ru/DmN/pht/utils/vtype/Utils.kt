@@ -1,11 +1,54 @@
 package ru.DmN.pht.utils.vtype
 
+import ru.DmN.pht.jvm.utils.vtype.genericsDefine
 import ru.DmN.siberia.utils.vtype.VirtualType
+
+inline val String.genericName
+    get() = indexOf('$').let { if (it > -1) substring(0, it) else this }
+
+val VirtualType.nameWithGenerics: String
+    get() {
+        if (genericsDefine.isEmpty())
+            return "^$name"
+        StringBuilder().run {
+            genericsDefine.values.forEachIndexed { i, it ->
+                append('^').append(it.name)
+                if (i != genericsDefine.size - 1) {
+                    append(", ")
+                }
+            }
+            return "^$name<$this>"
+        }
+    }
+
+val VirtualType.nameWithGens: String
+    get() =
+        if (this is VVTWithGenerics)
+            nameWithGens
+        else "^$name"
+
+val VVTWithGenerics.nameWithGens: String
+    get() {
+        if (genericsDefine.isEmpty())
+            return "^$name"
+        StringBuilder().run {
+            genericsData.values.forEachIndexed { i, it ->
+                if (it.isFirst)
+                    append(it.first().nameWithGens)
+                else append(it.second())
+                    .append('^')
+                if (i != genericsData.size - 1) {
+                    append(", ")
+                }
+            }
+            return "^$name<$this>"
+        }
+    }
 
 /**
  * Имя без пакета.
  */
-val VirtualType.simpleName: String
+inline val VirtualType.simpleName: String
     get() = name.substring(name.lastIndexOf('.') + 1)
 
 /**

@@ -1,10 +1,9 @@
 package ru.DmN.pht.unparsers
 
 import ru.DmN.pht.ast.NodeCatch
-import ru.DmN.pht.utils.nameWithGenerics
-import ru.DmN.pht.utils.nameWithGens
+import ru.DmN.pht.utils.vtype.nameWithGenerics
+import ru.DmN.pht.utils.vtype.nameWithGens
 import ru.DmN.siberia.unparser.Unparser
-
 import ru.DmN.siberia.unparser.ctx.UnparsingContext
 import ru.DmN.siberia.unparsers.INodeUnparser
 import ru.DmN.siberia.unparsers.NUDefault

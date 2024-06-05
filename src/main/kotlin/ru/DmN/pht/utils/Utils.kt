@@ -2,10 +2,8 @@
 package ru.DmN.pht.utils
 
 import ru.DmN.pht.ast.IValueNode
-import ru.DmN.pht.jvm.utils.vtype.genericsDefine
 import ru.DmN.pht.jvm.utils.vtype.superclass
 import ru.DmN.pht.processor.utils.ICastable
-import ru.DmN.pht.utils.vtype.VVTWithGenerics
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.utils.Variable
 import ru.DmN.siberia.utils.klassOf
@@ -73,42 +71,6 @@ fun <T> sequenceOf(nullable: Collection<T>?, iterable: Iterable<T>): Sequence<T>
     if (nullable == null)
         iterable.asSequence()
     else nullable.asSequence() + iterable.asSequence()
-
-val VirtualType.nameWithGenerics: String
-    get() {
-        if (genericsDefine.isEmpty())
-            return "^$name"
-        val sb = StringBuilder()
-        genericsDefine.values.forEachIndexed { i, it ->
-            sb.append('^').append(it.name)
-            if (i != genericsDefine.size - 1) {
-                sb.append(", ")
-            }
-        }
-        return "^$name<$sb>"
-    }
-
-val VirtualType.nameWithGens: String
-    get() =
-        if (this is VVTWithGenerics)
-            nameWithGens
-        else "^$name"
-
-val VVTWithGenerics.nameWithGens: String
-    get() {
-        if (genericsDefine.isEmpty())
-            return "^$name"
-        val sb = StringBuilder()
-        genericsData.values.forEachIndexed { i, it ->
-            if (it.isFirst)
-                sb.append(it.first().nameWithGens)
-            else sb.append(it.second()).append('^')
-            if (i != genericsData.size - 1) {
-                sb.append(", ")
-            }
-        }
-        return "^$name<$sb>"
-    }
 
 inline fun <T, R> List<T>.mapIndexedMutable(transform: (Int, T) -> R): MutableList<R> {
     val list = ArrayList<R>(size)

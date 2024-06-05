@@ -1,5 +1,6 @@
 package ru.DmN.pht.ast
 
+import ru.DmN.pht.ast.NodeValue.Type.*
 import ru.DmN.pht.utils.node.NodeTypes.VALUE
 import ru.DmN.siberia.ast.BaseNode
 import ru.DmN.siberia.utils.indent
@@ -28,7 +29,7 @@ class NodeValue(info: INodeInfo, val vtype: Type, val value: String) : BaseNode(
             .indent(indent).append(']')
     }
 
-    override fun isConstClass(): Boolean = vtype == Type.PRIMITIVE || vtype == Type.CLASS
+    override fun isConstClass(): Boolean = when (vtype) { PRIMITIVE, CLASS, CLASS_WITH_GEN -> true else -> false }
     override fun getValueAsString(): String = value
 
     enum class Type(val clazz: Boolean = false) {

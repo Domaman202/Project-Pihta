@@ -68,7 +68,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = get)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = ()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'Glory To Russia!')
@@ -161,7 +161,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = constructor)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = <init>)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(desc = (II)V)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = (Tnull;Tnull;)V)
 |	|	|	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
@@ -198,7 +198,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = get)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = ()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	[ADD_
@@ -215,7 +215,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(PhtLambda$1599379499))
+|	|	|	|	|	|	|	|	|	|	|	|	(type = VTWG(PhtLambda$1599379499<java.lang.Object>))
 |	|	|	|	|	|	|	|	|	|	|	|	(ctor = (II)V)
 |	|	|	|	|	|	|	|	|	|	|	|	[GET_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = i)
@@ -312,7 +312,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = constructor)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = <init>)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(desc = (II)V)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = (Tnull;Tnull;)V)
 |	|	|	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
@@ -349,7 +349,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = get)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = ()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	[ADD_
@@ -366,7 +366,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(PhtLambda$1599383343))
+|	|	|	|	|	|	|	|	|	|	|	|	(type = VTWG(PhtLambda$1599383343<java.lang.Object>))
 |	|	|	|	|	|	|	|	|	|	|	|	(ctor = (II)V)
 |	|	|	|	|	|	|	|	|	|	|	|	[GET_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = i)
@@ -509,7 +509,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = constructor)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = <init>)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(desc = (II)V)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = (Tnull;Tnull;)V)
 |	|	|	|	|	|	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(method = <init>()V)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
@@ -546,7 +546,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = apply)
 |	|	|	|	|	|	|	|	|	|	|	|	|	(desc = (Ljava/lang/Object;)Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(sign = (Tnull;)Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	[ADD_
@@ -570,7 +570,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(PhtLambda$1599391031))
+|	|	|	|	|	|	|	|	|	|	|	|	(type = VTWG(PhtLambda$1599391031<java.lang.Object, java.lang.Object>))
 |	|	|	|	|	|	|	|	|	|	|	|	(ctor = (II)V)
 |	|	|	|	|	|	|	|	|	|	|	|	[GET_
 |	|	|	|	|	|	|	|	|	|	|	|	|	(name = i)

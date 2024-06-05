@@ -2,7 +2,7 @@
 	(progn
 		(cls [] TestA [^java.lang.Object]
 			(@static
-				(defn [] call ^java.lang.Object [[lambda ^java.util.function.Supplier]]
+				(defn [] call ^java.lang.Object [[lambda ^java.util.function.Supplier<^java.lang.Object>]]
 					(mcall
 						(get lambda)
 						get))))
@@ -15,7 +15,7 @@
 								^TestA
 								call
 								(progn
-									(obj [] PhtLambda$1599375655 [^java.lang.Object ^java.util.function.Supplier]
+									(obj [[T ^java.lang.Object]] PhtLambda$1599375655 [^java.lang.Object ^java.util.function.Supplier]
 										(defn [] get ^java.lang.Object []
 											"Glory To Russia!")))))))))
 		(@test
@@ -30,7 +30,7 @@
 								^TestA
 								call
 								(progn
-									(cls [] PhtLambda$1599379499 [^java.lang.Object ^java.util.function.Supplier]
+									(cls [[T ^java.lang.Object]] PhtLambda$1599379499 [^java.lang.Object ^java.util.function.Supplier]
 										(def [
 											[i ^int]
 											[j ^int]])
@@ -51,7 +51,7 @@
 												(add
 													(get i)
 													(get j)))))
-									(new ^PhtLambda$1599379499
+									(new ^PhtLambda$1599379499<^java.lang.Object>
 										(get i)
 										(get j)))))))))
 		(@test
@@ -66,7 +66,7 @@
 								^TestA
 								call
 								(progn
-									(cls [] PhtLambda$1599383343 [^java.lang.Object ^java.util.function.Supplier]
+									(cls [[T ^java.lang.Object]] PhtLambda$1599383343 [^java.lang.Object ^java.util.function.Supplier]
 										(def [
 											[i ^int]
 											[j ^int]])
@@ -87,12 +87,12 @@
 												(add
 													(get i)
 													(get j)))))
-									(new ^PhtLambda$1599383343
+									(new ^PhtLambda$1599383343<^java.lang.Object>
 										(get i)
 										(get j)))))))))
 		(cls [] TestB [^java.lang.Object]
 			(@static
-				(defn [] call ^java.lang.Object [[lambda ^java.util.function.Function]]
+				(defn [] call ^java.lang.Object [[lambda ^java.util.function.Function<^java.lang.Object, ^java.lang.Object>]]
 					(mcall
 						(get lambda)
 						apply
@@ -110,7 +110,7 @@
 								^TestB
 								call
 								(progn
-									(cls [] PhtLambda$1599391031 [^java.lang.Object ^java.util.function.Function]
+									(cls [[T ^java.lang.Object][R ^java.lang.Object]] PhtLambda$1599391031 [^java.lang.Object ^java.util.function.Function]
 										(def [
 											[i ^int]
 											[j ^int]])
@@ -133,6 +133,6 @@
 													(get j)
 													(as ^int
 														(get arg0))))))
-									(new ^PhtLambda$1599391031
+									(new ^PhtLambda$1599391031<^java.lang.Object, ^java.lang.Object>
 										(get i)
 										(get j)))))))))))
