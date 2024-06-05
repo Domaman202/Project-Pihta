@@ -3,7 +3,9 @@
         (ctor [] (ccall))
         (defn foo A^ [] nil)
         (defn bar B^ [] nil))
-    (app-fn
+    (test-fn 0
         (def-set o (with-gens (new ^Test) [^String ^Class]))
-        (println (type-of (#foo o)))
-        (println (type-of (#bar o)))))
+        (type-of (#foo o)))
+    (test-fn 1
+        (def-set o (with-gens (new ^Test) [^String ^Class]))
+        (type-of (#bar o))))

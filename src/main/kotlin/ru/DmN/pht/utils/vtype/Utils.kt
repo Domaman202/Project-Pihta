@@ -35,8 +35,7 @@ val VVTWithGenerics.nameWithGens: String
             genericsData.values.forEachIndexed { i, it ->
                 if (it.isFirst)
                     append(it.first().nameWithGens)
-                else append(it.second())
-                    .append('^')
+                else append(it.second()).append('^')
                 if (i != genericsData.size - 1) {
                     append(' ')
                 }

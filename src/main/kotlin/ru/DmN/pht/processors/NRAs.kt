@@ -32,6 +32,22 @@ object NRAs : IStdNodeProcessor<NodeNodesList> {
             else checkNullable(node, from, to) { cast(node, value, from ,to) }
         } else null
 
+    fun cast(to: VirtualType, value: Node, processor: Processor, ctx: ProcessingContext): Node {
+        val np = processor.get(value, ctx)
+        val from = np.calc(value, processor, ctx)!!
+        return if(np is IAdaptableProcessor<Node> && np.adaptType.cast)
+            np.adaptToType(to, value, processor, ctx)
+        else checkNullable(value, from, to) { cast(value, value, from, to) }
+    }
+
+
+    fun castFrom(from: VirtualType, to: VirtualType, value: Node, processor: Processor, ctx: ProcessingContext): Node =
+        processor.get(value, ctx).let {
+            if (it is IAdaptableProcessor<Node> && it.adaptType.cast)
+                it.adaptToType(to, value, processor, ctx)
+            else checkNullable(value, from, to) { cast(value, value, from, to) }
+        }
+
     private inline fun checkNullable(node: Node, from: VirtualType, to: VirtualType, block: () -> Node) =
         if (from is VVTNullable)
             if (to is VVTNullable)

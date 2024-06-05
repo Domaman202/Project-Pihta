@@ -21,7 +21,6 @@ enum class NodeTypes : INodeType {
     ARR_SIZE_("arr-size", PROCESSED),                   // arr-size
     ARR_TYPE("arr-type", PARSED),                       // arr-type
     AS_("as", PROCESSED),                               // as
-    AS_GENS("as-gens", PARSED),                         // as-gens
     ASET_("aset", PROCESSED),                           // arr-set
     // b
     BGET_("bget", PROCESSED),                           // block-get

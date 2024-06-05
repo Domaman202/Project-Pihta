@@ -1,0 +1,31 @@
+(use-ctx pht pht/jvm
+	(progn
+		(cls [[B ^java.lang.Object][A ^java.lang.Object]] Test [^java.lang.Object]
+			(ctor []
+				(mcall
+					super
+					<init>))
+			(defn [] foo A^ []
+				(as ^java.lang.Object
+					nil))
+			(defn [] bar B^ []
+				(as ^java.lang.Object
+					nil)))
+		(@test
+			(cls [] Test0 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(def [
+							[^Test<^java.lang.Object ^java.lang.Object> o (as ^Test<^java.lang.Object ^java.lang.Object>
+									(new ^Test<^java.lang.Object ^java.lang.Object>))]])
+						(as ^dynamic
+							"java.lang.String")))))
+		(@test
+			(cls [] Test1 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(def [
+							[^Test<^java.lang.Object ^java.lang.Object> o (as ^Test<^java.lang.Object ^java.lang.Object>
+									(new ^Test<^java.lang.Object ^java.lang.Object>))]])
+						(as ^dynamic
+							"java.lang.Class")))))))

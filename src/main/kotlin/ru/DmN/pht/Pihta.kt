@@ -50,7 +50,6 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(ARR_SIZE)
         addSNP(ARR_TYPE)
         addSNP(AS)
-        addSNP(AS_GENS)
         addSNP(ASET)
         // b
         addSNP(BGET)
@@ -298,7 +297,6 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(ARR_TYPE)
         addSNU(AS)
         add(AS_,            NUIsAs)
-        addSNU(AS_GENS)
         addSNU(ASET)
         addSNU(ASET_)
         // b
@@ -533,7 +531,6 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(ARR_TYPE,      NRArrayType)
         add(AS,            NRAs)
         add(AS_,           NRAsB)
-        add(AS_GENS,       NRAsGens)
         add(ASET,          NRASet)
         add(ASET_,         NRASet)
         // b
@@ -764,6 +761,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
             ctx.global = GlobalContext(processor.tp)
             ctx.classes = LinkedClassesNode.LinkedClassesNodeStart as LinkedClassesNode<VirtualType>
             ctx.getType = NRValue::getType
+            ctx.cast = NRAs::cast
+            ctx.castFrom = NRAs::castFrom
             return super.load(processor, ctx, uses)
         }
         return false
