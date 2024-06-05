@@ -57,14 +57,14 @@ object NRValue : IStdNodeProcessor<NodeValue> {
         val type = getType(value.substring(0, gs), processor, ctx) as PhtVirtualType
         val generics = HashMap<String, OrPair<VirtualType, String>>()
         val iter = type.genericsAccept.iterator()
-        var s = value.substring(gs)
+        var s = value.substring(gs + 1)
         while (true) {
-            val i = s.indexOf(',')
+            val i = s.indexOf(' ')
             if (iter.hasNext())
                 generics[iter.next()] =
-                    if (s[1] == '^')
-                        OrPair.first(getType(s.substring(2, if (i == -1) s.length - 1 else i), processor, ctx))
-                    else OrPair.second(s.substring(1, if (i == -1) s.length - 2 else i - 1))
+                    if (s[0] == '^')
+                        OrPair.first(getType(s.substring(1, if (i == -1) s.length - 1 else i), processor, ctx))
+                    else OrPair.second(s.substring(0, if (i == -1) s.length - 2 else i - 1))
             if (i == -1)
                 break
             s = s.substring(i + 1)
@@ -80,13 +80,13 @@ object NRValue : IStdNodeProcessor<NodeValue> {
         val type = getType(node.value.substring(0, gs), processor, ctx) as PhtVirtualType
         val generics = HashMap<String, OrPair<VirtualType, String>>()
         val iter = type.genericsAccept.iterator()
-        var s = node.value.substring(gs)
+        var s = node.value.substring(gs + 1)
         while (true) {
-            val i = s.indexOf(',')
+            val i = s.indexOf(' ')
             generics[iter.next()] = OrPair.first(
                 if (s.startsWith('^'))
-                    getType(s.substring(2, if (i == -1) s.length - 1 else i), processor, ctx)
-                else gens[s.substring(1, if (i == -1) s.length - 2 else i - 1)]!!
+                    getType(s.substring(1, if (i == -1) s.length - 1 else i), processor, ctx)
+                else gens[s.substring(0, if (i == -1) s.length - 2 else i - 1)]!!
             )
             if (i == -1)
                 break

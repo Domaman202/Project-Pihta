@@ -14,7 +14,7 @@ val VirtualType.nameWithGenerics: String
             genericsDefine.values.forEachIndexed { i, it ->
                 append('^').append(it.name)
                 if (i != genericsDefine.size - 1) {
-                    append(", ")
+                    append(' ')
                 }
             }
             return "^$name<$this>"
@@ -38,7 +38,7 @@ val VVTWithGenerics.nameWithGens: String
                 else append(it.second())
                     .append('^')
                 if (i != genericsData.size - 1) {
-                    append(", ")
+                    append(' ')
                 }
             }
             return "^$name<$this>"

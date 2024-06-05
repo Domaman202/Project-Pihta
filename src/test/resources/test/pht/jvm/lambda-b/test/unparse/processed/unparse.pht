@@ -92,7 +92,7 @@
 										(get j)))))))))
 		(cls [] TestB [^java.lang.Object]
 			(@static
-				(defn [] call ^java.lang.Object [[lambda ^java.util.function.Function<^java.lang.Object, ^java.lang.Object>]]
+				(defn [] call ^java.lang.Object [[lambda ^java.util.function.Function<^java.lang.Object ^java.lang.Object>]]
 					(mcall
 						(get lambda)
 						apply
@@ -133,6 +133,6 @@
 													(get j)
 													(as ^int
 														(get arg0))))))
-									(new ^PhtLambda$1599391031<^java.lang.Object, ^java.lang.Object>
+									(new ^PhtLambda$1599391031<^java.lang.Object ^java.lang.Object>
 										(get i)
 										(get j)))))))))))

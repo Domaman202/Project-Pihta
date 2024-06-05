@@ -4,6 +4,6 @@
         (defn foo A^ [] nil)
         (defn bar B^ [] nil))
     (app-fn
-        (def-set o (new ^Test<^String, ^Class>))
+        (def-set o (new ^Test<^String ^Class>))
         (println (type-of (#foo o)))
         (println (type-of (#bar o)))))
