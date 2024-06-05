@@ -1,0 +1,17 @@
+(progn
+    (@open (cls [[T ^Object]] TestA [^Object]
+        (ctor [] (ccall))
+        (defn foo T^ [] nil)))
+    (test-fn 0 (type-of (#foo (new ^TestA))))
+    (test-fn 1 (type-of (#foo (new ^TestA<^String>))))
+
+    (@open (cls [[T ^Object]] TestB [^TestA<T^>]
+        (ctor [] (ccall))))
+    (@open (cls [[T ^Object]] TestC [^TestB<T^>]
+        (ctor [] (ccall))))
+    (test-fn 2 (type-of (#foo (new ^TestB<^Class>))))
+    (test-fn 3 (type-of (#foo (new ^TestC<^Class>))))
+
+    (cls TestD [^TestC<^Class>]
+        (ctor [] (ccall)))
+    (test-fn 4 (type-of (#foo (new ^TestD)))))

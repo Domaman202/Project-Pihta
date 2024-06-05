@@ -1,5 +1,9 @@
 (progn
-    (import java [[types [java.util.function.Supplier]]])
-    (app
-        (defn foo ^String [] "Foo!")
-        (app-fn (println (type-of (rfn ^Supplier<^Object> ^App foo)))))
+    (cls [[A ^Object][B ^Object]] Test [^Object]
+        (ctor [] (ccall))
+        (defn foo A^ [] nil)
+        (defn bar B^ [] nil))
+    (app-fn
+        (def-set o (new ^Test<^String, ^Class>))
+        (println (type-of (#foo o)))
+        (println (type-of (#bar o)))))

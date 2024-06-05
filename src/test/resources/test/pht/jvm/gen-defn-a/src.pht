@@ -1,0 +1,9 @@
+(progn
+    (cls TestA [^Object] (@static
+        (defn [[T ^Object]] foo T^ [] nil)))
+    (test-fn 0 (type-of (#foo ^TestA)))
+    (test-fn 1 (type-of (#foo<^String> ^TestA)))
+
+    (cls TestB [^Object] (@static
+        (defn [[T ^Object]] foo T^ [[o T^]] o)))
+    (test-fn 2 (type-of (#foo ^TestB (class-of ^TestB)))))

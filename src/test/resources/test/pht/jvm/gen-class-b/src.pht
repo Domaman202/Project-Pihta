@@ -1,0 +1,4 @@
+(progn
+    (import java [[types [java.util.ArrayList]]])
+    (test-fn 0 (type-of (#get (new ^ArrayList) 0)))
+    (test-fn 1 (type-of (#get (new ^ArrayList<^String>) 0))))

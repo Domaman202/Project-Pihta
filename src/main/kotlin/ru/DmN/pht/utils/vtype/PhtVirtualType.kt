@@ -6,12 +6,17 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 abstract class PhtVirtualType : VirtualType() {
     /**
+     * Generic's Accept
+     */
+    abstract val genericsAccept: List<String>
+
+    /**
      * Generic's (Name / Type).
      */
     abstract val genericsDefine: Map<String, VirtualType>
 
     /**
-     * Mapping of generic's to parents (This / Parent)
+     * Generic's Mapping to parents (This / Parent)
      */
     abstract val genericsMap: Map<String, String>
 
@@ -29,8 +34,9 @@ abstract class PhtVirtualType : VirtualType() {
         override var isFinal: Boolean = false,
         override var isFile: Boolean = false,
         //
+        override var genericsAccept: MutableList<String> = ArrayList(),
         override var genericsDefine: MutableMap<String, VirtualType> = HashMap(),
-        override val genericsMap: MutableMap<String, String> = HashMap()
+        override var genericsMap: MutableMap<String, String> = HashMap()
     ) : PhtVirtualType()
 
     class Decorator(val type: VirtualType) : PhtVirtualType() {
@@ -54,6 +60,8 @@ abstract class PhtVirtualType : VirtualType() {
             get() = type.isFinal
         override val isFile: Boolean
             get() = type.isFile
+        override val genericsAccept: List<String>
+            get() = emptyList()
         override val genericsDefine: Map<String, VirtualType>
             get() = emptyMap()
         override val genericsMap: Map<String, String>

@@ -60,13 +60,19 @@ val VirtualType.signature: String?
         }
 
 /**
+ * Generic's Accept
+ */
+val VirtualType.genericsAccept: List<String>
+    get() = if (this is PhtVirtualType) genericsAccept else emptyList()
+
+/**
  * Generic's (Name / Type)
  */
 val VirtualType.genericsDefine: Map<String, VirtualType>
     get() = if (this is PhtVirtualType) genericsDefine else emptyMap()
 
 /**
- * Mapping of generic's to parents (This / Parent)
+ * Generic's Mapping to parents (This / Parent)
  */
 val VirtualType.genericsMap: Map<String, String>
     get() = if (this is PhtVirtualType) genericsMap else emptyMap()

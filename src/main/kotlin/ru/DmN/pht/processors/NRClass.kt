@@ -46,11 +46,10 @@ object NRClass : INodeProcessor<NodeNodesList> {
         val new = NodeType(node.info.processed, node.nodes.drop(2 + offset).toMutableList(), type)
         processor.pushTask(TYPES_PREDEFINE, node) {
             generics?.forEach {
-                val generic = processor.computeList(it, ctx)
-                type.genericsDefine += Pair(
-                    "${processor.computeString(generic[0], ctx)}$$name",
-                    processor.computeType(generic[1], ctx)
-                )
+                val pair = processor.computeList(it, ctx)
+                val genericName = "${processor.computeString(pair[0], ctx)}$$name"
+                type.genericsAccept += genericName
+                type.genericsDefine[genericName] = processor.computeType(pair[1], ctx)
             }
             //
             processor.computeList(node.nodes[1 + offset], ctx).forEach { it ->

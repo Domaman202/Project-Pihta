@@ -121,9 +121,9 @@ object NRDefn : INodeProcessor<NodeNodesList> {
                 argsn += it.first()
                 val type = it.last()
                 if (type.endsWith('^')) {
-                    val generic = type.substring(0, type.length - 1)
+                    val generic = "${type.substring(0, type.length - 1)}$$decl"
                     argsc += generics[generic]!!
-                    argsg += "$generic$$decl"
+                    argsg += generic
                 } else {
                     argsc += NRValue.computeType(type, processor, ctx)
                     argsg += null

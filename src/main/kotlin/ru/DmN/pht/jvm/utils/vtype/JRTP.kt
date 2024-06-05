@@ -40,7 +40,9 @@ class JRTP : TypesProvider() {
             //
             klass.typeParameters.forEach {
                 val bound = it.bounds.lastOrNull()
-                genericsDefine["${it.name}$$name"] = typeOf(if (bound is Klass) bound else Any::class.java)
+                val generic = "${it.name}$$name"
+                genericsAccept += generic
+                genericsDefine[generic] = typeOf(if (bound is Klass) bound else Any::class.java)
             }
             klass.genericSuperclass.let {
                 if (it is ParameterizedTypeImpl) {

@@ -54,23 +54,22 @@ object NRValue : IStdNodeProcessor<NodeValue> {
         if (gs == -1)
             return ctx.getType(value, processor, ctx)
         val getType = ctx.getType
-        val name = value.substring(0, gs)
-        val type = getType(name, processor, ctx) as PhtVirtualType
-        val pair = computeGenerics(type)
-        val iter = pair.first.iterator()
+        val type = getType(value.substring(0, gs), processor, ctx) as PhtVirtualType
         val generics = HashMap<String, OrPair<VirtualType, String>>()
+        val iter = type.genericsAccept.iterator()
         var s = value.substring(gs)
         while (true) {
             val i = s.indexOf(',')
-            generics[iter.next()] =
-                if (s[1] == '^')
-                    OrPair.first(getType(s.substring(2, if (i == -1) s.length - 1 else i), processor, ctx))
-                else OrPair.second(s.substring(1, if (i == -1) s.length - 2 else i - 1))
+            if (iter.hasNext())
+                generics[iter.next()] =
+                    if (s[1] == '^')
+                        OrPair.first(getType(s.substring(2, if (i == -1) s.length - 1 else i), processor, ctx))
+                    else OrPair.second(s.substring(1, if (i == -1) s.length - 2 else i - 1))
             if (i == -1)
                 break
             s = s.substring(i + 1)
         }
-        return VVTWithGenerics(type, generics, pair.second)
+        return newVVT(type, generics)
     }
 
     override fun computeTypeWithGens(gens: Map<String, VirtualType>, node: NodeValue, processor: Processor, ctx: ProcessingContext): VirtualType {
@@ -78,11 +77,9 @@ object NRValue : IStdNodeProcessor<NodeValue> {
         if (gs == -1)
             return ctx.getType(node.value, processor, ctx)
         val getType = ctx.getType
-        val name = node.value.substring(0, gs)
-        val type = getType(name, processor, ctx) as PhtVirtualType
-        val pair = computeGenerics(type)
-        val iter = pair.first.iterator()
+        val type = getType(node.value.substring(0, gs), processor, ctx) as PhtVirtualType
         val generics = HashMap<String, OrPair<VirtualType, String>>()
+        val iter = type.genericsAccept.iterator()
         var s = node.value.substring(gs)
         while (true) {
             val i = s.indexOf(',')
@@ -95,25 +92,17 @@ object NRValue : IStdNodeProcessor<NodeValue> {
                 break
             s = s.substring(i + 1)
         }
-        return VVTWithGenerics(type, generics, pair.second)
+        return newVVT(type, generics)
     }
 
-    private fun VVTWithGenerics(type: PhtVirtualType, generics: MutableMap<String, OrPair<VirtualType, String>>, parent: List<String>): VVTWithGenerics {
+    private fun newVVT(type: PhtVirtualType, generics: MutableMap<String, OrPair<VirtualType, String>>): VVTWithGenerics {
         type.genericsMap.forEach { generics[it.key] = generics[it.value]!! }
-        parent.forEach { gen -> type.genericsDefine[gen]?.let { generics[gen] = OrPair.first(it) } }
-        return VVTWithGenerics(type, generics)
-    }
-
-    private fun computeGenerics(type: VirtualType): Pair<List<String>, List<String>> {
-        val last = ArrayList<String>()
-        val parent = ArrayList<String>()
         val name = type.name
-        type.genericsDefine.keys.forEach {
-            if (it.substring(it.indexOf('$') + 1) == name)
-                last += it
-            else parent += it
-        }
-        return Pair(last, parent)
+        type.genericsDefine.keys
+            .stream()
+            .filter { it.substring(it.indexOf('$') + 1) != name }
+            .forEach { gen -> type.genericsDefine[gen]?.let { generics[gen] = OrPair.first(it) } }
+        return VVTWithGenerics(type, generics)
     }
 
     override fun computeGenericType(node: NodeValue, processor: Processor, ctx: ProcessingContext): String? =
