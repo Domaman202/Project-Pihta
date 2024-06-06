@@ -11,7 +11,7 @@ import ru.DmN.pht.utils.node.NodeTypes.EFN_
 import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_A
 import ru.DmN.pht.utils.vtype.PhtVirtualMethod
 import ru.DmN.pht.utils.vtype.PhtVirtualType
-import ru.DmN.siberia.ast.NodeNodesList
+import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.METHODS_BODY
@@ -20,8 +20,8 @@ import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.exception.pushTask
 import ru.DmN.siberia.utils.vtype.MethodModifiers
 
-object NREFn : INodeProcessor<NodeNodesList> {
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
+object NREFn : INodeProcessor<INodesList> {
+    override fun process(node: INodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
         val type = ctx.clazz as PhtVirtualType.Impl
         //
         val gens = processor.computeListOr(node.nodes[0], ctx)

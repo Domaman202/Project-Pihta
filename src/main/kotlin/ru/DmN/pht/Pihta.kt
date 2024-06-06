@@ -11,7 +11,7 @@ import ru.DmN.pht.unparsers.*
 import ru.DmN.pht.utils.Platforms.CPP
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.addNP
-import ru.DmN.pht.utils.addSANP
+import ru.DmN.pht.utils.addSMNP
 import ru.DmN.pht.utils.addSNP
 import ru.DmN.pht.utils.addSNU
 import ru.DmN.pht.utils.meta.MetadataKeys
@@ -74,12 +74,12 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(DEF)
         addSNP(DEF_SET)
         addNP("def-macro",    NPDefMacro)
-        addSNP(DEFN)
+        addSMNP(DEFN)
         addSNP(DIV)
         // e
         addSNP(ECTOR)
         addSNP(EFLD)
-        addSNP(EFN)
+        addSMNP(EFN)
         addSNP(ENUM)
         addSNP(EQ)
         // f
@@ -174,14 +174,14 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(YIELD)
 
         // @
-        addSANP(ANN_ABSTRACT)
-        addSANP(ANN_FILE)
-        addSANP(ANN_FINAL)
-        addSANP(ANN_INLINE)
-        addSANP(ANN_OPEN)
-        addSANP(ANN_STATIC)
-        addSANP(ANN_TEST)
-        addSANP(ANN_VARARGS)
+        addSMNP(ANN_ABSTRACT)
+        addSMNP(ANN_FILE)
+        addSMNP(ANN_FINAL)
+        addSMNP(ANN_INLINE)
+        addSMNP(ANN_OPEN)
+        addSMNP(ANN_STATIC)
+        addSMNP(ANN_TEST)
+        addSMNP(ANN_VARARGS)
 
         // @@
         addNP("@@if-platform", NPIfPlatform)

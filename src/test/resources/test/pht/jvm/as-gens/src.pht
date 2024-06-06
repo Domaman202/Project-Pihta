@@ -1,0 +1,12 @@
+(progn
+    (cls [[A ^Object][B ^Object]] Test [^Object]
+        (ctor [] (ccall))
+        (defn foo A^ [] nil)
+        (defn bar B^ [] nil)
+        (@static (defn make ^Object [] (new ^Test))))
+    (test-fn 0
+        (def-set o (as-gens ^Test (#make ^Test) [^Class ^String]))
+        (type-of (#foo o)))
+    (test-fn 1
+        (def-set o (as-gens ^Test (#make ^Test) [^Class ^String]))
+        (type-of (#bar o))))

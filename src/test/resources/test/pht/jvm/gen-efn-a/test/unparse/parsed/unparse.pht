@@ -1,0 +1,26 @@
+(use-ctx pht pht/jvm
+	(progn
+		(cls
+			TestA
+			[
+				^Object
+			]
+			(@static
+				(efn
+					[
+						[
+							T
+							^Object
+						]
+					]
+					^String
+					foo
+					T^
+					[]
+					nil)))
+		(test-fn
+			0
+			(type-of
+				(mcall
+					"Foo!"
+					foo<^Class>)))))

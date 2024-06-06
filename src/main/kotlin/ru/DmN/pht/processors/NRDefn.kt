@@ -8,11 +8,13 @@ import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.ctx.with
 import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.utils.dropMutable
+import ru.DmN.pht.utils.meta.MetadataKeys
 import ru.DmN.pht.utils.node.NodeTypes.DEFN_
 import ru.DmN.pht.utils.node.NodeTypes.INL_BODY_A
 import ru.DmN.pht.utils.node.nodeAs
 import ru.DmN.pht.utils.vtype.PhtVirtualMethod
 import ru.DmN.pht.utils.vtype.PhtVirtualType
+import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
@@ -24,8 +26,8 @@ import ru.DmN.siberia.utils.vtype.MethodModifiers
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object NRDefn : INodeProcessor<NodeNodesList> {
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
+object NRDefn : INodeProcessor<INodesList> {
+    override fun process(node: INodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
         val type = ctx.clazz as PhtVirtualType.Impl
         val typeName = type.name
         //
@@ -33,7 +35,10 @@ object NRDefn : INodeProcessor<NodeNodesList> {
         val offset = if (gens == null) 0 else 1
         val name = processor.computeString(node.nodes[offset], ctx)
         //
-        val generics = type.genericsDefine.toMutableMap()
+        val generics =
+            if (node.getMetadata(MetadataKeys.STATIC) != true)
+                type.genericsDefine.toMutableMap()
+            else HashMap()
         gens?.forEach {
             val generic = processor.computeList(it, ctx)
             generics += Pair(

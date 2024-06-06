@@ -1,9 +1,1 @@
-(progn
-    (cls [[A ^Object][B ^Object]] Test [^Object]
-        (ctor [] (ccall))
-        (defn foo A^ [] nil)
-        (defn bar B^ [] nil))
-    (app-fn
-        (def-set o (with-gens (new ^Test) [^String ^Class]))
-        (println (type-of (#foo o)))
-        (println (type-of (#bar o)))))
+(app-fn)

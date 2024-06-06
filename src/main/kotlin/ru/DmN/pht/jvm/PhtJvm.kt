@@ -14,7 +14,7 @@ import ru.DmN.pht.jvm.utils.node.NodeTypes.*
 import ru.DmN.pht.parsers.NPNodeAlias
 import ru.DmN.pht.processors.NRSA
 import ru.DmN.pht.utils.Platforms.JVM
-import ru.DmN.pht.utils.addSANP
+import ru.DmN.pht.utils.addSMNP
 import ru.DmN.pht.utils.addSNP
 import ru.DmN.pht.utils.addSNU
 import ru.DmN.pht.utils.node.NodeTypes.*
@@ -35,9 +35,9 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         addSNP(SYMBOL_CLS)
 
         // @
-        addSANP(ANN_ANN)
-        addSANP(ANN_LIST)
-        addSANP(ANN_SYNC)
+        addSMNP(ANN_ANN)
+        addSMNP(ANN_LIST)
+        addSMNP(ANN_SYNC)
 
         // Длинные аналоги
 

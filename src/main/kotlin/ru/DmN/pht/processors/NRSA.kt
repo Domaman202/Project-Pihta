@@ -7,7 +7,6 @@ import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.mapMutable
 
 /***
  * Simple Annotation
@@ -15,7 +14,7 @@ import ru.DmN.siberia.utils.mapMutable
 class NRSA(val annotation: (node: Node, processor: Processor, ctx: ProcessingContext) -> Unit) : INodeProcessor<NodeMetaNodesList> {
     override fun process(node: NodeMetaNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeMetaNodesList {
         node.nodes.forEach { annotation(it, processor, ctx) }
-        val new = NodeMetaNodesList(node.info.processed, node.nodes.mapMutable { it.copy() })
+        val new = NodeMetaNodesList(node.info.processed, node.copyNodes())
         processNodesList(new,  processor, ctx, valMode)
         new.nodes.forEach { annotation(it, processor, ctx) }
         return new

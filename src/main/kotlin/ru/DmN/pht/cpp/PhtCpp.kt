@@ -12,7 +12,7 @@ import ru.DmN.pht.cpp.utils.vtype.VTString
 import ru.DmN.pht.processor.ctx.getType
 import ru.DmN.pht.processors.NRSA
 import ru.DmN.pht.utils.Platforms.CPP
-import ru.DmN.pht.utils.addSANP
+import ru.DmN.pht.utils.addSMNP
 import ru.DmN.pht.utils.addSNU
 import ru.DmN.pht.utils.meta.MetadataKeys
 import ru.DmN.pht.utils.node.NodeTypes.*
@@ -31,7 +31,7 @@ import java.io.FileOutputStream
 object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
     private fun initParsers() {
         // @
-        addSANP(ANN_NATIVE)
+        addSMNP(ANN_NATIVE)
     }
 
     private fun initUnparsers() {
