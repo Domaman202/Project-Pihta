@@ -8,9 +8,16 @@ import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-class NodeRFn(info: INodeInfo, var type: VirtualType?, var lambda: VirtualMethod?, var instance: Node?, val name: String, var method: VirtualMethod?) : BaseNode(info) {
-    override fun copy(): NodeRFn =
-        NodeRFn(info, type, lambda, instance, name, method)
+class NodeRFn(
+    info: INodeInfo,
+    var type: VirtualType?,
+    var lambda: VirtualMethod?,
+    var instance: Node?,
+    val name: String,
+    var method: VirtualMethod?
+) : BaseNode(info) {
+//    override fun copy(): NodeRFn =
+//        NodeRFn(info, type, lambda, instance, name, method) // todo: А зачем?
 
     override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
         indent(indent).append('(').append(info.type).append('\n')

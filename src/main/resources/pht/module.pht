@@ -3,6 +3,6 @@
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["siberia"])
-    (uses ["siberia"])
+    (uses ["siberia" "pht"])
     (src  ["src.pht"])
     (class "ru.DmN.pht.Pihta"))

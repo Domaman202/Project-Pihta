@@ -6,7 +6,11 @@ import ru.DmN.siberia.ast.BaseNode
 import ru.DmN.siberia.utils.indent
 import ru.DmN.siberia.utils.node.INodeInfo
 
-class NodeValue(info: INodeInfo, val vtype: Type, val value: String) : BaseNode(info), IValueNode {
+class NodeValue(
+    info: INodeInfo,
+    val vtype: Type,
+    val value: String
+) : BaseNode(info), IValueNode {
     fun getBoolean() =
         value.toBoolean()
     fun getChar() =

@@ -5,7 +5,11 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-open class NodeInlBodyA(info: INodeInfo, nodes: MutableList<Node>, var type: VirtualType?) : NodeNodesList(info, nodes) {
+open class NodeInlBodyA(
+    info: INodeInfo,
+    nodes: MutableList<Node>,
+    var type: VirtualType?
+) : NodeNodesList(info, nodes) {
     override fun copy(): NodeInlBodyA =
         NodeInlBodyA(info, copyNodes(), type)
 }

@@ -10,7 +10,11 @@ import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualField.VirtualFieldImpl
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-class NodeDef(info: INodeInfo, val variables: List<VariableOrField>, val isVariable: Boolean) : BaseNode(info), IStaticallyNode, IFinallyNode, IOpenlyNode {
+class NodeDef(
+    info: INodeInfo,
+    val variables: List<VariableOrField>,
+    val isVariable: Boolean
+) : BaseNode(info), IStaticallyNode, IFinallyNode, IOpenlyNode {
     override var static: Boolean = false
         set(value) {
             field = value

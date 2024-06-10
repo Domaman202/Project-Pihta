@@ -26,56 +26,6 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	)
-|	|	|	(EXPORTS:
-|	|	|	|	[PROGN_]
-|	|	|	|	[PROGN_
-|	|	|	|	|	[ANN_TEST_
-|	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	|	(name = Test3)
-|	|	|	|	|	|	|	(parents = [dmn.pht.object])
-|	|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	|	(name = test)
-|	|	|	|	|	|	|	|	|	(desc = ()V)
-|	|	|	|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	|	|	|	[PRINTLN_
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'test/siberia/cpp/export')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[ANN_TEST_
-|	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	|	(name = Test4)
-|	|	|	|	|	|	|	(parents = [dmn.pht.object])
-|	|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	|	(name = test)
-|	|	|	|	|	|	|	|	|	(desc = ()V)
-|	|	|	|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	|	|	|	[PRINTLN_
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'test/siberia/cpp/export')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	)
 |	|	]
-|	)
-|	(EXPORTS:
-|	|	[PROGN_]
 |	)
 ]

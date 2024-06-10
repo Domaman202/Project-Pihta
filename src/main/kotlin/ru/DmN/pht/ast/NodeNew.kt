@@ -8,7 +8,12 @@ import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-class NodeNew(info: INodeInfo, nodes: MutableList<Node>, val type: VirtualType, val ctor: VirtualMethod) : NodeNodesList(info, nodes) {
+class NodeNew(
+    info: INodeInfo,
+    nodes: MutableList<Node>,
+    val type: VirtualType,
+    val ctor: VirtualMethod
+) : NodeNodesList(info, nodes) {
     override fun copy(): NodeNew =
         NodeNew(info, copyNodes(), type, ctor)
 

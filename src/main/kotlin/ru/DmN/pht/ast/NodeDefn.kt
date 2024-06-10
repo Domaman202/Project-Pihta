@@ -10,8 +10,11 @@ import ru.DmN.siberia.utils.indent
 import ru.DmN.siberia.utils.meta.IMetadataKey
 import ru.DmN.siberia.utils.node.INodeInfo
 
-class NodeDefn(info: INodeInfo, nodes: MutableList<Node>, val method: PhtVirtualMethod.Impl) : NodeNodesList(info, nodes),
-    IAbstractlyNode, IFileNode, IInlinableNode, IOpenlyNode, IStaticallyNode, ISyncNode, IVarargNode {
+class NodeDefn(
+    info: INodeInfo,
+    nodes: MutableList<Node>,
+    val method: PhtVirtualMethod.Impl
+) : NodeNodesList(info, nodes), IAbstractlyNode, IFileNode, IInlinableNode, IOpenlyNode, IStaticallyNode, ISyncNode, IVarargNode {
     override var abstract: Boolean
         set(value) { method.modifiers.abstract = value }
         get() = method.modifiers.abstract
@@ -65,7 +68,15 @@ class NodeDefn(info: INodeInfo, nodes: MutableList<Node>, val method: PhtVirtual
         }
 
     override fun copy(): NodeDefn =
-        NodeDefn(info, copyNodes(), method).apply { static = this@NodeDefn.static }
+        NodeDefn(info, copyNodes(), method).apply {
+            this.abstract = this@NodeDefn.abstract
+            this.file     = this@NodeDefn.file
+            this.inline   = this@NodeDefn.inline
+            this.open     = this@NodeDefn.open
+            this.static   = this@NodeDefn.static
+            this.sync     = this@NodeDefn.sync
+            this.varargs  = this@NodeDefn.varargs
+        }
 
     override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type).append('\n')

@@ -5,7 +5,11 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.utils.indent
 import ru.DmN.siberia.utils.node.INodeInfo
 
-class NodeSet(info: INodeInfo, nodes: MutableList<Node>, val name: String) : NodeNodesList(info, nodes) {
+class NodeSet(
+    info: INodeInfo,
+    nodes: MutableList<Node>,
+    val name: String
+) : NodeNodesList(info, nodes) {
     override fun copy(): NodeSet =
         NodeSet(info, copyNodes(), name)
 

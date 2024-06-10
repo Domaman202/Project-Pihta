@@ -159,6 +159,4 @@
         (def-macro null-check [o]
             (if (= (macro-arg o) nil)
                 (throw (new ^NullPointerException))
-                (as (not-null-type (type-of (macro-arg o))) (as (clr-null-type (type-of (macro-arg o))) (macro-arg o)))))
-        (def-macro as-gens [type value generics]
-            (with-gens (as (macro-arg type) (macro-arg value)) (macro-arg generics)))))
+                (as (not-null-type (type-of (macro-arg o))) (as (clr-null-type (type-of (macro-arg o))) (macro-arg o)))))))

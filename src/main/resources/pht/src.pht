@@ -1,1 +1,4 @@
-(progn)
+(progn
+    (comment "Определение макро-инструкций")
+    (def-macro as-gens [type value generics]
+        (with-gens (as (macro-arg type) (macro-arg value)) (macro-arg generics))))

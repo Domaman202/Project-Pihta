@@ -8,8 +8,12 @@ import ru.DmN.siberia.utils.meta.IMetadataKey
 import ru.DmN.siberia.utils.meta.MetadataContainer
 import ru.DmN.siberia.utils.node.INodeInfo
 
-class NodeType(info: INodeInfo, metadata: Lazy<MetadataContainer>, nodes: MutableList<Node>, val type: PhtVirtualType.Impl)
-    : NodeMetaNodesList(info, metadata, nodes), IAbstractlyNode, IFileNode, IOpenlyNode, ITestableNode {
+class NodeType(
+    info: INodeInfo,
+    metadata: Lazy<MetadataContainer>,
+    nodes: MutableList<Node>,
+    val type: PhtVirtualType.Impl
+) : NodeMetaNodesList(info, metadata, nodes), IAbstractlyNode, IFileNode, IOpenlyNode, ITestableNode {
     constructor(info: INodeInfo, type: PhtVirtualType.Impl) : this(info, lazy { MetadataContainer() }, mutableListOf(), type)
     constructor(info: INodeInfo, nodes: MutableList<Node>, type: PhtVirtualType.Impl) : this(info, lazy { MetadataContainer() }, nodes, type)
 

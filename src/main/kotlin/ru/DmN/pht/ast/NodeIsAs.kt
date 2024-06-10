@@ -6,7 +6,12 @@ import ru.DmN.siberia.utils.indent
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-class NodeIsAs(info: INodeInfo, nodes: MutableList<Node>, val from: VirtualType, val type: VirtualType) : NodeNodesList(info, nodes) {
+class NodeIsAs(
+    info: INodeInfo,
+    nodes: MutableList<Node>,
+    val from: VirtualType,
+    val type: VirtualType
+) : NodeNodesList(info, nodes) {
     override fun copy(): NodeIsAs =
         NodeIsAs(info, copyNodes(), from, type)
 

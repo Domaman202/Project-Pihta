@@ -1,1 +1,1 @@
-(app-fn)
+(app-fn (println (list-of "12" "21" "33")))

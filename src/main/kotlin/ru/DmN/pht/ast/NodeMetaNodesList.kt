@@ -9,7 +9,11 @@ import ru.DmN.siberia.utils.meta.IMetadataKey
 import ru.DmN.siberia.utils.meta.MetadataContainer
 import ru.DmN.siberia.utils.node.INodeInfo
 
-open class NodeMetaNodesList(info: INodeInfo, metadata: Lazy<MetadataContainer>, override val nodes: MutableList<Node>) : BaseMetaNode(info, metadata), INodesList {
+open class NodeMetaNodesList(
+    info: INodeInfo,
+    metadata: Lazy<MetadataContainer>,
+    override val nodes: MutableList<Node>
+) : BaseMetaNode(info, metadata), INodesList {
     constructor(info: INodeInfo) : this(info, lazy { MetadataContainer() }, mutableListOf())
     constructor(info: INodeInfo, nodes: MutableList<Node>) : this(info, lazy { MetadataContainer() }, nodes)
 

@@ -6,7 +6,10 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.utils.indent
 import ru.DmN.siberia.utils.node.INodeInfo
 
-class NodeEField(info: INodeInfo, val fields: List<Pair<String, List<Node>>>) : BaseNode(info) {
+class NodeEField(
+    info: INodeInfo,
+    val fields: List<Pair<String, List<Node>>>
+) : BaseNode(info) {
     override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
         indent(indent).append('[').append(text)
         if (fields.isNotEmpty()) {

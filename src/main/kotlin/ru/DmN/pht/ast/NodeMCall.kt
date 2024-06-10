@@ -14,13 +14,12 @@ class NodeMCall(
     val generic: VirtualType?,
     val instance: Node,
     val method: VirtualMethod,
-    val type: Type
-) : NodeNodesList(info, nodes) {
+    val type: Type,
     var inline: Node? = null
+) : NodeNodesList(info, nodes) {
 
     override fun copy(): NodeMCall =
-//        this
-        NodeMCall(info, copyNodes(), generic, instance, method, type).apply { this.inline = this@NodeMCall.inline }
+        NodeMCall(info, copyNodes(), generic, instance, method, type, inline)
 
     override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type).append('\n')
