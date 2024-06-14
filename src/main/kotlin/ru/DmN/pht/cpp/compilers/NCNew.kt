@@ -13,8 +13,8 @@ object NCNew : ICppCompiler<NodeNew> {
     override fun StringBuilder.compileVal(node: NodeNew, compiler: Compiler, ctx: CompilationContext): Variable {
         node.type.run {
             if (isAutoPointer)
-                append("gc.alloc_ptr<").append(componentType!!.normalizedName()).append('>')
-            else append(normalizedName())
+                append("gc.alloc_ptr<").append(componentType!!.normalizedName).append('>')
+            else append(normalizedName)
             compileArgs(node, compiler, ctx)
             return Variable.tmp(node, this)
         }

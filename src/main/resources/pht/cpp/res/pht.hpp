@@ -1,10 +1,12 @@
 #ifndef __PHT_HPP__
 #define __PHT_HPP__
 
+#include <type_traits>
 #include <functional>
 #include <iostream>
 #include <concepts>
 #include <cstdint>
+#include <utility>
 #include <vector>
 
 #ifdef PHT_GC_DUMP
@@ -93,6 +95,12 @@ namespace dmn::pht {
             this->ref = ptr.get();
             return *this;
         }
+
+        /// Преобразование.
+        template<class R, typename std::enable_if<std::is_base_of<object, R>::value>::type* = nullptr>
+        auto_ptr<R>& cast() {
+            return *(auto_ptr<R>*) this;
+        }
     };
 
     class gc {
@@ -167,35 +175,51 @@ namespace dmn::pht {
         explicit primitive(T value) : value(value) { }
 
         virtual bool toBool() const {
-            return value;
+            if constexpr (std::is_same<T, std::string>::value)
+                return value == "true";
+            else return (bool) value;
         }
 
         virtual int8_t toByte() const {
-            return value;
+            if constexpr (std::is_same<T, std::string>::value)
+                return std::stoi(value);
+            else return (int8_t) value;
         }
 
         virtual int16_t toShort() const {
-            return value;
+            if constexpr (std::is_same<T, std::string>::value)
+                return std::stoi(value);
+            else return (int16_t) value;
         }
 
         virtual char16_t toChar() const {
-            return value;
+            if constexpr (std::is_same<T, std::string>::value)
+                return std::stoi(value);
+            else return (char16_t) value;
         }
 
         virtual int32_t toInt() const {
-            return value;
+            if constexpr (std::is_same<T, std::string>::value)
+                return std::stoi(value);
+            else return (int32_t) value;
         }
 
         virtual int64_t toLong() const {
-            return value;
+            if constexpr (std::is_same<T, std::string>::value)
+                return std::stol(value);
+            else return (int64_t) value;
         }
 
         virtual float toFloat() const {
-            return value;
+            if constexpr (std::is_same<T, std::string>::value)
+                return std::stof(value);
+            else return (float) value;
         }
 
         virtual double toDouble() const {
-            return value;
+            if constexpr (std::is_same<T, std::string>::value)
+                return std::stod(value);
+            else return (double) value;
         }
 
         virtual T toPrimitive() const {
@@ -203,13 +227,26 @@ namespace dmn::pht {
         }
 
         std::string toString() override {
-            return std::to_string(value);
+            if constexpr(std::is_same<T, std::string>::value)
+                return value;
+            else return std::to_string(value);
+        }
+    };
+
+    class string : public object {
+    private:
+        std::string value;
+    public:
+        explicit string(std::string value) : value(std::move(value)) { }
+
+        std::string toString() override {
+            return value;
         }
     };
 
     class utils {
     public:
-        static std::string toString(object obj) {
+        static std::string toString(object& obj) {
             return obj.toString();
         }
 
@@ -219,7 +256,8 @@ namespace dmn::pht {
             return "nullptr";
         }
 
-        static std::string toString(auto_ptr<object> ptr) {
+        template<typename T>
+        static std::string toString(const auto_ptr<T>& ptr) {
             if (ptr.get())
                 return ptr->toString();
             return "nullptr";

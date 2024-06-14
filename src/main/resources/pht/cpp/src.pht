@@ -1,4 +1,4 @@
 (export
     (alias-type [
-        [std.string      String]
-        [dmn.pht.object  Object]]))
+        [dmn.pht.object  Object]
+        [dmn.pht.string  String]]))

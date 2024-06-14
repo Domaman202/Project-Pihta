@@ -7,7 +7,9 @@ import ru.DmN.pht.cpp.compilers.*
 import ru.DmN.pht.cpp.processors.NRValue
 import ru.DmN.pht.cpp.utils.node.NodeParsedTypes.ANN_NATIVE
 import ru.DmN.pht.cpp.utils.node.NodeTypes.ANN_NATIVE_
-import ru.DmN.pht.cpp.utils.vtype.VTClass
+import ru.DmN.pht.cpp.utils.vtype.VTNativeClass
+import ru.DmN.pht.cpp.utils.vtype.VTNativeString
+import ru.DmN.pht.cpp.utils.vtype.VTObject
 import ru.DmN.pht.cpp.utils.vtype.VTString
 import ru.DmN.pht.processor.ctx.getType
 import ru.DmN.pht.processors.NRSA
@@ -16,15 +18,12 @@ import ru.DmN.pht.utils.addSMNP
 import ru.DmN.pht.utils.addSNU
 import ru.DmN.pht.utils.meta.MetadataKeys
 import ru.DmN.pht.utils.node.NodeTypes.*
-import ru.DmN.pht.utils.vtype.PhtVirtualMethod
-import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.ModuleCompilers
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.utils.vtype.MethodModifiers
 import ru.DmN.siberia.utils.vtype.VirtualType
 import java.io.FileOutputStream
 
@@ -112,66 +111,10 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
 
     override fun load(processor: Processor, ctx: ProcessingContext, uses: MutableList<String>): Boolean {
         if (!ctx.loadedModules.contains(this)) {
+            processor.tp += VTNativeClass
+            processor.tp += VTNativeString
+            processor.tp += VTObject
             processor.tp += VTString
-            val tObject = PhtVirtualType.Impl("dmn.pht.object").apply {
-                methods += PhtVirtualMethod.Impl(
-                    this,
-                    "<init>",
-                    VirtualType.VOID,
-                    null,
-                    emptyList(),
-                    emptyList(),
-                    emptyList(),
-                    MethodModifiers(),
-                    null,
-                    null,
-                    emptyMap()
-                )
-                methods += PhtVirtualMethod.Impl(
-                    this,
-                    "toString",
-                    VTString,
-                    null,
-                    emptyList(),
-                    emptyList(),
-                    emptyList(),
-                    MethodModifiers(),
-                    null,
-                    null,
-                    emptyMap()
-                )
-            }
-            processor.tp += tObject
-            processor.tp += PhtVirtualType.Impl("dmn.pht.integer").apply {
-                parents += tObject
-                methods += PhtVirtualMethod.Impl(
-                    this,
-                    "<init>",
-                    VirtualType.VOID,
-                    null,
-                    listOf(VirtualType.INT),
-                    listOf("value"),
-                    listOf(null),
-                    MethodModifiers(),
-                    null,
-                    null,
-                    emptyMap()
-                )
-                methods += PhtVirtualMethod.Impl(
-                    this,
-                    "toPrimitive",
-                    VirtualType.INT,
-                    null,
-                    emptyList(),
-                    emptyList(),
-                    emptyList(),
-                    MethodModifiers(),
-                    null,
-                    null,
-                    emptyMap()
-                )
-            }
-            processor.tp += VTClass
             processor.tp += VirtualType.VOID
             processor.tp += VirtualType.BOOLEAN
             processor.tp += VirtualType.BYTE

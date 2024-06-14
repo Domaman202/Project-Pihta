@@ -15,7 +15,7 @@ object NCValue : ICppCompiler<NodeValue> {
         when (node.vtype) {
             NIL    -> append("nullptr")
             CHAR   -> append('\'').append(node.value).append('\'')
-            STRING -> append('"').append(node.value.replace("\n", "\\n\\\n")).append('"')
+            STRING -> append("gc.alloc_ptr<dmn::pht::string>(\"").append(node.value.replace("\n", "\\n\\\n")).append("\")")
             else   -> append(node.value)
         }
         return Variable.tmp(

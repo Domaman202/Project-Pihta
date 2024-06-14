@@ -16,7 +16,7 @@ object NCCtor : ICppNRCompiler<NodeDefn> {
         node.method.run {
             append(declaringClass.simpleName)
             insertArgs(this)
-            append(" : ").append(declaringClass.superclass!!.normalizedName()).append("(nullptr) {\n")
+            append(" : ").append(declaringClass.superclass!!.normalizedName).append("(nullptr) {\n")
             val context = ctx.with(this)
             compile(node as INodesList, compiler, context)
             append("}\n")

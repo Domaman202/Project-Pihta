@@ -11,9 +11,9 @@ import ru.DmN.siberia.compiler.ctx.CompilationContext
 object NCCCall : ICppNRCompiler<NodeNodesList> {
     override fun StringBuilder.compile(node: NodeNodesList, compiler: Compiler, ctx: CompilationContext) {
         ctx.method.declaringClass.run {
-            append("new (this) ").append(superclass!!.normalizedName())
+            append("new (this) ").append(superclass!!.normalizedName)
             compileArgs(node, compiler, ctx)
-            append(";\nnew (this) ").append(normalizedName()).append("(nullptr)")
+            append(";\nnew (this) ").append(normalizedName).append("(nullptr)")
         }
     }
 }

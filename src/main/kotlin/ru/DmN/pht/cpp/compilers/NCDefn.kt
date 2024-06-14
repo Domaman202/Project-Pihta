@@ -21,7 +21,7 @@ object NCDefn : ICppNRCompiler<NodeDefn> {
                     append("static ")
                 if (modifiers.abstract || !modifiers.final)
                     append("virtual ")
-                append(rettype.normalizedName()).append(' ').append(name)
+                append(rettype.normalizedName).append(' ').append(name)
                 insertArgs(this)
                 if (modifiers.abstract)
                     append(" = 0;\n")
@@ -62,7 +62,7 @@ object NCDefn : ICppNRCompiler<NodeDefn> {
         method.argsc.forEachIndexed { i, it ->
             if (i > 0)
                 append(", ")
-            append(it.normalizedName()).append(' ').append(method.argsn[i])
+            append(it.normalizedName).append(' ').append(method.argsn[i])
         }
         append(')')
     }

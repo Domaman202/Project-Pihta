@@ -10,7 +10,7 @@ object NCFSet : ICppNRCompiler<NodeFSet> {
     override fun StringBuilder.compile(node: NodeFSet, compiler: Compiler, ctx: CompilationContext) {
         node.field.run {
             if (modifiers.isStatic)
-                append(declaringClass.normalizedName()).append("::").append(name)
+                append(declaringClass.normalizedName).append("::").append(name)
             else {
                 compiler.compileVal(node.nodes[0], ctx).load(this@compile)
                 append("->").append(name)

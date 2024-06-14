@@ -1,0 +1,8 @@
+(use-ctx pht pht/cpp
+	(progn
+		(@test
+			(cls [] Test0 [^dmn.pht.object]
+				(@static
+					(defn [] test ^void []
+						(println
+							"^dmn.pht.object")))))))

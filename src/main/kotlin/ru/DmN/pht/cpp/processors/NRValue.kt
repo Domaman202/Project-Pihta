@@ -2,7 +2,7 @@ package ru.DmN.pht.cpp.processors
 
 import ru.DmN.pht.ast.NodeValue
 import ru.DmN.pht.ast.NodeValue.Type.*
-import ru.DmN.pht.cpp.utils.vtype.VTClass
+import ru.DmN.pht.cpp.utils.vtype.VTNativeClass
 import ru.DmN.pht.cpp.utils.vtype.VTString
 import ru.DmN.pht.cpp.utils.vtype.VVTAutoPointer
 import ru.DmN.pht.cpp.utils.vtype.VVTPointer
@@ -28,7 +28,7 @@ object NRValue : IStdNodeProcessor<NodeValue> {
             DOUBLE          -> VirtualType.DOUBLE
             STRING          -> VTString
             CLASS,
-            CLASS_WITH_GEN  -> VTClass
+            CLASS_WITH_GEN  -> VTNativeClass
             else -> throw UnsupportedOperationException()
         }
 

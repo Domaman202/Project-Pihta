@@ -18,10 +18,10 @@ object NCMCall : ICppCompiler<NodeMCall> {
                 UNKNOWN,
                 DYNAMIC -> throw UnsupportedOperationException()
                 EXTEND  -> TODO()
-                STATIC  -> append(declaringClass.normalizedName()).append("::")
+                STATIC  -> append(declaringClass.normalizedName).append("::")
                 VIRTUAL -> {
                     val type = compiler.compileVal(node.instance, ctx).apply { load(this@compileVal) }.type
-                    append(if (type != null && (type.isPointer || type.isAutoPointer)) "->" else ".")
+                    append(if (type.isPointer || type.isAutoPointer) "->" else ".")
                 }
                 SUPER -> TODO()
             }

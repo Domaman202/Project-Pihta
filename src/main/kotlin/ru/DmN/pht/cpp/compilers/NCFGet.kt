@@ -15,7 +15,7 @@ object NCFGet : ICppNRCompiler<NodeFGet> {
         when (node.type) {
             NodeFGet.Type.UNKNOWN -> throw UnsupportedOperationException()
             NodeFGet.Type.STATIC -> {
-                append(node.vtype.normalizedName()).append("::").append(node.name)
+                append(node.vtype.normalizedName).append("::").append(node.name)
                 if (node.name == "INSTANCE")
                     append("()")
                 static = true

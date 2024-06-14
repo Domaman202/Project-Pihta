@@ -1,0 +1,13 @@
+(use-ctx pht pht/cpp
+	(progn
+		(alias-type
+			[
+				[
+					Object
+					object
+				]
+			])
+		(test-fn
+			0
+			(unparse
+				^object))))

@@ -9,9 +9,10 @@ class JavaVirtualTypeImpl(
     isInterface: Boolean,
     isFinal: Boolean
 ) : PhtVirtualType.Impl(
-    name=name,
-    componentType=componentType,
+    name = name,
+    componentType = componentType,
     isInterface = isInterface,
+    isNative = true,
     isFinal = isFinal
 ), IJvmVirtualType {
     override val VirtualType.jvmName: String

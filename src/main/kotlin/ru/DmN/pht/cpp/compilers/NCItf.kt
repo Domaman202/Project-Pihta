@@ -16,7 +16,7 @@ object NCItf : ICppNRCompiler<NodeType> {
                 parents.forEachIndexed { i, it ->
                     if (i > 0)
                         append(", ")
-                    append(it.normalizedName())
+                    append(it.normalizedName)
                 }
             }
             append(" {\n")

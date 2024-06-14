@@ -1,0 +1,3 @@
+(progn
+    (alias-type [[Object object]])
+    (test-fn 0 (unparse ^object)))

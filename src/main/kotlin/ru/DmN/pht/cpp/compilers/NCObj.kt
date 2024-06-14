@@ -11,14 +11,14 @@ import ru.DmN.siberia.utils.Variable
 object NCObj : ICppCompiler<NodeType> {
     override fun StringBuilder.compile(node: NodeType, compiler: Compiler, ctx: CompilationContext) {
         compileHeadPht(node, compiler, ctx)
-        val name = node.type.normalizedName()
+        val name = node.type.normalizedName
         append("public:\nstatic $name* INSTANCE() {\nstatic auto INSTANCE = gc.alloc_ptr<$name>();\nreturn INSTANCE.get();\n}\n};\n\n")
         compileTail(node)
     }
 
     override fun StringBuilder.compileVal(node: NodeType, compiler: Compiler, ctx: CompilationContext): Variable {
         compile(node, compiler, ctx)
-        append(node.type.normalizedName()).append("::INSTANCE")
+        append(node.type.normalizedName).append("::INSTANCE")
         return Variable.tmp(node, node.type)
     }
 }

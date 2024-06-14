@@ -1,0 +1,13 @@
+(use-ctx pht pht/cpp
+	(progn
+		(test-fn
+			0
+			(unparse
+				(arr-type
+					^Object)))
+		(test-fn
+			1
+			(unparse
+				(comp-type
+					(arr-type
+						^Object))))))

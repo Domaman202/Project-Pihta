@@ -22,6 +22,8 @@ object VTDynamic : PhtVirtualType(), IJvmVirtualType {
         get() = false
     override val isAbstract: Boolean
         get() = false
+    override val isNative: Boolean
+        get() = false
     override val isFinal: Boolean
         get() = false
     override val isFile: Boolean
