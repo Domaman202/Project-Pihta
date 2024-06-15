@@ -13,9 +13,11 @@
 |	|	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	|	(desc = test()V)
 |	|	|	|	|	|	|	|	[PRINTLN_
-|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	|	(value = 'test/siberia/cpp/export')
+|	|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'test/siberia/cpp/export')
+|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]

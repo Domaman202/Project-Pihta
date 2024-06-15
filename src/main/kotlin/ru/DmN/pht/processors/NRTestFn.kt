@@ -9,6 +9,7 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
+import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processors.INodeProcessor
 
@@ -30,7 +31,11 @@ object NRTestFn : INodeProcessor<NodeNodesList> {
                                     info,
                                     "test",
                                     if (platform == JVM) "dynamic" else "void",
-                                    node.nodes.dropMutable(1).let { if (platform == CPP) mutableListOf(nodePrintln(info, it)) else it }
+                                    node.nodes.dropMutable(1).let {
+                                        if (platform == CPP)
+                                            mutableListOf(nodePrintln(info, mutableListOf(nodeProgn(info, it))))
+                                        else it
+                                    }
                                 )
                             )
                         )

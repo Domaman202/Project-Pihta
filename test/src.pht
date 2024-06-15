@@ -1,2 +1,2 @@
 (app-fn
-    (println (as ^float (as ^Object 123))))
+    (println (not 1)))

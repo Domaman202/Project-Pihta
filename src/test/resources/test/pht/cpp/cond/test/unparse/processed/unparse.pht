@@ -1,0 +1,53 @@
+(use-ctx pht pht/cpp
+	(progn
+		(@test
+			(cls [] Test0 [^dmn.pht.object]
+				(@static
+					(defn [] test ^void []
+						(println
+							(progn
+								(if
+									(eq
+										0
+										0)
+									1
+									(if
+										(eq
+											1
+											1)
+										2
+										3))))))))
+		(@test
+			(cls [] Test1 [^dmn.pht.object]
+				(@static
+					(defn [] test ^void []
+						(println
+							(progn
+								(if
+									(eq
+										0
+										1)
+									1
+									(if
+										(eq
+											1
+											1)
+										2
+										3))))))))
+		(@test
+			(cls [] Test2 [^dmn.pht.object]
+				(@static
+					(defn [] test ^void []
+						(println
+							(progn
+								(if
+									(eq
+										1
+										0)
+									1
+									(if
+										(eq
+											2
+											1)
+										2
+										3))))))))))

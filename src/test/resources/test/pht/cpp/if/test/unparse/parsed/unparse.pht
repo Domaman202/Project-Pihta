@@ -1,0 +1,14 @@
+(use-ctx pht pht/cpp
+	(progn
+		(test-fn
+			0
+			(if
+				true
+				"Да"
+				"Нет"))
+		(test-fn
+			1
+			(if
+				false
+				"Да"
+				"Нет"))))

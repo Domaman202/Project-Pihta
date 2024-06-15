@@ -55,7 +55,14 @@ object NRValue : IStdNodeProcessor<NodeValue> {
             when (name.first()) {
                 '[' -> ctx.global.getType(name.substring(1)).arrayType
                 '$' -> ctx.global.getType(name.substring(1))
-                else -> VVTAutoPointer(PhtVirtualType.of(ctx.global.getType(name)))
+                else -> getTypeWithoutPrefix(name, ctx)
             }
-        else VVTAutoPointer(PhtVirtualType.of(ctx.global.getType(name)))
+        else getTypeWithoutPrefix(name, ctx)
+
+    private fun getTypeWithoutPrefix(name: String, ctx: ProcessingContext): VirtualType =
+        ctx.global.getType(name).run {
+            if (isNative)
+                this
+            else VVTAutoPointer(PhtVirtualType.of(this))
+        }
 }

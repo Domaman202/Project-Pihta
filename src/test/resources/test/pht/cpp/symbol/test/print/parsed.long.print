@@ -1,0 +1,43 @@
+[USE_CTX
+|	(modules = pht pht/cpp)
+|	[PROGN
+|	|	[CLS
+|	|	|	[SYMBOL
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'Test')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'Class')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '123')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[VALN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'Object')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CTOR
+|	|	|	|	[VALN]
+|	|	|	|	[CCALL]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[NEW
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'TestClass123')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	]
+]

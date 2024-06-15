@@ -14,9 +14,11 @@
 |	|	|	|	|	|	|	(desc = ()V)
 |	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	[PRINTLN_
-|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	(value = '^dmn.pht.object')
+|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	(value = '^dmn.pht.object')
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]

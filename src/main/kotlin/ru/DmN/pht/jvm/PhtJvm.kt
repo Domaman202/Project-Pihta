@@ -143,7 +143,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(MCALL_,       NCMCall)
         add(MUL_,         NCMath)
         // n
-        add(NB_,      NCNamedBlock)
+        add(NB_,          NCNamedBlock)
         add(NEG_,         NCMath)
         add(NEW_,         NCNew)
         add(NEW_ARR_,     NCNewArray)

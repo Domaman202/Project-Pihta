@@ -72,55 +72,6 @@ object NCAs : ICppCompiler<NodeIsAs> {
             append(".cast<").append(to.normalizedName).append(">()")
         }
 
-//        if (from.isNative || to.isNative) {
-//            if (from.isNative == to.isNative) {
-//                if (node.from == VTNativeString) {
-//                } else {
-//                    append("((").append(to.normalizedName).append(") ")
-//                    compiler.compileVal(node.nodes[0], ctx).load(this)
-//                    append(')')
-//                }
-//            } else if (from == VTNativeString && to == VTString) {
-//                append("gc.alloc_ptr<dmn::pht::string>(")
-//                compiler.compileVal(node.nodes[0], ctx).load(this)
-//                append(')')
-//            } else {
-//                append("gc.alloc_ptr<dmn::pht::primitive<").append(from.normalizedName).append(">>(")
-//                compiler.compileVal(node.nodes[0], ctx).load(this)
-//                append(')')
-//            }
-//        } else if (from.isPrimitive) {
-//            if (to.isPrimitive) {
-//                append("((").append(to.normalizedName).append(") ")
-//                compiler.compileVal(node.nodes[0], ctx).load(this)
-//                append(')')
-//            } else {
-//                throw UnsupportedOperationException()
-//            }
-//        } else {
-//            if (to.isPrimitive) {
-//                val tmp = Variable.tmp(node)
-//                append("[&]() {\nauto ").append(tmp).append(" = ")
-//                compiler.compileVal(node.nodes[0], ctx).load(this)
-//                append(";\nreturn ((dmn::pht::auto_ptr<dmn::pht::primitive<").append(to.normalizedName).append(">>&) ")
-//                append(tmp).append(")->").append(
-//                    when (to) {
-//                        VirtualType.BOOLEAN -> "toBool"
-//                        VirtualType.BYTE    -> "toByte"
-//                        VirtualType.SHORT   -> "toShort"
-//                        VirtualType.CHAR    -> "toChar"
-//                        VirtualType.INT     -> "toInt"
-//                        VirtualType.LONG    -> "toLong"
-//                        VirtualType.FLOAT   -> "toFloat"
-//                        VirtualType.DOUBLE  -> "toDouble"
-//                        else                -> "toPrimitive"
-//                    }
-//                ).append("();\n}()")
-//            } else {
-//                compiler.compileVal(node.nodes[0], ctx).load(this)
-//                append(".cast<").append(to.normalizedName).append(">()")
-//            }
-//        }
         return Variable.tmp(node, to)
     }
 }

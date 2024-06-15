@@ -5,4 +5,5 @@
 				(@static
 					(defn [] test ^void []
 						(println
-							"test/siberia/cpp/export")))))))
+							(progn
+								"test/siberia/cpp/export"))))))))

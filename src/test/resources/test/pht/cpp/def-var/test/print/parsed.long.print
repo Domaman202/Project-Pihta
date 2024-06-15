@@ -1,0 +1,169 @@
+[USE_CTX
+|	(modules = pht pht/cpp)
+|	[PROGN
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[DEF
+|	|	|	|	[VALN
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'i')
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '1')
+|	|	|	]
+|	|	|	[DEF
+|	|	|	|	[VALN
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'float')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'j')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'j')
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '2')
+|	|	|	]
+|	|	|	[DEF
+|	|	|	|	[VALN
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'double')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'k')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[SET_B
+|	|	|	|	(name = k)
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = DOUBLE)
+|	|	|	|	|	(value = '33')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'k')
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '3')
+|	|	|	]
+|	|	|	[DEF
+|	|	|	|	[VALN
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'double')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'l')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[SET_B
+|	|	|	|	(name = l)
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '44')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'l')
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '4')
+|	|	|	]
+|	|	|	[DEF_SET
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'a')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '202')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'a')
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '5')
+|	|	|	]
+|	|	|	[DEF_SET
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'b')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '213')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[DEF_SET
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'b')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '203')
+|	|	|	|	]
+|	|	|	]
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'b')
+|	|	|	]
+|	|	]
+|	]
+]

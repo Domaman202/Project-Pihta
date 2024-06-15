@@ -312,6 +312,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(CATCH)
         add(CATCH_,         NUCatch)
         addSNU(CCALL)
+        addSNU(CCALL_)
         addSNU(CLR_NULL_TYPE)
         addSNU(CLS)
         addSNU(COMP_TYPE)

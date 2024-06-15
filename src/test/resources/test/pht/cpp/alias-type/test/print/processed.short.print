@@ -11,9 +11,11 @@
 |	|	|	|	|	|	|	(type = method)
 |	|	|	|	|	|	|	(desc = test()V)
 |	|	|	|	|	|	|	[PRINTLN_
-|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	(value = '^dmn.pht.object')
+|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	(value = '^dmn.pht.object')
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]

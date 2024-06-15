@@ -25,7 +25,7 @@ object NCIf : ICppCompiler<NodeNodesList> {
         val result = compiler.compileVal(node.nodes[1], ctx).apply { load(this@compileVal) }.type
         if (node.nodes.size == 3) {
             append(";\nelse\n return ")
-            compiler.compile(node.nodes[2], ctx)
+            compiler.compileVal(node.nodes[2], ctx).load(this)
         }
         append(";\n}()")
         return Variable.tmp(node, result)

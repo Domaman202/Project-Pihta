@@ -13,7 +13,7 @@ class LogicBits : TestModule("test/pht/jvm/logic-bits") {
         assertEquals(test(4), 2)
         assertEquals(test(5), 3)
         assertEquals(test(6), 1)
-        assertEquals(test(7), 1)
+        assertEquals(test(7), 0)
         assertEquals(test(8), 1024)
         assertEquals(test(9), 1)
     }

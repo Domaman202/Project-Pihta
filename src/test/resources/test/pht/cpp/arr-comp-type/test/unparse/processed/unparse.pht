@@ -5,10 +5,12 @@
 				(@static
 					(defn [] test ^void []
 						(println
-							"^[dmn.pht.object")))))
+							(progn
+								"^[dmn.pht.object"))))))
 		(@test
 			(cls [] Test1 [^dmn.pht.object]
 				(@static
 					(defn [] test ^void []
 						(println
-							"^dmn.pht.object")))))))
+							(progn
+								"^dmn.pht.object"))))))))

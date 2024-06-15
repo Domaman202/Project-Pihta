@@ -1,0 +1,121 @@
+[USE_CTX_
+|	(modules = pht pht/cpp)
+|	(NODES:
+|	|	[PROGN_
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = TestA)
+|	|	|	|	(parents = [dmn.pht.object])
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEF_
+|	|	|	|	|	|	(static field)
+|	|	|	|	|	|	[
+|	|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	|	(type = int)
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	(type = final class)
+|	|	|	|	|	(name = Test0)
+|	|	|	|	|	(parents = [dmn.pht.object])
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[PRINTLN_
+|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	[FSET_
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[FGET_
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = TestB)
+|	|	|	|	(parents = [dmn.pht.object])
+|	|	|	|	[CTOR_
+|	|	|	|	|	(type = constructor)
+|	|	|	|	|	(name = <init>)
+|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	(sign = null)
+|	|	|	|	|	[CCALL_]
+|	|	|	|	]
+|	|	|	|	[DEF_
+|	|	|	|	|	(field)
+|	|	|	|	|	[
+|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	(type = int)
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	(type = final class)
+|	|	|	|	|	(name = Test1)
+|	|	|	|	|	(parents = [dmn.pht.object])
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[PRINTLN_
+|	|	|	|	|	|	|	|	[PROGN_
+|	|	|	|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	|	|	|	(var)
+|	|	|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	|	|	(name = o)
+|	|	|	|	|	|	|	|	|	|	|	(type = TestB)
+|	|	|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestB))
+|	|	|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[FSET_
+|	|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	|	(name = o)
+|	|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[FGET_
+|	|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	|	(name = o)
+|	|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	)
+]

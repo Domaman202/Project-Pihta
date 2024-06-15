@@ -14,7 +14,7 @@ object NCPrint : ICppNRCompiler<NodeNodesList> {
             val i = length
             compiler.compileVal(it, ctx).run {
                 load(this@compile)
-                if (type?.isPrimitive == false) {
+                if (!type.isPrimitive) {
                     replace(i, i, "dmn::pht::utils::toString(")
                     append(')')
                 }

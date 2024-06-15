@@ -1,0 +1,15 @@
+(use-ctx pht pht/cpp
+	(@test
+		(cls [] Test0 [^dmn.pht.object]
+			(@static
+				(defn [] test ^void []
+					(println
+						(progn
+							(def [
+								[^int i 0]])
+							(cycle
+								(less
+									(get i)
+									10)
+								(inc i))
+							(get i))))))))

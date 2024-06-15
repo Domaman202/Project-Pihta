@@ -24,6 +24,7 @@ import ru.DmN.siberia.compiler.utils.ModuleCompilers
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
+import ru.DmN.siberia.utils.node.NodeTypes.PROGN_
 import ru.DmN.siberia.utils.vtype.VirtualType
 import java.io.FileOutputStream
 
@@ -50,6 +51,7 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
     private fun initCompilers() {
         // a
         add(ADD_,         NCMath)
+        add(AND_,         NCMath)
         add(AS_,          NCAs)
         // c
         add(CCALL_,       NCCCall)
@@ -62,6 +64,7 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
         add(DEC_POST_,    NCIncDec)
         add(DEF_,         NCDef)
         add(DEFN_,        NCDefn)
+        add(DIV_,         NCMath)
         // e
         add(EQ_,          NCMath)
         // f
@@ -93,9 +96,12 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
         // p
         add(PRINT_,       NCPrint)
         add(PRINTLN_,     NCPrint)
+        add(PROGN_,       NCProgn)
+        add(PROGN_B_,     NCProgn)
         // r
         add(REM_,         NCMath)
         // s
+        add(SET_,         NCSet)
         add(SUB_,         NCMath)
         add(SHIFT_LEFT_,  NCMath)
         add(SHIFT_RIGHT_, NCMath)
@@ -153,7 +159,7 @@ object PhtCpp : ModuleCompilers("pht/cpp", CPP) {
                 FileOutputStream("$dir/main.hpp").use { it.write(PhtCpp.getModuleFile("res/main.hpp").readBytes()) }
                 FileOutputStream("$dir/pht.hpp").use { it.write(PhtCpp.getModuleFile("res/pht.hpp").readBytes()) }
                 //
-                Runtime.getRuntime().exec("c++ $dir/main.cpp -o $dir/main").run {
+                Runtime.getRuntime().exec("c++ $dir/main.cpp -o $dir/main -w").run {
                     waitFor()
                     val err = String(errorStream.readBytes())
                     if (err.isNotEmpty()) {

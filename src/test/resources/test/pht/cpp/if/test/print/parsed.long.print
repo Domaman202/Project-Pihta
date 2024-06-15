@@ -1,0 +1,45 @@
+[USE_CTX
+|	(modules = pht pht/cpp)
+|	[PROGN
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[IF
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = BOOLEAN)
+|	|	|	|	|	(value = 'true')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'Да')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'Нет')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '1')
+|	|	|	]
+|	|	|	[IF
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = BOOLEAN)
+|	|	|	|	|	(value = 'false')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'Да')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'Нет')
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	]
+]
