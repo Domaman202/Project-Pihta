@@ -1,14 +1,13 @@
 (use-ctx pht pht/jvm
-	(progn
-		(@test
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(if
-							(eq
-								nil
-								nil)
-							(throw
-								(new ^java.lang.NullPointerException))
-							(as ^java.lang.Object
-								nil))))))))
+	(@test
+		(cls [] Test0 [^java.lang.Object]
+			(@static
+				(defn [] test ^dynamic []
+					(if
+						(eq
+							nil
+							nil)
+						(throw
+							(new ^java.lang.NullPointerException))
+						(as ^java.lang.Object
+							nil)))))))

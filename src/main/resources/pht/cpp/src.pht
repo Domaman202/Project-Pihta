@@ -1,4 +1,0 @@
-(export
-    (alias-type [
-        [dmn.pht.object  Object]
-        [dmn.pht.string  String]]))

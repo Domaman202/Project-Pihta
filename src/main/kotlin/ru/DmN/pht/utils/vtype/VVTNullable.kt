@@ -5,5 +5,5 @@ class VVTNullable(type: PhtVirtualType, val nullable: Boolean) : VarVirtualType(
     override val name: String
         get() = (if (nullable) '?' else '!') + type.name
     override val cname: String
-        get() = type.name
+        get() = type.cname
 }

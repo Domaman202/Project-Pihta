@@ -3,6 +3,6 @@
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["pht"])
-    (uses ["pht"])
+    (uses ["pht" "pht/jvm"])
     (src  ["src.pht"])
     (class "ru.DmN.pht.jvm.PhtJvm"))

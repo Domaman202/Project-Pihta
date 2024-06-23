@@ -1,80 +1,14 @@
 [USE_CTX
 |	(modules = pht pht/jvm)
-|	[PROGN
-|	|	[DEF_MACRO
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'null-check')
-|	|	|	]
-|	|	|	[VALN
-|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'o')
-|	|	|	|	]
-|	|	|	]
-|	|	|	[IF
-|	|	|	|	[EQ
-|	|	|	|	|	[MACRO_ARG
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'o')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = NIL)
-|	|	|	|	|	|	(value = 'nil')
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[THROW
-|	|	|	|	|	[NEW
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'NullPointerException')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[AS
-|	|	|	|	|	[NOT_NULL_TYPE
-|	|	|	|	|	|	[TYPE_OF
-|	|	|	|	|	|	|	[MACRO_ARG
-|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'o')
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[AS
-|	|	|	|	|	|	[CLR_NULL_TYPE
-|	|	|	|	|	|	|	[TYPE_OF
-|	|	|	|	|	|	|	|	[MACRO_ARG
-|	|	|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	|	(text = 'o')
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[MACRO_ARG
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'o')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
+|	[TEST_FN
+|	|	[VALUE
+|	|	|	(type = INT)
+|	|	|	(value = '0')
 |	|	]
-|	|	[TEST_FN
+|	|	[MACRO_B
 |	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '0')
-|	|	|	]
-|	|	|	[MACRO_B
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = NIL)
-|	|	|	|	|	(value = 'nil')
-|	|	|	|	]
+|	|	|	|	(type = NIL)
+|	|	|	|	(value = 'nil')
 |	|	|	]
 |	|	]
 |	]

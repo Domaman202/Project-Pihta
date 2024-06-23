@@ -1,7 +1,0 @@
-(module
-    (name "test/pht/cpp/value")
-    (version "1.0.0")
-    (author "DomamaN202")
-    (deps ["pht"])
-    (uses ["pht"])
-    (src ["src.pht"]))

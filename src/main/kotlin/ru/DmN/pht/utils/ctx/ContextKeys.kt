@@ -9,6 +9,12 @@ enum class ContextKeys : IContextKey {
     GLOBAL,
 
     /**
+     * (Compiler)
+     * Пространство имён.
+     */
+    NAMESPACE,
+
+    /**
      * Контекст перечисления.
      */
     ENUM,

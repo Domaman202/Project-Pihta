@@ -2,6 +2,10 @@
 |	(modules = pht pht/jvm)
 |	(NODES:
 |	|	[PROGN_
+|	|	|	[IMPORT_
+|	|	|	|	(module = java)
+|	|	|	|	(types = [java.lang.Exception java.lang.RuntimeException java.lang.Error])
+|	|	|	]
 |	|	|	[ANN_TEST_
 |	|	|	|	[CLS_
 |	|	|	|	|	(type = final class)

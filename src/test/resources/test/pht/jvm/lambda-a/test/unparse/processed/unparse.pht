@@ -1,5 +1,8 @@
 (use-ctx pht pht/jvm
 	(progn
+		(import "java" [
+			[types [java.util.function.Supplier] [java.util.function.Function]]
+])
 		(@test
 			(cls [] Test0 [^java.lang.Object]
 				(@static

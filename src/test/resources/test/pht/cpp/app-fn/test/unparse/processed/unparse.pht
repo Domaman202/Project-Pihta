@@ -1,6 +1,0 @@
-(use-ctx pht pht/cpp
-	(cls [] App [^dmn.pht.object]
-		(@static
-			(defn [] main ^void []
-				(println
-					"Слава России!")))))

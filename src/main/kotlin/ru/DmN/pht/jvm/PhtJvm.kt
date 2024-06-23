@@ -130,6 +130,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(GREAT_OR_EQ_, NCCompare)
         // i
         add(IF_,          NCIf)
+        add(IMPORT_,      NCUnit)
         add(INC_PRE_,     NCIncDec)
         add(INC_POST_,    NCIncDec)
         add(INL_BODY_,    NCInlBody)

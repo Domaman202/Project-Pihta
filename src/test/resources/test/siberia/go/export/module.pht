@@ -1,0 +1,7 @@
+(module
+    (name "test/siberia/go/export")
+    (version "1.0.0")
+    (author "DomamaN202")
+    (deps ["pht" "test/siberia/cpp/export/helper"])
+    (uses ["pht"])
+    (src ["src.pht"]))

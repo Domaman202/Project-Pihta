@@ -4,7 +4,6 @@ import ru.DmN.pht.helper.ast.NodeAliasType
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.utils.computeList
 import ru.DmN.pht.processor.utils.computeStringNodes
-import ru.DmN.pht.utils.Platforms.CPP
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.node.NodeTypes.ALIAS_TYPE_
 import ru.DmN.siberia.ast.INodesList
@@ -26,7 +25,7 @@ object NRAliasType : INodeProcessor<NodeNodesList> {
             }
         }
         return when (ctx.platform) {
-            JVM, CPP -> null
+            JVM -> null
             else -> NodeAliasType(node.info.withType(ALIAS_TYPE_), imports)
         }
     }

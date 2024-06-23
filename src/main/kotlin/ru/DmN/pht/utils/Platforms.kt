@@ -17,20 +17,14 @@ enum class Platforms : IPlatform {
     /**
      * Lua
      */
-    LUA,
-
-    /**
-     * C++
-     */
-    CPP;
+    LUA;
 
     companion object {
         init {
             IPlatform.PLATFORMS += JVM
-            IPlatform.PLATFORMS += CPP
             IPlatform.PLATFORMS += LUA
             TypesProvider.add(JVM, ::JRTP)
-            TypesProvider.add(CPP, ::VoidTypesProvider)
+            TypesProvider.add(LUA, ::VoidTypesProvider)
         }
     }
 }

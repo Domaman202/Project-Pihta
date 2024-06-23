@@ -1,5 +1,8 @@
 (use-ctx pht pht/jvm
 	(progn
+		(import "java" [
+			[types [java.util.ArrayList]]
+])
 		(@test
 			(cls [] Test0 [^java.lang.Object]
 				(@static

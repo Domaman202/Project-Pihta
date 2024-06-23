@@ -1,37 +1,35 @@
 [USE_CTX_
 |	(modules = pht pht/jvm)
 |	(NODES:
-|	|	[PROGN_
-|	|	|	[ANN_TEST_
-|	|	|	|	[CLS_
-|	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = Test0)
-|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	[IF_
-|	|	|	|	|	|	|	|	[EQ_
-|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	(type = NIL)
-|	|	|	|	|	|	|	|	|	|	(value = 'nil')
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	(type = NIL)
-|	|	|	|	|	|	|	|	|	|	(value = 'nil')
-|	|	|	|	|	|	|	|	|	]
+|	|	[ANN_TEST_
+|	|	|	[CLS_
+|	|	|	|	(type = final class)
+|	|	|	|	(name = Test0)
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	[IF_
+|	|	|	|	|	|	|	[EQ_
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = NIL)
+|	|	|	|	|	|	|	|	|	(value = 'nil')
 |	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	[THROW_
-|	|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	|	(type = VT(java.lang.NullPointerException))
-|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = NIL)
+|	|	|	|	|	|	|	|	|	(value = 'nil')
 |	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	(type = NIL)
-|	|	|	|	|	|	|	|	|	|	(value = 'nil')
-|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[THROW_
+|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	(type = VT(java.lang.NullPointerException))
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = NIL)
+|	|	|	|	|	|	|	|	|	(value = 'nil')
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]

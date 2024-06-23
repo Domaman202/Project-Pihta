@@ -1,2 +1,1 @@
-(app-fn
-    (println (not 1)))
+(app-fn (println "Hi!"))

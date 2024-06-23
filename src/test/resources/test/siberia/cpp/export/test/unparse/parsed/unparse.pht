@@ -1,5 +1,0 @@
-(use-ctx pht pht/cpp
-	(use-ctx test/siberia/cpp/export/helper
-		(test-fn
-			0
-			(*module-name*))))

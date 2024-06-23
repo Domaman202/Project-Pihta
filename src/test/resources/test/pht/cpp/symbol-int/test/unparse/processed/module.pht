@@ -1,6 +1,0 @@
-(module
-    (name "test/pht/cpp/symbol-int/test/unparse/processed")
-    (version "1.0.0")
-    (author "DomamaN202")
-    (deps ["pht"])
-    (src ["unparse.pht"]))

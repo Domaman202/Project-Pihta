@@ -2,6 +2,10 @@
 |	(modules = pht pht/jvm)
 |	(NODES:
 |	|	[PROGN_
+|	|	|	[IMPORT_
+|	|	|	|	(module = java)
+|	|	|	|	(types = [java.util.function.Supplier])
+|	|	|	]
 |	|	|	[CLS_
 |	|	|	|	(type = final class)
 |	|	|	|	(name = TestA)

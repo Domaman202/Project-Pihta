@@ -8,7 +8,6 @@ import ru.DmN.pht.processor.ctx.*
 import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.pht.processors.*
 import ru.DmN.pht.unparsers.*
-import ru.DmN.pht.utils.Platforms.CPP
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.addNP
 import ru.DmN.pht.utils.addSMNP
@@ -742,7 +741,6 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
             // Платформно-зависимые функции
             when (ctx.platform) {
                 JVM -> uses += "pht/jvm"
-                CPP -> uses += "pht/cpp"
             }
             //
             super.load(parser, ctx, uses)
