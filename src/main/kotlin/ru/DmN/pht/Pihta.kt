@@ -284,7 +284,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(AGET)
         add(AGET_,          NUAGet)
         addSNU(ALIAS_TYPE)
-        // ALIAS_TYPE_
+        add(ALIAS_TYPE_,    NUAliasType)
         addSNU(AND)
         addSNU(AND_)
         addSNU(APP)

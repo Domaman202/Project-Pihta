@@ -71,6 +71,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
 
     private fun initProcessors() {
         // c
+        add(CCALL,       NRCCall)
         add(CLS_OF,      NRClassOf)
         add(CLS_OF_,     NRClassOf)
         // s

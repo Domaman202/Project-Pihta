@@ -1,5 +1,7 @@
 (use-ctx pht pht/jvm
 	(progn
+		(alias-type [
+			[Object object]])
 		(@test
 			(cls [] Test0 [^java.lang.Object]
 				(@static

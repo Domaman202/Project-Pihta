@@ -1,4 +1,8 @@
 (progn
-    (comment "Определение макро-инструкций")
+    (comment "Определение упрощающих макросов.")
+    (def-macro import-types [module types]
+        (import (macro-arg module) [[types (macro-arg types)]]))
+
+    (comment "Определение макро-инструкций.")
     (def-macro as-gens [type value generics]
         (with-gens (as (macro-arg type) (macro-arg value)) (macro-arg generics))))

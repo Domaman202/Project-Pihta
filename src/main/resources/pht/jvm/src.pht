@@ -1,14 +1,14 @@
 (progn
-    (import "java" [
-        [types [
-            java.lang.Enum
-            java.lang.Iterable
-            java.lang.StringBuilder
-            java.lang.System
-            java.util.ArrayList
-            java.util.Iterator
-            java.util.List]]])
+    (import-types "java" [
+        java.lang.Enum
+        java.lang.Iterable
+        java.lang.StringBuilder
+        java.lang.System
+        java.util.ArrayList
+        java.util.Iterator
+        java.util.List])
 
+    (comment "Разнообразный функционал.")
     (ns ru.DmN.pht
         (cls ArrayExtends [^Object]
             (def-macro toList [type]
@@ -44,6 +44,7 @@
                     (#append str (#toString ^java.util.Objects e)))
                 (#toString str))))))
 
+    (comment "Функционал ввода/вывода.")
     (ns ru.DmN.pht.io
         (cls StdOut [^Object] (@static
             (def-macro defn-print-as-int [types]
@@ -75,6 +76,7 @@
             (defn-print         [^boolean ^char ^int ^long ^float ^double ^Any])
             (defn-print-as-int  [^byte ^short]))))
 
+    (comment "Математический функционал.")
     (ns ru.DmN.pht.math
         (cls MathExtends [^Object]
             (efn ^float and ^float [[other ^float]]
@@ -138,16 +140,13 @@
 
     (export
         (comment "Импорт базовых типов")
-        (import "java" [
-            [types [
-                java.lang.Class
-                java.lang.Object
-                java.lang.String
-                java.lang.Integer
-                java.lang.NullPointerException]]])
-        (import "kotlin" [
-            [types [
-                kotlin.Unit]]])
+        (import-types "java" [
+            java.lang.Class
+            java.lang.Object
+            java.lang.String
+            java.lang.Integer
+            java.lang.NullPointerException
+            kotlin.Unit])
         (alias-type [[Object Any]])
         (import "pht/jvm" [
             [extensions [

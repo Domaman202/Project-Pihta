@@ -2,6 +2,7 @@
 |	(modules = pht pht/jvm)
 |	(NODES:
 |	|	[PROGN_
+|	|	|	[ALIAS_TYPE_]
 |	|	|	[ANN_TEST_
 |	|	|	|	[CLS_
 |	|	|	|	|	(type = final class)
