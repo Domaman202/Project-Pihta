@@ -3,6 +3,6 @@
     (test-fn 2 (test-macro))
     (export
         (def-macro test-macro [] (*module-name*)))
-    (only-export
+    (export-only
         (test-fn 3 (test-macro))
         (test-fn 4 (*module-name*))))
