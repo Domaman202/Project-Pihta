@@ -4,6 +4,7 @@ import ru.DmN.pht.module.utils.Module
 import ru.DmN.pht.module.utils.ModulesProvider
 import ru.DmN.pht.std.module.ast.NodeModule
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.ast.NodeProcessedUse
 import ru.DmN.siberia.compiler.CompilerImpl
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.console.BuildCommands
@@ -75,16 +76,12 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
             val tp = TypesProvider.of(platform)
             val processed = ArrayList<Node>()
             val processor = ProcessorImpl(mp, tp)
-            mp.injectModules(
-                mutableListOf(module.name),
-                processed,
-                processed,
-                processor,
-                ProcessingContext.base().with(platform).apply { this.module = module }
-            )
+            val list = ArrayList<NodeProcessedUse.ProcessedData>()
+            mp.injectModules(mutableListOf(module.name), list, processor, ProcessingContext.base().with(platform).apply { this.module = module })
+            list.forEach { processed += it.processed; processed += it.exports }
             processor.stageManager.runAll()
             val compiler = CompilerImpl(mp, tp)
-            val ctx = CompilationContext.base().apply { this.platform = this@TestModuleBase.platform }
+            val ctx = CompilationContext.base().with(platform).apply { this.module = module }
             processed.forEach { compiler.compile(it, ctx) }
             compiler.stageManager.runAll()
             File("dump/$dir").mkdirs()
@@ -108,13 +105,9 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
         }
         val processed = ArrayList<Node>()
         val processor = ProcessorImpl(mp, tp)
-        mp.injectModules(
-            mutableListOf(module.name),
-            processed,
-            processed,
-            processor,
-            ProcessingContext.base().with(platform).apply { this.module = module }
-        )
+        val list = ArrayList<NodeProcessedUse.ProcessedData>()
+        mp.injectModules(mutableListOf(module.name), list, processor, ProcessingContext.base().with(platform).apply { this.module = module })
+        list.forEach { processed += it.processed; processed += it.exports }
         processor.stageManager.runAll()
         File("dump/$dir/unparse/processed").mkdirs()
         FileOutputStream("dump/$dir/unparse/processed/unparse.pht").use { out ->
@@ -148,13 +141,9 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
         }
         val processed = ArrayList<Node>()
         val processor = ProcessorImpl(mp, tp)
-        mp.injectModules(
-            mutableListOf(module.name),
-            processed,
-            processed,
-            processor,
-            ProcessingContext.base().with(platform).apply { this.module = module }
-        )
+        val list = ArrayList<NodeProcessedUse.ProcessedData>()
+        mp.injectModules(mutableListOf(module.name), list, processor, ProcessingContext.base().with(platform).apply { this.module = module })
+        list.forEach { processed += it.processed; processed += it.exports }
         processor.stageManager.runAll()
         FileOutputStream("dump/$dir/print/processed.short.print").use { short ->
             FileOutputStream("dump/$dir/print/processed.long.print").use { long ->

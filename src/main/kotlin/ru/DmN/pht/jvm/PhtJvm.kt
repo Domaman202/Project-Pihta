@@ -22,9 +22,12 @@ import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.ModuleCompilers
 import ru.DmN.siberia.compilers.NCDefault
+import ru.DmN.siberia.processor.utils.module
 import ru.DmN.siberia.processors.NRProgn
 import java.io.File
 import java.io.FileOutputStream
+import java.util.jar.JarEntry
+import java.util.jar.JarOutputStream
 
 object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
     private fun initParsers() {
@@ -84,7 +87,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(ANN_ANN_,  NRAnnotation)
         add(ANN_LIST,  NRList)
         add(ANN_LIST_, NRList)
-        add(ANN_SYNC, NRSA { it, _, _ -> if (it is ISyncNode) it.sync = true })
+        add(ANN_SYNC,  NRSA { it, _, _ -> if (it is ISyncNode) it.sync = true })
     }
 
     private fun initCompilers() {
@@ -189,11 +192,10 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
             compiler.contexts.classes = HashMap()
             // Финализация
             compiler.finalizers.add { dir ->
-                compiler.contexts.classes.values.forEach {
-                    if (it.name.contains('/'))
-                        File("$dir/${it.name.substring(0, it.name.lastIndexOf('/'))}").mkdirs()
-                    FileOutputStream("$dir/${it.name}.class").use { stream ->
-                        val writer =
+                File(dir).mkdirs()
+                JarOutputStream(FileOutputStream("$dir/${ctx.module.name.let { ctx.module.name.let { it.substring(it.lastIndexOf('/') + 1) } }}.jar")).use { jar ->
+                    compiler.contexts.classes.values.forEach {
+                        val b =
                             try {
                                 val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
                                 it.accept(writer)
@@ -203,9 +205,15 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
                                 val writer = ClassWriter(ClassWriter.COMPUTE_MAXS)
                                 it.accept(writer)
                                 writer
-                            }
-                        val b = writer.toByteArray()
-                        stream.write(b)
+                            }.toByteArray()
+                        //
+                        if (it.name.contains('/'))
+                            File("$dir/${it.name.substring(0, it.name.lastIndexOf('/'))}").mkdirs()
+                        FileOutputStream("$dir/${it.name}.class").write(b)
+                        //
+                        jar.putNextEntry(JarEntry("${it.name}.class"))
+                        jar.write(b)
+                        jar.closeEntry()
                     }
                 }
             }
