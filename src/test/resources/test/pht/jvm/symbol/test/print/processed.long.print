@@ -1,51 +1,56 @@
-[USE_CTX_
-|	(modules = pht pht/jvm)
+[LOAD_CTX_
+|	(modules =)
 |	(NODES:
-|	|	[PROGN_
-|	|	|	[CLS_
-|	|	|	|	(type = final class)
-|	|	|	|	(name = TestClass123)
-|	|	|	|	(parents = [java.lang.Object])
-|	|	|	|	[CTOR_
-|	|	|	|	|	(type = constructor)
-|	|	|	|	|	(name = <init>)
-|	|	|	|	|	(desc = ()V)
-|	|	|	|	|	(sign = null)
-|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	(method = <init>()V)
-|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_
-|	|	|	|	|	|	|	|	(name = this)
-|	|	|	|	|	|	|	|	(type = var)
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	)
-|	|	|	|	|	|	(generic = VT(void))
-|	|	|	|	|	|	(type = SUPER)
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[ANN_TEST_
-|	|	|	|	[CLS_
-|	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = Test0)
-|	|	|	|	|	(parents = [java.lang.Object])
-|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(name = test)
-|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	[USE_CTX_
+|	|	|	(modules = pht pht/jvm)
+|	|	|	(NODES:
+|	|	|	|	[PROGN_
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = TestClass123)
+|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	[CTOR_
+|	|	|	|	|	|	|	(type = constructor)
+|	|	|	|	|	|	|	(name = <init>)
+|	|	|	|	|	|	|	(desc = ()V)
 |	|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	(type = VT(TestClass123))
-|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = <init>()V)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	|	|	(type = SUPER)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test0)
+|	|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestClass123))
+|	|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	]
+|	|	|	)
 |	|	]
 |	)
 ]

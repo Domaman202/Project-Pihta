@@ -1,14 +1,15 @@
-(use-ctx pht pht/jvm
-	(progn
-		(cls
-			TestA
-			[
-				^Object
-			]
-			(ctor
-				[]
-				(ccall)))
-		(test-fn
-			0
-			(new
-				^TestA))))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls
+				TestA
+				[
+					^Object
+				]
+				(ctor
+					[]
+					(ccall)))
+			(test-fn
+				0
+				(new
+					^TestA)))))

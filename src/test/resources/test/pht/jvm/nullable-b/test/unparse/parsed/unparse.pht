@@ -1,5 +1,6 @@
-(use-ctx pht pht/jvm
-	(test-fn
-		0
-		(macro null-check
-			nil)))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(test-fn
+			0
+			(macro null-check
+				nil))))

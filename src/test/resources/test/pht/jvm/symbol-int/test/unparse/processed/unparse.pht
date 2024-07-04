@@ -1,9 +1,10 @@
-(use-ctx pht pht/jvm
-	(@test
-		(cls [] Test0 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(add
-							12
-							21)))))))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(@test
+			(cls [] Test0 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(as ^dynamic
+							(add
+								12
+								21))))))))

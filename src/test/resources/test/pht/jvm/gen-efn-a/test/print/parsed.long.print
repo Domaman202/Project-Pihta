@@ -1,65 +1,67 @@
-[USE_CTX
-|	(modules = pht pht/jvm)
-|	[PROGN
-|	|	[CLS
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'TestA')
-|	|	|	]
-|	|	|	[VALN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'Object')
+[LOAD_CTX
+|	[USE_CTX
+|	|	(modules = pht pht/jvm)
+|	|	[PROGN
+|	|	|	[CLS
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'TestA')
 |	|	|	|	]
-|	|	|	]
-|	|	|	[ANN_STATIC
-|	|	|	|	[EFN
-|	|	|	|	|	[VALN
-|	|	|	|	|	|	[VALN
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'T')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'Object')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
+|	|	|	|	[VALN
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	|	(value = 'Object')
 |	|	|	|	|	]
-|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'foo')
-|	|	|	|	|	]
-|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'T^')
-|	|	|	|	|	]
-|	|	|	|	|	[VALN]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = NIL)
-|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	]
+|	|	|	|	[ANN_STATIC
+|	|	|	|	|	[EFN
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'T')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'foo')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'T^')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALN]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = NIL)
+|	|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '0')
-|	|	|	]
-|	|	|	[TYPE_OF
-|	|	|	|	[MCALL
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'Foo!')
-|	|	|	|	|	]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	(value = 'foo<^Class>')
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '0')
+|	|	|	|	]
+|	|	|	|	[TYPE_OF
+|	|	|	|	|	[MCALL
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	(value = 'Foo!')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	|	(value = 'foo<^Class>')
+|	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]

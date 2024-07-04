@@ -1,98 +1,103 @@
-[USE_CTX_
-|	(modules = pht pht/jvm)
+[LOAD_CTX_
+|	(modules =)
 |	(NODES:
-|	|	[ANN_TEST_
-|	|	|	[CLS_
-|	|	|	|	(type = final class)
-|	|	|	|	(name = Test0)
-|	|	|	|	(parents = [java.lang.Object])
-|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(name = test)
-|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
-|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	(method = toList([Ljava/lang/Object;)Ljava/util/List;)
-|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	(value = '[java.lang.Object')
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	(generic = VTWG(java.util.List<java.lang.Object>))
-|	|	|	|	|	|	|	|	(type = EXTEND)
-|	|	|	|	|	|	|	|	[BLOCK_
-|	|	|	|	|	|	|	|	|	[DEF_
-|	|	|	|	|	|	|	|	|	|	(var)
-|	|	|	|	|	|	|	|	|	|	[
-|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$25978)
-|	|	|	|	|	|	|	|	|	|	|	(type = [java.lang.Object)
-|	|	|	|	|	|	|	|	|	|	|	[NEW_ARR_
-|	|	|	|	|	|	|	|	|	|	|	|	(type = java.lang.Object)
-|	|	|	|	|	|	|	|	|	|	|	|	(size:
-|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '3')
+|	|	[USE_CTX_
+|	|	|	(modules = pht pht/jvm)
+|	|	|	(NODES:
+|	|	|	|	[ANN_TEST_
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = Test0)
+|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	(method = toList([Ljava/lang/Object;)Ljava/util/List;)
+|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = '[java.lang.Object')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	(generic = VTWG(java.util.List<java.lang.Object>))
+|	|	|	|	|	|	|	|	|	|	(type = EXTEND)
+|	|	|	|	|	|	|	|	|	|	[BLOCK_
+|	|	|	|	|	|	|	|	|	|	|	[DEF_
+|	|	|	|	|	|	|	|	|	|	|	|	(var)
+|	|	|	|	|	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$25978)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = [java.lang.Object)
+|	|	|	|	|	|	|	|	|	|	|	|	|	[NEW_ARR_
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = java.lang.Object)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(size:
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '3')
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[ASET_
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$25978)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '0')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'Слава')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[ASET_
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$25978)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '1')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'Великой')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[ASET_
+|	|	|	|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$25978)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '2')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'России')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$25978)
+|	|	|	|	|	|	|	|	|	|	|	|	(type = var)
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	[ASET_
-|	|	|	|	|	|	|	|	|	|	[GET_
-|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$25978)
-|	|	|	|	|	|	|	|	|	|	|	(type = var)
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	|	|	(value = '0')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'Слава')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	[ASET_
-|	|	|	|	|	|	|	|	|	|	[GET_
-|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$25978)
-|	|	|	|	|	|	|	|	|	|	|	(type = var)
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	|	|	(value = '1')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'Великой')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	[ASET_
-|	|	|	|	|	|	|	|	|	|	[GET_
-|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$25978)
-|	|	|	|	|	|	|	|	|	|	|	(type = var)
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	|	|	(value = '2')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'России')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	[GET_
-|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$25978)
-|	|	|	|	|	|	|	|	|	|	(type = var)
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	]
+|	|	|	)
 |	|	]
 |	)
 ]

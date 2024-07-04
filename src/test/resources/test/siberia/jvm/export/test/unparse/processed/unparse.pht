@@ -1,8 +1,9 @@
-(use-ctx pht pht/jvm
-	(use-ctx test/siberia/jvm/export/helper
-		(@test
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							"test/siberia/jvm/export")))))))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(use-ctx test/siberia/jvm/export/helper
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								"test/siberia/jvm/export"))))))))

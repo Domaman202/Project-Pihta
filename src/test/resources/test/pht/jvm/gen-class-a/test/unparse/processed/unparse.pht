@@ -1,58 +1,59 @@
-(use-ctx pht pht/jvm
-	(progn
-		(@open
-			(cls [[T ^java.lang.Object]] TestA [^java.lang.Object]
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(@open
+				(cls [[T ^java.lang.Object]] TestA [^java.lang.Object]
+					(ctor []
+						(mcall
+							super
+							<init>))
+					(defn [] foo T^ []
+						(as ^java.lang.Object
+							nil))))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								"java.lang.Object")))))
+			(@test
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								"java.lang.String")))))
+			(@open
+				(cls [[T ^java.lang.Object]] TestB [^TestA]
+					(ctor []
+						(mcall
+							super
+							<init>))))
+			(@open
+				(cls [[T ^java.lang.Object]] TestC [^TestB]
+					(ctor []
+						(mcall
+							super
+							<init>))))
+			(@test
+				(cls [] Test2 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								"java.lang.Class")))))
+			(@test
+				(cls [] Test3 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								"java.lang.Class")))))
+			(cls [[T ^java.lang.Class<^java.lang.Object>][T ^java.lang.Class<^java.lang.Object>][T ^java.lang.Class<^java.lang.Object>]] TestD [^TestC]
 				(ctor []
 					(mcall
 						super
-						<init>))
-				(defn [] foo T^ []
-					(as ^java.lang.Object
-						nil))))
-		(@test
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							"java.lang.Object")))))
-		(@test
-			(cls [] Test1 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							"java.lang.String")))))
-		(@open
-			(cls [[T ^java.lang.Object]] TestB [^TestA]
-				(ctor []
-					(mcall
-						super
-						<init>))))
-		(@open
-			(cls [[T ^java.lang.Object]] TestC [^TestB]
-				(ctor []
-					(mcall
-						super
-						<init>))))
-		(@test
-			(cls [] Test2 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							"java.lang.Class")))))
-		(@test
-			(cls [] Test3 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							"java.lang.Class")))))
-		(cls [[T ^java.lang.Class<^java.lang.Object>][T ^java.lang.Class<^java.lang.Object>][T ^java.lang.Class<^java.lang.Object>]] TestD [^TestC]
-			(ctor []
-				(mcall
-					super
-					<init>)))
-		(@test
-			(cls [] Test4 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							"java.lang.Class")))))))
+						<init>)))
+			(@test
+				(cls [] Test4 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								"java.lang.Class"))))))))

@@ -1,42 +1,43 @@
-(use-ctx pht pht/jvm
-	(progn
-		(cls [] TestA [^java.lang.Object]
-			(@static
-				(defn [] add ^int [[a ^int][b ^int]]
-					(add
-						(get a)
-						(get b)))))
-		(@test
-			(cls [] Test0 [^java.lang.Object]
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls [] TestA [^java.lang.Object]
 				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(mcall
-								^TestA
-								add
-								12
-								21))))))
-		(cls [] TestB [^java.lang.Object]
-			(def [
-				[value ^int]])
-			(ctor []
-				(mcall
-					super
-					<init>)
-				(fset
-					(get this)
-					value
-					20))
-			(defn [] sub ^int [[other ^int]]
-				(sub
-					(get value)
-					(get other))))
-		(@test
-			(cls [] Test1 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(mcall
-								(new ^TestB)
-								sub
-								5))))))))
+					(defn [] add ^int [[a ^int][b ^int]]
+						(add
+							(get a)
+							(get b)))))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									^TestA
+									add
+									12
+									21))))))
+			(cls [] TestB [^java.lang.Object]
+				(def [
+					[value ^int]])
+				(ctor []
+					(mcall
+						super
+						<init>)
+					(fset
+						(get this)
+						value
+						20))
+				(defn [] sub ^int [[other ^int]]
+					(sub
+						(get value)
+						(get other))))
+			(@test
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									(new ^TestB)
+									sub
+									5)))))))))

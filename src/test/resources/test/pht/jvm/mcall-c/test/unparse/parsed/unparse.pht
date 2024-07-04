@@ -1,11 +1,36 @@
-(use-ctx pht pht/jvm
-	(progn
-		(cls
-			TestA
-			[
-				^Object
-			]
-			(@static
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls
+				TestA
+				[
+					^Object
+				]
+				(@static
+					(defn
+						foo
+						^void
+						[
+							[
+								o
+								^Object
+							]
+						]
+						(unit))))
+			(test-fn
+				0
+				(mcall
+					^TestA
+					foo
+					"Foo!"))
+			(cls
+				TestB
+				[
+					^Object
+				]
+				(ctor
+					[]
+					(ccall))
 				(defn
 					foo
 					^void
@@ -15,44 +40,57 @@
 							^Object
 						]
 					]
-					(unit))))
-		(test-fn
-			0
-			(mcall
-				^TestA
-				foo
-				"Foo!"))
-		(cls
-			TestB
-			[
-				^Object
-			]
-			(ctor
-				[]
-				(ccall))
-			(defn
-				foo
-				^void
+					(unit)))
+			(test-fn
+				1
+				(mcall
+					(new
+						^TestB)
+					foo
+					"Foo!"))
+			(cls
+				TestC
 				[
-					[
-						o
-						^Object
-					]
+					^Object
 				]
-				(unit)))
-		(test-fn
-			1
-			(mcall
-				(new
-					^TestB)
-				foo
-				"Foo!"))
-		(cls
-			TestC
-			[
-				^Object
-			]
-			(@static
+				(@static
+					(defn
+						foo
+						^void
+						[
+							[
+								o
+								^Object
+							]
+						]
+						(unit))
+					(defn
+						call
+						^void
+						[
+							[
+								o
+								^Object
+							]
+						]
+						(mcall
+							.
+							foo
+							o))))
+			(test-fn
+				2
+				(mcall
+					^TestC
+					call
+					"Foo!"))
+			(cls
+				TestD
+				[
+					^Object
+				]
+				(ctor
+					[]
+					(ccall))
 				(defn
 					foo
 					^void
@@ -75,48 +113,11 @@
 					(mcall
 						.
 						foo
-						o))))
-		(test-fn
-			2
-			(mcall
-				^TestC
-				call
-				"Foo!"))
-		(cls
-			TestD
-			[
-				^Object
-			]
-			(ctor
-				[]
-				(ccall))
-			(defn
-				foo
-				^void
-				[
-					[
-						o
-						^Object
-					]
-				]
-				(unit))
-			(defn
-				call
-				^void
-				[
-					[
-						o
-						^Object
-					]
-				]
+						o)))
+			(test-fn
+				3
 				(mcall
-					.
-					foo
-					o)))
-		(test-fn
-			3
-			(mcall
-				(new
-					^TestD)
-				call
-				"Foo!"))))
+					(new
+						^TestD)
+					call
+					"Foo!")))))

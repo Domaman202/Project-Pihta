@@ -1,22 +1,23 @@
-(use-ctx pht pht/jvm
-	(app-fn
-		(block
-			(def
-				[
+(load-ctx
+	(use-ctx pht pht/jvm
+		(app-fn
+			(block
+				(def
 					[
-						i
-						12
-					]
-				])
-			(println
-				i))
-		(block
-			(def
-				[
+						[
+							i
+							12
+						]
+					])
+				(println
+					i))
+			(block
+				(def
 					[
-						i
-						21
-					]
-				])
-			(println
-				i))))
+						[
+							i
+							21
+						]
+					])
+				(println
+					i)))))

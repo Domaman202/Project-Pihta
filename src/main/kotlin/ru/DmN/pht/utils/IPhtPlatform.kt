@@ -19,9 +19,9 @@ interface IPhtPlatform : IPlatform {
         OBJECTIVE
     }
 
-    enum class Organization {
-        FILES,
-        MODULES,
-        PACKAGES
+    enum class Organization(val division: Boolean) {
+        FILE(false),
+        MODULES(true),
+        PACKAGES(true)
     }
 }

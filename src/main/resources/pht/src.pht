@@ -1,4 +1,4 @@
-(progn
+(export
     (comment "Определение упрощающих макросов.")
     (def-macro import-types [module types]
         (import (macro-arg module) [[types (macro-arg types)]]))

@@ -1,258 +1,260 @@
-[USE_CTX
-|	(modules = pht pht/jvm)
-|	[PROGN
-|	|	[IMPORT
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'java')
-|	|	|	]
-|	|	|	[VALN
-|	|	|	|	[VALN
-|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'types')
-|	|	|	|	|	]
-|	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'java.util.function.Supplier')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'java.util.function.Function')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
+[LOAD_CTX
+|	[USE_CTX
+|	|	(modules = pht pht/jvm)
+|	|	[PROGN
+|	|	|	[IMPORT
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'java')
 |	|	|	|	]
-|	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '0')
-|	|	|	]
-|	|	|	[MCALL
-|	|	|	|	[FN
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Supplier')
-|	|	|	|	|	]
-|	|	|	|	|	[VALN]
-|	|	|	|	|	[VALN]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'Арен брат, с днюхой!')
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	(value = 'get')
-|	|	|	|	]
-|	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '1')
-|	|	|	]
-|	|	|	[DEF
 |	|	|	|	[VALN
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	(text = 'types')
 |	|	|	|	|	|	]
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '12')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'j')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'java.util.function.Supplier')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'java.util.function.Function')
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[MCALL
-|	|	|	|	[FN
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Supplier')
-|	|	|	|	|	]
-|	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'j')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[VALN]
-|	|	|	|	|	[ADD
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'j')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
+|	|	|	[TEST_FN
 |	|	|	|	[VALUE
-|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	(value = 'get')
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '0')
 |	|	|	|	]
-|	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '2')
-|	|	|	]
-|	|	|	[DEF
-|	|	|	|	[VALN
-|	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	]
+|	|	|	|	[MCALL
+|	|	|	|	|	[FN
 |	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'Supplier')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALN]
+|	|	|	|	|	|	[VALN]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	(value = 'Арен брат, с днюхой!')
 |	|	|	|	|	|	]
 |	|	|	|	|	]
-|	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'j')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '21')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[MCALL
-|	|	|	|	[FN
 |	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Supplier')
-|	|	|	|	|	]
-|	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'j')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[VALN]
-|	|	|	|	|	[ADD
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'j')
-|	|	|	|	|	|	]
+|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	(value = 'get')
 |	|	|	|	|	]
 |	|	|	|	]
+|	|	|	]
+|	|	|	[TEST_FN
 |	|	|	|	[VALUE
-|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	(value = 'get')
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '1')
 |	|	|	|	]
-|	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '3')
-|	|	|	]
-|	|	|	[DEF
-|	|	|	|	[VALN
+|	|	|	|	[DEF
 |	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '12')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'j')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'j')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	]
-|	|	|	[MCALL
-|	|	|	|	[FN
+|	|	|	|	[MCALL
+|	|	|	|	|	[FN
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'Supplier')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'j')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALN]
+|	|	|	|	|	|	[ADD
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'j')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
 |	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Function')
-|	|	|	|	|	]
-|	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'j')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'k')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[ADD
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'j')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'k')
-|	|	|	|	|	|	]
+|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	(value = 'get')
 |	|	|	|	|	]
 |	|	|	|	]
+|	|	|	]
+|	|	|	[TEST_FN
 |	|	|	|	[VALUE
-|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	(value = 'apply')
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '2')
 |	|	|	|	]
-|	|	|	|	[AS
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	[DEF
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'j')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[MCALL
+|	|	|	|	|	[FN
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'Supplier')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'j')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALN]
+|	|	|	|	|	|	[ADD
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'j')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '33')
+|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	(value = 'get')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '3')
+|	|	|	|	]
+|	|	|	|	[DEF
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'j')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[MCALL
+|	|	|	|	|	[FN
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'Function')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'j')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'k')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[ADD
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'j')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'k')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	(value = 'apply')
+|	|	|	|	|	]
+|	|	|	|	|	[AS
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	(value = '33')
+|	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]

@@ -1,11 +1,38 @@
-(use-ctx pht pht/jvm
-	(progn
-		(cls
-			TestA
-			[
-				^Object
-			]
-			(@static
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls
+				TestA
+				[
+					^Object
+				]
+				(@static
+					(defn
+						foo
+						^int
+						[
+							[
+								i
+								^int
+							]
+						]
+						(add
+							i
+							5))))
+			(test-fn
+				0
+				(mcall
+					^TestA
+					foo
+					5))
+			(cls
+				TestB
+				[
+					^Object
+				]
+				(ctor
+					[]
+					(ccall))
 				(defn
 					foo
 					^int
@@ -17,46 +44,59 @@
 					]
 					(add
 						i
-						5))))
-		(test-fn
-			0
-			(mcall
-				^TestA
-				foo
-				5))
-		(cls
-			TestB
-			[
-				^Object
-			]
-			(ctor
-				[]
-				(ccall))
-			(defn
-				foo
-				^int
+						15)))
+			(test-fn
+				1
+				(mcall
+					(new
+						^TestB)
+					foo
+					10))
+			(cls
+				TestC
 				[
-					[
-						i
-						^int
-					]
+					^Object
 				]
-				(add
-					i
-					15)))
-		(test-fn
-			1
-			(mcall
-				(new
-					^TestB)
-				foo
-				10))
-		(cls
-			TestC
-			[
-				^Object
-			]
-			(@static
+				(@static
+					(defn
+						foo
+						^int
+						[
+							[
+								i
+								^int
+							]
+						]
+						(sub
+							i
+							5))
+					(defn
+						call
+						^int
+						[
+							[
+								i
+								^int
+							]
+						]
+						(mcall
+							.
+							foo
+							i))))
+			(test-fn
+				2
+				(mcall
+					^TestC
+					call
+					35))
+			(cls
+				TestD
+				[
+					^Object
+				]
+				(ctor
+					[]
+					(ccall))
 				(defn
 					foo
 					^int
@@ -68,7 +108,7 @@
 					]
 					(sub
 						i
-						5))
+						15))
 				(defn
 					call
 					^int
@@ -81,50 +121,11 @@
 					(mcall
 						.
 						foo
-						i))))
-		(test-fn
-			2
-			(mcall
-				^TestC
-				call
-				35))
-		(cls
-			TestD
-			[
-				^Object
-			]
-			(ctor
-				[]
-				(ccall))
-			(defn
-				foo
-				^int
-				[
-					[
-						i
-						^int
-					]
-				]
-				(sub
-					i
-					15))
-			(defn
-				call
-				^int
-				[
-					[
-						i
-						^int
-					]
-				]
+						i)))
+			(test-fn
+				3
 				(mcall
-					.
-					foo
-					i)))
-		(test-fn
-			3
-			(mcall
-				(new
-					^TestD)
-				call
-				65))))
+					(new
+						^TestD)
+					call
+					65)))))

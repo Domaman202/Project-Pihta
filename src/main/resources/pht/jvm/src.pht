@@ -145,6 +145,7 @@
             java.lang.Object
             java.lang.String
             java.lang.Integer
+            java.lang.Iterable
             java.lang.NullPointerException
             kotlin.Unit])
         (alias-type [[Object Any]])

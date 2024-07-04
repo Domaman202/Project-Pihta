@@ -1,17 +1,18 @@
-(use-ctx pht pht/jvm
-	(test-fn
-		0
-		(def
-			[
+(load-ctx
+	(use-ctx pht pht/jvm
+		(test-fn
+			0
+			(def
 				[
+					[
+						i
+						0
+					]
+				])
+			(cycle
+				(less
 					i
-					0
-				]
-			])
-		(cycle
-			(less
-				i
-				10)
-			(inc
-				i))
-		i))
+					10)
+				(inc
+					i))
+			i)))

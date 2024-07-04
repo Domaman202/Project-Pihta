@@ -1,69 +1,70 @@
-(use-ctx pht pht/jvm
-	(progn
-		(@test
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(block
-								(def [
-									[^[int pht$tmp$63919 (new-arr ^int 3)]])
-								(aset
-									(get pht$tmp$63919)
-									0
-									12)
-								(aset
-									(get pht$tmp$63919)
-									1
-									21)
-								(aset
-									(get pht$tmp$63919)
-									2
-									33)
-								(get pht$tmp$63919)))))))
-		(@test
-			(cls [] Test1 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(arr-size
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
 								(block
 									(def [
-										[^[int pht$tmp$20486 (new-arr ^int 3)]])
+										[^[int pht$tmp$63919 (new-arr ^int 3)]])
 									(aset
-										(get pht$tmp$20486)
+										(get pht$tmp$63919)
 										0
-										202)
+										12)
 									(aset
-										(get pht$tmp$20486)
+										(get pht$tmp$63919)
 										1
-										203)
+										21)
 									(aset
-										(get pht$tmp$20486)
+										(get pht$tmp$63919)
 										2
-										213)
-									(get pht$tmp$20486))))))))
-		(@test
-			(cls [] Test2 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(block
-								(def [
-									[^[float pht$tmp$20933 (new-arr ^float 3)]])
-								(aset
-									(get pht$tmp$20933)
-									0
-									(as ^float
-										202))
-								(aset
-									(get pht$tmp$20933)
-									1
-									(as ^float
-										203))
-								(aset
-									(get pht$tmp$20933)
-									2
-									(as ^float
-										213))
-								(get pht$tmp$20933)))))))))
+										33)
+									(get pht$tmp$63919)))))))
+			(@test
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(arr-size
+									(block
+										(def [
+											[^[int pht$tmp$20486 (new-arr ^int 3)]])
+										(aset
+											(get pht$tmp$20486)
+											0
+											202)
+										(aset
+											(get pht$tmp$20486)
+											1
+											203)
+										(aset
+											(get pht$tmp$20486)
+											2
+											213)
+										(get pht$tmp$20486))))))))
+			(@test
+				(cls [] Test2 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(block
+									(def [
+										[^[float pht$tmp$20933 (new-arr ^float 3)]])
+									(aset
+										(get pht$tmp$20933)
+										0
+										(as ^float
+											202))
+									(aset
+										(get pht$tmp$20933)
+										1
+										(as ^float
+											203))
+									(aset
+										(get pht$tmp$20933)
+										2
+										(as ^float
+											213))
+									(get pht$tmp$20933))))))))))

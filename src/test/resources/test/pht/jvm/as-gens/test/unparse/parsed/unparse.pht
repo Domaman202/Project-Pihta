@@ -1,71 +1,72 @@
-(use-ctx pht pht/jvm
-	(progn
-		(cls
-			[
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls
 				[
-					A
+					[
+						A
+						^Object
+					]
+					[
+						B
+						^Object
+					]
+				]
+				Test
+				[
 					^Object
 				]
-				[
-					B
-					^Object
-				]
-			]
-			Test
-			[
-				^Object
-			]
-			(ctor
-				[]
-				(ccall))
-			(defn
-				foo
-				A^
-				[]
-				nil)
-			(defn
-				bar
-				B^
-				[]
-				nil)
-			(@static
-				(defn
-					make
-					^Object
+				(ctor
 					[]
-					(new
-						^Test))))
-		(test-fn
-			0
-			(def-set
-				o
-				(macro as-gens
-					^Test
-					(mcall
-						^Test
-						make)
-					[
-						^Class
-						^String
-					]))
-			(type-of
-				(mcall
+					(ccall))
+				(defn
+					foo
+					A^
+					[]
+					nil)
+				(defn
+					bar
+					B^
+					[]
+					nil)
+				(@static
+					(defn
+						make
+						^Object
+						[]
+						(new
+							^Test))))
+			(test-fn
+				0
+				(def-set
 					o
-					foo)))
-		(test-fn
-			1
-			(def-set
-				o
-				(macro as-gens
-					^Test
-					(mcall
+					(macro as-gens
 						^Test
-						make)
-					[
-						^Class
-						^String
-					]))
-			(type-of
-				(mcall
+						(mcall
+							^Test
+							make)
+						[
+							^Class
+							^String
+						]))
+				(type-of
+					(mcall
+						o
+						foo)))
+			(test-fn
+				1
+				(def-set
 					o
-					bar)))))
+					(macro as-gens
+						^Test
+						(mcall
+							^Test
+							make)
+						[
+							^Class
+							^String
+						]))
+				(type-of
+					(mcall
+						o
+						bar))))))

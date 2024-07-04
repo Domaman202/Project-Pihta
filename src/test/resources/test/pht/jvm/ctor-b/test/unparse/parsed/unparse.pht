@@ -1,10 +1,26 @@
-(use-ctx pht pht/jvm
-	(progn
-		(@open
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(@open
+				(cls
+					TestA
+					[
+						^Object
+					]
+					(ctor
+						[
+							[
+								i
+								^int
+							]
+						]
+						(ccall)
+						(println
+							i))))
 			(cls
-				TestA
+				TestB
 				[
-					^Object
+					^TestA
 				]
 				(ctor
 					[
@@ -13,27 +29,12 @@
 							^int
 						]
 					]
-					(ccall)
-					(println
-						i))))
-		(cls
-			TestB
-			[
-				^TestA
-			]
-			(ctor
-				[
-					[
-						i
-						^int
-					]
-				]
-				(ccall
-					i)))
-		(app-fn
-			(new
-				^TestA
-				202)
-			(new
-				^TestB
-				203))))
+					(ccall
+						i)))
+			(app-fn
+				(new
+					^TestA
+					202)
+				(new
+					^TestB
+					203)))))

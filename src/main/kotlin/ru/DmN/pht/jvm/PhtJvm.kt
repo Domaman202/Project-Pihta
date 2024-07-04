@@ -1,9 +1,11 @@
 package ru.DmN.pht.jvm
 
 import org.objectweb.asm.ClassWriter
+import org.objectweb.asm.tree.ClassNode
 import ru.DmN.pht.ast.ISyncNode
 import ru.DmN.pht.compiler.java.compilers.*
-import ru.DmN.pht.jvm.compiler.ctx.classes
+import ru.DmN.pht.jvm.compiler.ctx.compiledClasses
+import ru.DmN.pht.jvm.compiler.ctx.compiledClassesOrNull
 import ru.DmN.pht.jvm.compilers.*
 import ru.DmN.pht.jvm.processors.*
 import ru.DmN.pht.jvm.unparsers.NUAnnotation
@@ -11,6 +13,7 @@ import ru.DmN.pht.jvm.unparsers.NUClassOf
 import ru.DmN.pht.jvm.unparsers.NUSync
 import ru.DmN.pht.jvm.utils.node.NodeParsedTypes.*
 import ru.DmN.pht.jvm.utils.node.NodeTypes.*
+import ru.DmN.pht.module.utils.Module
 import ru.DmN.pht.parsers.NPNodeAlias
 import ru.DmN.pht.processors.NRSA
 import ru.DmN.pht.utils.Platforms.JVM
@@ -20,6 +23,7 @@ import ru.DmN.pht.utils.addSNU
 import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
+import ru.DmN.siberia.compiler.ctx.splitModuleBuild
 import ru.DmN.siberia.compiler.utils.ModuleCompilers
 import ru.DmN.siberia.compilers.NCDefault
 import ru.DmN.siberia.processor.utils.module
@@ -189,12 +193,14 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
     override fun load(compiler: Compiler, ctx: CompilationContext) {
         if (!ctx.loadedModules.contains(this)) {
             // Контексты
-            compiler.contexts.classes = HashMap()
+            (compiler.contexts.compiledClassesOrNull ?: HashMap<Module, MutableMap<String, ClassNode>>().apply { compiler.contexts.compiledClassesOrNull = this })[ctx.module] = HashMap()
             // Финализация
             compiler.finalizers.add { dir ->
-                File(dir).mkdirs()
-                JarOutputStream(FileOutputStream("$dir/${ctx.module.name.let { ctx.module.name.let { it.substring(it.lastIndexOf('/') + 1) } }}.jar")).use { jar ->
-                    compiler.contexts.classes.values.forEach {
+                val module0 = ctx.module
+                val module = module0.name
+                File("$dir/$module").mkdirs()
+                JarOutputStream(FileOutputStream("$dir/${module.replace('/', '.')}.jar")).use { jar ->
+                    iterateCompiledClasses(compiler, module0).forEach {
                         val b =
                             try {
                                 val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES + ClassWriter.COMPUTE_MAXS)
@@ -208,8 +214,8 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
                             }.toByteArray()
                         //
                         if (it.name.contains('/'))
-                            File("$dir/${it.name.substring(0, it.name.lastIndexOf('/'))}").mkdirs()
-                        FileOutputStream("$dir/${it.name}.class").write(b)
+                            File("$dir/$module/${it.name.substring(0, it.name.lastIndexOf('/'))}").mkdirs()
+                        FileOutputStream("$dir/$module/${it.name}.class").write(b)
                         //
                         jar.putNextEntry(JarEntry("${it.name}.class"))
                         jar.write(b)
@@ -219,6 +225,34 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
             }
             //
             super.load(compiler, ctx)
+        }
+    }
+
+    private fun iterateCompiledClasses(compiler: Compiler, module: Module): Iterator<ClassNode> {
+        if (compiler.contexts.splitModuleBuild)
+            return compiler.contexts.compiledClasses[module]!!.values.iterator()
+        val modules = compiler.contexts.compiledClasses.values.iterator()
+        var classes: Iterator<ClassNode>? = null
+        return object : Iterator<ClassNode> {
+            override fun hasNext(): Boolean =
+                if (classes == null) {
+                    if (modules.hasNext()) {
+                        classes = modules.next().values.iterator()
+                        hasNext()
+                    } else {
+                        false
+                    }
+                } else if (classes!!.hasNext()) {
+                    true
+                } else {
+                    classes = null
+                    hasNext()
+                }
+
+            override fun next(): ClassNode {
+                hasNext()
+                return classes!!.next()
+            }
         }
     }
 

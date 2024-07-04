@@ -1,14 +1,16 @@
-[USE_CTX
-|	(modules = pht pht/jvm)
-|	[TEST_FN
-|	|	[VALUE
-|	|	|	(type = INT)
-|	|	|	(value = '0')
-|	|	]
-|	|	[CLS_OF
+[LOAD_CTX
+|	[USE_CTX
+|	|	(modules = pht pht/jvm)
+|	|	[TEST_FN
 |	|	|	[VALUE
-|	|	|	|	(type = CLASS)
-|	|	|	|	(value = 'String')
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[CLS_OF
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	(value = 'String')
+|	|	|	|	]
 |	|	|	]
 |	|	]
 |	]

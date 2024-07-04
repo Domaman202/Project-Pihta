@@ -1,16 +1,51 @@
-[USE_CTX
-|	(modules = pht pht/jvm)
-|	[PROGN
-|	|	[ANN_OPEN
+[LOAD_CTX
+|	[USE_CTX
+|	|	(modules = pht pht/jvm)
+|	|	[PROGN
+|	|	|	[ANN_OPEN
+|	|	|	|	[CLS
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'TestA')
+|	|	|	|	|	]
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[CTOR
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[CCALL]
+|	|	|	|	|	|	[PRINTLN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
 |	|	|	[CLS
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'TestA')
+|	|	|	|	|	(text = 'TestB')
 |	|	|	|	]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	(value = 'TestA')
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[CTOR
@@ -26,8 +61,7 @@
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
-|	|	|	|	|	[CCALL]
-|	|	|	|	|	[PRINTLN
+|	|	|	|	|	[CCALL
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
 |	|	|	|	|	|	|	(text = 'i')
@@ -35,58 +69,26 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	]
-|	|	[CLS
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'TestB')
-|	|	|	]
-|	|	|	[VALN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'TestA')
-|	|	|	|	]
-|	|	|	]
-|	|	|	[CTOR
-|	|	|	|	[VALN
-|	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'int')
-|	|	|	|	|	|	]
+|	|	|	[APP_FN
+|	|	|	|	[NEW
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '202')
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	|	[CCALL
-|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'i')
+|	|	|	|	[NEW
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'TestB')
 |	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	]
-|	|	[APP_FN
-|	|	|	[NEW
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'TestA')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '202')
-|	|	|	|	]
-|	|	|	]
-|	|	|	[NEW
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'TestB')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '203')
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '203')
+|	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	]

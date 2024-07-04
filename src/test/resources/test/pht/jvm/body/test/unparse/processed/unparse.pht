@@ -1,18 +1,19 @@
-(use-ctx pht pht/jvm
-	(cls [] App [^java.lang.Object]
-		(@static
-			(defn [] main ^void [[args ^[java.lang.String]]
-				(block
-					(def [
-						[^int i 12]])
-					(mcall
-						^ru.DmN.pht.io.StdOut
-						println
-						(get i)))
-				(block
-					(def [
-						[^int i 21]])
-					(mcall
-						^ru.DmN.pht.io.StdOut
-						println
-						(get i)))))))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(cls [] App [^java.lang.Object]
+			(@static
+				(defn [] main ^void [[args ^[java.lang.String]]
+					(block
+						(def [
+							[^int i 12]])
+						(mcall
+							^ru.DmN.pht.io.StdOut
+							println
+							(get i)))
+					(block
+						(def [
+							[^int i 21]])
+						(mcall
+							^ru.DmN.pht.io.StdOut
+							println
+							(get i))))))))

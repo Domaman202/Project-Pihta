@@ -1,18 +1,88 @@
-[USE_CTX
-|	(modules = pht pht/jvm)
-|	[PROGN
-|	|	[CLS
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'TestA')
-|	|	|	]
-|	|	|	[VALN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'Object')
+[LOAD_CTX
+|	[USE_CTX
+|	|	(modules = pht pht/jvm)
+|	|	[PROGN
+|	|	|	[CLS
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'TestA')
+|	|	|	|	]
+|	|	|	|	[VALN
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[ANN_STATIC
+|	|	|	|	|	[DEFN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'foo')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[ADD
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '5')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[ANN_STATIC
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '0')
+|	|	|	|	]
+|	|	|	|	[MCALL
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	(value = 'foo')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '5')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'TestB')
+|	|	|	|	]
+|	|	|	|	[VALN
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[CTOR
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[CCALL]
+|	|	|	|	]
 |	|	|	|	[DEFN
 |	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	(type = NO-STATIC)
@@ -41,114 +111,150 @@
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '5')
+|	|	|	|	|	|	|	(value = '15')
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '0')
-|	|	|	]
-|	|	|	[MCALL
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'TestA')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	(value = 'foo')
-|	|	|	|	]
+|	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '5')
+|	|	|	|	|	(value = '1')
+|	|	|	|	]
+|	|	|	|	[MCALL
+|	|	|	|	|	[NEW
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'TestB')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	(value = 'foo')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '10')
+|	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	]
-|	|	[CLS
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'TestB')
-|	|	|	]
-|	|	|	[VALN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'Object')
-|	|	|	|	]
-|	|	|	]
-|	|	|	[CTOR
-|	|	|	|	[VALN]
-|	|	|	|	[CCALL]
-|	|	|	]
-|	|	|	[DEFN
+|	|	|	[CLS
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'foo')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'int')
+|	|	|	|	|	(text = 'TestC')
 |	|	|	|	]
 |	|	|	|	[VALN
-|	|	|	|	|	[VALN
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[ANN_STATIC
+|	|	|	|	|	[DEFN
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	(text = 'foo')
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS)
 |	|	|	|	|	|	|	(value = 'int')
 |	|	|	|	|	|	]
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[SUB
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	(value = '5')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[DEFN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'call')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[MCALL
+|	|	|	|	|	|	|	[NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = '.')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	|	|	(value = 'foo')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	|	[ADD
-|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'i')
+|	|	|	]
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '2')
+|	|	|	|	]
+|	|	|	|	[MCALL
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'TestC')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	(value = 'call')
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '15')
+|	|	|	|	|	|	(value = '35')
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '1')
-|	|	|	]
-|	|	|	[MCALL
-|	|	|	|	[NEW
+|	|	|	[CLS
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'TestD')
+|	|	|	|	]
+|	|	|	|	[VALN
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'TestB')
+|	|	|	|	|	|	(value = 'Object')
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	(value = 'foo')
+|	|	|	|	[CTOR
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[CCALL]
 |	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '10')
-|	|	|	|	]
-|	|	|	]
-|	|	]
-|	|	[CLS
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'TestC')
-|	|	|	]
-|	|	|	[VALN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'Object')
-|	|	|	|	]
-|	|	|	]
-|	|	|	[ANN_STATIC
 |	|	|	|	[DEFN
 |	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	(type = NO-STATIC)
@@ -177,7 +283,7 @@
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '5')
+|	|	|	|	|	|	|	(value = '15')
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
@@ -218,130 +324,26 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '2')
-|	|	|	]
-|	|	|	[MCALL
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'TestC')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	(value = 'call')
-|	|	|	|	]
+|	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '35')
-|	|	|	|	]
-|	|	|	]
-|	|	]
-|	|	[CLS
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'TestD')
-|	|	|	]
-|	|	|	[VALN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'Object')
-|	|	|	|	]
-|	|	|	]
-|	|	|	[CTOR
-|	|	|	|	[VALN]
-|	|	|	|	[CCALL]
-|	|	|	]
-|	|	|	[DEFN
-|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'foo')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'int')
-|	|	|	|	]
-|	|	|	|	[VALN
-|	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'int')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[SUB
-|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '15')
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[DEFN
-|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'call')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'int')
-|	|	|	|	]
-|	|	|	|	[VALN
-|	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'int')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
+|	|	|	|	|	(value = '3')
 |	|	|	|	]
 |	|	|	|	[MCALL
-|	|	|	|	|	[NAME
-|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = '.')
+|	|	|	|	|	[NEW
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'TestD')
+|	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	(value = 'foo')
+|	|	|	|	|	|	(value = 'call')
 |	|	|	|	|	]
-|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '3')
-|	|	|	]
-|	|	|	[MCALL
-|	|	|	|	[NEW
 |	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'TestD')
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '65')
 |	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	(value = 'call')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '65')
 |	|	|	|	]
 |	|	|	]
 |	|	]

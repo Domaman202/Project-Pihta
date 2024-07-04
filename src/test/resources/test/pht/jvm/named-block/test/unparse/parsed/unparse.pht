@@ -1,80 +1,81 @@
-(use-ctx pht pht/jvm
-	(progn
-		(test-fn
-			0
-			(def
-				[
-					[
-						i
-						0
-					]
-				])
-			(nb
-				CycleBlock
-				(cycle
-					(less
-						i
-						10)
-					(if
-						(great
-							i
-							5)
-						(break
-							CycleBlock))
-					(inc
-						i)))
-			i)
-		(test-fn
-			1
-			(def
-				[
-					[
-						i
-						0
-					]
-				])
-			(nb
-				CycleBlock
-				(cycle
-					(less
-						i
-						10)
-					(inc
-						i)
-					(if
-						(less
-							i
-							5)
-						(continue
-							CycleBlock))
-					(break
-						CycleBlock)))
-			i)
-		(test-fn
-			2
-			(nb
-				A
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(test-fn
+				0
 				(def
 					[
 						[
 							i
-							12
+							0
 						]
 					])
 				(nb
-					B
+					CycleBlock
+					(cycle
+						(less
+							i
+							10)
+						(if
+							(great
+								i
+								5)
+							(break
+								CycleBlock))
+						(inc
+							i)))
+				i)
+			(test-fn
+				1
+				(def
+					[
+						[
+							i
+							0
+						]
+					])
+				(nb
+					CycleBlock
+					(cycle
+						(less
+							i
+							10)
+						(inc
+							i)
+						(if
+							(less
+								i
+								5)
+							(continue
+								CycleBlock))
+						(break
+							CycleBlock)))
+				i)
+			(test-fn
+				2
+				(nb
+					A
 					(def
 						[
 							[
 								i
-								21
+								12
 							]
 						])
-					(bset
-						"i"
-						"A"
-						33)
-					(ret
-						(bget
+					(nb
+						B
+						(def
+							[
+								[
+									i
+									21
+								]
+							])
+						(bset
 							"i"
-							"A")))))))
+							"A"
+							33)
+						(ret
+							(bget
+								"i"
+								"A"))))))))

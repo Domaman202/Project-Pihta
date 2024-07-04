@@ -1,22 +1,24 @@
-[USE_CTX
-|	(modules = pht pht/jvm)
-|	[CT_IF_PLATFORM
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '0')
-|	|	|	]
-|	|	|	[CT_IF_PLATFORM
-|	|	|	|	[THROW
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'java.lang.RuntimeException')
+[LOAD_CTX
+|	[USE_CTX
+|	|	(modules = pht pht/jvm)
+|	|	[CT_IF_PLATFORM
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '0')
+|	|	|	|	]
+|	|	|	|	[CT_IF_PLATFORM
+|	|	|	|	|	[THROW
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = 'java.lang.RuntimeException')
+|	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	]
-|	|	|	[VALUE
-|	|	|	|	(type = STRING)
-|	|	|	|	(value = 'Кто не работает - тот ест!')
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'Кто не работает - тот ест!')
+|	|	|	|	]
 |	|	|	]
 |	|	]
 |	]

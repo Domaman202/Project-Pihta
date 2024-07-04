@@ -1,4 +1,5 @@
-(use-ctx pht pht/jvm
-	(app-fn
-		(println
-			"Слава России!")))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(app-fn
+			(println
+				"Слава России!"))))

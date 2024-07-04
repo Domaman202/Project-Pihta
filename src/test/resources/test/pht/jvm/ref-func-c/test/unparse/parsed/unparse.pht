@@ -1,44 +1,69 @@
-(use-ctx pht pht/jvm
-	(progn
-		(import
-			java
-			[
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(import
+				java
 				[
-					types
 					[
-						java.util.function.Supplier
-					]
-				]
-			])
-		(cls
-			Caller
-			[
-				^Object
-			]
-			(@static
-				(defn
-					call
-					^Object
-					[
+						types
 						[
-							ref
-							^Supplier
+							java.util.function.Supplier
 						]
 					]
-					(mcall
-						ref
-						get))))
-		(cls
-			TestA
-			[
-				^Object
-			]
-			(@static
+				])
+			(cls
+				Caller
+				[
+					^Object
+				]
+				(@static
+					(defn
+						call
+						^Object
+						[
+							[
+								ref
+								^Supplier
+							]
+						]
+						(mcall
+							ref
+							get))))
+			(cls
+				TestA
+				[
+					^Object
+				]
+				(@static
+					(defn
+						foo
+						^String
+						[]
+						"Auto-Provider Foo!")
+					(defn
+						call
+						^Object
+						[]
+						(mcall
+							^Caller
+							call
+							(rfn
+								^Supplier
+								.
+								foo)))))
+			(cls
+				TestB
+				[
+					^Object
+				]
+				(ctor
+					[]
+					(ccall))
 				(defn
 					foo
 					^String
 					[]
-					"Auto-Provider Foo!")
+					"Auto-Provider Instanced Foo!")
 				(defn
 					call
 					^Object
@@ -49,39 +74,15 @@
 						(rfn
 							^Supplier
 							.
-							foo)))))
-		(cls
-			TestB
-			[
-				^Object
-			]
-			(ctor
-				[]
-				(ccall))
-			(defn
-				foo
-				^String
-				[]
-				"Auto-Provider Instanced Foo!")
-			(defn
-				call
-				^Object
-				[]
+							foo))))
+			(test-fn
+				0
 				(mcall
-					^Caller
-					call
-					(rfn
-						^Supplier
-						.
-						foo))))
-		(test-fn
-			0
-			(mcall
-				^TestA
-				call))
-		(test-fn
-			1
-			(mcall
-				(new
-					^TestB)
-				call))))
+					^TestA
+					call))
+			(test-fn
+				1
+				(mcall
+					(new
+						^TestB)
+					call)))))

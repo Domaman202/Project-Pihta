@@ -1,155 +1,157 @@
-[USE_CTX
-|	(modules = pht pht/jvm)
-|	[PROGN
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '0')
-|	|	|	]
-|	|	|	[NEW_ARR
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'int')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '4')
-|	|	|	|	]
-|	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '1')
-|	|	|	]
-|	|	|	[DEF
-|	|	|	|	[VALN
-|	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'arr')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[NEW_ARR
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'int')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	(value = '4')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[ASET
-|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'arr')
-|	|	|	|	]
+[LOAD_CTX
+|	[USE_CTX
+|	|	(modules = pht pht/jvm)
+|	|	[PROGN
+|	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
 |	|	|	|	|	(value = '0')
 |	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '12')
+|	|	|	|	[NEW_ARR
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '4')
+|	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[ASET
-|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'arr')
-|	|	|	|	]
+|	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
 |	|	|	|	|	(value = '1')
 |	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '21')
-|	|	|	|	]
-|	|	|	]
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'arr')
-|	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '2')
-|	|	|	]
-|	|	|	[DEF
-|	|	|	|	[VALN
+|	|	|	|	[DEF
 |	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'arr')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[NEW_ARR
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'arr')
 |	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	(value = '4')
+|	|	|	|	|	|	|	[NEW_ARR
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	(value = '4')
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	]
-|	|	|	[ASET
+|	|	|	|	[ASET
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'arr')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '0')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[ASET
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'arr')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '1')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	]
+|	|	|	|	]
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
 |	|	|	|	|	(text = 'arr')
 |	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '12')
-|	|	|	|	]
 |	|	|	]
-|	|	|	[ASET
-|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'arr')
-|	|	|	|	]
+|	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '1')
+|	|	|	|	|	(value = '2')
 |	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '21')
+|	|	|	|	[DEF
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'arr')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[NEW_ARR
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	(value = '4')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
 |	|	|	|	]
-|	|	|	]
-|	|	|	[ASET
-|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'arr')
+|	|	|	|	[ASET
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'arr')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '0')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	]
 |	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '3')
+|	|	|	|	[ASET
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'arr')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '1')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	]
 |	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '33')
+|	|	|	|	[ASET
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'arr')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '3')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '33')
+|	|	|	|	|	]
 |	|	|	|	]
-|	|	|	]
-|	|	|	[AGET
-|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'arr')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '3')
+|	|	|	|	[AGET
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'arr')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '3')
+|	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	]

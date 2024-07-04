@@ -1,8 +1,9 @@
-(use-ctx pht pht/jvm
-	(@@if-platform JVM
-		(test-fn
-			0
-			(@@if-platform CPP
-				(throw
-					^java.lang.RuntimeException))
-			"Кто не работает - тот ест!")))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(@@if-platform JVM
+			(test-fn
+				0
+				(@@if-platform CPP
+					(throw
+						^java.lang.RuntimeException))
+				"Кто не работает - тот ест!"))))

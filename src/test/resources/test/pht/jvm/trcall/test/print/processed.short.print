@@ -1,81 +1,86 @@
-[USE_CTX_
-|	(modules = pht pht/jvm)
+[LOAD_CTX_
+|	(modules =)
 |	(NODES:
-|	|	[CLS_
-|	|	|	(type = final class)
-|	|	|	(name = App)
-|	|	|	[ANN_STATIC_
-|	|	|	|	[DEFN_
-|	|	|	|	|	(type = method)
-|	|	|	|	|	(desc = fac(II)I)
-|	|	|	|	|	[IF_
-|	|	|	|	|	|	[LESS_
-|	|	|	|	|	|	|	[GET_ var i]
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	(value = '1')
+|	|	[USE_CTX_
+|	|	|	(modules = pht pht/jvm)
+|	|	|	(NODES:
+|	|	|	|	[CLS_
+|	|	|	|	|	(type = final class)
+|	|	|	|	|	(name = App)
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(desc = fac(II)I)
+|	|	|	|	|	|	|	[IF_
+|	|	|	|	|	|	|	|	[LESS_
+|	|	|	|	|	|	|	|	|	[GET_ var i]
+|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	(value = '1')
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_ var r]
+|	|	|	|	|	|	|	|	[TRCALL_
+|	|	|	|	|	|	|	|	|	[SUB_
+|	|	|	|	|	|	|	|	|	|	[GET_ var i]
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	(value = '1')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	[MUL_
+|	|	|	|	|	|	|	|	|	|	[GET_ var i]
+|	|	|	|	|	|	|	|	|	|	[GET_ var r]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
-|	|	|	|	|	|	[GET_ var r]
-|	|	|	|	|	|	[TRCALL_
-|	|	|	|	|	|	|	[SUB_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(desc = fac(I)I)
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = fac(II)I)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	(value = 'App')
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	
 |	|	|	|	|	|	|	|	[GET_ var i]
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	(value = '1')
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[MUL_
-|	|	|	|	|	|	|	|	[GET_ var i]
-|	|	|	|	|	|	|	|	[GET_ var r]
-|	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[DEFN_
-|	|	|	|	|	(type = method)
-|	|	|	|	|	(desc = fac(I)I)
-|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	(method = fac(II)I)
-|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'App')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	)
-|	|	|	|	|	
-|	|	|	|	|	|	[GET_ var i]
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '1')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[ANN_TEST_
-|	|	|	|	|	(meta:
-|	|	|	|	|	|	[STATIC] true
-|	|	|	|	|	)
-|	|	|	|	|	[CLS_
-|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	(name = Test0)
-|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	|	(method = fac(I)I)
-|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	(value = 'App')
+|	|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	|	(meta:
+|	|	|	|	|	|	|	|	[STATIC] true
+|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	|	(name = Test0)
+|	|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	|	|	(method = fac(I)I)
+|	|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'App')
+|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = '4')
+|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	|	|	(value = '4')
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
@@ -83,7 +88,7 @@
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	]
+|	|	|	)
 |	|	]
 |	)
 ]

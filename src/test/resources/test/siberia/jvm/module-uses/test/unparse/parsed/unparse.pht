@@ -1,2 +1,3 @@
-(use-ctx pht pht/jvm
-	(app-fn))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(app-fn)))

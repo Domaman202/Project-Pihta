@@ -1,60 +1,61 @@
-(use-ctx pht pht/jvm
-	(progn
-		(import
-			java
-			[
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(import
+				java
 				[
-					types
 					[
-						java.util.function.Supplier
+						types
+						[
+							java.util.function.Supplier
+						]
 					]
+				])
+			(cls
+				TestA
+				[
+					^Object
 				]
-			])
-		(cls
-			TestA
-			[
-				^Object
-			]
-			(@static
+				(@static
+					(defn
+						foo
+						^String
+						[]
+						"Foo!")))
+			(test-fn
+				0
+				(mcall
+					(rfn
+						^Supplier
+						^TestA
+						foo)
+					get))
+			(cls
+				TestB
+				[
+					^Object
+				]
+				(ctor
+					[]
+					(ccall))
 				(defn
 					foo
 					^String
 					[]
-					"Foo!")))
-		(test-fn
-			0
-			(mcall
-				(rfn
-					^Supplier
-					^TestA
-					foo)
-				get))
-		(cls
-			TestB
-			[
-				^Object
-			]
-			(ctor
-				[]
-				(ccall))
-			(defn
-				foo
-				^String
-				[]
-				"Instanced Foo!"))
-		(test-fn
-			1
-			(def
-				[
+					"Instanced Foo!"))
+			(test-fn
+				1
+				(def
 					[
+						[
+							o
+							(new
+								^TestB)
+						]
+					])
+				(mcall
+					(rfn
+						^Supplier
 						o
-						(new
-							^TestB)
-					]
-				])
-			(mcall
-				(rfn
-					^Supplier
-					o
-					foo)
-				get))))
+						foo)
+					get)))))

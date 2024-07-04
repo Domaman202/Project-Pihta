@@ -1,8 +1,9 @@
-(use-ctx pht pht/jvm
-	(progn
-		(@test
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							"Кто не работает - тот ест!")))))))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								"Кто не работает - тот ест!"))))))))

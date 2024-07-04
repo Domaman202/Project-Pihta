@@ -1,18 +1,63 @@
-[USE_CTX
-|	(modules = pht pht/jvm)
-|	[PROGN
-|	|	[CLS
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'TestA')
-|	|	|	]
-|	|	|	[VALN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'Object')
+[LOAD_CTX
+|	[USE_CTX
+|	|	(modules = pht pht/jvm)
+|	|	[PROGN
+|	|	|	[CLS
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'TestA')
+|	|	|	|	]
+|	|	|	|	[VALN
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[ANN_STATIC
+|	|	|	|	|	[FLD
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	|	[ANN_STATIC
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '0')
+|	|	|	|	]
+|	|	|	|	[FSET_B
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[FGET_B]
+|	|	|	]
+|	|	|	[CLS
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = 'TestB')
+|	|	|	|	]
+|	|	|	|	[VALN
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[CTOR
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[CCALL]
+|	|	|	|	]
 |	|	|	|	[FLD
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[VALN
@@ -28,81 +73,38 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '0')
-|	|	|	]
-|	|	|	[FSET_B
+|	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '12')
+|	|	|	|	|	(value = '1')
 |	|	|	|	]
-|	|	|	]
-|	|	|	[FGET_B]
-|	|	]
-|	|	[CLS
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'TestB')
-|	|	|	]
-|	|	|	[VALN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'Object')
-|	|	|	|	]
-|	|	|	]
-|	|	|	[CTOR
-|	|	|	|	[VALN]
-|	|	|	|	[CCALL]
-|	|	|	]
-|	|	|	[FLD
-|	|	|	|	[VALN
+|	|	|	|	[DEF
 |	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'int')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '1')
-|	|	|	]
-|	|	|	[DEF
-|	|	|	|	[VALN
-|	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'o')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[NEW
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'TestB')
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'o')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[NEW
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = 'TestB')
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	]
-|	|	|	[FSET_B
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '21')
+|	|	|	|	[FSET_B
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	]
 |	|	|	|	]
-|	|	|	]
-|	|	|	[FGET_B
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = STRING)
-|	|	|	|	|	(value = 'o')
+|	|	|	|	[FGET_B
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	(value = 'o')
+|	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	]

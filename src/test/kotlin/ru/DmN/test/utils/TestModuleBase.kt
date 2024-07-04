@@ -2,15 +2,13 @@ package ru.DmN.test.utils
 
 import ru.DmN.pht.module.utils.Module
 import ru.DmN.pht.module.utils.ModulesProvider
-import ru.DmN.pht.std.module.ast.NodeModule
+import ru.DmN.pht.module.utils.getOrLoadModule
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeProcessedUse
 import ru.DmN.siberia.compiler.CompilerImpl
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.console.BuildCommands
 import ru.DmN.siberia.console.BuildCommands.provider
-import ru.DmN.siberia.parser.ParserImpl
-import ru.DmN.siberia.parser.ctx.ParsingContext
 import ru.DmN.siberia.processor.ProcessorImpl
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.module
@@ -21,6 +19,7 @@ import ru.DmN.siberia.unparser.UnparserImpl
 import ru.DmN.siberia.unparser.ctx.UnparsingContext
 import ru.DmN.siberia.utils.IPlatform
 import ru.DmN.siberia.utils.exception.BaseException
+import ru.DmN.siberia.utils.invokeAll
 import ru.DmN.siberia.utils.vtype.TypesProvider
 import java.io.File
 import java.io.FileOutputStream
@@ -65,15 +64,10 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
 
     fun compile() {
         try {
-            val mp = ModulesProvider.of(platform)
-            val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(
-                ParsingContext.module(
-                    platform,
-                    "$dir/module.pht"
-                )
-            ) as NodeModule).module
-            module.init(platform, mp)
             val tp = TypesProvider.of(platform)
+            val mp = ModulesProvider.of(platform)
+            val module = mp.getOrLoadModule(dir, platform)
+            module.init(platform, mp)
             val processed = ArrayList<Node>()
             val processor = ProcessorImpl(mp, tp)
             val list = ArrayList<NodeProcessedUse.ProcessedData>()
@@ -85,17 +79,17 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
             processed.forEach { compiler.compile(it, ctx) }
             compiler.stageManager.runAll()
             File("dump/$dir").mkdirs()
-            compiler.finalizers.forEach { it("dump/$dir") }
+            compiler.finalizers.invokeAll("dump/$dir")
         } catch (e: BaseException) {
             throw WrappedException(e, BuildCommands::provider)
         }
     }
 
     fun unparse() {
-        val mp = ModulesProvider.of(platform)
-        val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(platform, "$dir/module.pht")) as NodeModule).module
-        module.init(platform, mp)
         val tp = TypesProvider.of(platform)
+        val mp = ModulesProvider.of(platform)
+        val module = mp.getOrLoadModule(dir, platform)
+        module.init(platform, mp)
         File("dump/$dir/unparse/parsed").mkdirs()
         FileOutputStream("dump/$dir/unparse/parsed/unparse.pht").use { out ->
             val unparser = UnparserImpl(mp, 1024*1024)
@@ -124,10 +118,10 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
     }
 
     private fun print() {
-        val mp = ModulesProvider.of(platform)
-        val module = (ParserImpl(Module.getModuleFile(dir), mp).parseNode(ParsingContext.module(platform, "$dir/module.pht")) as NodeModule).module
-        module.init(platform, mp)
         val tp = TypesProvider.of(platform)
+        val mp = ModulesProvider.of(platform)
+        val module = mp.getOrLoadModule(dir, platform)
+        module.init(platform, mp)
         File("dump/$dir/print").mkdirs()
         FileOutputStream("dump/$dir/print/parsed.short.print").use { short ->
             FileOutputStream("dump/$dir/print/parsed.long.print").use { long ->

@@ -1,22 +1,24 @@
-[USE_CTX
-|	(modules = pht pht/jvm)
-|	[TEST_FN
-|	|	[VALUE
-|	|	|	(type = INT)
-|	|	|	(value = '0')
-|	|	]
-|	|	[LIST_OF
+[LOAD_CTX
+|	[USE_CTX
+|	|	(modules = pht pht/jvm)
+|	|	[TEST_FN
 |	|	|	[VALUE
-|	|	|	|	(type = STRING)
-|	|	|	|	(value = 'Слава')
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
 |	|	|	]
-|	|	|	[VALUE
-|	|	|	|	(type = STRING)
-|	|	|	|	(value = 'Великой')
-|	|	|	]
-|	|	|	[VALUE
-|	|	|	|	(type = STRING)
-|	|	|	|	(value = 'России')
+|	|	|	[LIST_OF
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'Слава')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'Великой')
+|	|	|	|	]
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'России')
+|	|	|	|	]
 |	|	|	]
 |	|	]
 |	]

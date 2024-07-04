@@ -1,16 +1,17 @@
-(use-ctx pht pht/jvm
-	(progn
-		(test-fn
-			0
-			(@@roll-left
-				(div
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(test-fn
+				0
+				(@@roll-left
+					(div
+						8
+						4)
+					2))
+			(test-fn
+				1
+				(@@roll-right
 					8
-					4)
-				2))
-		(test-fn
-			1
-			(@@roll-right
-				8
-				4
-				(mul
-					2)))))
+					4
+					(mul
+						2))))))

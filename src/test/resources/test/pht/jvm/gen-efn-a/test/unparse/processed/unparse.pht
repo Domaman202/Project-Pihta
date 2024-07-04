@@ -1,12 +1,13 @@
-(use-ctx pht pht/jvm
-	(progn
-		(cls [] TestA [^java.lang.Object]
-			(@static
-				(efn [[T ^java.lang.Object]] ^java.lang.String foo T^ []
-					nil)))
-		(@test
-			(cls [] Test0 [^java.lang.Object]
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls [] TestA [^java.lang.Object]
 				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							"java.lang.Class")))))))
+					(efn [[T ^java.lang.Object]] ^java.lang.String foo T^ []
+						nil)))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								"java.lang.Class"))))))))

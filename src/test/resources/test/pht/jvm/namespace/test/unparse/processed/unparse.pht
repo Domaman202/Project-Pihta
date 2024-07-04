@@ -1,15 +1,16 @@
-(use-ctx pht pht/jvm
-	(progn
-		(ns ru.DmN.test
-			(cls [] Test [^java.lang.Object]
-				(@static
-					(defn [] glory-to-Putin ^java.lang.String []
-						"Слава Владимиру Путину!"))))
-		(@test
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(mcall
-								^ru.DmN.test.Test
-								glory-to-Putin))))))))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(ns ru.DmN.test
+				(cls [] Test [^java.lang.Object]
+					(@static
+						(defn [] glory-to-Putin ^java.lang.String []
+							"Слава Владимиру Путину!"))))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									^ru.DmN.test.Test
+									glory-to-Putin)))))))))

@@ -1,172 +1,177 @@
-[USE_CTX_
-|	(modules = pht pht/jvm)
+[LOAD_CTX_
+|	(modules =)
 |	(NODES:
-|	|	[PROGN_
-|	|	|	[CLS_
-|	|	|	|	(type = final class)
-|	|	|	|	(name = TestA)
-|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(desc = foo()V)
-|	|	|	|	|	|	[UNIT]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[ANN_TEST_
-|	|	|	|	[CLS_
-|	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = Test0)
-|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	(method = foo()V)
-|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	)
+|	|	[USE_CTX_
+|	|	|	(modules = pht pht/jvm)
+|	|	|	(NODES:
+|	|	|	|	[PROGN_
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = TestA)
+|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	(desc = foo()V)
+|	|	|	|	|	|	|	|	[UNIT]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[CLS_
-|	|	|	|	(type = final class)
-|	|	|	|	(name = TestB)
-|	|	|	|	[CTOR_
-|	|	|	|	|	(type = constructor)
-|	|	|	|	|	(desc = <init>()V)
-|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	(method = <init>()V)
-|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_ var this]
-|	|	|	|	|	|	)
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[DEFN_
-|	|	|	|	|	(type = method)
-|	|	|	|	|	(desc = foo()V)
-|	|	|	|	|	[UNIT]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[ANN_TEST_
-|	|	|	|	[CLS_
-|	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = Test1)
-|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	(method = foo()V)
-|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	|	(type = VT(TestB))
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test0)
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	(method = foo()V)
+|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[CLS_
-|	|	|	|	(type = final class)
-|	|	|	|	(name = TestC)
-|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(desc = foo()V)
-|	|	|	|	|	|	[UNIT]
-|	|	|	|	|	]
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(desc = call()V)
-|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	(method = foo()V)
-|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	(value = 'TestC')
 |	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[ANN_TEST_
-|	|	|	|	[CLS_
-|	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = Test2)
-|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = TestB)
+|	|	|	|	|	|	[CTOR_
+|	|	|	|	|	|	|	(type = constructor)
+|	|	|	|	|	|	|	(desc = <init>()V)
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = <init>()V)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[GET_ var this]
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
 |	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	(method = call()V)
-|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	(value = 'TestC')
+|	|	|	|	|	|	|	(desc = foo()V)
+|	|	|	|	|	|	|	[UNIT]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test1)
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	(method = foo()V)
+|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestB))
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = TestC)
+|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	(desc = foo()V)
+|	|	|	|	|	|	|	|	[UNIT]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	(desc = call()V)
+|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	(method = foo()V)
+|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	(value = 'TestC')
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test2)
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	(method = call()V)
+|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestC')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = TestD)
+|	|	|	|	|	|	[CTOR_
+|	|	|	|	|	|	|	(type = constructor)
+|	|	|	|	|	|	|	(desc = <init>()V)
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = <init>()V)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[GET_ var this]
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(desc = foo()V)
+|	|	|	|	|	|	|	[UNIT]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(desc = call()V)
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = foo()V)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[GET_ var this]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[CLS_
-|	|	|	|	(type = final class)
-|	|	|	|	(name = TestD)
-|	|	|	|	[CTOR_
-|	|	|	|	|	(type = constructor)
-|	|	|	|	|	(desc = <init>()V)
-|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	(method = <init>()V)
-|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_ var this]
-|	|	|	|	|	|	)
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[DEFN_
-|	|	|	|	|	(type = method)
-|	|	|	|	|	(desc = foo()V)
-|	|	|	|	|	[UNIT]
-|	|	|	|	]
-|	|	|	|	[DEFN_
-|	|	|	|	|	(type = method)
-|	|	|	|	|	(desc = call()V)
-|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	(method = foo()V)
-|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_ var this]
-|	|	|	|	|	|	)
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[ANN_TEST_
-|	|	|	|	[CLS_
-|	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = Test3)
-|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	(method = call()V)
-|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	|	(type = VT(TestD))
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test3)
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	(method = call()V)
+|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestD))
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	]
+|	|	|	)
 |	|	]
 |	)
 ]

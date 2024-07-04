@@ -1,7 +1,7 @@
 package ru.DmN.pht.utils
 
 import ru.DmN.pht.jvm.utils.vtype.JRTP
-import ru.DmN.pht.utils.IPhtPlatform.Organization.FILES
+import ru.DmN.pht.utils.IPhtPlatform.Organization.MODULES
 import ru.DmN.pht.utils.IPhtPlatform.Organization.PACKAGES
 import ru.DmN.pht.utils.IPhtPlatform.Paradigm.FUNCTIONAL
 import ru.DmN.pht.utils.IPhtPlatform.Paradigm.OBJECTIVE
@@ -27,7 +27,7 @@ enum class Platforms(
     /**
      * Lua
      */
-    LUA(STATIC, true, FUNCTIONAL, FILES);
+    LUA(STATIC, true, FUNCTIONAL, MODULES);
 
     companion object {
         init {

@@ -1,52 +1,53 @@
-(use-ctx pht pht/jvm
-	(progn
-		(import "java" [
-			[types [java.util.function.Supplier]]
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(import "java" [
+				[types [java.util.function.Supplier]]
 ])
-		(cls [] Caller [^java.lang.Object]
-			(@static
-				(defn [] call ^java.lang.Object [[ref ^java.util.function.Supplier<^java.lang.Object>]]
+			(cls [] Caller [^java.lang.Object]
+				(@static
+					(defn [] call ^java.lang.Object [[ref ^java.util.function.Supplier<^java.lang.Object>]]
+						(mcall
+							(get ref)
+							get))))
+			(cls [] TestA [^java.lang.Object]
+				(@static
+					(defn [] foo ^java.lang.String []
+						"Auto-Provider Foo!")
+					(defn [] call ^java.lang.Object []
+						(mcall
+							^Caller
+							call
+							(rfn ^java.util.function.Supplier<^java.lang.Object>
+								^TestA
+								foo)))))
+			(cls [] TestB [^java.lang.Object]
+				(ctor []
 					(mcall
-						(get ref)
-						get))))
-		(cls [] TestA [^java.lang.Object]
-			(@static
+						super
+						<init>))
 				(defn [] foo ^java.lang.String []
-					"Auto-Provider Foo!")
+					"Auto-Provider Instanced Foo!")
 				(defn [] call ^java.lang.Object []
 					(mcall
 						^Caller
 						call
 						(rfn ^java.util.function.Supplier<^java.lang.Object>
-							^TestA
-							foo)))))
-		(cls [] TestB [^java.lang.Object]
-			(ctor []
-				(mcall
-					super
-					<init>))
-			(defn [] foo ^java.lang.String []
-				"Auto-Provider Instanced Foo!")
-			(defn [] call ^java.lang.Object []
-				(mcall
-					^Caller
-					call
-					(rfn ^java.util.function.Supplier<^java.lang.Object>
-						(get this)
-						foo))))
-		(@test
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(mcall
-								^TestA
-								call))))))
-		(@test
-			(cls [] Test1 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(mcall
-								(new ^TestB)
-								call))))))))
+							(get this)
+							foo))))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									^TestA
+									call))))))
+			(@test
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									(new ^TestB)
+									call)))))))))

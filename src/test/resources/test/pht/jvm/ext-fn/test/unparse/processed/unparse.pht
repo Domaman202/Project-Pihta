@@ -1,27 +1,28 @@
-(use-ctx pht pht/jvm
-	(progn
-		(cls [] Utils [^java.lang.Object]
-			(efn [] ^java.lang.String hello ^java.lang.String []
-				(mcall
-					"Hello, "
-					add
-					(block
-						(def [
-							[^[java.lang.Object pht$tmp$9265 (new-arr ^java.lang.Object 2)]])
-						(aset
-							(get pht$tmp$9265)
-							0
-							(get this))
-						(aset
-							(get pht$tmp$9265)
-							1
-							"!")
-						(get pht$tmp$9265)))))
-		(@test
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(mcall
-								"Vasya"
-								hello))))))))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls [] Utils [^java.lang.Object]
+				(efn [] ^java.lang.String hello ^java.lang.String []
+					(mcall
+						"Hello, "
+						add
+						(block
+							(def [
+								[^[java.lang.Object pht$tmp$9265 (new-arr ^java.lang.Object 2)]])
+							(aset
+								(get pht$tmp$9265)
+								0
+								(get this))
+							(aset
+								(get pht$tmp$9265)
+								1
+								"!")
+							(get pht$tmp$9265)))))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									"Vasya"
+									hello)))))))))

@@ -1,44 +1,81 @@
-(use-ctx pht pht/jvm
-	(progn
-		(import
-			java
-			[
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(import
+				java
 				[
-					types
 					[
-						java.util.function.Supplier
-					]
-				]
-			])
-		(cls
-			Caller
-			[
-				^Object
-			]
-			(@static
-				(defn
-					call
-					^Object
-					[
+						types
 						[
-							ref
-							^Supplier
+							java.util.function.Supplier
 						]
 					]
-					(mcall
-						ref
-						get))))
-		(cls
-			TestA
-			[
-				^Object
-			]
-			(@static
+				])
+			(cls
+				Caller
+				[
+					^Object
+				]
+				(@static
+					(defn
+						call
+						^Object
+						[
+							[
+								ref
+								^Supplier
+							]
+						]
+						(mcall
+							ref
+							get))))
+			(cls
+				TestA
+				[
+					^Object
+				]
+				(@static
+					(defn
+						foo
+						^String
+						[]
+						"Auto Foo!")
+					(defn
+						call
+						^Object
+						[]
+						(mcall
+							^Caller
+							call
+							(rfn
+								.
+								.
+								foo)))
+					(defn
+						call-as
+						^Object
+						[]
+						(mcall
+							(as
+								^Supplier
+								(rfn
+									.
+									.
+									foo))
+							get))))
+			(cls
+				TestB
+				[
+					^Object
+				]
+				(ctor
+					[]
+					(ccall))
 				(defn
 					foo
 					^String
 					[]
-					"Auto Foo!")
+					"Auto Instanced Foo!")
 				(defn
 					call
 					^Object
@@ -61,62 +98,26 @@
 								.
 								.
 								foo))
-						get))))
-		(cls
-			TestB
-			[
-				^Object
-			]
-			(ctor
-				[]
-				(ccall))
-			(defn
-				foo
-				^String
-				[]
-				"Auto Instanced Foo!")
-			(defn
-				call
-				^Object
-				[]
+						get)))
+			(test-fn
+				0
 				(mcall
-					^Caller
-					call
-					(rfn
-						.
-						.
-						foo)))
-			(defn
-				call-as
-				^Object
-				[]
+					^TestA
+					call))
+			(test-fn
+				1
 				(mcall
-					(as
-						^Supplier
-						(rfn
-							.
-							.
-							foo))
-					get)))
-		(test-fn
-			0
-			(mcall
-				^TestA
-				call))
-		(test-fn
-			1
-			(mcall
-				^TestA
-				call-as))
-		(test-fn
-			2
-			(mcall
-				(new
-					^TestB)
-				call))
-		(test-fn
-			3
-			(mcall
-				(new
-					^TestB)
-				call-as))))
+					^TestA
+					call-as))
+			(test-fn
+				2
+				(mcall
+					(new
+						^TestB)
+					call))
+			(test-fn
+				3
+				(mcall
+					(new
+						^TestB)
+					call-as)))))

@@ -1,28 +1,29 @@
-(use-ctx pht pht/jvm
-	(progn
-		(import
-			java
-			[
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(import
+				java
 				[
-					types
 					[
-						java.util.ArrayList
+						types
+						[
+							java.util.ArrayList
+						]
 					]
-				]
-			])
-		(test-fn
-			0
-			(type-of
-				(mcall
-					(new
-						^ArrayList)
-					get
-					0)))
-		(test-fn
-			1
-			(type-of
-				(mcall
-					(new
-						^ArrayList<^String>)
-					get
-					0)))))
+				])
+			(test-fn
+				0
+				(type-of
+					(mcall
+						(new
+							^ArrayList)
+						get
+						0)))
+			(test-fn
+				1
+				(type-of
+					(mcall
+						(new
+							^ArrayList<^String>)
+						get
+						0))))))

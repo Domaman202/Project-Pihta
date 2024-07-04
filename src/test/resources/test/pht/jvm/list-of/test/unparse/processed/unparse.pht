@@ -1,24 +1,25 @@
-(use-ctx pht pht/jvm
-	(@test
-		(cls [] Test0 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(as ^dynamic
-						(mcall
-							(block
-								(def [
-									[^[java.lang.Object pht$tmp$25978 (new-arr ^java.lang.Object 3)]])
-								(aset
-									(get pht$tmp$25978)
-									0
-									"Слава")
-								(aset
-									(get pht$tmp$25978)
-									1
-									"Великой")
-								(aset
-									(get pht$tmp$25978)
-									2
-									"России")
-								(get pht$tmp$25978))
-							toList)))))))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(@test
+			(cls [] Test0 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(as ^dynamic
+							(mcall
+								(block
+									(def [
+										[^[java.lang.Object pht$tmp$25978 (new-arr ^java.lang.Object 3)]])
+									(aset
+										(get pht$tmp$25978)
+										0
+										"Слава")
+									(aset
+										(get pht$tmp$25978)
+										1
+										"Великой")
+									(aset
+										(get pht$tmp$25978)
+										2
+										"России")
+									(get pht$tmp$25978))
+								toList))))))))

@@ -1,61 +1,62 @@
-(use-ctx pht pht/jvm
-	(progn
-		(cls [] TestA [^java.lang.Object]
-			(@static
-				(progn-
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls [] TestA [^java.lang.Object]
+				(@static
+					(progn-
+						(@static
+							(defn [] setI ^void [[i ^int]]
+								(fset
+									^TestA
+									i
+									(get i)))
+							(defn [] getI ^int []
+								(fget
+									^TestA
+									i))
+							(def [
+								[i ^int]])))))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
 					(@static
+						(defn [] test ^dynamic []
+							(mcall
+								^TestA
+								setI
+								12)
+							(as ^dynamic
+								(mcall
+									^TestA
+									getI))))))
+			(cls [] TestB [^java.lang.Object]
+				(ctor []
+					(mcall
+						super
+						<init>))
+				(progn-
+					(progn-
 						(defn [] setI ^void [[i ^int]]
 							(fset
-								^TestA
+								(get this)
 								i
 								(get i)))
 						(defn [] getI ^int []
 							(fget
-								^TestA
+								(get this)
 								i))
 						(def [
-							[i ^int]])))))
-		(@test
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(mcall
-							^TestA
-							setI
-							12)
-						(as ^dynamic
+							[i ^int]]))))
+			(@test
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(def [
+								[^TestB o (new ^TestB)]])
 							(mcall
-								^TestA
-								getI))))))
-		(cls [] TestB [^java.lang.Object]
-			(ctor []
-				(mcall
-					super
-					<init>))
-			(progn-
-				(progn-
-					(defn [] setI ^void [[i ^int]]
-						(fset
-							(get this)
-							i
-							(get i)))
-					(defn [] getI ^int []
-						(fget
-							(get this)
-							i))
-					(def [
-						[i ^int]]))))
-		(@test
-			(cls [] Test1 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(def [
-							[^TestB o (new ^TestB)]])
-						(mcall
-							(get o)
-							setI
-							21)
-						(as ^dynamic
-							(fget
 								(get o)
-								i))))))))
+								setI
+								21)
+							(as ^dynamic
+								(fget
+									(get o)
+									i)))))))))

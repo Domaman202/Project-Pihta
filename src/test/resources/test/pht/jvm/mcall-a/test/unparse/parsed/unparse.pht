@@ -1,46 +1,72 @@
-(use-ctx pht pht/jvm
-	(progn
-		(cls
-			TestA
-			[
-				^Object
-			]
-			(@static
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls
+				TestA
+				[
+					^Object
+				]
+				(@static
+					(defn
+						foo
+						^void
+						[]
+						(unit))))
+			(test-fn
+				0
+				(mcall
+					^TestA
+					foo))
+			(cls
+				TestB
+				[
+					^Object
+				]
+				(ctor
+					[]
+					(ccall))
 				(defn
 					foo
 					^void
 					[]
-					(unit))))
-		(test-fn
-			0
-			(mcall
-				^TestA
-				foo))
-		(cls
-			TestB
-			[
-				^Object
-			]
-			(ctor
-				[]
-				(ccall))
-			(defn
-				foo
-				^void
-				[]
-				(unit)))
-		(test-fn
-			1
-			(mcall
-				(new
-					^TestB)
-				foo))
-		(cls
-			TestC
-			[
-				^Object
-			]
-			(@static
+					(unit)))
+			(test-fn
+				1
+				(mcall
+					(new
+						^TestB)
+					foo))
+			(cls
+				TestC
+				[
+					^Object
+				]
+				(@static
+					(defn
+						foo
+						^void
+						[]
+						(unit))
+					(defn
+						call
+						^void
+						[]
+						(mcall
+							.
+							foo))))
+			(test-fn
+				2
+				(mcall
+					^TestC
+					call))
+			(cls
+				TestD
+				[
+					^Object
+				]
+				(ctor
+					[]
+					(ccall))
 				(defn
 					foo
 					^void
@@ -52,35 +78,10 @@
 					[]
 					(mcall
 						.
-						foo))))
-		(test-fn
-			2
-			(mcall
-				^TestC
-				call))
-		(cls
-			TestD
-			[
-				^Object
-			]
-			(ctor
-				[]
-				(ccall))
-			(defn
-				foo
-				^void
-				[]
-				(unit))
-			(defn
-				call
-				^void
-				[]
+						foo)))
+			(test-fn
+				3
 				(mcall
-					.
-					foo)))
-		(test-fn
-			3
-			(mcall
-				(new
-					^TestD)
-				call))))
+					(new
+						^TestD)
+					call)))))

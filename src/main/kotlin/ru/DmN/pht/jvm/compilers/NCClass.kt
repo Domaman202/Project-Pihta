@@ -4,7 +4,7 @@ import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.ClassNode
 import ru.DmN.pht.ast.NodeType
 import ru.DmN.pht.compiler.java.ctx.ClassContext
-import ru.DmN.pht.jvm.compiler.ctx.classes
+import ru.DmN.pht.jvm.compiler.ctx.addCompiledClass
 import ru.DmN.pht.jvm.compiler.ctx.method
 import ru.DmN.pht.jvm.compiler.ctx.with
 import ru.DmN.pht.jvm.compiler.utils.desc
@@ -29,7 +29,7 @@ object NCClass : IStdNodeCompiler<NodeType, ClassNode, Nothing> {
     override fun compileAsm(node: NodeType, compiler: Compiler, ctx: CompilationContext): ClassNode =
         ClassNode().apply {
             compiler.pushTask(TYPES_PREDEFINE, node) {
-                compiler.contexts.classes[node.type.name] = this
+                ctx.addCompiledClass(compiler, node.type.name, this)
                 visit(
                     jcv,
                     Opcodes.ACC_PUBLIC.let {

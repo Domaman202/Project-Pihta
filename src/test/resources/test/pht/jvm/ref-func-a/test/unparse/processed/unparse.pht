@@ -1,38 +1,39 @@
-(use-ctx pht pht/jvm
-	(progn
-		(import "java" [
-			[types [java.util.function.Supplier]]
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(import "java" [
+				[types [java.util.function.Supplier]]
 ])
-		(cls [] TestA [^java.lang.Object]
-			(@static
+			(cls [] TestA [^java.lang.Object]
+				(@static
+					(defn [] foo ^java.lang.String []
+						"Foo!")))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									(rfn ^java.util.function.Supplier<^java.lang.Object>
+										^TestA
+										foo)
+									get))))))
+			(cls [] TestB [^java.lang.Object]
+				(ctor []
+					(mcall
+						super
+						<init>))
 				(defn [] foo ^java.lang.String []
-					"Foo!")))
-		(@test
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(mcall
-								(rfn ^java.util.function.Supplier<^java.lang.Object>
-									^TestA
-									foo)
-								get))))))
-		(cls [] TestB [^java.lang.Object]
-			(ctor []
-				(mcall
-					super
-					<init>))
-			(defn [] foo ^java.lang.String []
-				"Instanced Foo!"))
-		(@test
-			(cls [] Test1 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(def [
-							[^TestB o (new ^TestB)]])
-						(as ^dynamic
-							(mcall
-								(rfn ^java.util.function.Supplier<^java.lang.Object>
-									(get o)
-									foo)
-								get))))))))
+					"Instanced Foo!"))
+			(@test
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(def [
+								[^TestB o (new ^TestB)]])
+							(as ^dynamic
+								(mcall
+									(rfn ^java.util.function.Supplier<^java.lang.Object>
+										(get o)
+										foo)
+									get)))))))))

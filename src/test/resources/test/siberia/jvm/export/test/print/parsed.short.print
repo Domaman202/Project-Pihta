@@ -1,13 +1,15 @@
-[USE_CTX
-|	(modules = pht pht/jvm)
+[LOAD_CTX
 |	[USE_CTX
-|	|	(modules = test/siberia/jvm/export/helper)
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '0')
+|	|	(modules = pht pht/jvm)
+|	|	[USE_CTX
+|	|	|	(modules = test/siberia/jvm/export/helper)
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '0')
+|	|	|	|	]
+|	|	|	|	[CTC_MODULE_NAME]
 |	|	|	]
-|	|	|	[CTC_MODULE_NAME]
 |	|	]
 |	]
 ]

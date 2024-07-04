@@ -1,80 +1,81 @@
-(use-ctx pht pht/jvm
-	(progn
-		(@test
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(and
-								true
-								false))))))
-		(@test
-			(cls [] Test1 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(or
-								true
-								false))))))
-		(@test
-			(cls [] Test2 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(xor
-								true
-								false))))))
-		(@test
-			(cls [] Test3 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(not
-								true))))))
-		(@test
-			(cls [] Test4 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(and
-								2
-								3))))))
-		(@test
-			(cls [] Test5 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(or
-								2
-								3))))))
-		(@test
-			(cls [] Test6 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(xor
-								2
-								3))))))
-		(@test
-			(cls [] Test7 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(not
-								1))))))
-		(@test
-			(cls [] Test8 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(shift-left
-								1
-								10))))))
-		(@test
-			(cls [] Test9 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(shift-right
-								1024
-								10))))))))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(and
+									true
+									false))))))
+			(@test
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(or
+									true
+									false))))))
+			(@test
+				(cls [] Test2 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(xor
+									true
+									false))))))
+			(@test
+				(cls [] Test3 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(not
+									true))))))
+			(@test
+				(cls [] Test4 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(and
+									2
+									3))))))
+			(@test
+				(cls [] Test5 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(or
+									2
+									3))))))
+			(@test
+				(cls [] Test6 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(xor
+									2
+									3))))))
+			(@test
+				(cls [] Test7 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(not
+									1))))))
+			(@test
+				(cls [] Test8 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(shift-left
+									1
+									10))))))
+			(@test
+				(cls [] Test9 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(shift-right
+									1024
+									10)))))))))

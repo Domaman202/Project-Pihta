@@ -1,40 +1,41 @@
-(use-ctx pht pht/jvm
-	(progn
-		(cls [[B ^java.lang.Object][A ^java.lang.Object]] Test [^java.lang.Object]
-			(ctor []
-				(mcall
-					super
-					<init>))
-			(defn [] foo A^ []
-				(as ^java.lang.Object
-					nil))
-			(defn [] bar B^ []
-				(as ^java.lang.Object
-					nil))
-			(@static
-				(defn [] make ^java.lang.Object []
-					(new ^Test<^java.lang.Object ^java.lang.Object>))))
-		(@test
-			(cls [] Test0 [^java.lang.Object]
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls [[B ^java.lang.Object][A ^java.lang.Object]] Test [^java.lang.Object]
+				(ctor []
+					(mcall
+						super
+						<init>))
+				(defn [] foo A^ []
+					(as ^java.lang.Object
+						nil))
+				(defn [] bar B^ []
+					(as ^java.lang.Object
+						nil))
 				(@static
-					(defn [] test ^dynamic []
-						(def [
-							[^Test<^java.lang.Object ^java.lang.Object> o (as ^Test<^java.lang.Object ^java.lang.Object>
-									(as ^Test<^java.lang.Object ^java.lang.Object>
-										(mcall
-											^Test
-											make)))]])
-						(as ^dynamic
-							"java.lang.Class")))))
-		(@test
-			(cls [] Test1 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(def [
-							[^Test<^java.lang.Object ^java.lang.Object> o (as ^Test<^java.lang.Object ^java.lang.Object>
-									(as ^Test<^java.lang.Object ^java.lang.Object>
-										(mcall
-											^Test
-											make)))]])
-						(as ^dynamic
-							"java.lang.String")))))))
+					(defn [] make ^java.lang.Object []
+						(new ^Test<^java.lang.Object ^java.lang.Object>))))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(def [
+								[^Test<^java.lang.Object ^java.lang.Object> o (as ^Test<^java.lang.Object ^java.lang.Object>
+										(as ^Test<^java.lang.Object ^java.lang.Object>
+											(mcall
+												^Test
+												make)))]])
+							(as ^dynamic
+								"java.lang.Class")))))
+			(@test
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(def [
+								[^Test<^java.lang.Object ^java.lang.Object> o (as ^Test<^java.lang.Object ^java.lang.Object>
+										(as ^Test<^java.lang.Object ^java.lang.Object>
+											(mcall
+												^Test
+												make)))]])
+							(as ^dynamic
+								"java.lang.String"))))))))

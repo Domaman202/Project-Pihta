@@ -1,64 +1,65 @@
-(use-ctx pht pht/jvm
-	(progn
-		(cls [] TestA [^java.lang.Object]
-			(@static
-				(defn [] foo ^java.lang.String []
-					"Foo!")))
-		(@test
-			(cls [] Test0 [^java.lang.Object]
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls [] TestA [^java.lang.Object]
 				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(mcall
-								^TestA
-								foo))))))
-		(cls [] TestB [^java.lang.Object]
-			(ctor []
-				(mcall
-					super
-					<init>))
-			(defn [] foo ^java.lang.String []
-				"Instanced Foo!"))
-		(@test
-			(cls [] Test1 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(mcall
-								(new ^TestB)
-								foo))))))
-		(cls [] TestC [^java.lang.Object]
-			(@static
+					(defn [] foo ^java.lang.String []
+						"Foo!")))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									^TestA
+									foo))))))
+			(cls [] TestB [^java.lang.Object]
+				(ctor []
+					(mcall
+						super
+						<init>))
 				(defn [] foo ^java.lang.String []
-					"Auto Foo!")
+					"Instanced Foo!"))
+			(@test
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									(new ^TestB)
+									foo))))))
+			(cls [] TestC [^java.lang.Object]
+				(@static
+					(defn [] foo ^java.lang.String []
+						"Auto Foo!")
+					(defn [] call ^java.lang.String []
+						(mcall
+							^TestC
+							foo))))
+			(@test
+				(cls [] Test2 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									^TestC
+									call))))))
+			(cls [] TestD [^java.lang.Object]
+				(ctor []
+					(mcall
+						super
+						<init>))
+				(defn [] foo ^java.lang.String []
+					"Auto Instanced Foo!")
 				(defn [] call ^java.lang.String []
 					(mcall
-						^TestC
-						foo))))
-		(@test
-			(cls [] Test2 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(mcall
-								^TestC
-								call))))))
-		(cls [] TestD [^java.lang.Object]
-			(ctor []
-				(mcall
-					super
-					<init>))
-			(defn [] foo ^java.lang.String []
-				"Auto Instanced Foo!")
-			(defn [] call ^java.lang.String []
-				(mcall
-					(get this)
-					foo)))
-		(@test
-			(cls [] Test3 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(mcall
-								(new ^TestD)
-								call))))))))
+						(get this)
+						foo)))
+			(@test
+				(cls [] Test3 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									(new ^TestD)
+									call)))))))))

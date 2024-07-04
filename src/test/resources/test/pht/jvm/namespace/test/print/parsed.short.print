@@ -1,54 +1,56 @@
-[USE_CTX
-|	(modules = pht pht/jvm)
-|	[PROGN
-|	|	[NS
-|	|	|	[GET_OR_NAME
-|	|	|	|	(type = NO-STATIC)
-|	|	|	|	(text = 'ru.DmN.test')
-|	|	|	]
-|	|	|	[CLS
+[LOAD_CTX
+|	[USE_CTX
+|	|	(modules = pht pht/jvm)
+|	|	[PROGN
+|	|	|	[NS
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'Test')
+|	|	|	|	|	(text = 'ru.DmN.test')
 |	|	|	|	]
-|	|	|	|	[VALN
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	[CLS
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'Test')
 |	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[ANN_STATIC
-|	|	|	|	|	[DEFN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'glory-to-Putin')
-|	|	|	|	|	|	]
+|	|	|	|	|	[VALN
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	|	|	(value = 'Object')
 |	|	|	|	|	|	]
-|	|	|	|	|	|	[VALN]
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	(value = 'Слава Владимиру Путину!')
+|	|	|	|	|	]
+|	|	|	|	|	[ANN_STATIC
+|	|	|	|	|	|	[DEFN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = 'glory-to-Putin')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALN]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	(value = 'Слава Владимиру Путину!')
+|	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	]
-|	|	[TEST_FN
-|	|	|	[VALUE
-|	|	|	|	(type = INT)
-|	|	|	|	(value = '0')
-|	|	|	]
-|	|	|	[MCALL
+|	|	|	[TEST_FN
 |	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'ru.DmN.test.Test')
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = '0')
 |	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	(value = 'glory-to-Putin')
+|	|	|	|	[MCALL
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = 'ru.DmN.test.Test')
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = NAMING)
+|	|	|	|	|	|	(value = 'glory-to-Putin')
+|	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	]

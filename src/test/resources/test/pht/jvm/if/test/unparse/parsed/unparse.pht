@@ -1,14 +1,15 @@
-(use-ctx pht pht/jvm
-	(progn
-		(test-fn
-			0
-			(if
-				true
-				"Да"
-				"Нет"))
-		(test-fn
-			1
-			(if
-				false
-				"Да"
-				"Нет"))))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(test-fn
+				0
+				(if
+					true
+					"Да"
+					"Нет"))
+			(test-fn
+				1
+				(if
+					false
+					"Да"
+					"Нет")))))

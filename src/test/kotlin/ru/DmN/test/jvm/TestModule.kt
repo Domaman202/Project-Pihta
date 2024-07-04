@@ -22,7 +22,7 @@ abstract class TestModule(dir: String) : TestModuleBase(dir, JVM) {
         val original = System.out
         val steam = ByteArrayOutputStream()
         UNSAFE.putObject(System::class.java, OUT_OFFSET, PrintStream(steam))
-        URLClassLoader(arrayOf(File("dump/$dir").toURI().toURL()))
+        URLClassLoader(arrayOf(File("dump/$dir/${dir.replace('/', '.')}.jar").toURI().toURL()))
             .loadClass("App")
             .getMethod("main", Array<String>::class.java)
             .invoke(null, emptyArray<String>())
@@ -32,7 +32,7 @@ abstract class TestModule(dir: String) : TestModuleBase(dir, JVM) {
     }
 
     fun test(id: Int): Any? =
-        URLClassLoader(arrayOf(File("dump/$dir").toURI().toURL()))
+        URLClassLoader(arrayOf(File("dump/$dir/${dir.replace('/', '.')}.jar").toURI().toURL()))
             .loadClass("Test$id")
             .getMethod("test")
             .invoke(null)

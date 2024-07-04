@@ -1,10 +1,12 @@
-[USE_CTX
-|	(modules = pht pht/jvm)
-|	[APP_FN
-|	|	[PRINTLN
-|	|	|	[VALUE
-|	|	|	|	(type = STRING)
-|	|	|	|	(value = 'Слава России!')
+[LOAD_CTX
+|	[USE_CTX
+|	|	(modules = pht pht/jvm)
+|	|	[APP_FN
+|	|	|	[PRINTLN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = STRING)
+|	|	|	|	|	(value = 'Слава России!')
+|	|	|	|	]
 |	|	|	]
 |	|	]
 |	]

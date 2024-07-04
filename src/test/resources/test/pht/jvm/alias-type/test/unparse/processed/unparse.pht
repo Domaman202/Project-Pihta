@@ -1,10 +1,11 @@
-(use-ctx pht pht/jvm
-	(progn
-		(alias-type [
-			[Object object]])
-		(@test
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							^java.lang.Object)))))))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(alias-type [
+				[Object object]])
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								^java.lang.Object))))))))

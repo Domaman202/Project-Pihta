@@ -1,240 +1,245 @@
-[USE_CTX_
-|	(modules = pht pht/jvm)
+[LOAD_CTX_
+|	(modules =)
 |	(NODES:
-|	|	[PROGN_
-|	|	|	[IMPORT_
-|	|	|	|	(module = java)
-|	|	|	|	(types = [java.util.function.Supplier])
-|	|	|	]
-|	|	|	[CLS_
-|	|	|	|	(type = final class)
-|	|	|	|	(name = Caller)
-|	|	|	|	(parents = [java.lang.Object])
-|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(name = call)
-|	|	|	|	|	|	(desc = (Ljava/util/function/Supplier;)Ljava/lang/Object;)
-|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
-|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	[GET_
-|	|	|	|	|	|	|	|	|	(name = ref)
-|	|	|	|	|	|	|	|	|	(type = var)
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
-|	|	|	|	|	|	|	(type = VIRTUAL)
-|	|	|	|	|	|	]
+|	|	[USE_CTX_
+|	|	|	(modules = pht pht/jvm)
+|	|	|	(NODES:
+|	|	|	|	[PROGN_
+|	|	|	|	|	[IMPORT_
+|	|	|	|	|	|	(module = java)
+|	|	|	|	|	|	(types = [java.util.function.Supplier])
 |	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[CLS_
-|	|	|	|	(type = final class)
-|	|	|	|	(name = TestA)
-|	|	|	|	(parents = [java.lang.Object])
-|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	(name = foo)
-|	|	|	|	|	|	(desc = ()Ljava/lang/String;)
-|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	(value = 'Auto-Type Foo!')
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[CLS_
-|	|	|	|	(type = final class)
-|	|	|	|	(name = TestB)
-|	|	|	|	(parents = [java.lang.Object])
-|	|	|	|	[CTOR_
-|	|	|	|	|	(type = constructor)
-|	|	|	|	|	(name = <init>)
-|	|	|	|	|	(desc = ()V)
-|	|	|	|	|	(sign = null)
-|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	(method = <init>()V)
-|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	[GET_
-|	|	|	|	|	|	|	|	(name = this)
-|	|	|	|	|	|	|	|	(type = var)
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	)
-|	|	|	|	|	|	(generic = VT(void))
-|	|	|	|	|	|	(type = SUPER)
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	|	[DEFN_
-|	|	|	|	|	(type = method)
-|	|	|	|	|	(name = foo)
-|	|	|	|	|	(desc = ()Ljava/lang/String;)
-|	|	|	|	|	(sign = null)
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'Auto-Type Instanced Foo!')
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[ANN_TEST_
-|	|	|	|	[CLS_
-|	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = Test0)
-|	|	|	|	|	(parents = [java.lang.Object])
-|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(name = test)
-|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
-|	|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	(method = call(Ljava/util/function/Supplier;)Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'Caller')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	(RFN_
-|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
-|	|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
-|	|	|	|	|	|	|	|	|	|	(name = foo)
-|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
-|	|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[ANN_TEST_
-|	|	|	|	[CLS_
-|	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = Test1)
-|	|	|	|	|	(parents = [java.lang.Object])
-|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(name = test)
-|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
-|	|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = Caller)
+|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	(name = call)
+|	|	|	|	|	|	|	|	(desc = (Ljava/util/function/Supplier;)Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	(RFN_
-|	|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
-|	|	|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
-|	|	|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	|	(name = ref)
+|	|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
+|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = TestA)
+|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	(value = 'Auto-Type Foo!')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = TestB)
+|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	[CTOR_
+|	|	|	|	|	|	|	(type = constructor)
+|	|	|	|	|	|	|	(name = <init>)
+|	|	|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = <init>()V)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	|	|	(type = SUPER)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	(desc = ()Ljava/lang/String;)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	(value = 'Auto-Type Instanced Foo!')
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test0)
+|	|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	|	(method = call(Ljava/util/function/Supplier;)Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'Caller')
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
+|	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
+|	|	|	|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
+|	|	|	|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
-|	|	|	[ANN_TEST_
-|	|	|	|	[CLS_
-|	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = Test2)
-|	|	|	|	|	(parents = [java.lang.Object])
-|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(name = test)
-|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
-|	|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	(method = call(Ljava/util/function/Supplier;)Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'Caller')
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test1)
+|	|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
+|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	|	(type = STATIC)
-|	|	|	|	|	|	|	|	|	(RFN_
-|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
-|	|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
-|	|	|	|	|	|	|	|	|	|	(name = foo)
-|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestB))
-|	|	|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test2)
+|	|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	|	(method = call(Ljava/util/function/Supplier;)Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'Caller')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
+|	|	|	|	|	|	|	|	|	|	|	(type = STATIC)
+|	|	|	|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
+|	|	|	|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestB))
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test3)
+|	|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	(RFN_
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestB))
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
+|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
+|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	]
-|	|	|	[ANN_TEST_
-|	|	|	|	[CLS_
-|	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = Test3)
-|	|	|	|	|	(parents = [java.lang.Object])
-|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(name = test)
-|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
-|	|	|	|	|	|	|	(sign = null)
-|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	(RFN_
-|	|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
-|	|	|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
-|	|	|	|	|	|	|	|	|	|	|	(name = foo)
-|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestB))
-|	|	|	|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
-|	|	|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	]
-|	|	|	]
+|	|	|	)
 |	|	]
 |	)
 ]

@@ -1,23 +1,24 @@
-(use-ctx pht pht/jvm
-	(progn
-		(test-fn
-			0
-			(def
-				[
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(test-fn
+				0
+				(def
 					[
-						j
-						0
+						[
+							j
+							0
+						]
+					])
+				(for
+					[
+						i
+						(range
+							0
+							10)
 					]
-				])
-			(for
-				[
-					i
-					(range
-						0
-						10)
-				]
-				(set! j
-					(add
-						j
-						i)))
-			j)))
+					(set! j
+						(add
+							j
+							i)))
+				j))))

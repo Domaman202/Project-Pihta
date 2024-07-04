@@ -1,13 +1,14 @@
-(use-ctx pht pht/jvm
-	(progn
-		(cls [] TestClass123 [^java.lang.Object]
-			(ctor []
-				(mcall
-					super
-					<init>)))
-		(@test
-			(cls [] Test0 [^java.lang.Object]
-				(@static
-					(defn [] test ^dynamic []
-						(as ^dynamic
-							(new ^TestClass123))))))))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls [] TestClass123 [^java.lang.Object]
+				(ctor []
+					(mcall
+						super
+						<init>)))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(new ^TestClass123)))))))))

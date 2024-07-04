@@ -1,21 +1,22 @@
-(use-ctx pht pht/jvm
-	(progn
-		(cls
-			Utils
-			[
-				^Object
-			]
-			(efn
-				^String
-				hello
-				^String
-				[]
-				(add
-					"Hello, "
-					this
-					"!")))
-		(test-fn
-			0
-			(mcall
-				"Vasya"
-				hello))))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls
+				Utils
+				[
+					^Object
+				]
+				(efn
+					^String
+					hello
+					^String
+					[]
+					(add
+						"Hello, "
+						this
+						"!")))
+			(test-fn
+				0
+				(mcall
+					"Vasya"
+					hello)))))

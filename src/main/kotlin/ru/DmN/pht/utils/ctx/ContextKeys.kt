@@ -7,13 +7,6 @@ enum class ContextKeys : IContextKey {
      * Глобальный контекст.
      */
     GLOBAL,
-
-    /**
-     * (Compiler)
-     * Пространство имён.
-     */
-    NAMESPACE,
-
     /**
      * Контекст перечисления.
      */
@@ -27,22 +20,19 @@ enum class ContextKeys : IContextKey {
     /**
      * (Processor)
      * Список классов контекста (исключая текущий).
-     *
+     */
+    CLASSES,
+
+    /**
      * (JVM Compiler)
      * Список скомпилированных классов.
      */
-    CLASSES,
+    COMPILED_CLASSES,
 
     /**
      * Метод.
      */
     METHOD,
-
-    /**
-     * (C++ Compiler)
-     * Количество тестов.
-     */
-    TESTS,
 
     /**
      * Тело.
@@ -68,12 +58,6 @@ enum class ContextKeys : IContextKey {
      * Список макросов.
      */
     MACROS,
-
-    /**
-     * (C++ Compiler)
-     * Выхлоп компиляции.
-     */
-    OUTPUT,
 
     /**
      * (Processor)

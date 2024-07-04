@@ -1,13 +1,14 @@
-(use-ctx pht pht/jvm
-	(progn
-		(test-fn
-			0
-			(@@skip)
-			321)
-		(test-fn
-			1
-			(@@roll-right
-				(ret
-					666)
-				(@@skip))
-			777)))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(test-fn
+				0
+				(@@skip)
+				321)
+			(test-fn
+				1
+				(@@roll-right
+					(ret
+						666)
+					(@@skip))
+				777))))

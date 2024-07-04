@@ -1,57 +1,58 @@
-(use-ctx pht pht/jvm
-	(progn
-		(cls
-			TestA
-			[
-				^Object
-			]
-			(@static
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls
+				TestA
+				[
+					^Object
+				]
+				(@static
+					(fld
+						[
+							[
+								i
+								^int
+							]
+						])))
+			(test-fn
+				0
+				(fset
+					^TestA
+					i
+					12)
+				(fget
+					^TestA
+					i))
+			(cls
+				TestB
+				[
+					^Object
+				]
+				(ctor
+					[]
+					(ccall))
 				(fld
 					[
 						[
 							i
 							^int
 						]
-					])))
-		(test-fn
-			0
-			(fset
-				^TestA
-				i
-				12)
-			(fget
-				^TestA
-				i))
-		(cls
-			TestB
-			[
-				^Object
-			]
-			(ctor
-				[]
-				(ccall))
-			(fld
-				[
+					]))
+			(test-fn
+				1
+				(def
 					[
-						i
-						^int
-					]
-				]))
-		(test-fn
-			1
-			(def
-				[
-					[
-						o
-						(new
-							^TestB)
-					]
-				])
-			(fset
-				o
-				i
-				21)
-			(fget
-				(get
-					"o")
-				i))))
+						[
+							o
+							(new
+								^TestB)
+						]
+					])
+				(fset
+					o
+					i
+					21)
+				(fget
+					(get
+						"o")
+					i)))))

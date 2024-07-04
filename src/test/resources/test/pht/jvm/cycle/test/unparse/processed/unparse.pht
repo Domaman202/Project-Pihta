@@ -1,14 +1,15 @@
-(use-ctx pht pht/jvm
-	(@test
-		(cls [] Test0 [^java.lang.Object]
-			(@static
-				(defn [] test ^dynamic []
-					(def [
-						[^int i 0]])
-					(cycle
-						(less
-							(get i)
-							10)
-						(inc i))
-					(as ^dynamic
-						(get i)))))))
+(load-ctx
+	(use-ctx pht pht/jvm
+		(@test
+			(cls [] Test0 [^java.lang.Object]
+				(@static
+					(defn [] test ^dynamic []
+						(def [
+							[^int i 0]])
+						(cycle
+							(less
+								(get i)
+								10)
+							(inc i))
+						(as ^dynamic
+							(get i))))))))

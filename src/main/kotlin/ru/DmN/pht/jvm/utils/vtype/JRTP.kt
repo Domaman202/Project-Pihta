@@ -18,7 +18,14 @@ import java.util.*
  */
 class JRTP : TypesProvider() {
     override fun typeOf(name: String): VirtualType =
-        types[name.hashCode()] ?: addType(klassOf(name))
+        types[name.hashCode()]
+            ?: try {
+                addType(klassOf(name))
+            } catch (e: Exception) {
+                if (name.startsWith("ru."))
+                    println()
+                throw ClassNotFoundException("Класс '$name' не найден!", e)
+            }
 
     override fun typeOfOrNull(name: String): VirtualType? =
         try { typeOf(name) } catch (_: ClassNotFoundException) { null }

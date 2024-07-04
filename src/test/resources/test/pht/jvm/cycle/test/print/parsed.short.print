@@ -1,45 +1,47 @@
-[USE_CTX
-|	(modules = pht pht/jvm)
-|	[TEST_FN
-|	|	[VALUE
-|	|	|	(type = INT)
-|	|	|	(value = '0')
-|	|	]
-|	|	[DEF
-|	|	|	[VALN
+[LOAD_CTX
+|	[USE_CTX
+|	|	(modules = pht pht/jvm)
+|	|	[TEST_FN
+|	|	|	[VALUE
+|	|	|	|	(type = INT)
+|	|	|	|	(value = '0')
+|	|	|	]
+|	|	|	[DEF
 |	|	|	|	[VALN
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	(value = '0')
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CYCLE
+|	|	|	|	[LESS
 |	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	(type = NO-STATIC)
 |	|	|	|	|	|	(text = 'i')
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '0')
+|	|	|	|	|	|	(value = '10')
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[INC_PRE
+|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	(text = 'i')
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
-|	|	]
-|	|	[CYCLE
-|	|	|	[LESS
-|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'i')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '10')
-|	|	|	|	]
+|	|	|	[GET_OR_NAME
+|	|	|	|	(type = NO-STATIC)
+|	|	|	|	(text = 'i')
 |	|	|	]
-|	|	|	[INC_PRE
-|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'i')
-|	|	|	|	]
-|	|	|	]
-|	|	]
-|	|	[GET_OR_NAME
-|	|	|	(type = NO-STATIC)
-|	|	|	(text = 'i')
 |	|	]
 |	]
 ]

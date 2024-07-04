@@ -1,5 +1,6 @@
-(progn
-	(use-ctx pht pht/jvm
-		(cls [] App [^java.lang.Object]
-			(@static
-				(defn [] main ^void [[args ^[java.lang.String]])))))
+(load-ctx
+	(progn
+		(use-ctx pht pht/jvm
+			(cls [] App [^java.lang.Object]
+				(@static
+					(defn [] main ^void [[args ^[java.lang.String]]))))))

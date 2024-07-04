@@ -1,31 +1,32 @@
-(use-ctx pht pht/jvm
-	(cls [] App [^java.lang.Object]
-		(@static
-			(defn [] fac ^int [[i ^int][r ^int]]
-				(if
-					(less
-						(get i)
-						1)
-					(get r)
-					(trcall
-						(sub
+(load-ctx
+	(use-ctx pht pht/jvm
+		(cls [] App [^java.lang.Object]
+			(@static
+				(defn [] fac ^int [[i ^int][r ^int]]
+					(if
+						(less
 							(get i)
 							1)
-						(mul
-							(get i)
-							(get r)))))
-			(defn [] fac ^int [[i ^int]]
-				(mcall
-					^App
-					fac
-					(get i)
-					1))
-			(@test
-				(cls [] Test0 [^java.lang.Object]
-					(@static
-						(defn [] test ^dynamic []
-							(as ^dynamic
-								(mcall
-									^App
-									fac
-									4)))))))))
+						(get r)
+						(trcall
+							(sub
+								(get i)
+								1)
+							(mul
+								(get i)
+								(get r)))))
+				(defn [] fac ^int [[i ^int]]
+					(mcall
+						^App
+						fac
+						(get i)
+						1))
+				(@test
+					(cls [] Test0 [^java.lang.Object]
+						(@static
+							(defn [] test ^dynamic []
+								(as ^dynamic
+									(mcall
+										^App
+										fac
+										4))))))))))

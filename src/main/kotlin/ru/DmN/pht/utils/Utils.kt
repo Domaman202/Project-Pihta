@@ -1,4 +1,4 @@
-@file:Suppress("NOTHING_TO_INLINE", "UNCHECKED_CAST")
+@file:Suppress("NOTHING_TO_INLINE")
 package ru.DmN.pht.utils
 
 import ru.DmN.pht.ast.IValueNode
@@ -14,7 +14,19 @@ import java.util.stream.Stream
 inline val Variable.uniqueName
     get() = "$name$$id"
 
-fun <T> Iterable<T>.asSequenceWith(first: T): Sequence<T> =
+@Suppress("UNCHECKED_CAST")
+inline fun <T, reified R> Array<T>.mapArray(last: T, block: (T) -> R): Array<R> {
+    val arr = arrayOfNulls<R>(size + 1)
+    for (i in indices)
+        arr[i] = block(this[i])
+    arr[size] = block(last)
+    return arr as Array<R>
+}
+
+inline fun <T, reified R> Array<T>.mapArray(block: (T) -> R): Array<R> =
+    Array(size) { block(this[it]) }
+
+inline fun <T> Iterable<T>.asSequenceWith(first: T): Sequence<T> =
     FirstElementSequence(this, first)
 
 inline fun <T> List<T>.dropForEach(count: Int, block: (T) -> Unit) {
