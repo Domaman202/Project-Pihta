@@ -1,4 +1,4 @@
-package ru.DmN.pht.helper.ast
+package ru.DmN.pht.imports.ast
 
 interface IValueNode {
     val value: Any?

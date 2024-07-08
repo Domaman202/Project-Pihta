@@ -1,7 +1,7 @@
 package ru.DmN.pht.imports.parsers
 
-import ru.DmN.pht.helper.ast.IValueNode
-import ru.DmN.pht.helper.ast.NodeValueList
+import ru.DmN.pht.imports.ast.IValueNode
+import ru.DmN.pht.imports.ast.NodeValueList
 import ru.DmN.pht.parsers.NPValnB
 import ru.DmN.pht.utils.node.NodeParsedTypes.VALN
 import ru.DmN.siberia.ast.Node

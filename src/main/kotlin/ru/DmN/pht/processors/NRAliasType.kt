@@ -1,6 +1,6 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.helper.ast.NodeAliasType
+import ru.DmN.pht.imports.ast.NodeAliasType
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.utils.computeList
 import ru.DmN.pht.processor.utils.computeStringNodes

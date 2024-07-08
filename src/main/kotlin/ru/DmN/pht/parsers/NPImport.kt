@@ -1,7 +1,7 @@
 package ru.DmN.pht.parsers
 
 import ru.DmN.pht.ast.NodeImport
-import ru.DmN.pht.helper.ast.IValueNode
+import ru.DmN.pht.imports.ast.IValueNode
 import ru.DmN.pht.imports.Helper
 import ru.DmN.pht.parser.utils.nextOperation
 import ru.DmN.pht.utils.node.NodeTypes.IMPORT
