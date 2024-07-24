@@ -38,8 +38,10 @@ object NCMCall : INodeCompiler<NodeMCall> {
             } else if (modifiers.generator) {
                 val special = node.special as NodeDefn
                 val method = special.method
-                if (ctx.clazz.node.methods.none { it.name == method.name && it.desc == method.desc })
+                if (ctx.clazz.node.methods.none { it.name == method.name && it.desc == method.desc }) {
+                    node.method.modifiers.static = true
                     NCDefn.compileAsm(special, compiler, ctx)
+                }
                 compileCallInsert(node, NodeMCall.Type.UNKNOWN, node.instance, method, compiler, ctx)
             } else {
                 val mnode = ctx.method.node
@@ -52,7 +54,7 @@ object NCMCall : INodeCompiler<NodeMCall> {
     private fun compileCallInsert(node: INodesList, type: NodeMCall.Type, instance: Node, method: VirtualMethod, compiler: Compiler, ctx: CompilationContext): Pair<MethodNode, VirtualType> =
         method.run {
             val mnode = ctx.method.node
-            if (!modifiers.static)
+            if (!modifiers.static || modifiers.generator && modifiers.extension)
                 load(compiler.compileVal(instance, ctx), mnode)
             node.nodes.forEach { load(compiler.compileVal(it, ctx), mnode) }
             mnode.visitMethodInsn(

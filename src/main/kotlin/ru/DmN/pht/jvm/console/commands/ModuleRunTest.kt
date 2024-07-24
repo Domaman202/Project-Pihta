@@ -3,6 +3,7 @@ package ru.DmN.pht.jvm.console.commands
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.siberia.console.Console
 import ru.DmN.siberia.console.ctx.isModule
+import ru.DmN.siberia.console.ctx.module
 import ru.DmN.siberia.console.utils.Argument
 import ru.DmN.siberia.console.utils.ArgumentType
 import ru.DmN.siberia.console.utils.Command
@@ -37,7 +38,7 @@ object ModuleRunTest : Command(
         //
         console.println("Запуск...")
         try {
-            console.println(Class.forName("Test$index", true, URLClassLoader(arrayOf(File("dump").toURI().toURL()))).getMethod("test").invoke(null))
+            console.println(Class.forName("Test$index", true, URLClassLoader(arrayOf(File("dump/${console.module.name}").toURI().toURL()))).getMethod("test").invoke(null))
             console.println("Запуск окончен успешно!")
         } catch (t: Throwable) {
             console.println("Запуск окончен с ошибками:")

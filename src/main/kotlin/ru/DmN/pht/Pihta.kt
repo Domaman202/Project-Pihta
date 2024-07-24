@@ -369,7 +369,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(GET_,           NUGet)
         add(GET_OR_NAME,    NUGetOrName)
         addSNU(GFN)
-        // GFN_
+        add(GFN_,           NUGFn)
         addSNU(GREAT)
         addSNU(GREAT_)
         addSNU(GREAT_OR_EQ)

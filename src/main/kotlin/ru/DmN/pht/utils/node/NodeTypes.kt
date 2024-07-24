@@ -66,6 +66,7 @@ enum class NodeTypes : INodeType {
     GET_("get", PROCESSED),                             // get
     GET_OR_NAME("get-or-name!", PARSED),                // get-or-name
     GFN("gfn", true, false),       // def-gen-func
+    GFN_("gfn", false, false),     // def-gen-func
     GREAT_("great", PROCESSED),                         // great
     GREAT_OR_EQ_("gt-or-eq", PROCESSED),                // gt-or-eq
     // i

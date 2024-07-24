@@ -10,14 +10,12 @@ import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.node.*
 import ru.DmN.pht.utils.node.NodeTypes.*
-import ru.DmN.pht.utils.vtype.PhtVirtualMethod
-import ru.DmN.pht.utils.vtype.VTAuto
-import ru.DmN.pht.utils.vtype.VTDynamic
-import ru.DmN.pht.utils.vtype.VVTWithGenerics
+import ru.DmN.pht.utils.vtype.*
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
+import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processor.utils.ProcessingStage.FINALIZATION
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processors.INodeProcessor
@@ -26,6 +24,7 @@ import ru.DmN.siberia.utils.exception.pushTask
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
+import kotlin.math.absoluteValue
 
 object NRMCall : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
@@ -117,7 +116,18 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 )
             }
         //
-        finalize(method, arguments, instance1, new, processor, ctx, valMode)
+        processor.pushTask(ProcessingStage.METHODS_BODY, node) {
+            if (method.modifiers.generator && !method.modifiers.static && !method.modifiers.extension) {
+                method as GeneratorVirtualMethod
+                method.argsc.add(0, method.declaringClass)
+                method.argsn.add(0, "this")
+                method.argsg.add(0, null)
+                method.modifiers.extension = true
+                method.extension = method.declaringClass
+            }
+            //
+            finalize(method, arguments, instance1, new, processor, ctx, valMode)
+        }
         //
         return new
     }
@@ -135,17 +145,21 @@ object NRMCall : INodeProcessor<NodeNodesList> {
      */
     private fun finalize(method: VirtualMethod, args: List<Node>, instance: Node, node: NodeMCall, processor: Processor, ctx: ProcessingContext, valMode: Boolean) {
         if (method.modifiers.generator) {
-            val argsc = args.mapIndexed { i, it -> method.argsc[i].let { type -> if (type == VTAuto) processor.calc(it, ctx)!! else type } }
+            val margs = method.argsc
+            val argsc =
+                if (args.size == margs.size)
+                    args.mapIndexedMutable { i, it -> margs[i].let { type -> if (type == VTAuto) processor.calc(it, ctx)!! else type } }
+                else listOf(margs[0]) + args.mapIndexedMutable(1) { i, it -> margs[i].let { type -> if (type == VTAuto) processor.calc(it, ctx)!! else type } }
             PhtVirtualMethod.Impl(
                 ctx.clazz,
-                "pht\$tmp\$${argsc.hashCode()}",
+                "pht\$tmp\$${argsc.hashCode().absoluteValue}",
                 method.rettype,
                 method.retgen,
                 argsc,
                 method.argsn,
                 method.argsg,
-                method.modifiers,
-                null, // todo: Пока что невозможно.
+                method.modifiers.copy(static = true),
+                null,
                 null,
                 null,
                 method.generics // todo: Хз, надо проверить)

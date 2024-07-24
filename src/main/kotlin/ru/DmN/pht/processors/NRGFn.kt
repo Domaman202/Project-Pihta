@@ -6,7 +6,7 @@ import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.processors.NRDefn.parseArguments
 import ru.DmN.pht.utils.dropMutable
 import ru.DmN.pht.utils.meta.MetadataKeys
-import ru.DmN.pht.utils.node.NodeTypes.GFN
+import ru.DmN.pht.utils.node.NodeTypes.GFN_
 import ru.DmN.pht.utils.vtype.GeneratorVirtualMethod
 import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.ast.INodesList
@@ -53,11 +53,12 @@ object NRGFn : INodeProcessor<INodesList> {
             args.second,
             args.third,
             MethodModifiers(final = true, generator = true),
+            extension = null,
             generator = node.nodes.dropMutable(3 + offset),
             generics,
         )
         type.methods += method
         //
-        return NodeDefn(node.info.withType(GFN), ArrayList(), method) // Fake Nodes List =)
+        return NodeDefn(node.info.withType(GFN_), node.nodes.dropMutable(3 + offset), method) // Fake Nodes List =)
     }
 }

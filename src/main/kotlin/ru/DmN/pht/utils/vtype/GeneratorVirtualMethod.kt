@@ -12,18 +12,17 @@ class GeneratorVirtualMethod(
     override var rettype: VirtualType,
     override val retgen: String?,
     //
-    override var argsc: List<VirtualType>,
-    override var argsn: List<String>,
-    override val argsg: List<String?>,
+    override var argsc: MutableList<VirtualType>,
+    override var argsn: MutableList<String>,
+    override val argsg: MutableList<String?>,
     //
     override var modifiers: MethodModifiers,
     //
+    override var extension: VirtualType?,
     override val generator: List<Node>?,
     //
     override var generics: Map<String, VirtualType>
 ) : PhtVirtualMethod() {
     override val inline: Node?
         get() = null
-    override val extension: VirtualType?
-        get() = null // todo: Пока что нереализуемо
 }

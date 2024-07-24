@@ -92,6 +92,14 @@ inline fun <T, R> List<T>.mapIndexedMutable(transform: (Int, T) -> R): MutableLi
     return list
 }
 
+inline fun <T, R> List<T>.mapIndexedMutable(skip: Int, transform: (Int, T) -> R): MutableList<R> {
+    val list = ArrayList<R>(size)
+    var i = skip
+    for (it in this)
+        list.add(transform(i++, it))
+    return list
+}
+
 val Node.text
     get() = type.operation
 val Node.type

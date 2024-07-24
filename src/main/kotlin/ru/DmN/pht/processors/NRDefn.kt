@@ -4,7 +4,6 @@ import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.ast.NodeInlBodyB
 import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.ctx.clazz
-import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.ctx.with
 import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.utils.dropMutable
@@ -111,12 +110,7 @@ object NRDefn : INodeProcessor<INodesList> {
         }
         //
         if (new.nodes.isNotEmpty() && void) {
-            new.nodes[new.nodes.lastIndex] = NRAs.process(
-                nodeAs(new.info, new.nodes.last(), method.rettype.name),
-                processor,
-                ctx,
-                true
-            )!!
+            new.nodes[new.nodes.lastIndex] = NRAs.process(nodeAs(new.info, new.nodes.last(), method.rettype.name), processor, ctx, true)!!
         }
     }
 

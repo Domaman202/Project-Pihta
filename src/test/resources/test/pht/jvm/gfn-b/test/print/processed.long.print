@@ -1,0 +1,210 @@
+[LOAD_CTX_
+|	(modules =)
+|	(NODES:
+|	|	[USE_CTX_
+|	|	|	(modules = pht pht/jvm)
+|	|	|	(NODES:
+|	|	|	|	[PROGN_
+|	|	|	|	|	[CLS_
+|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	(name = TestA)
+|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	[CTOR_
+|	|	|	|	|	|	|	(type = constructor)
+|	|	|	|	|	|	|	(name = <init>)
+|	|	|	|	|	|	|	(desc = ()V)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	(method = <init>()V)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	(generic = VT(void))
+|	|	|	|	|	|	|	|	(type = SUPER)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[GFN_
+|	|	|	|	|	|	|	(type = extension method)
+|	|	|	|	|	|	|	(name = foo)
+|	|	|	|	|	|	|	(desc = (LTestA;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;)
+|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	[ADD
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'a')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = 'b')
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test0)
+|	|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	|	(method = pht$tmp$245536846(LTestA;II)I)
+|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestA))
+|	|	|	|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	(generic = null)
+|	|	|	|	|	|	|	|	|	|	|	(type = VIRTUAL)
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test1)
+|	|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	|	(method = pht$tmp$1080525776(LTestA;ID)I)
+|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	(generic = null)
+|	|	|	|	|	|	|	|	|	|	|	(type = EXTEND)
+|	|	|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestA))
+|	|	|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = DOUBLE)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = '21.12')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test2)
+|	|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	|	(method = pht$tmp$2087268524(LTestA;DI)D)
+|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	(generic = null)
+|	|	|	|	|	|	|	|	|	|	|	(type = EXTEND)
+|	|	|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestA))
+|	|	|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = DOUBLE)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = '12.21')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[ANN_TEST_
+|	|	|	|	|	|	[CLS_
+|	|	|	|	|	|	|	(type = final class)
+|	|	|	|	|	|	|	(name = Test3)
+|	|	|	|	|	|	|	(parents = [java.lang.Object])
+|	|	|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	|	|	(type = method)
+|	|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(sign = null)
+|	|	|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
+|	|	|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	|	|	(method = pht$tmp$761205902(LTestA;DD)D)
+|	|	|	|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	)
+|	|	|	|	|	|	|	|	|	|	|	(generic = null)
+|	|	|	|	|	|	|	|	|	|	|	(type = EXTEND)
+|	|	|	|	|	|	|	|	|	|	|	[NEW_
+|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestA))
+|	|	|	|	|	|	|	|	|	|	|	|	(ctor = ()V)
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = DOUBLE)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = '12.21')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	|	(type = DOUBLE)
+|	|	|	|	|	|	|	|	|	|	|	|	(value = '21.12')
+|	|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	)
+|	|	]
+|	)
+]
