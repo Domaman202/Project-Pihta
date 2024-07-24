@@ -17,6 +17,7 @@ import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.exception.pushTask
 import ru.DmN.siberia.utils.vtype.MethodModifiers
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRECtor : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
@@ -24,7 +25,7 @@ object NRECtor : INodeProcessor<NodeNodesList> {
         //
         val args = NRDefn.parseArguments(node.nodes[0], type.name, type.genericsDefine, processor, ctx)
         //
-        args.first.add(0, ctx.global.getType("int"))
+        args.first.add(0, VirtualType.INT)
         args.first.add(0, ctx.global.getType("String"))
         args.second.add(0, "\$order")
         args.second.add(0, "\$name")
@@ -34,15 +35,16 @@ object NRECtor : INodeProcessor<NodeNodesList> {
         val method = PhtVirtualMethod.Impl(
             type,
             "<init>",
-            ctx.global.getType("void"),
+            VirtualType.VOID,
             null,
             args.first,
             args.second,
             args.third,
             MethodModifiers(ctor = true),
-            null,
-            null,
-            type.genericsDefine
+            generator = null,
+            extension = null,
+            inline = null,
+            generics = type.genericsDefine
         )
         type.methods += method
         //

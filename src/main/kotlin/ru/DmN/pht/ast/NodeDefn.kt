@@ -13,7 +13,7 @@ import ru.DmN.siberia.utils.node.INodeInfo
 class NodeDefn(
     info: INodeInfo,
     nodes: MutableList<Node>,
-    val method: PhtVirtualMethod.Impl
+    val method: PhtVirtualMethod
 ) : NodeNodesList(info, nodes), IAbstractlyNode, IFileNode, IInlinableNode, IOpenlyNode, IStaticallyNode, ISyncNode, IVarargNode {
     override var abstract: Boolean
         set(value) { method.modifiers.abstract = value }

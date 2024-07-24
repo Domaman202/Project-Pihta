@@ -12,7 +12,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRCCall : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType("void")
+        VirtualType.VOID
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
         NodeNodesList(node.info.withType(CCALL_), node.nodes).apply { processValue(this, processor, ctx) }

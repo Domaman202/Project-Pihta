@@ -1,6 +1,5 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.node.nodeValue
 import ru.DmN.siberia.ast.Node
@@ -11,7 +10,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRSymbolInt : IStdNodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType("int")
+        VirtualType.INT
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
         if (valMode)

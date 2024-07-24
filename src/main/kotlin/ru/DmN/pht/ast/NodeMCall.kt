@@ -13,13 +13,16 @@ class NodeMCall(
     nodes: MutableList<Node>,
     val generic: VirtualType?,
     val instance: Node,
-    val method: VirtualMethod,
+    var method: VirtualMethod,
     val type: Type,
-    var inline: Node? = null
+    /**
+     * Inline | Generation
+     */
+    var special: Node? = null
 ) : NodeNodesList(info, nodes) {
 
     override fun copy(): NodeMCall =
-        NodeMCall(info, copyNodes(), generic, instance, method, type, inline)
+        NodeMCall(info, copyNodes(), generic, instance, method, type, special)
 
     override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type).append('\n')

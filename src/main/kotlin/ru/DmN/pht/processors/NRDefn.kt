@@ -63,9 +63,10 @@ object NRDefn : INodeProcessor<INodesList> {
             args.second,
             args.third,
             MethodModifiers(final = true),
-            null,
-            null,
-            generics
+            generator = null,
+            extension = null,
+            inline = null,
+            generics = generics
         )
         type.methods += method
         //
@@ -79,19 +80,23 @@ object NRDefn : INodeProcessor<INodesList> {
         //
         if (node.nodes.size > 3) {
             processor.pushTask(METHODS_BODY, node) {
-                val info = new.info
-                val ret = method.rettype
-                val void = ret != ctx.global.getType("void")
-                //
-                if (void)
-                    new.nodes[new.nodes.lastIndex] = nodeAs(info, new.nodes.last(), ret.name)
-                val context = ctx.with(method).with(BodyContext.of(method))
-                if (method.modifiers.inline)
-                    method.inline = NodeInlBodyB(info.withType(INL_BODY_A), new.copyNodes(), ret, context)
-                processNodes(method, void, new, processor, context)
+                processMethodBody(new, method, processor, ctx)
             }
         }
         return new
+    }
+
+    fun processMethodBody(new: NodeNodesList, method: PhtVirtualMethod.Impl, processor: Processor, ctx: ProcessingContext) {
+        val info = new.info
+        val ret = method.rettype
+        val void = ret != VirtualType.VOID
+        //
+        if (void)
+            new.nodes[new.nodes.lastIndex] = nodeAs(info, new.nodes.last(), ret.name)
+        val context = ctx.with(method).with(BodyContext.of(method))
+        if (method.modifiers.inline)
+            method.inline = NodeInlBodyB(info.withType(INL_BODY_A), new.copyNodes(), ret, context)
+        processNodes(method, void, new, processor, context)
     }
 
     private fun processNodes(method: VirtualMethod, void: Boolean, new: NodeNodesList, processor: Processor, ctx: ProcessingContext) {

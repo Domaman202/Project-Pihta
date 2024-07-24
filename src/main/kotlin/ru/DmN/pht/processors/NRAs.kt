@@ -3,6 +3,7 @@ package ru.DmN.pht.processors
 import ru.DmN.pht.ast.NodeIsAs
 import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.pht.utils.node.NodeTypes.AS_
+import ru.DmN.pht.utils.vtype.VTAuto
 import ru.DmN.pht.utils.vtype.VVTNullable
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -23,7 +24,7 @@ object NRAs : IStdNodeProcessor<NodeNodesList> {
             val from = np.calc(value, processor, ctx)
             val to = calc(node, processor, ctx)
             //
-            if (from == null || from == VOID)
+            if (from == null || from == VOID || to == VTAuto)
                 value
             else if (from.isAssignableFrom(to))
                 checkNullable(node, from, to) { value }

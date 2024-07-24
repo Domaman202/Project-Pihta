@@ -12,7 +12,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 object NRIf : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
         if (node.nodes.size == 3)
-            processor.calc(node.nodes[1], ctx).let { if (it == ctx.global.getType("void")) processor.calc(node.nodes[2], ctx) else it }
+            processor.calc(node.nodes[1], ctx).let { if (it == VirtualType.VOID) processor.calc(node.nodes[2], ctx) else it }
         else null
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node {

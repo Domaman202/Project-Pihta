@@ -1,9 +1,6 @@
-@file:Suppress("UNCHECKED_CAST")
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.ast.NodeFGet
-import ru.DmN.pht.ast.NodeInlBodyB
-import ru.DmN.pht.ast.NodeMCall
+import ru.DmN.pht.ast.*
 import ru.DmN.pht.ast.NodeMCall.Type.*
 import ru.DmN.pht.jvm.utils.vtype.desc
 import ru.DmN.pht.jvm.utils.vtype.generics
@@ -12,7 +9,9 @@ import ru.DmN.pht.processor.ctx.*
 import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.node.*
-import ru.DmN.pht.utils.node.NodeTypes.FGET_
+import ru.DmN.pht.utils.node.NodeTypes.*
+import ru.DmN.pht.utils.vtype.PhtVirtualMethod
+import ru.DmN.pht.utils.vtype.VTAuto
 import ru.DmN.pht.utils.vtype.VTDynamic
 import ru.DmN.pht.utils.vtype.VVTWithGenerics
 import ru.DmN.siberia.ast.Node
@@ -20,6 +19,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.FINALIZATION
+import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.exception.MessageException
 import ru.DmN.siberia.utils.exception.pushTask
@@ -29,13 +29,15 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRMCall : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType {
-        val instance0 = processor.compute(node.nodes[0], ctx)
-        return calc(findMethod(node, Static.ofInstanceNode(instance0, processor, ctx), processor, ctx), instance0, processor, ctx)
+        val instance = processor.compute(node.nodes[0], ctx)
+        val result = findMethod(node, Static.ofInstanceNode(instance, processor, ctx), processor, ctx)
+        return calc(result, instance, processor, ctx)
     }
 
     /**
      * Вычисляет тип, который вернёт функция.
      *
+     * @param node Исходная мода.
      * @param result Результат поиска метода.
      * @param instance Нода instance из MCALL.
      * @param processor Обработчик.
@@ -70,8 +72,11 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         val instance0 = processor.compute(node.nodes[0], ctx)
         val result = findMethod(node, Static.ofInstanceNode(instance0, processor, ctx), processor, ctx)
         val instance1 = getInstance(result, instance0, processor, ctx)
-        val generics = calc(result, node, processor, ctx)
         val method = result.method
+        val generics =
+            if (method.rettype == VTAuto)
+                null
+            else calc(result, node, processor, ctx)
         //
         lateinit var arguments: List<Node>
         val new =
@@ -112,26 +117,85 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 )
             }
         //
-        processor.pushTask(FINALIZATION, node) {
-            finalize(method, arguments, instance1, new, processor, ctx, valMode)
-        }
+        finalize(method, arguments, instance1, new, processor, ctx, valMode)
         //
         return new
     }
 
+    /**
+     * Окончание обработки ноды.
+     *
+     * @param method Метод.
+     * @param args Параметры.
+     * @param instance Итоговый объект.
+     * @param node Итоговая нода.
+     * @param processor Обработчик.
+     * @param ctx Контекст обработки.
+     * @param valMode Режим возврата значения.
+     */
     private fun finalize(method: VirtualMethod, args: List<Node>, instance: Node, node: NodeMCall, processor: Processor, ctx: ProcessingContext, valMode: Boolean) {
-        var names: List<String>? = null
-        (method.inline?.copy() ?: processor.inline<Node?>(instance, null, ctx).let { names = it.first; it.second } ?: return).run {
-            val bctx = BodyContext.of(ctx.body)
-            (names ?: method.argsn).asSequence().let {
-                if (method.extension == null)
-                    it
-                else {
-                    NRInlDef.process("this", instance, bctx)
-                    it.drop(1)
+        if (method.modifiers.generator) {
+            val argsc = args.mapIndexed { i, it -> method.argsc[i].let { type -> if (type == VTAuto) processor.calc(it, ctx)!! else type } }
+            PhtVirtualMethod.Impl(
+                ctx.clazz,
+                "pht\$tmp\$${argsc.hashCode()}",
+                method.rettype,
+                method.retgen,
+                argsc,
+                method.argsn,
+                method.argsg,
+                method.modifiers,
+                null, // todo: Пока что невозможно.
+                null,
+                null,
+                method.generics // todo: Хз, надо проверить)
+            ).run {
+                node.method = this
+                node.special = NodeDefn(node.info.withType(DEFN_), ArrayList((method as PhtVirtualMethod).generator!!), this).apply {
+                    NRDefn.processMethodBody(this, this@run, processor, ctx)
+                    //
+                    if (rettype == VTAuto) {
+                        val context = ctx.subCtx()
+                        context.method = this@run
+                        context.body = BodyContext.of(this@run).apply {
+                            argsn.forEachIndexed { i, it -> this.addVariable(it, argsc[i]) }
+                        }
+                        when (this.nodes.size) {
+                            0 -> rettype = VirtualType.VOID // maybe
+                            1 -> {
+                                val first = this.nodes[0]
+                                rettype =
+                                    if (first.type == AS_ && first is NodeIsAs)
+                                        first.from
+                                    else processor.calc(first, context) ?: VirtualType.VOID
+                            }
+                            else -> rettype = processor.calc(nodeProgn(node.info, this.nodes), context) ?: ctx.getType(
+                                "void",
+                                processor,
+                                ctx
+                            )
+                        }
+                    }
                 }
-            }.forEachIndexed { i, it -> NRInlDef.process(it, args[i], bctx) }
-            node.inline = processor.process(nodeAs(info, this, method.rettype.name), (if (this is NodeInlBodyB) this.ctx else ctx).with(bctx), valMode)
+            }
+        } else processor.pushTask(FINALIZATION, node) {
+            var names: List<String>? = null
+            (method.inline?.copy() ?: processor.inline<Node?>(instance, null, ctx).let { names = it.first; it.second } ?: return@pushTask).run {
+                val bctx = BodyContext.of(ctx.body)
+                (names ?: method.argsn).asSequence().let {
+                    if (method.extension == null)
+                        it
+                    else {
+                        NRInlDef.process("this", instance, bctx)
+                        it.drop(1)
+                    }
+                }.forEachIndexed { i, it -> NRInlDef.process(it, args[i], bctx) }
+                node.special = processor.process(
+                    nodeAs(info, this, method.rettype.name),
+                    (if (this is NodeInlBodyB) this.ctx else ctx).with(bctx),
+                    valMode
+                )
+            }
         }
     }
 
@@ -268,8 +332,6 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         val args = node.nodes.asSequence().drop(2).map { processor.process(it, ctx, true)!! }.toList()
         //
         // Class / Instance
-//        if (name == "call")
-//            println(ICastable.of(args[0], processor, ctx).castableTo(ctx.getType("java.util.function.Supplier", processor, ctx)))
         var result = findMethodOrNull(pair.second, name, args, static, node, processor, ctx)
         // Companion Object
         if (result == null) {

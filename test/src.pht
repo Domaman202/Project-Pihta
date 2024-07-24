@@ -1,1 +1,8 @@
-(app-fn (println "Hi!"))
+(app
+    (gfn sum ^auto [[a ^auto][b ^auto]]
+        (+ a b))
+    (app-fn
+        (println (#sum . 12    21))
+        (println (#sum . 12.33 21))
+        (println (#sum . 12    21.33))
+        (println (#sum . 12.33 21.33))))

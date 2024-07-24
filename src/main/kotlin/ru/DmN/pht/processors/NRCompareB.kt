@@ -9,5 +9,5 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRCompareB : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType("boolean")
+        VirtualType.BOOLEAN
 }

@@ -16,6 +16,7 @@ import ru.DmN.pht.utils.addSNU
 import ru.DmN.pht.utils.meta.MetadataKeys
 import ru.DmN.pht.utils.node.NodeParsedTypes.*
 import ru.DmN.pht.utils.node.NodeTypes.*
+import ru.DmN.pht.utils.vtype.VTAuto
 import ru.DmN.pht.utils.vtype.VTDynamic
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
@@ -90,6 +91,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         // g
         addNP("get",          NPGet)
         addNP("get-or-name!", NPGetOrName)
+        addSNP(GFN)
         addSNP(GREAT)
         addSNP(GREAT_OR_EQ)
         // i
@@ -221,6 +223,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         "field"         to "field"
         "lambda"        to "fn"
         "fld-set"       to "fset"
+        // g
+        "def-gen-func"  to "gfn"
         // i
         "interface"     to "itf"
         // m
@@ -364,6 +368,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(GET)
         add(GET_,           NUGet)
         add(GET_OR_NAME,    NUGetOrName)
+        addSNU(GFN)
+        // GFN_
         addSNU(GREAT)
         addSNU(GREAT_)
         addSNU(GREAT_OR_EQ)
@@ -584,6 +590,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(GET,           NRGetB)
         add(GET_,          NRGetC)
         add(GET_OR_NAME,   NRGetOrName)
+        add(GFN,           NRGFn)
         add(GREAT,         NRCompare)
         add(GREAT_,        NRCompareB)
         add(GREAT_OR_EQ,   NRCompare)
@@ -755,6 +762,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
     @Suppress("UNCHECKED_CAST")
     override fun load(processor: Processor, ctx: ProcessingContext, uses: MutableList<String>): Boolean {
         if (!ctx.loadedModules.contains(this)) {
+            processor.tp += VTAuto
             processor.tp += VTDynamic
             processor.contexts.macros_list = HashMap()
             ctx.global = GlobalContext(processor.tp)

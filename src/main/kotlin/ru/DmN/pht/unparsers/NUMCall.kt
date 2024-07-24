@@ -10,7 +10,7 @@ import ru.DmN.siberia.utils.operation
 
 object NUMCall : INodeUnparser<NodeMCall> {
     override fun unparse(node: NodeMCall, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
-        if (node.inline == null) {
+        if (node.special == null) {
             unparser.out.apply {
                 append('(').append(node.operation).append('\n').append("\t".repeat(indent + 1))
                 when (node.type) {
@@ -35,6 +35,6 @@ object NUMCall : INodeUnparser<NodeMCall> {
                     }
                 }
             }
-        } else unparser.unparse(node.inline!!,  ctx, indent)
+        } else unparser.unparse(node.special!!,  ctx, indent)
     }
 }

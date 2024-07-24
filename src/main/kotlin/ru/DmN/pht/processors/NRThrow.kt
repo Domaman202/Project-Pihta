@@ -10,7 +10,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRThrow : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        ctx.global.getType("void")
+        VirtualType.VOID
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeNodesList =
         NodeNodesList(node.info.withType(THROW_), mutableListOf(processor.process(node.nodes[0], ctx, valMode)!!))

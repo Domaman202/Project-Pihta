@@ -5,10 +5,7 @@ import ru.DmN.siberia.utils.Klass
 import ru.DmN.siberia.utils.klassOf
 import ru.DmN.siberia.utils.vtype.*
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl
-import java.lang.reflect.Constructor
-import java.lang.reflect.Method
-import java.lang.reflect.Modifier
-import java.lang.reflect.TypeVariable
+import java.lang.reflect.*
 import java.util.*
 
 /**
@@ -52,7 +49,7 @@ class JRTP : TypesProvider() {
                 genericsDefine[generic] = typeOf(if (bound is Klass) bound else Any::class.java)
             }
             klass.genericSuperclass.let {
-                if (it is ParameterizedTypeImpl) {
+                if (it is ParameterizedType) {
                     it.actualTypeArguments.forEachIndexed { j, it1 ->
                         val type = klass.superclass
                         genericsMap["${type.typeParameters[j].name}$${type.name}"] = "${it1.typeName}$$name"
@@ -60,7 +57,7 @@ class JRTP : TypesProvider() {
                 }
             }
             klass.genericInterfaces.forEachIndexed { i, it0 ->
-                if (it0 is ParameterizedTypeImpl) {
+                if (it0 is ParameterizedType) {
                     it0.actualTypeArguments.forEachIndexed { j, it1 ->
                         val type = klass.interfaces[i]
                         genericsMap["${type.typeParameters[j].name}$${type.name}"] = "${it1.typeName}$$name"
@@ -160,8 +157,9 @@ class JRTP : TypesProvider() {
                 abstract = Modifier.isAbstract(method.modifiers),
                 final = Modifier.isFinal(method.modifiers)
             ),
-            null,
-            null,
+            extension = null,
+            generator = null,
+            inline = null,
             generics
         )
     }

@@ -11,7 +11,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRValnSize : IStdNodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
-        ctx.global.getType("int")
+        VirtualType.INT
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node =
         nodeValue(node.info, computeInt(node, processor, ctx))

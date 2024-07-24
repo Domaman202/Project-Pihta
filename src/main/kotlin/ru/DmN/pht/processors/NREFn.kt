@@ -19,6 +19,7 @@ import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.exception.pushTask
 import ru.DmN.siberia.utils.vtype.MethodModifiers
+import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NREFn : INodeProcessor<INodesList> {
     override fun process(node: INodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
@@ -54,9 +55,10 @@ object NREFn : INodeProcessor<INodesList> {
             args.second,
             args.third,
             MethodModifiers(static = true, extension = true),
-            extend,
-            null,
-            generics
+            generator = null,
+            extension = extend,
+            inline = null,
+            generics = generics
         )
         type.methods += method
         ctx.global.getExtensions(extend) += method
@@ -71,7 +73,7 @@ object NREFn : INodeProcessor<INodesList> {
                 new,
                 processor,
                 context,
-                method.rettype != ctx.global.getType("void")
+                method.rettype != VirtualType.VOID
             )
         }
         //

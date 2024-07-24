@@ -13,8 +13,8 @@ enum class NodeTypes : INodeType {
     ALIAS_TYPE("alias-type", PARSED),                   // alias-type
     ALIAS_TYPE_("alias-type", PROCESSED),               // alias-type
     AND_("and", PROCESSED),                             // and              // &
-    APP("app", true, true),         // app-class
-    APP_FN("app-fn", true, true),   // app-func
+    APP("app", true, true),        // app-class
+    APP_FN("app-fn", true, true),  // app-func
     ARR_OF("arr-of", PARSED),                           // arr-of
     ARR_OF_TYPE("arr-of-type", PARSED),                 // arr-of-type
     ARR_SIZE("arr-size", PARSED),                       // arr-size
@@ -39,7 +39,7 @@ enum class NodeTypes : INodeType {
     CTOR_("ctor", PROCESSED),                           // def-ctor
     CYCLE_("cycle", PROCESSED),                         // cycle
     // d
-    DEBUG("debug", true, true),     // debug
+    DEBUG("debug", true, true),    // debug
     DEC_PRE_("dec", PROCESSED),                         // dec              // --
     DEC_POST_("dec-", PROCESSED),                       // dec-
     DEF("def", PARSED),                                 // def
@@ -65,6 +65,7 @@ enum class NodeTypes : INodeType {
     // g
     GET_("get", PROCESSED),                             // get
     GET_OR_NAME("get-or-name!", PARSED),                // get-or-name
+    GFN("gfn", true, false),       // def-gen-func
     GREAT_("great", PROCESSED),                         // great
     GREAT_OR_EQ_("gt-or-eq", PROCESSED),                // gt-or-eq
     // i
