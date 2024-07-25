@@ -152,7 +152,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 else listOf(margs[0]) + args.mapIndexedMutable(1) { i, it -> margs[i].let { type -> if (type == VTAuto) processor.calc(it, ctx)!! else type } }
             PhtVirtualMethod.Impl(
                 ctx.clazz,
-                "pht\$tmp\$${argsc.hashCode().absoluteValue}",
+                "pht\$autogen\$${method.name}\$${argsc.hashCode().absoluteValue}",
                 method.rettype,
                 method.retgen,
                 argsc,
