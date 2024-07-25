@@ -3,6 +3,7 @@ package ru.DmN.pht.jvm.utils.vtype
 import ru.DmN.pht.utils.vtype.PhtVirtualMethod
 import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.pht.utils.vtype.isArray
+import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.utils.vtype.VirtualField
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
@@ -104,12 +105,12 @@ val VirtualMethod.desc: String
  */
 val VirtualMethod.signature: String?
     get() =
-        if (generics.isEmpty())
+        if (generics.isNullOrEmpty())
             null
         else {
             val sb = StringBuilder()
             if (!modifiers.static) {
-                val list = generics.entries.drop(declaringClass.genericsDefine.size)
+                val list = generics!!.entries.drop(declaringClass.genericsDefine.size)
                 if (list.isNotEmpty()) {
                     sb.append('<')
                     list.forEach {
@@ -127,5 +128,11 @@ val VirtualMethod.signature: String?
 /**
  * Generic's (Name / Type)
  */
-val VirtualMethod.generics: Map<String, VirtualType>
-    get() = if (this is PhtVirtualMethod) generics else emptyMap()
+val VirtualMethod.generics: Map<String, VirtualType>?
+    get() = if (this is PhtVirtualMethod) generics else null
+
+/**
+ * Тело метода если он является генератором, иначе null.
+ */
+val VirtualMethod.generator: List<Node>?
+    get() = if (this is PhtVirtualMethod) generator else null

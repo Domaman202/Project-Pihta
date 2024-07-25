@@ -155,6 +155,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(THROW)
         addSNP(TRCALL)
         addSNP(TGET)
+        addSNP(TO_EFN)
         addSNP(TYPE_OF)
         // u
         addNP("unit",         NPUnit)
@@ -241,6 +242,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         "test-func"     to "test-fn"
         "tailrec-call"  to "trcall"
         "typed-get"     to "tget"
+        "to-ext-func"   to "fo-efn"
 
         // Символьные аналоги
 
@@ -469,6 +471,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(TRCALL_)
         addSNU(TGET)
         add(TGET_,          NUTGet)
+        addSNU(TO_EFN)
         addSNU(TYPE_OF)
         // u
         add(UNIT,           NUUnit)
@@ -684,6 +687,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(TRCALL_,       NRTRCall)
         add(TGET,          NRTGet)
         add(TGET_,         NRTGetB)
+        add(TO_EFN,        NRToEFn)
         add(TYPE_OF,       NRTypeof)
         // u
         add(UNIT,          NRUnit)

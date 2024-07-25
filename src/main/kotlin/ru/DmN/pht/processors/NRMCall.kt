@@ -58,7 +58,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 if (it is VVTWithGenerics) {
                     val res = it.genericsData[retgen]
                     if (res == null)
-                        method.generics[retgen]!!
+                        method.generics!![retgen]!!
                     else if (res.isFirst)
                         res.first()
                     else it.genericsDefine[res.second()]!!

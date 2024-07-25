@@ -35,12 +35,12 @@ object NUDefn : INodeUnparser<NodeDefn> {
     fun unparseGenerics(node: NodeDefn, unparser: Unparser) {
         unparser.out.apply {
             append(" [")
-            node.method.generics.entries
+            node.method.generics?.let { it ->
+                it.entries
                 .stream()
                 .skip(node.method.declaringClass.genericsDefine.size.toLong())
-                .forEach {
-                    append('[').append(it.key.genericName).append(' ').append(it.value.nameWithGenerics).append(']')
-                }
+                .forEach { append('[').append(it.key.genericName).append(' ').append(it.value.nameWithGenerics).append(']') }
+            }
             append("] ")
         }
     }

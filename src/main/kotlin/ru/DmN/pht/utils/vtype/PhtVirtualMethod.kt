@@ -14,7 +14,7 @@ abstract class PhtVirtualMethod : VirtualMethod() {
     /**
      * Generic's (Name / Type)
      */
-    abstract val generics: Map<String, VirtualType>
+    abstract val generics: Map<String, VirtualType>?
 
     class Impl(
         override var declaringClass: VirtualType,
@@ -34,6 +34,6 @@ abstract class PhtVirtualMethod : VirtualMethod() {
         override val generator: List<Node>?,
         override var inline: Node?,
         //
-        override val generics: Map<String, VirtualType>
+        override val generics: Map<String, VirtualType>?
     ) : PhtVirtualMethod()
 }

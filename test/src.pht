@@ -1,10 +1,4 @@
-(progn
-    (cls TestA [^Object] (@static
-        (gfn foo ^auto [[a ^auto][b ^auto]]
-            (+ a b))))
-    (app-fn
-        (println (#foo ^TestA 12 21))
-        (println (#foo ^TestA 12 21.12))
-        (println (#foo ^TestA 12.21 21))
-        (println (#foo ^TestA 12.21 21.12))
-        (println (#foo ^TestA "Слава " "России!"))))
+(app
+    (defn foo ^void [[this ^String]] (println this))
+    (to-efn ^App foo [^String])
+    (app-fn (#foo "Слава России!")))

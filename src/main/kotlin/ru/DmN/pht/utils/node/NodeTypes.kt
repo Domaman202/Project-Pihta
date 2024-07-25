@@ -140,6 +140,7 @@ enum class NodeTypes : INodeType {
     TRCALL_("trcall", PROCESSED),                       // tailrec-call
     TGET("tget", PARSED),                               // typed-get
     TGET_("tget", PROCESSED),                           // typed-get
+    TO_EFN("to-efn", PARSED),                           // to-ext-func
     TYPE_OF("type-of", PARSED),                         // type-of
     // u
     UNIT("unit", PROCESSED),                            // unit
