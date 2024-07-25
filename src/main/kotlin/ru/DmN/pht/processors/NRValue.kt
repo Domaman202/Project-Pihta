@@ -118,8 +118,6 @@ object NRValue : IStdNodeProcessor<NodeValue> {
                 '[' -> getType(name.substring(1), processor, ctx).arrayType
                 else -> getType(name, ctx)
             }
-        else if (name == ".")
-            VTAuto
         else getType(name, ctx)
 
     @Suppress("NOTHING_TO_INLINE")
