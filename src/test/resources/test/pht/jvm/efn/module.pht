@@ -1,5 +1,5 @@
 (module
-    (name "test/pht/jvm/ext-fn")
+    (name "test/pht/jvm/efn")
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["pht"])

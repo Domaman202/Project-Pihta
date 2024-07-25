@@ -472,6 +472,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(TGET)
         add(TGET_,          NUTGet)
         addSNU(TO_EFN)
+        add(TO_EFN_,        NUToEFn)
         addSNU(TYPE_OF)
         // u
         add(UNIT,           NUUnit)

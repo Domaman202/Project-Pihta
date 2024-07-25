@@ -8,9 +8,12 @@
 |	|	|	|	|	[CLS_
 |	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	(name = Utils)
+|	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	[EFN_
 |	|	|	|	|	|	|	(type = extension method)
-|	|	|	|	|	|	|	(desc = hello(Ljava/lang/String;)Ljava/lang/String;)
+|	|	|	|	|	|	|	(name = hello)
+|	|	|	|	|	|	|	(desc = (Ljava/lang/String;)Ljava/lang/String;)
+|	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	[MCALL_
 |	|	|	|	|	|	|	|	(method = add(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;)
 |	|	|	|	|	|	|	|	(instance:
@@ -19,7 +22,8 @@
 |	|	|	|	|	|	|	|	|	|	(value = 'ru.DmN.pht.StringExtends')
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	
+|	|	|	|	|	|	|	|	(generic = null)
+|	|	|	|	|	|	|	|	(type = EXTEND)
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = STRING)
 |	|	|	|	|	|	|	|	|	(value = 'Hello, ')
@@ -28,7 +32,7 @@
 |	|	|	|	|	|	|	|	|	[DEF_
 |	|	|	|	|	|	|	|	|	|	(var)
 |	|	|	|	|	|	|	|	|	|	[
-|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$9265)
+|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$29076)
 |	|	|	|	|	|	|	|	|	|	|	(type = [java.lang.Object)
 |	|	|	|	|	|	|	|	|	|	|	[NEW_ARR_
 |	|	|	|	|	|	|	|	|	|	|	|	(type = java.lang.Object)
@@ -42,15 +46,24 @@
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	[ASET_
-|	|	|	|	|	|	|	|	|	|	[GET_ var pht$tmp$9265]
+|	|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$29076)
+|	|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	(value = '0')
 |	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	[GET_ var this]
+|	|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	|	(name = this)
+|	|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	[ASET_
-|	|	|	|	|	|	|	|	|	|	[GET_ var pht$tmp$9265]
+|	|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$29076)
+|	|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	(value = '1')
@@ -60,7 +73,10 @@
 |	|	|	|	|	|	|	|	|	|	|	(value = '!')
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	[GET_ var pht$tmp$9265]
+|	|	|	|	|	|	|	|	|	[GET_
+|	|	|	|	|	|	|	|	|	|	(name = pht$tmp$29076)
+|	|	|	|	|	|	|	|	|	|	(type = var)
+|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
@@ -69,10 +85,13 @@
 |	|	|	|	|	|	[CLS_
 |	|	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	|	(name = Test0)
+|	|	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	|	[ANN_STATIC_
 |	|	|	|	|	|	|	|	[DEFN_
 |	|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(name = test)
+|	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
+|	|	|	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[MCALL_
@@ -83,7 +102,8 @@
 |	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'java.lang.String')
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	|	
+|	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
+|	|	|	|	|	|	|	|	|	|	|	(type = EXTEND)
 |	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
 |	|	|	|	|	|	|	|	|	|	|	|	(value = 'Vasya')

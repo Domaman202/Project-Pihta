@@ -1,5 +1,5 @@
 (module
-    (name "test/pht/jvm/ext-fn/test/unparse/processed")
+    (name "test/pht/jvm/to-efn/test/unparse/processed")
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["pht"])

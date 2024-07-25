@@ -1,0 +1,30 @@
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls [] Utils [^java.lang.Object]
+				(@static
+					(defn [] hello ^java.lang.String [[name ^java.lang.String]]
+						(mcall
+							"Hello, "
+							add
+							(block
+								(def [
+									[^[java.lang.Object pht$tmp$42602 (new-arr ^java.lang.Object 2)]])
+								(aset
+									(get pht$tmp$42602)
+									0
+									(get name))
+								(aset
+									(get pht$tmp$42602)
+									1
+									"!")
+								(get pht$tmp$42602))))
+					(to-efn ^Utils hello [^java.lang.String])))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(mcall
+									"Petya"
+									hello)))))))))

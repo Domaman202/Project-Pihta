@@ -141,6 +141,7 @@ enum class NodeTypes : INodeType {
     TGET("tget", PARSED),                               // typed-get
     TGET_("tget", PROCESSED),                           // typed-get
     TO_EFN("to-efn", PARSED),                           // to-ext-func
+    TO_EFN_("to-efn", false, false),// to-ext-func
     TYPE_OF("type-of", PARSED),                         // type-of
     // u
     UNIT("unit", PROCESSED),                            // unit
@@ -150,7 +151,7 @@ enum class NodeTypes : INodeType {
     VALN_("valn", PROCESSED),                           // valn
     VALN_REPEAT("valn-repeat", PARSED),                 // valn-repeat
     VALN_SIZE("valn-size", PARSED),                     // valn-size
-    VALUE("value", true, true),     // value
+    VALUE("value", true, true),    // value
     // w
     WITH_GENS("with-gens", PARSED),                     // with-gens
     // x

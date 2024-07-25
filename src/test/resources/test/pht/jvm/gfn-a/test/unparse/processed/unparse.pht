@@ -13,13 +13,13 @@
 						(defn [] test ^dynamic []
 							(as ^dynamic
 								(progn
-									(@static (defn [] pht$tmp$3342753 ^int [[a ^int][b ^int]]
+									(@static (defn [] pht$autogen$foo$3342753 ^int [[a ^int][b ^int]]
 										(add
 											(get a)
 											(get b))))
 									(mcall
 										^TestA
-										pht$tmp$3342753
+										pht$autogen$foo$3342753
 										12
 										21)))))))
 			(@test
@@ -28,14 +28,14 @@
 						(defn [] test ^dynamic []
 							(as ^dynamic
 								(progn
-									(@static (defn [] pht$tmp$1322719869 ^int [[a ^int][b ^double]]
+									(@static (defn [] pht$autogen$foo$1322719869 ^int [[a ^int][b ^double]]
 										(add
 											(get a)
 											(as ^int
 												(get b)))))
 									(mcall
 										^TestA
-										pht$tmp$1322719869
+										pht$autogen$foo$1322719869
 										12
 										21.12)))))))
 			(@test
@@ -44,14 +44,14 @@
 						(defn [] test ^dynamic []
 							(as ^dynamic
 								(progn
-									(@static (defn [] pht$tmp$1845074431 ^double [[a ^double][b ^int]]
+									(@static (defn [] pht$autogen$foo$1845074431 ^double [[a ^double][b ^int]]
 										(add
 											(get a)
 											(as ^double
 												(get b)))))
 									(mcall
 										^TestA
-										pht$tmp$1845074431
+										pht$autogen$foo$1845074431
 										12.21
 										21)))))))
 			(@test
@@ -60,12 +60,12 @@
 						(defn [] test ^dynamic []
 							(as ^dynamic
 								(progn
-									(@static (defn [] pht$tmp$519011809 ^double [[a ^double][b ^double]]
+									(@static (defn [] pht$autogen$foo$519011809 ^double [[a ^double][b ^double]]
 										(add
 											(get a)
 											(get b))))
 									(mcall
 										^TestA
-										pht$tmp$519011809
+										pht$autogen$foo$519011809
 										12.21
 										21.12))))))))))

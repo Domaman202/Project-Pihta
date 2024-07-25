@@ -1,4 +1,4 @@
 (app
     (defn foo ^void [[this ^String]] (println this))
-    (to-efn ^App foo [^String])
+    (to-efn . foo [^String])
     (app-fn (#foo "Слава России!")))

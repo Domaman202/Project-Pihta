@@ -42,7 +42,7 @@
 |	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	|	|	(method = pht$tmp$3342753(II)I)
+|	|	|	|	|	|	|	|	|	|	|	(method = pht$autogen$foo$3342753(II)I)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
@@ -79,7 +79,7 @@
 |	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	|	|	(method = pht$tmp$1322719869(ID)I)
+|	|	|	|	|	|	|	|	|	|	|	(method = pht$autogen$foo$1322719869(ID)I)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
@@ -116,7 +116,7 @@
 |	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	|	|	(method = pht$tmp$1845074431(DI)D)
+|	|	|	|	|	|	|	|	|	|	|	(method = pht$autogen$foo$1845074431(DI)D)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
@@ -153,7 +153,7 @@
 |	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	|	|	(method = pht$tmp$519011809(DD)D)
+|	|	|	|	|	|	|	|	|	|	|	(method = pht$autogen$foo$519011809(DD)D)
 |	|	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
