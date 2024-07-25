@@ -1,7 +1,7 @@
 (progn
     (cls TestA [^Object]
         (ctor [] (ccall))
-        (gfn foo ^auto [[a ^auto][b ^auto]]
+        (gfn foo . [[a .][b .]]
             (+ a b)))
     (test-fn 0
         (#foo (new ^TestA) 12 21))

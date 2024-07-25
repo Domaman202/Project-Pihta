@@ -15,6 +15,7 @@ import ru.DmN.pht.utils.InlineVariable
 import ru.DmN.pht.utils.lenArgs
 import ru.DmN.pht.utils.node.NodeTypes.GET_
 import ru.DmN.pht.utils.node.nodeTypesGet
+import ru.DmN.pht.utils.vtype.VTAuto
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
@@ -37,8 +38,10 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
     override fun computeString(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): String =
         node.getValueAsString()
 
-    override fun computeType(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        ctx.body[node.name]!!.type
+    override fun computeType(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): VirtualType =
+        if (node.name == ".")
+            VTAuto
+        else ctx.body[node.name]!!.type
 
     override fun computeTypes(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): List<VirtualType> =
         ctx.body.variables
