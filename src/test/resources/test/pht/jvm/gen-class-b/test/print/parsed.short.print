@@ -1,72 +1,38 @@
 [LOAD_CTX
 |	[USE_CTX
-|	|	(modules = pht pht/jvm)
 |	|	[PROGN
 |	|	|	[IMPORT
-|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'java')
-|	|	|	|	]
+|	|	|	|	[GET_OR_NAME]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'types')
-|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_OR_NAME]
 |	|	|	|	|	|	[VALN
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'java.util.ArrayList')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_OR_NAME]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[TYPE_OF
 |	|	|	|	|	[MCALL
 |	|	|	|	|	|	[NEW
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'ArrayList')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	|	]
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	|	(value = 'get')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '0')
-|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '1')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[TYPE_OF
 |	|	|	|	|	[MCALL
 |	|	|	|	|	|	[NEW
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = CLASS_WITH_GEN)
-|	|	|	|	|	|	|	|	(value = 'ArrayList<^String>')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	|	]
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	|	(value = 'get')
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '0')
-|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]

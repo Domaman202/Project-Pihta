@@ -11,7 +11,7 @@ import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.*
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.exception.pushTask
+import ru.DmN.siberia.utils.exception.pushOrRunTask
 
 object NRImport : INodeProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeImport? {
@@ -22,7 +22,7 @@ object NRImport : INodeProcessor<NodeNodesList> {
             .map { processor.computeList(it, ctx) }
             .associate { it -> Pair(processor.computeString(it[0], ctx), processor.computeList(it[1], ctx).map { processor.computeString(it, ctx) }) }
 
-        processor.pushTask(MACROS_IMPORT, node) {
+        processor.pushOrRunTask(MACROS_IMPORT, node) {
             data["macros"]?.run {
                 val cmacros = gctx.macros
                 val pmacros = processor.contexts.macros
@@ -34,7 +34,7 @@ object NRImport : INodeProcessor<NodeNodesList> {
             }
         }
 
-        processor.pushTask(TYPES_IMPORT, node) {
+        processor.pushOrRunTask(TYPES_IMPORT, node) {
             data["types"]?.run {
                 val aliases = gctx.aliases
                 val imports = gctx.imports
@@ -46,7 +46,7 @@ object NRImport : INodeProcessor<NodeNodesList> {
             }
         }
 
-        processor.pushTask(EXTENSIONS_IMPORT, node) {
+        processor.pushOrRunTask(EXTENSIONS_IMPORT, node) {
             data["extensions"]?.forEach { it ->
                 gctx.getType(it).methods
                     .stream()

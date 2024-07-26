@@ -5,40 +5,40 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[IF
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = BOOLEAN)
-|	|	|	|	|	|	(value = 'true')
+|	|	|	|	|	|	(value = true)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'Да')
+|	|	|	|	|	|	(value = Да)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'Нет')
+|	|	|	|	|	|	(value = Нет)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '1')
+|	|	|	|	|	(value = 1)
 |	|	|	|	]
 |	|	|	|	[IF
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = BOOLEAN)
-|	|	|	|	|	|	(value = 'false')
+|	|	|	|	|	|	(value = false)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'Да')
+|	|	|	|	|	|	(value = Да)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'Нет')
+|	|	|	|	|	|	(value = Нет)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]

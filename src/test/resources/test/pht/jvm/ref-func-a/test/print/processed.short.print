@@ -1,123 +1,45 @@
 [LOAD_CTX_
-|	(modules =)
-|	(NODES:
-|	|	[USE_CTX_
-|	|	|	(modules = pht pht/jvm)
-|	|	|	(NODES:
-|	|	|	|	[PROGN_
-|	|	|	|	|	[IMPORT_
-|	|	|	|	|	|	(module = java)
-|	|	|	|	|	|	(types = [java.util.function.Supplier])
+|	[USE_CTX_
+|	|	[PROGN_
+|	|	|	[IMPORT_]
+|	|	|	[CLS_
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	]
-|	|	|	|	|	[CLS_
-|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	(name = TestA)
-|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	(desc = foo()Ljava/lang/String;)
-|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	(value = 'Foo!')
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[ANN_TEST_
-|	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	|	(name = Test0)
-|	|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	(RFN_
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(name = foo)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[CLS_
-|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	(name = TestB)
-|	|	|	|	|	|	[CTOR_
-|	|	|	|	|	|	|	(type = constructor)
-|	|	|	|	|	|	|	(desc = <init>()V)
-|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	(method = <init>()V)
-|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[GET_ var this]
-|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	[ANN_STATIC_
 |	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(desc = foo()Ljava/lang/String;)
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	(value = 'Instanced Foo!')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[ANN_TEST_
-|	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	|	(name = Test1)
-|	|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	[DEF_
-|	|	|	|	|	|	|	|	|	|	(var)
-|	|	|	|	|	|	|	|	|	|	[
-|	|	|	|	|	|	|	|	|	|	|	(name = o)
-|	|	|	|	|	|	|	|	|	|	|	(type = TestB)
-|	|	|	|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestB))
-|	|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	|	|	(method = get()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	(RFN_
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = java.util.function.Supplier)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(lambda = get()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(method = foo()Ljava/lang/String;)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(name = foo)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	[GET_ var o]
-|	|	|	|	|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	[MCALL_]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	)
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	[CTOR_
+|	|	|	|	|	[MCALL_]
+|	|	|	|	]
+|	|	|	|	[DEFN_
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	[DEF_]
+|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	[MCALL_]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
 |	|	]
-|	)
+|	]
 ]

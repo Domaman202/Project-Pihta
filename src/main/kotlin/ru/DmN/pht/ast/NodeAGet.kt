@@ -10,12 +10,19 @@ class NodeAGet(
     val arr: Node,
     val index: Node
 ) : BaseNode(info) {
-    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type).append('\n')
             .indent(indent + 1).append("(array:\n")
-        arr.print(builder, indent + 2, short).append('\n').indent(indent + 1).append(")\n")
+        arr.print(builder, indent + 2).append('\n').indent(indent + 1).append(")\n")
             .indent(indent + 1).append("(index:\n")
-        index.print(builder, indent + 2, short).append('\n').indent(indent + 1).append(")\n")
+        index.print(builder, indent + 2).append('\n').indent(indent + 1).append(")\n")
             .indent(indent).append(']')
+    }
+
+    override fun printShort(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
+        indent(indent).append('[').append(info.type).append('\n')
+        arr.print(builder, indent + 1).append('\n')
+        index.print(builder, indent + 1).append('\n')
+        indent(indent).append(']')
     }
 }

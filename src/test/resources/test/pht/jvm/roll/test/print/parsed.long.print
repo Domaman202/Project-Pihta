@@ -5,43 +5,43 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[CT_ROLL_LEFT
 |	|	|	|	|	[DIV
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '8')
+|	|	|	|	|	|	|	(value = 8)
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '4')
+|	|	|	|	|	|	|	(value = 4)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '2')
+|	|	|	|	|	|	(value = 2)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '1')
+|	|	|	|	|	(value = 1)
 |	|	|	|	]
 |	|	|	|	[CT_ROLL_RIGHT
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '8')
+|	|	|	|	|	|	(value = 8)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '4')
+|	|	|	|	|	|	(value = 4)
 |	|	|	|	|	]
 |	|	|	|	|	[MUL
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '2')
+|	|	|	|	|	|	|	(value = 2)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]

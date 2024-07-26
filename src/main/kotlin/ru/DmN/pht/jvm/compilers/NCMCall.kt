@@ -5,6 +5,7 @@ import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.ast.NodeMCall
 import ru.DmN.pht.ast.NodeMCall.Type.SUPER
+import ru.DmN.pht.ast.NodeMCall.Type.VIRTUAL
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.jvm.compiler.ctx.clazz
 import ru.DmN.pht.jvm.compiler.ctx.method
@@ -39,10 +40,10 @@ object NCMCall : INodeCompiler<NodeMCall> {
                 val special = node.special as NodeDefn
                 val method = special.method
                 if (ctx.clazz.node.methods.none { it.name == method.name && it.desc == method.desc }) {
-                    node.method.modifiers.static = true
+                    modifiers.static = true
                     NCDefn.compileAsm(special, compiler, ctx)
                 }
-                compileCallInsert(node, NodeMCall.Type.UNKNOWN, node.instance, method, compiler, ctx)
+                compileCallInsert(node, node.type, node.instance, method, compiler, ctx)
             } else {
                 val mnode = ctx.method.node
                 val result = compiler.compileVal(node.special!!, ctx)
@@ -54,7 +55,7 @@ object NCMCall : INodeCompiler<NodeMCall> {
     private fun compileCallInsert(node: INodesList, type: NodeMCall.Type, instance: Node, method: VirtualMethod, compiler: Compiler, ctx: CompilationContext): Pair<MethodNode, VirtualType> =
         method.run {
             val mnode = ctx.method.node
-            if (!modifiers.static || modifiers.generator && modifiers.extension)
+            if (type == VIRTUAL || type == SUPER)
                 load(compiler.compileVal(instance, ctx), mnode)
             node.nodes.forEach { load(compiler.compileVal(it, ctx), mnode) }
             mnode.visitMethodInsn(

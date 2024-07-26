@@ -5,12 +5,12 @@
 |	|	|	[CLS
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'TestA')
+|	|	|	|	|	(text = TestA)
 |	|	|	|	]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	(value = Object)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[CTOR
@@ -21,12 +21,12 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[NEW
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	(value = TestA)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]

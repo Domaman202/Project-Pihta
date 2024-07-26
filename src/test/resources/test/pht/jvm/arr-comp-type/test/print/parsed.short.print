@@ -1,30 +1,17 @@
 [LOAD_CTX
 |	[USE_CTX
-|	|	(modules = pht pht/jvm)
 |	|	[PROGN
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[ARR_TYPE
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Object')
-|	|	|	|	|	]
+|	|	|	|	|	[VALUE]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '1')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[COMP_TYPE
 |	|	|	|	|	[ARR_TYPE
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'Object')
-|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]

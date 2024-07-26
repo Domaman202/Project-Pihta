@@ -6,12 +6,12 @@
 |	|	|	|	[CLS
 |	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'TestA')
+|	|	|	|	|	|	(text = TestA)
 |	|	|	|	|	]
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	|	(value = Object)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[CTOR
@@ -19,11 +19,11 @@
 |	|	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	|	(text = i)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	|	|	(value = int)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
@@ -31,7 +31,7 @@
 |	|	|	|	|	|	[PRINTLN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	(text = i)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -40,12 +40,12 @@
 |	|	|	[CLS
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'TestB')
+|	|	|	|	|	(text = TestB)
 |	|	|	|	]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	(value = TestA)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[CTOR
@@ -53,18 +53,18 @@
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	(text = i)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	|	(value = int)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[CCALL
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	(text = i)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
@@ -73,21 +73,21 @@
 |	|	|	|	[NEW
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	(value = TestA)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '202')
+|	|	|	|	|	|	(value = 202)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[NEW
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'TestB')
+|	|	|	|	|	|	(value = TestB)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '203')
+|	|	|	|	|	|	(value = 203)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]

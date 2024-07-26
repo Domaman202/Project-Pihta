@@ -35,7 +35,7 @@
 |	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	|	(value = TestA)
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	(generic = VT(void))
@@ -122,7 +122,7 @@
 |	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'TestC')
+|	|	|	|	|	|	|	|	|	|	|	(value = TestC)
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	(generic = VT(void))
@@ -147,7 +147,7 @@
 |	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestC')
+|	|	|	|	|	|	|	|	|	|	|	|	(value = TestC)
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	(generic = VT(void))

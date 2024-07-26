@@ -8,22 +8,22 @@
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'T')
+|	|	|	|	|	|	|	|	(text = T)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	|	|	(value = Object)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'TestA')
+|	|	|	|	|	|	(text = TestA)
 |	|	|	|	|	]
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	|	(value = Object)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[CTOR
@@ -33,16 +33,16 @@
 |	|	|	|	|	[DEFN
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'foo')
+|	|	|	|	|	|	|	(text = foo)
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'T^')
+|	|	|	|	|	|	|	(text = T^)
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALN]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = NIL)
-|	|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	|	|	(value = nil)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
@@ -50,19 +50,19 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[TYPE_OF
 |	|	|	|	|	[MCALL
 |	|	|	|	|	|	[NEW
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	(value = TestA)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	|	(value = 'foo')
+|	|	|	|	|	|	|	(value = foo)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
@@ -70,19 +70,19 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '1')
+|	|	|	|	|	(value = 1)
 |	|	|	|	]
 |	|	|	|	[TYPE_OF
 |	|	|	|	|	[MCALL
 |	|	|	|	|	|	[NEW
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS_WITH_GEN)
-|	|	|	|	|	|	|	|	(value = 'TestA<^String>')
+|	|	|	|	|	|	|	|	(value = TestA<^String>)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	|	(value = 'foo')
+|	|	|	|	|	|	|	(value = foo)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
@@ -93,22 +93,22 @@
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'T')
+|	|	|	|	|	|	|	|	(text = T)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	|	|	(value = Object)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'TestB')
+|	|	|	|	|	|	(text = TestB)
 |	|	|	|	|	]
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS_WITH_GEN)
-|	|	|	|	|	|	|	(value = 'TestA<T^>')
+|	|	|	|	|	|	|	(value = TestA<T^>)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[CTOR
@@ -123,22 +123,22 @@
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'T')
+|	|	|	|	|	|	|	|	(text = T)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	|	|	(value = Object)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'TestC')
+|	|	|	|	|	|	(text = TestC)
 |	|	|	|	|	]
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS_WITH_GEN)
-|	|	|	|	|	|	|	(value = 'TestB<T^>')
+|	|	|	|	|	|	|	(value = TestB<T^>)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[CTOR
@@ -150,19 +150,19 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '2')
+|	|	|	|	|	(value = 2)
 |	|	|	|	]
 |	|	|	|	[TYPE_OF
 |	|	|	|	|	[MCALL
 |	|	|	|	|	|	[NEW
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS_WITH_GEN)
-|	|	|	|	|	|	|	|	(value = 'TestB<^Class>')
+|	|	|	|	|	|	|	|	(value = TestB<^Class>)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	|	(value = 'foo')
+|	|	|	|	|	|	|	(value = foo)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
@@ -170,19 +170,19 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '3')
+|	|	|	|	|	(value = 3)
 |	|	|	|	]
 |	|	|	|	[TYPE_OF
 |	|	|	|	|	[MCALL
 |	|	|	|	|	|	[NEW
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS_WITH_GEN)
-|	|	|	|	|	|	|	|	(value = 'TestC<^Class>')
+|	|	|	|	|	|	|	|	(value = TestC<^Class>)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	|	(value = 'foo')
+|	|	|	|	|	|	|	(value = foo)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
@@ -190,12 +190,12 @@
 |	|	|	[CLS
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'TestD')
+|	|	|	|	|	(text = TestD)
 |	|	|	|	]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS_WITH_GEN)
-|	|	|	|	|	|	(value = 'TestC<^Class>')
+|	|	|	|	|	|	(value = TestC<^Class>)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[CTOR
@@ -206,19 +206,19 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '4')
+|	|	|	|	|	(value = 4)
 |	|	|	|	]
 |	|	|	|	[TYPE_OF
 |	|	|	|	|	[MCALL
 |	|	|	|	|	|	[NEW
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'TestD')
+|	|	|	|	|	|	|	|	(value = TestD)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	|	(value = 'foo')
+|	|	|	|	|	|	|	(value = foo)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]

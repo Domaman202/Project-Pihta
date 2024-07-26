@@ -19,6 +19,7 @@ import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
+import ru.DmN.siberia.utils.mapMutable
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
@@ -39,17 +40,11 @@ object NRMath : INodeProcessor<NodeNodesList> {
             if (valMode)
                 NodeMath(
                     info.processed,
-                    (when (info.type) {
+                    when (info.type) {
                         SHIFT_LEFT,
                         SHIFT_RIGHT -> nodes
-                        else -> nodes.map {
-                            processor.process(
-                                nodeAs(info, it, firstType.name),
-                                ctx,
-                                true
-                            )!!
-                        }
-                    }).toMutableList(),
+                        else -> nodes.mapMutable { processor.process(nodeAs(info, it, firstType.name), ctx, true)!! }
+                    },
                     firstType
                 )
             else null

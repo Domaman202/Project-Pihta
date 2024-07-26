@@ -24,17 +24,15 @@ class NodeMCall(
     override fun copy(): NodeMCall =
         NodeMCall(info, copyNodes(), generic, instance, method, type, special)
 
-    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+    override fun print(builder: StringBuilder, indent: Int,): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type).append('\n')
-            .indent(indent + 1).append("(method = ").append(method.name).append(method.desc).append(")\n")
-            .indent(indent + 1).append("(instance:\n")
-        instance.print(builder, indent + 2, short).append('\n').indent(indent + 1).append(')').append('\n').indent(indent)
-        if (!short) {
-            indent(1).append("(generic = ").append(generic).append(")\n").indent(indent + 1).append("(type = ").append(type).append(')')
-            if (nodes.isEmpty())
-                append('\n').indent(indent)
-        }
-        printNodes(builder, indent, short).append(']')
+        indent(indent + 1).append("(method = ").append(method.name).append(method.desc).append(")\n")
+        indent(indent + 1).append("(instance:\n")
+        instance.print(builder, indent + 2).append('\n').indent(indent + 1).append(')').append('\n').indent(indent)
+        indent(1).append("(generic = ").append(generic).append(")\n").indent(indent + 1).append("(type = ").append(type).append(')')
+        if (nodes.isEmpty())
+            append('\n').indent(indent)
+        printNodes(builder, indent).append(']')
     }
 
     enum class Type {

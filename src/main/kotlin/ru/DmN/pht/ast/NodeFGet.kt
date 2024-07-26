@@ -15,9 +15,6 @@ class NodeFGet(
     override fun copy(): NodeFGet =
         NodeFGet(info, copyNodes(), name, type, vtype)
 
-//    override fun print(builder: StringBuilder, indent: Int): StringBuilder =
-//        printNodes(builder.indent(indent).append('[').append(text).append(" (").append(type).append(")\n").indent(indent + 1).append("name = ").append(name), indent).append(']')
-
     enum class Type {
         UNKNOWN,
         STATIC,

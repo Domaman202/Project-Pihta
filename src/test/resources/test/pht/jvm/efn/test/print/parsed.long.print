@@ -5,40 +5,40 @@
 |	|	|	[CLS
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'Utils')
+|	|	|	|	|	(text = Utils)
 |	|	|	|	]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	(value = Object)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[EFN
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	|	(value = String)
 |	|	|	|	|	]
 |	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'hello')
+|	|	|	|	|	|	(text = hello)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	|	(value = String)
 |	|	|	|	|	]
 |	|	|	|	|	[VALN]
 |	|	|	|	|	[ADD
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	(value = 'Hello, ')
+|	|	|	|	|	|	|	(value = Hello, )
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'this')
+|	|	|	|	|	|	|	(text = this)
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	(value = '!')
+|	|	|	|	|	|	|	(value = !)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
@@ -46,16 +46,16 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[MCALL
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'Vasya')
+|	|	|	|	|	|	(value = Vasya)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	(value = 'hello')
+|	|	|	|	|	|	(value = hello)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]

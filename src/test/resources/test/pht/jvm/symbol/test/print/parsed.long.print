@@ -6,21 +6,21 @@
 |	|	|	|	[SYMBOL
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'Test')
+|	|	|	|	|	|	(value = Test)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'Class')
+|	|	|	|	|	|	(value = Class)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '123')
+|	|	|	|	|	|	(value = 123)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	(value = Object)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[CTOR
@@ -31,12 +31,12 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[NEW
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'TestClass123')
+|	|	|	|	|	|	(value = TestClass123)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]

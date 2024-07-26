@@ -13,6 +13,10 @@ class NodeSet(
     override fun copy(): NodeSet =
         NodeSet(info, copyNodes(), name)
 
-    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder =
-        printNodes(builder.indent(indent).append('[').append(info.type).append('\n').indent(indent + 1).append("(name = ").append(name).append(')'), indent, short).append(']')
+    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
+        indent(indent).append('[').append(info.type).append('\n')
+        indent(indent + 1).append("(name = ").append(name).append(')')
+        printNodes(builder, indent)
+        append(']')
+    }
 }

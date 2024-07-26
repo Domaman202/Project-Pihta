@@ -1,157 +1,72 @@
 [LOAD_CTX
 |	[USE_CTX
-|	|	(modules = pht pht/jvm)
 |	|	[PROGN
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[AND
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = BOOLEAN)
-|	|	|	|	|	|	(value = 'true')
-|	|	|	|	|	]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = BOOLEAN)
-|	|	|	|	|	|	(value = 'false')
-|	|	|	|	|	]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '1')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[OR
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = BOOLEAN)
-|	|	|	|	|	|	(value = 'true')
-|	|	|	|	|	]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = BOOLEAN)
-|	|	|	|	|	|	(value = 'false')
-|	|	|	|	|	]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '2')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[XOR
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = BOOLEAN)
-|	|	|	|	|	|	(value = 'true')
-|	|	|	|	|	]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = BOOLEAN)
-|	|	|	|	|	|	(value = 'false')
-|	|	|	|	|	]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '3')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[NOT
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = BOOLEAN)
-|	|	|	|	|	|	(value = 'true')
-|	|	|	|	|	]
+|	|	|	|	|	[VALUE]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '4')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[AND
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '2')
-|	|	|	|	|	]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '3')
-|	|	|	|	|	]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '5')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[OR
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '2')
-|	|	|	|	|	]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '3')
-|	|	|	|	|	]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '6')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[XOR
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '2')
-|	|	|	|	|	]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '3')
-|	|	|	|	|	]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '7')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[NOT
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '1')
-|	|	|	|	|	]
+|	|	|	|	|	[VALUE]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '8')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[SHIFT_LEFT
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '1')
-|	|	|	|	|	]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '10')
-|	|	|	|	|	]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '9')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[SHIFT_RIGHT
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '1024')
-|	|	|	|	|	]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '10')
-|	|	|	|	|	]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
 |	|	|	|	]
 |	|	|	]
 |	|	]

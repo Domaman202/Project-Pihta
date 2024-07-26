@@ -5,31 +5,31 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[CT_SKIP]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '321')
+|	|	|	|	|	(value = 321)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '1')
+|	|	|	|	|	(value = 1)
 |	|	|	|	]
 |	|	|	|	[CT_ROLL_RIGHT
 |	|	|	|	|	[RET
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '666')
+|	|	|	|	|	|	|	(value = 666)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[CT_SKIP]
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '777')
+|	|	|	|	|	(value = 777)
 |	|	|	|	]
 |	|	|	]
 |	|	]

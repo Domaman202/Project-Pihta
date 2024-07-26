@@ -78,9 +78,9 @@ class NodeDefn(
             this.varargs  = this@NodeDefn.varargs
         }
 
-    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type).append('\n')
-            .indent(indent + 1).append("(type = ")
+        indent(indent + 1).append("(type = ")
         if (method.modifiers.varargs)
             append("varargs ")
         append(
@@ -92,14 +92,12 @@ class NodeDefn(
                 "extension method"
             else "method"
         ).append(")\n")
-        if (short)
-            indent(indent + 1).append("(desc = ").append(method.name).append(method.desc).append(')')
-        else indent(indent + 1).append("(name = ").append(method.name).append(")\n")
-            .indent(indent + 1).append("(desc = ").append(method.desc).append(")\n")
-            .indent(indent + 1).append("(sign = ").append(method.signature).append(')')
+        indent(indent + 1).append("(name = ").append(method.name).append(")\n")
+        indent(indent + 1).append("(desc = ").append(method.desc).append(")\n")
+        indent(indent + 1).append("(sign = ").append(method.signature).append(')')
         if (nodes.isEmpty())
             append('\n').indent(indent)
-        else printNodes(this, indent, short)
+        else printNodes(this, indent)
         append(']')
     }
 }

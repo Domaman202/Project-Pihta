@@ -22,7 +22,7 @@ import ru.DmN.siberia.processor.utils.platform
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.IPlatform.UNIVERSAL
-import ru.DmN.siberia.utils.exception.pushTask
+import ru.DmN.siberia.utils.exception.pushOrRunTask
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualType
 import kotlin.math.absoluteValue
@@ -43,7 +43,7 @@ object NRFn : INodeProcessor<NodeNodesList>, IInlinableProcessor<NodeNodesList> 
         val body = LazyProcessValueList(node, processor, ctx).drop(offset + 2)
         val new = NodeFn(node.info.withType(FN_), body, type, args, gctx.name("PhtLambda\$${node.info.hashCode().absoluteValue}"), refs)
         if (ctx.platform != UNIVERSAL) {
-            processor.pushTask(FINALIZATION, node) {
+            processor.pushOrRunTask(FINALIZATION, node) {
                 finalize(node.info, new, processor, ctx)
             }
         }

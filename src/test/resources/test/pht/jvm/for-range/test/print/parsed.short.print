@@ -1,61 +1,32 @@
 [LOAD_CTX
 |	[USE_CTX
-|	|	(modules = pht pht/jvm)
 |	|	[PROGN
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[DEF
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[VALN
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'j')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	(value = '0')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[FOR
 |	|	|	|	|	[VALN
-|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	]
+|	|	|	|	|	|	[GET_OR_NAME]
 |	|	|	|	|	|	[RANGE
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	(value = '0')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	(value = '10')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[SET_B
-|	|	|	|	|	|	(name = j)
 |	|	|	|	|	|	[ADD
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'j')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'i')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	[GET_OR_NAME]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'j')
-|	|	|	|	]
+|	|	|	|	[GET_OR_NAME]
 |	|	|	]
 |	|	]
 |	]

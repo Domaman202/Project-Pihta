@@ -1,56 +1,28 @@
 [LOAD_CTX
 |	[USE_CTX
-|	|	(modules = pht pht/jvm)
 |	|	[PROGN
 |	|	|	[NS
-|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'ru.DmN.test')
-|	|	|	|	]
+|	|	|	|	[GET_OR_NAME]
 |	|	|	|	[CLS
-|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'Test')
-|	|	|	|	|	]
+|	|	|	|	|	[GET_OR_NAME]
 |	|	|	|	|	[VALN
-|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'Object')
-|	|	|	|	|	|	]
+|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	]
 |	|	|	|	|	[ANN_STATIC
 |	|	|	|	|	|	[DEFN
-|	|	|	|	|	|	|	[GET_OR_NAME
-|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'glory-to-Putin')
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'String')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	|	|	[VALN]
-|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	(value = 'Слава Владимиру Путину!')
-|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
-|	|	|	|	]
+|	|	|	|	[VALUE]
 |	|	|	|	[MCALL
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'ru.DmN.test.Test')
-|	|	|	|	|	]
-|	|	|	|	|	[VALUE
-|	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	(value = 'glory-to-Putin')
-|	|	|	|	|	]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
 |	|	|	|	]
 |	|	|	]
 |	|	]

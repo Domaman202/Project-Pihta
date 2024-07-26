@@ -4,12 +4,12 @@
 |	|	[TEST_FN
 |	|	|	[VALUE
 |	|	|	|	(type = INT)
-|	|	|	|	(value = '0')
+|	|	|	|	(value = 0)
 |	|	|	]
 |	|	|	[MACRO_B
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = NIL)
-|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	(value = nil)
 |	|	|	|	]
 |	|	|	]
 |	|	]

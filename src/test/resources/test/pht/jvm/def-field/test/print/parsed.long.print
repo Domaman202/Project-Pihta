@@ -5,12 +5,12 @@
 |	|	|	[CLS
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'TestA')
+|	|	|	|	|	(text = TestA)
 |	|	|	|	]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	(value = Object)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[ANN_STATIC
@@ -19,11 +19,11 @@
 |	|	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	|	(text = i)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	|	|	(value = int)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
@@ -33,12 +33,12 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[FSET_B
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	(value = 12)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[FGET_B]
@@ -46,12 +46,12 @@
 |	|	|	[CLS
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'TestB')
+|	|	|	|	|	(text = TestB)
 |	|	|	|	]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	(value = Object)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[CTOR
@@ -63,11 +63,11 @@
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	(text = i)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	|	(value = int)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -76,19 +76,19 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '1')
+|	|	|	|	|	(value = 1)
 |	|	|	|	]
 |	|	|	|	[DEF
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'o')
+|	|	|	|	|	|	|	|	(text = o)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[NEW
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	(value = 'TestB')
+|	|	|	|	|	|	|	|	|	(value = TestB)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
@@ -97,13 +97,13 @@
 |	|	|	|	[FSET_B
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	(value = 21)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[FGET_B
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'o')
+|	|	|	|	|	|	(value = o)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]

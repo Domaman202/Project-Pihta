@@ -4,12 +4,12 @@
 |	|	[TEST_FN
 |	|	|	[VALUE
 |	|	|	|	(type = INT)
-|	|	|	|	(value = '0')
+|	|	|	|	(value = 0)
 |	|	|	]
 |	|	|	[CLS_OF
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'String')
+|	|	|	|	|	(value = String)
 |	|	|	|	]
 |	|	|	]
 |	|	]

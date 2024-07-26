@@ -5,33 +5,33 @@
 |	|	|	[NS
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'ru.DmN.test')
+|	|	|	|	|	(text = ru.DmN.test)
 |	|	|	|	]
 |	|	|	|	[CLS
 |	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'Test')
+|	|	|	|	|	|	(text = Test)
 |	|	|	|	|	]
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	|	(value = Object)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[ANN_STATIC
 |	|	|	|	|	|	[DEFN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'glory-to-Putin')
+|	|	|	|	|	|	|	|	(text = glory-to-Putin)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	|	|	|	(value = String)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALN]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	(value = 'Слава Владимиру Путину!')
+|	|	|	|	|	|	|	|	(value = Слава Владимиру Путину!)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -40,16 +40,16 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[MCALL
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'ru.DmN.test.Test')
+|	|	|	|	|	|	(value = ru.DmN.test.Test)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	(value = 'glory-to-Putin')
+|	|	|	|	|	|	(value = glory-to-Putin)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]

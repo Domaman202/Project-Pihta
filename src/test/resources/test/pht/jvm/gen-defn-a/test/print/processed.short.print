@@ -1,97 +1,55 @@
 [LOAD_CTX_
-|	(modules =)
-|	(NODES:
-|	|	[USE_CTX_
-|	|	|	(modules = pht pht/jvm)
-|	|	|	(NODES:
-|	|	|	|	[PROGN_
-|	|	|	|	|	[CLS_
-|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	(name = TestA)
-|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	(desc = foo()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
-|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	(type = NIL)
-|	|	|	|	|	|	|	|	|	|	(value = 'nil')
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
+|	[USE_CTX_
+|	|	[PROGN_
+|	|	|	[CLS_
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
-|	|	|	|	|	[ANN_TEST_
-|	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	|	(name = Test0)
-|	|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'java.lang.Object')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[ANN_TEST_
-|	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	|	(name = Test1)
-|	|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'java.lang.String')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[CLS_
-|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	(name = TestB)
-|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	(desc = foo(Ljava/lang/Object;)Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	[GET_ var o]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[ANN_TEST_
-|	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	|	(name = Test2)
-|	|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'java.lang.Class')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	)
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	[GET_]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
 |	|	]
-|	)
+|	]
 ]

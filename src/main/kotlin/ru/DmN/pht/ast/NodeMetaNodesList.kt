@@ -33,17 +33,17 @@ open class NodeMetaNodesList(
     fun copyNodes(): MutableList<Node> =
         nodes.mapMutable { it.copy() }
 
-    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type)
         printMetadata(this, indent)
-        printNodes(this, indent, short)
+        printNodes(this, indent)
         append(']')
     }
 
-    fun printNodes(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder {
+    override fun printNodes(builder: StringBuilder, indent: Int): StringBuilder {
         if (nodes.isNotEmpty())
             builder.append('\n')
-        nodes.forEach { it.print(builder, indent + 1, short).append('\n') }
+        nodes.forEach { it.print(builder, indent + 1).append('\n') }
         if (nodes.isNotEmpty())
             builder.indent(indent)
         return builder

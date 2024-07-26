@@ -9,9 +9,9 @@ class NodeImport(
     val module: String,
     val data: Map<String, List<Any?>>
 ) : BaseNode(info) {
-    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type).append('\n')
-            .indent(indent + 1).append("(module = ").append(module).append(')')
+        indent(indent + 1).append("(module = ").append(module).append(')')
         if (data.isNotEmpty()) {
             data.entries.forEach {
                 append('\n').indent(indent + 1).append('(').append(it.key).append(" = [")

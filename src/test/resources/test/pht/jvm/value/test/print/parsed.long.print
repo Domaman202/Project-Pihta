@@ -5,181 +5,181 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = NIL)
-|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	(value = nil)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '1')
+|	|	|	|	|	(value = 1)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '12')
+|	|	|	|	|	(value = 12)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '2')
+|	|	|	|	|	(value = 2)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = DOUBLE)
-|	|	|	|	|	(value = '21.33')
+|	|	|	|	|	(value = 21.33)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '3')
+|	|	|	|	|	(value = 3)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = FLOAT)
-|	|	|	|	|	(value = '44')
+|	|	|	|	|	(value = 44)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '4')
+|	|	|	|	|	(value = 4)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = LONG)
-|	|	|	|	|	(value = '202')
+|	|	|	|	|	(value = 202)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '5')
+|	|	|	|	|	(value = 5)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = CHAR)
-|	|	|	|	|	(value = '@')
+|	|	|	|	|	(value = @)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '6')
+|	|	|	|	|	(value = 6)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = STRING)
-|	|	|	|	|	(value = 'Текст')
+|	|	|	|	|	(value = Текст)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '7')
+|	|	|	|	|	(value = 7)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	(value = Object)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '8')
+|	|	|	|	|	(value = 8)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = CLASS_WITH_GEN)
-|	|	|	|	|	(value = 'java.util.List<^Object>')
+|	|	|	|	|	(value = java.util.List<^Object>)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '9')
+|	|	|	|	|	(value = 9)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = NIL)
-|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	(value = nil)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '10')
+|	|	|	|	|	(value = 10)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '12')
+|	|	|	|	|	(value = 12)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '11')
+|	|	|	|	|	(value = 11)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = DOUBLE)
-|	|	|	|	|	(value = '21.33')
+|	|	|	|	|	(value = 21.33)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '12')
+|	|	|	|	|	(value = 12)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = FLOAT)
-|	|	|	|	|	(value = '44')
+|	|	|	|	|	(value = 44)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '13')
+|	|	|	|	|	(value = 13)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = LONG)
-|	|	|	|	|	(value = '202')
+|	|	|	|	|	(value = 202)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '14')
+|	|	|	|	|	(value = 14)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = CHAR)
-|	|	|	|	|	(value = '@')
+|	|	|	|	|	(value = @)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '15')
+|	|	|	|	|	(value = 15)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = STRING)
-|	|	|	|	|	(value = 'Текст')
+|	|	|	|	|	(value = Текст)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '16')
+|	|	|	|	|	(value = 16)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	(value = Object)
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '17')
+|	|	|	|	|	(value = 17)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'java.util.List<^Object>')
+|	|	|	|	|	(value = java.util.List<^Object>)
 |	|	|	|	]
 |	|	|	]
 |	|	]

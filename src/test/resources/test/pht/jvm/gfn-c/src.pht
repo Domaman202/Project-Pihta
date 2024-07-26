@@ -1,0 +1,9 @@
+(progn
+    (cls TestA [^Object] (@static
+        (gfn foo ^auto [[this ^auto]]
+            (+ this 10))
+        (to-efn . foo [^auto])))
+    (test-fn 0
+        (#foo ^TestA 5))
+    (test-fn 1
+        (#foo ^TestA 2.5)))

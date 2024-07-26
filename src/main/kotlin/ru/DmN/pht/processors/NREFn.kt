@@ -17,7 +17,7 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processor.utils.ProcessingStage.METHODS_BODY
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.exception.pushTask
+import ru.DmN.siberia.utils.exception.pushOrRunTask
 import ru.DmN.siberia.utils.vtype.MethodModifiers
 import ru.DmN.siberia.utils.vtype.VirtualType
 
@@ -65,7 +65,7 @@ object NREFn : INodeProcessor<INodesList> {
         //
         val new = NodeDefn(node.info.withType(EFN_), node.nodes.drop(4 + offset).toMutableList(), method)
         //
-        processor.pushTask(METHODS_BODY, node) {
+        processor.pushOrRunTask(METHODS_BODY, node) {
             val context = ctx.with(method).with(BodyContext.of(method))
             if (method.modifiers.inline)
                 method.inline = NodeInlBodyB(node.info.withType(INL_BODY_A), new.nodes.toMutableList(), method.rettype, context)

@@ -1,123 +1,59 @@
 [LOAD_CTX_
-|	(modules =)
-|	(NODES:
-|	|	[USE_CTX_
-|	|	|	(modules = pht pht/jvm)
-|	|	|	(NODES:
-|	|	|	|	[PROGN_
-|	|	|	|	|	[CLS_
-|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	(name = TestA)
-|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	(desc = add(II)I)
-|	|	|	|	|	|	|	|	[ADD_
-|	|	|	|	|	|	|	|	|	[GET_ var a]
-|	|	|	|	|	|	|	|	|	[GET_ var b]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
+|	[USE_CTX_
+|	|	[PROGN_
+|	|	|	[CLS_
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	[ADD_
+|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
-|	|	|	|	|	[ANN_TEST_
-|	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	|	(name = Test0)
-|	|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	|	|	(method = add(II)I)
-|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
-|	|	|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	|	
-|	|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	|	|	|	(value = '12')
-|	|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	|	|	|	(value = '21')
-|	|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[CLS_
-|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	(name = TestB)
-|	|	|	|	|	|	[DEF_
-|	|	|	|	|	|	|	(field)
-|	|	|	|	|	|	|	[
-|	|	|	|	|	|	|	|	(name = value)
-|	|	|	|	|	|	|	|	(type = int)
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	|	[CTOR_
-|	|	|	|	|	|	|	(type = constructor)
-|	|	|	|	|	|	|	(desc = <init>()V)
-|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	(method = <init>()V)
-|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	[GET_ var this]
-|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[FSET_
-|	|	|	|	|	|	|	|	[GET_ var this]
-|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	(value = '20')
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	[ANN_STATIC_
 |	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(desc = sub(I)I)
-|	|	|	|	|	|	|	[SUB_
-|	|	|	|	|	|	|	|	[GET_ this field value]
-|	|	|	|	|	|	|	|	[GET_ var other]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
-|	|	|	|	|	]
-|	|	|	|	|	[ANN_TEST_
-|	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	|	(name = Test1)
-|	|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	|	|	(method = sub(I)I)
-|	|	|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	|	|	[NEW_
-|	|	|	|	|	|	|	|	|	|	|	|	|	(type = VT(TestB))
-|	|	|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	|	|	
-|	|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	|	|	|	(value = '5')
-|	|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	)
+|	|	|	]
+|	|	|	[CLS_
+|	|	|	|	[DEF_]
+|	|	|	|	[CTOR_
+|	|	|	|	|	[MCALL_]
+|	|	|	|	|	[FSET_
+|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[DEFN_
+|	|	|	|	|	[SUB_
+|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	[GET_]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
 |	|	]
-|	)
+|	]
 ]

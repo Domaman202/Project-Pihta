@@ -45,7 +45,7 @@
 |	|	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	(value = 'Auto-Type Foo!')
+|	|	|	|	|	|	|	|	|	(value = Auto-Type Foo!)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
@@ -78,7 +78,7 @@
 |	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	(value = 'Auto-Type Instanced Foo!')
+|	|	|	|	|	|	|	|	(value = Auto-Type Instanced Foo!)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -100,7 +100,7 @@
 |	|	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'Caller')
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = Caller)
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
@@ -113,7 +113,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = TestA)
 |	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	]
@@ -147,7 +147,7 @@
 |	|	|	|	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	|	|	|	|	(value = TestA)
 |	|	|	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	|	]
@@ -178,7 +178,7 @@
 |	|	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'Caller')
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = Caller)
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))

@@ -7,11 +7,11 @@
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'Object')
+|	|	|	|	|	|	|	(text = Object)
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'object')
+|	|	|	|	|	|	|	(text = object)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
@@ -19,11 +19,11 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'object')
+|	|	|	|	|	(value = object)
 |	|	|	|	]
 |	|	|	]
 |	|	]

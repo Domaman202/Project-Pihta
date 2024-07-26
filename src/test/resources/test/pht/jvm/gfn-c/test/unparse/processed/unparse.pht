@@ -1,0 +1,39 @@
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls [] TestA [^java.lang.Object]
+				(@static
+					(gfn [] foo ^auto [[this ^auto]]
+						(add
+							this
+							10))
+					(to-efn ^TestA foo [^auto])))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(progn
+									(@static (defn [] pht$autogen$foo$104462 ^int [[this ^int]]
+										(add
+											(get this)
+											10)))
+									(mcall
+										^TestA
+										pht$autogen$foo$104462
+										5)))))))
+			(@test
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(progn
+									(@static (defn [] pht$autogen$foo$1325958160 ^double [[this ^double]]
+										(add
+											(get this)
+											(as ^double
+												10))))
+									(mcall
+										^TestA
+										pht$autogen$foo$1325958160
+										2.5))))))))))

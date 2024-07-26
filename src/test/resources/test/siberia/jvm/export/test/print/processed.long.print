@@ -22,7 +22,7 @@
 |	|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	|	|	|	(value = 'test/siberia/jvm/export')
+|	|	|	|	|	|	|	|	|	|	|	|	(value = test/siberia/jvm/export)
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]

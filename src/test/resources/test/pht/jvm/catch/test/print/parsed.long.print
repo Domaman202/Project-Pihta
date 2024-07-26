@@ -5,26 +5,26 @@
 |	|	|	[IMPORT
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = STRING)
-|	|	|	|	|	(value = 'java')
+|	|	|	|	|	(value = java)
 |	|	|	|	]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'types')
+|	|	|	|	|	|	|	(text = types)
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'java.lang.Exception')
+|	|	|	|	|	|	|	|	(text = java.lang.Exception)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'java.lang.RuntimeException')
+|	|	|	|	|	|	|	|	(text = java.lang.RuntimeException)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'java.lang.Error')
+|	|	|	|	|	|	|	|	(text = java.lang.Error)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -33,40 +33,40 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[CATCH
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	(value = int)
 |	|	|	|	|	]
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = '_')
+|	|	|	|	|	|	|	|	(text = _)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'RuntimeException')
+|	|	|	|	|	|	|	|	(value = RuntimeException)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	|	|	(value = 12)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = '_')
+|	|	|	|	|	|	|	|	(text = _)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'Exception')
+|	|	|	|	|	|	|	|	(value = Exception)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	|	|	(value = 21)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -74,7 +74,7 @@
 |	|	|	|	|	|	[NEW
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'Exception')
+|	|	|	|	|	|	|	|	(value = Exception)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -83,40 +83,40 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '1')
+|	|	|	|	|	(value = 1)
 |	|	|	|	]
 |	|	|	|	[CATCH
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	(value = int)
 |	|	|	|	|	]
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = '_')
+|	|	|	|	|	|	|	|	(text = _)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'RuntimeException')
+|	|	|	|	|	|	|	|	(value = RuntimeException)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	(value = '12')
+|	|	|	|	|	|	|	|	(value = 12)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = '_')
+|	|	|	|	|	|	|	|	(text = _)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'Exception')
+|	|	|	|	|	|	|	|	(value = Exception)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	(value = '21')
+|	|	|	|	|	|	|	|	(value = 21)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -124,7 +124,7 @@
 |	|	|	|	|	|	[NEW
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'RuntimeException')
+|	|	|	|	|	|	|	|	(value = RuntimeException)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -133,29 +133,29 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '2')
+|	|	|	|	|	(value = 2)
 |	|	|	|	]
 |	|	|	|	[CATCH
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = '_')
+|	|	|	|	|	|	|	|	(text = _)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'RuntimeException')
+|	|	|	|	|	|	|	|	(value = RuntimeException)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[UNIT]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = '_')
+|	|	|	|	|	|	|	|	(text = _)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'Exception')
+|	|	|	|	|	|	|	|	(value = Exception)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[UNIT]
 |	|	|	|	|	|	]
@@ -164,7 +164,7 @@
 |	|	|	|	|	|	[NEW
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'Error')
+|	|	|	|	|	|	|	|	(value = Error)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -173,46 +173,46 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '3')
+|	|	|	|	|	(value = 3)
 |	|	|	|	]
 |	|	|	|	[CATCH
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	|	(value = String)
 |	|	|	|	|	]
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'e')
+|	|	|	|	|	|	|	|	(text = e)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'RuntimeException')
+|	|	|	|	|	|	|	|	(value = RuntimeException)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[MCALL
 |	|	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'e')
+|	|	|	|	|	|	|	|	|	(text = e)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	|	|	|	(value = 'toString')
+|	|	|	|	|	|	|	|	|	(value = toString)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = '_')
+|	|	|	|	|	|	|	|	(text = _)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'Exception')
+|	|	|	|	|	|	|	|	(value = Exception)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = NIL)
-|	|	|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	|	|	|	(value = nil)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -220,7 +220,7 @@
 |	|	|	|	|	|	[NEW
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'RuntimeException')
+|	|	|	|	|	|	|	|	(value = RuntimeException)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]

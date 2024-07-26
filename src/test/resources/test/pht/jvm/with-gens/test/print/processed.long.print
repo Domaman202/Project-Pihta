@@ -35,7 +35,7 @@
 |	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = NIL)
-|	|	|	|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	|	|	|	|	(value = nil)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
@@ -48,7 +48,7 @@
 |	|	|	|	|	|	|	|	(type = VT(java.lang.Object))
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = NIL)
-|	|	|	|	|	|	|	|	|	(value = 'nil')
+|	|	|	|	|	|	|	|	|	(value = nil)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
@@ -65,7 +65,7 @@
 |	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	|	|	[DEF_
-|	|	|	|	|	|	|	|	|	|	(var)
+|	|	|	|	|	|	|	|	|	|	(type = var)
 |	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	(name = o)
 |	|	|	|	|	|	|	|	|	|	|	(type = Test)
@@ -82,7 +82,7 @@
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'java.lang.String')
+|	|	|	|	|	|	|	|	|	|	|	(value = java.lang.String)
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]
@@ -101,7 +101,7 @@
 |	|	|	|	|	|	|	|	|	(desc = ()Ljava/lang/Object;)
 |	|	|	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	|	|	[DEF_
-|	|	|	|	|	|	|	|	|	|	(var)
+|	|	|	|	|	|	|	|	|	|	(type = var)
 |	|	|	|	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	|	|	|	(name = o)
 |	|	|	|	|	|	|	|	|	|	|	(type = Test)
@@ -118,7 +118,7 @@
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'java.lang.Class')
+|	|	|	|	|	|	|	|	|	|	|	(value = java.lang.Class)
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	]

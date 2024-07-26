@@ -20,19 +20,19 @@ class NodeFn(
     override val nodes: MutableList<Node>
         get() = processed ?: source
 
-    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type).append('\n')
-            .indent(indent + 1).append("(source:")
+        indent(indent + 1).append("(source:")
         if (source.isNotEmpty()) {
-            builder.append('\n')
-            source.forEach { it.print(builder, indent + 2, short).append('\n') }
-            builder.indent(indent + 1)
+            append('\n')
+            source.forEach { it.print(builder, indent + 2).append('\n') }
+            indent(indent + 1)
         }
         append(")\n").indent(indent + 1).append("(processed:")
         processed?.let { it ->
-            builder.append('\n')
-            it.forEach { it.print(builder, indent + 2, short).append('\n') }
-            builder.indent(indent + 1)
+            append('\n')
+            it.forEach { it.print(builder, indent + 2).append('\n') }
+            indent(indent + 1)
         }
         append(")\n").indent(indent).append(']')
     }

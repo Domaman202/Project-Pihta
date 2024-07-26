@@ -5,64 +5,64 @@
 |	|	|	[CLS
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'Utils')
+|	|	|	|	|	(text = Utils)
 |	|	|	|	]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	(value = 'Object')
+|	|	|	|	|	|	(value = Object)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[ANN_STATIC
 |	|	|	|	|	[DEFN
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'hello')
+|	|	|	|	|	|	|	(text = hello)
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	|	|	(value = String)
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	|	(text = 'name')
+|	|	|	|	|	|	|	|	|	(text = name)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	|	|	|	|	(value = String)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[ADD
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	(value = 'Hello, ')
+|	|	|	|	|	|	|	|	(value = Hello, )
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'name')
+|	|	|	|	|	|	|	|	(text = name)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	(value = '!')
+|	|	|	|	|	|	|	|	(value = !)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[TO_EFN
 |	|	|	|	|	|	[NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = '.')
+|	|	|	|	|	|	|	(text = .)
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'hello')
+|	|	|	|	|	|	|	(text = hello)
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALN
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	(value = 'String')
+|	|	|	|	|	|	|	|	(value = String)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -71,16 +71,16 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[MCALL
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	(value = 'Petya')
+|	|	|	|	|	|	(value = Petya)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	(value = 'hello')
+|	|	|	|	|	|	(value = hello)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]

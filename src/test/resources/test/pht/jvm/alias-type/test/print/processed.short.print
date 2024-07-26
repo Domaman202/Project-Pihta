@@ -1,32 +1,18 @@
 [LOAD_CTX_
-|	(modules =)
-|	(NODES:
-|	|	[USE_CTX_
-|	|	|	(modules = pht pht/jvm)
-|	|	|	(NODES:
-|	|	|	|	[PROGN_
-|	|	|	|	|	[ALIAS_TYPE_]
-|	|	|	|	|	[ANN_TEST_
-|	|	|	|	|	|	[CLS_
-|	|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	|	(name = Test0)
-|	|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'java.lang.Object')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
+|	[USE_CTX_
+|	|	[PROGN_
+|	|	|	[ALIAS_TYPE_]
+|	|	|	[ANN_TEST_
+|	|	|	|	[CLS_
+|	|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	)
+|	|	|	]
 |	|	]
-|	)
+|	]
 ]

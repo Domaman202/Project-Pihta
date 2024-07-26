@@ -19,7 +19,7 @@ import ru.DmN.siberia.processor.utils.ProcessingStage.TYPES_DEFINE
 import ru.DmN.siberia.processor.utils.ProcessingStage.TYPES_PREDEFINE
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
-import ru.DmN.siberia.utils.exception.pushTask
+import ru.DmN.siberia.utils.exception.pushOrRunTask
 import ru.DmN.siberia.utils.vtype.FieldModifiers
 import ru.DmN.siberia.utils.vtype.VirtualField.VirtualFieldImpl
 
@@ -44,7 +44,7 @@ object NRClass : INodeProcessor<NodeNodesList> {
         processor.tp.types[name.hashCode()] = type
         //
         val new = NodeType(node.info.processed, node.nodes.drop(2 + offset).toMutableList(), type)
-        processor.pushTask(TYPES_PREDEFINE, node) {
+        processor.pushOrRunTask(TYPES_PREDEFINE, node) {
             generics?.forEach {
                 val pair = processor.computeList(it, ctx)
                 val genericName = "${processor.computeString(pair[0], ctx)}$$name"
@@ -65,7 +65,7 @@ object NRClass : INodeProcessor<NodeNodesList> {
                 }
             }
             //
-            processor.pushTask(TYPES_DEFINE, node) {
+            processor.pushOrRunTask(TYPES_DEFINE, node) {
                 processNodesList(new, processor, ctx.with(type), valMode)
             }
         }

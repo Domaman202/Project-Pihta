@@ -11,13 +11,13 @@ import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext
 import ru.DmN.siberia.compiler.utils.CompilingStage.METHODS_BODY
 import ru.DmN.siberia.compilers.INodeCompiler
-import ru.DmN.siberia.utils.exception.pushTask
+import ru.DmN.siberia.utils.exception.pushOrRunTask
 
 object NCECtor : INodeCompiler<NodeDefn> {
     override fun compile(node: NodeDefn, compiler: Compiler, ctx: CompilationContext) {
         val method = node.method
         val mnode = ctx.clazz.node.visitMethod(Opcodes.ACC_PUBLIC, "<init>", method.desc, method.signature, null) as MethodNode
-        compiler.pushTask(METHODS_BODY, node) {
+        compiler.pushOrRunTask(METHODS_BODY, node) {
             mnode.run {
                 visitVarInsn(Opcodes.ALOAD, 0)
                 visitVarInsn(Opcodes.ALOAD, 1)

@@ -17,7 +17,7 @@
 |	|	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	(value = 'Foo!')
+|	|	|	|	|	|	|	|	|	(value = Foo!)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
@@ -40,7 +40,7 @@
 |	|	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = TestA)
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
@@ -79,7 +79,7 @@
 |	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	(value = 'Instanced Foo!')
+|	|	|	|	|	|	|	|	(value = Instanced Foo!)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -124,7 +124,7 @@
 |	|	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	(value = 'Auto Foo!')
+|	|	|	|	|	|	|	|	|	(value = Auto Foo!)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[DEFN_
@@ -137,7 +137,7 @@
 |	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'TestC')
+|	|	|	|	|	|	|	|	|	|	|	(value = TestC)
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
@@ -164,7 +164,7 @@
 |	|	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestC')
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = TestC)
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.String))
@@ -203,7 +203,7 @@
 |	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	(value = 'Auto Instanced Foo!')
+|	|	|	|	|	|	|	|	(value = Auto Instanced Foo!)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[DEFN_

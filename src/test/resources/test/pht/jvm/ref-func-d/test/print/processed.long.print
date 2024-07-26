@@ -45,7 +45,7 @@
 |	|	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	(value = 'Auto Foo!')
+|	|	|	|	|	|	|	|	|	(value = Auto Foo!)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[DEFN_
@@ -58,7 +58,7 @@
 |	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'Caller')
+|	|	|	|	|	|	|	|	|	|	|	(value = Caller)
 |	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
@@ -71,7 +71,7 @@
 |	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	|	(value = TestA)
 |	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	]
@@ -93,7 +93,7 @@
 |	|	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = TestA)
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	]
@@ -132,7 +132,7 @@
 |	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	(value = 'Auto Instanced Foo!')
+|	|	|	|	|	|	|	|	(value = Auto Instanced Foo!)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[DEFN_
@@ -145,7 +145,7 @@
 |	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	(value = 'Caller')
+|	|	|	|	|	|	|	|	|	|	(value = Caller)
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
@@ -208,7 +208,7 @@
 |	|	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = TestA)
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))
@@ -237,7 +237,7 @@
 |	|	|	|	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	|	|	(value = 'TestA')
+|	|	|	|	|	|	|	|	|	|	|	|	|	(value = TestA)
 |	|	|	|	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	|	|	|	(generic = VT(java.lang.Object))

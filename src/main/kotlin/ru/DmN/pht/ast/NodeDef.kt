@@ -53,9 +53,9 @@ class NodeDef(
             else   -> null
         }
 
-    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type).append('\n')
-            .indent(indent + 1).append('(')
+        indent(indent + 1).append("(type = ")
         if (static)
             append("static ")
         else if (open)
@@ -66,9 +66,9 @@ class NodeDef(
         if (variables.isNotEmpty()) {
             variables.forEach {
                 append('\n').indent(indent + 1).append("[\n")
-                    .indent(indent + 2).append("(name = ").append(it.name).append(")\n")
-                    .indent(indent + 2).append("(type = ").append(it.type.name).append(')')
-                it.value?.print(append('\n'), indent + 2, short)
+                indent(indent + 2).append("(name = ").append(it.name).append(")\n")
+                indent(indent + 2).append("(type = ").append(it.type.name).append(')')
+                it.value?.print(append('\n'), indent + 2)
                 append('\n').indent(indent + 1).append(']')
             }
             append('\n').indent(indent)

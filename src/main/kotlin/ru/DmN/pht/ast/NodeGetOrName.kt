@@ -15,10 +15,10 @@ open class NodeGetOrName(
     override fun getValueAsString(): String =
         name
 
-    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type).append('\n')
-            .indent(indent + 1).append("(type = ").append(if (static) "STATIC" else "NO-STATIC").append(")\n")
-            .indent(indent + 1).append("(text = '").append(name).append("')\n")
-            .indent(indent).append(']')
+        indent(indent + 1).append("(type = ").append(if (static) "STATIC" else "NO-STATIC").append(")\n")
+        indent(indent + 1).append("(text = ").append(name).append(")\n")
+        indent(indent).append(']')
     }
 }

@@ -10,6 +10,9 @@ class NodeIncDec(
     val name: String,
     val type: VirtualType
 ) : BaseNode(info) {
-    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder =
-        builder.indent(indent).append('[').append(info.type).append('\n').indent(indent + 1).append("(name = ").append(name).append(")\n").indent(indent).append(']')
+    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
+        indent(indent).append('[').append(info.type).append('\n')
+        indent(indent + 1).append("(name = ").append(name).append(")\n")
+        indent(indent).append(']')
+    }
 }

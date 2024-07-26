@@ -5,31 +5,31 @@
 |	|	|	[DEFN
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'fac')
+|	|	|	|	|	(text = fac)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'int')
+|	|	|	|	|	(value = int)
 |	|	|	|	]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	(text = i)
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	(value = int)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'r')
+|	|	|	|	|	|	|	(text = r)
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	(value = int)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
@@ -37,36 +37,36 @@
 |	|	|	|	|	[LESS
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	(text = i)
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	(value = '1')
+|	|	|	|	|	|	|	(value = 1)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'r')
+|	|	|	|	|	|	(text = r)
 |	|	|	|	|	]
 |	|	|	|	|	[TRCALL
 |	|	|	|	|	|	[SUB
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	(text = i)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	(value = '1')
+|	|	|	|	|	|	|	|	(value = 1)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[MUL
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	|	(text = i)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	|	(text = 'r')
+|	|	|	|	|	|	|	|	(text = r)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
@@ -75,60 +75,60 @@
 |	|	|	[DEFN
 |	|	|	|	[GET_OR_NAME
 |	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	(text = 'fac')
+|	|	|	|	|	(text = fac)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'int')
+|	|	|	|	|	(value = int)
 |	|	|	|	]
 |	|	|	|	[VALN
 |	|	|	|	|	[VALN
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	|	(text = i)
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'int')
+|	|	|	|	|	|	|	(value = int)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[MCALL
 |	|	|	|	|	[NAME
 |	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = '.')
+|	|	|	|	|	|	(text = .)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	(value = 'fac')
+|	|	|	|	|	|	(value = fac)
 |	|	|	|	|	]
 |	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = 'i')
+|	|	|	|	|	|	(text = i)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '1')
+|	|	|	|	|	|	(value = 1)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[MCALL
 |	|	|	|	|	[NAME
 |	|	|	|	|	|	(type = NO-STATIC)
-|	|	|	|	|	|	(text = '.')
+|	|	|	|	|	|	(text = .)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = NAMING)
-|	|	|	|	|	|	(value = 'fac')
+|	|	|	|	|	|	(value = fac)
 |	|	|	|	|	]
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	(value = '4')
+|	|	|	|	|	|	(value = 4)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	]

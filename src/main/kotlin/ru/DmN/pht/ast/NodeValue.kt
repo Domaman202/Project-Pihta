@@ -26,11 +26,11 @@ class NodeValue(
     fun getString() =
         value
 
-    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type).append('\n')
-            .indent(indent + 1).append("(type = ").append(vtype).append(")\n")
-            .indent(indent + 1).append("(value = '").append(value).append("')\n")
-            .indent(indent).append(']')
+        indent(indent + 1).append("(type = ").append(vtype).append(")\n")
+        indent(indent + 1).append("(value = ").append(value).append(")\n")
+        indent(indent).append(']')
     }
 
     override fun isConstClass(): Boolean = when (vtype) { PRIMITIVE, CLASS, CLASS_WITH_GEN -> true else -> false }

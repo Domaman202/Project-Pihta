@@ -1,68 +1,22 @@
 [LOAD_CTX_
-|	(modules =)
-|	(NODES:
-|	|	[USE_CTX_
-|	|	|	(modules = pht pht/jvm)
-|	|	|	(NODES:
-|	|	|	|	[CLS_
-|	|	|	|	|	(type = final class)
-|	|	|	|	|	(name = App)
-|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	(desc = main([Ljava/lang/String;)V)
-|	|	|	|	|	|	|	[BLOCK_
-|	|	|	|	|	|	|	|	[DEF_
-|	|	|	|	|	|	|	|	|	(var)
-|	|	|	|	|	|	|	|	|	[
-|	|	|	|	|	|	|	|	|	|	(name = i)
-|	|	|	|	|	|	|	|	|	|	(type = int)
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	|	|	(value = '12')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	(method = println(I)V)
-|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'ru.DmN.pht.io.StdOut')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	
-|	|	|	|	|	|	|	|	|	[GET_ var i]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	[BLOCK_
-|	|	|	|	|	|	|	|	[DEF_
-|	|	|	|	|	|	|	|	|	(var)
-|	|	|	|	|	|	|	|	|	[
-|	|	|	|	|	|	|	|	|	|	(name = i)
-|	|	|	|	|	|	|	|	|	|	(type = int)
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	|	|	(value = '21')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	[MCALL_
-|	|	|	|	|	|	|	|	|	(method = println(I)V)
-|	|	|	|	|	|	|	|	|	(instance:
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	|	(value = 'ru.DmN.pht.io.StdOut')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	)
-|	|	|	|	|	|	|	|	
-|	|	|	|	|	|	|	|	|	[GET_ var i]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
+|	[USE_CTX_
+|	|	[CLS_
+|	|	|	[ANN_STATIC_
+|	|	|	|	[DEFN_
+|	|	|	|	|	[BLOCK_
+|	|	|	|	|	|	[DEF_]
+|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[BLOCK_
+|	|	|	|	|	|	[DEF_]
+|	|	|	|	|	|	[MCALL_
+|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	)
+|	|	|	]
 |	|	]
-|	)
+|	]
 ]

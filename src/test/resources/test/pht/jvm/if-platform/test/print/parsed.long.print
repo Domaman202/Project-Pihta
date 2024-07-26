@@ -5,19 +5,19 @@
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
+|	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[CT_IF_PLATFORM
 |	|	|	|	|	[THROW
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	(value = 'java.lang.RuntimeException')
+|	|	|	|	|	|	|	(value = java.lang.RuntimeException)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = STRING)
-|	|	|	|	|	(value = 'Кто не работает - тот ест!')
+|	|	|	|	|	(value = Кто не работает - тот ест!)
 |	|	|	|	]
 |	|	|	]
 |	|	]

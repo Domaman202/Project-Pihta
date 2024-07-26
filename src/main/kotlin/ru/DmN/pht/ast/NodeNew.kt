@@ -17,14 +17,13 @@ class NodeNew(
     override fun copy(): NodeNew =
         NodeNew(info, copyNodes(), type, ctor)
 
-    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type).append('\n')
-            .indent(indent + 1).append("(type = ").append(type).append(')')
-        if (!short)
-            append('\n').indent(indent + 1).append("(ctor = ").append(ctor.desc).append(')')
+        indent(indent + 1).append("(type = ").append(type).append(')')
+        append('\n').indent(indent + 1).append("(ctor = ").append(ctor.desc).append(')')
         if (nodes.isEmpty())
             append('\n').indent(indent)
-        else printNodes(builder, indent, short)
+        else printNodes(builder, indent)
         append(']')
     }
 }

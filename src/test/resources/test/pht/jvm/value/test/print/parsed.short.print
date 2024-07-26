@@ -1,186 +1,77 @@
 [LOAD_CTX
 |	[USE_CTX
-|	|	(modules = pht pht/jvm)
 |	|	[PROGN
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '0')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = NIL)
-|	|	|	|	|	(value = 'nil')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '1')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '12')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '2')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = DOUBLE)
-|	|	|	|	|	(value = '21.33')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '3')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = FLOAT)
-|	|	|	|	|	(value = '44')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '4')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = LONG)
-|	|	|	|	|	(value = '202')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '5')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CHAR)
-|	|	|	|	|	(value = '@')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '6')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = STRING)
-|	|	|	|	|	(value = 'Текст')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '7')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'Object')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '8')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS_WITH_GEN)
-|	|	|	|	|	(value = 'java.util.List<^Object>')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '9')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = NIL)
-|	|	|	|	|	(value = 'nil')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '10')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '12')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '11')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = DOUBLE)
-|	|	|	|	|	(value = '21.33')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '12')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = FLOAT)
-|	|	|	|	|	(value = '44')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '13')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = LONG)
-|	|	|	|	|	(value = '202')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '14')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CHAR)
-|	|	|	|	|	(value = '@')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '15')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = STRING)
-|	|	|	|	|	(value = 'Текст')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '16')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'Object')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	|	[TEST_FN
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = INT)
-|	|	|	|	|	(value = '17')
-|	|	|	|	]
-|	|	|	|	[VALUE
-|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	(value = 'java.util.List<^Object>')
-|	|	|	|	]
+|	|	|	|	[VALUE]
+|	|	|	|	[VALUE]
 |	|	|	]
 |	|	]
 |	]

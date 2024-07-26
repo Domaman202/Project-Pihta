@@ -4,20 +4,20 @@
 |	|	[TEST_FN
 |	|	|	[VALUE
 |	|	|	|	(type = INT)
-|	|	|	|	(value = '0')
+|	|	|	|	(value = 0)
 |	|	|	]
 |	|	|	[LIST_OF
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = STRING)
-|	|	|	|	|	(value = 'Слава')
+|	|	|	|	|	(value = Слава)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = STRING)
-|	|	|	|	|	(value = 'Великой')
+|	|	|	|	|	(value = Великой)
 |	|	|	|	]
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = STRING)
-|	|	|	|	|	(value = 'России')
+|	|	|	|	|	(value = России)
 |	|	|	|	]
 |	|	|	]
 |	|	]

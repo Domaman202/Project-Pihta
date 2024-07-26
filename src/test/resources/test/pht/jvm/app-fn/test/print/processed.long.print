@@ -19,14 +19,14 @@
 |	|	|	|	|	|	|	|	(instance:
 |	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	(type = CLASS)
-|	|	|	|	|	|	|	|	|	|	(value = 'ru.DmN.pht.io.StdOut')
+|	|	|	|	|	|	|	|	|	|	(value = ru.DmN.pht.io.StdOut)
 |	|	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	(generic = VT(void))
 |	|	|	|	|	|	|	|	(type = STATIC)
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = STRING)
-|	|	|	|	|	|	|	|	|	(value = 'Слава России!')
+|	|	|	|	|	|	|	|	|	(value = Слава России!)
 |	|	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]

@@ -54,19 +54,19 @@ class NodeType(
     override fun copy(): NodeType =
         NodeType(info, copyMetadata(), copyNodes(), type)
 
-    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
         indent(indent).append('[').append(info.type).append('\n')
-            .indent(indent + 1).append("(type = ").append(
-                if (type.isInterface)
-                    "interface"
-                else if (type.isAbstract)
-                    "abstract class"
-                else if (type.isFinal)
-                    "final class"
-                else "open class"
-            ).append(")\n")
-            .indent(indent + 1).append("(name = ").append(type.name).append(')')
-        if (!short && type.parents.isNotEmpty()) {
+        indent(indent + 1).append("(type = ").append(
+            if (type.isInterface)
+                "interface"
+            else if (type.isAbstract)
+                "abstract class"
+            else if (type.isFinal)
+                "final class"
+            else "open class"
+        ).append(")\n")
+        indent(indent + 1).append("(name = ").append(type.name).append(')')
+        if (type.parents.isNotEmpty()) {
             append('\n').indent(indent + 1).append("(parents = [")
             type.parents.forEachIndexed { i, it ->
                 append(it.name)
@@ -77,6 +77,7 @@ class NodeType(
             append("])")
         }
         printMetadata(builder, indent)
-        printNodes(this, indent, short).append(']')
+        printNodes(this, indent)
+        append(']')
     }
 }

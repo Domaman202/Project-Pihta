@@ -15,6 +15,10 @@ class NodeIsAs(
     override fun copy(): NodeIsAs =
         NodeIsAs(info, copyNodes(), from, type)
 
-    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder =
-        printNodes(builder.indent(indent).append('[').append(info.type).append('\n').indent(indent + 1).append("(type = ").append(type).append(')'), indent, short).append(']')
+    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
+        indent(indent).append('[').append(info.type).append('\n')
+        indent(indent + 1).append("(type = ").append(type).append(')')
+        printNodes(builder, indent)
+        append(']')
+    }
 }

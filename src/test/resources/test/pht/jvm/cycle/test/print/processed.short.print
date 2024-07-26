@@ -1,49 +1,23 @@
 [LOAD_CTX_
-|	(modules =)
-|	(NODES:
-|	|	[USE_CTX_
-|	|	|	(modules = pht pht/jvm)
-|	|	|	(NODES:
-|	|	|	|	[ANN_TEST_
-|	|	|	|	|	[CLS_
-|	|	|	|	|	|	(type = final class)
-|	|	|	|	|	|	(name = Test0)
-|	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	[DEFN_
-|	|	|	|	|	|	|	|	(type = method)
-|	|	|	|	|	|	|	|	(desc = test()Ljava/lang/Object;)
-|	|	|	|	|	|	|	|	[DEF_
-|	|	|	|	|	|	|	|	|	(var)
-|	|	|	|	|	|	|	|	|	[
-|	|	|	|	|	|	|	|	|	|	(name = i)
-|	|	|	|	|	|	|	|	|	|	(type = int)
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	|	|	(value = '0')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	[CYCLE_
-|	|	|	|	|	|	|	|	|	[LESS_
-|	|	|	|	|	|	|	|	|	|	[GET_ var i]
-|	|	|	|	|	|	|	|	|	|	[VALUE
-|	|	|	|	|	|	|	|	|	|	|	(type = INT)
-|	|	|	|	|	|	|	|	|	|	|	(value = '10')
-|	|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	|	[INC_PRE_
-|	|	|	|	|	|	|	|	|	|	(name = i)
-|	|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	|	[AS_
-|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
-|	|	|	|	|	|	|	|	|	[GET_ var i]
-|	|	|	|	|	|	|	|	]
+|	[USE_CTX_
+|	|	[ANN_TEST_
+|	|	|	[CLS_
+|	|	|	|	[ANN_STATIC_
+|	|	|	|	|	[DEFN_
+|	|	|	|	|	|	[DEF_]
+|	|	|	|	|	|	[CYCLE_
+|	|	|	|	|	|	|	[LESS_
+|	|	|	|	|	|	|	|	[GET_]
+|	|	|	|	|	|	|	|	[VALUE]
 |	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[INC_PRE_]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[AS_
+|	|	|	|	|	|	|	[GET_]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	)
+|	|	|	]
 |	|	]
-|	)
+|	]
 ]

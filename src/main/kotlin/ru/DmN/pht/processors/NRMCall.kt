@@ -20,7 +20,7 @@ import ru.DmN.siberia.processor.utils.ProcessingStage.FINALIZATION
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.exception.MessageException
-import ru.DmN.siberia.utils.exception.pushTask
+import ru.DmN.siberia.utils.exception.pushOrRunTask
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
@@ -116,7 +116,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 )
             }
         //
-        processor.pushTask(ProcessingStage.METHODS_BODY, node) {
+        processor.pushOrRunTask(ProcessingStage.METHODS_BODY, node) {
             if (method.modifiers.generator && !method.modifiers.static && !method.modifiers.extension) {
                 method as GeneratorVirtualMethod
                 method.argsc.add(0, method.declaringClass)
@@ -192,9 +192,9 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                     }
                 }
             }
-        } else processor.pushTask(FINALIZATION, node) {
+        } else processor.pushOrRunTask(FINALIZATION, node) {
             var names: List<String>? = null
-            (method.inline?.copy() ?: processor.inline<Node?>(instance, null, ctx).let { names = it.first; it.second } ?: return@pushTask).run {
+            (method.inline?.copy() ?: processor.inline<Node?>(instance, null, ctx).let { names = it.first; it.second } ?: return@pushOrRunTask).run {
                 val bctx = BodyContext.of(ctx.body)
                 (names ?: method.argsn).asSequence().let {
                     if (method.extension == null)

@@ -19,7 +19,7 @@ class NodeRFn(
 //    override fun copy(): NodeRFn =
 //        NodeRFn(info, type, lambda, instance, name, method) // todo: А зачем?
 
-    override fun print(builder: StringBuilder, indent: Int, short: Boolean): StringBuilder = builder.apply {
+    override fun print(builder: StringBuilder, indent: Int): StringBuilder = builder.apply {
         indent(indent).append('(').append(info.type).append('\n')
         type?.let { indent(indent + 1).append("(type = ").append(it.name).append(")\n") }
         lambda?.let { indent(indent + 1).append("(lambda = ").append(it.name).append(it.desc).append(")\n") }
@@ -27,7 +27,7 @@ class NodeRFn(
         indent(indent + 1).append("(name = ").append(name).append(")\n")
         instance?.let {
             indent(indent + 1).append("(instance:\n")
-            it.print(builder, indent + 2, short).append('\n').indent(indent + 1).append(")\n")
+            it.print(builder, indent + 2).append('\n').indent(indent + 1).append(")\n")
         }
         indent(indent).append(']')
     }
