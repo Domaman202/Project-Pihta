@@ -16,31 +16,35 @@ typealias FunctionGetType = (name: String, processor: Processor, ctx: Processing
 typealias FunctionCast = (to: VirtualType, value: Node, processor: Processor, ctx: ProcessingContext) -> Node
 typealias FunctionCastFrom = (from: VirtualType, to: VirtualType, value: Node, processor: Processor, ctx: ProcessingContext) -> Node
 
-inline fun <T : IContextCollection<T>> T.with(ctx: GlobalContext) =
+inline fun <T : IContextCollection<T>> T.with(ctx: GlobalContext): T =
     this.with(GLOBAL, ctx)
-inline fun <T : IContextCollection<T>> T.with(ctx: EnumContext) =
+inline fun <T : IContextCollection<T>> T.with(ctx: EnumContext): T =
     this.with(ENUM, ctx).apply {
         this.clazz = ctx.type
         this.classes = LinkedClassesNode(this.classes, ctx.type)
         this.methodOrNull = null
         this.bodyOrNull = null
     }
-inline fun <T : IContextCollection<T>> T.with(ctx: VirtualType) =
+inline fun <T : IContextCollection<T>> T.with(ctx: VirtualType): T =
     this.with(CLASS, ctx).apply {
         this.classes = LinkedClassesNode(this.classes, ctx)
         this.methodOrNull = null
         this.bodyOrNull = null
     }
-inline fun <T : IContextCollection<T>> T.with(ctx: VirtualMethod?) =
+inline fun <T : IContextCollection<T>> T.with(ctx: VirtualMethod?): T =
     this.with(METHOD, ctx)
-inline fun <T : IContextCollection<T>> T.with(ctx: BodyContext) =
+inline fun <T : IContextCollection<T>> T.with(ctx: BodyContext): T =
     this.with(BODY, ctx)
-inline fun <T : IContextCollection<T>> T.with(ctx: MacroContext) =
+inline fun <T : IContextCollection<T>> T.with(ctx: MacroContext): T =
     this.with(MACRO, ctx)
 
-inline fun IContextCollection<*>.isBody() =
-    this.bodyOrNull != null
-inline fun IContextCollection<*>.isMacro() =
+inline fun IContextCollection<*>.isClass(): Boolean =
+    contexts.containsKey(CLASS)
+inline fun IContextCollection<*>.isMethod(): Boolean =
+    contexts.containsKey(METHOD)
+inline fun IContextCollection<*>.isBody(): Boolean =
+    contexts.containsKey(BODY)
+inline fun IContextCollection<*>.isMacro(): Boolean =
     contexts.containsKey(MACRO)
 
 inline var IContextCollection<*>.global

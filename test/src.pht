@@ -1,13 +1,2 @@
-(progn
-    (cls TestA [^Object] (@static
-        (@inline
-        (gfn foo ^auto [[a ^auto][b ^auto]]
-            (+ a b)))))
-    (test-fn 0
-        (#foo ^TestA 12 21))
-    (test-fn 1
-        (#foo ^TestA 12 21.12))
-    (test-fn 2
-        (#foo ^TestA 12.21 21))
-    (test-fn 3
-        (#foo ^TestA 12.21 21.12)))
+(app-fn
+    (println (>= 1.0 1.0)))

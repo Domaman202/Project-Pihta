@@ -45,60 +45,96 @@ object NCCompare : IValueNodeCompiler<NodeNodesList> {
                     BYTE,
                     SHORT,
                     CHAR,
-                    INT    -> visitJumpInsn(Opcodes.IF_ICMPEQ, ifLabel)
-                    FLOAT,
-                    DOUBLE -> throw UnsupportedOperationException() // todo:
-                    else   -> visitJumpInsn(Opcodes.IF_ACMPEQ, ifLabel)
+                    INT   -> visitJumpInsn(Opcodes.IF_ICMPEQ, ifLabel)
+                    FLOAT -> {
+                        visitInsn(Opcodes.FCMPL)
+                        visitJumpInsn(Opcodes.IFEQ, ifLabel)
+                    }
+                    DOUBLE -> {
+                        visitInsn(Opcodes.DCMPL)
+                        visitJumpInsn(Opcodes.IFEQ, ifLabel)
+                    }
+                    else -> visitJumpInsn(Opcodes.IF_ACMPEQ, ifLabel)
                 }
                 NOT_EQ_ -> when (type) {
                     BOOLEAN,
                     BYTE,
                     SHORT,
                     CHAR,
-                    INT    -> visitJumpInsn(Opcodes.IF_ICMPNE, ifLabel)
-                    FLOAT,
-                    DOUBLE -> throw UnsupportedOperationException() // todo:
-                    else   -> visitJumpInsn(Opcodes.IF_ACMPNE, ifLabel)
+                    INT   -> visitJumpInsn(Opcodes.IF_ICMPNE, ifLabel)
+                    FLOAT -> {
+                        visitInsn(Opcodes.FCMPL)
+                        visitJumpInsn(Opcodes.IFNE, ifLabel)
+                    }
+                    DOUBLE -> {
+                        visitInsn(Opcodes.DCMPL)
+                        visitJumpInsn(Opcodes.IFNE, ifLabel)
+                    }
+                    else -> visitJumpInsn(Opcodes.IF_ACMPNE, ifLabel)
                 }
                 GREAT_ -> when (type) {
                     BOOLEAN,
                     BYTE,
                     SHORT,
                     CHAR,
-                    INT    -> visitJumpInsn(Opcodes.IF_ICMPGT, ifLabel)
-                    FLOAT,
-                    DOUBLE -> throw UnsupportedOperationException() // todo:
-                    else   -> throw RuntimeException()
+                    INT   -> visitJumpInsn(Opcodes.IF_ICMPGT, ifLabel)
+                    FLOAT -> {
+                        visitInsn(Opcodes.FCMPG)
+                        visitJumpInsn(Opcodes.IFNE, ifLabel)
+                    }
+                    DOUBLE -> {
+                        visitInsn(Opcodes.DCMPG)
+                        visitJumpInsn(Opcodes.IFNE, ifLabel)
+                    }
+                    else -> throw RuntimeException()
                 }
                 GREAT_OR_EQ_ -> when (type) {
                     BOOLEAN,
                     BYTE,
                     SHORT,
                     CHAR,
-                    INT    -> visitJumpInsn(Opcodes.IF_ICMPGE, ifLabel)
-                    FLOAT,
-                    DOUBLE -> throw UnsupportedOperationException() // todo:
-                    else   -> throw RuntimeException()
+                    INT   -> visitJumpInsn(Opcodes.IF_ICMPGE, ifLabel)
+                    FLOAT -> {
+                        visitInsn(Opcodes.FCMPG)
+                        visitJumpInsn(Opcodes.IFEQ, ifLabel)
+                    }
+                    DOUBLE -> {
+                        visitInsn(Opcodes.DCMPG)
+                        visitJumpInsn(Opcodes.IFEQ, ifLabel)
+                    }
+                    else -> throw RuntimeException()
                 }
                 LESS_ -> when (type) {
                     BOOLEAN,
                     BYTE,
                     SHORT,
                     CHAR,
-                    INT    -> visitJumpInsn(Opcodes.IF_ICMPLT, ifLabel)
-                    FLOAT,
-                    DOUBLE -> throw UnsupportedOperationException() // todo:
-                    else   -> throw RuntimeException()
+                    INT   -> visitJumpInsn(Opcodes.IF_ICMPLT, ifLabel)
+                    FLOAT -> {
+                        visitInsn(Opcodes.FCMPL)
+                        visitJumpInsn(Opcodes.IFNE, ifLabel)
+                    }
+                    DOUBLE -> {
+                        visitInsn(Opcodes.DCMPL)
+                        visitJumpInsn(Opcodes.IFNE, ifLabel)
+                    }
+                    else -> throw RuntimeException()
                 }
                 LESS_OR_EQ_ -> when (type) {
                     BOOLEAN,
                     BYTE,
                     SHORT,
                     CHAR,
-                    INT    -> visitJumpInsn(Opcodes.IF_ICMPLE, ifLabel)
-                    FLOAT,
-                    DOUBLE -> throw UnsupportedOperationException() // todo:
-                    else   -> throw RuntimeException()
+                    INT   -> visitJumpInsn(Opcodes.IF_ICMPLE, ifLabel)
+                    FLOAT -> {
+                        visitInsn(Opcodes.FCMPL)
+                        visitJumpInsn(Opcodes.IFEQ, ifLabel)
+                    }
+                    DOUBLE -> {
+                        visitInsn(Opcodes.DCMPL)
+                        visitJumpInsn(Opcodes.IFEQ, ifLabel)
+                    }
+                    else -> throw RuntimeException()
                 }
                 else -> throw RuntimeException("Unknown operation \"$operation\"!")
             }
