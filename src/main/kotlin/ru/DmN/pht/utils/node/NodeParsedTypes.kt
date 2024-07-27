@@ -20,6 +20,7 @@ enum class NodeParsedTypes(override val operation: String, override val processe
     CONTINUE("continue", CONTINUE_),            // continue
     CTOR("ctor", CTOR_),                        // def-ctor
     CYCLE("cycle", CYCLE_),                     // cycle
+    // d
     DEC_PRE("dec", DEC_PRE_),                   // dec          // --
     DEC_POST("dec-", DEC_POST_),                // dec-
     DEFN("defn", DEFN_),                        // def-func
