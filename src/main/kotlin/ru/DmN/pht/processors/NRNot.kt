@@ -14,17 +14,16 @@ object NRNot : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
         processor.calc(node.nodes[0], ctx)
 
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? {
-        return NRCompare.process(
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
+        NRCompare.process(
             node,
-            {
-                if (it == VirtualType.BOOLEAN)
-                    NodeCompare(node.info.withType(NOT_), node.nodes)
-                else NodeMath(node.info.withType(NOT_), node.nodes, it)
+            { type, nodes ->
+                if (type == VirtualType.BOOLEAN)
+                    NodeCompare(node.info.withType(NOT_), nodes)
+                else NodeMath(node.info.withType(NOT_), nodes, type)
             },
             processor,
             ctx,
             valMode
         )
-    }
 }
