@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "ru.DmN.pht"
-version = "1.26.6"
+version = "1.26.7"
 
 repositories {
     mavenCentral()

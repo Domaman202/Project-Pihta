@@ -1,9 +1,7 @@
 package ru.DmN.pht.utils.node
 
+import ru.DmN.pht.utils.node.NodeTypes.Type.*
 import ru.DmN.siberia.utils.node.INodeType
-import ru.DmN.siberia.utils.node.NodeTypes.Type
-import ru.DmN.siberia.utils.node.NodeTypes.Type.PARSED
-import ru.DmN.siberia.utils.node.NodeTypes.Type.PROCESSED
 
 enum class NodeTypes : INodeType {
     // a
@@ -13,8 +11,8 @@ enum class NodeTypes : INodeType {
     ALIAS_TYPE("alias-type", PARSED),                   // alias-type
     ALIAS_TYPE_("alias-type", PROCESSED),               // alias-type
     AND_("and", PROCESSED),                             // and              // &
-    APP("app", true, true),        // app-class
-    APP_FN("app-fn", true, true),  // app-func
+    APP("app", ALL),                                    // app-class
+    APP_FN("app-fn", ALL),                              // app-func
     ARR_OF("arr-of", PARSED),                           // arr-of
     ARR_OF_TYPE("arr-of-type", PARSED),                 // arr-of-type
     ARR_SIZE("arr-size", PARSED),                       // arr-size
@@ -39,7 +37,7 @@ enum class NodeTypes : INodeType {
     CTOR_("ctor", PROCESSED),                           // def-ctor
     CYCLE_("cycle", PROCESSED),                         // cycle
     // d
-    DEBUG("debug", true, true),    // debug
+    DEBUG("debug", ALL),                                // debug
     DEC_PRE_("dec", PROCESSED),                         // dec              // --
     DEC_POST_("dec-", PROCESSED),                       // dec-
     DEF("def", PARSED),                                 // def
@@ -65,8 +63,8 @@ enum class NodeTypes : INodeType {
     // g
     GET_("get", PROCESSED),                             // get
     GET_OR_NAME("get-or-name!", PARSED),                // get-or-name
-    GFN("gfn", true, false),       // def-gen-func
-    GFN_("gfn", false, false),     // def-gen-func
+    GFN("gfn", PARSED),                                 // def-gen-func
+    GFN_("gfn", NONE),                                  // def-gen-func
     GREAT_("great", PROCESSED),                         // great
     GREAT_OR_EQ_("gt-or-eq", PROCESSED),                // gt-or-eq
     // i
@@ -141,7 +139,7 @@ enum class NodeTypes : INodeType {
     TGET("tget", PARSED),                               // typed-get
     TGET_("tget", PROCESSED),                           // typed-get
     TO_EFN("to-efn", PARSED),                           // to-ext-func
-    TO_EFN_("to-efn", false, false),// to-ext-func
+    TO_EFN_("to-efn", NONE),                            // to-ext-func
     TYPE_OF("type-of", PARSED),                         // type-of
     // u
     UNIT("unit", PROCESSED),                            // unit
@@ -151,7 +149,7 @@ enum class NodeTypes : INodeType {
     VALN_("valn", PROCESSED),                           // valn
     VALN_REPEAT("valn-repeat", PARSED),                 // valn-repeat
     VALN_SIZE("valn-size", PARSED),                     // valn-size
-    VALUE("value", true, true),    // value
+    VALUE("value", ALL),                                // value
     // w
     WITH_GENS("with-gens", PARSED),                     // with-gens
     // x
@@ -174,7 +172,7 @@ enum class NodeTypes : INodeType {
     CT_IF_PLATFORM("@@if-platform", PARSED),            // @@if-platform
     CT_ROLL_LEFT("@@roll-left", PARSED),                // @@roll-left      // <-
     CT_ROLL_RIGHT("@@roll-right", PARSED),              // @@roll-right     // ->
-    CT_SKIP("@@skip", true, true), // @@skip
+    CT_SKIP("@@skip", ALL),                             // @@skip
 
     // *
     CTC_MODULE_NAME("*module-name*", PARSED),           // *module-name*
@@ -194,12 +192,30 @@ enum class NodeTypes : INodeType {
 
     constructor(operation: String, type: Type) {
         this.operation = operation
-        if (type == PARSED) {
-            this.processable = true
-            this.compilable = false
-        } else {
-            this.processable = false
-            this.compilable = true
+        when (type) {
+            NONE -> {
+                this.processable = false
+                this.compilable = false
+            }
+            PARSED -> {
+                this.processable = true
+                this.compilable = false
+            }
+            PROCESSED -> {
+                this.processable = false
+                this.compilable = true
+            }
+            ALL -> {
+                this.processable = true
+                this.compilable = true
+            }
         }
+    }
+
+    enum class Type {
+        NONE,
+        ALL,
+        PARSED,
+        PROCESSED
     }
 }
