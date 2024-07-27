@@ -1,6 +1,8 @@
-(app
-    (@to-efn
-    (defn foo ^void [[text ^String]]
-        (println text)))
-    (app-fn
-        (#foo "Hi!")))
+(progn
+    (cls TestC [^Object]
+        (def [[i ^int]])
+        (ctor [[i ^int]]
+            (ccall)
+            (set this/i i))
+        (@inline (defn bar ^int [[other ^int]] (+ this/i other))))
+    (app-fn (println (#bar (new ^TestC 1900) 45))))

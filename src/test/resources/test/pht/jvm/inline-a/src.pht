@@ -1,0 +1,10 @@
+(progn
+    (cls TestA [^Object] (@static
+        (@inline
+        (defn foo ^String [] "Foo!"))))
+    (test-fn 0 (#foo ^TestA))
+
+    (cls TestB [^Object] (@static
+        (@inline
+        (defn foo ^int [[other ^int]] (+ 12 other)))))
+    (test-fn 1 (#foo ^TestB 21)))

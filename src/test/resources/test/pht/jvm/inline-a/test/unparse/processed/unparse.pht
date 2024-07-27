@@ -1,0 +1,31 @@
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls [] TestA [^java.lang.Object]
+				(@static
+					(@inline
+						(defn [] foo ^java.lang.String []
+							"Foo!"))))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(inl-body ^java.lang.String
+									"Foo!"))))))
+			(cls [] TestB [^java.lang.Object]
+				(@static
+					(@inline
+						(defn [] foo ^int [[other ^int]]
+							(add
+								12
+								(get other))))))
+			(@test
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(inl-body ^int
+									(add
+										12
+										21))))))))))

@@ -7,6 +7,7 @@ import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.pht.processors.IInlinableProcessor
 import ru.DmN.pht.processors.IStdNodeProcessor
 import ru.DmN.pht.utils.lenArgs
+import ru.DmN.pht.utils.node.nodeAs
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
@@ -16,6 +17,10 @@ import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.mapMutable
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType.Companion.VOID
+
+fun Processor.processAndCast(node: Node, target: VirtualType, ctx: ProcessingContext, valMode: Boolean): Node? =
+    process(if (target == VOID) node else nodeAs(node.info, node, target.name), ctx, valMode)
 
 fun Processor.inline(node: NodeGetOrName, ctx: ProcessingContext): Pair<List<String>, Node> =
     get(node, ctx).let {

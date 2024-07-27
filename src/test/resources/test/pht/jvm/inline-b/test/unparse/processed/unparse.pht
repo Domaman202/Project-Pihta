@@ -1,0 +1,67 @@
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls [] TestA [^java.lang.Object]
+				(ctor []
+					(mcall
+						super
+						<init>))
+				(@inline
+					(defn [] foo ^java.lang.String []
+						"Bar!")))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(inl-body ^java.lang.String
+									"Bar!"))))))
+			(cls [] TestB [^java.lang.Object]
+				(ctor []
+					(mcall
+						super
+						<init>))
+				(@inline
+					(defn [] foo ^int [[other ^int]]
+						(add
+							1900
+							(get other)))))
+			(@test
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(inl-body ^int
+									(add
+										1900
+										41)))))))
+			(cls [] TestC [^java.lang.Object]
+				(def [
+					[i ^int]])
+				(ctor [[i ^int]]
+					(mcall
+						super
+						<init>)
+					(fset
+						(get this)
+						i
+						(get i)))
+				(@inline
+					(defn [] bar ^int [[other ^int]]
+						(add
+							(fget
+								(get this)
+								i)
+							(get other)))))
+			(@test
+				(cls [] Test2 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(inl-body ^int
+									(add
+										(fget
+											(new ^TestC
+												1900)
+											i)
+										45))))))))))

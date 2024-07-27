@@ -1,0 +1,124 @@
+[LOAD_CTX
+|	[USE_CTX
+|	|	[PROGN
+|	|	|	[CLS
+|	|	|	|	[GET_OR_NAME]
+|	|	|	|	[VALN
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	|	[CTOR
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[CCALL]
+|	|	|	|	]
+|	|	|	|	[ANN_INLINE
+|	|	|	|	|	[DEFN
+|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	[VALN]
+|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE]
+|	|	|	|	[MCALL
+|	|	|	|	|	[NEW
+|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS
+|	|	|	|	[GET_OR_NAME]
+|	|	|	|	[VALN
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	|	[CTOR
+|	|	|	|	|	[VALN]
+|	|	|	|	|	[CCALL]
+|	|	|	|	]
+|	|	|	|	[ANN_INLINE
+|	|	|	|	|	[DEFN
+|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[ADD
+|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE]
+|	|	|	|	[MCALL
+|	|	|	|	|	[NEW
+|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[CLS
+|	|	|	|	[GET_OR_NAME]
+|	|	|	|	[VALN
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	|	[DEF
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[CTOR
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[CCALL]
+|	|	|	|	|	[FSET_B
+|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[ANN_INLINE
+|	|	|	|	|	[DEFN
+|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	|	[ADD
+|	|	|	|	|	|	|	[FGET_B
+|	|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE]
+|	|	|	|	[MCALL
+|	|	|	|	|	[NEW
+|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	]
+]

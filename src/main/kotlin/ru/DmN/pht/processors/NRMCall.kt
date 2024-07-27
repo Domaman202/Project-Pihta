@@ -24,6 +24,7 @@ import ru.DmN.siberia.utils.exception.pushOrRunTask
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
+import ru.DmN.siberia.utils.vtype.VirtualType.Companion.VOID
 import kotlin.math.absoluteValue
 
 object NRMCall : INodeProcessor<NodeNodesList> {
@@ -175,13 +176,13 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                             argsn.forEachIndexed { i, it -> this.addVariable(it, argsc[i]) }
                         }
                         when (this.nodes.size) {
-                            0 -> rettype = VirtualType.VOID // maybe
+                            0 -> rettype = VOID // maybe
                             1 -> {
                                 val first = this.nodes[0]
                                 rettype =
                                     if (first.type == AS_ && first is NodeIsAs)
                                         first.from
-                                    else processor.calc(first, context) ?: VirtualType.VOID
+                                    else processor.calc(first, context) ?: VOID
                             }
                             else -> rettype = processor.calc(nodeProgn(node.info, this.nodes), context) ?: ctx.getType(
                                 "void",
@@ -196,16 +197,15 @@ object NRMCall : INodeProcessor<NodeNodesList> {
             var names: List<String>? = null
             (method.inline?.copy() ?: processor.inline<Node?>(instance, null, ctx).let { names = it.first; it.second } ?: return@pushOrRunTask).run {
                 val bctx = BodyContext.of(ctx.body)
-                (names ?: method.argsn).asSequence().let {
-                    if (method.extension == null)
-                        it
-                    else {
+                (names ?: method.argsn).asSequence().let { it ->
+                    if (method.modifiers.let { !it.static || it.extension })
                         NRInlDef.process("this", instance, bctx)
-                        it.drop(1)
-                    }
+                    method.extension ?: return@let it
+                    it.drop(1)
                 }.forEachIndexed { i, it -> NRInlDef.process(it, args[i], bctx) }
-                node.special = processor.process(
-                    nodeAs(info, this, method.rettype.name),
+                node.special = processor.processAndCast(
+                    this,
+                    method.rettype,
                     (if (this is NodeInlBodyB) this.ctx else ctx).with(bctx),
                     valMode
                 )

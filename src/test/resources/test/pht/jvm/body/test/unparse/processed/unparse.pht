@@ -6,14 +6,20 @@
 					(block
 						(def [
 							[^int i 12]])
-						(mcall
-							^ru.DmN.pht.io.StdOut
-							println
-							(get i)))
+						(inl-body ^void
+							(mcall
+								(fget
+									^java.lang.System
+									out)
+								println
+								(get i))))
 					(block
 						(def [
 							[^int i 21]])
-						(mcall
-							^ru.DmN.pht.io.StdOut
-							println
-							(get i))))))))
+						(inl-body ^void
+							(mcall
+								(fget
+									^java.lang.System
+									out)
+								println
+								(get i)))))))))

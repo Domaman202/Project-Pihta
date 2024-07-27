@@ -7,10 +7,13 @@
 						(mcall
 							super
 							<init>)
-						(mcall
-							^ru.DmN.pht.io.StdOut
-							println
-							(get i)))))
+						(inl-body ^void
+							(mcall
+								(fget
+									^java.lang.System
+									out)
+								println
+								(get i))))))
 			(cls [] TestB [^TestA]
 				(ctor [[i ^int]]
 					(mcall
