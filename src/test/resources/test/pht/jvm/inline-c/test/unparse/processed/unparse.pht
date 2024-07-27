@@ -1,0 +1,35 @@
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls [] TestA [^java.lang.Object]
+				(@static
+					(@inline
+						(efn [] ^java.lang.String foo ^java.lang.String []
+							(mcall
+								(get this)
+								add
+								(block
+									(def [
+										[^[java.lang.Object pht$tmp$63494 (new-arr ^java.lang.Object 1)]])
+									(aset
+										(get pht$tmp$63494)
+										0
+										"V")
+									(get pht$tmp$63494)))))))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(as ^dynamic
+								(inl-body ^java.lang.String
+									(mcall
+										"Z"
+										add
+										(block
+											(def [
+												[^[java.lang.Object pht$tmp$63494 (new-arr ^java.lang.Object 1)]])
+											(aset
+												(get pht$tmp$63494)
+												0
+												"V")
+											(get pht$tmp$63494))))))))))))

@@ -175,41 +175,56 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                         context.body = BodyContext.of(this@run).apply {
                             argsn.forEachIndexed { i, it -> this.addVariable(it, argsc[i]) }
                         }
-                        when (this.nodes.size) {
-                            0 -> rettype = VOID // maybe
+                        rettype = when (this.nodes.size) {
+                            0 -> null
                             1 -> {
                                 val first = this.nodes[0]
-                                rettype =
-                                    if (first.type == AS_ && first is NodeIsAs)
-                                        first.from
-                                    else processor.calc(first, context) ?: VOID
+                                if (first.type == AS_ && first is NodeIsAs)
+                                    first.from
+                                else processor.calc(first, context)
                             }
-                            else -> rettype = processor.calc(nodeProgn(node.info, this.nodes), context) ?: ctx.getType(
-                                "void",
-                                processor,
-                                ctx
-                            )
+                            else -> processor.calc(nodeProgn(node.info, this.nodes), context)
+                        } ?: VOID
+                        if (this@run.inline is NodeInlBodyA) {
+                            (this@run.inline as NodeInlBodyA).type = rettype
                         }
                     }
                 }
+                finalizeInline(this, args, instance, node, processor, ctx, valMode)
             }
         } else processor.pushOrRunTask(FINALIZATION, node) {
-            var names: List<String>? = null
-            (method.inline?.copy() ?: processor.inline<Node?>(instance, null, ctx).let { names = it.first; it.second } ?: return@pushOrRunTask).run {
-                val bctx = BodyContext.of(ctx.body)
-                (names ?: method.argsn).asSequence().let { it ->
-                    if (method.modifiers.let { !it.static || it.extension })
-                        NRInlDef.process("this", instance, bctx)
-                    method.extension ?: return@let it
-                    it.drop(1)
-                }.forEachIndexed { i, it -> NRInlDef.process(it, args[i], bctx) }
-                node.special = processor.processAndCast(
-                    this,
-                    method.rettype,
-                    (if (this is NodeInlBodyB) this.ctx else ctx).with(bctx),
-                    valMode
-                )
-            }
+            finalizeInline(method, args, instance, node, processor, ctx, valMode)
+        }
+    }
+
+    /**
+     * Окончание обработки встраивания ноды.
+     *
+     * @param method Метод.
+     * @param args Параметры.
+     * @param instance Итоговый объект.
+     * @param node Итоговая нода.
+     * @param processor Обработчик.
+     * @param ctx Контекст обработки.
+     * @param valMode Режим возврата значения.
+     */
+    private fun finalizeInline(method: VirtualMethod, args: List<Node>, instance: Node, node: NodeMCall, processor: Processor, ctx: ProcessingContext, valMode: Boolean) {
+        var names: List<String>? = null
+        (method.inline?.copy() ?: processor.inline<Node?>(instance, null, ctx).let { names = it.first; it.second } ?: return).run {
+            val bctx = BodyContext.of(ctx.body)
+            (names ?: method.argsn).asSequence().let { it ->
+                if (method.modifiers.let { !it.static || it.extension })
+                    NRInlDef.process("this", instance, bctx)
+                method.extension ?: return@let it
+                it.drop(1)
+            }.forEachIndexed { i, it -> NRInlDef.process(it, args[i], bctx) }
+            node.special = processor.processAndCast(
+                this,
+                method.rettype,
+                (if (this is NodeInlBodyB) this.ctx else ctx).with(bctx),
+                valMode
+            )
+            method.modifiers.generator = false
         }
     }
 

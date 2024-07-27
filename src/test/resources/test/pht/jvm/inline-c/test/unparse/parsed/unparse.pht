@@ -1,0 +1,23 @@
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls
+				TestA
+				[
+					^Object
+				]
+				(@static
+					(@inline
+						(efn
+							^String
+							foo
+							^String
+							[]
+							(add
+								this
+								"V")))))
+			(test-fn
+				0
+				(mcall
+					"Z"
+					foo)))))

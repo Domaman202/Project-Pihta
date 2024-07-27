@@ -1,0 +1,5 @@
+(progn
+    (cls TestA [^Object] (@static
+        (@inline
+        (efn ^String foo ^String [] (+ this "V")))))
+    (test-fn 0 (#foo "Z")))

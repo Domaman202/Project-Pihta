@@ -1,0 +1,70 @@
+[LOAD_CTX
+|	[USE_CTX
+|	|	[PROGN
+|	|	|	[CLS
+|	|	|	|	[GET_OR_NAME]
+|	|	|	|	[VALN
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	|	[ANN_STATIC
+|	|	|	|	|	[ANN_INLINE
+|	|	|	|	|	|	[GFN
+|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[ADD
+|	|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE]
+|	|	|	|	[MCALL
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE]
+|	|	|	|	[MCALL
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE]
+|	|	|	|	[MCALL
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE]
+|	|	|	|	[MCALL
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	]
+]
