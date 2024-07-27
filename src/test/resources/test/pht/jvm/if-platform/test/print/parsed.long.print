@@ -2,12 +2,14 @@
 |	[USE_CTX
 |	|	(modules = pht pht/jvm)
 |	|	[CT_IF_PLATFORM
+|	|	|	(target = [JVM])
 |	|	|	[TEST_FN
 |	|	|	|	[VALUE
 |	|	|	|	|	(type = INT)
 |	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[CT_IF_PLATFORM
+|	|	|	|	|	(target = [CPP])
 |	|	|	|	|	[THROW
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS)

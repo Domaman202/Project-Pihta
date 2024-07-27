@@ -36,12 +36,29 @@
 |	|	|	|	|	(value = 0)
 |	|	|	|	]
 |	|	|	|	[FSET_B
+|	|	|	|	|	(static)
+|	|	|	|	|	(name = i)
+|	|	|	|	|	(instance:
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = TestA)
+|	|	|	|	|	|	]
+|	|	|	|	|	)
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	(value = 12)
 |	|	|	|	|	]
 |	|	|	|	]
-|	|	|	|	[FGET_B]
+|	|	|	|	[FGET_B
+|	|	|	|	|	(static)
+|	|	|	|	|	(name = i)
+|	|	|	|	|	(instance:
+|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	(value = TestA)
+|	|	|	|	|	|	]
+|	|	|	|	|	)
+|	|	|	|	]
 |	|	|	]
 |	|	|	[CLS
 |	|	|	|	[GET_OR_NAME
@@ -95,12 +112,28 @@
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[FSET_B
+|	|	|	|	|	(name = i)
+|	|	|	|	|	(instance:
+|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	(text = o)
+|	|	|	|	|	|	]
+|	|	|	|	|	)
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	(value = 21)
 |	|	|	|	|	]
 |	|	|	|	]
 |	|	|	|	[FGET_B
+|	|	|	|	|	(name = i)
+|	|	|	|	|	(instance:
+|	|	|	|	|	|	[GET
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	(value = o)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	)
 |	|	|	|	|	[VALUE
 |	|	|	|	|	|	(type = STRING)
 |	|	|	|	|	|	(value = o)

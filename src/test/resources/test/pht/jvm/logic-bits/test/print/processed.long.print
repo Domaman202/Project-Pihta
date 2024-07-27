@@ -19,6 +19,7 @@
 |	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[AND_
+|	|	|	|	|	|	|	|	|	|	|	(type = VT(boolean))
 |	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	(type = BOOLEAN)
 |	|	|	|	|	|	|	|	|	|	|	|	(value = true)
@@ -47,6 +48,7 @@
 |	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[OR_
+|	|	|	|	|	|	|	|	|	|	|	(type = VT(boolean))
 |	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	(type = BOOLEAN)
 |	|	|	|	|	|	|	|	|	|	|	|	(value = true)
@@ -75,6 +77,7 @@
 |	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[XOR_
+|	|	|	|	|	|	|	|	|	|	|	(type = VT(boolean))
 |	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	(type = BOOLEAN)
 |	|	|	|	|	|	|	|	|	|	|	|	(value = true)
@@ -127,6 +130,7 @@
 |	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[AND_
+|	|	|	|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	(value = 2)
@@ -155,6 +159,7 @@
 |	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[OR_
+|	|	|	|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	(value = 2)
@@ -183,6 +188,7 @@
 |	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[XOR_
+|	|	|	|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	(value = 2)
@@ -211,6 +217,7 @@
 |	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[NOT_
+|	|	|	|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	(value = 1)
@@ -235,6 +242,7 @@
 |	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[SHIFT_LEFT_
+|	|	|	|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	(value = 1)
@@ -263,6 +271,7 @@
 |	|	|	|	|	|	|	|	|	[AS_
 |	|	|	|	|	|	|	|	|	|	(type = VT(dynamic))
 |	|	|	|	|	|	|	|	|	|	[SHIFT_RIGHT_
+|	|	|	|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	|	|	|	|	|	(value = 1024)

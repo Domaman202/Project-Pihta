@@ -16,6 +16,7 @@
 |	|	|	|	|	|	|	|	(desc = (II)I)
 |	|	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	|	[ADD_
+|	|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	|	|	[GET_
 |	|	|	|	|	|	|	|	|	|	(name = a)
 |	|	|	|	|	|	|	|	|	|	(type = var)
@@ -93,6 +94,8 @@
 |	|	|	|	|	|	|	|	(type = SUPER)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	|	[FSET_
+|	|	|	|	|	|	|	|	(name = value)
+|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	|	[GET_
 |	|	|	|	|	|	|	|	|	(name = this)
 |	|	|	|	|	|	|	|	|	(type = var)
@@ -109,6 +112,7 @@
 |	|	|	|	|	|	|	(desc = (I)I)
 |	|	|	|	|	|	|	(sign = null)
 |	|	|	|	|	|	|	[SUB_
+|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	|	[GET_
 |	|	|	|	|	|	|	|	|	(name = value)
 |	|	|	|	|	|	|	|	|	(type = this field)

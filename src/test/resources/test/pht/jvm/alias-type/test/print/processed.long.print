@@ -5,7 +5,12 @@
 |	|	|	(modules = pht pht/jvm)
 |	|	|	(NODES:
 |	|	|	|	[PROGN_
-|	|	|	|	|	[ALIAS_TYPE_]
+|	|	|	|	|	[ALIAS_TYPE_
+|	|	|	|	|	|	[
+|	|	|	|	|	|	|	(name = Object)
+|	|	|	|	|	|	|	(type = object)
+|	|	|	|	|	|	]
+|	|	|	|	|	]
 |	|	|	|	|	[ANN_TEST_
 |	|	|	|	|	|	[CLS_
 |	|	|	|	|	|	|	(type = final class)

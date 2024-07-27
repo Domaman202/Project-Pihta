@@ -12,9 +12,4 @@ class NodeMacroUtil(
 ) : NodeNodesList(info, nodes) {
     override fun copy(): NodeMacroUtil =
         NodeMacroUtil(info, copyNodes(), uuids)
-
-//    override fun print(builder: StringBuilder, indent: Int): StringBuilder {
-//        builder.indent(indent).append('[').append(text).append(" (").append(uuids).append(')')
-//        return printNodes(builder, indent).append(']')
-//    }
 }

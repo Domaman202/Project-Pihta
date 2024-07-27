@@ -111,6 +111,13 @@
 |	|	|	|	|	[VALN]
 |	|	|	|	|	[CCALL]
 |	|	|	|	|	[FSET_B
+|	|	|	|	|	|	(name = value)
+|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = this)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	)
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = INT)
 |	|	|	|	|	|	|	(value = 20)

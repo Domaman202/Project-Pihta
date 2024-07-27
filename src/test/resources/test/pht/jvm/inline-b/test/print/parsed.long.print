@@ -165,6 +165,13 @@
 |	|	|	|	|	]
 |	|	|	|	|	[CCALL]
 |	|	|	|	|	[FSET_B
+|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = this)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	)
 |	|	|	|	|	|	[GET_OR_NAME
 |	|	|	|	|	|	|	(type = NO-STATIC)
 |	|	|	|	|	|	|	(text = i)
@@ -195,6 +202,15 @@
 |	|	|	|	|	|	]
 |	|	|	|	|	|	[ADD
 |	|	|	|	|	|	|	[FGET_B
+|	|	|	|	|	|	|	|	(name = i)
+|	|	|	|	|	|	|	|	(instance:
+|	|	|	|	|	|	|	|	|	[GET
+|	|	|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	|	|	|	(value = this)
+|	|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	)
 |	|	|	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	|	|	(type = STRING)
 |	|	|	|	|	|	|	|	|	(value = this)

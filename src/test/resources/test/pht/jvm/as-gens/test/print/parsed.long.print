@@ -100,6 +100,7 @@
 |	|	|	|	|	|	(text = o)
 |	|	|	|	|	]
 |	|	|	|	|	[MACRO_B
+|	|	|	|	|	|	(name = as-gens)
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS)
 |	|	|	|	|	|	|	(value = Test)
@@ -150,6 +151,7 @@
 |	|	|	|	|	|	(text = o)
 |	|	|	|	|	]
 |	|	|	|	|	[MACRO_B
+|	|	|	|	|	|	(name = as-gens)
 |	|	|	|	|	|	[VALUE
 |	|	|	|	|	|	|	(type = CLASS)
 |	|	|	|	|	|	|	(value = Test)
