@@ -50,9 +50,4 @@ class NodeValue(
         CLASS_WITH_GEN(true),
         NAMING
     }
-
-    companion object {
-        fun of(info: INodeInfo, vtype: Type, value: String) =
-            NodeValue(info.withType(VALUE), vtype, value)
-    }
 }

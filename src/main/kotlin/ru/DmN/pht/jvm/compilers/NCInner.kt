@@ -10,7 +10,7 @@ import ru.DmN.siberia.compilers.INodeCompiler
 object NCInner : INodeCompiler<NodeInner> {
     override fun compile(node: NodeInner, compiler: Compiler, ctx: CompilationContext) {
         val inner = ctx.clazz.node
-        val outer = ctx.compiledClasses!![node.type]!!
+        val outer = ctx.compiledClasses[node.type]!!
         outer.visitInnerClass(node.field, outer.name, inner.name, inner.access)
     }
 }

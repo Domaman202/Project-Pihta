@@ -1,0 +1,38 @@
+[LOAD_CTX
+|	[USE_CTX
+|	|	[PROGN
+|	|	|	[CLS
+|	|	|	|	[GET_OR_NAME]
+|	|	|	|	[VALN
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	|	[ANN_STATIC
+|	|	|	|	|	[ANN_TO_EFN
+|	|	|	|	|	|	[DEFN
+|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[ADD
+|	|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE]
+|	|	|	|	[MCALL
+|	|	|	|	|	[VALUE]
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	]
+]

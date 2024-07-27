@@ -1,5 +1,5 @@
 (module
-    (name "test/pht/jvm/to-efn")
+    (name "test/pht/jvm/to-efn-a")
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["pht"])

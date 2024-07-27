@@ -12,8 +12,8 @@ class NodeType(
     info: INodeInfo,
     metadata: Lazy<MetadataContainer>,
     nodes: MutableList<Node>,
-    val type: PhtVirtualType.Impl
-) : NodeMetaNodesList(info, metadata, nodes), IAbstractlyNode, IFileNode, IOpenlyNode, ITestableNode {
+    override val type: PhtVirtualType.Impl
+) : NodeMetaNodesList(info, metadata, nodes), IAbstractlyNode, IFileNode, IOpenlyNode, ITestableNode, IVTProviderNode<PhtVirtualType.Impl> {
     constructor(info: INodeInfo, type: PhtVirtualType.Impl) : this(info, lazy { MetadataContainer() }, mutableListOf(), type)
     constructor(info: INodeInfo, nodes: MutableList<Node>, type: PhtVirtualType.Impl) : this(info, lazy { MetadataContainer() }, nodes, type)
 

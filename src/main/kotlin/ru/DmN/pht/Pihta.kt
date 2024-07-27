@@ -183,6 +183,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSMNP(ANN_OPEN)
         addSMNP(ANN_STATIC)
         addSMNP(ANN_TEST)
+        addSMNP(ANN_TO_EFN)
         addSMNP(ANN_VARARGS)
 
         // @@
@@ -243,6 +244,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         "tailrec-call"  to "trcall"
         "typed-get"     to "tget"
         "to-ext-func"   to "fo-efn"
+        // @
+        "@to-ext-func"  to "@to-efn"
 
         // Символьные аналоги
 
@@ -507,6 +510,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNU(ANN_STATIC_)
         addSNU(ANN_TEST)
         addSNU(ANN_TEST_)
+        addSNU(ANN_TO_EFN)
         addSNU(ANN_VARARGS)
         addSNU(ANN_VARARGS_)
 
@@ -716,6 +720,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(ANN_OPEN,     NRSA { it, _, _ -> it.setMetadata(MetadataKeys.OPEN,     true) })
         add(ANN_STATIC,   NRSA { it, _, _ -> it.setMetadata(MetadataKeys.STATIC,   true) })
         add(ANN_TEST,     NRSA { it, _, _ -> it.setMetadata(MetadataKeys.TEST,     true) })
+        add(ANN_TO_EFN,   NRAnnToEfn)
         add(ANN_VARARGS,  NRSA { it, _, _ -> it.setMetadata(MetadataKeys.VARARG,   true) })
 
         // @@

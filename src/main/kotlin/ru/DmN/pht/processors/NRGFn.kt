@@ -10,14 +10,13 @@ import ru.DmN.pht.utils.node.NodeTypes.GFN_
 import ru.DmN.pht.utils.vtype.GeneratorVirtualMethod
 import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.ast.INodesList
-import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.MethodModifiers
 
 object NRGFn : INodeProcessor<INodesList> {
-    override fun process(node: INodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? {
+    override fun process(node: INodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeDefn {
         val type = ctx.clazz as PhtVirtualType.Impl
         val typeName = type.name
         //

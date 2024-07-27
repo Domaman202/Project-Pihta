@@ -167,13 +167,14 @@ enum class NodeTypes : INodeType {
     ANN_OPEN_("@open", PROCESSED),                      // @open
     ANN_STATIC_("@static", PROCESSED),                  // @static
     ANN_TEST_("@test", PROCESSED),                      // @test
+    ANN_TO_EFN("@to-efn", PARSED),                      // @to-ext-func
     ANN_VARARGS_("@varargs", PROCESSED),                // @varargs
 
     // @@
     CT_IF_PLATFORM("@@if-platform", PARSED),            // @@if-platform
     CT_ROLL_LEFT("@@roll-left", PARSED),                // @@roll-left      // <-
     CT_ROLL_RIGHT("@@roll-right", PARSED),              // @@roll-right     // ->
-    CT_SKIP("@@skip", true, true),  // @@skip
+    CT_SKIP("@@skip", true, true), // @@skip
 
     // *
     CTC_MODULE_NAME("*module-name*", PARSED),           // *module-name*

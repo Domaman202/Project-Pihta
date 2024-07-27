@@ -1,0 +1,6 @@
+(progn
+    (cls Utils [^Object] (@static
+        (@to-efn
+        (defn hello ^String [[name ^String]]
+            (+ "Hello, " name "!")))))
+    (test-fn 0 (#hello "Stepan")))

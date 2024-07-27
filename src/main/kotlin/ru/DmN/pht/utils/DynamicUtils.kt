@@ -15,7 +15,7 @@ object DynamicUtils {
         if (instance == null)
             throw NullPointerException()
         return try {
-            invokeMethod(instance, "get${name.let { it[0].toUpperCase() + it.substring(1) }}", args)
+            invokeMethod(instance, "get${name.let { it[0].uppercase() + it.substring(1) }}", args)
         } catch (ignored: NoSuchMethodException) {
             val field = instance.javaClass.getDeclaredField(name)
             field.isAccessible = true
@@ -28,7 +28,7 @@ object DynamicUtils {
         if (instance == null)
             throw NullPointerException()
         return try {
-            invokeMethod(instance, "set${name.let { it[0].toUpperCase() + it.substring(1) }}", args)
+            invokeMethod(instance, "set${name.let { it[0].uppercase() + it.substring(1) }}", args)
         } catch (ignored: NoSuchMethodException) {
             val field = instance.javaClass.getDeclaredField(name)
             field.isAccessible = true

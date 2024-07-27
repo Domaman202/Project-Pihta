@@ -1,27 +1,6 @@
-(progn
-    (test-fn 0
-        (def [[i 0]])
-        (named-block CycleBlock
-            (cycle (< i 10)
-                (if (> i 5)
-                    (break CycleBlock))
-                (++ i)))
-        i)
-
-    (test-fn 1
-        (def [[i 0]])
-        (named-block CycleBlock
-            (cycle (< i 10)
-                (++ i)
-                (if (< i 5)
-                    (continue CycleBlock))
-                (break CycleBlock)))
-        i)
-
-    (test-fn 2
-        (named-block A
-            (def [[i 12]])
-            (named-block B
-                (def [[i 21]])
-                (set i@A 33)
-                (ret i@A)))))
+(app
+    (@to-efn
+    (defn foo ^void [[text ^String]]
+        (println text)))
+    (app-fn
+        (#foo "Hi!")))
