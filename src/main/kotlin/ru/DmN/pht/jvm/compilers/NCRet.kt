@@ -1,4 +1,4 @@
-package ru.DmN.pht.compiler.java.compilers
+package ru.DmN.pht.jvm.compilers
 
 import ru.DmN.pht.compiler.java.utils.load
 import ru.DmN.pht.jvm.compiler.ctx.method

@@ -64,9 +64,9 @@ fun nodeDefSet(info: INodeInfo, name: String, value: Node) =
 fun nodeDefn(info: INodeInfo, name: String, ret: String, args: List<Pair<String, String>>, nodes: List<Node>) =
     NodeNodesList(info.withType(DEFN),
         mutableListOf<Node>(
-            nodeValue(info, name),
-            nodeValue(info, ret),
-            nodeValn(info, args.mapMutable { nodeValn(info, mutableListOf(nodeValue(info, it.first), nodeValueClass(info, it.second))) })
+            nodeGetOrName(info, name),
+            nodeValueClass(info, ret),
+            nodeValn(info, args.mapMutable { nodeValn(info, mutableListOf(nodeGetOrName(info, it.first), nodeValueClass(info, it.second))) })
         ).apply { addAll(nodes) })
 fun nodeDefn(info: INodeInfo, name: String, ret: String, nodes: MutableList<Node>) =
     nodeDefn(info, name, ret, emptyList(), nodes)

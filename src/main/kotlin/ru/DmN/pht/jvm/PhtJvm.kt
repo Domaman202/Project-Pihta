@@ -3,7 +3,6 @@ package ru.DmN.pht.jvm
 import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.tree.ClassNode
 import ru.DmN.pht.ast.ISyncNode
-import ru.DmN.pht.compiler.java.compilers.*
 import ru.DmN.pht.jvm.compiler.ctx.compiledClasses
 import ru.DmN.pht.jvm.compiler.ctx.compiledClassesOrNull
 import ru.DmN.pht.jvm.compilers.*

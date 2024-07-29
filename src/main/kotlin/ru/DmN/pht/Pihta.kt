@@ -1,9 +1,10 @@
 package ru.DmN.pht
 
-import ru.DmN.pht.compiler.java.compilers.NCSkip
+import ru.DmN.pht.jvm.compilers.NCSkip
 import ru.DmN.pht.parser.ParserImpl
 import ru.DmN.pht.parser.utils.macros
 import ru.DmN.pht.parsers.*
+import ru.DmN.pht.processor.NRVoid
 import ru.DmN.pht.processor.ctx.*
 import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.pht.processors.*
@@ -570,6 +571,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(CONTINUE,      NRBreakContinue)
         add(CTOR,          NRCtor)
         add(CYCLE,         NRCycle)
+        add(CYCLE_,        NRVoid)
         // d
         add(DEBUG,         NRDebug)
         add(DEC_PRE,       NRIncDec)

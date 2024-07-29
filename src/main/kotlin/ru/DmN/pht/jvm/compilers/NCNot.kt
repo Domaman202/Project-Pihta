@@ -2,8 +2,6 @@ package ru.DmN.pht.jvm.compilers
 
 import ru.DmN.pht.ast.NodeCompare
 import ru.DmN.pht.ast.NodeMath
-import ru.DmN.pht.compiler.java.compilers.NCCompare
-import ru.DmN.pht.compiler.java.compilers.NCMath
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.compiler.Compiler
 import ru.DmN.siberia.compiler.ctx.CompilationContext

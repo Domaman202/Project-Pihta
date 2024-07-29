@@ -43,6 +43,7 @@ object NRGFn : INodeProcessor<INodesList> {
             else generics[returnGen]!!
         val args = parseArguments(node.nodes[2 + offset], typeName, generics, processor, ctx)
         //
+        val body = node.nodes.dropMutable(3 + offset)
         val method = GeneratorVirtualMethod(
             type,
             name,
@@ -53,11 +54,11 @@ object NRGFn : INodeProcessor<INodesList> {
             args.third,
             MethodModifiers(final = true, generator = true),
             extension = null,
-            generator = node.nodes.dropMutable(3 + offset),
+            generator = body,
             generics,
         )
         type.methods += method
         //
-        return NodeDefn(node.info.withType(GFN_), node.nodes.dropMutable(3 + offset), method) // Fake Nodes List =)
+        return NodeDefn(node.info.withType(GFN_), body, method) // Fake Nodes List =)
     }
 }

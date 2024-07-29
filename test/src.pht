@@ -1,5 +1,9 @@
-(app-fn
-    (def-set i 0)
-    (println (inc i))
-    (println (inc- i))
-    (println i))
+(app
+    (gfn main ^auto []
+        (def-set sum 0.0)
+        (def-set i 0.0)
+        (cycle (< i 10.0)
+            (oset sum (+ i))
+            (++ i))
+        (println sum))
+    (app-fn (#main .)))

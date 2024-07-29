@@ -3,8 +3,8 @@ package ru.DmN.pht.jvm.compilers
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.MethodNode
 import ru.DmN.pht.ast.NodeDefn
-import ru.DmN.pht.compiler.java.compilers.NCDefn.visit
 import ru.DmN.pht.jvm.compiler.ctx.clazz
+import ru.DmN.pht.jvm.compilers.NCDefn.visit
 import ru.DmN.pht.jvm.utils.vtype.desc
 import ru.DmN.pht.jvm.utils.vtype.signature
 import ru.DmN.siberia.compiler.Compiler

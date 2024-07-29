@@ -1,4 +1,4 @@
-package ru.DmN.pht.compiler.java.compilers
+package ru.DmN.pht.jvm.compilers
 
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.compiler.Compiler
