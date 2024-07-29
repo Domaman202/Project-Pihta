@@ -1,0 +1,48 @@
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls
+				TestA
+				[
+					^Object
+				]
+				(@static
+					(def
+						[
+							[
+								i
+								^int
+							]
+						])))
+			(test-fn
+				0
+				(fset
+					^TestA
+					i
+					5)
+				(arr-of
+					(macro over-set-left
+						(fget
+							^TestA
+							i)
+						(add
+							6))
+					(fget
+						^TestA
+						i)))
+			(test-fn
+				1
+				(fset
+					^TestA
+					i
+					7)
+				(arr-of
+					(macro over-set-post-left
+						(fget
+							^TestA
+							i)
+						(add
+							8))
+					(fget
+						^TestA
+						i))))))

@@ -1,13 +1,13 @@
 package ru.DmN.pht.unparsers
 
-import ru.DmN.pht.imports.ast.NodeAliasType
+import ru.DmN.pht.imports.ast.NodeAlias
 import ru.DmN.siberia.unparser.Unparser
 import ru.DmN.siberia.unparser.ctx.UnparsingContext
 import ru.DmN.siberia.unparsers.INodeUnparser
 import ru.DmN.siberia.utils.operation
 
-object NUAliasType : INodeUnparser<NodeAliasType> {
-    override fun unparse(node: NodeAliasType, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
+object NUAliasType : INodeUnparser<NodeAlias> {
+    override fun unparse(node: NodeAlias, unparser: Unparser, ctx: UnparsingContext, indent: Int) {
         unparser.out.apply {
             append('(').append(node.operation).append(" [")
             node.imports.forEach {

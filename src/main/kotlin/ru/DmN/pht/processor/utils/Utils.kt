@@ -5,6 +5,7 @@ import ru.DmN.pht.ast.NodeGetOrName
 import ru.DmN.pht.module.utils.Module
 import ru.DmN.pht.processors.IAdaptableProcessor
 import ru.DmN.pht.processors.IInlinableProcessor
+import ru.DmN.pht.processors.ISetterGetterProcessor
 import ru.DmN.pht.processors.IStdNodeProcessor
 import ru.DmN.pht.utils.lenArgs
 import ru.DmN.pht.utils.node.nodeAs
@@ -19,6 +20,38 @@ import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
 import ru.DmN.siberia.utils.vtype.VirtualType.Companion.VOID
 
+inline fun <T> Processor.getOrCompute(node: Node, ctx: ProcessingContext, block: (Node, INodeProcessor<Node>) -> T): T {
+    val np = get(node, ctx)
+    return if (np is IStdNodeProcessor<Node>) {
+        val new = np.compute(node, this, ctx)
+        if (new == node)
+            block(new, np)
+        else block(new, get(new, ctx))
+    } else block(node, np)
+}
+
+fun Processor.processAsSetterLazy(node: Node, value: List<Node>, ctx: ProcessingContext, valMode: Boolean): Node? =
+    getOrCompute(node, ctx) { it, np ->
+        if (np is ISetterGetterProcessor<Node>)
+            np.processAsSetterLazy(it, value, this, ctx, valMode)
+        else throw UnsupportedOperationException(np.javaClass.name)
+    }
+
+fun Processor.processAsSetter(node: Node, value: List<Node>, ctx: ProcessingContext, valMode: Boolean): Node? =
+    getOrCompute(node, ctx) { it, np ->
+        if (np is ISetterGetterProcessor<Node>)
+            np.processAsSetter(it, value, this, ctx, valMode)
+        else throw UnsupportedOperationException(np.javaClass.name)
+    }
+
+fun Processor.processAsGetter(node: Node, ctx: ProcessingContext): Node? =
+    getOrCompute(node, ctx) { it, np ->
+        if (np is ISetterGetterProcessor<Node>)
+            np.processAsGetter(it, this, ctx)
+        else throw UnsupportedOperationException(np.javaClass.name)
+    }
+
+
 fun Processor.processAndCast(node: Node, target: VirtualType, ctx: ProcessingContext, valMode: Boolean): Node? =
     process(if (target == VOID) node else nodeAs(node.info, node, target.name), ctx, valMode)
 
@@ -26,7 +59,7 @@ fun Processor.inline(node: NodeGetOrName, ctx: ProcessingContext): Pair<List<Str
     get(node, ctx).let {
         if (it is IInlinableProcessor<Node>)
             it.inline(node, this, ctx)
-        else throw UnsupportedOperationException()
+        else throw UnsupportedOperationException(it.javaClass.name)
     }
 
 inline fun <T : Node?> Processor.inline(node: Node, other: T, ctx: ProcessingContext): Pair<List<String>, T> =
@@ -66,7 +99,7 @@ fun Processor.computeTypeOr(node: Node, ctx: ProcessingContext): VirtualType? =
     get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeType(node, this, ctx)
-        else throw UnsupportedOperationException()
+        else throw UnsupportedOperationException(it.javaClass.name)
     }
 
 fun Processor.computeTypesOr(node: Node, ctx: ProcessingContext): List<VirtualType>? =
@@ -80,7 +113,7 @@ fun Processor.computeGenericType(node: Node, ctx: ProcessingContext): String? =
     get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeGenericType(node, this, ctx)
-        else throw UnsupportedOperationException()
+        else throw UnsupportedOperationException(it.javaClass.name)
     }
 
 fun Processor.computeString(node: Node, ctx: ProcessingContext): String =
@@ -90,7 +123,7 @@ fun Processor.computeStringOr(node: Node, ctx: ProcessingContext): String? =
     get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeString(node, this, ctx)
-        else throw UnsupportedOperationException()
+        else throw UnsupportedOperationException(it.javaClass.name)
     }
 
 fun Processor.computeInt(node: Node, ctx: ProcessingContext): Int =
@@ -100,7 +133,7 @@ fun Processor.computeIntOr(node: Node, ctx: ProcessingContext): Int? =
     get(node, ctx).let {
         if (it is IStdNodeProcessor<Node>)
             it.computeInt(node, this, ctx)
-        else throw UnsupportedOperationException()
+        else throw UnsupportedOperationException(it.javaClass.name)
     }
 
 fun Processor.adaptToType(type: VirtualType, node: Node, ctx: ProcessingContext): Node =

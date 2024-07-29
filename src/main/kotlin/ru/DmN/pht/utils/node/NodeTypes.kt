@@ -10,6 +10,7 @@ enum class NodeTypes : INodeType {
     AGET_("aget", PROCESSED),                           // arr-get
     ALIAS_TYPE("alias-type", PARSED),                   // alias-type
     ALIAS_TYPE_("alias-type", PROCESSED),               // alias-type
+    ALIAS_MACRO("alias-macro", PARSED),                 // alias-macro
     AND_("and", PROCESSED),                             // and              // &
     APP("app", ALL),                                    // app-class
     APP_FN("app-fn", ALL),                              // app-func
@@ -110,6 +111,8 @@ enum class NodeTypes : INodeType {
     // o
     OBJ_("obj", PROCESSED),                             // object
     OR_("or", PROCESSED),                               // or               // |
+    OVER_SET_PRE("over-set", PARSED),                   // over-set-pre
+    OVER_SET_POST("over-set-post", PARSED),             // over-set-post
     // p
     PRINT_("print", PROCESSED),                         // print
     PRINTLN_("println", PROCESSED),                     // println

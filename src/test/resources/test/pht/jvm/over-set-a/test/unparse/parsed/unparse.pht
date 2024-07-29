@@ -1,0 +1,25 @@
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(test-fn
+				0
+				(def-set
+					i
+					1)
+				(arr-of
+					(macro over-set-left
+						i
+						(add
+							2))
+					i))
+			(test-fn
+				1
+				(def-set
+					i
+					3)
+				(arr-of
+					(macro over-set-post-left
+						i
+						(add
+							4))
+					i)))))

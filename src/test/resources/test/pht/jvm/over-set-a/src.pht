@@ -1,0 +1,7 @@
+(progn
+    (test-fn 0
+        (def-set i 1)
+        (arr-of (over-set-left i (+ 2)) i))
+    (test-fn 1
+        (def-set i 3)
+        (arr-of (over-set-post-left i (+ 4)) i)))

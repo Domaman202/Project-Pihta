@@ -14,6 +14,7 @@ import ru.DmN.pht.processors.IAdaptableProcessor.Type.ARGUMENT
 import ru.DmN.pht.utils.InlineVariable
 import ru.DmN.pht.utils.lenArgs
 import ru.DmN.pht.utils.node.NodeTypes.GET_
+import ru.DmN.pht.utils.node.nodeSet
 import ru.DmN.pht.utils.node.nodeTypesGet
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.Processor
@@ -21,7 +22,12 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeGetOrName>, IInlinableProcessor<NodeGetOrName> {
+object NRGetOrName :
+    IStdNodeProcessor<NodeGetOrName>,
+    IAdaptableProcessor<NodeGetOrName>,
+    IInlinableProcessor<NodeGetOrName>,
+    ISetterGetterProcessor<NodeGetOrName>
+{
     override fun calc(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): VirtualType? =
         calc(node.info, node.name, processor, ctx)
 
@@ -78,13 +84,8 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
         return lenArgs((ctx.classes.firstNotNullOfOrNull { it -> it.fields.find { it.name == node.name } } ?: return -1).type, type)
     }
 
-    override fun adaptToType(
-        type: VirtualType,
-        node: NodeGetOrName,
-        processor: Processor,
-        ctx: ProcessingContext
-    ): Node {
-        return when (ctx.body.variables.count {
+    override fun adaptToType(type: VirtualType, node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Node =
+        when (ctx.body.variables.count {
             if (it.name == node.name)
                 if (it is InlineVariable)
                     return node
@@ -116,7 +117,6 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
             1 -> node
             else -> nodeTypesGet(node.info, node.name, type)
         }
-    }
 
     override fun isInlinable(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Boolean =
         ctx.body[node.name]?.let {
@@ -126,4 +126,13 @@ object NRGetOrName : IStdNodeProcessor<NodeGetOrName>, IAdaptableProcessor<NodeG
 
     override fun inline(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Pair<List<String>, Node> =
         (ctx.body[node.name] as InlineVariable).value.let { processor.inline(it, it, ctx) }
+
+    override fun processAsSetterLazy(node: NodeGetOrName, values: List<Node>, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
+        nodeSet(node.info, node.name, values)
+
+    override fun processAsSetter(node: NodeGetOrName, values: List<Node>, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node =
+        NRSet.process(node.info, node.name, values, processor, ctx)
+
+    override fun processAsGetter(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Node? =
+        process(node, processor, ctx, true)
 }

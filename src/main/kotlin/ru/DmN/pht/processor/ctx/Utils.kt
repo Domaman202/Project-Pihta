@@ -39,11 +39,11 @@ inline fun <T : IContextCollection<T>> T.with(ctx: MacroContext): T =
     this.with(MACRO, ctx)
 
 inline fun IContextCollection<*>.isClass(): Boolean =
-    contexts.containsKey(CLASS)
+    clazzOrNull != null
 inline fun IContextCollection<*>.isMethod(): Boolean =
-    contexts.containsKey(METHOD)
+    methodOrNull != null
 inline fun IContextCollection<*>.isBody(): Boolean =
-    contexts.containsKey(BODY)
+    bodyOrNull != null
 inline fun IContextCollection<*>.isMacro(): Boolean =
     contexts.containsKey(MACRO)
 

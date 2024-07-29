@@ -7,8 +7,8 @@
 |	|	|	|	[PROGN_
 |	|	|	|	|	[ALIAS_TYPE_
 |	|	|	|	|	|	[
-|	|	|	|	|	|	|	(name = Object)
-|	|	|	|	|	|	|	(type = object)
+|	|	|	|	|	|	|	(alias = Object)
+|	|	|	|	|	|	|	(source = object)
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[ANN_TEST_

@@ -58,6 +58,9 @@ fun nodeDef(info: INodeInfo, fields: List<Pair<String, String>>) =
 fun nodeDef(info: INodeInfo, name: String, value: Node) =
     NodeNodesList(info.withType(DEF),
         mutableListOf(nodeValn(info, nodeValn(info, mutableListOf(nodeGetOrName(info, name), value)))))
+fun nodeDefSet(info: INodeInfo, name: String, value: Node) =
+    NodeNodesList(info.withType(DEF_SET),
+        mutableListOf(nodeValn(info, nodeValn(info, mutableListOf(nodeGetOrName(info, name), value)))))
 fun nodeDefn(info: INodeInfo, name: String, ret: String, args: List<Pair<String, String>>, nodes: List<Node>) =
     NodeNodesList(info.withType(DEFN),
         mutableListOf<Node>(
@@ -68,6 +71,8 @@ fun nodeDefn(info: INodeInfo, name: String, ret: String, args: List<Pair<String,
 fun nodeDefn(info: INodeInfo, name: String, ret: String, nodes: MutableList<Node>) =
     nodeDefn(info, name, ret, emptyList(), nodes)
 // f
+fun nodeFSet(info: INodeInfo, name: String, instance: Node, values: MutableList<Node>, static: Boolean, native: Boolean) =
+    NodeFieldSet(info.withType(FSET_B), values, instance, name, static, native)
 fun nodeInitFld(info: INodeInfo, name: String, type: VirtualType) =
     NodeNodesList(info.withType(FSET_A),
         mutableListOf(nodeGetVariable(info, "this", type), nodeGetOrName(info, name), nodeGetOrName(info, name)))
@@ -102,6 +107,16 @@ fun nodeNewArray(info: INodeInfo, type: String, size: Int) =
 fun nodeObj(info: INodeInfo, name: String, parents: List<String>, nodes: List<Node>) =
     NodeNodesList(info.withType(OBJ),
         mutableListOf<Node>(nodeValue(info, name), nodeValn(info, parents.mapMutable { nodeValue(info, it) })).apply { addAll(nodes) })
+// r
+fun nodeRollLeft(info: INodeInfo, node: Node, value: Node) =
+    NodeNodesList(info.withType(CT_ROLL_LEFT), mutableListOf(node, value))
+fun nodeRollRight(info: INodeInfo, node: Node, value: Node) =
+    NodeNodesList(info.withType(CT_ROLL_RIGHT), mutableListOf(node, value))
+// s
+fun nodeSet(info: INodeInfo, name: String, values: List<Node>) =
+    NodeSet(info.withType(SET_B), values.toMutableList(), name)
+fun nodeSetVariable(info: INodeInfo, name: String, value: Node) =
+    NodeSet(info.withType(SET_B), mutableListOf(value), name)
 // t
 fun nodeThrow(info: INodeInfo, clazz: String, args: List<Node>) =
     NodeNodesList(info.withType(THROW),

@@ -1,0 +1,12 @@
+(progn
+    (cls TestB [^Object] (
+        (ctor [] (ccall))
+        (def [[i ^int]])))
+    (test-fn 0
+        (def-set o (new ^TestB))
+        (set o/i 9)
+        (arr-of (over-set-left o/i (+ 10)) o/i))
+    (test-fn 1
+        (def-set o (new ^TestB))
+        (set o/i 11)
+        (arr-of (over-set-post-left o/i (+ 12))  o/i)))

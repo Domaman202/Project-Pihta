@@ -1,0 +1,83 @@
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls [] TestB [^java.lang.Object]
+				(progn
+					(ctor []
+						(mcall
+							super
+							<init>))
+					(def [
+						[i ^int]])))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(def [
+								[^TestB o (new ^TestB)]])
+							(fset
+								(get o)
+								i
+								9)
+							(as ^dynamic
+								(block
+									(def [
+										[^[int pht$tmp$37967 (new-arr ^int 2)]])
+									(aset
+										(get pht$tmp$37967)
+										0
+										(block
+											(def [
+												[^int pht$tmp$27126 (add
+														(fget
+															(get o)
+															i)
+														10)]])
+											(fset
+												(get o)
+												i
+												(get pht$tmp$27126))
+											(get pht$tmp$27126)))
+									(aset
+										(get pht$tmp$37967)
+										1
+										(fget
+											(get o)
+											i))
+									(get pht$tmp$37967)))))))
+			(@test
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(def [
+								[^TestB o (new ^TestB)]])
+							(fset
+								(get o)
+								i
+								11)
+							(as ^dynamic
+								(block
+									(def [
+										[^[int pht$tmp$42772 (new-arr ^int 2)]])
+									(aset
+										(get pht$tmp$42772)
+										0
+										(block
+											(def [
+												[^int pht$tmp$44424 (fget
+														(get o)
+														i)]])
+											(fset
+												(get o)
+												i
+												(add
+													(get pht$tmp$44424)
+													12))
+											(get pht$tmp$44424)))
+									(aset
+										(get pht$tmp$42772)
+										1
+										(fget
+											(get o)
+											i))
+									(get pht$tmp$42772))))))))))

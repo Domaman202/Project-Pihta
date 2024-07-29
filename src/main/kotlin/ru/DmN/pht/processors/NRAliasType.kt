@@ -1,6 +1,6 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.imports.ast.NodeAliasType
+import ru.DmN.pht.imports.ast.NodeAlias
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.utils.computeList
 import ru.DmN.pht.processor.utils.computeStringNodes
@@ -14,14 +14,12 @@ import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.exception.pushOrRunTask
 
 object NRAliasType : INodeProcessor<NodeNodesList> {
-    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeAliasType? {
+    override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeAlias {
         val imports = processor.computeList(node.nodes[0], ctx).map { val pair = processor.computeStringNodes(it as INodesList, ctx); Pair(pair[0], pair[1]) }
         processor.pushOrRunTask(TYPES_IMPORT, node) {
             val gctx = ctx.global
-            imports.forEach {
-                gctx.aliases[it.second] = gctx.getTypeName(it.first) ?: it.first
-            }
+            imports.forEach { gctx.aliases[it.second] = gctx.getTypeName(it.first) ?: it.first }
         }
-        return NodeAliasType(node.info.withType(ALIAS_TYPE_), imports)
+        return NodeAlias(node.info.withType(ALIAS_TYPE_), imports)
     }
 }

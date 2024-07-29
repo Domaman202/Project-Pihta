@@ -5,4 +5,18 @@
 
     (comment "Определение макро-инструкций.")
     (def-macro as-gens [type value generics]
-        (with-gens (as (macro-arg type) (macro-arg value)) (macro-arg generics))))
+        (with-gens (as (macro-arg type) (macro-arg value)) (macro-arg generics)))
+
+    (comment "Вспомогательные макро-инструкции для over-set.")
+    (def-macro over-set-left [getter value]
+        (over-set (macro-arg getter) 0 (macro-arg value)))
+    (alias-macro [[over-set-left osetl]])
+    (def-macro over-set-post-left [getter value]
+        (over-set-post (macro-arg getter) 0 (macro-arg value)))
+    (alias-macro [[over-set-left osetpl]])
+    (def-macro over-set-right [getter value]
+        (over-set (macro-arg getter)(macro-arg value)))
+    (alias-macro [[over-set-left osetr]])
+    (def-macro over-set-post-right [getter value]
+        (over-set (macro-arg getter) (macro-arg value)))
+    (alias-macro [[over-set-left osetpr]]))

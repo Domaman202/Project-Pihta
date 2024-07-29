@@ -1,0 +1,75 @@
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls [] TestA [^java.lang.Object]
+				(@static
+					(def [
+						[i ^int]])))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(fset
+								^TestA
+								i
+								5)
+							(as ^dynamic
+								(block
+									(def [
+										[^[int pht$tmp$7086 (new-arr ^int 2)]])
+									(aset
+										(get pht$tmp$7086)
+										0
+										(block
+											(def [
+												[^int pht$tmp$27126 (add
+														(fget
+															^TestA
+															i)
+														6)]])
+											(fset
+												^TestA
+												i
+												(get pht$tmp$27126))
+											(get pht$tmp$27126)))
+									(aset
+										(get pht$tmp$7086)
+										1
+										(fget
+											^TestA
+											i))
+									(get pht$tmp$7086)))))))
+			(@test
+				(cls [] Test1 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(fset
+								^TestA
+								i
+								7)
+							(as ^dynamic
+								(block
+									(def [
+										[^[int pht$tmp$10930 (new-arr ^int 2)]])
+									(aset
+										(get pht$tmp$10930)
+										0
+										(block
+											(def [
+												[^int pht$tmp$44424 (fget
+														^TestA
+														i)]])
+											(fset
+												^TestA
+												i
+												(add
+													(get pht$tmp$44424)
+													8))
+											(get pht$tmp$44424)))
+									(aset
+										(get pht$tmp$10930)
+										1
+										(fget
+											^TestA
+											i))
+									(get pht$tmp$10930))))))))))

@@ -20,6 +20,7 @@ class GlobalContext(
     val methods: MutableMap<String, MutableList<VirtualMethod>> = HashMap(),
     val extensions: MutableList<Pair<String, MutableList<VirtualMethod>>> = ArrayList(),
     val macros: MutableList<MacroDefine> = ArrayList(),
+    val macrosAliases: MutableMap<String, String> = HashMap(),
 ) {
     fun with(namespace: String) =
         GlobalContext(
@@ -29,7 +30,8 @@ class GlobalContext(
             SubList(imports),
             SubMap(methods),
             SubList(extensions),
-            SubList(macros)
+            SubList(macros),
+            HashMap(macrosAliases)
         )
 
     fun combineWith(context: GlobalContext) =
@@ -40,7 +42,8 @@ class GlobalContext(
             SubList(imports, context.imports),
             SubMap(methods, context.methods),
             SubList(extensions, context.extensions),
-            SubList(macros, context.macros)
+            SubList(macros, context.macros),
+            SubMap(macrosAliases, context.macrosAliases)
         )
 
     fun name(name: String): String =

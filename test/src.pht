@@ -1,2 +1,34 @@
-(app-fn
-    (println (> 1.0 1)))
+(progn
+    (test-fn 0
+        (def-set i 1)
+        (println (over-set i 0 (+ 2)))
+        (println i))
+    (test-fn 1
+        (def-set i 3)
+        (println (over-set-post i 0 (+ 4)))
+        (println i))
+
+    (cls TestA [^Object] (@static
+        (def [[i ^int]])))
+    (test-fn 2
+        (set ^TestA/i 5)
+        (println (over-set ^TestA/i 0 (+ 6)))
+        (println ^TestA/i))
+    (test-fn 3
+        (set ^TestA/i 7)
+        (println (over-set-post ^TestA/i 0 (+ 8)))
+        (println ^TestA/i))
+
+    (cls TestB [^Object] (
+        (ctor [] (ccall))
+        (def [[i ^int]])))
+    (test-fn 4
+        (def-set o (new ^TestB))
+        (set o/i 9)
+        (println (over-set-left o/i (+ 10)))
+        (println o/i))
+    (test-fn 5
+        (def-set o (new ^TestB))
+        (set o/i 11)
+        (println (over-set-post-left o/i (+ 12)))
+        (println o/i)))

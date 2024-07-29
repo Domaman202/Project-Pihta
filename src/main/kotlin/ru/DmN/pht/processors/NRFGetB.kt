@@ -11,6 +11,7 @@ import ru.DmN.pht.processor.utils.Static
 import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.pht.utils.node.NodeTypes.FGET_
 import ru.DmN.pht.utils.node.NodeTypes.MCALL_
+import ru.DmN.pht.utils.node.nodeFSet
 import ru.DmN.pht.utils.node.nodeValue
 import ru.DmN.pht.utils.node.nodeValueClass
 import ru.DmN.pht.utils.vtype.VTDynamic
@@ -20,58 +21,71 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object NRFGetB : INodeProcessor<NodeFMGet> {
+object NRFGetB :
+    INodeProcessor<NodeFMGet>,
+    ISetterGetterProcessor<NodeFMGet>
+{
     override fun calc(node: NodeFMGet, processor: Processor, ctx: ProcessingContext): VirtualType? =
         getMethod(node, processor, ctx).second?.method?.rettype ?: NRFGetA.findField(getInstanceType(node, processor, ctx), node.name, node.static)?.type
 
     override fun process(node: NodeFMGet, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
-        if (valMode) {
-            val info = node.info
-            val instance = processor.process(node.instance, ctx, true)!!
-            val result = getMethod(node, processor, ctx)
-            if (result.second == null)
-                NodeFGet(
-                    info.withType(FGET_),
-                    mutableListOf(instance),
-                    node.name,
-                    result.first.let {
-                        val field = NRFGetA.findField(it, node.name, node.static)
-                        if (field == null)
-                            UNKNOWN
-                        else if (field.modifiers.isStatic)
-                            STATIC
-                        else INSTANCE
-                    },
-                    result.first
-                )
-            else {
-                val method = result.second!!.method
-                if (result.first == VTDynamic)
-                    NodeMCall(
-                        info.withType(MCALL_),
-                        NRMCall.processArguments(
-                            info,
-                            processor,
-                            ctx,
-                            method,
-                            listOf(instance, nodeValue(info, node.name)) + node.nodes,
-                            result.second!!.compression
-                        ),
-                        null,
-                        nodeValueClass(info, method.declaringClass.name),
-                        method,
-                        VIRTUAL
-                    )
-                else NodeMCall(
+        if (valMode)
+            processAsGetter(node, processor, ctx)
+        else null
+
+    override fun processAsSetterLazy(node: NodeFMGet, values: List<Node>, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node =
+        nodeFSet(node.info, node.name, node.instance, values.toMutableList(), node.static, node.native)
+
+    override fun processAsSetter(node: NodeFMGet, values: List<Node>, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node =
+        NRFSetB.process(node.info, node.name, node.instance, values, node.static, node.native, processor, ctx)
+
+    override fun processAsGetter(node: NodeFMGet, processor: Processor, ctx: ProcessingContext): Node {
+        val info = node.info
+        val instance = processor.process(node.instance, ctx, true)!!
+        val result = getMethod(node, processor, ctx)
+        return if (result.second == null)
+            NodeFGet(
+                info.withType(FGET_),
+                mutableListOf(instance),
+                node.name,
+                result.first.let {
+                    val field = NRFGetA.findField(it, node.name, node.static)
+                    if (field == null)
+                        UNKNOWN
+                    else if (field.modifiers.isStatic)
+                        STATIC
+                    else INSTANCE
+                },
+                result.first
+            )
+        else {
+            val method = result.second!!.method
+            if (result.first == VTDynamic)
+                NodeMCall(
                     info.withType(MCALL_),
-                    NRMCall.processArguments(info, processor, ctx, method, node.nodes, result.second!!.compression),
+                    NRMCall.processArguments(
+                        info,
+                        processor,
+                        ctx,
+                        method,
+                        listOf(instance, nodeValue(info, node.name)) + node.nodes,
+                        result.second!!.compression
+                    ),
                     null,
-                    instance,
+                    nodeValueClass(info, method.declaringClass.name),
                     method,
                     VIRTUAL
                 )
-            }
-        } else null
+            else NodeMCall(
+                info.withType(MCALL_),
+                NRMCall.processArguments(info, processor, ctx, method, node.nodes, result.second!!.compression),
+                null,
+                instance,
+                method,
+                VIRTUAL
+            )
+        }
+    }
 
     private fun getMethod(node: NodeFMGet, processor: Processor, ctx: ProcessingContext): Pair<VirtualType, MethodFindResultB?> {
         val type = getInstanceType(node, processor, ctx)!!

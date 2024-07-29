@@ -42,6 +42,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(ADD)
         addSNP(AGET)
         addSNP(ALIAS_TYPE)
+        addSNP(ALIAS_MACRO)
         addSNP(AND)
         addSNP(APP)
         addSNP(APP_FN)
@@ -132,6 +133,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         // o
         addSNP(OBJ)
         addSNP(OR)
+        addSNP(OVER_SET_PRE)
+        addSNP(OVER_SET_POST)
         // p
         addSNP(PRINT)
         addSNP(PRINTLN)
@@ -236,6 +239,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         "namespace"     to "ns"
         // o
         "object"        to "obj"
+        "oset"          to "over-set"
+        "osetp"         to "over-set-post"
         // r
         "return"        to "ret"
         "ref-func"      to "rfn"
@@ -294,6 +299,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(AGET_,          NUAGet)
         addSNU(ALIAS_TYPE)
         add(ALIAS_TYPE_,    NUAliasType)
+        addSNU(ALIAS_MACRO)
         addSNU(AND)
         addSNU(AND_)
         addSNU(APP)
@@ -438,6 +444,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(OBJ_,           NUClass)
         addSNU(OR)
         addSNU(OR_)
+        addSNU(OVER_SET_PRE)
+        addSNU(OVER_SET_POST)
         // p
         addSNU(PRINT)
         addSNU(PRINT_)
@@ -532,6 +540,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(ADD,           NRMath)
         add(ADD_,          NRMathB)
         add(ALIAS_TYPE,    NRAliasType)
+        add(ALIAS_MACRO,   NRAliasMacro)
         add(AGET,          NRAGet)
         add(AGET_,         NRAGetB)
         add(AND,           NRMath)
@@ -660,6 +669,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         add(OBJ_,          NRObjB)
         add(OR,            NRMath)
         add(OR_,           NRMathB)
+        add(OVER_SET_PRE,  NROverSetPre)
+        add(OVER_SET_POST, NROverSetPost)
         // p
         add(PRINT,         NRPrint)
         add(PRINTLN,       NRPrint)

@@ -1,0 +1,9 @@
+(progn
+    (cls TestA [^Object] (@static
+        (def [[i ^int]])))
+    (test-fn 0
+        (set ^TestA/i 5)
+        (arr-of (over-set-left ^TestA/i (+ 6)) ^TestA/i))
+    (test-fn 1
+        (set ^TestA/i 7)
+        (arr-of (over-set-post-left ^TestA/i (+ 8)) ^TestA/i)))

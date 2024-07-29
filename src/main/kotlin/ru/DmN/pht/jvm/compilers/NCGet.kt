@@ -19,7 +19,7 @@ object NCGet : IValueNodeCompiler<NodeGet> {
     override fun compileVal(node: NodeGet, compiler: Compiler, ctx: CompilationContext): Variable {
         val name = node.name.normalizeName()
         return when (node.type) {
-            VARIABLE -> ctx.body[name]!!
+            VARIABLE -> ctx.body[name] ?: throw RuntimeException("Переменная '$name' не найдена!")
             THIS_FIELD -> ctx.method.node.run {
                 visitVarInsn(Opcodes.ALOAD, 0)
                 val field = ctx.clazz.clazz.fields.find { it.name == name }!!
