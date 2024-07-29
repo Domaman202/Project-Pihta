@@ -10,6 +10,12 @@
 							(less
 								(get i)
 								10)
-							(inc i))
+							(block
+								(def [
+									[^int pht$tmp$25140 (add
+											(get i)
+											1)]])
+								(set! i
+									(get pht$tmp$25140))))
 						(as ^dynamic
 							(get i))))))))

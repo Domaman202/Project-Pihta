@@ -39,8 +39,8 @@ enum class NodeTypes : INodeType {
     CYCLE_("cycle", PROCESSED),                         // cycle
     // d
     DEBUG("debug", ALL),                                // debug
-    DEC_PRE_("dec", PROCESSED),                         // dec              // --
-    DEC_POST_("dec-", PROCESSED),                       // dec-
+    DEC_PRE("dec", PARSED),                             // dec              // --
+    DEC_POST("dec-", PARSED),                           // dec-
     DEF("def", PARSED),                                 // def
     DEF_("def", PROCESSED),                             // def
     DEF_SET("def-set", PARSED),                         // def-or-set
@@ -73,8 +73,8 @@ enum class NodeTypes : INodeType {
     IF_("if", PROCESSED),                               // if
     IMPORT("import", PARSED),                           // import
     IMPORT_("import", PROCESSED),                       // import
-    INC_PRE_("inc", PROCESSED),                         // inc              // ++
-    INC_POST_("inc-", PROCESSED),                       // inc-
+    INC_PRE("inc", PARSED),                             // inc              // ++
+    INC_POST("inc-", PARSED),                           // inc-
     INC_PHT("inc-pht", PARSED),                         // include-pihta
     INL_BODY_A("inl-body", PARSED),                     // inl-body
     INL_BODY_B("inl-body", PARSED),                     // inl-body

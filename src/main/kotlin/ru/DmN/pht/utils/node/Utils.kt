@@ -104,6 +104,10 @@ fun nodeNewArray(info: INodeInfo, type: String, size: Int) =
     NodeNodesList(info.withType(NEW_ARR),
         mutableListOf(nodeValueClass(info, type), nodeValue(info, size)))
 // o
+fun nodeOverSetLeft(info: INodeInfo, getter: Node, value: Node) =
+    NodeNodesList(info.withType(OVER_SET_PRE), mutableListOf(getter, nodeValue(info, 0), value))
+fun nodeOverSetRight(info: INodeInfo, getter: Node, value: Node) =
+    NodeNodesList(info.withType(OVER_SET_PRE), mutableListOf(getter, value))
 fun nodeObj(info: INodeInfo, name: String, parents: List<String>, nodes: List<Node>) =
     NodeNodesList(info.withType(OBJ),
         mutableListOf<Node>(nodeValue(info, name), nodeValn(info, parents.mapMutable { nodeValue(info, it) })).apply { addAll(nodes) })

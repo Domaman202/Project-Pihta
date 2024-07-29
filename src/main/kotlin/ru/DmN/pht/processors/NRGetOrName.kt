@@ -127,7 +127,7 @@ object NRGetOrName :
     override fun inline(node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Pair<List<String>, Node> =
         (ctx.body[node.name] as InlineVariable).value.let { processor.inline(it, it, ctx) }
 
-    override fun processAsSetterLazy(node: NodeGetOrName, values: List<Node>, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
+    override fun processAsSetterLazy(node: NodeGetOrName, values: List<Node>, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node =
         nodeSet(node.info, node.name, values)
 
     override fun processAsSetter(node: NodeGetOrName, values: List<Node>, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node =

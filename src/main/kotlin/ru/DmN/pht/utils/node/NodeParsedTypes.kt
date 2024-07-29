@@ -21,8 +21,6 @@ enum class NodeParsedTypes(override val operation: String, override val processe
     CTOR("ctor", CTOR_),                        // def-ctor
     CYCLE("cycle", CYCLE_),                     // cycle
     // d
-    DEC_PRE("dec", DEC_PRE_),                   // dec          // --
-    DEC_POST("dec-", DEC_POST_),                // dec-
     DEFN("defn", DEFN_),                        // def-func
     DIV("div", DIV_),                           // div          // /
     // e
@@ -41,8 +39,6 @@ enum class NodeParsedTypes(override val operation: String, override val processe
     GREAT("great", GREAT_),                     // great        // >
     GREAT_OR_EQ("gt-or-eq", GREAT_OR_EQ_),      // gt-or-eq     // >=
     // i
-    INC_PRE("inc", INC_PRE_),                   // inc // ++
-    INC_POST("inc-", INC_POST_),                // inc-
     IS("is", IS_),                              // is
     ITF("itf", ITF_),                           // interface
     // l

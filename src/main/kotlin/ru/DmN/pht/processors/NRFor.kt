@@ -5,8 +5,8 @@ import ru.DmN.pht.processor.utils.computeList
 import ru.DmN.pht.processor.utils.computeString
 import ru.DmN.pht.utils.Platforms.JVM
 import ru.DmN.pht.utils.node.*
-import ru.DmN.pht.utils.node.NodeParsedTypes.INC_PRE
 import ru.DmN.pht.utils.node.NodeParsedTypes.LESS
+import ru.DmN.pht.utils.node.NodeTypes.INC_PRE
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
@@ -60,9 +60,9 @@ object NRFor : INodeProcessor<NodeNodesList> {
                                     if (name != "_")
                                         listOf(nodeDef(info, name, nodeAGet(info, arr, i)))
                                             + node.nodes.drop(1)
-                                            + NodeNodesList(info.withType(INC_PRE), mutableListOf(nodeValue(info, i)))
+                                            + NodeNodesList(info.withType(INC_PRE), mutableListOf(nodeGetOrName(info, i)))
                                     else node.nodes.drop(1)
-                                            + NodeNodesList(info.withType(INC_PRE), mutableListOf(nodeValue(info, i)))
+                                            + NodeNodesList(info.withType(INC_PRE), mutableListOf(nodeGetOrName(info, i)))
                                 )
                             )
                         ),
