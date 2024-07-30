@@ -1,6 +1,7 @@
 package ru.DmN.pht
 
 import ru.DmN.pht.jvm.compilers.NCSkip
+import ru.DmN.pht.jvm.compilers.NCUnit
 import ru.DmN.pht.parser.ParserImpl
 import ru.DmN.pht.parser.utils.macros
 import ru.DmN.pht.parsers.*
@@ -742,6 +743,8 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
     }
 
     private fun initCompilers() {
+        // i
+        add(IMPORT_,       NCUnit)
         // p
         add(PROGN_B_,      NCDefault)
 
