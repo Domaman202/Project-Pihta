@@ -73,6 +73,9 @@ fun nodeDefn(info: INodeInfo, name: String, ret: String, nodes: MutableList<Node
 // f
 fun nodeFSet(info: INodeInfo, name: String, instance: Node, values: MutableList<Node>, static: Boolean, native: Boolean) =
     NodeFieldSet(info.withType(FSET_B), values, instance, name, static, native)
+fun nodeInitFld(info: INodeInfo, name: String, type: VirtualType, value: Node) =
+    NodeNodesList(info.withType(FSET_A),
+        mutableListOf(nodeGetVariable(info, "this", type), nodeGetOrName(info, name), value))
 fun nodeInitFld(info: INodeInfo, name: String, type: VirtualType) =
     NodeNodesList(info.withType(FSET_A),
         mutableListOf(nodeGetVariable(info, "this", type), nodeGetOrName(info, name), nodeGetOrName(info, name)))

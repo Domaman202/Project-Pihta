@@ -2,13 +2,13 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.imports.ast.NodeAlias
 import ru.DmN.pht.processor.ctx.global
+import ru.DmN.pht.processor.utils.PhtProcessingStage.MACROS_IMPORT
 import ru.DmN.pht.processor.utils.computeList
 import ru.DmN.pht.processor.utils.computeStringNodes
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ProcessingStage.MACROS_IMPORT
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.exception.pushOrRunTask
 

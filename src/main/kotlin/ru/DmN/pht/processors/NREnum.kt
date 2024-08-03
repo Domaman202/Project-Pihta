@@ -5,6 +5,7 @@ import ru.DmN.pht.ast.NodeType
 import ru.DmN.pht.processor.ctx.EnumContext
 import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.processor.ctx.with
+import ru.DmN.pht.processor.utils.PhtProcessingStage.*
 import ru.DmN.pht.processor.utils.computeList
 import ru.DmN.pht.processor.utils.computeListOr
 import ru.DmN.pht.processor.utils.computeString
@@ -15,12 +16,10 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ProcessingStage.*
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.exception.pushOrRunTask
-import ru.DmN.siberia.utils.exception.pushTask
 import ru.DmN.siberia.utils.mapMutable
 
 object NREnum : INodeProcessor<NodeNodesList> {

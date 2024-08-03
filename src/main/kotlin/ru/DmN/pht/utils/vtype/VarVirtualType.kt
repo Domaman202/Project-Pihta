@@ -21,6 +21,8 @@ open class VarVirtualType(val type: PhtVirtualType) : PhtVirtualType() {
         get() = type.isInterface
     override val isAbstract: Boolean
         get() = type.isAbstract
+    override val isDynamic: Boolean
+        get() = type.isDynamic
     override val isNative: Boolean
         get() = type.isNative
     override val isFinal: Boolean

@@ -4,6 +4,7 @@ import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.ctx.clazz
 import ru.DmN.pht.processor.ctx.with
+import ru.DmN.pht.processor.utils.PhtProcessingStage.CONSTRUCTORS_BODY
 import ru.DmN.pht.utils.dropMutable
 import ru.DmN.pht.utils.node.NodeParsedTypes
 import ru.DmN.pht.utils.type
@@ -12,7 +13,6 @@ import ru.DmN.pht.utils.vtype.PhtVirtualType
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ProcessingStage.METHODS_BODY
 import ru.DmN.siberia.processor.utils.processNodesList
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.exception.pushOrRunTask
@@ -42,7 +42,7 @@ object NRCtor : INodeProcessor<NodeNodesList> {
         type.methods += method
         //
         val new = NodeDefn(node.info.withType((node.type as NodeParsedTypes).processed), node.nodes.dropMutable(1), method)
-        processor.pushOrRunTask(METHODS_BODY, node) {
+        processor.pushOrRunTask(CONSTRUCTORS_BODY, node) {
             processNodesList(new, processor, ctx.with(method).with(BodyContext.of(method)), false)
         }
         return new

@@ -73,11 +73,11 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
             val list = ArrayList<NodeProcessedUse.ProcessedData>()
             mp.injectModules(mutableListOf(module.name), list, processor, ProcessingContext.base().with(platform).apply { this.module = module })
             list.forEach { processed += it.processed; processed += it.exports }
-            processor.stageManager.runAll()
+            processor.sm.runAll()
             val compiler = CompilerImpl(mp, tp)
             val ctx = CompilationContext.base().with(platform).apply { this.module = module }
             processed.forEach { compiler.compile(it, ctx) }
-            compiler.stageManager.runAll()
+            compiler.sm.runAll()
             File("dump/$dir").mkdirs()
             compiler.finalizers.invokeAll("dump/$dir")
         } catch (e: BaseException) {
@@ -102,7 +102,7 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
         val list = ArrayList<NodeProcessedUse.ProcessedData>()
         mp.injectModules(mutableListOf(module.name), list, processor, ProcessingContext.base().with(platform).apply { this.module = module })
         list.forEach { processed += it.processed; processed += it.exports }
-        processor.stageManager.runAll()
+        processor.sm.runAll()
         File("dump/$dir/unparse/processed").mkdirs()
         FileOutputStream("dump/$dir/unparse/processed/unparse.pht").use { out ->
             val unparser = UnparserImpl(mp, 1024*1024)
@@ -138,7 +138,7 @@ abstract class TestModuleBase(val dir: String, private val platform: IPlatform) 
         val list = ArrayList<NodeProcessedUse.ProcessedData>()
         mp.injectModules(mutableListOf(module.name), list, processor, ProcessingContext.base().with(platform).apply { this.module = module })
         list.forEach { processed += it.processed; processed += it.exports }
-        processor.stageManager.runAll()
+        processor.sm.runAll()
         FileOutputStream("dump/$dir/print/processed.short.print").use { short ->
             FileOutputStream("dump/$dir/print/processed.long.print").use { long ->
                 processed.forEach {

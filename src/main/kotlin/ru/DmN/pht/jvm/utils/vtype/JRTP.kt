@@ -1,10 +1,11 @@
 package ru.DmN.pht.jvm.utils.vtype
 
 import ru.DmN.pht.utils.vtype.PhtVirtualMethod
+import ru.DmN.pht.utils.vtype.PhtVirtualType
+import ru.DmN.pht.utils.vtype.VVTArray
 import ru.DmN.siberia.utils.Klass
 import ru.DmN.siberia.utils.klassOf
 import ru.DmN.siberia.utils.vtype.*
-import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl
 import java.lang.reflect.*
 import java.util.*
 
@@ -31,10 +32,13 @@ class JRTP : TypesProvider() {
         typeOfOrNull(klass.name) ?: addType(klass)
 
     private fun addType(klass: Klass): VirtualType =
-        JavaVirtualTypeImpl(
+        if (klass.isArray)
+            VVTArray(PhtVirtualType.of(typeOf(klass.componentType)))
+        else JavaVirtualTypeImpl(
             klass.name,
             klass.componentType?.let(::typeOf),
             klass.isInterface,
+            klass.interfaces.any { it.name == "groovy.lang.GroovyObject" },
             Modifier.isFinal(klass.modifiers) || klass.isEnum
         ).apply {
             this@JRTP += this
@@ -138,7 +142,7 @@ class JRTP : TypesProvider() {
         val generics = declaringClass.genericsDefine.toMutableMap()
         val decl = declaringClass.name
         method.parameters.forEach { it ->
-            argsc += VirtualType.ofKlass(it.type)
+            argsc += typeOf(it.type)
             argsn += it.name
             argsg += it.parameterizedType.let { if (it is TypeVariable<*>) "${it.name}$$decl" else null }
         }
@@ -146,7 +150,7 @@ class JRTP : TypesProvider() {
         return PhtVirtualMethod.Impl(
             declaringClass,
             method.name,
-            VirtualType.ofKlass(method.returnType),
+            typeOf(method.returnType),
             method.genericReturnType.let { if (it is TypeVariable<*>) "${it.name}$$decl" else null },
             argsc,
             argsn,

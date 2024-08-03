@@ -31,6 +31,7 @@ abstract class PhtVirtualType : VirtualType() {
         //
         override var isInterface: Boolean = false,
         override var isAbstract: Boolean = false,
+        override val isDynamic: Boolean = false,
         override val isNative: Boolean = false,
         override var isFinal: Boolean = false,
         override var isFile: Boolean = false,
@@ -57,6 +58,8 @@ abstract class PhtVirtualType : VirtualType() {
             get() = type.isInterface
         override val isAbstract: Boolean
             get() = type.isAbstract
+        override val isDynamic: Boolean
+            get() = type.isDynamic
         override val isNative: Boolean
             get() = type.isNative
         override val isFinal: Boolean

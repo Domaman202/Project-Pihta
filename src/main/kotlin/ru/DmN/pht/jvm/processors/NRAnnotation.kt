@@ -3,6 +3,7 @@ package ru.DmN.pht.jvm.processors
 import ru.DmN.pht.ast.NodeMetaNodesList
 import ru.DmN.pht.jvm.ast.NodeAnnotation
 import ru.DmN.pht.jvm.utils.node.NodeTypes.ANN_ANN_
+import ru.DmN.pht.processor.utils.PhtProcessingStage.METHODS_BODY
 import ru.DmN.pht.processor.utils.computeList
 import ru.DmN.pht.processor.utils.computeListOr
 import ru.DmN.pht.processor.utils.computeString
@@ -10,7 +11,6 @@ import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ProcessingStage.METHODS_BODY
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.processors.NRProgn
 import ru.DmN.siberia.utils.exception.pushTask

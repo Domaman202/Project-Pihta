@@ -8,6 +8,7 @@ import ru.DmN.pht.parsers.*
 import ru.DmN.pht.processor.NRVoid
 import ru.DmN.pht.processor.ctx.*
 import ru.DmN.pht.processor.utils.LinkedClassesNode
+import ru.DmN.pht.processor.utils.PhtProcessingStage
 import ru.DmN.pht.processors.*
 import ru.DmN.pht.unparsers.*
 import ru.DmN.pht.utils.Platforms.JVM
@@ -782,6 +783,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         if (!ctx.loadedModules.contains(this)) {
             processor.tp += VTAuto
             processor.tp += VTDynamic
+            PhtProcessingStage.addStagesAfter(processor.sm)
             processor.contexts.macros_list = HashMap()
             ctx.global = GlobalContext(processor.tp)
             ctx.classes = LinkedClassesNode.LinkedClassesNodeStart as LinkedClassesNode<VirtualType>

@@ -7,6 +7,7 @@ import ru.DmN.pht.jvm.utils.vtype.generics
 import ru.DmN.pht.jvm.utils.vtype.superclass
 import ru.DmN.pht.processor.ctx.*
 import ru.DmN.pht.processor.utils.*
+import ru.DmN.pht.processor.utils.PhtProcessingStage.METHODS_BODY
 import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.node.*
 import ru.DmN.pht.utils.node.NodeTypes.*
@@ -15,7 +16,6 @@ import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
-import ru.DmN.siberia.processor.utils.ProcessingStage
 import ru.DmN.siberia.processor.utils.ProcessingStage.FINALIZATION
 import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processors.INodeProcessor
@@ -117,7 +117,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 )
             }
         //
-        processor.pushOrRunTask(ProcessingStage.METHODS_BODY, node) {
+        processor.pushOrRunTask(METHODS_BODY, node) {
             if (method.modifiers.generator && !method.modifiers.static && !method.modifiers.extension) {
                 method as GeneratorVirtualMethod
                 method.argsc.add(0, method.declaringClass)

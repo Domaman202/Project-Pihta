@@ -7,11 +7,13 @@ class JavaVirtualTypeImpl(
     name: String,
     componentType: VirtualType?,
     isInterface: Boolean,
+    isDynamic: Boolean,
     isFinal: Boolean
 ) : PhtVirtualType.Impl(
     name = name,
     componentType = componentType,
     isInterface = isInterface,
+    isDynamic = isDynamic,
     isNative = true,
     isFinal = isFinal
 ), IJvmVirtualType {
