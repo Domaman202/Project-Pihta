@@ -2,6 +2,7 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.processor.ctx.clazz
+import ru.DmN.pht.processor.ctx.methodOrNull
 import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.processors.NRDefn.parseArguments
 import ru.DmN.pht.utils.dropMutable
@@ -52,7 +53,11 @@ object NRGFn : INodeProcessor<INodesList> {
             args.first,
             args.second,
             args.third,
-            MethodModifiers(final = true, generator = true),
+            MethodModifiers(
+                static = ctx.methodOrNull?.modifiers?.static == true,
+                final = true,
+                generator = true
+            ),
             extension = null,
             generator = body,
             generics,

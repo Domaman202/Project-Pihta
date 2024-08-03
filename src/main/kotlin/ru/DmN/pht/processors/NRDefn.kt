@@ -4,6 +4,7 @@ import ru.DmN.pht.ast.NodeDefn
 import ru.DmN.pht.ast.NodeInlBodyB
 import ru.DmN.pht.processor.ctx.BodyContext
 import ru.DmN.pht.processor.ctx.clazz
+import ru.DmN.pht.processor.ctx.methodOrNull
 import ru.DmN.pht.processor.ctx.with
 import ru.DmN.pht.processor.utils.*
 import ru.DmN.pht.processor.utils.PhtProcessingStage.METHODS_BODY
@@ -61,7 +62,10 @@ object NRDefn : INodeProcessor<INodesList> {
             args.first,
             args.second,
             args.third,
-            MethodModifiers(final = true),
+            MethodModifiers(
+                static = ctx.methodOrNull?.modifiers?.static == true,
+                final = true
+            ),
             generator = null,
             extension = null,
             inline = null,
