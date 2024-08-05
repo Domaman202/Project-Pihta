@@ -66,7 +66,7 @@ object NRFld : INodeProcessor<NodeFieldA> {
                 mutableListOf(
                     NodeMetaNodesList(
                         info.withType(if (node.static) ANN_STATIC else PROGN_B),
-                        body.apply { this += NodeFieldB(info.withType(FLD_), fields) }
+                        body.apply { this.add(0, NodeFieldB(info.withType(FLD_), fields)) }
                     )
                 )
             ),

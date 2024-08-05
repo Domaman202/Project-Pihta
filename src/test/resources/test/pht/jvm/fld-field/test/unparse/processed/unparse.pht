@@ -5,6 +5,8 @@
 				(@static
 					(progn-
 						(@static
+							(def [
+								[i ^int]])
 							(defn [] setI ^void [[i ^int]]
 								(fset
 									^TestA
@@ -13,9 +15,7 @@
 							(defn [] getI ^int []
 								(fget
 									^TestA
-									i))
-							(def [
-								[i ^int]])))))
+									i))))))
 			(@test
 				(cls [] Test0 [^java.lang.Object]
 					(@static
@@ -35,6 +35,8 @@
 						<init>))
 				(progn-
 					(progn-
+						(def [
+							[i ^int]])
 						(defn [] setI ^void [[i ^int]]
 							(fset
 								(get this)
@@ -43,9 +45,7 @@
 						(defn [] getI ^int []
 							(fget
 								(get this)
-								i))
-						(def [
-							[i ^int]]))))
+								i)))))
 			(@test
 				(cls [] Test1 [^java.lang.Object]
 					(@static

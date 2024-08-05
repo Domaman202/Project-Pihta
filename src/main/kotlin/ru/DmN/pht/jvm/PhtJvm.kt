@@ -116,6 +116,7 @@ object PhtJvm : ModuleCompilers("pht/jvm", JVM) {
         add(CYCLE_,       NCCycle)
         // d
         add(DEF_,         NCDef)
+        add(DEF_FLD_,     NCDefFld)
         add(DEFN_,        NCDefn)
         add(DIV_,         NCMath)
         // e

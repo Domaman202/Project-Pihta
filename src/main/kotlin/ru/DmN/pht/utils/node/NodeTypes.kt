@@ -43,6 +43,8 @@ enum class NodeTypes : INodeType {
     DEC_POST("dec-", PARSED),                           // dec-
     DEF("def", PARSED),                                 // def
     DEF_("def", PROCESSED),                             // def
+    DEF_FLD("def-fld", PARSED),                         // def-fld
+    DEF_FLD_("def-fld", PROCESSED),                     // def-fld
     DEF_SET("def-set", PARSED),                         // def-or-set
     DEF_MACRO("def-macro", PARSED),                     // def-macro
     DEFN_("defn", PROCESSED),                           // def-func
