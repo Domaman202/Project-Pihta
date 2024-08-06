@@ -3,7 +3,7 @@
 |	|	[PROGN_
 |	|	|	[CLS_
 |	|	|	|	[ANN_STATIC_
-|	|	|	|	|	[DEF_]
+|	|	|	|	|	[DEF_FLD_]
 |	|	|	|	]
 |	|	|	]
 |	|	|	[ANN_TEST_

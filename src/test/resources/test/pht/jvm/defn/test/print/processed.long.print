@@ -70,13 +70,12 @@
 |	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	(name = TestB)
 |	|	|	|	|	|	(parents = [java.lang.Object])
-|	|	|	|	|	|	[DEF_
-|	|	|	|	|	|	|	(type = field)
+|	|	|	|	|	|	[DEF_FLD_
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = value)
-|	|	|	|	|	|	|	|	(type = int)
+|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
+]
 |	|	|	|	|	|	[CTOR_
 |	|	|	|	|	|	|	(type = constructor)
 |	|	|	|	|	|	|	(name = <init>)

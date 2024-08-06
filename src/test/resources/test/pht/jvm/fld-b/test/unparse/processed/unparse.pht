@@ -1,0 +1,36 @@
+(load-ctx
+	(use-ctx pht pht/jvm
+		(progn
+			(cls [] TestC [^java.lang.Object]
+				(ctor [[i ^int]]
+					(mcall
+						super
+						<init>)
+					(progn-
+						(progn-
+							(def-fld [
+								[i ^int]])
+							(defn [] setI ^void [[i ^int]]
+								(fset
+									(get this)
+									i
+									(get i)))
+							(defn [] getI ^int []
+								(fget
+									(get this)
+									i))
+							(fset
+								(get this)
+								i
+								(get i))))))
+			(@test
+				(cls [] Test0 [^java.lang.Object]
+					(@static
+						(defn [] test ^dynamic []
+							(def [
+								[^TestC o (new ^TestC
+										33)]])
+							(as ^dynamic
+								(fget
+									(get o)
+									i)))))))))

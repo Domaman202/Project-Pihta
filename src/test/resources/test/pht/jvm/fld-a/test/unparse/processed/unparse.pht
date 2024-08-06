@@ -5,7 +5,7 @@
 				(@static
 					(progn-
 						(@static
-							(def [
+							(def-fld [
 								[i ^int]])
 							(defn [] setI ^void [[i ^int]]
 								(fset
@@ -35,7 +35,7 @@
 						<init>))
 				(progn-
 					(progn-
-						(def [
+						(def-fld [
 							[i ^int]])
 						(defn [] setI ^void [[i ^int]]
 							(fset

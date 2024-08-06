@@ -3,7 +3,7 @@
 		(progn
 			(cls [] TestA [^java.lang.Object]
 				(@static
-					(def [
+					(def-fld [
 						[i ^int]])))
 			(@test
 				(cls [] Test0 [^java.lang.Object]

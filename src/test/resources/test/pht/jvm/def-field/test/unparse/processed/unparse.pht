@@ -3,7 +3,7 @@
 		(progn
 			(cls [] TestA [^java.lang.Object]
 				(@static
-					(def [
+					(def-fld [
 						[i ^int]])))
 			(@test
 				(cls [] Test0 [^java.lang.Object]
@@ -22,7 +22,7 @@
 					(mcall
 						super
 						<init>))
-				(def [
+				(def-fld [
 					[i ^int]]))
 			(@test
 				(cls [] Test1 [^java.lang.Object]

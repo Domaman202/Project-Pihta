@@ -35,7 +35,7 @@
 									call
 									(progn
 										(cls [[T ^java.lang.Object]] PhtLambda$1599379499 [^java.lang.Object ^java.util.function.Supplier]
-											(def [
+											(def-fld [
 												[i ^int]
 												[j ^int]])
 											(ctor [[i ^int][j ^int]]
@@ -71,7 +71,7 @@
 									call
 									(progn
 										(cls [[T ^java.lang.Object]] PhtLambda$1599383343 [^java.lang.Object ^java.util.function.Supplier]
-											(def [
+											(def-fld [
 												[i ^int]
 												[j ^int]])
 											(ctor [[i ^int][j ^int]]
@@ -115,7 +115,7 @@
 									call
 									(progn
 										(cls [[T ^java.lang.Object][R ^java.lang.Object]] PhtLambda$1599391031 [^java.lang.Object ^java.util.function.Function]
-											(def [
+											(def-fld [
 												[i ^int]
 												[j ^int]])
 											(ctor [[i ^int][j ^int]]

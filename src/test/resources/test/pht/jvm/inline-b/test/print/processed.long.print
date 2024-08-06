@@ -146,13 +146,12 @@
 |	|	|	|	|	|	(type = final class)
 |	|	|	|	|	|	(name = TestC)
 |	|	|	|	|	|	(parents = [java.lang.Object])
-|	|	|	|	|	|	[DEF_
-|	|	|	|	|	|	|	(type = field)
+|	|	|	|	|	|	[DEF_FLD_
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = i)
-|	|	|	|	|	|	|	|	(type = int)
+|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
+]
 |	|	|	|	|	|	[CTOR_
 |	|	|	|	|	|	|	(type = constructor)
 |	|	|	|	|	|	|	(name = <init>)

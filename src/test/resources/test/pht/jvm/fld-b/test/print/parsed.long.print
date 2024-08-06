@@ -1,0 +1,89 @@
+[LOAD_CTX
+|	[USE_CTX
+|	|	(modules = pht pht/jvm)
+|	|	[PROGN
+|	|	|	[CLS
+|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	(text = TestC)
+|	|	|	|	]
+|	|	|	|	[VALN
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	(value = Object)
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[CTOR
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = i)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	(value = int)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[CCALL]
+|	|	|	|	|	[FLD
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = i)
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	|	(text = i)
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE
+|	|	|	|	|	(type = INT)
+|	|	|	|	|	(value = 0)
+|	|	|	|	]
+|	|	|	|	[DEF
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME
+|	|	|	|	|	|	|	|	(type = NO-STATIC)
+|	|	|	|	|	|	|	|	(text = o)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	[NEW
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = CLASS)
+|	|	|	|	|	|	|	|	|	(value = TestC)
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	|	(type = INT)
+|	|	|	|	|	|	|	|	|	(value = 33)
+|	|	|	|	|	|	|	|	]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[FGET_B
+|	|	|	|	|	(name = i)
+|	|	|	|	|	(instance:
+|	|	|	|	|	|	[GET
+|	|	|	|	|	|	|	[VALUE
+|	|	|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	|	|	(value = o)
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	)
+|	|	|	|	|	[VALUE
+|	|	|	|	|	|	(type = STRING)
+|	|	|	|	|	|	(value = o)
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	]
+]

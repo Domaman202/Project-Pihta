@@ -1,0 +1,8 @@
+(progn
+    (cls TestC [^Object]
+        (ctor [[i ^int]]
+            (ccall)
+            (fld [[i i]])))
+    (test-fn 0
+        (def [[o (new ^TestC 33)]])
+        o/i))

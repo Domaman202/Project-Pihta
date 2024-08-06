@@ -1,0 +1,46 @@
+[LOAD_CTX
+|	[USE_CTX
+|	|	[PROGN
+|	|	|	[CLS
+|	|	|	|	[GET_OR_NAME]
+|	|	|	|	[VALN
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	|	[CTOR
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	|	[CCALL]
+|	|	|	|	|	[FLD
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	]
+|	|	|	[TEST_FN
+|	|	|	|	[VALUE]
+|	|	|	|	[DEF
+|	|	|	|	|	[VALN
+|	|	|	|	|	|	[VALN
+|	|	|	|	|	|	|	[GET_OR_NAME]
+|	|	|	|	|	|	|	[NEW
+|	|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	|	[VALUE]
+|	|	|	|	|	|	|	]
+|	|	|	|	|	|	]
+|	|	|	|	|	]
+|	|	|	|	]
+|	|	|	|	[FGET_B
+|	|	|	|	|	[VALUE]
+|	|	|	|	]
+|	|	|	]
+|	|	]
+|	]
+]

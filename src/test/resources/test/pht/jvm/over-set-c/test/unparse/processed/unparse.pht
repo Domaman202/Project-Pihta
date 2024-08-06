@@ -7,7 +7,7 @@
 						(mcall
 							super
 							<init>))
-					(def [
+					(def-fld [
 						[i ^int]])))
 			(@test
 				(cls [] Test0 [^java.lang.Object]

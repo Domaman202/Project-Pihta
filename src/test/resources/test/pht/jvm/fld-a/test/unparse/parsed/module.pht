@@ -1,5 +1,5 @@
 (module
-    (name "test/pht/jvm/fld-field/test/unparse/processed")
+    (name "test/pht/jvm/fld-a/test/unparse/parsed")
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["pht"])

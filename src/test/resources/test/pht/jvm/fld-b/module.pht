@@ -1,5 +1,5 @@
 (module
-    (name "test/pht/jvm/fld-field")
+    (name "test/pht/jvm/fld-b")
     (version "1.0.0")
     (author "DomamaN202")
     (deps ["pht"])

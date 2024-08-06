@@ -36,7 +36,7 @@
 										1900
 										41)))))))
 			(cls [] TestC [^java.lang.Object]
-				(def [
+				(def-fld [
 					[i ^int]])
 				(ctor [[i ^int]]
 					(mcall

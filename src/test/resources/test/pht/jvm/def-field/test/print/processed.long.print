@@ -10,13 +10,13 @@
 |	|	|	|	|	|	(name = TestA)
 |	|	|	|	|	|	(parents = [java.lang.Object])
 |	|	|	|	|	|	[ANN_STATIC_
-|	|	|	|	|	|	|	[DEF_
-|	|	|	|	|	|	|	|	(type = static field)
+|	|	|	|	|	|	|	[DEF_FLD_
 |	|	|	|	|	|	|	|	[
+|	|	|	|	|	|	|	|	|	(static)
 |	|	|	|	|	|	|	|	|	(name = i)
-|	|	|	|	|	|	|	|	|	(type = int)
+|	|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	|	]
-|	|	|	|	|	|	|	]
+]
 |	|	|	|	|	|	]
 |	|	|	|	|	]
 |	|	|	|	|	[ANN_TEST_
@@ -76,13 +76,12 @@
 |	|	|	|	|	|	|	|	(type = SUPER)
 |	|	|	|	|	|	|	]
 |	|	|	|	|	|	]
-|	|	|	|	|	|	[DEF_
-|	|	|	|	|	|	|	(type = field)
+|	|	|	|	|	|	[DEF_FLD_
 |	|	|	|	|	|	|	[
 |	|	|	|	|	|	|	|	(name = i)
-|	|	|	|	|	|	|	|	(type = int)
+|	|	|	|	|	|	|	|	(type = VT(int))
 |	|	|	|	|	|	|	]
-|	|	|	|	|	|	]
+]
 |	|	|	|	|	]
 |	|	|	|	|	[ANN_TEST_
 |	|	|	|	|	|	[CLS_

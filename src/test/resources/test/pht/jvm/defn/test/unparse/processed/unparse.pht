@@ -18,7 +18,7 @@
 									12
 									21))))))
 			(cls [] TestB [^java.lang.Object]
-				(def [
+				(def-fld [
 					[value ^int]])
 				(ctor []
 					(mcall
