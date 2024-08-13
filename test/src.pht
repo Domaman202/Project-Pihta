@@ -1,5 +1,2 @@
-(progn
-    (cls Test [^Object]
-        (ctor [[i ^int]]
-            (fld [[i i]])))
-    (app-fn))
+(app-fn
+    (println (fn ^java.lang.Runnable [][] (println "Hi!"))))

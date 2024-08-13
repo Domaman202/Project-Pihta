@@ -49,7 +49,7 @@ object NRAs : IStdNodeProcessor<NodeNodesList> {
             else checkNullable(value, from, to) { cast(value, value, from, to) }
         }
 
-    private inline fun checkNullable(node: Node, from: VirtualType, to: VirtualType, block: () -> Node) =
+    inline fun checkNullable(node: Node, from: VirtualType, to: VirtualType, block: () -> Node) =
         if (from is VVTNullable)
             if (to is VVTNullable)
                 if (from.nullable == to.nullable || to.nullable)
@@ -59,6 +59,6 @@ object NRAs : IStdNodeProcessor<NodeNodesList> {
         else block()
 
     @Suppress("NOTHING_TO_INLINE")
-    private inline fun cast(node: Node, value: Node, from: VirtualType, to: VirtualType) =
+    inline fun cast(node: Node, value: Node, from: VirtualType, to: VirtualType) =
         NodeIsAs(node.info.withType(AS_), mutableListOf(value), from, to)
 }

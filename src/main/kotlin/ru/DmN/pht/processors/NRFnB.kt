@@ -22,7 +22,8 @@ object NRFnB : IStdNodeProcessor<NodeFn>, IAdaptableProcessor<NodeFn>, IInlinabl
         else -1
 
     override fun adaptToType(type: VirtualType, node: NodeFn, processor: Processor, ctx: ProcessingContext): NodeFn {
-        node.type = type
+        if (node.type?.isAssignableFrom(type) != true)
+            node.type = type
         return node
     }
 
