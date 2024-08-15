@@ -13,26 +13,9 @@ import ru.DmN.siberia.utils.vtype.VirtualMethod
 import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRAnnToEfn : INodeProcessor<NodeMetaNodesList> {
-    override fun process(
-        node: NodeMetaNodesList,
-        processor: Processor,
-        ctx: ProcessingContext,
-        valMode: Boolean
-    ): Node {
+    override fun process(node: NodeMetaNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node {
         val nodes = ArrayList<Node>()
         val methods = ArrayList<VirtualMethod>()
-//        node.nodes.forEach { it ->
-//            if (it is IVMProviderNode<*>) {
-//                methods += it.method
-//                processor.process(it, ctx, false)?.let(nodes::add)
-//            } else {
-//                processor.process(it, ctx, false)?.let {
-//                    if (it is IVMProviderNode<*>)
-//                        methods += it.method
-//                    nodes += it
-//                }
-//            }
-//        }
         forEachAllMetaNodesListA(node, nodes, processor, ctx, valMode) {
             if (it is IVMProviderNode<*>) {
                 methods += it.method
