@@ -7,6 +7,7 @@ import ru.DmN.pht.utils.node.NodeTypes.*
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.utils.mapMutable
+import ru.DmN.siberia.utils.meta.MetadataContainer
 import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualType
 
@@ -61,8 +62,15 @@ fun nodeDef(info: INodeInfo, name: String, value: Node) =
 fun nodeDefSet(info: INodeInfo, name: String, value: Node) =
     NodeNodesList(info.withType(DEF_SET),
         mutableListOf(nodeValn(info, nodeValn(info, mutableListOf(nodeGetOrName(info, name), value)))))
+fun nodeDefn(info: INodeInfo, metadata: Lazy<MetadataContainer>, name: String, ret: String, args: List<Pair<String, String>>, nodes: List<Node>) =
+    NodeNodesListWithMeta(info.withType(DEFN), metadata,
+        mutableListOf<Node>(
+            nodeGetOrName(info, name),
+            nodeValueClass(info, ret),
+            nodeValn(info, args.mapMutable { nodeValn(info, mutableListOf(nodeGetOrName(info, it.first), nodeValueClass(info, it.second))) })
+        ).apply { addAll(nodes) })
 fun nodeDefn(info: INodeInfo, name: String, ret: String, args: List<Pair<String, String>>, nodes: List<Node>) =
-    NodeNodesList(info.withType(DEFN),
+    NodeNodesListWithMeta(info.withType(DEFN),
         mutableListOf<Node>(
             nodeGetOrName(info, name),
             nodeValueClass(info, ret),

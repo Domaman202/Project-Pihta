@@ -53,7 +53,7 @@ object NRAnnToEfn : INodeProcessor<NodeMetaNodesList> {
                 processor.process(it, ctx, valMode)?.let {
                     nodes += it
                     if (flag) {
-                        block(it)
+                        forEachAllMetaNodesListB(it, block)
                     }
                 }
             }

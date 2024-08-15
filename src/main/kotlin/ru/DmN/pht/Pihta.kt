@@ -45,7 +45,7 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(ALIAS_MACRO)
         addSNP(AND)
         addSNP(APP)
-        addSNP(APP_FN)
+        addSWMNP(APP_FN)
         addSNP(ARR_OF)
         addSNP(ARR_OF_TYPE)
         addSNP(ARR_SIZE)
