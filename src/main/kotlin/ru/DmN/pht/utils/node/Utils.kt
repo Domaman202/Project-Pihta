@@ -61,7 +61,7 @@ fun nodeDef(info: INodeInfo, name: String, value: Node) =
         mutableListOf(nodeValn(info, nodeValn(info, mutableListOf(nodeGetOrName(info, name), value)))))
 fun nodeDefSet(info: INodeInfo, name: String, value: Node) =
     NodeNodesList(info.withType(DEF_SET),
-        mutableListOf(nodeValn(info, nodeValn(info, mutableListOf(nodeGetOrName(info, name), value)))))
+        mutableListOf(nodeGetOrName(info, name), value))
 fun nodeDefn(info: INodeInfo, metadata: Lazy<MetadataContainer>, name: String, ret: String, args: List<Pair<String, String>>, nodes: List<Node>) =
     NodeNodesListWithMeta(info.withType(DEFN), metadata,
         mutableListOf<Node>(

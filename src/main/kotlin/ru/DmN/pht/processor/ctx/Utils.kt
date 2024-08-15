@@ -15,6 +15,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 typealias FunctionGetType = (name: String, processor: Processor, ctx: ProcessingContext) -> VirtualType
 typealias FunctionCast = (to: VirtualType, value: Node, processor: Processor, ctx: ProcessingContext) -> Node
 typealias FunctionCastFrom = (from: VirtualType, to: VirtualType, value: Node, processor: Processor, ctx: ProcessingContext) -> Node
+typealias FunctionRetValWrap = (node: Node?, processor: Processor, ctx: ProcessingContext) -> Node?
 
 inline fun <T : IContextCollection<T>> T.with(ctx: GlobalContext): T =
     this.with(GLOBAL, ctx)
@@ -37,6 +38,8 @@ inline fun <T : IContextCollection<T>> T.with(ctx: BodyContext): T =
     this.with(BODY, ctx)
 inline fun <T : IContextCollection<T>> T.with(ctx: MacroContext): T =
     this.with(MACRO, ctx)
+inline fun <T : IContextCollection<T>> T.with(noinline ctx: FunctionRetValWrap): T =
+    this.with(F_RET_VAL_WRAP, ctx)
 
 inline fun IContextCollection<*>.isClass(): Boolean =
     clazzOrNull != null
@@ -85,6 +88,9 @@ var IContextCollection<*>.cast
 var IContextCollection<*>.castFrom
     set(value) { contexts[F_CAST_FROM] = value }
     inline get() = contexts[F_CAST_FROM] as FunctionCastFrom
+var IContextCollection<*>.retValWrap
+    set(value) { contexts[F_RET_VAL_WRAP] = value }
+    inline get() = contexts[F_RET_VAL_WRAP] as FunctionRetValWrap?
 
 inline var MutableMap<IContextKey, Any?>.macros
     set(value) { this[MACROS] = value }
