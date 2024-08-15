@@ -1,19 +1,16 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeMCall
+import ru.DmN.pht.ast.NodeMCall.Type.STATIC
 import ru.DmN.pht.ast.NodeMath
 import ru.DmN.pht.processor.ctx.global
-import ru.DmN.pht.processor.utils.ICastable
-import ru.DmN.pht.processor.utils.MethodFindResultB
-import ru.DmN.pht.processor.utils.adaptToType
-import ru.DmN.pht.processor.utils.processNodes
+import ru.DmN.pht.processor.utils.*
+import ru.DmN.pht.utils.node.*
 import ru.DmN.pht.utils.node.NodeParsedTypes.SHIFT_LEFT
 import ru.DmN.pht.utils.node.NodeParsedTypes.SHIFT_RIGHT
 import ru.DmN.pht.utils.node.NodeTypes.MCALL_
-import ru.DmN.pht.utils.node.nodeAs
-import ru.DmN.pht.utils.node.nodeValueClass
-import ru.DmN.pht.utils.node.processed
 import ru.DmN.pht.utils.text
+import ru.DmN.pht.utils.vtype.VTDynamic
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.ast.NodeNodesList
 import ru.DmN.siberia.processor.Processor
@@ -32,10 +29,41 @@ object NRMath : INodeProcessor<NodeNodesList> {
     }
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? {
+        val info = node.info
         val nodes = processor.processNodes(node, ctx, true)
         val firstType = processor.calc(nodes[0], ctx)!!
+        if (firstType == VTDynamic) {
+            val values =
+                mutableListOf<Node>(
+                    nodeValue(info, info.type.toString()),
+                    nodeArrayOfType(info, "dynamic", nodes)
+                )
+            val result =
+                NRMCall.findMethod(
+                    ctx.global.getType("ru.DmN.pht.utils.DynamicUtils"),
+                    "math",
+                    values,
+                    Static.ANY,
+                    processor,
+                    ctx
+                )
+            return NodeMCall(
+                info.withType(MCALL_),
+                NRMCall.processArguments(
+                    info,
+                    processor,
+                    ctx,
+                    result.method,
+                    values,
+                    result.compression
+                ),
+                null,
+                nodeValueClass(info, result.method.declaringClass.name),
+                result.method,
+                STATIC
+            )
+        }
         val result = getExtend(firstType, node.text, nodes.drop(1), processor, ctx)
-        val info = node.info
         return if (result == null)
             if (valMode)
                 NodeMath(

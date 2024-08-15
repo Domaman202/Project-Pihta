@@ -28,10 +28,10 @@ object NRIncDec : INodeProcessor<NodeNodesList> {
         return if (result == null)
             processor.process(
                 when (info.type) {
-                    DEC_PRE -> nodeOverSetLeft(info, nodes[0], NodeNodesList(info.withType(SUB), mutableListOf(nodeValue(info, 1))))
-                    DEC_POST -> nodeOverSetLeft(info, nodes[0], NodeNodesList(info.withType(SUB), mutableListOf(nodeValue(info, 1))))
-                    INC_PRE -> nodeOverSetLeft(info, nodes[0], NodeNodesList(info.withType(ADD), mutableListOf(nodeValue(info, 1))))
-                    INC_POST -> nodeOverSetLeft(info, nodes[0], NodeNodesList(info.withType(ADD), mutableListOf(nodeValue(info, 1))))
+                    DEC_PRE  -> nodeOverSetLeft(info, node.nodes[0], NodeNodesList(info.withType(SUB), mutableListOf(nodeValue(info, 1))))
+                    DEC_POST -> nodeOverSetLeft(info, node.nodes[0], NodeNodesList(info.withType(SUB), mutableListOf(nodeValue(info, 1))))
+                    INC_PRE  -> nodeOverSetLeft(info, node.nodes[0], NodeNodesList(info.withType(ADD), mutableListOf(nodeValue(info, 1))))
+                    INC_POST -> nodeOverSetLeft(info, node.nodes[0], NodeNodesList(info.withType(ADD), mutableListOf(nodeValue(info, 1))))
                     else -> throw UnsupportedOperationException()
                 },
                 ctx,

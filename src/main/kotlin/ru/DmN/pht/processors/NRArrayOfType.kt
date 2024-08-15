@@ -1,6 +1,7 @@
 package ru.DmN.pht.processors
 
 import ru.DmN.pht.processor.utils.computeString
+import ru.DmN.pht.processor.utils.computeType
 import ru.DmN.pht.utils.node.*
 import ru.DmN.pht.utils.vtype.arrayType
 import ru.DmN.siberia.ast.Node
@@ -13,7 +14,7 @@ import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRArrayOfType : INodeProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
-        processor.calc(node.nodes[0], ctx)!!.arrayType
+        processor.computeType(node.nodes[0], ctx).arrayType
 
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
         if (valMode) {

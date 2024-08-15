@@ -1,8 +1,6 @@
 package ru.DmN.pht.jvm.utils.vtype
 
-import ru.DmN.pht.utils.vtype.PhtVirtualMethod
-import ru.DmN.pht.utils.vtype.PhtVirtualType
-import ru.DmN.pht.utils.vtype.VVTArray
+import ru.DmN.pht.utils.vtype.*
 import ru.DmN.siberia.utils.Klass
 import ru.DmN.siberia.utils.klassOf
 import ru.DmN.siberia.utils.vtype.*
@@ -132,25 +130,56 @@ class JRTP : TypesProvider() {
         )
     }
 
+    private fun fakeTypeOf(name: String): VirtualType =
+        if (name.startsWith('['))
+            fakeTypeOf(name.substring(1)).arrayType
+        else if (name == "dynamic")
+            VTDynamic
+        else typeOf(name)
+
     /**
      * Создаёт новый метод.
      */
     private fun methodOf(declaringClass: VirtualType, method: Method): VirtualMethod {
+        val isDynRet = method.isAnnotationPresent(DynamicReturn::class.java)
+        val isDynArgs = method.isAnnotationPresent(DynamicArguments::class.java)
+        val fakeArgTypes =
+            if (method.isAnnotationPresent(FakeArgumentType::class.java)) {
+                val map = HashMap<Int, VirtualType>()
+                method.getAnnotationsByType(FakeArgumentType::class.java)
+                    .forEach { map[it.position] = fakeTypeOf(it.type) }
+                map
+            } else null
+        //
         val argsc = ArrayList<VirtualType>()
         val argsn = ArrayList<String>()
         val argsg = ArrayList<String?>()
         val generics = declaringClass.genericsDefine.toMutableMap()
         val decl = declaringClass.name
-        method.parameters.forEach { it ->
-            argsc += typeOf(it.type)
-            argsn += it.name
-            argsg += it.parameterizedType.let { if (it is TypeVariable<*>) "${it.name}$$decl" else null }
+        if (isDynArgs) {
+            method.parameters.forEach { it ->
+                argsc += VTDynamic
+                argsn += it.name
+                argsg += it.parameterizedType.let { if (it is TypeVariable<*>) "${it.name}$$decl" else null }
+            }
+        } else if (fakeArgTypes != null) {
+            method.parameters.forEachIndexed { i, it ->
+                argsc += fakeArgTypes[i] ?: typeOf(it.type)
+                argsn += it.name
+                argsg += it.parameterizedType.let { if (it is TypeVariable<*>) "${it.name}$$decl" else null }
+            }
+        } else {
+            method.parameters.forEach { it ->
+                argsc += typeOf(it.type)
+                argsn += it.name
+                argsg += it.parameterizedType.let { if (it is TypeVariable<*>) "${it.name}$$decl" else null }
+            }
         }
         // todo: add method only generics
         return PhtVirtualMethod.Impl(
             declaringClass,
             method.name,
-            typeOf(method.returnType),
+            if (isDynRet) VTDynamic else typeOf(method.returnType),
             method.genericReturnType.let { if (it is TypeVariable<*>) "${it.name}$$decl" else null },
             argsc,
             argsn,

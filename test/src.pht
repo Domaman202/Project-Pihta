@@ -1,6 +1,2 @@
-(progn
-    (cls StringUtils [^Object] (@to-efn (@static
-        (defn println ^void [[text ^String]]
-            (println text)))))
-    (app-fn
-        (#println "Hello!")))
+(app-fn
+    (println (<= (as ^dynamic 123) (as ^dynamic 321))))

@@ -14,6 +14,10 @@ import java.util.stream.Stream
 inline val Variable.uniqueName
     get() = "$name$$id"
 
+
+inline fun <reified T> Sequence<T>.toArray(): Array<T> =
+    this.toList().toTypedArray()
+
 @Suppress("UNCHECKED_CAST")
 inline fun <T, reified R> Array<T>.mapArray(last: T, block: (T) -> R): Array<R> {
     val arr = arrayOfNulls<R>(size + 1)
