@@ -1,0 +1,37 @@
+<program> ::= <use_ctx> <comment> <app_fn>
+
+<use_ctx> ::= "(use_ctx" <identifier> ")"
+
+<comment> ::= "(comment" <character_sequence> ")"
+
+<app_fn> ::= "(app_fn" <function_call> ")"
+
+<function_call> ::= <identifier> <argument_list>
+
+<argument_list> ::= "(" <expression_list> ")"
+
+<expression_list> ::= <expression> <expression_tail>
+
+<expression_tail> ::= <expression> <expression_tail>
+
+<expression> ::= <string> | <function_call>
+
+<identifier> ::= <letter> <identifier_tail>
+
+<identifier_tail> ::= <letter_or_digit> <identifier_tail>
+
+<letter_or_digit> ::= <letter> | <digit>
+
+<string> ::= "\"" <character_sequence> "\""
+
+<character_sequence> ::= <character> <character_sequence_tail>
+
+<character_sequence_tail> ::= <character> <character_sequence_tail>
+
+<letter> ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"  
+
+<digit> ::= "0" | "1" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+
+<character> ::= <letter> | <digit> | <punctuation>
+
+<punctuation> ::= " " | "," | "." | "!" | "?" | ";" | ":" | "'" | "\"" | "-" | "(" | ")"
