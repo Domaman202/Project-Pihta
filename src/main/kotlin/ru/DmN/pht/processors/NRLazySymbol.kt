@@ -6,7 +6,7 @@ import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 
-object NRLazySymbol : IStdNodeProcessor<NodeLazySymbol> {
+object NRLazySymbol : IComputableProcessor<NodeLazySymbol> {
     override fun process(node: NodeLazySymbol, processor: Processor, ctx: ProcessingContext, valMode: Boolean): Node? =
         if (valMode)
             nodeValue(node.info, computeString(node, processor, ctx))

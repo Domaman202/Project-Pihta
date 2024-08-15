@@ -13,7 +13,7 @@ import ru.DmN.siberia.utils.exception.MessageException
 import ru.DmN.siberia.utils.vtype.VirtualType
 import ru.DmN.siberia.utils.vtype.VirtualType.Companion.VOID
 
-object NRAs : IStdNodeProcessor<NodeNodesList> {
+object NRAs : IComputableProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
         processor.computeType(node.nodes[0], ctx)
 
@@ -29,15 +29,15 @@ object NRAs : IStdNodeProcessor<NodeNodesList> {
             else if (from.isAssignableFrom(to))
                 checkNullable(node, from, to) { value }
             else if (np is IAdaptableProcessor<Node> && np.adaptType.cast)
-                np.adaptToType(to, value, processor, ctx)
+                np.adaptToType(value, to, processor, ctx)
             else checkNullable(node, from, to) { cast(node, value, from ,to) }
         } else null
 
     fun cast(to: VirtualType, value: Node, processor: Processor, ctx: ProcessingContext): Node {
         val np = processor.get(value, ctx)
         val from = np.calc(value, processor, ctx)!!
-        return if(np is IAdaptableProcessor<Node> && np.adaptType.cast)
-            np.adaptToType(to, value, processor, ctx)
+        return if (np is IAdaptableProcessor<Node> && np.adaptType.cast)
+            np.adaptToType(value, to, processor, ctx)
         else checkNullable(value, from, to) { cast(value, value, from, to) }
     }
 
@@ -45,7 +45,7 @@ object NRAs : IStdNodeProcessor<NodeNodesList> {
     fun castFrom(from: VirtualType, to: VirtualType, value: Node, processor: Processor, ctx: ProcessingContext): Node =
         processor.get(value, ctx).let {
             if (it is IAdaptableProcessor<Node> && it.adaptType.cast)
-                it.adaptToType(to, value, processor, ctx)
+                it.adaptToType(value, to, processor, ctx)
             else checkNullable(value, from, to) { cast(value, value, from, to) }
         }
 

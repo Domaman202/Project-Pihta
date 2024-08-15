@@ -9,7 +9,7 @@ import ru.DmN.siberia.processor.utils.nodeProgn
 import ru.DmN.siberia.processors.NRProgn
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object NRValnRepeat : IStdNodeProcessor<NodeNodesList> {
+object NRValnRepeat : IComputableProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
         processor.calc(node.nodes.last(), ctx)
 

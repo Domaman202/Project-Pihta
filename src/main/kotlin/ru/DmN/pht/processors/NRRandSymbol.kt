@@ -8,7 +8,7 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import java.util.*
 import kotlin.math.absoluteValue
 
-object NRRandSymbol : IStdNodeProcessor<Node> {
+object NRRandSymbol : IComputableProcessor<Node> {
     override fun process(node: Node, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeValue? =
         if (valMode)
             nodeValue(node.info, computeInt(node, processor, ctx))

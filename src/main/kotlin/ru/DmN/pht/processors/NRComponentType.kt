@@ -10,7 +10,7 @@ import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object NRComponentType : IStdNodeProcessor<NodeNodesList> {
+object NRComponentType : IComputableProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? {
         val type = processor.compute(node.nodes[0], ctx)
         return (if (type.isConstClass) processor.computeType(type, ctx) else processor.calc(type, ctx))?.componentType

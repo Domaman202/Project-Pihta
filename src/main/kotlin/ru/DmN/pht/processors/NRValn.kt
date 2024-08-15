@@ -7,7 +7,7 @@ import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.mapMutable
 
-object NRValn : IStdNodeProcessor<NodeNodesList> {
+object NRValn : IComputableProcessor<NodeNodesList> {
     override fun process(node: NodeNodesList, processor: Processor, ctx: ProcessingContext, valMode: Boolean): NodeNodesList =
         NodeNodesList(node.info.withType(VALN_), node.nodes.mapMutable { processor.process(it, ctx, true)!! })
 

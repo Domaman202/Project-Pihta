@@ -11,7 +11,7 @@ import ru.DmN.siberia.unparser.UnparserImpl
 import ru.DmN.siberia.unparser.ctx.UnparsingContext
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object NRUnparse : IStdNodeProcessor<NodeNodesList> {
+object NRUnparse : IComputableProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
         ctx.global.getType("String")
 

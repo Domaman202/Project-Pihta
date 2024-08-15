@@ -1,2 +1,6 @@
-(app-fn
-    (println (fn ^java.lang.Runnable [][] (println "Hi!"))))
+(progn
+    (cls StringUtils [^Object] (@to-efn (@static
+        (defn println ^void [[text ^String]]
+            (println text)))))
+    (app-fn
+        (#println "Hello!")))

@@ -21,7 +21,7 @@ import java.io.InputStream
 import java.util.*
 import java.util.function.Function
 
-object NRMacro : IStdNodeProcessor<NodeMacro> {
+object NRMacro : IComputableProcessor<NodeMacro> {
     override fun calc(node: NodeMacro, processor: Processor, ctx: ProcessingContext): VirtualType? {
         val result = macroCalc(node, ctx)
         return macroBodyNode(node, result)?.let { processor.calc(it, result.second) }

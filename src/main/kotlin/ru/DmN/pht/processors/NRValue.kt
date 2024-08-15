@@ -12,7 +12,7 @@ import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object NRValue : IStdNodeProcessor<NodeValue> {
+object NRValue : IComputableProcessor<NodeValue> {
     override fun calc(node: NodeValue, processor: Processor, ctx: ProcessingContext): VirtualType {
         return ctx.global.getType(
             when (node.vtype) {

@@ -10,8 +10,8 @@ interface IAdaptableProcessor<T : Node> : INodeProcessor<T> {
     val adaptType: Type
         get() = Type.ANY
 
-    fun adaptableTo(type: VirtualType, node: T, processor: Processor, ctx: ProcessingContext): Int
-    fun adaptToType(type: VirtualType, node: T, processor: Processor, ctx: ProcessingContext): Node
+    fun adaptableTo(node: T, type: VirtualType, processor: Processor, ctx: ProcessingContext): Int
+    fun adaptToType(node: T, type: VirtualType, processor: Processor, ctx: ProcessingContext): Node
 
     enum class Type(val cast: Boolean, val argument: Boolean) {
         CAST(true, false),

@@ -2,13 +2,13 @@ package ru.DmN.pht.processors
 
 import ru.DmN.pht.ast.NodeMetaNodesList
 import ru.DmN.pht.utils.node.NodeTypes.PROGN_B_
-import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.ast.Node
+import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.NRProgn
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object NRPrognB : IStdNodeProcessor<NodeMetaNodesList> {
+object NRPrognB : IComputableProcessor<NodeMetaNodesList> {
     override fun calc(node: NodeMetaNodesList, processor: Processor, ctx: ProcessingContext): VirtualType? =
         NRProgn.calc(node, processor, ctx)
 

@@ -260,7 +260,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                 nodeGetInstance(instance, processor, ctx)
             else {
                 val np = processor.get(instance, ctx)
-                if (instance.isLiteral && (np as IStdNodeProcessor<Node>).computeString(instance, processor, ctx) == ".")
+                if (instance.isLiteral && (np as IComputableProcessor<Node>).computeString(instance, processor, ctx) == ".")
                     when (result.type) {
                         UNKNOWN -> result.method.run {
                             if (modifiers.static)
@@ -272,7 +272,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
                         else -> throw RuntimeException()
                     }
                 else if (np is IAdaptableProcessor<*>)
-                    (np as IAdaptableProcessor<Node>).adaptToType(result.method.declaringClass, instance, processor, ctx)
+                    (np as IAdaptableProcessor<Node>).adaptToType(instance, result.method.declaringClass, processor, ctx)
                 else instance
             }
         }
@@ -334,7 +334,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         } else { args }.mapIndexedMutable { i, it ->
             val np = processor.get(it, ctx)
             if (np is IAdaptableProcessor<*>)
-                (np as IAdaptableProcessor<Node>).adaptToType(method.argsc[i], it, processor, ctx)
+                (np as IAdaptableProcessor<Node>).adaptToType(it, method.argsc[i], processor, ctx)
             else { it }.let { processor.process(nodeAs(info, it, method.argsc[i].name), ctx, true)!! }
         }
 
@@ -503,7 +503,7 @@ object NRMCall : INodeProcessor<NodeNodesList> {
         return MethodFindResultB(
             if (result.second)
                 args
-            else args.mapIndexed { i, it -> processor.adaptToType(result.first.argsc[i], it, ctx) },
+            else args.mapIndexed { i, it -> processor.adaptToType(it, result.first.argsc[i], ctx) },
             result.first,
             result.second
         )

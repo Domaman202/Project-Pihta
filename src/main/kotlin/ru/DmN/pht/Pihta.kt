@@ -11,11 +11,8 @@ import ru.DmN.pht.processor.utils.LinkedClassesNode
 import ru.DmN.pht.processor.utils.PhtProcessingStage
 import ru.DmN.pht.processors.*
 import ru.DmN.pht.unparsers.*
+import ru.DmN.pht.utils.*
 import ru.DmN.pht.utils.Platforms.JVM
-import ru.DmN.pht.utils.addNP
-import ru.DmN.pht.utils.addSMNP
-import ru.DmN.pht.utils.addSNP
-import ru.DmN.pht.utils.addSNU
 import ru.DmN.pht.utils.meta.MetadataKeys
 import ru.DmN.pht.utils.node.NodeParsedTypes.*
 import ru.DmN.pht.utils.node.NodeTypes.*
@@ -79,12 +76,12 @@ object Pihta : ModuleCompilers("pht", UNIVERSAL) {
         addSNP(DEF_FLD)
         addSNP(DEF_SET)
         addNP("def-macro",    NPDefMacro)
-        addSMNP(DEFN)
+        addSWMNP(DEFN)
         addSNP(DIV)
         // e
         addSNP(ECTOR)
         addSNP(EFLD)
-        addSMNP(EFN)
+        addSWMNP(EFN)
         addSNP(ENUM)
         addSNP(EQ)
         // f

@@ -66,7 +66,7 @@ object NRMath : INodeProcessor<NodeNodesList> {
         val adapted = ArrayList<Node>()
         val j = min(args.size, result.first.argsc.size)
         for (i in 0 until j)
-            adapted += processor.adaptToType(result.first.argsc[i], args[i], ctx)
+            adapted += processor.adaptToType(args[i], result.first.argsc[i], ctx)
         for (i in j until args.size)
             adapted += args[i]
         return MethodFindResultB(adapted, result.first, result.second)

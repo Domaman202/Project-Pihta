@@ -6,7 +6,7 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.processors.INodeProcessor
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-interface IStdNodeProcessor<T : Node> : INodeProcessor<T> {
+interface IComputableProcessor<T : Node> : INodeProcessor<T> {
     fun compute(node: T, processor: Processor, ctx: ProcessingContext): Node =
         node
 

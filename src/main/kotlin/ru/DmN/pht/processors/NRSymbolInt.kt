@@ -8,7 +8,7 @@ import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object NRSymbolInt : IStdNodeProcessor<NodeNodesList> {
+object NRSymbolInt : IComputableProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
         VirtualType.INT
 

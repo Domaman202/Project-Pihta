@@ -22,7 +22,7 @@ object NRRFnB : INodeProcessor<NodeRFn>, IAdaptableProcessor<NodeRFn> {
     override fun calc(node: NodeRFn, processor: Processor, ctx: ProcessingContext): VirtualType =
         node.type ?: ctx.global.getType("Any")
 
-    override fun adaptableTo(type: VirtualType, node: NodeRFn, processor: Processor, ctx: ProcessingContext): Int {
+    override fun adaptableTo(node: NodeRFn, type: VirtualType, processor: Processor, ctx: ProcessingContext): Int {
         val name = node.name
         val lambda = findLambdaMethodOrNull(type) ?: return -1
         return if (node.instance != null) {
@@ -55,7 +55,7 @@ object NRRFnB : INodeProcessor<NodeRFn>, IAdaptableProcessor<NodeRFn> {
         }
     }
 
-    override fun adaptToType(type: VirtualType, node: NodeRFn, processor: Processor, ctx: ProcessingContext): NodeRFn =
+    override fun adaptToType(node: NodeRFn, type: VirtualType, processor: Processor, ctx: ProcessingContext): NodeRFn =
         node.apply { this.type = type }.process(processor, ctx)
 
     private fun findMethod(instance: VirtualType, name: String, lambda: VirtualMethod, static: Boolean): Int =

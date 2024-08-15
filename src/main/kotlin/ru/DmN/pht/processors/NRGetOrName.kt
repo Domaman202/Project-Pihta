@@ -23,7 +23,7 @@ import ru.DmN.siberia.utils.node.INodeInfo
 import ru.DmN.siberia.utils.vtype.VirtualType
 
 object NRGetOrName :
-    IStdNodeProcessor<NodeGetOrName>,
+    IComputableProcessor<NodeGetOrName>,
     IAdaptableProcessor<NodeGetOrName>,
     IInlinableProcessor<NodeGetOrName>,
     ISetterGetterProcessor<NodeGetOrName>
@@ -61,7 +61,7 @@ object NRGetOrName :
     override val adaptType: IAdaptableProcessor.Type
         get() = ARGUMENT
 
-    override fun adaptableTo(type: VirtualType, node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Int {
+    override fun adaptableTo(node: NodeGetOrName, type: VirtualType, processor: Processor, ctx: ProcessingContext): Int {
         val variable = ctx.body.variables
             .stream()
             .filter { it.name == node.name }
@@ -84,7 +84,7 @@ object NRGetOrName :
         return lenArgs((ctx.classes.firstNotNullOfOrNull { it -> it.fields.find { it.name == node.name } } ?: return -1).type, type)
     }
 
-    override fun adaptToType(type: VirtualType, node: NodeGetOrName, processor: Processor, ctx: ProcessingContext): Node =
+    override fun adaptToType(node: NodeGetOrName, type: VirtualType, processor: Processor, ctx: ProcessingContext): Node =
         when (ctx.body.variables.count {
             if (it.name == node.name)
                 if (it is InlineVariable)

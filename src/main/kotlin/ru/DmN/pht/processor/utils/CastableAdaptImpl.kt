@@ -7,6 +7,6 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.vtype.VirtualType
 
 data class CastableAdaptImpl(val node: Node, val np: IAdaptableProcessor<Node>, val processor: Processor, val ctx: ProcessingContext) : ICastable {
-    override fun castableTo(to: VirtualType): Int =
-        np.adaptableTo(to, node, processor, ctx)
+    override fun castableTo(type: VirtualType): Int =
+        np.adaptableTo(node, type, processor, ctx)
 }

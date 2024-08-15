@@ -10,7 +10,7 @@ import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.vtype.VirtualType
 import java.util.*
 
-object NRMacroArg : IStdNodeProcessor<NodeMacroUtil> {
+object NRMacroArg : IComputableProcessor<NodeMacroUtil> {
     override fun calc(node: NodeMacroUtil, processor: Processor, ctx: ProcessingContext): VirtualType? =
         processor.calc(compute(node, processor, ctx), ctx)
 

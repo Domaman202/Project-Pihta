@@ -1,6 +1,5 @@
 package ru.DmN.pht.processors
 
-import ru.DmN.pht.processor.ctx.global
 import ru.DmN.pht.utils.node.nodeValue
 import ru.DmN.siberia.ast.INodesList
 import ru.DmN.siberia.ast.Node
@@ -9,7 +8,7 @@ import ru.DmN.siberia.processor.Processor
 import ru.DmN.siberia.processor.ctx.ProcessingContext
 import ru.DmN.siberia.utils.vtype.VirtualType
 
-object NRValnSize : IStdNodeProcessor<NodeNodesList> {
+object NRValnSize : IComputableProcessor<NodeNodesList> {
     override fun calc(node: NodeNodesList, processor: Processor, ctx: ProcessingContext): VirtualType =
         VirtualType.INT
 
