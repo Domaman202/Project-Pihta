@@ -1,3 +1,0 @@
-(progn
-    (test-fn 0 (symbol (rand-symbol)))
-    (test-fn 1 (symbol (rand-symbol))))

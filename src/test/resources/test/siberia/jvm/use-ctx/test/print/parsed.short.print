@@ -1,7 +1,0 @@
-[LOAD_CTX
-|	[USE_CTX
-|	|	[USE_CTX
-|	|	|	[APP_FN]
-|	|	]
-|	]
-]

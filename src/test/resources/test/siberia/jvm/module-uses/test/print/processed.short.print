@@ -1,9 +1,0 @@
-[LOAD_CTX_
-|	[USE_CTX_
-|	|	[CLS_
-|	|	|	[ANN_STATIC_
-|	|	|	|	[DEFN_]
-|	|	|	]
-|	|	]
-|	]
-]

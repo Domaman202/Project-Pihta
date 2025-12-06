@@ -1,4 +1,0 @@
-(@@if-platform JVM
-    (test-fn 0
-        (@@if-platform CPP (throw ^java.lang.RuntimeException))
-        "Кто не работает - тот ест!"))

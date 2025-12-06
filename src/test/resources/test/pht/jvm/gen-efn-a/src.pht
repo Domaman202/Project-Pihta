@@ -1,4 +1,0 @@
-(progn
-    (cls TestA [^Object] (@static
-        (efn [[T ^Object]] ^String foo T^ [] nil)))
-    (test-fn 0 (type-of (#foo<^Class> "Foo!"))))

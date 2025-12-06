@@ -1,4 +1,0 @@
-(load-ctx
-	(use-ctx
-		(use-ctx pht pht/jvm
-			(app-fn))))

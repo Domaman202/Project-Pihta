@@ -1,2 +1,0 @@
-(app-fn
-    (println (<= (as ^dynamic 123) (as ^dynamic 321))))
